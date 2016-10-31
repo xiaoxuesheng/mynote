@@ -1,0 +1,781 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0047)http://www.cnblogs.com/andy-zhou/p/5317866.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Spring中@Transactional事务回滚 - Andrew.Zhou - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./Spring中@Transactional事务回滚 - Andrew.Zhou - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./Spring中@Transactional事务回滚 - Andrew.Zhou - 博客园_files/bundle-LoveIsIntheAir.css">
+<link type="text/css" rel="stylesheet" href="./Spring中@Transactional事务回滚 - Andrew.Zhou - 博客园_files/246678.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/andy-zhou/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/andy-zhou/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/andy-zhou/wlwmanifest.xml">
+<script src="./Spring中@Transactional事务回滚 - Andrew.Zhou - 博客园_files/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'andy-zhou', cb_enable_mathjax=true;var isLogined=false;</script>
+<script src="./Spring中@Transactional事务回滚 - Andrew.Zhou - 博客园_files/blog-common.js" type="text/javascript"></script>
+<script type="text/x-mathjax-config;executed=true">MathJax.Hub.Config({
+  tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] },
+  TeX: { equationNumbers: { autoNumber: ['AMS'], useLabelIds: true } },
+  'HTML-CSS': { linebreaks: { automatic: true } },
+  SVG: { linebreaks: { automatic: true } }});</script><script type="text/javascript" src="./Spring中@Transactional事务回滚 - Andrew.Zhou - 博客园_files/MathJax.js"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+<body><div id="MathJax_Message" style="display: none;"></div>
+<a name="top"></a>
+
+<!--done-->
+<center>
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/andy-zhou/"><img id="blogLogo" src="./Spring中@Transactional事务回滚 - Andrew.Zhou - 博客园_files/logo.gif" alt=""></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/andy-zhou/">Andy.Zhou</a></h1>
+<h2></h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+	<li><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+	<li><a href="http://q.cnblogs.com/" class="menu">博问</a></li>
+    <li><a href="http://home.cnblogs.com/ing/" class="menu">闪存</a></li>
+	<li><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/andy-zhou/">首页</a></li>
+	<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+	<li><a id="blog_nav_contact" accesskey="9" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/Andrew.Zhou">联系</a></li>
+	<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+	<li><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/andy-zhou/rss">订阅</a>
+	<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/andy-zhou/rss"><img src="./Spring中@Transactional事务回滚 - Andrew.Zhou - 博客园_files/xml.gif" alt="订阅"></a></li>
+</ul>
+		<div class="blogStats">
+			
+			
+<!--done-->
+随笔- 140&nbsp;
+文章- 1&nbsp;
+评论- 1&nbsp;
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div class="clear"></div>
+	<div id="topicList">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/andy-zhou/p/5317866.html">Spring中@Transactional事务回滚</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="cnblogs-markdown"><blockquote><h4>目录</h4><a href="http://www.cnblogs.com/andy-zhou/p/5317866.html#_caption_0"><strong>一、使用场景举例</strong></a><br><a href="http://www.cnblogs.com/andy-zhou/p/5317866.html#_caption_1"><strong>二、checked异常和unchecked异常</strong></a><br><a href="http://www.cnblogs.com/andy-zhou/p/5317866.html#_caption_2"><strong>三、@Transactional的使用实例</strong></a><br><a href="http://www.cnblogs.com/andy-zhou/p/5317866.html#_caption_3"><strong>四、</strong></a><strong><a href="mailto:Spring%E4%B8%AD%E7%9A%84@Transactional%E5%BF%85%E9%A1%BB%E8%A6%81%E4%BA%86%E8%A7%A3%E7%9A%84%E6%A6%82%E5%BF%B5" target="_blank">Spring中的@Transactional必须要了解的概念</a></strong><br></blockquote><blockquote>
+<h3 id="转载-spring中transactional事务回滚">转载: <a href="http://blog.csdn.net/u013142781/article/details/50421904" target="_blank">Spring中@Transactional事务回滚</a></h3>
+</blockquote>
+<a name="_caption_0"></a><h2 id="一使用场景举例">一、使用场景举例</h2>
+<p><a href="mailto:%E5%9C%A8%E4%BA%86%E8%A7%A3@Transactional%E6%80%8E%E4%B9%88%E7%94%A8%E4%B9%8B%E5%89%8D%E6%88%91%E4%BB%AC%E5%BF%85%E9%A1%BB%E8%A6%81%E5%85%88%E7%9F%A5%E9%81%93@Transactional%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8" target="_blank">在了解@Transactional怎么用之前我们必须要先知道@Transactional有什么用</a>。下面举个栗子：比如一个部门里面有很多成员，这两者分别保存在部门表和成员表里面，在删除某个部门的时候，假设我们默认删除对应的成员。但是在执行的时候可能会出现这种情况，我们先删除部门，再删除成员，但是部门删除成功了，删除成员的时候出异常了。这时候我们希望如果成员删除失败了，之前删除的部门也取消删除。<a href="mailto:%E8%BF%99%E7%A7%8D%E5%9C%BA%E6%99%AF%E5%B0%B1%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8@Transactional%E4%BA%8B%E7%89%A9%E5%9B%9E%E6%BB%9A" target="_blank">这种场景就可以使用@Transactional事物回滚</a>。</p>
+<a name="_caption_1"></a><h2 id="二checked异常和unchecked异常">二、checked异常和unchecked异常</h2>
+<p>这里之所以让大家清楚checked异常和unchecked异常概念，是因为：</p>
+<h4 id="spring使用声明式事务处理默认情况下如果被注解的数据库操作方法中发生了unchecked异常所有的数据库操作将rollback如果发生的异常是checked异常默认情况下数据库操作还是会提交的">Spring使用声明式事务处理，默认情况下，如果被注解的数据库操作方法中发生了unchecked异常，所有的数据库操作将rollback；如果发生的异常是checked异常，默认情况下数据库操作还是会提交的。</h4>
+<h4 id="checked异常">checked异常：</h4>
+<p>表示无效，不是程序中可以预测的。比如无效的用户输入，文件不存在，网络或者数据库链接错误。这些都是外在的原因，都不是程序内部可以控制的。<br>
+必须在代码中显式地处理。比如try-catch块处理，或者给所在的方法加上throws说明，将异常抛到调用栈的上一层。<br>
+继承自java.lang.Exception（java.lang.RuntimeException除外）。</p>
+<h4 id="unchecked异常">unchecked异常：</h4>
+<p>表示错误，程序的逻辑错误。是RuntimeException的子类，比如IllegalArgumentException, NullPointerException和IllegalStateException。<br>
+不需要在代码中显式地捕获unchecked异常做处理。<br>
+继承自java.lang.RuntimeException（而java.lang.RuntimeException继承自java.lang.Exception）。</p>
+<p>看下面的异常结构图或许层次感更加深些：</p>
+<p><img src="./Spring中@Transactional事务回滚 - Andrew.Zhou - 博客园_files/o_Exception001.jpg" title="Exception 001"></p>
+<a name="_caption_2"></a><h2 id="三transactional的使用实例">三、@Transactional的使用实例</h2>
+<p>本实例采用的是eclipse+maven，maven只是作为jar管理，即便不了解的maven的猿友也可以读懂。</p>
+<h4 id="spring的配置文件">3.1、spring的配置文件</h4>
+<p>里面必须先配置tx名字空间如下：</p>
+<p><img src="./Spring中@Transactional事务回滚 - Andrew.Zhou - 博客园_files/o_Spring_Transactional001.png" title="Spring Transactional 001" style="width: 733px;"></p>
+<p><a href="mailto:%E4%B8%BA%E4%BA%86%E4%BD%BF%E7%94%A8%E5%9F%BA%E4%BA%8E@Transactional%E7%9A%84%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86" target="_blank">为了使用基于@Transactional的事务管理</a>，需要在Spring中进行如下的配置：</p>
+<div class="sourceCode"><pre class="brush: xml;">&lt;bean id="appTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"&gt;
+      &lt;property name="dataSource" ref="dataSource" /&gt;
+    &lt;/bean&gt;
+
+    &lt;tx:annotation-driven proxy-target-class="false" transaction-manager="appTransactionManager" /&gt;</pre></div>
+<p>博主的整个spring配置文件：</p>
+<div class="sourceCode"><pre class="brush: xml;">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="  
+           http://www.springframework.org/schema/tx
+           http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+           http://www.springframework.org/schema/beans  
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+           http://www.springframework.org/schema/aop  
+           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+           http://www.springframework.org/schema/context  
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd"&gt;
+
+     &lt;!-- 引入jdbc配置文件 --&gt;  
+     &lt;bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"&gt;
+        &lt;property name="locations"&gt;
+            &lt;list&gt;
+               &lt;value&gt;classpath:properties/*.properties&lt;/value&gt;
+                &lt;!--要是有多个配置文件，只需在这里继续添加即可 --&gt;
+            &lt;/list&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+
+
+
+    &lt;!-- 配置数据源 --&gt;
+    &lt;bean id="dataSource"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource"&gt;
+        &lt;!-- 不使用properties来配置 --&gt;
+        &lt;!-- &lt;property name="driverClassName" value="com.mysql.jdbc.Driver" /&gt; 
+            &lt;property name="url" value="jdbc:mysql://localhost:3306/learning" /&gt; 
+            &lt;property name="username" value="root" /&gt; 
+            &lt;property name="password" value="christmas258@" /&gt; --&gt;
+       &lt;!-- 使用properties来配置 --&gt;
+        &lt;property name="driverClassName"&gt;
+            &lt;value&gt;${jdbc_driverClassName}&lt;/value&gt;
+        &lt;/property&gt;
+        &lt;property name="url"&gt;
+            &lt;value&gt;${jdbc_url}&lt;/value&gt;
+        &lt;/property&gt;
+        &lt;property name="username"&gt;
+            &lt;value&gt;${jdbc_username}&lt;/value&gt;
+        &lt;/property&gt;
+        &lt;property name="password"&gt;
+            &lt;value&gt;${jdbc_password}&lt;/value&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+
+    &lt;bean id="appTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"&gt;
+      &lt;property name="dataSource" ref="dataSource" /&gt;
+    &lt;/bean&gt;
+
+    &lt;tx:annotation-driven proxy-target-class="false" transaction-manager="appTransactionManager" /&gt;
+
+    &lt;!-- 自动扫描了所有的XxxxMapper.xml对应的mapper接口文件，这样就不用一个一个手动配置Mpper的映射了，只要Mapper接口类和Mapper映射文件对应起来就可以了。 --&gt;
+    &lt;bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"&gt;
+        &lt;property name="basePackage"
+            value="com.luo.dao" /&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- 配置Mybatis的文件 ，mapperLocations配置**Mapper.xml文件位置，configLocation配置mybatis-config文件位置--&gt;
+    &lt;bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"&gt;
+        &lt;property name="dataSource" ref="dataSource" /&gt;
+        &lt;property name="mapperLocations" value="classpath:mapper/*.xml"/&gt;  
+        &lt;property name="configLocation" value="classpath:mybatis/mybatis-config.xml" /&gt;
+        &lt;!-- &lt;property name="typeAliasesPackage" value="com.tiantian.ckeditor.model" 
+            /&gt; --&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- 自动扫描注解的bean --&gt;
+    &lt;context:component-scan base-package="com.luo.service" /&gt;
+
+&lt;/beans&gt;</pre></div>
+<h4 id="使用transactional在添加用户实现类方法加上注解">3.2、<a href="mailto:%E4%BD%BF%E7%94%A8@Transactional" target="_blank">使用@Transactional</a>，在添加用户实现类方法加上注解</h4>
+<div class="sourceCode"><pre class="brush: java;">@Transactional(propagation=Propagation.REQUIRED)
+public void addUser(User user) {
+    userDao.addUser(user);
+    String string  = null;
+    if(string.equals("")) {
+        int i = 0;
+    }
+}</pre></div>
+<p>上面的方法我故意让其出现空指针异常，会事物回滚</p>
+<h4 id="运行单元测试类">3.3、运行单元测试类</h4>
+<div class="sourceCode"><pre class="brush: java;">@Test  
+public void addUserTest(){  
+    User user = new User();
+    user.setUserName("luoguohui1");
+    user.setUserPassword("luoguohui1");
+    userService.addUser(user);
+}</pre></div>
+<p>发现无法插入进去，<a href="mailto:%E4%BD%86%E6%98%AF%E5%A6%82%E6%9E%9C%E6%8A%8A@Transactional%E5%8E%BB%E6%8E%89" target="_blank">但是如果把@Transactional去掉</a>，即代码如下，虽然出现异常，但是数据库中还是有添加对应数据的：</p>
+<p><img src="./Spring中@Transactional事务回滚 - Andrew.Zhou - 博客园_files/o_Spring_Transactional002.png" title="Spring Transactional 002"></p>
+<h4 id="源码下载">3.4、源码下载</h4>
+<p>本文的工程是在<a href="http://blog.csdn.net/u013142781/article/details/50388204" target="_blank"><font color="#0099ff">mybatis入门（含实例教程和源码）</font></a>的基础上修改的，该文包含了数据库脚本及工程搭建的详细流程。</p>
+<p>本文最终源码下载：</p>
+<p><code>http://download.csdn.net/detail/u013142781/9381184</code></p>
+<a name="_caption_3"></a><h2 id="四spring中的transactional必须要了解的概念">四、<a href="mailto:Spring%E4%B8%AD%E7%9A%84@Transactional%E5%BF%85%E9%A1%BB%E8%A6%81%E4%BA%86%E8%A7%A3%E7%9A%84%E6%A6%82%E5%BF%B5" target="_blank">Spring中的@Transactional必须要了解的概念</a></h2>
+<p><a href="mailto:Spring%E4%B8%AD%E7%9A%84@Transactional%E5%9F%BA%E4%BA%8E%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E7%9A%84%E6%9C%BA%E5%88%B6" target="_blank">Spring中的@Transactional基于动态代理的机制</a>，提供了一种透明的事务管理机制，方便快捷解决在开发中碰到的问题。</p>
+<p>一般使用是通过如下代码对方法或接口或类注释：</p>
+<div class="sourceCode"><pre class="brush: java;">@Transactional(propagation=Propagation.NOT_SUPPORTED)</pre></div>
+<p>Propagation支持7种不同的传播机制：</p>
+<p>REQUIRED：如果存在一个事务，则支持当前事务。如果没有事务则开启一个新的事务。</p>
+<p>SUPPORTS： 如果存在一个事务，支持当前事务。如果没有事务，则非事务的执行。但是对于事务同步的事务管理器，PROPAGATION_SUPPORTS与不使用事务有少许不同。</p>
+<p>NOT_SUPPORTED：总是非事务地执行，并挂起任何存在的事务。</p>
+<p>REQUIRESNEW：总是开启一个新的事务。如果一个事务已经存在，则将这个存在的事务挂起。</p>
+<p>MANDATORY：如果已经存在一个事务，支持当前事务。如果没有一个活动的事务，则抛出异常。</p>
+<p>NEVER：总是非事务地执行，如果存在一个活动事务，则抛出异常</p>
+<p>NESTED：如果一个活动的事务存在，则运行在一个嵌套的事务中。如果没有活动事务，则按REQUIRED属性执行。</p>
+<blockquote>
+<p>下面是一些需要注意的事项，必须必须必须要看，不然遇到各种坑别说博主没有提醒你哦：</p>
+</blockquote>
+<ol>
+<li><p><a href="mailto:%E5%9C%A8%E9%9C%80%E8%A6%81%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86%E7%9A%84%E5%9C%B0%E6%96%B9%E5%8A%A0@Transactional" target="_blank">在需要事务管理的地方加@Transactional</a> 注解。@Transactional 注解可以被应用于接口定义和接口方法、类定义和类的 public 方法上。</p></li>
+<li><p>@Transactional 注解只能应用到 public 可见度的方法上。 如果你在 protected、private 或者 package-visible 的方法上使用 @Transactional 注解，它也不会报错， 但是这个被注解的方法将不会展示已配置的事务设置。</p></li>
+<li><p>注意仅仅 @Transactional 注解的出现不足于开启事务行为，它仅仅 是一种元数据。必须在配置文件中使用配置元素，才真正开启了事务行为。</p></li>
+<li><p>通过 元素的 “proxy-target-class” 属性值来控制是基于接口的还是基于类的代理被创建。如果 “proxy-target-class” 属值被设置为 “true”，那么基于类的代理将起作用（这时需要CGLIB库cglib.jar在CLASSPATH中）。如果 “proxy-target-class” 属值被设置为 “false” 或者这个属性被省略，那么标准的JDK基于接口的代理将起作用。</p></li>
+<li><p>Spring团队建议在具体的类（或类的方法）上使用 @Transactional 注解，而不要使用在类所要实现的任何接口上。在接口上使用 @Transactional 注解，只能当你设置了基于接口的代理时它才生效。因为注解是 不能继承 的，这就意味着如果正在使用基于类的代理时，那么事务的设置将不能被基于类的代理所识别，而且对象也将不会被事务代理所包装。</p></li>
+<li><p>@Transactional 的事务开启 ，或者是基于接口的 或者是基于类的代理被创建。所以在同一个类中一个方法调用另一个方法有事务的方法，事务是不会起作用的。</p></li>
+</ol>
+</div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="http://www.cnblogs.com/andy-zhou/category/802818.html">Framework</a></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(5317866,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;acf1618f-9162-e511-b908-9dcfd8948a71&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./Spring中@Transactional事务回滚 - Andrew.Zhou - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./Spring中@Transactional事务回滚 - Andrew.Zhou - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/andy-zhou/" target="_blank"><img src="./Spring中@Transactional事务回滚 - Andrew.Zhou - 博客园_files/20150924161502.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/andy-zhou/">Andrew.Zhou</a><br>
+            <a href="http://home.cnblogs.com/u/andy-zhou/followees">关注 - 3</a><br>
+            <a href="http://home.cnblogs.com/u/andy-zhou/followers">粉丝 - 3</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;acf1618f-9162-e511-b908-9dcfd8948a71&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(5317866,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">0</span>
+    </div>
+    <div class="buryit" onclick="votePost(5317866,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/andy-zhou/p/5317830.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/andy-zhou/p/5317830.html" title="发布于2016-03-24 23:46">Java中synchronized的使用实例</a><br><a href="http://www.cnblogs.com/andy-zhou/p/5317881.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/andy-zhou/p/5317881.html" title="发布于2016-03-25 00:11">关于Java，那些我心存疑惑的事（不断更新中...）</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2016-03-25 00:02</span> <a href="http://www.cnblogs.com/andy-zhou/">Andrew.Zhou</a> 阅读(<span id="post_view_count">40</span>) 评论(<span id="post_comment_count">0</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=5317866" rel="nofollow">编辑</a> <a href="http://www.cnblogs.com/andy-zhou/p/5317866.html#" onclick="AddToWz(5317866);return false;">收藏</a></div>
+	</div>
+	<script src="./Spring中@Transactional事务回滚 - Andrew.Zhou - 博客园_files/highlight.min.js"></script><script>markdown_highlight();</script><script type="text/javascript">var allowComments=true,cb_blogId=246678,cb_entryId=5317866,cb_blogApp=currentBlogApp,cb_blogUserGuid='acf1618f-9162-e511-b908-9dcfd8948a71',cb_entryCreatedDate='2016/3/25 0:02:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="http://www.cnblogs.com/andy-zhou/p/5317866.html#" onclick="return RefreshPage();">刷新页面</a><a href="http://www.cnblogs.com/andy-zhou/p/5317866.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="https://group.cnblogs.com/topic/75389.html" target="_blank">【活动】优达学城正式发布“无人驾驶车工程师”课程</a><br><a href="http://www.rongcloud.cn/live" target="_blank">【推荐】移动直播百强八成都在用融云即时通讯云</a><br><a href="http://www.gcpowertools.com.cn/products/activereports_overview.htm?utm_source=cnblogs&amp;utm_medium=blogpage&amp;utm_term=bottom&amp;utm_content=AR&amp;utm_campaign=community" target="_blank">【推荐】报表开发有捷径：快速设计轻松集成，数据可视化和交互</a><br></div>
+<div id="opt_under_post"></div>
+<div id="ad_c1" class="c_ad_block"><a href="http://gold.xitu.io/extension/?utm_source=cnblogs&amp;utm_medium=banner&amp;utm_content=juhe&amp;utm_campaign=q3_extension" target="_blank"><img width="300" height="250" src="./Spring中@Transactional事务回滚 - Andrew.Zhou - 博客园_files/24442-20160902193613668-1123982956.png" alt=""></a></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="http://news.cnblogs.com/n/553738/" target="_blank">支付宝终拿下高速收费 月底将覆盖200条车道</a><br> ·  <a href="http://news.cnblogs.com/n/553737/" target="_blank">微软HoloLens眼镜销量大爆发：一下卖出2万多台</a><br> ·  <a href="http://news.cnblogs.com/n/553736/" target="_blank">不会编程也能创建智能助手，Oracle推出聊天机器人平台</a><br> ·  <a href="http://news.cnblogs.com/n/553735/" target="_blank">英国正式颁布机器人道德标准：不许伤害、欺骗和令人成瘾</a><br> ·  <a href="http://news.cnblogs.com/n/553734/" target="_blank">天天动听10月1日起将停止服务</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="ad_c2" class="c_ad_block"><a href="https://www.jiguang.cn/devservice/?from=cnblogs01" target="_blank"><img width="468" height="60" src="./Spring中@Transactional事务回滚 - Andrew.Zhou - 博客园_files/24442-20160803181056012-1919505484.jpg" alt=""></a></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/553682/" target="_blank">陈皓：什么是工程师文化？</a><br> ·  <a href="http://kb.cnblogs.com/page/551422/" target="_blank">没那么难，谈CSS的设计模式</a><br> ·  <a href="http://kb.cnblogs.com/page/550625/" target="_blank">程序猿媳妇儿注意事项</a><br> ·  <a href="http://kb.cnblogs.com/page/540529/" target="_blank">可是姑娘，你为什么要编程呢？</a><br> ·  <a href="http://kb.cnblogs.com/page/549631/" target="_blank">知其所以然（以算法学习为例）</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: topicList 文章列表容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"><div id="profile_block">昵称：<a href="http://home.cnblogs.com/u/andy-zhou/">Andrew.Zhou</a><br>园龄：<a href="http://home.cnblogs.com/u/andy-zhou/" title="入园时间：2015-09-24">11个月</a><br>粉丝：<a href="http://home.cnblogs.com/u/andy-zhou/followers/">3</a><br>关注：<a href="http://home.cnblogs.com/u/andy-zhou/followees/">3</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;acf1618f-9162-e511-b908-9dcfd8948a71&#39;)">+加关注</a></div></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2016/08/01&#39;);return false;">&lt;</a></td><td align="center">2016年9月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2016/10/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">28</td><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td><td class="CalOtherMonthDay" align="center">31</td><td align="center">1</td><td align="center">2</td><td class="CalWeekendDay" align="center">3</td></tr><tr><td class="CalWeekendDay" align="center">4</td><td align="center">5</td><td align="center">6</td><td align="center">7</td><td align="center">8</td><td align="center">9</td><td class="CalWeekendDay" align="center">10</td></tr><tr><td class="CalWeekendDay" align="center">11</td><td align="center">12</td><td align="center"><a href="http://www.cnblogs.com/andy-zhou/archive/2016/09/13.html"><u>13</u></a></td><td align="center">14</td><td align="center">15</td><td align="center">16</td><td class="CalWeekendDay" align="center">17</td></tr><tr><td class="CalWeekendDay" align="center">18</td><td class="CalTodayDay" align="center"><a href="http://www.cnblogs.com/andy-zhou/archive/2016/09/19.html"><u>19</u></a></td><td align="center">20</td><td align="center">21</td><td align="center">22</td><td align="center">23</td><td class="CalWeekendDay" align="center">24</td></tr><tr><td class="CalWeekendDay" align="center">25</td><td align="center">26</td><td align="center">27</td><td align="center">28</td><td align="center">29</td><td align="center">30</td><td class="CalOtherMonthDay" align="center">1</td></tr><tr><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td><td class="CalOtherMonthDay" align="center">7</td><td class="CalOtherMonthDay" align="center">8</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+<div id="widget_my_google" class="div_my_zzk"><input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk"></div>
+</div>
+</div>
+
+</div><div id="sidebar_shortcut" class="sidebar-block">
+<div class="catListLink">
+<h3 class="catListTitle">常用链接</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/andy-zhou/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="http://www.cnblogs.com/andy-zhou/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="http://www.cnblogs.com/andy-zhou/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="http://www.cnblogs.com/andy-zhou/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="http://www.cnblogs.com/andy-zhou/tag/" title="我的博客的标签列表">我的标签</a></li>
+<li><a id="itemListLink" onclick="this.blur();WarpClass(&#39;itemListLink&#39;, &#39;itemListLin_con&#39;);return false;" href="http://www.cnblogs.com/andy-zhou/p/5317866.html#">更多链接</a></li>
+</ul>
+<div id="itemListLin_con" style="display:none;">
+<ul>
+
+</ul>
+</div>
+</div></div><div id="sidebar_toptags" class="sidebar-block"></div><div id="sidebar_categories">
+<div class="catListPostCategory">
+<h3 class="catListTitle">随笔分类</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="http://www.cnblogs.com/andy-zhou/category/807540.html">Algorithm(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="http://www.cnblogs.com/andy-zhou/category/806328.html">Collection(4)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="http://www.cnblogs.com/andy-zhou/category/806121.html">Concurrent(19)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_3" href="http://www.cnblogs.com/andy-zhou/category/805000.html">DB &amp; SQL(4)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_4" href="http://www.cnblogs.com/andy-zhou/category/802838.html">Design(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_5" href="http://www.cnblogs.com/andy-zhou/category/802818.html">Framework(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_6" href="http://www.cnblogs.com/andy-zhou/category/802814.html">Front-End(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_7" href="http://www.cnblogs.com/andy-zhou/category/802817.html">Git(4)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_8" href="http://www.cnblogs.com/andy-zhou/category/806109.html">Hash &amp; Cached(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_9" href="http://www.cnblogs.com/andy-zhou/category/809122.html">HTTP &amp; HTTPS(5)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_10" href="http://www.cnblogs.com/andy-zhou/category/803537.html">Interview(16)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_11" href="http://www.cnblogs.com/andy-zhou/category/755371.html">iOS(11)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_12" href="http://www.cnblogs.com/andy-zhou/category/809150.html">iOS-Study(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_13" href="http://www.cnblogs.com/andy-zhou/category/802621.html">Java(16)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_14" href="http://www.cnblogs.com/andy-zhou/category/806821.html">Java Exception(3)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_15" href="http://www.cnblogs.com/andy-zhou/category/806785.html">Java I/O(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_16" href="http://www.cnblogs.com/andy-zhou/category/807545.html">Java NIO(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_17" href="http://www.cnblogs.com/andy-zhou/category/804986.html">JSP &amp; Servlet(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_18" href="http://www.cnblogs.com/andy-zhou/category/806120.html">JVM(12)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_19" href="http://www.cnblogs.com/andy-zhou/category/802809.html">Linux(3)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_20" href="http://www.cnblogs.com/andy-zhou/category/755438.html">Markdown(3)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_21" href="http://www.cnblogs.com/andy-zhou/category/804905.html">Patterns(4)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_22" href="http://www.cnblogs.com/andy-zhou/category/802824.html">Python(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_23" href="http://www.cnblogs.com/andy-zhou/category/811784.html">Redis(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_24" href="http://www.cnblogs.com/andy-zhou/category/802831.html">Text(16)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_25" href="http://www.cnblogs.com/andy-zhou/category/883668.html">Tomcat(1)</a> </li>
+
+</ul>
+
+</div>
+
+<div class="catListPostArchive">
+<h3 class="catListTitle">随笔档案</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_1_Link_0" href="http://www.cnblogs.com/andy-zhou/archive/2016/09.html">2016年9月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_1" href="http://www.cnblogs.com/andy-zhou/archive/2016/05.html">2016年5月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_2" href="http://www.cnblogs.com/andy-zhou/archive/2016/04.html">2016年4月 (21)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_3" href="http://www.cnblogs.com/andy-zhou/archive/2016/03.html">2016年3月 (113)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_4" href="http://www.cnblogs.com/andy-zhou/archive/2015/11.html">2015年11月 (3)</a> </li>
+
+</ul>
+
+</div>
+
+<div class="catListImageCategory">
+<h3 class="catListTitle">相册</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_2_Link_0" href="http://www.cnblogs.com/andy-zhou/gallery/803849.html" rel="nofollow">133个Java面试问题列表(4)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_1" href="http://www.cnblogs.com/andy-zhou/gallery/804987.html" rel="nofollow">Ajax原理学习(1)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_2" href="http://www.cnblogs.com/andy-zhou/gallery/805982.html" rel="nofollow">Git 分支管理是一门艺术(5)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_3" href="http://www.cnblogs.com/andy-zhou/gallery/816916.html" rel="nofollow">Git使用教程(73)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_4" href="http://www.cnblogs.com/andy-zhou/gallery/817145.html" rel="nofollow">HashMap多线程并发问题分析(5)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_5" href="http://www.cnblogs.com/andy-zhou/gallery/803540.html" rel="nofollow">Interview(1)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_6" href="http://www.cnblogs.com/andy-zhou/gallery/805770.html" rel="nofollow">iOS 面试基础题目(1)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_7" href="http://www.cnblogs.com/andy-zhou/gallery/802934.html" rel="nofollow">iOS应用架构谈 view层的组织和调用方案(3)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_8" href="http://www.cnblogs.com/andy-zhou/gallery/803534.html" rel="nofollow">iOS应用架构谈 组件化方案(1)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_9" href="http://www.cnblogs.com/andy-zhou/gallery/808162.html" rel="nofollow">Java ConcurrentModificationException异常原因和解决方法(2)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_10" href="http://www.cnblogs.com/andy-zhou/gallery/805036.html" rel="nofollow">Java I/O学习(9)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_11" href="http://www.cnblogs.com/andy-zhou/gallery/807546.html" rel="nofollow">Java NIO：NIO概述(2)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_12" href="http://www.cnblogs.com/andy-zhou/gallery/807560.html" rel="nofollow">Java NIO：浅析I/O模型(2)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_13" href="http://www.cnblogs.com/andy-zhou/gallery/806866.html" rel="nofollow">Java 字节流与字符流的区别(4)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_14" href="http://www.cnblogs.com/andy-zhou/gallery/806836.html" rel="nofollow">Java：类与继承(2)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_15" href="http://www.cnblogs.com/andy-zhou/gallery/805267.html" rel="nofollow">Javaweb异常提示信息统一处理(6)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_16" href="http://www.cnblogs.com/andy-zhou/gallery/806297.html" rel="nofollow">Java并发编程：Lock(2)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_17" href="http://www.cnblogs.com/andy-zhou/gallery/806123.html" rel="nofollow">Java并发编程：synchronized(4)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_18" href="http://www.cnblogs.com/andy-zhou/gallery/808170.html" rel="nofollow">Java并发编程：Thread类的使用(7)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_19" href="http://www.cnblogs.com/andy-zhou/gallery/808165.html" rel="nofollow">Java并发编程：volatile关键字解析(2)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_20" href="http://www.cnblogs.com/andy-zhou/gallery/808161.html" rel="nofollow">Java并发编程：并发容器之ConcurrentHashMap(3)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_21" href="http://www.cnblogs.com/andy-zhou/gallery/808169.html" rel="nofollow">Java并发编程：如何创建线程(1)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_22" href="http://www.cnblogs.com/andy-zhou/gallery/808164.html" rel="nofollow">Java并发编程：深入剖析ThreadLocal(8)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_23" href="http://www.cnblogs.com/andy-zhou/gallery/808163.html" rel="nofollow">Java并发编程：同步容器(3)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_24" href="http://www.cnblogs.com/andy-zhou/gallery/803905.html" rel="nofollow">Java并发编程：性能、扩展性和响应(1)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_25" href="http://www.cnblogs.com/andy-zhou/gallery/807579.html" rel="nofollow">Java常用排序算法/程序员必须掌握的8大排序算法(11)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_26" href="http://www.cnblogs.com/andy-zhou/gallery/804972.html" rel="nofollow">Java基础之泛型(2)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_27" href="http://www.cnblogs.com/andy-zhou/gallery/804953.html" rel="nofollow">Java基础之集合(4)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_28" href="http://www.cnblogs.com/andy-zhou/gallery/806325.html" rel="nofollow">Java集合框架：HashMap(3)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_29" href="http://www.cnblogs.com/andy-zhou/gallery/804941.html" rel="nofollow">Java经典设计模式(4)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_30" href="http://www.cnblogs.com/andy-zhou/gallery/806853.html" rel="nofollow">Java垃圾回收机制(4)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_31" href="http://www.cnblogs.com/andy-zhou/gallery/806319.html" rel="nofollow">Java内部类详解(5)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_32" href="http://www.cnblogs.com/andy-zhou/gallery/805012.html" rel="nofollow">Java内存管理(2)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_33" href="http://www.cnblogs.com/andy-zhou/gallery/807043.html" rel="nofollow">Java输入输出流(17)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_34" href="http://www.cnblogs.com/andy-zhou/gallery/811437.html" rel="nofollow">Java位操作全面总结(1)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_35" href="http://www.cnblogs.com/andy-zhou/gallery/806198.html" rel="nofollow">Java线程面试题 Top 50(1)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_36" href="http://www.cnblogs.com/andy-zhou/gallery/806130.html" rel="nofollow">Java虚拟机类加载机制(1)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_37" href="http://www.cnblogs.com/andy-zhou/gallery/807049.html" rel="nofollow">Java异常处理和设计(4)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_38" href="http://www.cnblogs.com/andy-zhou/gallery/805264.html" rel="nofollow">Java异常封装(2)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_39" href="http://www.cnblogs.com/andy-zhou/gallery/805276.html" rel="nofollow">Java中synchronized的使用实例(2)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_40" href="http://www.cnblogs.com/andy-zhou/gallery/806841.html" rel="nofollow">Java中的static关键字解析(2)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_41" href="http://www.cnblogs.com/andy-zhou/gallery/807048.html" rel="nofollow">JVM的内存区域划分(3)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_42" href="http://www.cnblogs.com/andy-zhou/gallery/806435.html" rel="nofollow">JVM调优总结(21)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_43" href="http://www.cnblogs.com/andy-zhou/gallery/811918.html" rel="nofollow">MySQL 死锁问题分析(13)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_44" href="http://www.cnblogs.com/andy-zhou/gallery/807034.html" rel="nofollow">MySQL通用优化手册(42)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_45" href="http://www.cnblogs.com/andy-zhou/gallery/805287.html" rel="nofollow">Objective-C与JavaScript交互的那些事(2)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_46" href="http://www.cnblogs.com/andy-zhou/gallery/811785.html" rel="nofollow">Redis时延问题分析及应对(3)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_47" href="http://www.cnblogs.com/andy-zhou/gallery/805070.html" rel="nofollow">Servlet再度学习(2)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_48" href="http://www.cnblogs.com/andy-zhou/gallery/805278.html" rel="nofollow">Spring中@Transactional事务回滚(2)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_49" href="http://www.cnblogs.com/andy-zhou/gallery/805095.html" rel="nofollow">SQL实例整理(7)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_50" href="http://www.cnblogs.com/andy-zhou/gallery/802666.html" rel="nofollow">Xcode + Swift 制作动态原型(18)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_51" href="http://www.cnblogs.com/andy-zhou/gallery/805768.html" rel="nofollow">阿里Linux Shell脚本面试25个经典问答(13)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_52" href="http://www.cnblogs.com/andy-zhou/gallery/803919.html" rel="nofollow">初探Java字符串(7)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_53" href="http://www.cnblogs.com/andy-zhou/gallery/806102.html" rel="nofollow">对一致性Hash算法，Java代码实现的深入研究(2)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_54" href="http://www.cnblogs.com/andy-zhou/gallery/811968.html" rel="nofollow">画图解释 SQL Join 语句(6)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_55" href="http://www.cnblogs.com/andy-zhou/gallery/805985.html" rel="nofollow">简明 Git 命令速查表(1)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_56" href="http://www.cnblogs.com/andy-zhou/gallery/811282.html" rel="nofollow">理解Cookie和Session机制(5)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_57" href="http://www.cnblogs.com/andy-zhou/gallery/818571.html" rel="nofollow">理解HTTP幂等性(2)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_58" href="http://www.cnblogs.com/andy-zhou/gallery/806384.html" rel="nofollow">理解Java虚拟机体系结构(8)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_59" href="http://www.cnblogs.com/andy-zhou/gallery/811989.html" rel="nofollow">秒杀系统架构分析与实战(25)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_60" href="http://www.cnblogs.com/andy-zhou/gallery/807045.html" rel="nofollow">浅谈Java中的equals和==(2)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_61" href="http://www.cnblogs.com/andy-zhou/gallery/806830.html" rel="nofollow">浅谈Java中的深拷贝和浅拷贝(1)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_62" href="http://www.cnblogs.com/andy-zhou/gallery/806300.html" rel="nofollow">浅析Java中的final关键字(3)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_63" href="http://www.cnblogs.com/andy-zhou/gallery/807046.html" rel="nofollow">浅析Java中的访问权限控制(4)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_64" href="http://www.cnblogs.com/andy-zhou/gallery/806133.html" rel="nofollow">三张图彻底了解Java中字符串的不变性(3)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_65" href="http://www.cnblogs.com/andy-zhou/gallery/807047.html" rel="nofollow">深入剖析Java中的装箱和拆箱(1)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_66" href="http://www.cnblogs.com/andy-zhou/gallery/806681.html" rel="nofollow">什么是堆和栈，它们在哪儿？(4)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_67" href="http://www.cnblogs.com/andy-zhou/gallery/755355.html" rel="nofollow">使用XIB实现一个简单view(3)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_68" href="http://www.cnblogs.com/andy-zhou/gallery/809125.html" rel="nofollow">详解https是如何确保安全的？(2)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_69" href="http://www.cnblogs.com/andy-zhou/gallery/806055.html" rel="nofollow">在Xcode中使用Git进行源码版本控制(40)</a> </li>
+
+</ul>
+
+</div>
+
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/andy-zhou/p/5331392.html#3432068">1. Re:Java输入输出流</a></li>
+        <li class="recent_comment_body">这个博客的含金量太高了。。。</li>
+        <li class="recent_comment_author">--FranklinYang</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock"><ul><li><a href="http://www.cnblogs.com/andy-zhou/p/5317820.html">1. Javaweb异常提示信息统一处理(836)</a></li><li><a href="http://www.cnblogs.com/andy-zhou/p/5364136.html">2. 秒杀系统架构分析与实战(317)</a></li><li><a href="http://www.cnblogs.com/andy-zhou/p/5499009.html">3. 关于启用 HTTPS 的一些经验分享（一）(184)</a></li><li><a href="http://www.cnblogs.com/andy-zhou/p/4962135.html">4. 使用XIB实现一个简单view(181)</a></li><li><a href="http://www.cnblogs.com/andy-zhou/p/5321798.html">5. iOS响应式编程：ReactiveCocoa vs RxSwift 选谁好(124)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="http://www.cnblogs.com/andy-zhou/p/5331392.html">1. Java输入输出流(1)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap" style="display: none;">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div class="RecentComment">
+	<div id="TopDiggPostsBlock"></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+		<div class="clear"></div>
+		<div id="footer">
+			
+<!--done-->
+Copyright ©2016 Andrew.Zhou
+		</div><!--end: footer -->
+	</div><!--end: sideBar 侧边栏容器 -->
+</div><!--end: home 自定义的最大容器 -->
+</center>
+<!--PageEndHtml Block Begin-->
+<script type="text/javascript">  
+    var setMyBlog = {
+        setCopyright: function() {
+            //设置版权信息，转载出处自动根据页面url生成
+            var info_str = '<p>作者：<a target="_blank">@gzdaijie</a><br>'+
+                '本文为作者原创，转载请注明出处：<a class="uri"></a></p><hr></hr>', 
+                info = $(info_str),
+                info_a = info.find("a"),
+                url = window.location.href;
+            $(info_a[0]).attr("href","https://github.com/gzdaijie");
+            $(info_a[1]).attr("href",url).text(url);
+            $("#cnblogs_post_body").prepend(info);
+        },
+        setCodeRow: function(){
+            // 代码行号显示
+            var pre = $("pre.sourceCode"); //选中需要更改的部分
+            if(pre && pre.length){
+                pre.each(function() {
+                    var item = $(this);
+                    var lang = item.attr("class").split(" ")[1]; //判断高亮的语言
+                    item.html(item.html().replace(/<[^>]+>/g,"")); //将<pre>标签中的html标签去掉
+                    item.removeClass().addClass("brush: " + lang +";"); //根据语言添加笔刷
+                    SyntaxHighlighter.all();
+                })
+            }
+        },
+        setAtarget: function() {
+            // 博客内的链接在新窗口打开
+            $("#cnblogs_post_body a").each(function(){
+                this.target = "_blank";
+            }) 
+        },
+        setContent: function() {
+            // 根据h2、h3标签自动生成目录
+            var captions_ori = $("#cnblogs_post_body h2"),
+                //captions = $("#cnblogs_post_body h2,#cnblogs_post_body h3").clone(),
+                captions = $("#cnblogs_post_body h2").clone(),
+                content = $("<blockquote><h4>目录</h4></blockquote>");
+            $("#cnblogs_post_body").prepend(content.append(captions));
+            var index = -1;
+            captions.replaceWith(function(){
+                var self = this;
+                if(self.tagName == "H2" || self.tagName == "h2"){
+                    // 设置点击目录跳转
+                    index += 1;
+                    $('<a name="' + '_caption_' + index + '"></a>').insertBefore(captions_ori[index]); 
+                    return '<a href="#_caption_' + index + '"><strong>' + self.innerHTML + '</strong></a><br>';
+                } else {
+                    return self.innerHTML + "<br>";
+                }
+            });
+        },
+        runAll: function() {
+            /* 运行所有方法
+             * setAtarget() 博客园内标签新窗口打开
+             * setContent() 设置目录
+             * setCopyright() 设置版权信息
+             * setCodeRow() 代码行号显示
+             */ 
+            this.setAtarget(); 
+            this.setContent();
+            //this.setCopyright();
+            this.setCodeRow();
+        }
+    }
+    setMyBlog.runAll();
+</script>
+<!--PageEndHtml Block End-->
+
+
+</body></html>
