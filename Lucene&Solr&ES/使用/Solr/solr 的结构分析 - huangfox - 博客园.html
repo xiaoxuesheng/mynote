@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)http://www.cnblogs.com/huangfox/archive/2012/08/07/2627055.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>solr 的结构分析 - huangfox - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./solr 的结构分析 - huangfox - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./solr 的结构分析 - huangfox - 博客园_files/bundle-Cogitation.css">
+<link id="mobile-style" media="only screen and (max-device-width: 980px)" type="text/css" rel="stylesheet" href="./solr 的结构分析 - huangfox - 博客园_files/bundle-Cogitation-mobile.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/huangfox/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/huangfox/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/huangfox/wlwmanifest.xml">
+<script src="./solr 的结构分析 - huangfox - 博客园_files/jquery.js.下载" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'huangfox', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="./solr 的结构分析 - huangfox - 博客园_files/blog-common.js.下载" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="top">
+	
+<div>
+	<table>
+		<tbody><tr>
+			<td class="HeaderTitles">
+				<h1 class="HeaderTitle"><a id="Header1_HeaderTitle" class="HeaderMainTitle" href="http://www.cnblogs.com/huangfox/">huangfox</a></h1>
+				<p id="tagline">冰冻三尺,非一日之寒！</p>
+			</td>
+		</tr>
+	</tbody></table>
+</div>
+<div class="HeaderBar">
+	<table id="HeaderBar" class="HeaderBar" cellpadding="0" cellspacing="0">
+		<tbody><tr>
+			<td class="HeaderBarTab" nowrap="">
+&nbsp;
+<a id="blog_nav_sitehome" href="http://www.cnblogs.com/">博客园</a> ::
+<a id="blog_nav_myhome" href="http://www.cnblogs.com/huangfox/">首页</a> ::
+<a href="http://q.cnblogs.com/" class="menu">博问</a> ::
+<a href="http://home.cnblogs.com/ing/" class="menu">闪存</a> ::
+<a id="blog_nav_newpost" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a> ::
+<a id="blog_nav_contact" accesskey="9" rel="nofollow" href="https://msg.cnblogs.com/send/huangfox">联系</a> ::
+<a id="blog_nav_rss" href="http://www.cnblogs.com/huangfox/rss">订阅</a>
+<a id="blog_nav_rss_image" class="XMLLink" href="http://www.cnblogs.com/huangfox/rss"><img src="./solr 的结构分析 - huangfox - 博客园_files/xml.gif" alt="订阅"></a> ::
+<a id="blog_nav_admin" rel="nofollow" href="https://i.cnblogs.com/">管理</a> ::
+
+</td>
+			<td><img id="Header1_BlueTab" src="./solr 的结构分析 - huangfox - 博客园_files/BlueTabRight.gif" align="absmiddle"></td>
+			<td class="HeaderBarTabBack" nowrap="" width="100%">
+				<div id="blog_stats">
+<div class="BlogStatsBar">
+	<table class="BlogStatsBar">
+		<tbody><tr>
+			<td width="100%">
+			</td>
+			<td class="BlogStatsBar" nowrap="">
+				&nbsp;
+				192 
+				随笔&nbsp;::
+				5 文章
+				::
+				90 评论
+				::
+				0 引用
+			</td>
+		</tr>
+	</tbody></table>
+</div>
+</div>
+			</td>
+		</tr>
+	</tbody></table>
+</div>
+
+</div>
+<div id="leftmenu">	
+
+	    <div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+		
+		<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+
+</div>
+</div>
+
+</div><div id="sidebar_toptags" class="sidebar-block">
+<h3 class="catListTitle">我的标签</h3>
+<div id="MyTag">
+<ul>
+<li><a href="http://www.cnblogs.com/huangfox/tag/elasticsearch/">elasticsearch</a>(13)</li><li><a href="http://www.cnblogs.com/huangfox/tag/lucene3.x%E5%9F%BA%E7%A1%80/">lucene3.x基础</a>(10)</li><li><a href="http://www.cnblogs.com/huangfox/tag/Lucene%E9%AB%98%E7%BA%A7/">Lucene高级</a>(9)</li><li><a href="http://www.cnblogs.com/huangfox/tag/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%8E%92%E5%BA%8F/">数据结构-排序</a>(9)</li><li><a href="http://www.cnblogs.com/huangfox/tag/solr%E5%85%A5%E9%97%A8/">solr入门</a>(8)</li><li><a href="http://www.cnblogs.com/huangfox/tag/Lucene%E6%89%A9%E5%B1%95/">Lucene扩展</a>(8)</li><li><a href="http://www.cnblogs.com/huangfox/tag/LuceneFAQ/">LuceneFAQ</a>(8)</li><li><a href="http://www.cnblogs.com/huangfox/tag/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%91/">数据结构-树</a>(7)</li><li><a href="http://www.cnblogs.com/huangfox/tag/Servlet/">Servlet</a>(6)</li><li><a href="http://www.cnblogs.com/huangfox/tag/redis/">redis</a>(6)</li><li><a href="http://www.cnblogs.com/huangfox/tag/">更多</a></li>
+</ul>
+</div></div><div id="sidebar_categories">
+		<h3>随笔分类<span style="font-size:11px;font-weight:normal">(208)</span></h3>
+		
+				<ul>
+			
+				<li><a id="CatList_LinkList_0_Link_0" href="http://www.cnblogs.com/huangfox/category/322817.html">10-java核心(13)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_1" href="http://www.cnblogs.com/huangfox/category/322830.html">11-javaEE核心(9)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_2" href="http://www.cnblogs.com/huangfox/category/322829.html">12-SSH</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_3" href="http://www.cnblogs.com/huangfox/category/345649.html">13-java组件(3)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_4" href="http://www.cnblogs.com/huangfox/category/415101.html">14-java开发技巧(3)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_5" href="http://www.cnblogs.com/huangfox/category/322836.html">20-数据库(4)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_6" href="http://www.cnblogs.com/huangfox/category/322837.html">21-mongoDB(10)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_7" href="http://www.cnblogs.com/huangfox/category/329125.html">30-Tomcat(1)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_8" href="http://www.cnblogs.com/huangfox/category/368401.html">31-http(2)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_9" href="http://www.cnblogs.com/huangfox/category/360592.html">40-linux(8)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_10" href="http://www.cnblogs.com/huangfox/category/362442.html">50-hadoop(1)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_11" href="http://www.cnblogs.com/huangfox/category/332322.html">60-图形图像(4)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_12" href="http://www.cnblogs.com/huangfox/category/828767.html">61-python(1)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_13" href="http://www.cnblogs.com/huangfox/category/391161.html">70-数据结构(18)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_14" href="http://www.cnblogs.com/huangfox/category/264901.html">71-算法(4)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_15" href="http://www.cnblogs.com/huangfox/category/322820.html">72-设计模式</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_16" href="http://www.cnblogs.com/huangfox/category/268169.html">80-分布式(9)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_17" href="http://www.cnblogs.com/huangfox/category/400632.html">81-memcached(3)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_18" href="http://www.cnblogs.com/huangfox/category/400791.html">82-redis(3)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_19" href="http://www.cnblogs.com/huangfox/category/322818.html">90-信息检索理论(4)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_20" href="http://www.cnblogs.com/huangfox/category/322819.html">91-搜索引擎(9)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_21" href="http://www.cnblogs.com/huangfox/category/263194.html">92-搜索引擎_lucene(49)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_22" href="http://www.cnblogs.com/huangfox/category/341799.html">93-搜索引擎_solr(31)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_23" href="http://www.cnblogs.com/huangfox/category/426639.html">94-数据挖掘(1)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_24" href="http://www.cnblogs.com/huangfox/category/549802.html">94-搜索引擎_elasticSearch(15)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_25" href="http://www.cnblogs.com/huangfox/category/322827.html">a0-关注资讯(3)</a> </li>
+			
+				<li><a id="CatList_LinkList_0_Link_26" href="http://www.cnblogs.com/huangfox/category/322828.html">a1-一帧思维</a> </li>
+			
+				</ul>
+			
+	
+		<h3>相册<span style="font-size:11px;font-weight:normal">(1)</span></h3>
+		
+				<ul>
+			
+				<li><a id="CatList_LinkList_1_Link_0" href="http://www.cnblogs.com/huangfox/gallery/643947.html" rel="nofollow">结构图(1)</a> </li>
+			
+				</ul>
+			
+	
+		<h3>Solr</h3>
+		
+				<ul>
+			
+				<li><a id="CatList_LinkList_2_Link_0" href="https://support.lucidworks.com/hc/en-us" rel="nofollow">lucidworks</a> </li>
+			
+				<li><a id="CatList_LinkList_2_Link_1" href="http://wiki.apache.org/solr/SolrPerformanceProblems#Java_Heap" rel="nofollow">SolrPerformanceProblems</a> </li>
+			
+				<li><a id="CatList_LinkList_2_Link_2" href="http://stackoverflow.com/" rel="nofollow">stackoverflow</a> </li>
+			
+				</ul>
+			
+	</div><div id="sidebar_scorerank" class="sidebar-block">
+<h3>积分与排名</h3>
+<ul>
+	<li>
+		积分 -
+		234823
+	</li><li>
+		排名 -
+		657
+	</li>
+</ul>
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<h3 class="catListTitle">最新评论</h3>
+<div class="RecentComment" id="RecentComments">
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/huangfox/archive/2012/07/02/2573333.html#3508464">1. Re:[ lucene高级 ] 细说lucene的评分机制</a></li>
+        <li class="recent_comment_body">大神，能留个联系方式吗</li>
+        <li class="recent_comment_author">--清风习习·真</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/huangfox/p/3210509.html#3506327">2. Re:如何查看java对象的大小</a></li>
+        <li class="recent_comment_body">为什么我下载的lucene没有RamUsageEstimator这个类</li>
+        <li class="recent_comment_author">--laugher_ccc</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/huangfox/archive/2011/10/20/2218970.html#3483128">3. Re:Eclipse导入Tomcat源码</a></li>
+        <li class="recent_comment_body">@coderam可以的~：P...</li>
+        <li class="recent_comment_author">--huangfox</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/huangfox/p/3541300.html#3483069">4. Re:elasticsearch 口水篇（1） 安装、插件</a></li>
+        <li class="recent_comment_body">非常不错，找到了需要的插件！点个赞</li>
+        <li class="recent_comment_author">--xingoo</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/huangfox/p/3543134.html#3480718">5. Re:elasticsearch 口水篇（4）java客户端 - 原生esClient</a></li>
+        <li class="recent_comment_body">我用你上面的API但是没有调用成功出错[img]//images2015.cnblogs.com/blog/987074/201608/987074-20160801141736247-1308325......</li>
+        <li class="recent_comment_author">--舆</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<h3 class="catListTitle">阅读排行榜</h3>
+<div class="RecentComment" id="TopViewPosts"> 
+	<div id="TopViewPostsBlock"><ul><li><a href="http://www.cnblogs.com/huangfox/archive/2012/03/31/2426341.html">1. HTTP Keep-Alive详解[转](51815)</a></li><li><a href="http://www.cnblogs.com/huangfox/archive/2012/03/31/2426268.html">2. Linux hostname主机名配置文件与文件 /etc/hosts解说[转](36989)</a></li><li><a href="http://www.cnblogs.com/huangfox/archive/2011/10/20/2218970.html">3. Eclipse导入Tomcat源码(31061)</a></li><li><a href="http://www.cnblogs.com/huangfox/archive/2012/04/01/2428947.html">4. [ mongoDB ] - MongoDB 连接池(29787)</a></li><li><a href="http://www.cnblogs.com/huangfox/p/3541300.html">5. elasticsearch 口水篇（1） 安装、插件(29706)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<h3 class="catListTitle">评论排行榜</h3>
+<div class="RecentComment" id="TopCommentsPosts">
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="http://www.cnblogs.com/huangfox/archive/2011/10/20/2218970.html">1. Eclipse导入Tomcat源码(8)</a></li><li><a href="http://www.cnblogs.com/huangfox/archive/2012/08/21/2649055.html">2. lucene中的nrt(7)</a></li><li><a href="http://www.cnblogs.com/huangfox/archive/2010/10/15/1852206.html">3. [ lucene高级 ] 研讨如何进行Lucene的分布式应用 [转](7)</a></li><li><a href="http://www.cnblogs.com/huangfox/archive/2012/08/09/2630643.html">4. 两三年前的搜索管理系统(6)</a></li><li><a href="http://www.cnblogs.com/huangfox/p/3541300.html">5. elasticsearch 口水篇（1） 安装、插件(6)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+	
+</div>
+<div id="main">
+	
+<div id="post_detail">
+<div class="post">
+	<div class="postTitle">
+		<a id="cb_post_title_url" href="http://www.cnblogs.com/huangfox/archive/2012/08/07/2627055.html">solr 的结构分析</a>
+	</div>
+	
+	<div class="postText">
+		<div id="cnblogs_post_body"><p>solr在lucene外边做了一层厚厚的封装，主要是为了简化二次开发，提供了一些成熟的解决方案。</p>
+<p><strong>solr和solrCore</strong></p>
+<p>solr可以对多个core进行综合管理，并接受请求选择特定的一个或者多个core执行相关任务。下面来回答什么是solr的core。</p>
+<p>core从文件结构的角度来看的话，主要包括一份索引（也可能还包括拼写检查的索引）、一堆配置文件。最主要的配置文件是：solrconfig.xml和schema.xml。<strong>solrconfig.xml</strong>从整体上对core进行了配置，例如索引的存放路径、字段的最大长度（maxFiedlLength）、写锁的超时时间（writeLockTimeout）、锁类型（lockType）、是否压缩索引（useCompoundFile）、内存索引缓冲区大小（ramBufferSizeMB）、合并因子（mergeFactor）、删除策略、自动提交策略、缓存设置等，它好比是一份组装机器人的说明书，里面详细描述了各个部件（handler）的参数。<strong>schema.xml</strong>主要是对索引的配置，例如分词器、字段名称+索引方法+存储方式+分词方式、唯一标识字段等，它好比是机器人学习的学习方法，机器人主动或被动接受特定数据，按照配置转化成索引，然后通过其部件（handler）展示出来，例如：search、moreLikeThis、spellCheck、factedSearcher等。</p>
+<p>core从功能方面来说的话，主要是通过各种<strong>handler</strong>进行工作，这个在上文中也提及过。solr的功能之多让我想到瑞士军刀，看图：</p>
+<p><img src="./solr 的结构分析 - huangfox - 博客园_files/2012080715554123.jpg" alt="">&nbsp; &nbsp; &nbsp;&nbsp;<img style="border-style: initial; border-color: initial;" src="./solr 的结构分析 - huangfox - 博客园_files/2012080716021249.jpg" alt=""></p>
+<p>常见的有：morelikeThis、search、 spellCheck、dataImport等。</p>
+<p>&nbsp;</p>
+<p>然而不同的部件有复杂简易之分，我们常见的searchHandler就比较复杂，他包括多个零件（<strong>component</strong>）。</p>
+<p><img src="./solr 的结构分析 - huangfox - 博客园_files/2012080716053498.jpg" alt=""></p>
+<p>多个component进行组合就可以完成特定的工作。（以下代码摘自：SearchHandler.java）</p>
+<div class="cnblogs_Highlighter">
+<div><div id="highlighter_101727" class="syntaxhighlighter nogutter  java"><div class="toolbar"><span><a href="http://www.cnblogs.com/huangfox/archive/2012/08/07/2627055.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="java keyword">for</code><code class="java plain">( SearchComponent c : components ) {</code></div><div class="line number2 index1 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">rb.setTimer( subt.sub( c.getName() ) );</code></div><div class="line number3 index2 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">c.process(rb);</code></div><div class="line number4 index3 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">rb.getTimer().stop();</code></div><div class="line number5 index4 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">}</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>&nbsp;</p>
+<p>以上文字主要简单白话了solr的core是个什么东西！那么solr怎么控制这些core进行工作呢？</p>
+<p>例如我们输入：<a href="http://localhost:8080/solr3.5/core1/select/?q=*%3A*&amp;version=2.2&amp;start=0&amp;rows=10&amp;indent=on">http://localhost:8080/solr3.5/core1/select/?q=*%3A*&amp;version=2.2&amp;start=0&amp;rows=10&amp;indent=on</a></p>
+<p>这个是检索的目的是：检索core1下的所有内容，并返回前10条。</p>
+<p>solr通过request获取requestPath，解析出对应的core名称（这里coreName=core1），然后获取core实例（找到相应的机器人）。</p>
+<p>然后解析出select指令，明确告诉core是进行检索任务，任务的具体参数通过<strong>solrRequestParser</strong>进行解析。solrRequestParser可以看出是将url转换成core识别指令的“翻译器”。下面core就可以调用相应的handler执行任务了。</p>
+<p>从外往里看，solr可以看成是：</p>
+<p>solr Manager -&gt; solr core -&gt; handler -&gt; component&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>简单说说solr的分布式（version：solr3.5）</strong></p>
+<p>当一个索引越来越大，一个服务器放不下了，怎么办？</p>
+<p>当一个大索引的单次请求慢得想死，怎么办？</p>
+<p>选择分布式吧！他能将索引进行切分放到不同的服务器上（shards），还可以将处理的计算压力进行分摊。他会将各个shard上的结果进行合并，并“完美”的呈现给您！</p>
+<p>然而、但是......solr的分布式并不完美。最主要的就是idf的计算问题。这个问题会在单个shard进行打分运算过程中就发生了，如果每个shard在计算过程中实时去其他shards去获取df和文档总数，请求的消耗是不能忍受的。要解决这个问题就得在每个shard中实时保存每个单词的df和文档总数。</p>
+<p>&nbsp;</p>
+<p><strong>简单说说solr的服务发布方式和客户端solrJ</strong></p>
+<p>solr部署在服务器上，提供各种服务。服务发布的方式主要是基于http协议的，传输数据格式为xml、json，不同开发语言都可以通过socket编程进行访问。官方的java客户端就是solrJ，他利用HttpClient进行客户端开发。</p>
+<p>我曾经毫无理由的怀疑过这种方式——如果我要用标准的webService，然后又不想改动太多源码，是不是还得通过slorJ做个中间桥梁？是不是无缘无故的多了一次http请求？虽然有embedded！感觉就是solr的这层服务接口被http侵入得有点深。深入的研究后续跟进= =。</p>
+<p>&nbsp;</p>
+<p><strong>为什么solr没有multiSearcher？</strong></p>
+<p>lucene3.5中的multiSearcher已经过时了，取而代之的是multiReader。</p>
+<p><em>If you are using MultiSearcher over IndexSearchers, please use MultiReader instead; this class does not properly handle certain kinds of queries.</em></p>
+<p>从lucene早起版本开始，或者说是受数据库思想的影响，会将数据按照某一性质进行划分，放到不同的索引里面。理由是便于管理、防止单一索引过大。如果需要同时检索多个索引，自然就用到了multiSearcher。到了solr发现一个core中只能一份索引，于是纠结solr为什么没有multiSearcher？难道solr不担心单一索引过大吗？难道同时检索多个索引就得使用它并不完善的distributedSearch吗？当时这个思想一直影响了我对solr的好感。</p>
+<p>现在“改革开发”的思想就是：在业务需求下，不支持对多个索引同时进行检索。当单个索引的检索压力出现效率问题后，再考虑分布式检索，将数据分发到不同的shards上。如果不是单次检索的运算量瓶颈，而是并发量带来的压力，考虑使用负载均衡。这里很类似于mongodb，并发压力大作replSet，单库太大做sharding。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="http://www.cnblogs.com/huangfox/category/341799.html" target="_blank">93-搜索引擎_solr</a></div>
+<div id="EntryTag">标签: <a href="http://www.cnblogs.com/huangfox/tag/solr%E6%B7%B1%E5%85%A5/">solr深入</a></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(2627055,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;91483945-37c9-df11-ac81-842b2b196315&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./solr 的结构分析 - huangfox - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./solr 的结构分析 - huangfox - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/huangfox/" target="_blank"><img src="./solr 的结构分析 - huangfox - 博客园_files/u161247.jpg" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/huangfox/">huangfox</a><br>
+            <a href="http://home.cnblogs.com/u/huangfox/followees">关注 - 3</a><br>
+            <a href="http://home.cnblogs.com/u/huangfox/followers">粉丝 - 113</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;91483945-37c9-df11-ac81-842b2b196315&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(2627055,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">1</span>
+    </div>
+    <div class="buryit" onclick="votePost(2627055,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/huangfox/archive/2012/08/02/2620339.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/huangfox/archive/2012/08/02/2620339.html" title="发布于2012-08-02 16:52">linux常用命令大全[转]</a><br><a href="http://www.cnblogs.com/huangfox/archive/2012/08/09/2630643.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/huangfox/archive/2012/08/09/2630643.html" title="发布于2012-08-09 17:24">两三年前的搜索管理系统</a><br></div>
+</div>
+
+
+	</div>
+	
+	<div class="postfoot">
+		posted on <span id="post-date">2012-08-07 17:28</span> <a href="http://www.cnblogs.com/huangfox/">huangfox</a> 阅读(<span id="post_view_count">7100</span>) 评论(<span id="post_comment_count">5</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=2627055" rel="nofollow">编辑</a> <a href="http://www.cnblogs.com/huangfox/archive/2012/08/07/2627055.html#" onclick="AddToWz(2627055);return false;">收藏</a>
+	</div>
+</div>
+<script type="text/javascript">var allowComments=true,cb_blogId=76383,cb_entryId=2627055,cb_blogApp=currentBlogApp,cb_blogUserGuid='91483945-37c9-df11-ac81-842b2b196315',cb_entryCreatedDate='2012/8/7 17:28:00';loadViewCount(cb_entryId);</script>
+
+</div><a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"></div>
+<a name="comments"></a>
+<br>
+<div id="comments">
+<h3>评论</h3>
+
+
+		<div class="post">			
+			<div class="postTitle">
+				<a href="http://www.cnblogs.com/huangfox/archive/2012/08/07/2627055.html#2599676" class="layer">#1楼</a><a name="2599676" id="comment_anchor_2599676"></a>
+					<span>
+						 <span class="comment_date">2013-01-14 15:46</span>
+					</span>
+				<a id="a_comment_author_2599676" href="http://home.cnblogs.com/u/371493/" target="_blank">ccit</a> <a href="http://msg.cnblogs.com/send/ccit" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="postText">
+				<div id="comment_body_2599676" class="blog_comment_body">哈哈 拜读了喔~~~</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2599676,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2599676,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+            <div class="commentOpt">
+			&nbsp;&nbsp;<span class="comment_actions"></span>
+            </div>
+		</div>
+		<br>
+	
+		<div class="post">			
+			<div class="postTitle">
+				<a href="http://www.cnblogs.com/huangfox/archive/2012/08/07/2627055.html#2668853" class="layer">#2楼</a><a name="2668853" id="comment_anchor_2668853"></a>
+					<span>
+						 <span class="comment_date">2013-04-28 15:44</span>
+					</span>
+				<a id="a_comment_author_2668853" href="http://home.cnblogs.com/u/518267/" target="_blank">zhumeilian</a> <a href="http://msg.cnblogs.com/send/zhumeilian" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="postText">
+				<div id="comment_body_2668853" class="blog_comment_body">写的真好！！！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2668853,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2668853,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+            <div class="commentOpt">
+			&nbsp;&nbsp;<span class="comment_actions"></span>
+            </div>
+		</div>
+		<br>
+	
+		<div class="post">			
+			<div class="postTitle">
+				<a href="http://www.cnblogs.com/huangfox/archive/2012/08/07/2627055.html#2856590" class="layer">#3楼</a><a name="2856590" id="comment_anchor_2856590"></a>
+					<span>
+						 <span class="comment_date">2014-01-09 13:21</span>
+					</span>
+				<a id="a_comment_author_2856590" href="http://home.cnblogs.com/u/598036/" target="_blank">TinySolr</a> <a href="http://msg.cnblogs.com/send/TinySolr" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="postText">
+				<div id="comment_body_2856590" class="blog_comment_body">博主你好，我也在困惑这个问题：</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2856590,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2856590,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+            <div class="commentOpt">
+			&nbsp;&nbsp;<span class="comment_actions"></span>
+            </div>
+		</div>
+		<br>
+	
+		<div class="post">			
+			<div class="postTitle">
+				<a href="http://www.cnblogs.com/huangfox/archive/2012/08/07/2627055.html#2856593" class="layer">#4楼</a><a name="2856593" id="comment_anchor_2856593"></a>
+					<span>
+						 <span class="comment_date">2014-01-09 13:21</span>
+					</span>
+				<a id="a_comment_author_2856593" href="http://home.cnblogs.com/u/598036/" target="_blank">TinySolr</a> <a href="http://msg.cnblogs.com/send/TinySolr" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="postText">
+				<div id="comment_body_2856593" class="blog_comment_body">如果我要用标准的webService，然后又不想改动太多源码，是不是还得通过slorJ做个中间桥梁？是不是无缘无故的多了一次http请求？<br><br>能否解答一下？</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2856593,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2856593,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+            <div class="commentOpt">
+			&nbsp;&nbsp;<span class="comment_actions"></span>
+            </div>
+		</div>
+		<br>
+	
+		<div class="post">			
+			<div class="postTitle">
+				<a href="http://www.cnblogs.com/huangfox/archive/2012/08/07/2627055.html#2856872" class="layer">#5楼</a><a name="2856872" id="comment_anchor_2856872"></a>[<span class="louzhu">楼主</span>]<span id="comment-maxId" style="display:none;">2856872</span><span id="comment-maxDate" style="display:none;">2014/1/9 16:59:10</span>
+					<span>
+						 <span class="comment_date">2014-01-09 16:59</span>
+					</span>
+				<a id="a_comment_author_2856872" href="http://www.cnblogs.com/huangfox/" target="_blank">huangfox</a> <a href="http://msg.cnblogs.com/send/huangfox" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="postText">
+				<div id="comment_body_2856872" class="blog_comment_body"><a href="http://www.cnblogs.com/huangfox/archive/2012/08/07/2627055.html#2856593" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2856593);">@</a>
+TinySolr<br>这个也是一年前的记录了，当时也没太深刻的理解<br>其实可以跳出solr来考虑分布式，无非就是searchNode（shard）节点提供检索，mergeNode提供合并。mergeNode与searchNode用什么通讯方式是多样的，可以直接自定义协议走socket传输，solr这里使用的是http协议（比较方便，json、xml什么的）</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2856872,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2856872,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2856872_avatar" style="display:none;">http://pic.cnblogs.com/face/u161247.jpg</span>
+			</div>
+            <div class="commentOpt">
+			&nbsp;&nbsp;<span class="comment_actions"></span>
+            </div>
+		</div>
+		<br>
+	
+</div><div id="comments_pager_bottom"></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="http://www.cnblogs.com/huangfox/archive/2012/08/07/2627055.html#" onclick="return RefreshPage();">刷新页面</a><a href="http://www.cnblogs.com/huangfox/archive/2012/08/07/2627055.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="https://group.cnblogs.com/topic/75389.html" target="_blank">【活动】优达学城正式发布“无人驾驶车工程师”课程</a><br><a href="http://www.rongcloud.cn/live" target="_blank">【推荐】移动直播百强八成都在用融云即时通讯云</a><br><a href="http://www.gcpowertools.com.cn/products/componentone_studio_enterprise.htm?utm_source=cnblogs&amp;utm_medium=blogpage&amp;utm_term=bottom&amp;utm_content=C1&amp;utm_campaign=community" target="_blank">【推荐】别再闷头写代码！找对工具，事半功倍，全能开发工具包用起来</a><br><a href="http://netease.im/?&amp;hmsr=bky8&amp;from=bky8" target="_blank">【推荐】网易这群程序员1年撸了10万+IM开发者，一天让APP接入一个微信</a><br></div>
+<div id="opt_under_post"></div>
+<div id="ad_c1" class="c_ad_block"><a href="http://q.cnblogs.com/" target="_blank"><img width="300" height="250" src="./solr 的结构分析 - huangfox - 博客园_files/q-cnblogs-com-20160923.png" alt=""></a></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="http://news.cnblogs.com/n/554936/" target="_blank">往事重现：这家公司要用AR技术把你带回1953年的联合车站</a><br> ·  <a href="http://news.cnblogs.com/n/554935/" target="_blank">支付宝提现手续费明起正式开收 这些“免费”方法赶紧学起来</a><br> ·  <a href="http://news.cnblogs.com/n/554934/" target="_blank">谷歌聘用Pixar及the Onion喜剧作家 使语言助手变得更加“幽默”</a><br> ·  <a href="http://news.cnblogs.com/n/554933/" target="_blank">15个开源的顶级人工智能工具</a><br> ·  <a href="http://news.cnblogs.com/n/554932/" target="_blank">FreeBSD 11发布</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="ad_c2" class="c_ad_block"><a href="https://www.jiguang.cn/devservice/?from=cnblogs01" target="_blank"><img width="468" height="60" src="./solr 的结构分析 - huangfox - 博客园_files/24442-20161011141820868-1378717477.jpg" alt=""></a></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/553682/" target="_blank">陈皓：什么是工程师文化？</a><br> ·  <a href="http://kb.cnblogs.com/page/551422/" target="_blank">没那么难，谈CSS的设计模式</a><br> ·  <a href="http://kb.cnblogs.com/page/550625/" target="_blank">程序猿媳妇儿注意事项</a><br> ·  <a href="http://kb.cnblogs.com/page/540529/" target="_blank">可是姑娘，你为什么要编程呢？</a><br> ·  <a href="http://kb.cnblogs.com/page/549631/" target="_blank">知其所以然（以算法学习为例）</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+</div>
+<div class="footer">
+
+<p id="footer">
+	Powered by: 
+	<br>
+	
+	<a id="Footer1_Hyperlink3" name="Hyperlink1" href="http://www.cnblogs.com/" style="font-family:Verdana;font-size:12px;">博客园</a>
+	<br>
+	Copyright © huangfox
+</p>
+</div>
+
+
+</body></html>
