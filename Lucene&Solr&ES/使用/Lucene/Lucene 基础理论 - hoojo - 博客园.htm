@@ -1,0 +1,825 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn"><head><script src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/46428" async="" type="text/javascript"></script><script src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/analytics.js" async=""></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Lucene 基础理论 - hoojo - 博客园</title>
+<link type="text/css" rel="stylesheet" href="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/bundle-sea.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/hoojo/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/hoojo/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/hoojo/wlwmanifest.xml">
+<script src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/gpt.js" type="text/javascript" async=""></script><script src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'hoojo', cb_enable_mathjax=false;</script>
+<script src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/blog-common.js" type="text/javascript"></script>
+<script src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/pubads_impl_55.js" type="text/javascript" async=""></script><script src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/osd.js" type="text/javascript"></script></head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="header">
+	
+<!--done-->
+<div class="header">
+	<div class="headerText">
+		<a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/hoojo/">hoojo</a><br>
+		学习在于积累：滴水可以石穿！
+学而不思则罔，思而不学则殆！
+	</div>
+</div>
+
+</div>
+
+<div id="mytopmenu">
+	
+		<div id="mylinks">
+<!--done-->
+<a id="MyLinks1_HomeLink" class="menu" href="http://www.cnblogs.com/">博客园</a> &nbsp;
+<a id="MyLinks1_MyHomeLink" class="menu" href="http://www.cnblogs.com/hoojo/">首页</a> &nbsp;
+<a href="http://q.cnblogs.com/" class="menu">博问</a> &nbsp;
+<a href="http://home.cnblogs.com/ing/" class="menu">闪存</a> &nbsp;
+<a id="MyLinks1_NewPostLink" class="menu" rel="nofollow" href="http://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a> &nbsp;
+<a id="MyLinks1_ContactLink" class="menu" rel="nofollow" href="http://space.cnblogs.com/msg/send/hoojo">联系</a> &nbsp;
+<a id="MyLinks1_Syndication" class="menu" href="http://www.cnblogs.com/hoojo/rss">订阅</a><a id="MyLinks1_XMLLink" href="http://www.cnblogs.com/hoojo/rss"><img src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/xml.gif" alt="订阅"></a>&nbsp;
+<a id="MyLinks1_Admin" class="menu" rel="nofollow" href="http://i.cnblogs.com/">管理</a>
+</div>
+		<div id="mystats">
+<!--done-->
+随笔-152&nbsp;
+评论-1048&nbsp;
+文章-3&nbsp;
+trackbacks-0
+</div>
+	
+</div>
+<div id="centercontent">
+	
+
+<div class="post">
+	<h1 class="postTitle"><a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/hoojo/archive/2012/09/06/2672891.html">Lucene 基础理论</a></h1>
+	<div id="cnblogs_post_body"><h3>1. 全文检索系统与Lucene简介</h3> <h4>1.1 什么是全文检索与全文检索系统</h4> <blockquote> <p>全文检索是指计算机索引程序通过扫描文章中的每一个词，对每一个词建立一个索引，指明该词在文章中出现的次数和位置，当用户查询时，检索程序就根据事先建立的索引进行查找，并将查找的结果反馈给用户的检索方式。这个过程类似于通过字典中的检索字表查字的过程。  </p><p>全
+文检索的方法主要分为按字检索和按词检索两种。按字检索是指对于文章中的每一个字都建立索引，检索时将词分解为字的组合。对于各种不同的语言而言，字有不
+同的含义，比如英文中字与词实际上是合一的，而中文中字与词有很大分别。按词检索指对文章中的词，即语义单位建立索引，检索时按词检索，并且可以处理同义
+项等。英文等西方文字由于按照空白切分词，因此实现上与按字处理类似，添加同义处理也很容易。中文等东方文字则需要切分字词，以达到按词索引的目的，关于
+这方面的问题，是当前全文检索技术尤其是中文全文检索技术中的难点，在此不做详述。  </p><p>全文检索系统是按照全文检索理论建立起来的用于提供
+全文检索服务的软件系统。一般来说，全文检索需要具备建立索引和提供查询的基本功能，此外现代的全文检索系统还需要具有方便的用户接口、面向WWW[1]
+的开发接口、二次应用开发接口等等。功能上，全文检索系统核心具有建立索引、处理查询返回结果集、增加索引、优化索引结构等等功能，外围则由各种不同应用
+具有的功能组成。结构上，全文检索系统核心具有索引引擎、查询引擎、文本分析引擎、对外接口等等，加上各种外围应用系统等等共同构成了全文检索系统。图
+1.1展示了上述全文检索系统的结构与功能。  </p><p><b><a href="http://images.cnblogs.com/cnblogs_com/hoojo/201209/201209060931342775.gif"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="clip_image002" alt="clip_image002" src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/201209060931348597.gif" border="0" height="385" width="552"></a></b>  </p><p>在
+上图中，我们看到：全文检索系统中最为关键的部分是全文检索引擎，各种应用程序都需要建立在这个引擎之上。一个全文检索应用的优异程度，根本上由全文检索
+引擎来决定。因此提升全文检索引擎的效率即是我们提升全文检索应用的根本。另一个方面，一个优异的全文检索引擎，在做到效率优化的同时，还需要具有开放的
+体系结构，以方便程序员对整个系统进行优化改造，或者是添加原有系统没有的功能。比如在当今多语言处理的环境下，有时需要给全文检索系统添加处理某种语言
+或者文本格式的功能，比如在英文系统中添加中文处理功能，在纯文本系统中添加XML或者HTML格式的文本处理功能，系统的开放性和扩充性就十分的重要。
+ </p></blockquote> <h4>1.2 什么是Lucene</h4> <blockquote> <p>Lucene是apache软
+件基金会jakarta项目组的一个子项目，是一个开放源代码的全文检索引擎工具包，即它不是一个完整的全文检索引擎，而是一个全文检索引擎的架构，提供
+了完整的查询引擎和索引引擎，部分文本分析引擎（英文与德文两种西方语言）。Lucene的目的是为软件开发人员提供一个简单易用的工具包，以方便的在目
+标系统中实现全文检索的功能，或者是以此为基础建立起完整的全文检索引擎。  </p><p>Lucene的原作者是Doug 
+Cutting，他是一位资深全文索引/检索专家，曾经是V-Twin搜索引擎的主要开发者，后在Excite担任高级系统架构设计师，目前从事于一些
+Internet底层架构的研究。早先发布在作者自己的http://www.lucene.com/，后来发布在SourceForge，2001年年
+底成为apache软件基金会jakarta的一个子项目：<a href="http://jakarta.apache.org/lucene/">http://jakarta.apache.org/lucene/</a>。 </p></blockquote> <h4>1.3 Lucene的应用、特点及优势</h4> <blockquote> <p>作
+为一个开放源代码项目，Lucene从问世之后，引发了开放源代码社群的巨大反响，程序员们不仅使用它构建具体的全文检索应用，而且将之集成到各种系统软
+件中去，以及构建Web应用，甚至某些商业软件也采用了Lucene作为其内部全文检索子系统的核心。apache软件基金会的网站使用了Lucene作
+为全文检索的引擎，IBM的开源软件eclipse的2.1版本中也采用了Lucene作为帮助子系统的全文索引引擎，相应的IBM的商业软件Web 
+Sphere中也采用了Lucene。Lucene以其开放源代码的特性、优异的索引结构、良好的系统架构获得了越来越多的应用。  </p><p>Lucene作为一个全文检索引擎，其具有如下突出的优点：  </p><p>（1）索引文件格式独立于应用平台。Lucene定义了一套以8位字节为基础的索引文件格式，使得兼容系统或者不同平台的应用能够共享建立的索引文件。  </p><p>（2）在传统全文检索引擎的倒排索引的基础上，实现了分块索引，能够针对新的文件建立小文件索引，提升索引速度。然后通过与原有索引的合并，达到优化的目的。  </p><p>（3）优秀的面向对象的系统架构，使得对于Lucene扩展的学习难度降低，方便扩充新功能。  </p><p>（4）设计了独立于语言和文件格式的文本分析接口，索引器通过接受Token流完成索引文件的创立，用户扩展新的语言和文件格式，只需要实现文本分析的接口。  </p><p>（5）已经默认实现了一套强大的查询引擎，用户无需自己编写代码即使系统可获得强大的查询能力，Lucene的查询实现中默认实现了布尔操作、模糊查询（Fuzzy Search）、分组查询等等。  </p><p>面对已经存在的商业全文检索引擎，Lucene也具有相当的优势：  </p><p>首
+先，它的开发源代码发行方式（遵守Apache Software 
+License），在此基础上程序员不仅仅可以充分的利用Lucene所提供的强大功能，而且可以深入细致的学习到全文检索引擎制作技术和面相对象编程的
+实践，进而在此基础上根据应用的实际情况编写出更好的更适合当前应用的全文检索引擎。在这一点上，商业软件的灵活性远远不及Lucene。其
+次，Lucene秉承了开放源代码一贯的架构优良的优势，设计了一个合理而极具扩充能力的面向对象架构，程序员可以在Lucene的基础上扩充各种功能，
+比如扩充中文处理能力，从文本扩充到HTML、PDF等等文本格式的处理，编写这些扩展的功能不仅仅不复杂，而且由于Lucene恰当合理的对系统设备做
+了程序上的抽象，扩展的功能也能轻易的达到跨平台的能力。最后，转移到apache软件基金会后，借助于apache软件基金会的网络平台，程序员可以方
+便的和开发者、其它程序员交流，促成资源的共享，甚至直接获得已经编写完备的扩充功能。最后，虽然Lucene使用Java语言写成，但是开放源代码社区
+的程序员正在不懈的将之使用各种传统语言实现（例如.net 
+framework），在遵守Lucene索引文件格式的基础上，使得Lucene能够运行在各种各样的平台上，系统管理员可以根据当前的平台适合的语言
+来合理的选。 </p></blockquote> <h4>&nbsp;</h4> <h4>2. Lucene系统结构分析</h4> <h4>2.1 系统结构组织</h4> <blockquote> <p>Lucene
+作为一个优秀的全文检索引擎，其系统结构具有强烈的面向对象特征。首先是定义了一个与平台无关的索引文件格式，其次通过抽象将系统的核心组成部分设计为抽
+象类，具体的平台实现部分设计为抽象类的实现，此外与具体平台相关的部分比如文件存储也封装为类，经过层层的面向对象式的处理，最终达成了一个低耦合高效
+率，容易二次开发的检索引擎系统。  </p><p>以下将讨论Lucene系统的结构组织，并给出系统结构与源码组织图：  </p><p><b><a href="http://images.cnblogs.com/cnblogs_com/hoojo/201209/201209060931358564.gif"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="clip_image004" alt="clip_image004" src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/201209060931358216.gif" border="0" height="336" width="577"></a></b>  </p><p>从
+图中我们清楚的看到，Lucene的系统由基础结构封装、索引核心、对外接口三大部分组成。其中直接操作索引文件的索引核心又是系统的重点。Lucene
+的将所有源码分为了7个模块（在java语言中以包即package来表示），各个模块所属的系统部分也如上图所示。需要说明的是
+org.apache.lucene.queryPaser是做为org.apache.lucene.search的语法解析器存在，不被系统之外实际
+调用，因此这里没有当作对外接口看待，而是将之独立出来。  </p><p>从面象对象的观点来考察，Lucene应用了最基本的一条程序设计准则：引入
+额外的抽象层以降低耦合性。首先，引入对索引文件的操作org.apache.lucene.store的封装，然后将索引部分的实现建立在
+（org.apache.lucene.index）其之上，完成对索引核心的抽象。在索引核心的基础上开始设计对外的接口
+org.apache.lucene.search与org.apache.lucene.analysis。在每一个局部细节上，比如某些常用的数据结
+构与算法上，Lucene也充分的应用了这一条准则。在高度的面向对象理论的支撑下，使得Lucene的实现容易理解，易于扩展。  </p><p>Lucene
+在系统结构上的另一个特点表现为其引入了传统的客户端服务器结构以外的的应用结构。Lucene可以作为一个运行库被包含进入应用本身中去，而不是做为一
+个单独的索引服务器存在。这自然和Lucene开放源代码的特征分不开，但是也体现了Lucene在编写上的本来意图：提供一个全文索引引擎的架构，而不
+是实现。 </p></blockquote> <h4>2.2 数据流分析</h4> <blockquote> <p>了解数据流分析的重要性：  </p><p>理
+解Lucene系统结构的另一个方式是去探讨其中数据流的走向，并以此摸清楚Lucene系统内部的调用时序。在此基础上，我们能够更加深入的理解
+Lucene的系统结构组织，以方便以后在Lucene系统上的开发工作。这部分的分析，是深入Lucene系统的钥匙，也是进行重写的基础。  </p><p>Lucene系统中的主要的数据流以及它们之间的关系图：  </p><p><a href="http://images.cnblogs.com/cnblogs_com/hoojo/201209/201209060931354038.jpg"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="clip_image006" alt="clip_image006" src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/20120906093136940.jpg" border="0" height="413" width="557"></a>  </p><p>图2.2很好的表明了Lucene在内部的数据流组织情况，并且沿着数据流的方向我们也可以对与Lucene内部的执行时序有一个清楚的了解。现在将图中的涉及到的流的类型与各个逻辑对应系统的相关部分的关系说明一下。  </p><p>图
+中共存在4种数据流，分别是文本流、token流、字节流与查询语句对象流。文本流表示了对于索引目标和交互控制的抽象，即用文本流表示了将要索引的文
+件，用文本流向用户输出信息；在实际的实现中，Lucene中的文本流采用了UCS-2作为编码，以达到适应多种语言文字的处理的目的。Token流是
+Lucene内部所使用的概念，是对传统文字中的词的概念的抽象，也是Lucene在建立索引时直接处理的最小单位；简单的讲Token就是一个词和所在
+域值的组合，后面在叙述文件格式时也将继续涉及到token，这里不详细展开。字节流则是对文件抽象的直接操作的体现，通过固定长度的字节（Lucene
+定义为8比特位长，后面文件格式将详细叙述）流的处理，将文件操作解脱出来，也做到了与平台文件系统的无关性。查询语句对象流则是仅仅在查询语句解析时用
+到的概念，它对查询语句抽象，通过类的继承结构反映查询语句的结构，将之传送到查找逻辑来进行查找的操作。  </p><p>图中的涉及到了多种逻辑，基
+本上直接对应于系统某一模块，但是也有跨模块调用的问题发生，这是因为Lucene的重用程度非常好，因此很多实现直接调用了以前的工作成果，这在某种程
+度上其实是加强了模块耦合性，但是也是为了避免系统的过于庞大和不必要的重复设计的一种折衷体现。词法分析逻辑对应于
+org.apache.lucene.analysis部分。查询语句语法分析逻辑对应于org.apache.lucene.queryParser部
+分，并且调用了org.apache.lucene.analysis的代码。查询结束之后向评分排序逻辑输出token流，继而由评分排序逻辑处理之后
+给出文本流的结果，这一部分的实现也包含在了org.apache.lucene.search中。索引构建逻辑对应于
+org.apache.lucene.index部分。索引查找逻辑则主要是org.apache.lucene.search，但是也大量的使用了
+org.apache.lucene.index部分的代码和接口定义。存储抽象对应于org.apache.lucene.store。没有提到的模块
+则是做为系统公共基础设施存在。 </p></blockquote> <h4>2.3 基于Lucene的应用开发</h4> <blockquote> <p>首
+先，我们需要的是按照目标语言的词法结构来构建相应的词法分析逻辑，实现Lucene在org.apache.lucene.analysis中定义的接
+口，为Lucene提供目标系统所使用的语言处理能力。Lucene默认的已经实现了英文和德文的简单词法分析逻辑（按照空格分词，并去除常用的语法词，
+如英语中的is，am，are等等）。在这里，主要需要参考实现的接口在org.apache.lucene.analysis中的
+Analyzer.java和Tokenizer.java中定义，Lucene提供了很多英文规范的实现样本，也可以做为实现时候的参考资料。其次，需
+要按照被索引的文件的格式来提供相应的文本分析逻辑，这里是指除开词法分析之外的部分，比如HTML文件，通常需要把其中的内容按照所属于域分门别类加入
+索引，这就需要从org.apache.lucene.document中定义的类document继承，定义自己的HTMLDocument类，然后就
+可以将之交给org.apache.lucene.index模块来写入索引文件。完成了这两步之后，Lucene全文检索引擎就基本上完备了。这个过程
+可以用下图表示：  </p><p><b><a href="http://images.cnblogs.com/cnblogs_com/hoojo/201209/201209060931361464.gif"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="clip_image008" alt="clip_image008" src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/201209060931365575.gif" border="0" height="334" width="629"></a></b>  </p><p>下面是使用java语言开发，Lucene系统能够方便的嵌入到整个系统中去，作为一个API集来调用。这个过程十分简单，以下便是一个示例程序，配合注释理解起来很容易。  </p><p><b><a href="http://images.cnblogs.com/cnblogs_com/hoojo/201209/201209060931362511.gif"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="clip_image009" alt="clip_image009" src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/201209060931403576.gif" border="0" height="602" width="664"></a></b> </p></blockquote> <h4>2.4 Lucene索引文件格式</h4> <blockquote> <p>首先在Lucene的文件格式中，以字节为基础，定义了如下的数据类型：  </p><p><b>表</b><b> 3.1 Lucene</b><b>文件格式中定义的数据类型</b><b></b>  </p><table border="0" cellpadding="0" cellspacing="0"> <tbody> <tr> <td valign="top" width="92"> <p><b>数据类型</b></p></td> <td valign="top" width="123"> <p><b>所占字节长度（字节）</b></p></td> <td valign="top" width="353"> <p><b>说明</b></p></td></tr> <tr> <td valign="top" width="92"> <p>Byte</p></td> <td valign="top" width="123"> <p>1</p></td> <td valign="top" width="353"> <p>基本数据类型，其他数据类型以此为基础定义</p></td></tr> <tr> <td valign="top" width="92"> <p>UInt32</p></td> <td valign="top" width="123"> <p>4</p></td> <td valign="top" width="353"> <p>32位无符号整数，高位优先</p></td></tr> <tr> <td valign="top" width="92"> <p>UInt64</p></td> <td valign="top" width="123"> <p>8</p></td> <td valign="top" width="353"> <p>64位无符号整数，高位优先</p></td></tr> <tr> <td valign="top" width="92"> <p>VInt</p></td> <td valign="top" width="123"> <p>不定，最少1字节</p></td> <td valign="top" width="353"> <p>动态长度整数，每字节的最高位表明还剩多少字节，每字节的低七位表明整数的值，高位优先。可以认为值可以为无限大。其示例如下  </p><table border="0" cellpadding="0" cellspacing="0"> <tbody> <tr> <td valign="top" width="82"> <p>值</p></td> <td valign="top" width="84"> <p>字节1</p></td> <td valign="top" width="84"> <p>字节2</p></td> <td valign="top" width="78"> <p>字节3</p></td></tr> <tr> <td valign="top" width="82"> <p>0</p></td> <td valign="top" width="84"> <p>00000000</p></td> <td valign="top" width="84">&nbsp;</td> <td valign="top" width="78">&nbsp;</td></tr> <tr> <td valign="top" width="82"> <p>1</p></td> <td valign="top" width="84"> <p>00000001</p></td> <td valign="top" width="84">&nbsp;</td> <td valign="top" width="78">&nbsp;</td></tr> <tr> <td valign="top" width="82"> <p>2</p></td> <td valign="top" width="84"> <p>00000010</p></td> <td valign="top" width="84">&nbsp;</td> <td valign="top" width="78">&nbsp;</td></tr> <tr> <td valign="top" width="82"> <p>127</p></td> <td valign="top" width="84"> <p>01111111</p></td> <td valign="top" width="84">&nbsp;</td> <td valign="top" width="78">&nbsp;</td></tr> <tr> <td valign="top" width="82"> <p>128</p></td> <td valign="top" width="84"> <p>10000000</p></td> <td valign="top" width="84"> <p>00000001</p></td> <td valign="top" width="78">&nbsp;</td></tr> <tr> <td valign="top" width="82"> <p>129</p></td> <td valign="top" width="84"> <p>10000001</p></td> <td valign="top" width="84"> <p>00000001</p></td> <td valign="top" width="78">&nbsp;</td></tr> <tr> <td valign="top" width="82"> <p>130</p></td> <td valign="top" width="84"> <p>10000010</p></td> <td valign="top" width="84"> <p>00000001</p></td> <td valign="top" width="78">&nbsp;</td></tr> <tr> <td valign="top" width="82"> <p>16383</p></td> <td valign="top" width="84"> <p>10000000</p></td> <td valign="top" width="84"> <p>10000000</p></td> <td valign="top" width="78"> <p>00000001</p></td></tr> <tr> <td valign="top" width="82"> <p>16384</p></td> <td valign="top" width="84"> <p>10000001</p></td> <td valign="top" width="84"> <p>10000000</p></td> <td valign="top" width="78"> <p>00000001</p></td></tr> <tr> <td valign="top" width="82"> <p>16385</p></td> <td valign="top" width="84"> <p>10000010</p></td> <td valign="top" width="84"> <p>10000000</p></td> <td valign="top" width="78"> <p>00000001</p></td></tr></tbody></table><p></p></td></tr> <tr> <td valign="top" width="92"> <p>Chars</p></td> <td valign="top" width="123"> <p>不定，最少1字节</p></td> <td valign="top" width="353"> <p>采用UTF-8编码<sup>[20]</sup>的Unicode字符序列</p></td></tr> <tr> <td valign="top" width="92"> <p>String</p></td> <td valign="top" width="123"> <p>不定，最少2字节</p></td> <td valign="top" width="353"> <p>由VInt和Chars组成的字符串类型，VInt表示Chars的长度，Chars则表示了String的值</p></td></tr></tbody></table> <p>以上的数据类型就是Lucene索引文件格式中用到的全部数据类型，由于它们都以字节为基础定义而来，因此保证了是平台无关，这也是Lucene索引文件格式平台无关的主要原因。接下来我们看看Lucene索引文件的概念组成和结构组成。  </p><p><b><a href="http://images.cnblogs.com/cnblogs_com/hoojo/201209/201209060931409639.gif"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="clip_image010" alt="clip_image010" src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/201209060931402114.gif" border="0" height="306" width="664"></a></b>  </p><p>以
+上就是Lucene的索引文件的概念结构。Lucene索引index由若干段(segment)组成，每一段由若干的文档（document）组成，每
+一个文档由若干的域（field）组成，每一个域由若干的项（term）组成。项是最小的索引概念单位，它直接代表了一个字符串以及其在文件中的位置、出
+现次数等信息。域是一个关联的元组，由一个域名和一个域值组成，域名是一个字串，域值是一个项，比如将“标题”和实际标题的项组成的域。文档是提取了某个
+文件中的所有信息之后的结果，这些组成了段，或者称为一个子索引。子索引可以组合为索引，也可以合并为一个新的包含了所有合并项内部元素的子索引。我们可
+以清楚的看出，Lucene的索引结构在概念上即为传统的倒排索引结构。  </p><p>从概念上映射到结构中，索引被处理为一个目录（文件夹），其中
+含有的所有文件即为其内容，这些文件按照所属的段不同分组存放，同组的文件拥有相同的文件名，不同的扩展名。此外还有三个文件，分别用来保存所有的段的记
+录、保存已删除文件的记录和控制读写的同步，它们分别是segments，deletable和lock文件，都没有扩展名。每个段包含一组文件，它们的
+文件扩展名不同，但是文件名均为记录在文件segments中段的名字。让我们看如下的结构图3.2：  </p><p><a href="http://images.cnblogs.com/cnblogs_com/hoojo/201209/201209060931413477.jpg"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="clip_image012" alt="clip_image012" src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/2012090609314163.jpg" border="0" height="342" width="593"></a>  </p><p>每
+个段的文件中，主要记录了两大类的信息：域集合与项集合。这两个集合中所含有的文件在图3.2中均有表明。由于索引信息是静态存储的，域集合与项集合中的
+文件组采用了一种类似的存储办法：一个小型的索引文件，运行时载入内存；一个对应于索引文件的实际信息文件，可以按照索引中指示的偏移量随机访问；索引文
+件与信息文件在记录的排列顺序上存在隐式的对应关系，即索引文件中按照“索引项1、索引项2…”排列，则信息文件则也按照“信息项1、信息项2…”排列。
+比如在图3.2所示文件中，segment1.fdx与segment1.fdt之间，segment1.tii与segment1.tis、
+segment1.prx、segment1.frq之间，都存在这样的组织关系。而域集合与项集合之间则通过域的在域记录文件（比如
+segment1.fnm）中所记录的域记录号维持对应关系，在图3.2中segment1.fdx与segment1.tii中就是通过这种方式保持联
+系。这样，域集合和项集合不仅仅联系起来，而且其中的文件之间也相互联系起来。此外，标准化因子文件和被删除文档文件则提供了一些程序内部的辅助设施（标
+准化因子用在评分排序机制中，被删除文档是一种伪删除手段）。这样，整个段的索引信息就通过这些文档有机的组成。 </p></blockquote><b> <p><br></p></b> <h4>2.5 一些公用的基础类</h4> <blockquote> <p>基
+础结构封装，或者基础类，由org.apache.lucene.util和org.apache.lucene.document两个包组成，前者定义
+了一些常量和优化过的常用的数据结构和算法，后者则是对于文档（document）和域（field）概念的一个类定义。以下我们用列表的方式来分析这些
+封装类，指出其要点；  </p><p><b></b> </p><p><b>表</b><b> 3.2 </b><b>基础类包</b><b>org.apache.lucene.util</b>  </p><p><b></b> </p><table border="0" cellpadding="0" cellspacing="0"> <tbody> <tr> <td valign="top" width="123"> <p><b>类</b></p></td> <td valign="top" width="445"> <p><b>说明</b></p></td></tr> <tr> <td valign="top" width="123"> <p>Arrays</p></td> <td valign="top" width="445"> <p>一个关于数组的排序方法的静态类，提供了优化的基于快排序的排序方法sort</p></td></tr> <tr> <td valign="top" width="123"> <p>BitVector</p></td> <td valign="top" width="445"> <p>C/C++语言中位域的java实现品，但是加入了序列化能力</p></td></tr> <tr> <td valign="top" width="123"> <p>Constants</p></td> <td valign="top" width="445"> <p>常量静态类，定义了一些常量</p></td></tr> <tr> <td valign="top" width="123"> <p>PriorityQueue</p></td> <td valign="top" width="445"> <p>一个优先队列的抽象类，用于后面实现各种具体的优先队列，提供常数时间内的最小元素访问能力，内部实现机制是哈析表和堆排序算法</p></td></tr></tbody></table> <p><b></b> </p><p><b>表</b><b> 3.3 </b><b>基础类包</b><b>org.apache.lucene.document</b>  </p><p><b></b> </p><table border="0" cellpadding="0" cellspacing="0"> <tbody> <tr> <td valign="top" width="129"> <p><b>类</b></p></td> <td valign="top" width="502"> <p><b>说明</b></p></td></tr> <tr> <td valign="top" width="129"> <p>Document</p></td> <td valign="top" width="502"> <p>是文档概念的一个实现类，每个文档包含了一个域表（fieldList），并提供了一些实用的方法，比如多种添加域的方法、返回域表的迭代器的方法</p></td></tr> <tr> <td valign="top" width="129"> <p>Field</p></td> <td valign="top" width="502"> <p>是域概念的一个实现类，每个域包含了一个域名和一个值，以及一些相关的属性</p></td></tr> <tr> <td valign="top" width="129"> <p>DateField</p></td> <td valign="top" width="502"> <p>提供了一些辅助方法的静态类，这些方法将java中Date和Time数据类型和String相互转化</p></td></tr></tbody></table><p></p></blockquote> <h4><a name="_Toc43005326">2.6 存储抽象</a></h4> <blockquote> <p>org.apache.lucene.store包：存储抽象是唯一能够直接对索引文件存取的包，因此其主要目的是抽象出和平台文件系统无关的存储抽象，提供诸如目录服务（增、删文件）、输入流和输出流。在分析其实现之前，首先我们看一下UML图；  </p><p><b><a href="http://images.cnblogs.com/cnblogs_com/hoojo/201209/201209060931414491.gif"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="clip_image013" alt="clip_image013" src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/201209060931422821.gif" border="0" height="361" width="495"></a></b>  </p><p><b>图</b><b> 3.3 </b><b>存储抽象实现</b><b>UML</b><b>图（一）</b><b></b>  </p><p><b><a href="http://images.cnblogs.com/cnblogs_com/hoojo/201209/201209060931425297.gif"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="clip_image014" alt="clip_image014" src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/201209060931425820.gif" border="0" height="329" width="363"></a></b>  </p><p><b>图</b><b> 3.4 </b><b>存储抽象实现</b><b>UML</b><b>图（二）</b>  </p><p><b><a href="http://images.cnblogs.com/cnblogs_com/hoojo/201209/201209060931429931.gif"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="clip_image015" alt="clip_image015" src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/20120906093143770.gif" border="0" height="308" width="347"></a></b>  </p><p><b>图</b><b> 3.4 </b><b>存储抽象实现</b><b>UML</b><b>图（三）</b>  </p><p>图
+3.2到3.4展示了整个org.apache.lucene.store中主要的继承体系。共有三个抽象类定义：Directory、
+InputStream和OutputStrem，构成了一个完整的基于抽象文件系统的存取体系结构，在此基础上，实作出了两个实现品：
+（FSDirectory，FSInputStream，FSOutputStream）和（RAMDirectory，RAMInputStream和
+RAMOutputStream）。前者是以实际的文件系统做为基础实现的，后者则是建立在内存中的虚拟文件系统。前者主要用来永久的保存索引文件，后者
+的作用则在于索引操作时是在内存中建立小的索引，然后一次性的输出合并到文件中去，这一点我们在后面的索引逻辑部分能够看到。此外，还定以了
+org.apache.lucene.store.lock和org.apache.lucene.store.with两个辅助内部实现的类用在实现
+Directory方法的makeLock的时候，以在锁定索引读写之前来让客户程序做一些准备工作。  </p><p>（FSDirectory，FSInputStream，FSOutputStream）
+的内部实现依托于java语言中的io类库，只是简单的做了一个外部逻辑的包装。这当然要归功于java语言所提供的跨平台特性，同时也带了一些隐患：文
+件存取的效率提升需要依耐于文件类库的优化。如果需要继续优化文件存取的效率，应该还提供一个文件与目录的抽象，以根据各种文件系统或者文件类型来提供一
+个优化的机会。当然，这是应用开发者所不需要关系的问题。  </p><p>（RAMDirectory，RAMInputStream和
+RAMOutputStream）的内部实现就比较直接了，直接采用了虚拟的文件RAMFile类（定义于文件RAMDirectory.java中）来
+表示文件，目录则看作一个String与RAMFile对应的关联数组。RAMFile中采用数组来表示文件的存储空间。在此的基础上，完成各项操作的实
+现，就形成了基于内存的虚拟文件系统。因为在实际使用时，并不会牵涉到很大字节数量的文件，因此这种设计是简单直接的，也是高效率的。 </p></blockquote><b> <p><br></p></b> <h4>&nbsp;</h4> <h4>3. Lucene索引构建逻辑模块分析</h4> <h4>3.1对象体系与UML图</h4> <blockquote> <p><b>1</b><b>． </b><b>项（Term</b><b>）</b>  </p><p><b></b>项（Term）：包括概念所实际涉及的类、永久化类。项（Term）所表示的是一个字符串，它拥有域、频数和位置信息等等属性。因此，Lucene中设计了两个类来表示这个概念，如下图  </p><p><b><a href="http://images.cnblogs.com/cnblogs_com/hoojo/201209/201209060931435198.gif"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="clip_image016" alt="clip_image016" src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/201209060931431261.gif" border="0" height="533" width="545"></a></b>  </p><p><b>图</b><b> 4.1 UML</b><b>图（－）</b>  </p><p><b></b> </p><p>上
+图中，有意的突出了类Term和TermInfo中的数据成员，因为它反映了对于项（Term）这个概念的具体表示。同时上图中也同时列出了用于永久化项
+（Term）的代理类TermInfosWriter和TermInfosReader，它们完成永久化的功能，需要注意的
+是，TermInfosReader内部使用了数组indexTerms和indexInfos来存储一系列项；而TermInfosWriter则是一
+个类似于链表的结构，通过一个other指向下一个TermInfosWriter，每一个TermInfosWriter只负责本身那个
+lastTerm和lastTi的永久化工作。这是一个设计上的技巧，通过批量读取（或者称为缓冲的方式）来获得读入时候的效率优化；而通过一个链表式
+的、各负其责的方式，来获得写出时候的设计简化。  </p><p>项（term）这部分的设计中，还有一些重要的接口和类：  </p><p><b><a href="http://images.cnblogs.com/cnblogs_com/hoojo/201209/201209060931439832.gif"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="clip_image017" alt="clip_image017" src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/201209060931433180.gif" border="0" height="205" width="379"></a></b>  </p><p><b>图 4.2 UML图（二）</b>  </p><p><b></b> </p><p>图
+4.2中，我们看到三个类：TermEnum、TermDocs与TermPositions，第一个是抽象类，后两个都是接口。TermEnum的设计
+主要用在后面Segment和Document等等的实现中，以提供枚举其中每一个项（Term）的能力。TermDocs是一个接口，用来继承以提供返
+回&lt;document, 
+frequency&gt;值对的能力，通过这个接口就可以获得某个项（Term）在某个文档中出现的频数。TermPositions则是在
+TermDocs上的扩展，将项（Term）在文档中的位置信息也表示出来。TermDocs（TermPositions）接口的使用方式类似于
+java中的Enumration接口，即通过next方法跳转，通过doc，freq等方法获得当前的属性值。  </p><p><a name="_Toc43005332"><b>2． </b><b>域（</b></a><b>Field</b><b>）</b>  </p><p>由于Field的基本概念在org.apache.lucene.document中已经做了定义，因此在这部分主要是针对项文件（.fnm文件、.fdx文件、.fdt文件）所需要的信息再来设计一些类。  </p><p><b><a href="http://images.cnblogs.com/cnblogs_com/hoojo/201209/201209060931446211.gif"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="clip_image018" alt="clip_image018" src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/201209060931449243.gif" border="0" height="118" width="149"></a></b>  </p><p><b>图 4.3 UML图（三）</b>  </p><p><b><br></b> </p><p>图 4.3中展示的，就是表示与域（Field）所关联的属性信息的类。其中isIndexed表示的这个域的值是否被索引过，即值是否被分词然后索引；另外两个属性所表示的意思则很明显：一个是域的名字，一个是域的编号。  </p><p>关于域表和存取逻辑的UML图：  </p><p><b><a href="http://images.cnblogs.com/cnblogs_com/hoojo/201209/201209060931448130.gif"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="clip_image019" alt="clip_image019" src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/20120906093144605.gif" border="0" height="329" width="549"></a></b>  </p><p>FieldInfos即为域表的概念表示，内部采用了冗余的方式以获取在通过域的编号访问或者通过域的名字来访问时候的高效率。FieldsReader与FieldsWriter则分别是写出和读入的代理类。在功能和实现上，这两个类都比较简单。  </p><p><b>3． </b><b>文档（document）</b>  </p><p>文档（document）同样也是在org.apache.lucene.document中定义过的结构。由于对于这部分比较重要，我们也来看看其UML图：  </p><p><b><a href="http://images.cnblogs.com/cnblogs_com/hoojo/201209/201209060931445032.gif"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="clip_image020" alt="clip_image020" src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/201209060931456636.gif" border="0" height="355" width="643"></a></b>  </p><p><b>图 4.5 UML图（五）</b>  </p><p>在
+图4.5中我们看到，Document的设计基本上沿用了链表的处理方法。左边的Document类作为一个数据外包类，用来提供对于内部结构
+DocumentFieldList的增加删除访问操作等等。DocumentFieldList才是实际上的数据存储单位，它用了链表的处理方法，直接
+指向一个当前的Field对象和下一个DocumentFieldList对象，这个与前面的类似。为了能够逐个访问链表中的节点，还设计了
+DocumentFieldEnumeration枚举类。  </p><p><b><a href="http://images.cnblogs.com/cnblogs_com/hoojo/201209/201209060931459983.gif"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="clip_image021" alt="clip_image021" src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/201209060931458554.gif" border="0" height="241" width="361"></a></b>  </p><p><b>图 4.6 UML图（六）</b>  </p><p><b><br></b> </p><p><b></b> </p><p>实
+际上定义于org.apache.lucene.index中的有关于Document的就是永久化的代理类。在图4.6中给出了其UML图。需要说明的
+是为什么没有出现读入的方法：这个方法已经隐含在图4.5中Document类中的add方法中了，结合图2.4中的程序代码段，我们就能够清楚的理解这
+种设计。  </p><p><a name="_Toc43005334"><b>4． </b><b>段（</b></a><b>segment</b><b>）</b>  </p><p>段（Segment）这一部分设计的比较特殊，在实现简单的对象结构之上，还特意的设计了用于段之间合并的类。接下来，我们仍然采取对照UML分析的方式逐个叙述。接下来我们看Lucene中如何表示段这个概念。  </p><p><b><a href="http://images.cnblogs.com/cnblogs_com/hoojo/201209/201209060931462948.gif"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="clip_image022" alt="clip_image022" src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/201209060931495650.gif" border="0" height="230" width="262"></a></b>  </p><p><b>图 4.7 UML图（七）</b>  </p><p>Lucene
+定义了一个类SegmentInfo用来表示每一个段（Segment）的信息，包括名字（name）、含有的文档的数目（docCount）和段所位于
+的目录的位置（dir）。根据索引文件中的段的意义，有了这三点，就能唯一确定一个段了。SegmentInfos这个类则是用来表示一个段的链表（从标
+准的java.util.Vector继承而来），实际上，也就是索引（index）的意思了。需要注意的是，这里并没有在SegmentInfo中安插
+一个文档（document）的链表。这样做的原因牵涉到Lucene内部对于文档（相当于一个被索引文件）的处理；Lucene内部采用了赋予文档编
+号，给域赋值的方式来处理文档，即加入的文档顺次编号，以后用文档号表示文档，而路径信息，文件名字等等在以后索引查找需要的属性，都作为域存储下来；因
+此SegmentInfo中并没有另外存储一个文档（document）的链表，对于这些的写出和读入，则交给了永久化的代理类来做。  </p><p><b><a href="http://images.cnblogs.com/cnblogs_com/hoojo/201209/2012090609314977.gif"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="clip_image023" alt="clip_image023" src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/201209060931494504.gif" border="0" height="415" width="661"></a></b>  </p><p><b>图 4.8 UML图（八）</b>  </p><p>图4.8给出了负责段（segment）的读入操作的代理类，而负责段（segment）的写出操作也同样没有定义，这些操作都直接实现在了类IndexWriter类中。段的操作同样采用了之前的数组或者说是缓冲的处理方式。  </p><p>针对前面项（term）那部分定义的几个接口，段（segment）这部分也需要做相应的接口实现，因为提供直接遍历访问段中的各个项的能力对于检索来说，无疑是十分重要的。即这部分的设计，实际上都是在为了检索在服务。  </p><p><b><a href="http://images.cnblogs.com/cnblogs_com/hoojo/201209/201209060931502486.gif"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="clip_image024" alt="clip_image024" src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/201209060931504961.gif" border="0" height="346" width="351"></a></b>  </p><p><b>图 4.9 UML图（九）</b>  </p><p><b><a href="http://images.cnblogs.com/cnblogs_com/hoojo/201209/201209060931501025.gif"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="clip_image025" alt="clip_image025" src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/201209060931517404.gif" border="0" height="680" width="533"></a></b>  </p><p><b>图 4.10 UML图（十）</b>  </p><p>图
+4.9和图4.10分别展示了前面项（term）那里定义的接口是如何在这里通过继承实现的。Lucene在处理这部分的时候，也是分成两部分
+（Segment与Segments开头的类）来实现，而且很合理的运用了数组的技法，以及注意了继承重用。但是细化到局部，终归是比较简单的按照语义来
+获得结果而已了。  </p><p>Lucene为了兼顾建立索引时的效率和读取索引查找的速度，引入了分小段建立索引的方式，即每一次批量建立索引时，
+先在内存中的虚拟文件系统中为每一个文档单独建立一个段，然后在输出的时候将这些段合并之后输出成为索引文件，这时仅仅存在一个段。多次建立的索引后，如
+果想优化索引文件，也可采取合并段的方法，将索引中的段合并成为一个段。我们来看一下在IndexWriter类中相应的方法的实现，来了解一下这中建立
+索引的实现。  </p><p><b><a href="http://images.cnblogs.com/cnblogs_com/hoojo/201209/201209060931546517.gif"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="clip_image026" alt="clip_image026" src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/201209060931575838.gif" border="0" height="774" width="664"></a></b>  </p><p><b><br></b> </p><p>在mergeSegments函数中，将用到几个重要的类结构，它们记录了合并时候的一些重要信息，完成合并时候的工作。接下来，我们来看这几个类的UML图：  </p><p><b><a href="http://images.cnblogs.com/cnblogs_com/hoojo/201209/20120906093158265.gif"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="clip_image027" alt="clip_image027" src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/201209060931596545.gif" border="0" height="458" width="509"></a></b>  </p><p><b>图 4.12 UML图（十一）</b>  </p><p><b></b> </p><p>从
+图4.12中，我们看到Lucene设计一个类SegmentMergeInfo用来保存每一个被合并的段的信息，也保存能够访问其内部的接口句柄，也就
+是说合并时的操作使用这个类作为对被合并的段的操作代理。类SegmentMergeQueue则设计为
+org.apache.lucene.util.PriorityQueue的子类，做为SegmentMergeInfo的容器类，而且附带能够自动排
+序。SegmentMerger是主要进行操作的类，主要完成合并各个数据项的问题。  </p><p><a name="_Toc43005335"><b>5． </b><b>IndexReader</b></a><b>类与IndexWirter类</b>  </p><p>最后剩下的，就是整个索引逻辑部分的使用接口类了。外界通过这两个类以及文档（document）类的构造函数调用之，比如图2.4中的代码示例所示。下面我们来看一下这部分最后两个类的UML图：  </p><p><b><a href="http://images.cnblogs.com/cnblogs_com/hoojo/201209/201209060931594560.gif"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="clip_image028" alt="clip_image028" src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/201209060931598987.gif" border="0" height="552" width="471"></a></b>  </p><p><b>图 4.13 UML图（十二）</b>  </p><p><b></b> </p><p>IndexWriter
+的设计与IndexReader的设计很不相同，前者是一个实现类，而后者是一个抽象类，带有没有实现的接口。IndexWriter的主要作用就是接收
+新加入的文档（document），然后在内部为之生成相应的小段，最后再合并并向索引文件中输出，图4.11中已经给出了一些实现的代码。由于
+Lucene在面向对象上封装的努力，通过各个构造函数就已经完成了对于各个概念的构造过程，剩下部分的代码主要是依据各个数组或者是链表中的信息，逐个
+逐个的将信息写出到相应的文件中去了。IndexReader部分则只是做了接口设计，没有具体的实现，这个和本部分所完成的主要功能有关：索引构建逻
+辑。设计这个抽象类的目的是，预先完成一些函数，为以后的检索（search）部分的各种形式的IndexReader铺平道路，也是利用了在同一个包内
+可以方便访问其它类的保护变量这个java语言的限制。<a name="_Toc43005336"></a>  </p><p><b>3.2 </b><b>数据流逻辑</b><b></b>  </p><p>从
+宏观上明白一个系统的设计，理清楚其中的运行规律，最好的方式应该是通过数据流图。在分析了各个位于索引构建逻辑部分的类的设计之后，我们接下来就通过分
+析数据流图的方式来总结一下。但是由于之前提到的原因：索引读入部分在这一部分并没有完全实现，所以我们在数据流图中主要给出的是索引构建的数据流图。 
+ </p><p><a href="http://images.cnblogs.com/cnblogs_com/hoojo/201209/201209060932001953.jpg"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="clip_image030" alt="clip_image030" src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/201209060932013000.jpg" border="0" height="382" width="557"></a>  </p><p>对
+于图4.14中所描述的内容，结合Lucene源代码中的一些文件看，能够加深理解。准备阶段可以参考demo文件夹中的
+org.apache.lucene.demo.IndexFiles类和java文件夹中的org.apache.lucene.document文件
+包。索引构建阶段的主要源码位于java文件夹中org.apache.lucene.index.IndexWriter类，因此这部分可以结合这个类
+的实现来看。至于内存文件系统，比较复杂，但是这时的逻辑相对简单，因此也不难理解。  </p><p>上面的数据流图十分清楚的勾画除了整个索引构建逻辑这部分的设计：通过层层嵌套的类结构，在构建时候即分步骤有计划的生成了索引结构，将之存储到内存中的文件系统中，然后通过对内存中的文件系统优化合并输出到实际的文件系统中。 </p></blockquote> <p>&nbsp;</p> <p>本文是在我2010年学习Lucene的时候在互联网上摘抄整理而来，当时是在一家电子商务公司做商品检索需要用到Lucene，所以就研究了下。这篇文章也是在当时在网络上阅读Lucene相关知识整理而来的。</p></div><div style="display: block;" id="MySignature"><div id="MySignature" class="post">
+<li style="padding: 0 0 0 60px; background:transparent url('http://images.cnblogs.com/cnblogs_com/hoojo/276187/r_o_info.png') no-repeat scroll 0 50%; list-style-type: none;">
+作者：<a target="_blank" href="http://hoojo.cnblogs.com/">hoojo</a> <br>
+出处：<a target="_blank" href="http://hoojo.cnblogs.com/"></a>
+<br>
+blog：<a target="_blank" href="http://blog.csdn.net/IBM_hoojo/">http://blog.csdn.net/IBM_hoojo</a><br>
+本文版权归作者和博客园共有，欢迎转载，但未经作者同意必须保留此段声明，且在文章页面明显位置给出原文连接，否则保留追究法律责任的权利。
+</li>
+</div>
+<br>
+
+
+<a href="http://hoojo.cnblogs.com/">版权所有，转载请注明出处</a>
+<a href="http://hoojo.cnblogs.com/">本文出自：
+
+</a><br>
+
+<!-- 将以下这行代码放到准备放按钮的位置 --> 
+<!-- ShareTo Button BEGIN -->
+<a class="shareto_button" href="http://hoojo.cnblogs.com/"><img src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/lg-share-cn.gif" alt="分享道" style="border:0" height="21" width="125">版权所有，欢迎转载，转载请注明出处，谢谢</a>
+<!-- ShareTo Button END -->
+
+<!-- 然后将以下这段代码放到网页页尾 --> 
+<!-- ShareTo Button BEGIN -->
+
+<!-- ShareTo Button END -->
+
+<div id="div_digga" onclick="DiggIt(cb_entryId,cb_blogId,1);" style="position: fixed; right: 40px;bottom: 30px;">			
+	<div class="diggit" style="height: 20px; background-image: none; color: #FFFFFF; background-color: #E33100; border: medium none; font-size: 9pt; font-weight: bold; text-decoration: none; text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);">
+        <span class="diggnum" style="color: #ffffff;font-size: 9pt;">赞</span> 		
+	</div>			
+</div>
+
+<div id="div_diggc" style="position: fixed; right: 100px;bottom: 30px;">			
+	<div class="diggit" style="height: 20px; background-image: none; color: #FFFFFF; background-color: #2DAEBF; border: medium none; font-weight: bold; text-decoration: none; text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);">
+        <span class="diggnum"><a href="#top" style="color: #FFFFFF;font-size: 9pt;">Top↑</a></span> 		
+	</div>			
+</div>
+
+<div id="div_diggc" style="position: fixed; right: 20px;bottom: 0;" onclick="AddToWz(cb_entryId)">			
+	<div class="diggit" style="height: 20px; background-image: none; color: #FFFFFF; background-color: #FFB515; border: medium none; font-weight: bold; text-decoration: none; text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);">
+        <span class="diggnum" style="color: #FFFFFF;font-size: 9pt;">收藏</span> 		
+	</div>			
+</div>
+
+
+<div id="div_diggb" onclick="my_follow();" style="position: fixed; right: 80px;bottom: 0;">			
+	<div class="diggit" style="height: 20px; background-image: none; color: #FFFFFF; background-color: green; border: medium none; font-weight: bold; text-decoration: none; text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);">
+        <span class="diggnum" style="color: #ffffff;font-size: 9pt;">关注</span> 		
+	</div>			
+</div>
+
+<div id="div_diggc" style="position: fixed; right: 140px;bottom: 0;" onclick="$('#tbCommentBody').focus();">			
+	<div class="diggit" style="height: 20px; background-image: none; color: #FFFFFF; background-color: #AFD788; border: medium none; font-weight: bold; text-decoration: none; text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);">
+        <span class="diggnum" style="color: #000000;font-size: 9pt;">评论</span> 		
+	</div>			
+</div></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="http://www.cnblogs.com/hoojo/category/276244.html">JavaEE</a>, <a href="http://www.cnblogs.com/hoojo/category/276247.html">JavaSE</a>, <a href="http://www.cnblogs.com/hoojo/category/276254.html">Others</a>, <a href="http://www.cnblogs.com/hoojo/category/276271.html">SE FTS</a>, <a href="http://www.cnblogs.com/hoojo/category/411091.html">Lucene/Compass/Solr</a></div>
+<div id="EntryTag">标签: <a href="http://www.cnblogs.com/hoojo/tag/JavaEE/">JavaEE</a>, <a href="http://www.cnblogs.com/hoojo/tag/JavaSE/">JavaSE</a>, <a href="http://www.cnblogs.com/hoojo/tag/Lucene/">Lucene</a>, <a href="http://www.cnblogs.com/hoojo/tag/%E5%85%A8%E6%96%87%E6%A3%80%E7%B4%A2/">全文检索</a></div>
+<div id="blog_post_info"><div id="green_channel">
+绿色通道：
+<a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(2672891,cb_blogId,1);green_channel_success(this,'谢谢推荐！');">好文要顶</a>
+<a id="green_channel_follow" onclick="c_follow();" href="javascript:void(0);">关注我</a>
+<a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a><a id="green_channel_contact" href="http://space.cnblogs.com/msg/send/hoojo" target="_blank">与我联系</a>
+<a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/icon_weibo_24.png" alt=""></a>
+</div>
+<div id="author_profile">
+<div id="author_profile_info" class="author_profile_info">
+<a href="http://home.cnblogs.com/u/hoojo/" target="_blank"><img src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/u151517.jpg" class="author_avatar" alt=""></a>
+<div id="author_profile_detail" class="author_profile_info">
+<a href="http://home.cnblogs.com/u/hoojo/">hoojo</a><br>
+<a href="http://home.cnblogs.com/u/hoojo/followees">关注 - 1</a><br>
+<a href="http://home.cnblogs.com/u/hoojo/followers">粉丝 - 913</a>
+</div>
+</div>
+<div class="clear"></div>
+<div id="author_profile_honor"></div>
+<div id="author_profile_follow">
+    <a href="javascript:void(0);" onclick="c_follow();return false;">+加关注</a>
+</div>
+</div>
+<div id="div_digg">										
+    <div class="diggit" onclick="votePost(2672891,'Digg')">
+        <span class="diggnum" id="digg_count">6</span>
+    </div>
+	<div class="buryit" onclick="votePost(2672891,'Bury')"> 
+		<span class="burynum" id="bury_count">0</span>
+	</div>
+	<div class="clear"></div>	
+	<div class="diggword" id="digg_tips">
+    (请您对文章做出评价)
+    </div>	
+</div>
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/hoojo/archive/2012/09/05/2671678.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/hoojo/archive/2012/09/05/2671678.html" title="发布于2012-09-05 11:58">Lucene 简单手记</a><br><a href="http://www.cnblogs.com/hoojo/archive/2012/10/31/2747838.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/hoojo/archive/2012/10/31/2747838.html" title="发布于2012-10-31 12:43">谈谈个人关于程序开发中，“零配置”和“有配置”的看法</a><br></div>
+</div>
+
+
+	<div class="postDesc">posted on <span id="post-date">2012-09-06 09:32</span> <a href="http://www.cnblogs.com/hoojo/">hoojo</a> 阅读(<span id="post_view_count">2935</span>) 评论(<span id="post_comment_count">0</span>)  <a href="http://i.cnblogs.com/EditPosts.aspx?postid=2672891" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(2672891);return false;">收藏</a></div>
+</div>
+<script type="text/javascript">var allowComments=true,isLogined=false,cb_blogId=74515,cb_entryId=2672891,cb_blogApp=currentBlogApp,cb_blogUserGuid='e55c12f3-74a3-df11-8eb9-001cf0cd104b',cb_entryCreatedDate='2012/9/6 9:32:00';loadViewCount(cb_entryId);</script>
+
+<a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" id="lnk_RefreshComments" onclick="return RefreshCommentList();">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login('commentform');">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="site_nav_under"><a href="http://www.imooc.com/view/118?from=cnblogs" target="_blank"><b>【免费课程】案例：CSS圆角进化论</b></a><br><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="http://www.rongcloud.cn/promotion" target="_blank">融云，免费为你的App加入IM功能——让你的App“聊”起来！！</a><br><a href="http://amazeui.org/" target="_blank">【推荐】最懂中文的 H5 开源前端框架</a><br><a href="http://www.cnblogs.com/cmt/p/4168231.html" target="_blank">【活动】加班一整年了，程序员们，你们还好吗？</a></div>
+<div id="opt_under_post"></div>
+<script type="text/javascript">
+    var enableGoogleAd = canShowAdsense(); var googletag = googletag || {}; googletag.cmd = googletag.cmd || [];
+    fixPostBodyFormat();
+</script>
+<div id="ad_under_post_holder">
+<script type="text/javascript">
+    var googletag = googletag || {};
+    googletag.cmd = googletag.cmd || [];
+    (function () {
+        if (enableGoogleAd) {
+            var gads = document.createElement('script');
+            gads.async = true;
+            gads.type = 'text/javascript';
+            var useSSL = 'https:' == document.location.protocol;
+            gads.src = (useSSL ? 'https:' : 'http:') + '//www.googletagservices.com/tag/js/gpt.js';
+            var node = document.getElementsByTagName('script')[0];
+            node.parentNode.insertBefore(gads, node);
+        }
+    })();
+</script>
+<script type="text/javascript">
+    try {
+        if (enableGoogleAd) {
+            googletag.cmd.push(function () {
+                googletag.defineSlot('/1090369/cnblogs_blogpost_C1_sitehome', [300, 250], 'div-gpt-ad-1346480159711-0').addService(googletag.pubads());
+                googletag.defineSlot('/1090369/cnblogs_blogpost_C2', [468, 60], 'div-gpt-ad-1410860226396-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+            });
+        };
+    } catch (e) { }
+</script>
+<div id="google_ad_c1" class="c_ad_block">
+    <div id="div-gpt-ad-1346480159711-0" style="width: 300px; height: 250px;">
+    <script type="text/javascript">
+        try {
+            if (enableGoogleAd) {
+                googletag.cmd.push(function () { googletag.display('div-gpt-ad-1346480159711-0'); });            
+            } else {
+                $('#div-gpt-ad-1346480159711-0').hide();
+            }
+    } catch (e) { }
+    </script>
+    <div style="border: 0pt none;" id="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0__container__"><iframe src="javascript:&quot;<html><body style='background:transparent'></body></html>&quot;" style="border: 0px none; vertical-align: bottom;" marginheight="0" marginwidth="0" scrolling="no" name="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0" id="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0" frameborder="0" height="250" width="300"></iframe></div><iframe src="javascript:&quot;<html><body style='background:transparent'></body></html>&quot;" style="border: 0px none; vertical-align: bottom; visibility: hidden; display: none;" marginheight="0" marginwidth="0" scrolling="no" name="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0__hidden__" id="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0__hidden__" frameborder="0" height="0" width="0"></iframe></div>
+</div>
+</div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="http://news.cnblogs.com/n/513169/" target="_blank">1500名印度富士康员工拟1月23日绝食抗议停产</a><br> ·  <a href="http://news.cnblogs.com/n/513168/" target="_blank">百度与301医院共建网上医疗平台：在线医疗新模式</a><br> ·  <a href="http://news.cnblogs.com/n/513167/" target="_blank">三星在印度发布首款Tizen手机Z1 售92美元</a><br> ·  <a href="http://news.cnblogs.com/n/513166/" target="_blank">为什么你应该为开源做设计</a><br> ·  <a href="http://news.cnblogs.com/n/513165/" target="_blank">王石细数自己的噩梦美梦与理想</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="google_ad_c2" class="c_ad_block">
+<div id="div-gpt-ad-1410860226396-0" style="width: 468px; height: 60px;">
+<script type="text/javascript">
+try {
+    if (enableGoogleAd) {
+        googletag.cmd.push(function () { googletag.display('div-gpt-ad-1410860226396-0'); });
+    } else {
+        $('#div-gpt-ad-1346480159711-0').hide();
+    }
+} catch (e) { }
+</script>
+<div style="border: 0pt none;" id="google_ads_iframe_/1090369/cnblogs_blogpost_C2_0__container__"><iframe src="javascript:&quot;<html><body style='background:transparent'></body></html>&quot;" style="border: 0px none; vertical-align: bottom;" marginheight="0" marginwidth="0" scrolling="no" name="google_ads_iframe_/1090369/cnblogs_blogpost_C2_0" id="google_ads_iframe_/1090369/cnblogs_blogpost_C2_0" frameborder="0" height="60" width="468"></iframe></div></div>
+</div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/511530/" target="_blank">小团队的技术管理</a><br> ·  <a href="http://kb.cnblogs.com/page/512849/" target="_blank">高效编程之欲擒故纵</a><br> ·  <a href="http://kb.cnblogs.com/page/512517/" target="_blank">互联网组织的未来：剖析GitHub员工的任性之源</a><br> ·  <a href="http://kb.cnblogs.com/page/512759/" target="_blank">内存数据库中的索引技术</a><br> ·  <a href="http://kb.cnblogs.com/page/512454/" target="_blank">如何实现一个malloc</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"><b>历史上的今天:</b><br>2011-09-06 <a href="http://www.cnblogs.com/hoojo/archive/2011/09/06/2168673.html">Flex 设置TextArea的滚动条 位于底部</a><br></div>
+<script type="text/javascript">
+$(function () {
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 200);
+});
+</script>
+</div>
+
+</div>
+<div id="leftcontent">
+	
+		<div id="leftcontentcontainer">
+			
+<!--done-->
+<div class="newsItem">
+	<div id="blog-news"><h3 class="catListTitle">About Me</h3>
+<div class="post" style="padding: 5px;">
+<center>
+<img src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/a151517.jpg"></center><br>
+网名：hoojo<br>
+E-mail：<a href="mailto:hoojo_@126.com">hoojo_@126.com</a><br>
+专注于Java，现从事电警卡口、智能交通、电子警察、数字城市等应用开发，擅长JavaEE、Flex、ActionScript及Web前端
+HTML、CSS、JavaScript、ExtJS、jQuery、Mootools等开发。对常用开源框架有一定的认识和见解。
+</div>
+
+<br>
+<h3 class="catListTitle">版权声明</h3>
+<div class="post" style="padding: 5px;color:red;">
+hoojo 所有文章遵循<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/"> 创作共用版权协议</a>，要求<b style="color:black;">署名、非商业、保持一致</b>。在满足<a href="http://creativecommons.org/licenses/by-nc-sa/2.5/cn/">创作共用版权协议</a>的基础上可以转载，但请以超链接形式注明出处。 
+</div>
+
+<br>
+<h3 class="catListTitle">访客统计</h3>
+<a href="http://www.cnzz.com/stat/website.php?web_id=4324368" target="_blank" title="站长统计"><img src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/pic.gif" border="0" hspace="0" vspace="0"></a>
+
+<div id="clicki_widget_3964" class="post"></div>
+
+<br>
+<h3 class="catListTitle">订阅统计</h3>
+<!-- Feedsky FEED 订阅统计发布代码开始 -->
+<a href="http://feed.feedsky.com/hoojo" title="订阅我的博客"><img src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/orange.gif" style="border:0" alt="订阅我的博客"></a>
+<!-- http://img.feedsky.com/feed/hoojo/sc/gif -->
+<!-- Feedsky FEED 订阅统计发布代码结束 -->
+
+<br>
+<h3 class="catListTitle">订阅文章</h3>
+<div>
+<!-- Feedsky FEED发布代码开始 -->
+<!-- FEED自动发现标记开始 -->
+<link title="RSS 2.0" type="application/rss+xml" href="http://feed.feedsky.com/hoojo" rel="alternate">
+<!-- FEED自动发现标记结束 -->
+<a href="http://www.zhuaxia.com/add_channel.php?url=http://feed.feedsky.com/hoojo" target="_blank"><img src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/icon_subshot01_zhuaxia.gif" alt="抓虾" style="margin-bottom:3px" border="0" vspace="2"></a><br>
+<a href="http://fusion.google.com/add?feedurl=http://feed.feedsky.com/hoojo" target="_blank"><img src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/icon_subshot01_google.gif" alt="google reader" style="margin-bottom:3px" border="0" vspace="2"></a><br>
+<a href="http://www.netvibes.com/subscribe.php?url=http://feed.feedsky.com/hoojo" target="_blank"><img src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/icon_subshot01_netvibes.gif" alt="netvibes" style="margin-bottom:3px" border="0" vspace="2"></a><br>
+<a href="http://add.my.yahoo.com/rss?url=http://feed.feedsky.com/hoojo" target="_blank"><img src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/icon_subshot01_yahoo.gif" alt="my yahoo" style="margin-bottom:3px" border="0" vspace="2"></a><br>
+<a href="http://www.bloglines.com/sub/http://feed.feedsky.com/hoojo" target="_blank"><img src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/icon_subshot01_bloglines.gif" alt="bloglines" style="margin-bottom:3px" border="0" vspace="2"></a><br>
+<a href="http://www.xianguo.com/subscribe.php?url=http://feed.feedsky.com/hoojo" target="_blank"><img src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/icon_subshot01_xianguo.gif" alt="鲜果" style="margin-bottom:3px" border="0" vspace="2"></a><br>
+<a href="http://inezha.com/add?url=http://feed.feedsky.com/hoojo" target="_blank"><img src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/icon_subshot01_nazha.gif" alt="哪吒" style="margin-bottom:3px" border="0" vspace="2"></a><br>
+<a href="http://reader.youdao.com/b.do?keyfrom=feedsky&amp;url=http://feed.feedsky.com/hoojo" target="_blank"><img src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/icon_subshot01_youdao.gif" alt="有道" style="margin-bottom:3px" border="0" vspace="2"></a><br>
+<a href="http://mail.qq.com/cgi-bin/feed?u=http://feed.feedsky.com/hoojo" target="_blank"><img src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/icon_subshot01_qq.gif" alt="QQ邮箱" style="margin-bottom:3px" border="0" vspace="2"></a><br>
+<!-- Feedsky FEED发布代码结束 -->
+</div>
+
+<!-- Feedsky FEED发布代码开始 -->
+<!-- FEED自动发现标记开始 -->
+<link title="RSS 2.0" type="application/rss+xml" href="http://feed.feedsky.com/hoojo" rel="alternate">
+<!-- FEED自动发现标记结束 -->
+<a href="http://wap.feedsky.com/hoojo" target="_blank"><img src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/icon_sub_mobile_c1s1.gif" alt="订阅内容到手机" border="0" vspace="2"></a>
+<!-- Feedsky FEED发布代码结束 -->
+
+<br>
+<h3 class="catListTitle">订阅历史</h3>
+<!-- Feedsky FEED Flash发布代码开始 -->
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" id="feedstatview" align="middle" height="90" width="200">
+<param name="allowScriptAccess" value="sameDomain">
+<param name="movie" value="http://www.feedsky.com/flash/feedstatview.swf?burl=hoojo&amp;bar=5">
+<param name="quality" value="high">
+<param value="transparent" name="wmode">
+<embed src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/feedstatview.swf" quality="high" wmode="transparent" name="feedstatview" allowscriptaccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" align="middle" height="90" width="200">
+</object>
+<!-- Feedsky FEED Flash发布代码结束 -->
+
+<br>
+<h3 class="catListTitle">
+<a href="http://news.cnblogs.com/">IT 新闻</a></h3>
+<!-- 博客园新闻频道引用代码 num-显示条数 -->
+     
+<br><div id="profile_block">昵称：<a href="http://home.cnblogs.com/u/hoojo/">hoojo</a><br>园龄：<a href="http://home.cnblogs.com/u/hoojo/" title="入园时间：2010-08-09">4年5个月</a><br>粉丝：<a href="http://home.cnblogs.com/u/hoojo/followers/">913</a><br>关注：<a href="http://home.cnblogs.com/u/hoojo/followees/">1</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="cnblogs.UserManager.FollowBlogger('e55c12f3-74a3-df11-8eb9-001cf0cd104b')">+加关注</a></div></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" title="日历" cellpadding="0" cellspacing="0">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar('2012/08/01');return false;">&lt;</a></td><td align="center">2012年9月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar('2012/10/01');return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" abbr="日" scope="col" align="center">日</th><th class="CalDayHeader" abbr="一" scope="col" align="center">一</th><th class="CalDayHeader" abbr="二" scope="col" align="center">二</th><th class="CalDayHeader" abbr="三" scope="col" align="center">三</th><th class="CalDayHeader" abbr="四" scope="col" align="center">四</th><th class="CalDayHeader" abbr="五" scope="col" align="center">五</th><th class="CalDayHeader" abbr="六" scope="col" align="center">六</th></tr><tr><td class="CalOtherMonthDay" align="center">26</td><td class="CalOtherMonthDay" align="center">27</td><td class="CalOtherMonthDay" align="center">28</td><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td><td class="CalOtherMonthDay" align="center">31</td><td class="CalWeekendDay" align="center">1</td></tr><tr><td class="CalWeekendDay" align="center">2</td><td align="center">3</td><td align="center">4</td><td align="center"><a href="http://www.cnblogs.com/hoojo/archive/2012/09/05.html"><u>5</u></a></td><td align="center"><a href="http://www.cnblogs.com/hoojo/archive/2012/09/06.html"><u>6</u></a></td><td align="center">7</td><td class="CalWeekendDay" align="center">8</td></tr><tr><td class="CalWeekendDay" align="center">9</td><td align="center">10</td><td align="center">11</td><td align="center">12</td><td align="center">13</td><td align="center">14</td><td class="CalWeekendDay" align="center">15</td></tr><tr><td class="CalWeekendDay" align="center">16</td><td align="center">17</td><td align="center">18</td><td align="center">19</td><td align="center">20</td><td align="center">21</td><td class="CalWeekendDay" align="center">22</td></tr><tr><td class="CalWeekendDay" align="center">23</td><td align="center">24</td><td align="center">25</td><td align="center">26</td><td align="center">27</td><td align="center">28</td><td class="CalWeekendDay" align="center">29</td></tr><tr><td class="CalWeekendDay" align="center">30</td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script><br>
+			<div id="blog-sidecolumn">
+<div class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="widget_my_zzk" class="div_my_zzk"><input id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk" type="text">&nbsp;<input onclick="zzk_go()" value="找找看" id="btnZzk" class="btn_my_zzk" type="button"></div>
+<div id="widget_my_google" class="div_my_zzk"><input name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk" type="text">&nbsp;<input onclick="google_go()" value="谷歌搜索" class="btn_my_zzk" type="button"></div>
+</div>
+
+
+<h3 class="catListTitle">常用链接</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/hoojo/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="http://www.cnblogs.com/hoojo/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="http://www.cnblogs.com/hoojo/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="http://www.cnblogs.com/hoojo/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="http://www.cnblogs.com/hoojo/tag/" title="我的博客的标签列表">我的标签</a></li>
+</ul>
+<div id="itemListLin_con" style="display:none;">
+
+</div>
+<h3 class="catListTitle">最新随笔</h3>
+<div class="RecentComment" id="RecentPosts">
+<ul style="word-break:break-all">
+<li><a href="http://www.cnblogs.com/hoojo/p/3689258.html">1. Linux环境安装jdk</a></li><li><a href="http://www.cnblogs.com/hoojo/p/3689243.html">2. Linux 下安装Samba 文件共享服务器</a></li><li><a href="http://www.cnblogs.com/hoojo/p/oracle_procedure_job_interval.html">3. Oracle job procedure 存储过程定时任务</a></li><li><a href="http://www.cnblogs.com/hoojo/p/java_round_format_bigdecimal_decimalformat.html">4. java 四舍五入保留小数</a></li><li><a href="http://www.cnblogs.com/hoojo/p/cxf_webservice_Unmarshalling_unexpected_element.html">5. 在cxf中使用配置避免增加字段导致客户端必须更新、同步实体属性的问题</a></li><li><a href="http://www.cnblogs.com/hoojo/p/ant_increment_svn_diff_diffSummarize.html">6. 不会用ant打包、部署项目的工程师，不是一个好程序员（测试）</a></li><li><a href="http://www.cnblogs.com/hoojo/p/use_eclipse_ant_javac_JDT_compiler_class.html">7. 使用eclipse JDT compile class，解决 无法确定 X 的类型参数；对于上限为 X,java.lang.Object 的类型变量 X，不存在唯一最大实例</a></li><li><a href="http://www.cnblogs.com/hoojo/p/dynamic_switch_sqlSessionfactory_muliteSqlSessionFactory.html">8. Spring3 整合MyBatis3 配置多数据源 动态选择SqlSessionFactory</a></li><li><a href="http://www.cnblogs.com/hoojo/p/dynamic_switch_sessionfactory_muliteSessionFactory.html">9. Spring3 整合Hibernate3.5 动态切换SessionFactory （切换数据库方言）</a></li><li><a href="http://www.cnblogs.com/hoojo/p/Spring_Hibernate_MyBatis_MultipleDataSource_switchDataSource.html">10. Spring3.3 整合 Hibernate3、MyBatis3.2 配置多数据源/动态切换数据源 方法</a></li>
+</ul>
+</div>
+
+<h3 class="catListTitle">我的标签</h3>
+<div id="MyTag">
+<ul>
+<li><a href="http://www.cnblogs.com/hoojo/tag/JavaEE/">JavaEE</a>(37)</li><li><a href="http://www.cnblogs.com/hoojo/tag/DataBase/">DataBase</a>(31)</li><li><a href="http://www.cnblogs.com/hoojo/tag/JavaSE/">JavaSE</a>(20)</li><li><a href="http://www.cnblogs.com/hoojo/tag/Oracle/">Oracle</a>(18)</li><li><a href="http://www.cnblogs.com/hoojo/tag/Spring/">Spring</a>(18)</li><li><a href="http://www.cnblogs.com/hoojo/tag/WebService/">WebService</a>(17)</li><li><a href="http://www.cnblogs.com/hoojo/tag/%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88/">框架整合</a>(15)</li><li><a href="http://www.cnblogs.com/hoojo/tag/%E7%AC%94%E8%AE%B0/">笔记</a>(11)</li><li><a href="http://www.cnblogs.com/hoojo/tag/Axis2%20WebService/">Axis2 WebService</a>(11)</li><li><a href="http://www.cnblogs.com/hoojo/tag/JSON/">JSON</a>(9)</li><li><a href="http://www.cnblogs.com/hoojo/tag/">更多</a></li>
+</ul>
+</div>
+		<h3 class="catListTitle">随笔分类<span style="font-size:11px;font-weight:normal">(434)</span></h3>
+		
+				<ul class="catList">
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_0" class="listitem" href="http://www.cnblogs.com/hoojo/category/276233.html">Ajax【富客户端技术】(14)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_1" class="listitem" href="http://www.cnblogs.com/hoojo/category/276234.html">DataBase(19)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_2" class="listitem" href="http://www.cnblogs.com/hoojo/category/276270.html">Design Pattern(2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_3" class="listitem" href="http://www.cnblogs.com/hoojo/category/276235.html">DWR(1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_4" class="listitem" href="http://www.cnblogs.com/hoojo/category/276236.html">ExtJS(6)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_5" class="listitem" href="http://www.cnblogs.com/hoojo/category/276237.html">Flex/ActionScript(5)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_6" class="listitem" href="http://www.cnblogs.com/hoojo/category/276269.html">FrameWork Integration(25)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_7" class="listitem" href="http://www.cnblogs.com/hoojo/category/276238.html">GXT</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_8" class="listitem" href="http://www.cnblogs.com/hoojo/category/276239.html">Hibernate(5)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_9" class="listitem" href="http://www.cnblogs.com/hoojo/category/276240.html">HTML/CSS(14)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_10" class="listitem" href="http://www.cnblogs.com/hoojo/category/276241.html">IDE/Utils(5)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_11" class="listitem" href="http://www.cnblogs.com/hoojo/category/276243.html">IT WorkPlace【IT职场】</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_12" class="listitem" href="http://www.cnblogs.com/hoojo/category/276244.html">JavaEE(77)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_13" class="listitem" href="http://www.cnblogs.com/hoojo/category/276245.html">JavaME(1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_14" class="listitem" href="http://www.cnblogs.com/hoojo/category/276246.html">JavaScript(10)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_15" class="listitem" href="http://www.cnblogs.com/hoojo/category/276247.html">JavaSE(26)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_16" class="listitem" href="http://www.cnblogs.com/hoojo/category/276248.html">JDBC(2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_17" class="listitem" href="http://www.cnblogs.com/hoojo/category/276249.html">jQuery(6)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_18" class="listitem" href="http://www.cnblogs.com/hoojo/category/295538.html">JSON&amp;XML(15)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_19" class="listitem" href="http://www.cnblogs.com/hoojo/category/276250.html">Jsp/Servlet(5)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_20" class="listitem" href="http://www.cnblogs.com/hoojo/category/411091.html">Lucene/Compass/Solr(2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_21" class="listitem" href="http://www.cnblogs.com/hoojo/category/276251.html">Ms SQL Server(10)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_22" class="listitem" href="http://www.cnblogs.com/hoojo/category/294148.html">MyBatis(8)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_23" class="listitem" href="http://www.cnblogs.com/hoojo/category/305964.html">MySQL(4)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_24" class="listitem" href="http://www.cnblogs.com/hoojo/category/380029.html">Openfire/XMPP(11)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_25" class="listitem" href="http://www.cnblogs.com/hoojo/category/276252.html">Oracle(19)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_26" class="listitem" href="http://www.cnblogs.com/hoojo/category/276254.html">Others(31)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_27" class="listitem" href="http://www.cnblogs.com/hoojo/category/276255.html">RCP【富客户端技术】(18)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_28" class="listitem" href="http://www.cnblogs.com/hoojo/category/276256.html">RIA 【富互联网程序】(22)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_29" class="listitem" href="http://www.cnblogs.com/hoojo/category/276271.html">SE FTS(3)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_30" class="listitem" href="http://www.cnblogs.com/hoojo/category/276257.html">Spring(19)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_31" class="listitem" href="http://www.cnblogs.com/hoojo/category/276258.html">Struts(2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_32" class="listitem" href="http://www.cnblogs.com/hoojo/category/276259.html">Struts2.x(6)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_33" class="listitem" href="http://www.cnblogs.com/hoojo/category/504221.html">UML(2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_34" class="listitem" href="http://www.cnblogs.com/hoojo/category/276011.html">WebService(37)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_35" class="listitem" href="http://www.cnblogs.com/hoojo/category/276261.html">XmlHttpRequest(2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_36" class="listitem" href="http://www.cnblogs.com/hoojo/category/271627.html">业界动态</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_37" class="listitem" href="http://www.cnblogs.com/hoojo/category/276272.html">娱乐人生</a></li>
+			
+				</ul>
+			
+	
+		<h3 class="catListTitle">随笔档案<span style="font-size:11px;font-weight:normal">(152)</span></h3>
+		
+				<ul class="catList">
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_0" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2014/04.html">2014年4月 (2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_1" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2013/11.html">2013年11月 (4)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_2" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2013/10.html">2013年10月 (4)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_3" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2013/09.html">2013年9月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_4" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2013/08.html">2013年8月 (3)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_5" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2013/07.html">2013年7月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_6" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2013/06.html">2013年6月 (2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_7" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2013/04.html">2013年4月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_8" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2013/03.html">2013年3月 (3)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_9" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2012/10.html">2012年10月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_10" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2012/09.html">2012年9月 (2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_11" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2012/08.html">2012年8月 (4)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_12" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2012/07.html">2012年7月 (7)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_13" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2012/06.html">2012年6月 (3)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_14" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2012/05.html">2012年5月 (4)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_15" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2012/03.html">2012年3月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_16" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2012/02.html">2012年2月 (6)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_17" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2012/01.html">2012年1月 (4)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_18" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2011/10.html">2011年10月 (2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_19" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2011/09.html">2011年9月 (4)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_20" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2011/08.html">2011年8月 (2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_21" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2011/07.html">2011年7月 (10)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_22" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2011/06.html">2011年6月 (8)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_23" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2011/05.html">2011年5月 (24)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_24" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2011/04.html">2011年4月 (12)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_25" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2011/03.html">2011年3月 (19)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_26" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2011/01.html">2011年1月 (2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_27" class="listitem" href="http://www.cnblogs.com/hoojo/archive/2010/12.html">2010年12月 (16)</a></li>
+			
+				</ul>
+			
+	
+		<h3 class="catListTitle">文章档案<span style="font-size:11px;font-weight:normal">(3)</span></h3>
+		
+				<ul class="catList">
+			
+				<li class="catListItem"> <a id="CatList_LinkList_2_Link_0" class="listitem" href="http://www.cnblogs.com/hoojo/archives/2010/12.html" rel="nofollow">2010年12月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_2_Link_1" class="listitem" href="http://www.cnblogs.com/hoojo/archives/2010/11.html" rel="nofollow">2010年11月 (2)</a></li>
+			
+				</ul>
+			
+	
+		<h3 class="catListTitle">相册</h3>
+		
+				<ul class="catList">
+			
+				<li class="catListItem"> <a id="CatList_LinkList_3_Link_0" class="listitem" href="http://www.cnblogs.com/hoojo/gallery/276187.html" rel="nofollow">博文图库</a></li>
+			
+				</ul>
+			
+	
+		<h3 class="catListTitle">关注博客</h3>
+		
+				<ul class="catList">
+			
+				<li class="catListItem"> <a id="CatList_LinkList_4_Link_0" class="listitem" href="http://blog.csdn.net/WinGeek" rel="nofollow" target="_blank">WinGeek[Web前端工程师] </a></li>
+			
+				</ul>
+			
+	
+		<h3 class="catListTitle">我的链接</h3>
+		
+				<ul class="catList">
+			
+				<li class="catListItem"> <a id="CatList_LinkList_5_Link_0" class="listitem" href="http://js1k.com/" rel="nofollow" target="_blank">1K JS</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_5_Link_1" class="listitem" href="http://www.infoq.com/cn" rel="nofollow" target="_blank">InfoQ</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_5_Link_2" class="listitem" href="http://blog.csdn.net/IBM_hoojo" rel="nofollow" target="_blank">My CSDN Blog</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_5_Link_3" class="listitem" href="http://hoojo.blogjava.net/" rel="nofollow" target="_blank">我的BlogJava</a></li>
+			
+				</ul>
+			
+	
+
+<h3>积分与排名</h3>
+<ul>
+	<li>
+		积分 -
+		245191
+	</li><li>
+		排名 -
+		433
+	</li>
+</ul>
+<div id="recent_comments_wrap">
+<h3 class="catListTitle">最新评论</h3>
+<div class="RecentComment" id="RecentComments">
+	<div id="RecentCommentsBlock"><ul>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/hoojo/archive/2012/08/13/2635779.html#3103009">1. Re:JavaScript/jQuery、HTML、CSS 构建 Web IM 远程及时聊天通信程序</a></li>
+    <li class="recent_comment_body">你好，博主 我想问下  jsjac有没有获取在线用户的方法？@hoojo</li>
+    <li class="recent_comment_author">--liu4120</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/hoojo/p/ant_increment_svn_diff_diffSummarize.html#3101014">2. Re:不会用ant打包、部署项目的工程师，不是一个好程序员（测试）</a></li>
+    <li class="recent_comment_body">maven 可以发布到容器然后让容器重启 有插件的。</li>
+    <li class="recent_comment_author">--E=MC^2</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/hoojo/p/longPolling_comet_jquery_iframe_ajax.html#3100872">3. Re:Web 通信 之 长连接、长轮询（long polling）</a></li>
+    <li class="recent_comment_body">收藏，学习。</li>
+    <li class="recent_comment_author">--USID</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/hoojo/archive/2012/08/13/2635779.html#3093674">4. Re:JavaScript/jQuery、HTML、CSS 构建 Web IM 远程及时聊天通信程序</a></li>
+    <li class="recent_comment_body">楼主好人, 求代码一份 zhaoqiang121121@163.com, very 3Q.</li>
+    <li class="recent_comment_author">--心语无痕</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/hoojo/archive/2011/03/30/1999499.html#3093507">5. Re:三、CXF对Interceptor拦截器的支持</a></li>
+    <li class="recent_comment_body">博主你好，我现在在flex里调用CXF写好的webservice，现在需要实现拦截器的功能，在CXF里有入拦截器，请问如何在flex中添加出拦截器？这篇博客里写了如何在Java客户端中添加拦截器，现在需要实现在flex客户端中添加拦截器。...</li>
+    <li class="recent_comment_author">--商商-77</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/hoojo/archive/2011/06/02/2068665.html#3091366">6. Re:【MongoDB for Java】Java操作MongoDB</a></li>
+    <li class="recent_comment_body">写的很好~</li>
+    <li class="recent_comment_author">--规格严格-功夫到家</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/hoojo/archive/2012/06/18/2553886.html#3089570">7. Re:JavaScript/jQuery WebIM 及时聊天通信工具 本地客户端</a></li>
+    <li class="recent_comment_body">源码能给吗 虽然过去很久 但还是搜到了，如果不能给，问一下那个B 标签是怎么做的，可以做加粗，但是再点一下反加粗 做不到，求指点。</li>
+    <li class="recent_comment_author">--沐清风</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/hoojo/p/oracle_procedure_job_interval.html#3087382">8. Re:Oracle job procedure 存储过程定时任务</a></li>
+    <li class="recent_comment_body">很好，跟着一会就入门了，谢谢作者</li>
+    <li class="recent_comment_author">--广州-小段</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/hoojo/archive/2012/08/13/2635779.html#3087312">9. Re:JavaScript/jQuery、HTML、CSS 构建 Web IM 远程及时聊天通信程序</a></li>
+    <li class="recent_comment_body">你好博主，东西写的好，本人是个菜鸟，没有成功！求份源码谢谢，望博主分享份  邮箱77723890@qq.com</li>
+    <li class="recent_comment_author">--martin_yl</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/hoojo/archive/2011/08/12/2135743.html#3084277">10. Re:使用Dom4j操作XML</a></li>
+    <li class="recent_comment_body">很好，学习了</li>
+    <li class="recent_comment_author">--一系风</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/hoojo/archive/2011/03/30/1999563.html#3083317">11. Re:五、CXF WebService整合Spring</a></li>
+    <li class="recent_comment_body">这个cxf的restfull风格和spring mvc 结合起来会冲突？<br>我如果支持spring mvc的restfull风格，调用不了cxf的。。<br>反过来也是一样</li>
+    <li class="recent_comment_author">--野猪大改造</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/hoojo/archive/2012/07/23/2605219.html#3083316">12. Re:Spring整合CXF，发布RSETful 风格WebService</a></li>
+    <li class="recent_comment_body">这个cxf的restfull风格和spring mvc 结合起来会冲突？<br>我如果支持spring mvc的restfull风格，调用不了cxf的。。<br>反过来也是一样</li>
+    <li class="recent_comment_author">--野猪大改造</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/hoojo/archive/2011/03/30/1999563.html#3083200">13. Re:五、CXF WebService整合Spring</a></li>
+    <li class="recent_comment_body">我参照你的一步一步写的，但是客户端调用的时候报错了！Exception 
+in thread "main" javax.xml.ws.soap.SOAPFaultException: Message part 
+{}getUserByName was not recognized. (Does it ......</li>
+    <li class="recent_comment_author">--丅丄</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/hoojo/archive/2011/06/20/2085390.html#3082069">14. Re:MySQL 学习笔记 一</a></li>
+    <li class="recent_comment_body">写的不错，我敲了一遍，发现自己对这个mysql的理解深度多了。</li>
+    <li class="recent_comment_author">--淡淡的幽情</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/hoojo/p/longPolling_comet_jquery_iframe_ajax.html#3081889">15. Re:Web 通信 之 长连接、长轮询（long polling）</a></li>
+    <li class="recent_comment_body">赞！！！</li>
+    <li class="recent_comment_author">--啊！Bug</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/hoojo/archive/2012/08/13/2635779.html#3081283">16. Re:JavaScript/jQuery、HTML、CSS 构建 Web IM 远程及时聊天通信程序</a></li>
+    <li class="recent_comment_body">博主的文章写得很仔细，只是按照文章中的内容调试总是不成功，博主能否发一份源码到 346674168@qq.com 以便调试和学习</li>
+    <li class="recent_comment_author">--探路者0101</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/hoojo/p/ant_increment_svn_diff_diffSummarize.html#3080945">17. Re:不会用ant打包、部署项目的工程师，不是一个好程序员（测试）</a></li>
+    <li class="recent_comment_body">赞一个，自己还没用到，一般 直接maven</li>
+    <li class="recent_comment_author">--凯恩123</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/hoojo/archive/2011/04/15/2016324.html#3077915">18. Re:MyBatis3整合Spring3、SpringMVC3</a></li>
+    <li class="recent_comment_body">最后扩展将SqlSessionTemplate、SqlSession暴露出来进行扩展那里怎么都搞不定，楼主可不可以讲一下怎么做.....</li>
+    <li class="recent_comment_author">--步履神途</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/hoojo/archive/2011/03/29/1998909.html#3075573">19. Re:二、CXF 入门示例</a></li>
+    <li class="recent_comment_body">请问发布webService没报错，但是浏览器无法访问该wsdl是什么原因？<br>发布前有启动tomcat</li>
+    <li class="recent_comment_author">--寻梦追忆</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/hoojo/archive/2011/06/08/2075201.html#3074455">20. Re:Spring整合DWR comet 实现无刷新 多人聊天室</a></li>
+    <li class="recent_comment_body">ChatService.js怎么得到啊</li>
+    <li class="recent_comment_author">--诸乔</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/hoojo/archive/2013/03/07/2947502.html#3073195">21. Re:跟我一步一步开发自己的Openfire插件</a></li>
+    <li class="recent_comment_body">楼主，编码问题怎么解决啊，一直是乱码，不知道从哪里改</li>
+    <li class="recent_comment_author">--诸乔</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/hoojo/archive/2013/03/07/2947502.html#3073191">22. Re:跟我一步一步开发自己的Openfire插件</a></li>
+    <li class="recent_comment_body">@nash你好，请问你当初遇到不能自动解压的问题是怎么解决的，能不能以qq的信息发给我，谢谢344099997...</li>
+    <li class="recent_comment_author">--诸乔</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/hoojo/archive/2011/04/19/2020551.html#3072020">23. Re:FreeMarker整合Spring 3</a></li>
+    <li class="recent_comment_body">Hello Hoo，能不能发一份FreeMarker整合Spring 3的完整工程文件到我的邮箱？cunxiang.chen@163.com, 多谢！多谢！多谢！</li>
+    <li class="recent_comment_author">--dongfanglongyin</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/hoojo/archive/2012/05/17/2506845.html#3068958">24. Re:Jwchat 的安装和配置、Service unavailable、Authorization failed问题汇总</a></li>
+    <li class="recent_comment_body"><a href="#2882622" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2882622);">@</a>泥泥虎虎<br>登陆openfire后，在服务器管理器——添加新属性</li>
+    <li class="recent_comment_author">--XuanWei清枫</li>
+    <li class="recent_comment_title"><a href="http://www.cnblogs.com/hoojo/archive/2011/07/20/2111316.html#3068455">25. Re:SQL Server 触发器</a></li>
+    <li class="recent_comment_body">我书读得少，求楼主不要骗我！</li>
+    <li class="recent_comment_author">--lwccc</li>
+</ul>
+</div>
+</div>
+</div><div id="topview_posts_wrap">
+<h3 class="catListTitle">阅读排行榜</h3>
+<div class="RecentComment" id="TopViewPosts"> 
+	<div id="TopViewPostsBlock"><ul><li><a href="http://www.cnblogs.com/hoojo/archive/2011/07/19/2110862.html">1. SQL Server 存储过程(189167)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/07/20/2111316.html">2. SQL Server 触发器(148475)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/04/22/2024628.html">3. Jackson 框架，轻易转换JSON(117099)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2012/05/17/2506769.html">4. Openfire 的安装和配置(93340)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/06/02/2068665.html">5. 【MongoDB for Java】Java操作MongoDB(80541)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/04/21/2023805.html">6. JSON-lib框架，转换JSON、XML不再困难(78112)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/04/22/2025197.html">7. xStream完美转换XML、JSON(74603)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2012/02/16/2354663.html">8. jQuery 获取屏幕高度、宽度(71459)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/03/30/1999563.html">9. 五、CXF WebService整合Spring(70097)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2012/07/12/2587556.html">10. Ehcache 整合Spring 使用页面、对象缓存(38243)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/10/21/2220431.html">11. Solr开发文档(35805)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/04/19/2020551.html">12. FreeMarker整合Spring 3(27915)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/04/15/2016324.html">13. MyBatis3整合Spring3、SpringMVC3(27125)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2012/07/23/2605219.html">14. Spring整合CXF，发布RSETful 风格WebService(26584)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/06/01/2066426.html">15. mongoDB 入门指南、示例(25060)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/06/10/2077422.html">16. Spring REST(24746)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2012/06/25/2561576.html">17. Smack 结合 Openfire服务器，建立IM通信，发送聊天消息(22388)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2013/03/07/2947502.html">18. 跟我一步一步开发自己的Openfire插件(21775)</a></li><li><a href="http://www.cnblogs.com/hoojo/p/longPolling_comet_jquery_iframe_ajax.html">19. Web 通信 之 长连接、长轮询（long polling）(21121)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/05/05/2038101.html">20. Java Thread 多线程同步、锁、通信(20696)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/01/13/1934373.html">21. IE6、IE7、IE8的CSS、JS兼容(20679)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/06/20/2085390.html">22. MySQL 学习笔记 一(19543)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2013/03/29/openfire_plugin_chatlogs_plugin_.html">23. 基于开源 Openfire 聊天服务器 - 开发Openfire聊天记录插件(19341)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2012/05/17/2506845.html">24. Jwchat 的安装和配置、Service unavailable、Authorization failed问题汇总(17739)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/07/16/2108129.html">25. SQL Server T-SQL高级查询(17177)</a></li></ul></div>
+</div>
+</div><div id="topfeedback_posts_wrap">
+<h3 class="catListTitle">评论排行榜</h3>
+<div class="RecentComment" id="TopCommentsPosts">
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="http://www.cnblogs.com/hoojo/archive/2011/04/15/2016324.html">1. MyBatis3整合Spring3、SpringMVC3(81)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2012/08/13/2635779.html">2. JavaScript/jQuery、HTML、CSS 构建 Web IM 远程及时聊天通信程序(77)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/07/19/2110862.html">3. SQL Server 存储过程(63)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2013/03/29/openfire_plugin_chatlogs_plugin_.html">4. 基于开源 Openfire 聊天服务器 - 开发Openfire聊天记录插件(53)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2013/03/07/2947502.html">5. 跟我一步一步开发自己的Openfire插件(51)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2013/03/04/2942591.html">6. cnblogs博文浏览[推荐、Top、评论、关注、收藏]利器代码片段(37)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/07/20/2111316.html">7. SQL Server 触发器(34)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/06/02/2068665.html">8. 【MongoDB for Java】Java操作MongoDB(33)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/04/19/2020551.html">9. FreeMarker整合Spring 3(33)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/07/16/2108129.html">10. SQL Server T-SQL高级查询(29)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2012/05/17/2506769.html">11. Openfire 的安装和配置(25)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/03/30/1999563.html">12. 五、CXF WebService整合Spring(24)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/06/08/2075201.html">13. Spring整合DWR comet 实现无刷新 多人聊天室(24)</a></li><li><a href="http://www.cnblogs.com/hoojo/p/longPolling_comet_jquery_iframe_ajax.html">14. Web 通信 之 长连接、长轮询（long polling）(22)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/04/22/2024628.html">15. Jackson 框架，轻易转换JSON(21)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/01/07/1929577.html">16. Struts2、Spring、Hibernate整合ExtJS(19)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2012/05/17/2506845.html">17. Jwchat 的安装和配置、Service unavailable、Authorization failed问题汇总(19)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2012/06/18/2553886.html">18. JavaScript/jQuery WebIM 及时聊天通信工具 本地客户端(17)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/10/21/2220431.html">19. Solr开发文档(16)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2012/07/31/2616896.html">20. 移动应用（手机应用）开发IM聊天程序解决方案(15)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/03/29/1998909.html">21. 二、CXF 入门示例(15)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/07/21/2112559.html">22. SQL Server 开发指南(14)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/07/19/2110325.html">23. SQL Server 事务、异常和游标(14)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2012/10/31/2747838.html">24. 谈谈个人关于程序开发中，“零配置”和“有配置”的看法(14)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/04/21/2023805.html">25. JSON-lib框架，转换JSON、XML不再困难(14)</a></li></ul></div>
+</div></div><div id="topdigg_posts_wrap">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div class="RecentComment">
+	<div id="TopDiggPostsBlock"><ul><li><a href="http://www.cnblogs.com/hoojo/archive/2013/03/04/2942591.html">1. cnblogs博文浏览[推荐、Top、评论、关注、收藏]利器代码片段(170)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/07/19/2110862.html">2. SQL Server 存储过程(120)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/07/20/2111316.html">3. SQL Server 触发器(63)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/07/16/2108129.html">4. SQL Server T-SQL高级查询(32)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2013/03/07/2947502.html">5. 跟我一步一步开发自己的Openfire插件(32)</a></li><li><a href="http://www.cnblogs.com/hoojo/p/longPolling_comet_jquery_iframe_ajax.html">6. Web 通信 之 长连接、长轮询（long polling）(24)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/04/22/2025197.html">7. xStream完美转换XML、JSON(22)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/04/21/2023805.html">8. JSON-lib框架，转换JSON、XML不再困难(20)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/06/02/2068665.html">9. 【MongoDB for Java】Java操作MongoDB(20)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/10/21/2220431.html">10. Solr开发文档(17)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2012/08/13/2635779.html">11. JavaScript/jQuery、HTML、CSS 构建 Web IM 远程及时聊天通信程序(15)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/07/19/2110325.html">12. SQL Server 事务、异常和游标(15)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/06/01/2066426.html">13. mongoDB 入门指南、示例(12)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/06/20/2085390.html">14. MySQL 学习笔记 一(12)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/04/22/2024628.html">15. Jackson 框架，轻易转换JSON(12)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2013/03/29/openfire_plugin_chatlogs_plugin_.html">16. 基于开源 Openfire 聊天服务器 - 开发Openfire聊天记录插件(12)</a></li><li><a href="http://www.cnblogs.com/hoojo/p/UML_design_constitute_example.html">17. 软件设计之UML—UML的构成[上](11)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2012/05/17/2506769.html">18. Openfire 的安装和配置(11)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/04/15/2016324.html">19. MyBatis3整合Spring3、SpringMVC3(11)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/07/18/2109291.html">20. SQL Server 索引和视图(11)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/07/21/2112559.html">21. SQL Server 开发指南(10)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/07/15/2107740.html">22. SQL Server Transact-SQL 编程(10)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2011/06/10/2077643.html">23. Java JDBC 理论笔记(10)</a></li><li><a href="http://www.cnblogs.com/hoojo/p/active_mq_jms_apache_activeMQ.html">24. ActiveMQ 即时通讯服务 浅析(9)</a></li><li><a href="http://www.cnblogs.com/hoojo/archive/2012/06/18/2553886.html">25. JavaScript/jQuery WebIM 及时聊天通信工具 本地客户端(8)</a></li></ul></div>
+</div></div></div><script type="text/javascript">loadBlogSideColumn();</script><iframe style="visibility: hidden; display: none;" src="Lucene%20%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%20-%20hoojo%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD_files/container.htm"></iframe></div>
+	
+</div>
+
+<!--done-->
+<div class="footer">
+	Powered by: <a href="http://www.cnblogs.com/">博客园</a>	模板提供：<a href="http://blog.hjenglish.com/">沪江博客</a>
+	Copyright ©2015 hoojo
+</div>
+
+
+
+
+
+</body></html>
