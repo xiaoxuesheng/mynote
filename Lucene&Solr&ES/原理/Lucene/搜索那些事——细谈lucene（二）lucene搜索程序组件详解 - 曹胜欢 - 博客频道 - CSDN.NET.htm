@@ -1,0 +1,561 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<title>搜索那些事——细谈lucene（二）lucene搜索程序组件详解 - 曹胜欢 - 博客频道 - CSDN.NET</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="description" content="对于类似lucene这样的搜索程序来说，首先了解其整个组件结构是非常有必要的，现在整体主观上对它有一个简单了解，然后逐一击破学习。初学者很多人都以为lucene是一个完成的搜索程序，其实这种理解是错误的。它其实仅仅是搜索程序的核心索引和搜索模块的一部分。刚才我们说过Lucene是有索引和搜索的两个过程，包含索引创建、索引、搜索三个要点。让我们更细一些看Lucene的各组件的构成和工作流程：">
+<script src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/getnl" async="" type="text/javascript"></script><script src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/ga.js" async="" type="text/javascript"></script><script src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/jquery.js" type="text/javascript"></script>
+<script type="text/javascript" src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/ad.js"></script>
+<link rel="Stylesheet" type="text/css" href="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/style.css">
+<link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="http://blog.csdn.net/csh624366188/rss/list">
+<link rel="shortcut icon" href="http://blog.csdn.net/favicon.ico">
+<link type="text/css" rel="stylesheet" href="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/green_black.css">
+</head>
+<body>
+<script src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/pub_topnav_2011.js" type="text/javascript"></script><link rel="stylesheet" type="text/css" href="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/navtop_2012.css">
+<div class="nav_top_2011">
+<p><em>haojianjun1987</em><a href="http://notify.csdn.net/dashboard" class="notice_num" id="header_notice_num" target="_blank">0</a>我的：<a href="http://my.csdn.net/my/letter" target="_blank">收件箱<span id="header_letter_num"></span></a><a href="http://download.csdn.net/my" class="red" target="_top">资源</a><a href="http://write.blog.csdn.net/" class="red" target="_top">博客</a><a href="http://my.csdn.net/" target="_top">空间</a><a href="https://passport.csdn.net/account/profile" target="_blank">设置</a>|<a href="https://passport.csdn.net/help/faq" target="_blank">帮助</a>|<a href="https://passport.csdn.net/account/logout" target="_top">退出</a></p><ul>
+<li><a href="http://www.csdn.net/" target="_blank" style="color: red;">首页</a></li>
+<li><a href="http://news.csdn.net/" target="_blank">业界</a></li>
+<li><a href="http://mobile.csdn.net/" target="_blank">移动</a></li>
+<li><a href="http://cloud.csdn.net/" target="_blank">云计算</a></li>
+<li><a href="http://sd.csdn.net/" target="_blank">研发</a></li>
+<li><a href="http://bbs.csdn.net/" target="_blank">论坛</a></li>
+<li><a href="http://blog.csdn.net/" target="_blank">博客</a></li>
+<li><a href="http://download.csdn.net/" target="_blank">下载</a></li>
+<li class="more"><h2 id="topnav_btnmore" onclick="showNavMore(this)"><a href="javascript:void(0);">更多</a></h2>
+<div id="topnav_hidlist">
+<iframe name="nav_frm" src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/a.htm" frameborder="no" height="178" scrolling="no" width="92"></iframe>
+</div>
+</li>
+</ul>
+</div>
+
+
+<div id="container">
+<div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h1><a href="http://blog.csdn.net/csh624366188">曹胜欢</a></h1>
+            <h2>欢迎关注微信账号：csh624366188. “java那些事'：每天分享关于java技术和有关新闻 </h2>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg"></div>
+    <div class="navigator">
+        <ul>
+            <li id="btnContents"><a href="http://blog.csdn.net/csh624366188?viewmode=contents"><span><img src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/ico_list.gif">目录视图</span></a></li>
+            <li id="btnView"><a href="http://blog.csdn.net/csh624366188?viewmode=list"><span><img src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/ico_summary.gif">摘要视图</span></a></li>
+            <li id="btnRss"><a href="http://blog.csdn.net/csh624366188/rss/list"><span><img src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/ico_rss.gif">订阅</span></a></li>
+</ul>
+    </div>
+</div>
+<script type="text/javascript">
+    var username = "csh624366188";
+    var _blogger = username;
+    var blog_address = "http://blog.csdn.net/csh624366188";
+    var static_host = "http://static.blog.csdn.net";
+    var currentUserName = "haojianjun1987";
+</script>
+
+<div id="body">
+<div id="main">
+<div class="main">
+<div class="notice tracking-ad" data-mod="popu_3"> 
+
+<a href="http://blog.csdn.net/blogdevteam/article/details/11889881" target="_blank">
+<font color="blue">2014年1月微软MVP申请开始啦！</font></a>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<a href="http://blog.csdn.net/blogdevteam/article/details/12576603" target="_blank"><font color="red">2013年10月微软MVP当选名单揭晓！ 
+</font></a>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+<a href="http://blog.csdn.net/csdnproduct/article/details/12423189" target="_blank">
+<font color="blue">Tag功能介绍—我们为什么打Tag 
+ </font></a>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+<a href="http://blog.csdn.net/blogdevteam/article/details/11975399" target="_blank">
+<font color="red">“说说家乡的互联网”主题有奖征文
+ </font></a>
+
+</div><link href="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/comment1.css" type="text/css" rel="stylesheet">
+<link href="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/style1.css" type="text/css" rel="stylesheet">
+
+<div id="article_details" class="details">
+    <div class="article_title">
+    <span class="ico ico_type_Original"></span>
+    <h3>
+        <span class="link_title"><a href="http://blog.csdn.net/csh624366188/article/details/12746989">
+        搜索那些事——细谈lucene（二）lucene搜索程序组件详解
+        </a></span>
+    </h3>
+</div>
+
+        
+    <div class="article_manage">
+        <span class="link_categories">
+        分类：
+            <a href="http://blog.csdn.net/csh624366188/article/category/895342">Lucene专区</a> 
+        </span>
+    <span class="link_postdate">2013-10-15 11:23</span>
+    <span class="link_view" title="阅读次数">354人阅读</span>
+    <span class="link_comments" title="评论次数"><a href="#comments">评论</a>(0)</span>
+    <span class="link_collect"><a href="javascript:void(0);" onclick="javascript:collectArticle('搜索那些事——细谈lucene（二）lucene搜索程序组件详解','12746989');return false;" title="收藏">收藏</a></span>
+    <span class="link_report"><a href="#report" onclick="javascript:report(12746989,2);return false;" title="举报">举报</a></span>
+    
+</div>
+
+
+    
+<div id="article_content" class="article_content">
+<p><span style="font-family:宋体;font-size:18px;">&nbsp;</span></p><p><span style="font-size:18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 对于类似<span style="font-family:Calibri;">lucene</span>这样的搜索程序来说，首先了解其整个组件结构是非常有必要的，现在整体主观上对它有一个简单了解，然后逐一击破学习。初学者很多人都以为<span style="font-family:Calibri;">lucene</span>是一个完成的搜索程序，其实这种理解是错误的。它其实仅仅是搜索程序的核心索引和搜索模块的一部分。刚才我们说过<span style="font-family:Calibri;">Lucene</span>是有索引和搜索的两个过程，包含索引创建、索引、搜索三个要点。让我们更细一些看<span style="font-family:Calibri;">Lucene</span>的各组件的构成和工作流程：</span></p><p><span style="font-size:18px;"></span>&nbsp;</p><p><span style="font-family:宋体;font-size:18px;">&nbsp;</span></p><p><span style="font-size:18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <img alt="" src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/20131015111454375.jpg"></span></p><p><span style="font-size:18px;"></span>&nbsp;</p><p><span style="font-family:宋体;font-size:18px;">&nbsp;</span></p><p><span style="font-size:18px;">下面我们就简单来看一下<span style="font-family:Calibri;">lucene</span>中两个最重要的组成部分</span></p><p><span style="font-family:宋体;font-size:18px;">&nbsp;</span></p><p><span style="font-size:18px;color:#ff6666;"><strong>一：索引组件</strong></span></p><p><strong><span style="font-size:18px;color:#ff6666;"></span></strong>&nbsp;</p><p align="left"><span style="font-size:18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 
+使用索引可快速访问数据中的特定信息。索引是对数据记录中一列或多列的值进行排序的一种结构，索引是一个单独的、物理的数据结构，它是某个记录中一列或若
+干列值的集合和相应的指向表中物理标识这些值的数据页的逻辑指针清单。会帮助您更快地获得该信息。大家想象一下，如果没有索引的话，我们查找某个文件的记
+录，最简单想到的方式就是一条一条记录的顺序查找，如果数据量比较小的话还没什么，如果数据量达到上百万，上千万的话，大家可以想象一下这个搜索时间。在<span style="font-family:Calibri;">lucene</span>中使用索引就要必须建立对文本文件的索引，将文本内容转换成能快速进行搜索的文件格式。从而消除由于慢速顺序扫描带来的效率低的影响。大家可以把索引想象成一种数据结构，它可以提供一种对文本文件内容随机访问的机制。下面我们就来看一下整个索引的步骤</span></p><p align="left"><span style="font-family:宋体;font-size:18px;">&nbsp;</span></p><p style="background: rgb(241, 246, 250);"><span style="font-size:18px;"><strong>1.<span style="font-family:宋体;">获取内容</span></strong></span></p><p style="background: rgb(241, 246, 250);"><span style="font-size:18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Lucene<span style="font-family:宋体;">本身没有提供获取内容的工具或者组件，内容是要开发者自己提供相应的程序。这一步包括使用网络爬虫或蜘蛛程序来搜索和界定需要索引的内容。当然，数据来源可能包括数据库、分布式文件系统、本地</span>xml<span style="font-family:宋体;">等等。</span>lucene<span style="font-family:宋体;">作为一款核心搜索库，不提供任何功能来实现内容获取。目前有大量的开源爬虫软件可以实现这个功能，例如：</span>Solr<span style="font-family:宋体;">，</span>lucene<span style="font-family:宋体;">的子项；</span>Nutch<span style="font-family:宋体;">，</span>apache<span style="font-family:宋体;">项目，包含大规模的爬虫工具，抓取和分辨</span>web<span style="font-family:宋体;">站点数据；</span>Grub<span style="font-family:宋体;">，比较流行的开源</span>web<span style="font-family:宋体;">爬虫工具；</span>Heritrix<span style="font-family:宋体;">，一款开源的</span>Internet<span style="font-family:宋体;">文档搜索程序；</span>Aperture<span style="font-family:宋体;">，支持从</span>web<span style="font-family:宋体;">站点、文件系统和邮箱中抓取，并解析和索引其中的文本数据。</span></span></p><p align="left"><span style="font-size:18px;">获取到内容之后，下一步我们来看一下如何根据获取到的内容来建立相应的小数据块，也成为文档。</span></p><p align="left"><span style="font-family:宋体;font-size:18px;"><strong>&nbsp;</strong></span></p><p align="left"><span style="font-size:18px;"><strong><span style="font-family:Calibri;">2</span>．建立文档</strong></span></p><p align="left"><strong><span style="font-size:18px;"></span></strong>&nbsp;</p><p align="left"><span style="font-size:18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 
+获取原始内容后，需要对这些内容进行索引，必须将这些内容转换成部件（文档）。文档主要包括几个带值的域，比如标题，正文，摘要，作者和链接。如果文档和
+域比较重要的话，还可以添加权值。设计完方案后，需要将原始内容中的文本提取出来写入各个文档，这一步可以使用文档过滤器，开源项目如<span style="font-family:Calibri;">Tika</span>，实现很好的文档过滤。如果要获取的原始内容存储于数据库中，有一些项目通过无缝链接内容获取步骤和文档建立步骤就能轻易地对数据库表进行航所以操作和搜索操作，例如<span style="font-family:Calibri;">DBSight</span>，<span style="font-family:Calibri;">Hibernate Search</span>，<span style="font-family:Calibri;">LuSQL</span>，<span style="font-family:Calibri;">Compass</span>和<span style="font-family:Calibri;">Oracle/Lucene</span>集成项目。</span></p><p align="left"><span style="font-family:宋体;font-size:18px;">&nbsp;</span></p><p align="left"><span style="font-size:18px;"><strong><span style="font-family:Calibri;">3</span>文档分析</strong></span></p><p align="left"><strong><span style="font-size:18px;"></span></strong>&nbsp;</p><p align="left"><span style="font-size:18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 搜索引擎不能直接对文本进行索引：必须将文本分割成一系列被称为语汇单元的独立的原子元素。每一个语汇单元能大致与语言中的<span style="font-family:Calibri;">“</span>单词<span style="font-family:Calibri;">”</span>对应起来，这个步骤决定文档中的文本域如何分割成语汇单元系列。<span style="font-family:Calibri;">lucene</span>提供了大量内嵌的分析器可以轻松控制这步操作。</span></p><p align="left"><span style="font-size:18px;"></span>&nbsp;</p><p align="left"><span style="font-size:18px;"><strong><span style="font-family:Calibri;">4</span>文档索引</strong></span></p><p align="left"><strong><span style="font-size:18px;"></span></strong>&nbsp;</p><p align="left"><span style="font-size:18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将文档加入到索引列表中。<span style="font-family:Calibri;">Lucene</span>在这一步骤中提供了强档的<span style="font-family:Calibri;">API</span>，只需简单调用提供的几个方法就可以实现出文档索引的建立。</span></p><p align="left"><span style="font-family:宋体;font-size:18px;">&nbsp;</span></p><p align="left"><span style="font-size:18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 为了提供好的用户体验，索引是必须要处理好的一环：在设计和定制索引程序时必须围绕如何提高用户的搜索体验来进行。</span></p><p align="left"><span style="font-family:宋体;font-size:18px;">&nbsp;</span></p><p><span style="font-size:18px;color:#ff6666;"><strong>二：搜索组件</strong></span></p><p><strong><span style="font-size:18px;color:#ff6666;"></span></strong>&nbsp;</p><p style="background: white;"><span style="font-size:18px;"><span style="font-family:宋体;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 搜索组件即为输入搜索短语，然后进行分词，然从索引中查找单词，从而找到包含该单词的文档。搜索质量由查准率和查全率来衡量。搜索的细节还是比较复杂的。这也是我们以后讲解</span>lucene<span style="font-family:宋体;">的主要内容之一。尤其是在搜索速度和搜索大容量数据的能力在搜索技术中是比较重要的。搜索组件主要包括以下内容：</span></span></p><p style="background: white;"><span style="font-family:宋体;font-size:18px;"></span>&nbsp;</p><p style="background: white;"><span style="font-size:18px;"><strong>1.</strong><span style="font-family:宋体;"><strong>用户搜索界面</strong>：主要是和用户进行交互的页面，也就是呈现在浏览器中能看到的东西，这里主要考虑的就是页面</span>UI<span style="font-family:宋体;">设计了。一个良好的</span>UI<span style="font-family:宋体;">设计是吸引用户的重要组成部分。</span></span></p><p style="background: white;"><span style="font-size:18px;"><strong>2.</strong><span style="font-family:宋体;"><strong>建立查询</strong>：建立查询主要是指用户输入所要查询的短语，以普通</span>HTML<span style="font-family:宋体;">表单或者</span>ajax<span style="font-family:宋体;">的方式提交到后台服务器端。然后把词语传递给后台搜索引擎。这就是一个简单建立查询的过程。</span></span></p><p style="background: white;"><span style="font-size:18px;"><strong>3.</strong><span style="font-family:宋体;"><strong>搜索查询</strong>：即为查询检索索引然后返回与查询词语匹配的文档。然后把返回来的结构按照查询请求来排序。搜索查询组件覆盖了搜索引擎中大部分的复杂内容。</span></span></p><p style="background: white;"><span style="font-size:18px;"><span style="font-family:宋体;">常见的搜索理论模型主要有以下</span>3<span style="font-family:宋体;">种：</span></span></p><p style="background: white;"><span style="font-size:18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img alt="" src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/20131015111458937.jpg"></span></p><p style="background: white;"><span style="font-size:18px;"></span>&nbsp;</p><p style="background: white;"><span style="font-size:18px;"><strong>4.</strong><span style="font-family:宋体;"><strong>展现结果</strong>：所谓展现结果，和第一个搜索界面类似。都是一个与用户交互的前端展示页面，作为一个搜索引擎，用户体验永远是第一位。其中前端展示在用户体现上占据了重要地位</span></span></p><p style="background: white;"><span style="font-family:宋体;font-size:18px;">&nbsp;</span></p><p style="background: white;"><span style="font-size:18px;">Ok<span style="font-family:宋体;">，上面就主要讲解了搜索程序的两个比较重要的组件，这里只是简单介绍一下，在以后的博文中我们还会详细介绍。最后我们就简单看一下</span>lucene<span style="font-family:宋体;">在这两个组件方面所提供的几个</span>API<span style="font-family:宋体;">。</span></span></p><p><span style="font-family:宋体;font-size:18px;">&nbsp;</span></p><p><span style="font-family:宋体;font-size:18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <img alt="" src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/20131015112245234.jpg"></span></p><p><span style="font-size:18px;"></span></p><p><span style="font-size:18px;">简单解释一下这个图：</span></p><p style="background: white;" align="left"><span style="font-size:18px;"><span style="font-family:Calibri;">1.</span>被索引的文档用<span style="font-family:Calibri;">Document</span>对象表示</span></p><p style="background: white;" align="left"><span style="font-size:18px;"><span style="font-family:Calibri;">2.IndexWriter</span>通过函数<span style="font-family:Calibri;">addDocument</span>将文档添加到索引中，实现创建索引的过程</span></p><p style="background: white;" align="left"><span style="font-size:18px;"><span style="font-family:Calibri;">3.Lucene</span>的索引是反向索引</span></p><p style="background: white;" align="left"><span style="font-size:18px;"><span style="font-family:Calibri;">4.</span>当用户查询请求时，<span style="font-family:Calibri;">Query</span>代表用户查询语句</span></p><p style="background: white;" align="left"><span style="font-size:18px;"><span style="font-family:Calibri;">5.IndexSearcher</span>通过函数<span style="font-family:Calibri;">search</span>搜索<span style="font-family:Calibri;">Lucene Index</span></span></p><p style="background: white;" align="left"><span style="font-size:18px;"><span style="font-family:Calibri;">6.IndexSearcher</span>计算<span style="font-family:Calibri;">Term Weight</span>和<span style="font-family:Calibri;">Score</span>并且将结果返回给用户</span></p><p style="background: white;" align="left"><span style="font-size:18px;"><span style="font-family:Calibri;">7.</span>返回给用户的文档集合用<span style="font-family:Calibri;">TopDocsCollector</span>表示</span></p><p><span style="font-family:宋体;font-size:18px;">&nbsp;</span></p>
+</div>
+
+<div class="share_buttons" id="sharePanel"></div>
+<!--192.168.100.33-->
+<div class="article_next_prev">
+    <li class="prev_article"><span>上一篇：</span><a href="http://blog.csdn.net/csh624366188/article/details/12676263">搜索那些事——细谈lucene（一）初识全文资源检索框架lucene</a></li>
+</div>
+
+
+            <div id="digg" articleid="12746989">
+            <dl id="btnDigg" class="digg digg_enable">
+                <dt>顶</dt>
+                <dd>5</dd>
+            </dl>
+            <dl id="btnBury" class="digg digg_enable">
+                <dt>踩</dt>
+                <dd>0</dd>
+            </dl>
+        </div>
+
+</div>
+<div id="ad_cen">
+<script type="text/javascript">BAIDU_CLB_SLOT_ID = "117306";</script>
+<script type="text/javascript" src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/o.js"></script><div id="BAIDU_CLB_SLOT_PS_117306"></div><script charset="utf-8" src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/ecom"></script><script type="text/javascript"><!--
+google_ad_client = "ca-pub-1076724771190722";
+/* blog正文下方728x90 */
+google_ad_slot = "4497271841";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript" src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/show_ads.js">
+</script><ins style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px"><ins id="aswift_0_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;" frameborder="0" height="90" scrolling="no" width="728"></iframe></ins></ins>
+</div>
+<script type="text/javascript">
+    //new Ad(4, 'ad_cen');
+</script>
+<div id="comment_title" class="panel_head">查看评论<a name="comments"></a></div>
+<div id="comment_list"></div>
+<div id="comment_bar"></div>
+<div id="comment_form"></div>
+<div class="announce">* 以上用户言论只代表其个人观点，不代表CSDN网站的观点或立场<a name="reply"></a><a name="quote"></a></div>
+<script type="text/javascript">
+    var fileName = '12746989';
+    var commentscount = 0;
+    var islock = false
+</script>
+<script type="text/javascript" src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/comment.js"></script>
+<div id="ad_bot"></div>
+<script type="text/javascript">
+    new Ad(5, 'ad_bot');
+</script>
+<div id="report_dialog"></div>
+
+<div id="d-top" style="display:none;">
+<a id="d-top-a" href="#" title="回到顶部">
+<img src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/top.png" alt="TOP"></a>
+</div>
+<script type="text/javascript">
+    $(function(){
+        var d_top=$('#d-top');
+        document.onscroll=function(){
+            var scrTop=(document.body.scrollTop||document.documentElement.scrollTop);
+            if(scrTop>500){
+                d_top.show();
+            }else{
+                d_top.hide();
+            }
+        }
+        $('#d-top-a').click(function(){
+            scrollTo(0,0);
+            this.blur();
+            return false;
+        });
+    });
+  
+</script>
+
+<div class="clear"></div>
+</div>
+</div>
+
+<div id="side">
+<div class="side">
+<div id="custom_column_20896731" class="panel">
+<ul class="panel_head"><span>★★★★交流QQ群★★★★</span></ul>
+<ul class="panel_body">
+<font color="red"><b>欢迎关注微信账号：csh624366188.<br>“java那些事“：每天分享关于java技术和有关新闻</b></font><br><br>
+<img src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/1375243485_7882.jpg"><br><br>
+
+<font color="blue">java交流工作群1: 77800592 </font><br>
+<font color="blue">java交流学生群2：234897635</font><br>
+<font color="blue">java交流工作群3：94507287 </font><br>
+<font color="blue">90后技术交流群: 336882565</font><br>
+<br>
+<font color="blue">我的邮箱：bzu901@163.com</font><br>
+<br>
+<font color="green"><b>PS：请勿同时加入多个群，一经发现，永久封号，谢谢！</b></font>
+</ul>
+</div><div id="panel_Profile" class="panel">
+<ul class="panel_head"><span>个人资料</span></ul>
+<ul class="panel_body profile">
+<div id="blog_userface">
+    <a href="http://my.csdn.net/csh624366188" target="_blank">
+    <img src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/1_csh624366188.jpg" title="访问我的空间" style="max-width:90%">
+    </a>
+    <br>
+    <span><a href="http://my.csdn.net/csh624366188" class="user_name" target="_blank">csh624366188</a></span>
+</div>
+<div class="interact">
+<a href="javascript:void(0);" class="attent" id="span_add_follow" title="[加关注]"></a>
+<a href="javascript:void(0);" class="letter" onclick="loginto(1)" title="[发私信]"></a>
+</div>
+<div id="blog_medal">
+        <div class="ico_expert" title="CSDN认证专家"></div>
+<div id="bms_box"><a href="http://medal.blog.csdn.net/allmedal.aspx" target="_blank"><img src="http://static.blog.csdn.net/images/medal/columnstar_s.gif" onmouseover="m_over_m(this,0)" onmouseout="m_out_m()" alt=""></a><a href="http://medal.blog.csdn.net/allmedal.aspx" target="_blank"><img src="http://static.blog.csdn.net/images/medal/holdon_s2.gif" onmouseover="m_over_m(this,1)" onmouseout="m_out_m()" alt=""></a></div></div>
+<ul id="blog_rank">
+    <li>访问：<span>998283次</span></li>
+    <li>积分：<span>14970分</span></li>
+    <li>排名：<span>第143名</span></li>
+</ul>
+<ul id="blog_statistics">
+    <li>原创：<span>205篇</span></li>
+    <li>转载：<span>31篇</span></li>
+    <li>译文：<span>0篇</span></li>
+    <li>评论：<span>2907条</span></li>
+</ul>
+</ul>
+</div>
+
+
+<div id="custom_column_20858073" class="panel">
+<ul class="panel_head"><span>我的微博</span></ul>
+<ul class="panel_body">
+<iframe class="share_self" src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/index.htm" frameborder="0" height="500" scrolling="no" width="100%"></iframe>
+</ul>
+</div><div id="panel_Category" class="panel">
+    <ul class="panel_head"><span>博客专栏</span></ul>
+    <ul class="panel_body" id="sp_column">
+    <table cellpadding="0" cellspacing="0"><tbody><tr>
+    <td style="padding:10px 10px 0 0;">
+    <a href="http://blog.csdn.net/column/details/jvm123.html" target="_blank"><img src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/20120905225010026.jpg" style="width:75px;height:75px;"></a>
+    </td>
+    <td style="padding:10px 0; vertical-align:top;">
+    <a href="http://blog.csdn.net/column/details/jvm123.html" target="_blank">深入java虚拟机</a>
+    <p>文章：8篇</p>
+    <span>阅读：58444</span>
+    </td>
+    </tr></tbody></table>
+    <table cellpadding="0" cellspacing="0"><tbody><tr>
+    <td style="padding:10px 10px 0 0;">
+    <a href="http://blog.csdn.net/column/details/jquery.html" target="_blank"><img src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/20120702150943398.jpg" style="width:75px;height:75px;"></a>
+    </td>
+    <td style="padding:10px 0; vertical-align:top;">
+    <a href="http://blog.csdn.net/column/details/jquery.html" target="_blank">跟我学jquery</a>
+    <p>文章：7篇</p>
+    <span>阅读：33782</span>
+    </td>
+    </tr></tbody></table>
+    <table cellpadding="0" cellspacing="0"><tbody><tr>
+    <td style="padding:10px 10px 0 0;">
+    <a href="http://blog.csdn.net/column/details/spring.html" target="_blank"><img src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/20120606141129163.jpg" style="width:75px;height:75px;"></a>
+    </td>
+    <td style="padding:10px 0; vertical-align:top;">
+    <a href="http://blog.csdn.net/column/details/spring.html" target="_blank">细谈spring</a>
+    <p>文章：12篇</p>
+    <span>阅读：40628</span>
+    </td>
+    </tr></tbody></table>
+    <table cellpadding="0" cellspacing="0"><tbody><tr>
+    <td style="padding:10px 10px 0 0;">
+    <a href="http://blog.csdn.net/column/details/hibernate123.html" target="_blank"><img src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/20120511230333771.jpg" style="width:75px;height:75px;"></a>
+    </td>
+    <td style="padding:10px 0; vertical-align:top;">
+    <a href="http://blog.csdn.net/column/details/hibernate123.html" target="_blank">细谈Hibernate</a>
+    <p>文章：18篇</p>
+    <span>阅读：51911</span>
+    </td>
+    </tr></tbody></table>
+    <table cellpadding="0" cellspacing="0"><tbody><tr>
+    <td style="padding:10px 10px 0 0;">
+    <a href="http://blog.csdn.net/column/details/hello-struts2.html" target="_blank"><img src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/20120426192850973.jpg" style="width:75px;height:75px;"></a>
+    </td>
+    <td style="padding:10px 0; vertical-align:top;">
+    <a href="http://blog.csdn.net/column/details/hello-struts2.html" target="_blank">细谈struts2</a>
+    <p>文章：14篇</p>
+    <span>阅读：50841</span>
+    </td>
+    </tr></tbody></table>
+    <table cellpadding="0" cellspacing="0"><tbody><tr>
+    <td style="padding:10px 10px 0 0;">
+    <a href="http://blog.csdn.net/column/details/designpatterns.html" target="_blank"><img src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/20120416215805457.jpg" style="width:75px;height:75px;"></a>
+    </td>
+    <td style="padding:10px 0; vertical-align:top;">
+    <a href="http://blog.csdn.net/column/details/designpatterns.html" target="_blank">大话设计模式</a>
+    <p>文章：8篇</p>
+    <span>阅读：32084</span>
+    </td>
+    </tr></tbody></table>
+    <table cellpadding="0" cellspacing="0"><tbody><tr>
+    <td style="padding:10px 10px 0 0;">
+    <a href="http://blog.csdn.net/column/details/java.html" target="_blank"><img src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/20120224173841690.jpg" style="width:75px;height:75px;"></a>
+    </td>
+    <td style="padding:10px 0; vertical-align:top;">
+    <a href="http://blog.csdn.net/column/details/java.html" target="_blank">Java程序员从笨鸟到菜鸟</a>
+    <p>文章：112篇</p>
+    <span>阅读：527842</span>
+    </td>
+    </tr></tbody></table>
+    <table cellpadding="0" cellspacing="0"><tbody><tr>
+    <td style="padding:10px 10px 0 0;">
+    <a href="http://blog.csdn.net/column/details/javaweb.html" target="_blank"><img src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/20111207142355709.jpg" style="width:75px;height:75px;"></a>
+    </td>
+    <td style="padding:10px 0; vertical-align:top;">
+    <a href="http://blog.csdn.net/column/details/javaweb.html" target="_blank">java一系列</a>
+    <p>文章：3篇</p>
+    <span>阅读：0</span>
+    </td>
+    </tr></tbody></table>
+    </ul>
+</div><div id="panel_Category" class="panel">
+<ul class="panel_head"><span>文章分类</span></ul>
+<ul class="panel_body">
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/category/855596">框架Struts2</a><span>(18)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/category/855597">java Web</a><span>(12)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/category/855598">java SE</a><span>(11)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/category/855605">IDE</a><span>(1)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/category/888600">学习专区</a><span>(141)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/category/895342">Lucene专区</a><span>(4)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/category/895970">杂谈</a><span>(30)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/category/911647">框架Hibernate</a><span>(31)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/category/925020">c#</a><span>(4)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/category/1060780">设计模式</a><span>(12)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/category/1083058">ASP.NET</a><span>(4)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/category/1096527">Java程序员从笨鸟到菜鸟</a><span>(82)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/category/1120310">数据结构</a><span>(2)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/category/1122818">jquery</a><span>(10)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/category/1232815">深入jvm</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/category/1249308">operate sys</a><span>(1)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/category/1282681">经典转载</a><span>(13)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/category/1288831">webservice</a><span>(4)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/category/1293387">oracle</a><span>(6)</span>
+</li>
+</ul>
+</div><div class="panel" id="panel_Search">
+    <ul class="panel_head"><span>文章搜索</span></ul>
+    <ul class="panel_body">
+        <form id="frmSearch" action="http://so.csdn.net/search" class="form_search" target="_blank">
+        <span><input id="inputSearch" class="blogsearch" title="请输入关键字" type="text"></span>
+        <input id="btnSubmit" value="搜索" title="search in blog" type="submit">
+        <input name="q" id="inputQ" type="hidden">
+        <input name="t" value="blog" type="hidden">
+        <a id="btnSearchBlog" target="_blank"></a>
+        </form>
+    </ul>
+</div><div id="hotarticls" class="panel">
+<ul class="panel_head"><span>阅读排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/details/7278508" title="Java程序员从笨鸟到菜鸟全部博客目录">Java程序员从笨鸟到菜鸟全部博客目录</a><span>(32089)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/details/6823209" title="Lucene教程详解">Lucene教程详解</a><span>(26545)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/details/7065036" title="Entity Framework 全面教程详解（转）">Entity Framework 全面教程详解（转）</a><span>(21979)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/details/8029181" title="铁道部12306后台技术框架、完整异常栈信息以及技术缺点和漏洞">铁道部12306后台技术框架、完整异常栈信息以及技术缺点和漏洞</a><span>(20847)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/details/7937144" title="Java程序员从笨鸟到菜鸟之（九十二）深入java虚拟机（一）——java虚拟机底层结构详解">Java程序员从笨鸟到菜鸟之（九十二）深入java虚拟机（一）——java虚拟机底层结构详解</a><span>(19937)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/details/7999247" title="《Java程序员由笨鸟到菜鸟》电子版书正式发布，欢迎大家下载">《Java程序员由笨鸟到菜鸟》电子版书正式发布，欢迎大家下载</a><span>(19799)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/details/7064269" title="经典ASP.NET MVC3.0入门详解">经典ASP.NET MVC3.0入门详解</a><span>(19177)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/details/8070266" title="Java面试宝典2013版（超长版）">Java面试宝典2013版（超长版）</a><span>(18277)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/details/7282959" title="Java程序员从笨鸟到菜鸟之（一）开发环境搭建，基本语法，字符串，数组">Java程序员从笨鸟到菜鸟之（一）开发环境搭建，基本语法，字符串，数组</a><span>(15454)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/csh624366188/article/details/8105217" title="Java程序员从笨鸟到菜鸟之（一百）sql注入攻击详解（一）sql注入原理详解">Java程序员从笨鸟到菜鸟之（一百）sql注入攻击详解（一）sql注入原理详解</a><span>(14048)</span>
+</li>
+</ul>
+</div>
+<div id="custom_column_20418211" class="panel">
+<ul class="panel_head"><span>学习博客</span></ul>
+<ul class="panel_body">
+<a href="http://coolshell.cn/">【酷壳】 </a><br>
+<br>
+<a href="http://blog.csdn.net/cheny_com">【陈勇老师】</a> <br>
+<br>
+<a href="http://chenguang.blog.51cto.com/">【李晨光老师】</a> <br>
+<br>
+<a href="http://blog.csdn.net/lfsfxy9">【纪争光】</a> <br>
+<br>
+<a href="http://blog.csdn.net/lsh6688">【李守宏】</a> <br>
+<br>
+<a href="http://lanfei.sinaapp.com/">【畅之部落格博客】</a> <br>
+<br>
+<a href="http://blog.csdn.net/ghsau">【高爽|Java】</a><br><br>
+<a href="http://blog.csdn.net/lfsf802">【陈建秋】</a><br>
+<br>
+<a href="http://blog.csdn.net/fenglibing">【java老鸟】</a><br>
+<br>
+<a href="http://www.cnblogs.com/huangxincheng">【一线码农】</a><br>
+<br>
+<a href="http://blog.csdn.net/lifetragedy">【 通向架构师的道路】</a><br>
+<br>
+<a href="http://www.miniui.com/demo/">【jQuery MiniUI Demo】</a><br>
+<br>
+<a href="http://blog.csdn.net/java2000_net">【老紫竹】</a><br>
+<br>
+</ul>
+</div><div id="newcomments" class="panel">
+<ul class="panel_head"><span>最新评论</span></ul>
+<ul class="panel_body itemlist">
+    <li>
+    <a href="http://blog.csdn.net/csh624366188/article/details/12676263#comments">搜索那些事——细谈lucene（一）初识全文资源检索框架lucene</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/luohuacanyue" class="user_name">luohuacanyue</a>:
+@csh624366188:我有段时间也在弄Lucene。后来也自己尝试着写，自己写和看完全两样，会...
+    </p>
+    </li>
+    <li>
+    <a href="http://blog.csdn.net/csh624366188/article/details/12676263#comments">搜索那些事——细谈lucene（一）初识全文资源检索框架lucene</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/zl1zl2zl3" class="user_name">zl1zl2zl3</a>:
+对中文的支持只需对其语言词法分析接口进行扩展就能实现对中文检索的支持。    最近在研究中文分词器，...
+    </p>
+    </li>
+    <li>
+    <a href="http://blog.csdn.net/csh624366188/article/details/12676263#comments">搜索那些事——细谈lucene（一）初识全文资源检索框架lucene</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/FansUnion" class="user_name">FansUnion</a>:
+@csh624366188:恭喜啊！(*^__^*) 你写了这么多文章，学习了这么多技术，名气也不小...
+    </p>
+    </li>
+    <li>
+    <a href="http://blog.csdn.net/csh624366188/article/details/12676263#comments">搜索那些事——细谈lucene（一）初识全文资源检索框架lucene</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/csh624366188" class="user_name">csh624366188</a>:
+@listenTOknow:共同学习！
+    </p>
+    </li>
+    <li>
+    <a href="http://blog.csdn.net/csh624366188/article/details/12676263#comments">搜索那些事——细谈lucene（一）初识全文资源检索框架lucene</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/csh624366188" class="user_name">csh624366188</a>:
+@suannai0314:感谢推荐！
+    </p>
+    </li>
+    <li>
+    <a href="http://blog.csdn.net/csh624366188/article/details/12676263#comments">搜索那些事——细谈lucene（一）初识全文资源检索框架lucene</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/csh624366188" class="user_name">csh624366188</a>:
+@FansUnion:第一段只是我对最近一段时间的简短总结，所以用了特殊字体。希望自己能坚持按自己的...
+    </p>
+    </li>
+    <li>
+    <a href="http://blog.csdn.net/csh624366188/article/details/12676263#comments">搜索那些事——细谈lucene（一）初识全文资源检索框架lucene</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/csh624366188" class="user_name">csh624366188</a>:
+@F361095351:共同学习
+    </p>
+    </li>
+    <li>
+    <a href="http://blog.csdn.net/csh624366188/article/details/12676263#comments">搜索那些事——细谈lucene（一）初识全文资源检索框架lucene</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/listenTOknow" class="user_name">listenTOknow</a>:
+学习
+    </p>
+    </li>
+    <li>
+    <a href="http://blog.csdn.net/csh624366188/article/details/12676263#comments">搜索那些事——细谈lucene（一）初识全文资源检索框架lucene</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/suannai0314" class="user_name">suannai0314</a>:
+您的文章已被推荐到CSDN首页，感谢您的分享。
+    </p>
+    </li>
+    <li>
+    <a href="http://blog.csdn.net/csh624366188/article/details/7999247#comments">《Java程序员由笨鸟到菜鸟》电子版书正式发布，欢迎大家下载</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/lovexjyong" class="user_name">lovexjyong</a>:
+楼主好人 好人医生平安
+    </p>
+    </li>
+</ul>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+
+<div class="clear"></div>
+</div>
+
+<script type="text/javascript" src="%E6%90%9C%E7%B4%A2%E9%82%A3%E4%BA%9B%E4%BA%8B%E2%80%94%E2%80%94%E7%BB%86%E8%B0%88lucene%EF%BC%88%E4%BA%8C%EF%BC%89lucene%E6%90%9C%E7%B4%A2%E7%A8%8B%E5%BA%8F%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3%20-%20%E6%9B%B9%E8%83%9C%E6%AC%A2%20-%20%E5%8D%9A%E5%AE%A2%E9%A2%91%E9%81%93%20-%20CSDN.NET_files/newblog.js"></script>
+<script type="text/javascript" src="http://medal.blog.csdn.net/showblogmedal.ashx?blogid=974723"></script>
+
+<script type="text/javascript">
+document.write('<script type="text/javascript" src="http://csdnimg.cn/pubfooter/js/publib_footer.js?' + Math.floor(new Date()/120000).toString(36) + '="></'+'script>');
+</script><script type="text/javascript" src="http://csdnimg.cn/pubfooter/js/publib_footer.js?6utl2="></script></div></body></html>
