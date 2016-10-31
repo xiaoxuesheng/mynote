@@ -1,0 +1,8 @@
+ctrl+e:最近编辑文件
+ctrl+u:父类或接口
+ctrl+alt+b：子类
+ctrl+h：类层级结构  ctrl+alt+u：图解方式表示层级结构
+ctrl+alt+h：方法调用层级结构
+ctrl+n：查找类
+ctrl+shif+n：查找文件
+ctrl+shift+alt+n：查找符号

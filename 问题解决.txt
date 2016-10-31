@@ -1,0 +1,25 @@
+解决-Dmaven.multiModuleProjectDirectory system property is not set. Check $M2_HOME environment variable and mvn script match.——注意maven版本号问题
+
+解决-tomcat服务器运行一段时间，总是会自动报异常：java.lang.OutOfmemoryError: PermGen Space 的错误，导致项目无法正常运行。——java中的 垃圾回收器GC 不会在主程序运行期对 PermGen space 进行清理；
+原因：
+1.当我们的应用中有很多的class时，很可能就会出现PermGen space的错误。
+2.我们的 tomcat 在重启的时候，不是使用的 ./bin/shutdown.sh 而是使用 kill -9 xxx 直接杀掉，这样的话，存在 PermGen space 里面的内存不会被释放的，这样多长进行 kill 之后，就会导致系统的内存被渐渐吃完了，直到最后 tomcat 报错。
+解决方法：
+
+1.手动设置MaxPermSize的大小
+1).修改 TOMCAT_HOME/bin/catalina.bat文件
+在echo "using CATALINA_BASE：$CATALINA_BASE"上面加入这一行内容：
+set JAVA_OPTS=%JAVA_OPTS% -server -XX:PermSize=128m -XX:MaxPermSize=512m
+2).如果是 linux 环境，则修改 TOMCAT_HOME/bin/catalina.sh：
+JAVA_OPTS="$JAVA_OPTS" -server -XX:PermSize=128m -XX:MaxSize=512m
+3).修改 TOMCAT_HOME/bin/catalina.bat文件的内容：
+在 %_EXECJAVA% %JAVA_OPTS% 后面添加 -Xms=256m -Xmx512m  
+注意：前后后有空格的
+例如： %_EXECJAVA% %JAVA_OPTS% -Xms=256m -Xmx512m(空格)后面的内容不变
+
+3.在关闭重启 tomcat 的过程中使用 shutdown.sh 而不是 使用 kill -9
+如果使用 shutdown.sh 不能将 tomcat 关掉的话，就必须要使用 kill -9 来关闭了，这个时候只有手动的来回收垃圾了:在 linux 命令下执行如下的命令，把缓存给丢弃掉。
+
+
+解决-读取数据库表中的text字段值出现net.sourceforge.jtds.jdbc.ClobImpl@.... 我用的是jtds1.25最新版本，各位高手有没有碰到这样的问题呢？如何解决？？——useLOBs=false
+
