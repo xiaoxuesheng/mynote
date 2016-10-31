@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)http://www.cnblogs.com/yjmyzz/p/hadoop-hdfs-api-sample.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" src="./hadoop_ hdfs API示例 - 菩提树下的杨过 - 博客园_files/encoder.js.下载"></script><script async="" src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?_=1476857552455"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>hadoop: hdfs API示例 - 菩提树下的杨过 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./hadoop_ hdfs API示例 - 菩提树下的杨过 - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./hadoop_ hdfs API示例 - 菩提树下的杨过 - 博客园_files/bundle-SimpleBlue.css">
+<link id="mobile-style" media="only screen and (max-device-width: 980px)" type="text/css" rel="stylesheet" href="./hadoop_ hdfs API示例 - 菩提树下的杨过 - 博客园_files/bundle-SimpleBlue-mobile.css">
+<link type="text/css" rel="stylesheet" href="./hadoop_ hdfs API示例 - 菩提树下的杨过 - 博客园_files/31164.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/yjmyzz/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/yjmyzz/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/yjmyzz/wlwmanifest.xml">
+<script src="./hadoop_ hdfs API示例 - 菩提树下的杨过 - 博客园_files/jquery.js.下载" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'yjmyzz', cb_enable_mathjax=true;var isLogined=false;</script>
+<script src="./hadoop_ hdfs API示例 - 菩提树下的杨过 - 博客园_files/blog-common.js.下载" type="text/javascript"></script>
+<script type="text/x-mathjax-config;executed=true">MathJax.Hub.Config({
+  tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] },
+  TeX: { equationNumbers: { autoNumber: ['AMS'], useLabelIds: true } },
+  'HTML-CSS': { linebreaks: { automatic: true } },
+  SVG: { linebreaks: { automatic: true } }});</script><script type="text/javascript" src="./hadoop_ hdfs API示例 - 菩提树下的杨过 - 博客园_files/MathJax.js.下载"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+<body><div id="MathJax_Message" style="display: none;"></div>
+<a name="top"></a>
+<!--PageBeginHtml Block Begin-->
+<script type="text/javascript" src="./hadoop_ hdfs API示例 - 菩提树下的杨过 - 博客园_files/cnblog.js.下载"></script>
+<div class="ajaxBg" id="ajaxBg" style="display:none">
+    </div>
+    <div class="ajaxPopUp" id="ajaxPopUp" style="display:none">
+        <div class="title" id="ajaxTitle">            
+        </div>
+        <div class="body" id="ajaxBody">           
+        </div>
+        <div class="footer">
+            <a href="javascript:void(0)" onclick="_jimmyClosePopUp()">Close(关闭)</a></div>
+    </div>
+<!--PageBeginHtml Block End-->
+
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/yjmyzz/">菩提树下的杨过.Net</a></div>
+<div class="subtitle"></div>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li id="nav_myhome"><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/yjmyzz/">首页</a></li>
+<li id="nav_newpost"><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li id="nav_contact"></li>
+<li id="nav_rss"><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/yjmyzz/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/yjmyzz/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li id="nav_admin"><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔-1081&nbsp;
+文章-1&nbsp;
+评论-2500&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/yjmyzz/p/hadoop-hdfs-api-sample.html">hadoop: hdfs API示例</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><p>利用hdfs的api，可以实现向hdfs的文件、目录读写，利用这一套API可以设计一个简易的山寨版云盘，见下图：</p>
+<p><img style="cursor: pointer; width: 450px; border: solid 1px #efefef;" title="点击查看大图" onclick="window.open(this.src)" src="./hadoop_ hdfs API示例 - 菩提树下的杨过 - 博客园_files/200942142755149.jpg" alt="点击查看大图"></p>
+<p>为了方便操作,将常用的文件读写操作封装了一个工具类:</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show(&#39;733b6016-58e8-41f0-b72c-c63c2c67b8ba&#39;)"><img id="code_img_closed_733b6016-58e8-41f0-b72c-c63c2c67b8ba" class="code_img_closed" src="./hadoop_ hdfs API示例 - 菩提树下的杨过 - 博客园_files/ContractedBlock.gif" alt="" style="display: none;"><img id="code_img_opened_733b6016-58e8-41f0-b72c-c63c2c67b8ba" class="code_img_opened" style="display: inline;" onclick="cnblogs_code_hide(&#39;733b6016-58e8-41f0-b72c-c63c2c67b8ba&#39;,event)" src="./hadoop_ hdfs API示例 - 菩提树下的杨过 - 博客园_files/ExpandedBlockStart.gif" alt="">
+<div id="cnblogs_code_open_733b6016-58e8-41f0-b72c-c63c2c67b8ba" class="cnblogs_code_hide" style="display: block;"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./hadoop_ hdfs API示例 - 菩提树下的杨过 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #008080;">  1</span> <span style="color: #0000ff;">import</span><span style="color: #000000;"> org.apache.hadoop.conf.Configuration;
+</span><span style="color: #008080;">  2</span> <span style="color: #0000ff;">import</span> org.apache.hadoop.fs.*<span style="color: #000000;">;
+</span><span style="color: #008080;">  3</span> <span style="color: #0000ff;">import</span><span style="color: #000000;"> org.apache.hadoop.io.IOUtils;
+</span><span style="color: #008080;">  4</span> 
+<span style="color: #008080;">  5</span> <span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.ByteArrayOutputStream;
+</span><span style="color: #008080;">  6</span> <span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.IOException;
+</span><span style="color: #008080;">  7</span> <span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.InputStream;
+</span><span style="color: #008080;">  8</span> <span style="color: #0000ff;">import</span><span style="color: #000000;"> java.io.OutputStream;
+</span><span style="color: #008080;">  9</span> 
+<span style="color: #008080;"> 10</span> <span style="color: #008000;">/**</span>
+<span style="color: #008080;"> 11</span> <span style="color: #008000;"> * HDFS工具类
+</span><span style="color: #008080;"> 12</span> <span style="color: #008000;"> * Author: 菩提树下的杨过(</span><span style="color: #008000; text-decoration: underline;">http://yjmyzz.cnblogs.com</span><span style="color: #008000;">)
+</span><span style="color: #008080;"> 13</span> <span style="color: #008000;"> * Since: 2015-05-21
+</span><span style="color: #008080;"> 14</span>  <span style="color: #008000;">*/</span>
+<span style="color: #008080;"> 15</span> <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> HDFSUtil {
+</span><span style="color: #008080;"> 16</span> 
+<span style="color: #008080;"> 17</span> 
+<span style="color: #008080;"> 18</span>     <span style="color: #0000ff;">private</span><span style="color: #000000;"> HDFSUtil() {
+</span><span style="color: #008080;"> 19</span> 
+<span style="color: #008080;"> 20</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;"> 21</span> 
+<span style="color: #008080;"> 22</span>     <span style="color: #008000;">/**</span>
+<span style="color: #008080;"> 23</span> <span style="color: #008000;">     * 判断路径是否存在
+</span><span style="color: #008080;"> 24</span> <span style="color: #008000;">     *
+</span><span style="color: #008080;"> 25</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> conf
+</span><span style="color: #008080;"> 26</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> path
+</span><span style="color: #008080;"> 27</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@return</span>
+<span style="color: #008080;"> 28</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@throws</span><span style="color: #008000;"> IOException
+</span><span style="color: #008080;"> 29</span>      <span style="color: #008000;">*/</span>
+<span style="color: #008080;"> 30</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">boolean</span> exits(Configuration conf, String path) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException {
+</span><span style="color: #008080;"> 31</span>         FileSystem fs =<span style="color: #000000;"> FileSystem.get(conf);
+</span><span style="color: #008080;"> 32</span>         <span style="color: #0000ff;">return</span> fs.exists(<span style="color: #0000ff;">new</span><span style="color: #000000;"> Path(path));
+</span><span style="color: #008080;"> 33</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;"> 34</span> 
+<span style="color: #008080;"> 35</span>     <span style="color: #008000;">/**</span>
+<span style="color: #008080;"> 36</span> <span style="color: #008000;">     * 创建文件
+</span><span style="color: #008080;"> 37</span> <span style="color: #008000;">     *
+</span><span style="color: #008080;"> 38</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> conf
+</span><span style="color: #008080;"> 39</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> filePath
+</span><span style="color: #008080;"> 40</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> contents
+</span><span style="color: #008080;"> 41</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@throws</span><span style="color: #008000;"> IOException
+</span><span style="color: #008080;"> 42</span>      <span style="color: #008000;">*/</span>
+<span style="color: #008080;"> 43</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> createFile(Configuration conf, String filePath, <span style="color: #0000ff;">byte</span>[] contents) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException {
+</span><span style="color: #008080;"> 44</span>         FileSystem fs =<span style="color: #000000;"> FileSystem.get(conf);
+</span><span style="color: #008080;"> 45</span>         Path path = <span style="color: #0000ff;">new</span><span style="color: #000000;"> Path(filePath);
+</span><span style="color: #008080;"> 46</span>         FSDataOutputStream outputStream =<span style="color: #000000;"> fs.create(path);
+</span><span style="color: #008080;"> 47</span> <span style="color: #000000;">        outputStream.write(contents);
+</span><span style="color: #008080;"> 48</span> <span style="color: #000000;">        outputStream.close();
+</span><span style="color: #008080;"> 49</span> <span style="color: #000000;">        fs.close();
+</span><span style="color: #008080;"> 50</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;"> 51</span> 
+<span style="color: #008080;"> 52</span>     <span style="color: #008000;">/**</span>
+<span style="color: #008080;"> 53</span> <span style="color: #008000;">     * 创建文件
+</span><span style="color: #008080;"> 54</span> <span style="color: #008000;">     *
+</span><span style="color: #008080;"> 55</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> conf
+</span><span style="color: #008080;"> 56</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> filePath
+</span><span style="color: #008080;"> 57</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> fileContent
+</span><span style="color: #008080;"> 58</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@throws</span><span style="color: #008000;"> IOException
+</span><span style="color: #008080;"> 59</span>      <span style="color: #008000;">*/</span>
+<span style="color: #008080;"> 60</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> createFile(Configuration conf, String filePath, String fileContent) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException {
+</span><span style="color: #008080;"> 61</span> <span style="color: #000000;">        createFile(conf, filePath, fileContent.getBytes());
+</span><span style="color: #008080;"> 62</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;"> 63</span> 
+<span style="color: #008080;"> 64</span>     <span style="color: #008000;">/**</span>
+<span style="color: #008080;"> 65</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> conf
+</span><span style="color: #008080;"> 66</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> localFilePath
+</span><span style="color: #008080;"> 67</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> remoteFilePath
+</span><span style="color: #008080;"> 68</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@throws</span><span style="color: #008000;"> IOException
+</span><span style="color: #008080;"> 69</span>      <span style="color: #008000;">*/</span>
+<span style="color: #008080;"> 70</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> copyFromLocalFile(Configuration conf, String localFilePath, String remoteFilePath) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException {
+</span><span style="color: #008080;"> 71</span>         FileSystem fs =<span style="color: #000000;"> FileSystem.get(conf);
+</span><span style="color: #008080;"> 72</span>         Path localPath = <span style="color: #0000ff;">new</span><span style="color: #000000;"> Path(localFilePath);
+</span><span style="color: #008080;"> 73</span>         Path remotePath = <span style="color: #0000ff;">new</span><span style="color: #000000;"> Path(remoteFilePath);
+</span><span style="color: #008080;"> 74</span>         fs.copyFromLocalFile(<span style="color: #0000ff;">true</span>, <span style="color: #0000ff;">true</span><span style="color: #000000;">, localPath, remotePath);
+</span><span style="color: #008080;"> 75</span> <span style="color: #000000;">        fs.close();
+</span><span style="color: #008080;"> 76</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;"> 77</span> 
+<span style="color: #008080;"> 78</span>     <span style="color: #008000;">/**</span>
+<span style="color: #008080;"> 79</span> <span style="color: #008000;">     * 删除目录或文件
+</span><span style="color: #008080;"> 80</span> <span style="color: #008000;">     *
+</span><span style="color: #008080;"> 81</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> conf
+</span><span style="color: #008080;"> 82</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> remoteFilePath
+</span><span style="color: #008080;"> 83</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> recursive
+</span><span style="color: #008080;"> 84</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@return</span>
+<span style="color: #008080;"> 85</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@throws</span><span style="color: #008000;"> IOException
+</span><span style="color: #008080;"> 86</span>      <span style="color: #008000;">*/</span>
+<span style="color: #008080;"> 87</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">boolean</span> deleteFile(Configuration conf, String remoteFilePath, <span style="color: #0000ff;">boolean</span> recursive) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException {
+</span><span style="color: #008080;"> 88</span>         FileSystem fs =<span style="color: #000000;"> FileSystem.get(conf);
+</span><span style="color: #008080;"> 89</span>         <span style="color: #0000ff;">boolean</span> result = fs.delete(<span style="color: #0000ff;">new</span><span style="color: #000000;"> Path(remoteFilePath), recursive);
+</span><span style="color: #008080;"> 90</span> <span style="color: #000000;">        fs.close();
+</span><span style="color: #008080;"> 91</span>         <span style="color: #0000ff;">return</span><span style="color: #000000;"> result;
+</span><span style="color: #008080;"> 92</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;"> 93</span> 
+<span style="color: #008080;"> 94</span>     <span style="color: #008000;">/**</span>
+<span style="color: #008080;"> 95</span> <span style="color: #008000;">     * 删除目录或文件(如果有子目录,则级联删除)
+</span><span style="color: #008080;"> 96</span> <span style="color: #008000;">     *
+</span><span style="color: #008080;"> 97</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> conf
+</span><span style="color: #008080;"> 98</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> remoteFilePath
+</span><span style="color: #008080;"> 99</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@return</span>
+<span style="color: #008080;">100</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@throws</span><span style="color: #008000;"> IOException
+</span><span style="color: #008080;">101</span>      <span style="color: #008000;">*/</span>
+<span style="color: #008080;">102</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">boolean</span> deleteFile(Configuration conf, String remoteFilePath) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException {
+</span><span style="color: #008080;">103</span>         <span style="color: #0000ff;">return</span> deleteFile(conf, remoteFilePath, <span style="color: #0000ff;">true</span><span style="color: #000000;">);
+</span><span style="color: #008080;">104</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">105</span> 
+<span style="color: #008080;">106</span>     <span style="color: #008000;">/**</span>
+<span style="color: #008080;">107</span> <span style="color: #008000;">     * 文件重命名
+</span><span style="color: #008080;">108</span> <span style="color: #008000;">     *
+</span><span style="color: #008080;">109</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> conf
+</span><span style="color: #008080;">110</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> oldFileName
+</span><span style="color: #008080;">111</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> newFileName
+</span><span style="color: #008080;">112</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@return</span>
+<span style="color: #008080;">113</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@throws</span><span style="color: #008000;"> IOException
+</span><span style="color: #008080;">114</span>      <span style="color: #008000;">*/</span>
+<span style="color: #008080;">115</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">boolean</span> renameFile(Configuration conf, String oldFileName, String newFileName) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException {
+</span><span style="color: #008080;">116</span>         FileSystem fs =<span style="color: #000000;"> FileSystem.get(conf);
+</span><span style="color: #008080;">117</span>         Path oldPath = <span style="color: #0000ff;">new</span><span style="color: #000000;"> Path(oldFileName);
+</span><span style="color: #008080;">118</span>         Path newPath = <span style="color: #0000ff;">new</span><span style="color: #000000;"> Path(newFileName);
+</span><span style="color: #008080;">119</span>         <span style="color: #0000ff;">boolean</span> result =<span style="color: #000000;"> fs.rename(oldPath, newPath);
+</span><span style="color: #008080;">120</span> <span style="color: #000000;">        fs.close();
+</span><span style="color: #008080;">121</span>         <span style="color: #0000ff;">return</span><span style="color: #000000;"> result;
+</span><span style="color: #008080;">122</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">123</span> 
+<span style="color: #008080;">124</span>     <span style="color: #008000;">/**</span>
+<span style="color: #008080;">125</span> <span style="color: #008000;">     * 创建目录
+</span><span style="color: #008080;">126</span> <span style="color: #008000;">     *
+</span><span style="color: #008080;">127</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> conf
+</span><span style="color: #008080;">128</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> dirName
+</span><span style="color: #008080;">129</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@return</span>
+<span style="color: #008080;">130</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@throws</span><span style="color: #008000;"> IOException
+</span><span style="color: #008080;">131</span>      <span style="color: #008000;">*/</span>
+<span style="color: #008080;">132</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">boolean</span> createDirectory(Configuration conf, String dirName) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException {
+</span><span style="color: #008080;">133</span>         FileSystem fs =<span style="color: #000000;"> FileSystem.get(conf);
+</span><span style="color: #008080;">134</span>         Path dir = <span style="color: #0000ff;">new</span><span style="color: #000000;"> Path(dirName);
+</span><span style="color: #008080;">135</span>         <span style="color: #0000ff;">boolean</span> result =<span style="color: #000000;"> fs.mkdirs(dir);
+</span><span style="color: #008080;">136</span> <span style="color: #000000;">        fs.close();
+</span><span style="color: #008080;">137</span>         <span style="color: #0000ff;">return</span><span style="color: #000000;"> result;
+</span><span style="color: #008080;">138</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">139</span> 
+<span style="color: #008080;">140</span>     <span style="color: #008000;">/**</span>
+<span style="color: #008080;">141</span> <span style="color: #008000;">     * 列出指定路径下的所有文件(不包含目录)
+</span><span style="color: #008080;">142</span> <span style="color: #008000;">     *
+</span><span style="color: #008080;">143</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> conf
+</span><span style="color: #008080;">144</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> basePath
+</span><span style="color: #008080;">145</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> recursive
+</span><span style="color: #008080;">146</span>      <span style="color: #008000;">*/</span>
+<span style="color: #008080;">147</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> RemoteIterator&lt;LocatedFileStatus&gt; listFiles(FileSystem fs, String basePath, <span style="color: #0000ff;">boolean</span> recursive) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException {
+</span><span style="color: #008080;">148</span> 
+<span style="color: #008080;">149</span>         RemoteIterator&lt;LocatedFileStatus&gt; fileStatusRemoteIterator = fs.listFiles(<span style="color: #0000ff;">new</span><span style="color: #000000;"> Path(basePath), recursive);
+</span><span style="color: #008080;">150</span> 
+<span style="color: #008080;">151</span>         <span style="color: #0000ff;">return</span><span style="color: #000000;"> fileStatusRemoteIterator;
+</span><span style="color: #008080;">152</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">153</span> 
+<span style="color: #008080;">154</span>     <span style="color: #008000;">/**</span>
+<span style="color: #008080;">155</span> <span style="color: #008000;">     * 列出指定路径下的文件（非递归）
+</span><span style="color: #008080;">156</span> <span style="color: #008000;">     *
+</span><span style="color: #008080;">157</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> conf
+</span><span style="color: #008080;">158</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> basePath
+</span><span style="color: #008080;">159</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@return</span>
+<span style="color: #008080;">160</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@throws</span><span style="color: #008000;"> IOException
+</span><span style="color: #008080;">161</span>      <span style="color: #008000;">*/</span>
+<span style="color: #008080;">162</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> RemoteIterator&lt;LocatedFileStatus&gt; listFiles(Configuration conf, String basePath) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException {
+</span><span style="color: #008080;">163</span>         FileSystem fs =<span style="color: #000000;"> FileSystem.get(conf);
+</span><span style="color: #008080;">164</span>         RemoteIterator&lt;LocatedFileStatus&gt; remoteIterator = fs.listFiles(<span style="color: #0000ff;">new</span> Path(basePath), <span style="color: #0000ff;">false</span><span style="color: #000000;">);
+</span><span style="color: #008080;">165</span> <span style="color: #000000;">        fs.close();
+</span><span style="color: #008080;">166</span>         <span style="color: #0000ff;">return</span><span style="color: #000000;"> remoteIterator;
+</span><span style="color: #008080;">167</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">168</span> 
+<span style="color: #008080;">169</span>     <span style="color: #008000;">/**</span>
+<span style="color: #008080;">170</span> <span style="color: #008000;">     * 列出指定目录下的文件\子目录信息（非递归）
+</span><span style="color: #008080;">171</span> <span style="color: #008000;">     *
+</span><span style="color: #008080;">172</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> conf
+</span><span style="color: #008080;">173</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> dirPath
+</span><span style="color: #008080;">174</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@return</span>
+<span style="color: #008080;">175</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@throws</span><span style="color: #008000;"> IOException
+</span><span style="color: #008080;">176</span>      <span style="color: #008000;">*/</span>
+<span style="color: #008080;">177</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> FileStatus[] listStatus(Configuration conf, String dirPath) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException {
+</span><span style="color: #008080;">178</span>         FileSystem fs =<span style="color: #000000;"> FileSystem.get(conf);
+</span><span style="color: #008080;">179</span>         FileStatus[] fileStatuses = fs.listStatus(<span style="color: #0000ff;">new</span><span style="color: #000000;"> Path(dirPath));
+</span><span style="color: #008080;">180</span> <span style="color: #000000;">        fs.close();
+</span><span style="color: #008080;">181</span>         <span style="color: #0000ff;">return</span><span style="color: #000000;"> fileStatuses;
+</span><span style="color: #008080;">182</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">183</span> 
+<span style="color: #008080;">184</span> 
+<span style="color: #008080;">185</span>     <span style="color: #008000;">/**</span>
+<span style="color: #008080;">186</span> <span style="color: #008000;">     * 读取文件内容
+</span><span style="color: #008080;">187</span> <span style="color: #008000;">     *
+</span><span style="color: #008080;">188</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> conf
+</span><span style="color: #008080;">189</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> filePath
+</span><span style="color: #008080;">190</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@return</span>
+<span style="color: #008080;">191</span> <span style="color: #008000;">     * </span><span style="color: #808080;">@throws</span><span style="color: #008000;"> IOException
+</span><span style="color: #008080;">192</span>      <span style="color: #008000;">*/</span>
+<span style="color: #008080;">193</span>     <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> String readFile(Configuration conf, String filePath) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException {
+</span><span style="color: #008080;">194</span>         String fileContent = <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+</span><span style="color: #008080;">195</span>         FileSystem fs =<span style="color: #000000;"> FileSystem.get(conf);
+</span><span style="color: #008080;">196</span>         Path path = <span style="color: #0000ff;">new</span><span style="color: #000000;"> Path(filePath);
+</span><span style="color: #008080;">197</span>         InputStream inputStream = <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+</span><span style="color: #008080;">198</span>         ByteArrayOutputStream outputStream = <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+</span><span style="color: #008080;">199</span>         <span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+</span><span style="color: #008080;">200</span>             inputStream =<span style="color: #000000;"> fs.open(path);
+</span><span style="color: #008080;">201</span>             outputStream = <span style="color: #0000ff;">new</span><span style="color: #000000;"> ByteArrayOutputStream(inputStream.available());
+</span><span style="color: #008080;">202</span> <span style="color: #000000;">            IOUtils.copyBytes(inputStream, outputStream, conf);
+</span><span style="color: #008080;">203</span>             fileContent =<span style="color: #000000;"> outputStream.toString();
+</span><span style="color: #008080;">204</span>         } <span style="color: #0000ff;">finally</span><span style="color: #000000;"> {
+</span><span style="color: #008080;">205</span> <span style="color: #000000;">            IOUtils.closeStream(inputStream);
+</span><span style="color: #008080;">206</span> <span style="color: #000000;">            IOUtils.closeStream(outputStream);
+</span><span style="color: #008080;">207</span> <span style="color: #000000;">            fs.close();
+</span><span style="color: #008080;">208</span> <span style="color: #000000;">        }
+</span><span style="color: #008080;">209</span>         <span style="color: #0000ff;">return</span><span style="color: #000000;"> fileContent;
+</span><span style="color: #008080;">210</span> <span style="color: #000000;">    }
+</span><span style="color: #008080;">211</span> }</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./hadoop_ hdfs API示例 - 菩提树下的杨过 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<span class="cnblogs_code_collapse" style="display: none;">View Code</span></div>
+<p>简单的测试了一下:</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show(&#39;332d1ed2-ebcc-4f93-84c2-6ce788b2a5af&#39;)"><div>按 Ctrl+C 复制代码</div><textarea style="width: 1128.4px; height: 600px; font-family: &quot;Courier New&quot;; font-size: 12px; line-height: 1.5;"></textarea><div>按 Ctrl+C 复制代码</div></div>
+<p>注:测试时,不要忘记了在resources目录下放置core-site.xml文件,不然IDE环境下,代码不知道去连哪里的HDFS</p>
+<p>输出结果：</p>
+<p><em>/test 已存在!</em><br><em>/test/myfile.txt 创建成功</em><br><em>/test/myfile.txt 的内容为:</em><br><em>Hi,hadoop. I love you</em><br><em>--根目录下的所有子目录---</em><br><em>FileStatus{path=hdfs://172.28.20.102:9000/jimmy; isDirectory=true; modification_time=1432176691550; access_time=0; owner=hadoop; group=supergroup; permission=rwxrwxrwx; isSymlink=false}</em><br><em>FileStatus{path=hdfs://172.28.20.102:9000/test; isDirectory=true; modification_time=1432181331362; access_time=0; owner=jimmy; group=supergroup; permission=rwxr-xr-x; isSymlink=false}</em><br><em>FileStatus{path=hdfs://172.28.20.102:9000/user; isDirectory=true; modification_time=1431931797244; access_time=0; owner=hadoop; group=supergroup; permission=rwxr-xr-x; isSymlink=false}</em><br><em>--根目录下的所有文件---</em><br><em>LocatedFileStatus{path=hdfs://172.28.20.102:9000/jimmy/input/README.txt; isDirectory=false; length=1366; replication=1; blocksize=134217728; modification_time=1431922483851; access_time=1432174134018; owner=hadoop; group=supergroup; permission=rw-r--r--; isSymlink=false}</em><br><em>LocatedFileStatus{path=hdfs://172.28.20.102:9000/jimmy/output/_SUCCESS; isDirectory=false; length=0; replication=3; blocksize=134217728; modification_time=1432176692454; access_time=1432176692448; owner=jimmy; group=supergroup; permission=rw-r--r--; isSymlink=false}</em><br><em>LocatedFileStatus{path=hdfs://172.28.20.102:9000/jimmy/output/part-r-00000; isDirectory=false; length=1306; replication=3; blocksize=134217728; modification_time=1432176692338; access_time=1432176692182; owner=jimmy; group=supergroup; permission=rw-r--r--; isSymlink=false}</em><br><em>LocatedFileStatus{path=hdfs://172.28.20.102:9000/test/myfile.txt; isDirectory=false; length=21; replication=3; blocksize=134217728; modification_time=1432181331601; access_time=1432181331362; owner=jimmy; group=supergroup; permission=rw-r--r--; isSymlink=false}</em><br><em>/test 已被删除</em></p>
+<p>用spring-mvc结合hdfs api仿造hadoop的文件浏览管理界面，做了一个山寨版：（只完成了文件列表功能）</p>
+<p><img style="cursor: pointer; width: 450px; border: solid 1px #efefef;" title="点击查看大图" onclick="window.open(this.src)" src="./hadoop_ hdfs API示例 - 菩提树下的杨过 - 博客园_files/211505301664491.png" alt="点击查看大图"></p>
+<p>源代码托管在taobao开源平台上了，有需要的可以参考下：</p>
+<p><a href="http://code.taobao.org/p/hdfs-web-client/src/trunk/" target="_blank">http://code.taobao.org/p/hdfs-web-client/src/trunk/</a></p></div><div id="MySignature" style="display: block;"><div style="padding:5px;background:#ff9;border:solid 1px #ccc">作者：<a href="http://yjmyzz.cnblogs.com/">菩提树下的杨过</a><br>
+出处：<a href="http://yjmyzz.cnblogs.com/">http://yjmyzz.cnblogs.com</a>
+<br>
+本文版权归作者和博客园共有，欢迎转载，但未经作者同意必须保留此段声明，且在文章页面明显位置给出原文连接，否则保留追究法律责任的权利。
+</div>
+</div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="http://www.cnblogs.com/yjmyzz/category/195427.html" target="_blank">09.Open Source</a>,<a href="http://www.cnblogs.com/yjmyzz/category/424772.html" target="_blank">15.Java/Scala</a>,<a href="http://www.cnblogs.com/yjmyzz/category/691867.html" target="_blank">17.Hadoop</a></div>
+<div id="EntryTag">标签: <a href="http://www.cnblogs.com/yjmyzz/tag/api/">api</a>, <a href="http://www.cnblogs.com/yjmyzz/tag/hadoop/">hadoop</a>, <a href="http://www.cnblogs.com/yjmyzz/tag/hdfs/">hdfs</a></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(4516349,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;c1853d0b-63cf-dd11-9e4d-001cf0cd104b&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./hadoop_ hdfs API示例 - 菩提树下的杨过 - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./hadoop_ hdfs API示例 - 菩提树下的杨过 - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/yjmyzz/" target="_blank"><img src="./hadoop_ hdfs API示例 - 菩提树下的杨过 - 博客园_files/u27612.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/yjmyzz/">菩提树下的杨过</a><br>
+            <a href="http://home.cnblogs.com/u/yjmyzz/followees">关注 - 6</a><br>
+            <a href="http://home.cnblogs.com/u/yjmyzz/followers">粉丝 - 2557</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor">荣誉：<a href="http://www.cnblogs.com/expert/" target="_blank">推荐博客</a></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;c1853d0b-63cf-dd11-9e4d-001cf0cd104b&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(4516349,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">0</span>
+    </div>
+    <div class="buryit" onclick="votePost(4516349,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/yjmyzz/p/how-to-remote-debug-hadoop-with-eclipse-and-intellij-idea.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/yjmyzz/p/how-to-remote-debug-hadoop-with-eclipse-and-intellij-idea.html" title="发布于2015-05-19 16:22">eclipse/intellij idea 远程调试hadoop 2.6.0</a><br><a href="http://www.cnblogs.com/yjmyzz/p/4519130.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/yjmyzz/p/4519130.html" title="发布于2015-05-21 10:58">hadoop:将WordCount打包成独立运行的jar包</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2015-05-20 23:08</span> <a href="http://www.cnblogs.com/yjmyzz/">菩提树下的杨过</a> 阅读(<span id="post_view_count">3793</span>) 评论(<span id="post_comment_count">3</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=4516349" rel="nofollow">编辑</a> <a href="http://www.cnblogs.com/yjmyzz/p/hadoop-hdfs-api-sample.html#" onclick="AddToWz(4516349);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=31164,cb_entryId=4516349,cb_blogApp=currentBlogApp,cb_blogUserGuid='c1853d0b-63cf-dd11-9e4d-001cf0cd104b',cb_entryCreatedDate='2015/5/20 23:08:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"></div>
+<!--done-->
+<div class="feedback_area_title">评论列表</div>
+<div class="feedbackNoItems"></div>
+	
+
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/yjmyzz/p/hadoop-hdfs-api-sample.html#3423760" class="layer">#1楼</a><a name="3423760" id="comment_anchor_3423760"></a>  <span class="comment_date">2016-05-05 18:54</span> <a id="a_comment_author_3423760" href="http://home.cnblogs.com/u/950740/" target="_blank">Eleganty</a> <a href="http://msg.cnblogs.com/send/Eleganty" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3423760" class="blog_comment_body">你好，我是初学者，在淘宝上下载了你的工程，但是maven构建的时候有几个包下载不到，比如说com.cnblogs.yjmyzz，可以帮助我一下吗</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3423760,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3423760,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/yjmyzz/p/hadoop-hdfs-api-sample.html#3424897" class="layer">#2楼</a><a name="3424897" id="comment_anchor_3424897"></a>[<span class="louzhu">楼主</span>]  <span class="comment_date">2016-05-06 22:50</span> <a id="a_comment_author_3424897" href="http://www.cnblogs.com/yjmyzz/" target="_blank">菩提树下的杨过</a> <a href="http://msg.cnblogs.com/send/%E8%8F%A9%E6%8F%90%E6%A0%91%E4%B8%8B%E7%9A%84%E6%9D%A8%E8%BF%87" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3424897" class="blog_comment_body"><a href="http://www.cnblogs.com/yjmyzz/p/hadoop-hdfs-api-sample.html#3423760" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3423760);">@</a>
+Eleganty<br>缺的y-lib项目，在<a href="http://code.taobao.org/p/y-lib/src/" target="_blank">http://code.taobao.org/p/y-lib/src/</a> 这里</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3424897,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3424897,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3424897_avatar" style="display:none;">http://pic.cnblogs.com/face/u27612.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/yjmyzz/p/hadoop-hdfs-api-sample.html#3425031" class="layer">#3楼</a><a name="3425031" id="comment_anchor_3425031"></a><span id="comment-maxId" style="display:none;">3425031</span><span id="comment-maxDate" style="display:none;">2016/5/7 11:16:14</span>  <span class="comment_date">2016-05-07 11:16</span> <a id="a_comment_author_3425031" href="http://home.cnblogs.com/u/950740/" target="_blank">Eleganty</a> <a href="http://msg.cnblogs.com/send/Eleganty" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3425031" class="blog_comment_body"><a href="http://www.cnblogs.com/yjmyzz/p/hadoop-hdfs-api-sample.html#3424897" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3424897);">@</a>
+菩提树下的杨过<br>谢谢了哈</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3425031,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3425031,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	<div id="comments_pager_bottom"></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="http://www.cnblogs.com/yjmyzz/p/hadoop-hdfs-api-sample.html#" onclick="return RefreshPage();">刷新页面</a><a href="http://www.cnblogs.com/yjmyzz/p/hadoop-hdfs-api-sample.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="https://group.cnblogs.com/topic/75389.html" target="_blank">【活动】优达学城正式发布“无人驾驶车工程师”课程</a><br><a href="http://www.rongcloud.cn/live" target="_blank">【推荐】移动直播百强八成都在用融云即时通讯云</a><br><a href="http://www.gcpowertools.com.cn/products/componentone_studio_enterprise.htm?utm_source=cnblogs&amp;utm_medium=blogpage&amp;utm_term=bottom&amp;utm_content=C1&amp;utm_campaign=community" target="_blank">【推荐】别再闷头写代码！找对工具，事半功倍，全能开发工具包用起来</a><br><a href="http://netease.im/promotion/1013?hmsr=bky10&amp;from=bky10" target="_blank">【福利】网易云信1周年接入开发者突破10万，送红包活动火热开展中</a><br></div>
+<div id="opt_under_post"></div>
+<div id="ad_c1" class="c_ad_block">     <ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-4210569241504288" data-ad-slot="5457903683"></ins></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="http://news.cnblogs.com/n/555432/" target="_blank">YouTube掌门：目前仍处投资阶段 盈利没有时间表</a><br> ·  <a href="http://news.cnblogs.com/n/555431/" target="_blank">亚马逊拟在欧洲推出宽带服务 捆绑其数字内容</a><br> ·  <a href="http://news.cnblogs.com/n/555430/" target="_blank">罗永浩：既然必须穿越地狱，那就走下去吧</a><br> ·  <a href="http://news.cnblogs.com/n/555429/" target="_blank">微软憋了一个VR大招 可能比Hololens更堪大用</a><br> ·  <a href="http://news.cnblogs.com/n/555428/" target="_blank">雷军：小米已成为印度第三大智能手机厂商 将进一步加大投入</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="ad_c2" class="c_ad_block"><a href="https://www.jiguang.cn/devservice/?from=cnblogs01" target="_blank"><img width="468" height="60" src="./hadoop_ hdfs API示例 - 菩提树下的杨过 - 博客园_files/24442-20161011141820868-1378717477.jpg" alt=""></a></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/553682/" target="_blank">陈皓：什么是工程师文化？</a><br> ·  <a href="http://kb.cnblogs.com/page/551422/" target="_blank">没那么难，谈CSS的设计模式</a><br> ·  <a href="http://kb.cnblogs.com/page/550625/" target="_blank">程序猿媳妇儿注意事项</a><br> ·  <a href="http://kb.cnblogs.com/page/540529/" target="_blank">可是姑娘，你为什么要编程呢？</a><br> ·  <a href="http://kb.cnblogs.com/page/549631/" target="_blank">知其所以然（以算法学习为例）</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"><b>历史上的今天:</b><br>2014-05-20 <a href="http://www.cnblogs.com/yjmyzz/p/3739612.html">UML：类图复习-鸡生蛋，蛋生鸡</a><br>2013-05-20 <a href="http://www.cnblogs.com/yjmyzz/archive/2013/05/20/3088832.html">javascript:双链表-插入排序</a><br>2011-05-20 <a href="http://www.cnblogs.com/yjmyzz/archive/2011/05/20/2051920.html">Silverlight Telerik控件学习：RadTransitionControl</a><br>2010-05-20 <a href="http://www.cnblogs.com/yjmyzz/archive/2010/05/20/1740377.html">Flash/Flex学习笔记(51)：3维旋转与透视变换(PerspectiveProjection)</a><br></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"><img src="./hadoop_ hdfs API示例 - 菩提树下的杨过 - 博客园_files/2011012713161842.png" alt="菩提树下的杨过"><br>
+<span style="color:#399ab2">注：技术发展日新月异，随着时间推移，无法保证本博客所有内容的正确性，如有误导，请大家见谅！</span>
+<table>
+<tbody><tr>
+<td align="right">英文名：</td>
+<td align="left">Jimmy.Yang</td>
+</tr>
+<tr>
+<td align="right">中文名：</td>
+<td align="left">杨俊明</td>
+</tr>
+<tr>
+<td align="right">一妹儿：</td>
+<td align="left">yjmyzz#126.com</td>
+</tr>
+<tr>
+<td align="right">扣扣：</td>
+<td align="left">二妻八舅幺舅五零妻</td>
+</tr>
+<tr>
+<td align="right">所在地：</td>
+<td align="left">上海</td>
+</tr>
+</tbody></table><div id="profile_block">昵称：<a href="http://home.cnblogs.com/u/yjmyzz/">菩提树下的杨过</a><br>园龄：<a href="http://home.cnblogs.com/u/yjmyzz/" title="入园时间：2007-11-26">8年10个月</a><br>荣誉：<a href="http://www.cnblogs.com/expert/">推荐博客</a><br>粉丝：<a href="http://home.cnblogs.com/u/yjmyzz/followers/">2557</a><br>关注：<a href="http://home.cnblogs.com/u/yjmyzz/followees/">6</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;c1853d0b-63cf-dd11-9e4d-001cf0cd104b&#39;)">+加关注</a></div></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+
+</div>
+</div>
+
+</div><div id="sidebar_categories">
+<div class="catListPostCategory">
+<h3 class="catListTitle">随笔分类<span style="font-size:11px;font-weight:normal">(1256)</span></h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="http://www.cnblogs.com/yjmyzz/category/195429.html">01.WebForm/MVC(105)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="http://www.cnblogs.com/yjmyzz/category/195428.html">02.FrameWork/C#(142)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="http://www.cnblogs.com/yjmyzz/category/195425.html">03.WinForm(22)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_3" href="http://www.cnblogs.com/yjmyzz/category/195430.html">04.JavaScript(85)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_4" href="http://www.cnblogs.com/yjmyzz/category/195426.html">05.CSS(25)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_5" href="http://www.cnblogs.com/yjmyzz/category/195432.html">06.Design Pattern(13)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_6" href="http://www.cnblogs.com/yjmyzz/category/195431.html">07.WPF/Silverlight(118)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_7" href="http://www.cnblogs.com/yjmyzz/category/195433.html">08.Database(82)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_8" href="http://www.cnblogs.com/yjmyzz/category/195427.html">09.Open Source(96)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_9" href="http://www.cnblogs.com/yjmyzz/category/223381.html">10.Delphi(17)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_10" href="http://www.cnblogs.com/yjmyzz/category/233120.html">11.Ruby(16)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_11" href="http://www.cnblogs.com/yjmyzz/category/236214.html">12.Flex/Flash/AS3.0(124)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_12" href="http://www.cnblogs.com/yjmyzz/category/273711.html">13.C/Objective-C(15)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_13" href="http://www.cnblogs.com/yjmyzz/category/424772.html">15.Java/Scala(229)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_14" href="http://www.cnblogs.com/yjmyzz/category/552939.html">16.linux/mac(37)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_15" href="http://www.cnblogs.com/yjmyzz/category/691867.html">17.Hadoop(17)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_16" href="http://www.cnblogs.com/yjmyzz/category/219873.html">18.Others(113)</a> </li>
+
+</ul>
+
+</div>
+
+<div class="catListPostArchive">
+<h3 class="catListTitle">随笔档案<span style="font-size:11px;font-weight:normal">(1081)</span></h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_1_Link_0" href="http://www.cnblogs.com/yjmyzz/archive/2016/09.html">2016年9月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_1" href="http://www.cnblogs.com/yjmyzz/archive/2016/06.html">2016年6月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_2" href="http://www.cnblogs.com/yjmyzz/archive/2016/05.html">2016年5月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_3" href="http://www.cnblogs.com/yjmyzz/archive/2016/04.html">2016年4月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_4" href="http://www.cnblogs.com/yjmyzz/archive/2016/03.html">2016年3月 (13)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_5" href="http://www.cnblogs.com/yjmyzz/archive/2016/02.html">2016年2月 (10)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_6" href="http://www.cnblogs.com/yjmyzz/archive/2016/01.html">2016年1月 (15)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_7" href="http://www.cnblogs.com/yjmyzz/archive/2015/12.html">2015年12月 (14)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_8" href="http://www.cnblogs.com/yjmyzz/archive/2015/11.html">2015年11月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_9" href="http://www.cnblogs.com/yjmyzz/archive/2015/10.html">2015年10月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_10" href="http://www.cnblogs.com/yjmyzz/archive/2015/09.html">2015年9月 (18)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_11" href="http://www.cnblogs.com/yjmyzz/archive/2015/08.html">2015年8月 (17)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_12" href="http://www.cnblogs.com/yjmyzz/archive/2015/07.html">2015年7月 (6)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_13" href="http://www.cnblogs.com/yjmyzz/archive/2015/06.html">2015年6月 (9)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_14" href="http://www.cnblogs.com/yjmyzz/archive/2015/05.html">2015年5月 (11)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_15" href="http://www.cnblogs.com/yjmyzz/archive/2015/04.html">2015年4月 (6)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_16" href="http://www.cnblogs.com/yjmyzz/archive/2015/03.html">2015年3月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_17" href="http://www.cnblogs.com/yjmyzz/archive/2015/02.html">2015年2月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_18" href="http://www.cnblogs.com/yjmyzz/archive/2015/01.html">2015年1月 (9)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_19" href="http://www.cnblogs.com/yjmyzz/archive/2014/12.html">2014年12月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_20" href="http://www.cnblogs.com/yjmyzz/archive/2014/11.html">2014年11月 (17)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_21" href="http://www.cnblogs.com/yjmyzz/archive/2014/10.html">2014年10月 (15)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_22" href="http://www.cnblogs.com/yjmyzz/archive/2014/09.html">2014年9月 (10)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_23" href="http://www.cnblogs.com/yjmyzz/archive/2014/08.html">2014年8月 (9)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_24" href="http://www.cnblogs.com/yjmyzz/archive/2014/07.html">2014年7月 (14)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_25" href="http://www.cnblogs.com/yjmyzz/archive/2014/05.html">2014年5月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_26" href="http://www.cnblogs.com/yjmyzz/archive/2014/04.html">2014年4月 (12)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_27" href="http://www.cnblogs.com/yjmyzz/archive/2014/03.html">2014年3月 (7)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_28" href="http://www.cnblogs.com/yjmyzz/archive/2014/02.html">2014年2月 (8)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_29" href="http://www.cnblogs.com/yjmyzz/archive/2014/01.html">2014年1月 (18)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_30" href="http://www.cnblogs.com/yjmyzz/archive/2013/12.html">2013年12月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_31" href="http://www.cnblogs.com/yjmyzz/archive/2013/11.html">2013年11月 (8)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_32" href="http://www.cnblogs.com/yjmyzz/archive/2013/10.html">2013年10月 (7)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_33" href="http://www.cnblogs.com/yjmyzz/archive/2013/09.html">2013年9月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_34" href="http://www.cnblogs.com/yjmyzz/archive/2013/08.html">2013年8月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_35" href="http://www.cnblogs.com/yjmyzz/archive/2013/07.html">2013年7月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_36" href="http://www.cnblogs.com/yjmyzz/archive/2013/05.html">2013年5月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_37" href="http://www.cnblogs.com/yjmyzz/archive/2013/04.html">2013年4月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_38" href="http://www.cnblogs.com/yjmyzz/archive/2013/02.html">2013年2月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_39" href="http://www.cnblogs.com/yjmyzz/archive/2013/01.html">2013年1月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_40" href="http://www.cnblogs.com/yjmyzz/archive/2012/12.html">2012年12月 (8)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_41" href="http://www.cnblogs.com/yjmyzz/archive/2012/11.html">2012年11月 (16)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_42" href="http://www.cnblogs.com/yjmyzz/archive/2012/09.html">2012年9月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_43" href="http://www.cnblogs.com/yjmyzz/archive/2012/07.html">2012年7月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_44" href="http://www.cnblogs.com/yjmyzz/archive/2012/06.html">2012年6月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_45" href="http://www.cnblogs.com/yjmyzz/archive/2012/05.html">2012年5月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_46" href="http://www.cnblogs.com/yjmyzz/archive/2012/04.html">2012年4月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_47" href="http://www.cnblogs.com/yjmyzz/archive/2012/03.html">2012年3月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_48" href="http://www.cnblogs.com/yjmyzz/archive/2012/02.html">2012年2月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_49" href="http://www.cnblogs.com/yjmyzz/archive/2012/01.html">2012年1月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_50" href="http://www.cnblogs.com/yjmyzz/archive/2011/12.html">2011年12月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_51" href="http://www.cnblogs.com/yjmyzz/archive/2011/11.html">2011年11月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_52" href="http://www.cnblogs.com/yjmyzz/archive/2011/10.html">2011年10月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_53" href="http://www.cnblogs.com/yjmyzz/archive/2011/09.html">2011年9月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_54" href="http://www.cnblogs.com/yjmyzz/archive/2011/08.html">2011年8月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_55" href="http://www.cnblogs.com/yjmyzz/archive/2011/07.html">2011年7月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_56" href="http://www.cnblogs.com/yjmyzz/archive/2011/06.html">2011年6月 (12)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_57" href="http://www.cnblogs.com/yjmyzz/archive/2011/05.html">2011年5月 (15)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_58" href="http://www.cnblogs.com/yjmyzz/archive/2011/04.html">2011年4月 (16)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_59" href="http://www.cnblogs.com/yjmyzz/archive/2011/03.html">2011年3月 (11)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_60" href="http://www.cnblogs.com/yjmyzz/archive/2011/02.html">2011年2月 (9)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_61" href="http://www.cnblogs.com/yjmyzz/archive/2011/01.html">2011年1月 (8)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_62" href="http://www.cnblogs.com/yjmyzz/archive/2010/12.html">2010年12月 (10)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_63" href="http://www.cnblogs.com/yjmyzz/archive/2010/11.html">2010年11月 (13)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_64" href="http://www.cnblogs.com/yjmyzz/archive/2010/10.html">2010年10月 (10)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_65" href="http://www.cnblogs.com/yjmyzz/archive/2010/09.html">2010年9月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_66" href="http://www.cnblogs.com/yjmyzz/archive/2010/08.html">2010年8月 (12)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_67" href="http://www.cnblogs.com/yjmyzz/archive/2010/07.html">2010年7月 (32)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_68" href="http://www.cnblogs.com/yjmyzz/archive/2010/06.html">2010年6月 (19)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_69" href="http://www.cnblogs.com/yjmyzz/archive/2010/05.html">2010年5月 (21)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_70" href="http://www.cnblogs.com/yjmyzz/archive/2010/04.html">2010年4月 (30)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_71" href="http://www.cnblogs.com/yjmyzz/archive/2010/03.html">2010年3月 (49)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_72" href="http://www.cnblogs.com/yjmyzz/archive/2010/02.html">2010年2月 (23)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_73" href="http://www.cnblogs.com/yjmyzz/archive/2010/01.html">2010年1月 (22)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_74" href="http://www.cnblogs.com/yjmyzz/archive/2009/12.html">2009年12月 (47)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_75" href="http://www.cnblogs.com/yjmyzz/archive/2009/11.html">2009年11月 (26)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_76" href="http://www.cnblogs.com/yjmyzz/archive/2009/10.html">2009年10月 (12)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_77" href="http://www.cnblogs.com/yjmyzz/archive/2009/09.html">2009年9月 (7)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_78" href="http://www.cnblogs.com/yjmyzz/archive/2009/08.html">2009年8月 (14)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_79" href="http://www.cnblogs.com/yjmyzz/archive/2009/07.html">2009年7月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_80" href="http://www.cnblogs.com/yjmyzz/archive/2009/06.html">2009年6月 (27)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_81" href="http://www.cnblogs.com/yjmyzz/archive/2009/05.html">2009年5月 (14)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_82" href="http://www.cnblogs.com/yjmyzz/archive/2009/04.html">2009年4月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_83" href="http://www.cnblogs.com/yjmyzz/archive/2009/03.html">2009年3月 (14)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_84" href="http://www.cnblogs.com/yjmyzz/archive/2009/02.html">2009年2月 (9)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_85" href="http://www.cnblogs.com/yjmyzz/archive/2009/01.html">2009年1月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_86" href="http://www.cnblogs.com/yjmyzz/archive/2008/11.html">2008年11月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_87" href="http://www.cnblogs.com/yjmyzz/archive/2008/10.html">2008年10月 (8)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_88" href="http://www.cnblogs.com/yjmyzz/archive/2008/09.html">2008年9月 (34)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_89" href="http://www.cnblogs.com/yjmyzz/archive/2008/08.html">2008年8月 (40)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_90" href="http://www.cnblogs.com/yjmyzz/archive/2008/06.html">2008年6月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_91" href="http://www.cnblogs.com/yjmyzz/archive/2008/05.html">2008年5月 (8)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_92" href="http://www.cnblogs.com/yjmyzz/archive/2008/04.html">2008年4月 (10)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_93" href="http://www.cnblogs.com/yjmyzz/archive/2008/03.html">2008年3月 (20)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_94" href="http://www.cnblogs.com/yjmyzz/archive/2008/02.html">2008年2月 (12)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_95" href="http://www.cnblogs.com/yjmyzz/archive/2008/01.html">2008年1月 (24)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_96" href="http://www.cnblogs.com/yjmyzz/archive/2007/12.html">2007年12月 (36)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_97" href="http://www.cnblogs.com/yjmyzz/archive/2007/11.html">2007年11月 (27)</a> </li>
+
+</ul>
+
+</div>
+
+<div class="catList">
+<h3 class="catListTitle">友情链接</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_2_Link_0" href="http://www.cnblogs.com/cloudgamer/" rel="nofollow">cloudgamer</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_1" href="http://blog.zhaojie.me/" rel="nofollow">JeffreyZhao</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_2" href="http://www.cnblogs.com/Jax/" rel="nofollow">包建强</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_3" href="http://www.cnblogs.com/subconscious/" rel="nofollow">计算机的潜意识</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_4" href="http://www.cnblogs.com/rubylouvre/" rel="nofollow" target="_blank">司徒正美</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_5" href="http://www.cnblogs.com/del/" rel="nofollow">万一</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_6" href="http://wayfarer.cnblogs.com/" rel="nofollow">张逸:晴窗笔记</a> </li>
+
+</ul>
+
+</div>
+
+</div><div id="sidebar_scorerank" class="sidebar-block">
+<div class="catListBlogRank">
+<h3 class="catListTitle">积分与排名</h3>
+<ul>
+	<li class="liScore">
+		积分 -	1182213
+	</li>
+	<li class="liRank">
+		排名 -	43
+	</li>
+</ul>
+</div>
+
+
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/yjmyzz/p/update-dubbo-to-spring-4-and-add-log4j2-support.html#3534727">1. Re:dubbox升级spring到4.x及添加log4j2支持</a></li>
+        <li class="recent_comment_body">支持你啊！！很喜欢你的改进啊！！</li>
+        <li class="recent_comment_author">--wq13480</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/yjmyzz/p/dubbox-demo.html#3531215">2. Re:分布式服务框架 dubbo/dubbox 入门示例</a></li>
+        <li class="recent_comment_body">请问dobbx如何集成到现有的 springmvc的项目里，直接通过你导出的jar在运行时会报Exception in thread "main" org.springframework.beans.......</li>
+        <li class="recent_comment_author">--梁DH</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/yjmyzz/p/jenkins-tutorial-part-2.html#3531008">3. Re:jenkins 入门教程(中)</a></li>
+        <li class="recent_comment_body">写的挺好，学习了</li>
+        <li class="recent_comment_author">--chenkunke</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/yjmyzz/p/haproxy.html#3530792">4. Re:haproxy 新手上路</a></li>
+        <li class="recent_comment_body">请问博主，如何把tcp转发和http转发弄到同一个配置文件里面?</li>
+        <li class="recent_comment_author">--journeyto</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/yjmyzz/archive/2010/01/18/1650389.html#3525164">5. Re:c#如何启动/干掉/查找 进程</a></li>
+        <li class="recent_comment_body">遍历进程后，然后procee.kill ，相比有什么好处？</li>
+        <li class="recent_comment_author">--lileishihaoren</li>
+</ul>
+</div>
+</div>
+</div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright ©2016 菩提树下的杨过
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+</body></html>
