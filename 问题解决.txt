@@ -23,3 +23,11 @@ JAVA_OPTS="$JAVA_OPTS" -server -XX:PermSize=128m -XX:MaxSize=512m
 
 解决-读取数据库表中的text字段值出现net.sourceforge.jtds.jdbc.ClobImpl@.... 我用的是jtds1.25最新版本，各位高手有没有碰到这样的问题呢？如何解决？？——useLOBs=false
 
+
+解决-当在mybatis用到foreach的时候，会报这个错误Parameter '__frch_item_0' not found. Available parameters are [list]会出现的几种解决方案：
+1.查看parameterType的类型是不是java.util.List类型，如果是的话，看foreach的collection属性是不是list，
+因为 传递一个 List 实例或者数组作为参数对象传给 MyBatis,MyBatis 会自动将它包装在一个 Map 中,用名称在作为键。List 实例将会以“list” 作为键,而数组实例将会以“array”作为键 
+2.看一下foreach里面的值有没有传递进来 
+3.看foreach里面的名称字段是否写错 
+4.还有就是我用Mybatis的时候，用mysql的值插入自动增长值，里面的key我在数据库中没有设置自动增长，然后我又用了selectkey，所以也会出现这种情况
+5.还有一种情况是item的属性不对，我在使用通用Map的时候，发现此问题。
