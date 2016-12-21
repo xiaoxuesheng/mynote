@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!-- saved from url=(0394)http://ssp.idgtechnetwork.com.cn/static/pc/04032c8168e846dfbc7616a43edd6ecd/110.html?requestId=ef656185a32845d1a7f2c26d144e3111&HWUID=65081126825530408127263124498484&isDd=0&ref=http%3A%2F%2Fwww.toutiao.com%2Fi6342226431749128705%2F%3Ftt_from%3Dweixin%26utm_campaign%3Dclient_share%26app%3Dnews_article%26utm_source%3Dweixin%26iid%3D4814822643%26utm_medium%3Dtoutiao_android%26wxshare_count%3D1 -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title></title>
+</head>
+<body marginwidth="0" marginheight="0">
+<script>
+    function getURLParameter(name) {
+        return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+    };
+    var ref=getURLParameter('ref');
+    var google_page_url='';
+    if(ref!=''&&ref!=null){
+        google_page_url=decodeURIComponent(ref);
+    }else{
+        google_page_url=document.referrer;
+    }
+    console.log(google_page_url);
+</script>
+<script type="text/javascript">google_ad_client='ca-pub-7443704194229694';google_ad_slot='7186942384';google_ad_width=300;google_ad_height=250;</script><script type="text/javascript" src="./show_ads.js.下载"></script>
+
+    <script>
+        var HWUID=getURLParameter("HWUID");
+        function addCookie(sName,sValue,day) {
+            try{
+                var date=new Date();
+                date.setDate(date.getDate()+day);
+                document.cookie = escape(sName) + '=' + escape(sValue) +';expires=' + date.toGMTString();//escape()汉字转成unicode编码,toGMTString() 把日期对象转成字符串
+            }finally{
+
+            }
+        }
+        addCookie("tadseekerHwuid",HWUID,12);
+        var requestId=getURLParameter("requestId");
+        var isDd=getURLParameter("isDd");
+
+        var tadSdkId="c0de318dadbc4eb1bb8a529bed83b6f3";
+        var tadSpaceKey="04032c8168e846dfbc7616a43edd6ecd";
+        var width="300";
+        var height="250";
+        var adxId="110";
+        times=0;
+        sendImpress.counter = 0;
+        function sendImpress(){
+            var path = "http://ssp.idgtechnetwork.com.cn/jssdk/pc/impress.do?sdkId="+tadSdkId+"&adxId="+adxId+"&winPrice=0&customerPrice=0&platform=4&dealType=cpm&adSlotId="+tadSpaceKey+"&HWUID="+HWUID+"&billTag=0&finalPrice=0&adId=&sspadxSlotId=&costPrice=&requestId="+requestId;
+            var cbnum = "cb" + sendImpress.counter++;
+            var cbname = "sendImpress." + cbnum;
+            if (path.indexOf("?") === -1) {
+                path += "?callback=" + cbname;
+            } else {
+                path += "&callback=" + cbname;
+            }
+            var script = document.createElement("script");
+            sendImpress[cbnum] = function (response) {
+                try {
+                } finally {
+                    delete sendImpress[cbnum];
+                    script.parentNode.removeChild(script);
+                }
+            };
+            script.src = path;
+            document.body.appendChild(script);
+        }
+        function monitorAdChoices(){
+            var size=document.getElementsByTagName('ins').length;
+            if(size>0){
+                sendImpress();
+                return true;
+            }
+            return false;
+        }
+        //曝光监测器
+        function monitorImpress(){
+            if(adxId=="110"){//adxid是谷歌
+                if(!monitorAdChoices()){
+
+                }
+            }
+        }
+        setTimeout("monitorImpress()",1000*2);
+    </script>
+</body></html>

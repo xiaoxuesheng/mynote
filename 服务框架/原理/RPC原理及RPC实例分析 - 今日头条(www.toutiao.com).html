@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<!-- saved from url=(0178)http://www.toutiao.com/i6342226431749128705/?tt_from=weixin&utm_campaign=client_share&app=news_article&utm_source=weixin&iid=4814822643&utm_medium=toutiao_android&wxshare_count=1 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style class="vjs-styles-defaults">
+      .video-js {
+        width: 300px;
+        height: 150px;
+      }
+
+      .vjs-fluid {
+        padding-top: 56.25%
+      }
+    </style>
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="dns-prefetch" href="http://s3.pstatp.com/">
+    <link rel="dns-prefetch" href="http://s3a.pstatp.com/">
+    <link rel="dns-prefetch" href="http://s3b.pstatp.com/">
+    <link rel="dns-prefetch" href="http://p1.pstatp.com/">
+    <link rel="dns-prefetch" href="http://p3.pstatp.com/">
+    
+    
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+    
+    <meta name="baidu-site-verification" content="T239HZAbh7">
+    
+    <!--meta name="baidu_union_verify" content="94bb8bb3fa863f70e7fd926bffecd81e"-->
+    <meta name="360-site-verification" content="b96e1758dfc9156a410a4fb9520c5956">
+    <meta name="360_ssp_verify" content="2ae4ad39552c45425bddb738efda3dbb">
+    <meta name="google-site-verification" content="3PYTTW0s7IAfkReV8wAECfjIdKY-bQeSkVTyJNZpBKE">
+    <meta name="shenma-site-verification" content="34c05607e2a9430ad4249ed48faaf7cb_1432711730">
+    <meta name="baidu_union_verify" content="b88dd3920f970845bad8ad9f90d687f7">
+    <meta name="domain_verify" content="pmrgi33nmfuw4ir2ej2g65lunfqw6ltdn5wselbcm52wszbchirdqyztge3tenrsgq3dknjume2tayrvmqytemlfmiydimddgu4gcnzcfqrhi2lnmvjwc5tfei5dcnbwhazdcobuhe2dqobrpu">
+    
+    
+  <link rel="alternate" media="only screen and (max-width: 640px)" href="http://m.toutiao.com/a6342219502365245697/">
+
+  <title>RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)</title>
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta name="keywords" content="public class,调用者,Object,数据结构,服务端,线程,server stub,client stub,二进制,序列化,public static void main,RPC,调用">
+  <meta name="description" content="在学校期间大家都写过不少程序，比如写个hello world服务类，然后本地调用下，如下所示。这些程序的特点是服务消费方和服务提供方是本地调用关系。">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="shortcut icon" href="http://s3a.pstatp.com/toutiao/resource/ntoutiao_web/static/image/favicon_8e9c9c7.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/layout_a2bdebe.css">
+    <!--[if lt IE 9]>
+      <script src="//s3a.pstatp.com/toutiao/resource/ntoutiao_web/static/js/lib/es5-shim_110642e.js"></script>
+    <![endif]-->
+    <script async="" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/analytics.js.下载"></script><script src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/lib_45674aa.js.下载"></script>
+    
+  <link rel="stylesheet" href="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/article_0f8bea2.css">
+  <link rel="stylesheet" href="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/video.min.css">
+  <!--[if lt IE 9]>
+    <script src="http://s3a.pstatp.com/site/tt_mfsroot/v-player/video-ie8.js" charset="utf-8"></script>
+  <![endif]-->
+
+</head>
+
+<body style="min-width: 1220px; overflow-x: hidden;"><div id="BAIDU_DUP_fp_wrapper" style="position: absolute; left: -1px; bottom: -1px; z-index: 0; width: 0px; height: 0px; overflow: hidden; visibility: hidden; display: none;"><iframe id="BAIDU_DUP_fp_iframe" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/o.html" style="width: 0px; height: 0px; visibility: hidden; display: none;"></iframe></div>
+    <div style="display:none"><input type="hidden" name="csrfmiddlewaretoken" value="18b4c2dd50a67dabc20f982bd846f3f0"></div>
+
+    <a href="http://www.toutiao.com/articles_news_society/" style="display:none;"></a>
+
+    <div class="y-wrap">
+        
+
+<!-- 公共头部 -->
+<div id="header">
+  <div riot-tag="wtopbar" style="height: 34px; background: #222;"><div class="y-box wtopbar">  <div class="y-left y-nav-topbar" riot-tag="nav"><div class="nav"> <ul class="y-box nav-list" ga_event="mh_channel"> <li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/" ga_event="mh_channel_recommend">推荐</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_hot/" ga_event="mh_channel_hot">热点</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/video/" ga_event="mh_channel_video">视频</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_image/" ga_event="mh_channel_image">图片</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/essay_joke/" ga_event="mh_channel_essay">段子</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_society/" ga_event="mh_channel_society">社会</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_entertainment/" ga_event="mh_channel_entertainment">娱乐</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_tech/" ga_event="mh_channel_tech">科技</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_car/" ga_event="mh_channel_car">汽车</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_sports/" ga_event="mh_channel_sports">体育</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_finance/" ga_event="mh_channel_finance">财经</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_military/" ga_event="mh_channel_military">军事</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_world/" ga_event="mh_channel_world">国际</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_fashion/" ga_event="mh_channel_fashion">时尚</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_travel/" ga_event="mh_channel_travel">旅游</a> </li><!--riot placeholder--> <li class="y-left nav-item nav-more"> <a class="nav-link" href="javascript:;"> 更多<i class="y-icon icon-more"></i> </a> <div class="nav-layer"> <ul class="nav-more-list"> <li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_discovery/" ga_event="mh_channel_discovery">探索</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_baby/" ga_event="mh_channel_baby">育儿</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_regimen/" ga_event="mh_channel_regimen">养生</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_story/" ga_event="mh_channel_story">故事</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_essay/" ga_event="mh_channel_essay">美文</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_game/" ga_event="mh_channel_game">游戏</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_history/" ga_event="mh_channel_history">历史</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_food/" ga_event="mh_channel_food">美食</a> </li><!--riot placeholder--> </ul> </div> </li> </ul> </div></div> <ul class="y-right"> <li class="tb-item userbox"> <div riot-tag="wuserbox" abtype="" pageid=""><div class="y-box wuserbox">   <div class="nav-login"> <a ga_event="nav_login" href="javascript:;"> <span>登录</span> </a>  </div> </div></div> </li> <li class="tb-item"> <a class="tb-link" href="https://wenda.toutiao.com/" target="_blank" ga_event="mh_nav_others">问答</a> </li> <li class="tb-item"> <a class="tb-link" href="https://mp.toutiao.com/" target="_blank" ga_event="mh_nav_others">头条号</a> </li> <li class="tb-item"> <a class="tb-link" href="https://tuchong.com/" target="_blank" ga_event="mh_nav_others">图虫</a> </li> <li class="tb-item"> <a class="tb-link" href="javascript:void(0)">反馈</a> </li> <li class="tb-item more"> <a class="tb-link" href="http://www.toutiao.com/about/">更多</a> <div class="layer"> <ul> <li> <a href="http://www.toutiao.com/articles_news_society/" class="layer-item">头条简版</a> </li> <li> <a href="http://www.toutiao.com/about/" class="layer-item" rel="nofollow">关于头条</a> </li> <li> <a href="http://www.toutiao.com/join/" class="layer-item" rel="nofollow">加入头条</a> </li> <li> <a href="http://www.toutiao.com/report/" class="layer-item" rel="nofollow">媒体报道</a> </li> <li> <a href="http://www.toutiao.com/media_partners/" class="layer-item" rel="nofollow">媒体合作</a> </li> <li> <a href="http://www.toutiao.com/cooperation/" class="layer-item" rel="nofollow">产品合作</a> </li> <li> <a href="http://www.toutiao.com/media_cooperation/" class="layer-item" rel="nofollow">合作说明</a> </li> <li> <a href="https://ad.toutiao.com/e/" class="layer-item" target="_blank" rel="nofollow">广告投放</a> </li> <li> <a href="http://www.toutiao.com/contact/" class="layer-item" rel="nofollow">联系我们</a> </li> <li> <a href="http://www.toutiao.com/user_agreement/" class="layer-item" rel="nofollow">用户协议</a> </li> <li> <a href="http://www.toutiao.com/complain/" class="layer-item" rel="nofollow">投诉指引</a> </li> <li> <a href="http://www.toutiao.com/corrupt_report/" class="layer-item" rel="nofollow">廉洁举报</a> </li> </ul> </div> </li> </ul> <div riot-tag="userFeedback" class="userFeedback" style="display: none;"><div class="feedback_dialog"> <div class="dialog-header"> <h3>意见反馈</h3> </div> <div class="dialog-inner"> <div class="feedback_panel"> <form> <p class="label">联系方式（必填）</p> <div class="input-group"> <input class="email" placeholder="您的邮箱/QQ号" type="text" name="feedback-email"> </div> <p class="label">您的意见（必填）</p> <div class="input-group"> <textarea style="height:100px;" name="feedback-content" class="content" maxlength="140" placeholder="请填写您的意见，不超过140字"></textarea> </div> <div class="input-group"> <input type="submit" value="提交" class="submit-btn"> <span class="error"></span> <a class="close" href="javascript:void(0);">[关闭]</a> </div> </form> </div> </div> </div></div> </div></div>
+  
+  <div class="middlebar">
+  <div class="y-box middlebar-inner">
+    <div class="y-left logo-box">
+      <a class="logo-link" href="http://www.toutiao.com/" ga_event="go_home">
+        <img class="logo" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/logo_201f80d.png">
+      </a>
+    </div>
+
+    
+
+    <div class="y-right">
+      <div riot-tag="wsearch" style="margin-top: 9px; width: 340px;"><div name="searchBox" class="wsearch"> <form name="searchForm" action="http://www.toutiao.com/search/" method="get" target="_blank"> <div name="inputbox" class="y-box input-group"> <input class="y-left input-text" name="keyword" autocomplete="off" ga_event="mh_search" type="text" placeholder="请输入关键字" onclick=""> <div class="y-right btn-submit"> <button type="submit" href="javascript:;"> <i class="y-icon icon-search" ga_event="mh_search"></i> </button> </div> </div> </form> <div class="layer "> <div class="layer-inner"> <ul ga_event="mh_search"> <li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-1">1</i> <span class="search-txt">以色列前总统获释</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-2">2</i> <span class="search-txt">IMF总裁有罪</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-3">3</i> <span class="search-txt">鞠建东提名诺贝尔</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-4">4</i> <span class="search-txt">训练机器识美女</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-5">5</i> <span class="search-txt">官微发色情广告</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-6">6</i> <span class="search-txt">23岁女孩被抢走</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-7">7</i> <span class="search-txt">雾霾首都航班延误</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-8">8</i> <span class="search-txt">村民手榴弹砸核桃</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-9">9</i> <span class="search-txt">LOLO直播被查</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-10">10</i> <span class="search-txt">大三女生遭杀害</span> </a> </li><!--riot placeholder--> </ul> </div> </div> </div></div>
+    </div>
+  </div>
+</div>
+
+  
+</div>
+
+<div riot-tag="login"><div class="login-dialog hide"> <a class="btn" href="javascript:;"> <i class="icon icon-close"></i> </a> <div class="login-dialog-header"> <h3>邮箱登录</h3> </div> <div class="login-dialog-inner" data-node="inner"> <div class="login-pannel bottom-line"> <form action="http://www.toutiao.com/auth/login/" method="POST"> <ul> <li> <div class="input-group"> <div class="input"> <label>邮箱</label> <input class="name" name="name_or_email" type="text" placeholder="请使用您的注册邮箱" autocomplete="off" spellcheck="false"> </div> </div> </li> <li> <div class="input-group"> <div class="input"> <label>密码</label> <input class="password" name="password" type="password" data-node="password" placeholder="密码" autocomplete="off" spellcheck="false"> </div> </div> </li> <li class="captcha-box "> <div class="input-group"> <div class="input"> <input class="password" name="captcha" type="text" data-node="captcha" placeholder="验证码" autocomplete="off" spellcheck="false"> <img name="captchaImg"> </div> </div> </li> <li> <div class="input-group"> <input type="checkbox" name="remember_me" checked="" style="vertical-align:top"> <label for="remember_me" class="label">记住账号</label> </div> </li> <li> <div class="input-group" style="text-align: center;"> <input type="submit" class="submit-btn" value="登录"> <p class=""></p> </div> </li> </ul> </form> </div> <div class="login-dialog-header"> <h3>合作网站帐号登录</h3> </div> <div class=""> <ul class="y-box sns_login_list"> <li class="sinaweibo"> <a href="javascript:;" data-pid="sina_weibo" ga_event="login_sina_weibo"> <i class="icon"></i> 新浪微博 </a> </li> <li class="qqweibo"> <a href="javascript:;" data-pid="qq_weibo" ga_event="login_tencnet_weibo"> <i class="icon"></i> 腾讯微博 </a> </li> <li class="qzone"> <a href="javascript:;" data-pid="qzone_sns" ga_event="login_qqzone"> <i class="icon"></i> QQ空间 </a> </li> <li class="renren"> <a href="javascript:;" data-pid="renren_sns" ga_event="login_renren"> <i class="icon"></i> 人人网 </a> </li> <li class="weixin"> <a href="javascript:;" style="margin-right:0;" data-pid="weixin" ga_event="login_wechat"> <i class="icon"></i> 微信 </a> </li> </ul> </div> </div> </div> <div class="mask hide"></div></div>
+<div id="toast"></div>
+
+
+<div class="y-box container">
+  <div class="y-left">
+    <div class="y-box">
+      <div class="y-left index-left">
+        <div riot-tag="snsbox"><div class="snsbox snsbox-fixed" name="snsbox"> <a href="http://www.toutiao.com/i6342226431749128705/?tt_from=weixin&amp;utm_campaign=client_share&amp;app=news_article&amp;utm_source=weixin&amp;iid=4814822643&amp;utm_medium=toutiao_android&amp;wxshare_count=1#comment_area" class="share-count" ga_event="click_comment_anchor"> <i class="y-icon icon-comments"></i> <span>15</span> </a> <div class="share-hr"></div> <div class="share-box" ga_event="click_share_weibo"><i class="y-icon icon-sina"></i><span>微博</span></div> <div class="share-box" ga_event="click_share_qzone"><i class="y-icon icon-qzone"></i><span>Qzone</span></div> <div class="share-box share-weixin" ga_event="click_share_weixin"> <i class="y-icon icon-wechat"></i><span>微信</span> <div class="share-qrcode"> <div></div> </div> </div> </div></div>
+      </div>
+      <div class="y-left index-middle" id="J_content">
+        <div id="article-main">
+	
+
+  <h1 class="article-title">RPC原理及RPC实例分析</h1>
+
+  <div class="articleInfo">
+	
+    
+    <span class="src">
+    	
+    		达人科技
+    	
+    </span>
+    
+    <span class="time">2016-10-17 08:40</span>
+</div>
+
+  <div class="article-content"><p>在学校期间大家都写过不少程序，比如写个hello world服务类，然后本地调用下，如下所示。这些程序的特点是服务消费方和服务提供方是本地调用关系。</p><pre>public class Test {
+     public static void main(String[] args) {
+         HelloWorldService helloWorldService = new HelloWorldServiceImpl;
+         helloWorldService.sayHello("test");
+     }
+}</pre><p>而一旦踏入公司尤其是大型互联网公司就会发现，公司的系统都由成千上万大大小小的服务组成，各服务部署在不同的机器上，由不同的团队负责。</p><p>这时就会遇到两个问题：</p><ol><li>要搭建一个新服务，免不了需要依赖他人的服务，而现在他人的服务都在远端，怎么调用？</li><li>其它团队要使用我们的新服务，我们的服务该怎么发布以便他人调用？下文将对这两个问题展开探讨。</li></ol><p></p><h2>1. 如何调用他人的远程服务？</h2><p>由于各服务部署在不同机器，服务间的调用免不了网络通信过程，服务消费方每调用一个服务都要写一坨网络通信相关的代码，不仅复杂而且极易出错。</p><p>如果有一种方式能让我们像调用本地服务一样调用远程服务，而让调用者对网络通信这些细节透明，那么将大大提高生产力，比如服务消费方在执行helloWorldService.sayHello(“test”)时，实质上调用的是远端的服务。这种方式其实就是RPC（Remote Procedure Call Protocol），在各大互联网公司中被广泛使用，如阿里巴巴的hsf、dubbo（开源）、Facebook的thrift（开源）、Google grpc（开源）、Twitter的finagle（开源）等。</p><p>要让网络通信细节对使用者透明，我们需要对通信细节进行封装，我们先看下一个RPC调用的流程涉及到哪些通信细节：</p><p><img src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/f61000ce8ac4f7b23ab" img_width="1444" img_height="862" alt="RPC原理及RPC实例分析" onerror="javascript:errorimg.call(this);"></p><ol><li>服务消费方（client）调用以本地调用方式调用服务；</li><li>client stub接收到调用后负责将方法、参数等组装成能够进行网络传输的消息体；</li><li>client stub找到服务地址，并将消息发送到服务端；</li><li>server stub收到消息后进行解码；</li><li>server stub根据解码结果调用本地的服务；</li><li>本地服务执行并将结果返回给server stub；</li><li>server stub将返回结果打包成消息并发送至消费方；</li><li>client stub接收到消息，并进行解码；</li><li>服务消费方得到最终结果。</li></ol><p>RPC的目标就是要2~8这些步骤都封装起来，让用户对这些细节透明。</p><p></p><h3>1.1 怎么做到透明化远程服务调用？</h3><p>怎么封装通信细节才能让用户像以本地调用方式调用远程服务呢？对java来说就是使用代理！java代理有两种方式：</p><ol><li>jdk 动态代理</li><li>字节码生成</li></ol><p>尽管字节码生成方式实现的代理更为强大和高效，但代码维护不易，大部分公司实现RPC框架时还是选择动态代理方式。</p><p>下面简单介绍下动态代理怎么实现我们的需求。我们需要实现RPCProxyClient代理类，代理类的invoke方法中封装了与远端服务通信的细节，消费方首先从RPCProxyClient获得服务提供方的接口，当执行helloWorldService.sayHello(“test”)方法时就会调用invoke方法。</p><pre>public class RPCProxyClient implements java.lang.reflect.InvocationHandler{
+    private Object obj;
+
+    public RPCProxyClient(Object obj){
+        this.obj=obj;
+    }
+
+    /**
+     * 得到被代理对象;
+     */
+    public static Object getProxy(Object obj){
+        return java.lang.reflect.Proxy.newProxyInstance(obj.getClass.getClassLoader,
+ obj.getClass.getInterfaces, new RPCProxyClient(obj));
+    }
+
+    /**
+     * 调用此方法执行
+     */
+    public Object invoke(Object proxy, Method method, Object[] args)
+ throws Throwable {
+        //结果参数;
+        Object result = new Object;
+        // ...执行通信相关逻辑
+        // ...
+        return result;
+    }
+}</pre><pre>public class Test {
+     public static void main(String[] args) {
+         HelloWorldService helloWorldService = (HelloWorldService)RPCProxyClient.getProxy(HelloWorldService.class);
+         helloWorldService.sayHello("test");
+     }
+ }</pre><p></p><h3>1.2 怎么对消息进行编码和解码？</h3><h4>1.2.1 确定消息数据结构</h4><p>上节讲了invoke里需要封装通信细节（通信细节再后面几章详细探讨），而通信的第一步就是要确定客户端和服务端相互通信的消息结构。客户端的请求消息结构一般需要包括以下内容：</p><p>1）接口名称</p><p>在我们的例子里接口名是“HelloWorldService”，如果不传，服务端就不知道调用哪个接口了；</p><p>2）方法名</p><p>一个接口内可能有很多方法，如果不传方法名服务端也就不知道调用哪个方法；</p><p>3）参数类型&amp;参数值</p><p>参数类型有很多，比如有bool、int、long、double、string、map、list，甚至如struct（class）；以及相应的参数值；</p><p>4）超时时间</p><p>5）requestID，标识唯一请求id，在下面一节会详细描述requestID的用处。</p><p>同理服务端返回的消息结构一般包括以下内容。</p><p>1）返回值</p><p>2）状态code</p><p>3）requestID</p><p></p><h4>1.2.2 序列化</h4><p>一旦确定了消息的数据结构后，下一步就是要考虑序列化与反序列化了。</p><p>什么是序列化？序列化就是将数据结构或对象转换成二进制串的过程，也就是编码的过程。</p><p>什么是反序列化？将在序列化过程中所生成的二进制串转换成数据结构或者对象的过程。</p><p>为什么需要序列化？转换为二进制串后才好进行网络传输嘛！</p><p>为什么需要反序列化？将二进制转换为对象才好进行后续处理！</p><p>现如今序列化的方案越来越多，每种序列化方案都有优点和缺点，它们在设计之初有自己独特的应用场景，那到底选择哪种呢？从RPC的角度上看，主要看三点：</p><ol><li>通用性，比如是否能支持Map等复杂的数据结构；</li><li>性能，包括时间复杂度和空间复杂度，由于RPC框架将会被公司几乎所有服务使用，如果序列化上能节约一点时间，对整个公司的收益都将非常可观，同理如果序列化上能节约一点内存，网络带宽也能省下不少；</li><li>可扩展性，对互联网公司而言，业务变化飞快，如果序列化协议具有良好的可扩展性，支持自动增加新的业务字段，而不影响老的服务，这将大大提供系统的灵活度。</li></ol><p>目前互联网公司广泛使用Protobuf、Thrift、Avro等成熟的序列化解决方案来搭建RPC框架，这些都是久经考验的解决方案。</p><p></p><h3>1.3 通信</h3><p>消息数据结构被序列化为二进制串后，下一步就要进行网络通信了。目前有两种常用IO通信模型：1）BIO；2）NIO。一般RPC框架需要支持这两种IO模型。</p><p>如何实现RPC的IO通信框架呢？</p><ol><li>使用java nio方式自研，这种方式较为复杂，而且很有可能出现隐藏bug，但也见过一些互联网公司使用这种方式；</li><li>基于mina，mina在早几年比较火热，不过这些年版本更新缓慢；</li><li>基于netty，现在很多RPC框架都直接基于netty这一IO通信框架，省力又省心，比如阿里巴巴的HSF、dubbo，Twitter的finagle等。</li></ol><p></p><h3>1.4 <strong>消息里为什么要有requestID？</strong></h3><p>如果使用netty的话，一般会用channel.writeAndFlush方法来发送消息二进制串，这个方法调用后对于整个远程调用(从发出请求到接收到结果)来说是一个异步的，即对于当前线程来说，将请求发送出来后，线程就可以往后执行了，至于服务端的结果，是服务端处理完成后，再以消息的形式发送给客户端的。于是这里出现以下两个问题：</p><ol><li>怎么让当前线程“暂停”，等结果回来后，再向后执行？</li><li>如果有多个线程同时进行远程方法调用，这时建立在client server之间的socket连接上会有很多双方发送的消息传递，前后顺序也可能是随机的，server处理完结果后，将结果消息发送给client，client收到很多消息，怎么知道哪个消息结果是原先哪个线程调用的？</li></ol><p>如下图所示，线程A和线程B同时向client socket发送请求requestA和requestB，socket先后将requestB和requestA发送至server，而server可能将responseA先返回，尽管requestA请求到达时间更晚。我们需要一种机制保证responseA丢给ThreadA，responseB丢给ThreadB。</p><p><img src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/f6300086ace1fc925b8" img_width="1192" img_height="281" alt="RPC原理及RPC实例分析" onerror="javascript:errorimg.call(this);"></p><p>怎么解决呢？</p><ol><li>client线程每次通过socket调用一次远程接口前，生成一个唯一的ID，即requestID（requestID必需保证在一个Socket连接里面是唯一的），一般常常使用AtomicLong从0开始累计数字生成唯一ID；</li><li>将处理结果的回调对象callback，存放到全局ConcurrentHashMap里面put(requestID, callback)；</li><li>当线程调用channel.writeAndFlush发送消息后，紧接着执行callback的get方法试图获取远程返回的结果。在get内部，则使用synchronized获取回调对象callback的锁，再先检测是否已经获取到结果，如果没有，然后调用callback的wait方法，释放callback上的锁，让当前线程处于等待状态。</li><li>服务端接收到请求并处理后，将response结果（此结果中包含了前面的requestID）发送给客户端，客户端socket连接上专门监听消息的线程收到消息，分析结果，取到requestID，再从前面的ConcurrentHashMap里面get(requestID)，从而找到callback对象，再用synchronized获取callback上的锁，将方法调用结果设置到callback对象里，再调用callback.notifyAll唤醒前面处于等待状态的线程。</li></ol><pre>public Object get {
+        synchronized (this) { // 旋锁
+ while (!isDone) { // 是否有结果了
+ wait; //没结果是释放锁，让当前线程处于等待状态
+ }
+        }
+}</pre><pre>private void setDone(Response res) {
+        this.res = res;
+        isDone = true;
+        synchronized (this) { //获取锁，因为前面wait已经释放了callback的锁了
+ notifyAll; // 唤醒处于等待的线程
+        }
+    }</pre><p></p><h2>2 如何发布自己的服务？</h2><p>如何让别人使用我们的服务呢？有同学说很简单嘛，告诉使用者服务的IP以及端口就可以了啊。确实是这样，这里问题的关键在于是自动告知还是人肉告知。</p><p>人肉告知的方式：如果你发现你的服务一台机器不够，要再添加一台，这个时候就要告诉调用者我现在有两个ip了，你们要轮询调用来实现负载均衡；调用者咬咬牙改了，结果某天一台机器挂了，调用者发现服务有一半不可用，他又只能手动修改代码来删除挂掉那台机器的ip。现实生产环境当然不会使用人肉方式。</p><p>有没有一种方法能实现自动告知，即机器的增添、剔除对调用方透明，调用者不再需要写死服务提供方地址？当然可以，现如今zookeeper被广泛用于实现服务自动注册与发现功能！</p><p>简单来讲，zookeeper可以充当一个<code>服务注册表</code>（Service Registry），让多个<code>服务提供者</code>形成一个集群，让<code>服务消费者</code>通过服务注册表获取具体的服务访问地址（ip+端口）去访问具体的服务提供者。如下图所示：</p><p><img src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/f5f000766a6b8d6f056" img_width="1383" img_height="642" alt="RPC原理及RPC实例分析" onerror="javascript:errorimg.call(this);"></p><p>具体来说，zookeeper就是个分布式文件系统，每当一个服务提供者部署后都要将自己的服务注册到zookeeper的某一路径上: /{service}/{version}/{ip:port}, 比如我们的HelloWorldService部署到两台机器，那么zookeeper上就会创建两条目录：分别为/HelloWorldService/1.0.0/100.19.20.01:16888 /HelloWorldService/1.0.0/100.19.20.02:16888。</p><p>zookeeper提供了“心跳检测”功能，它会定时向各个服务提供者发送一个请求（实际上建立的是一个 Socket 长连接），如果长期没有响应，服务中心就认为该服务提供者已经“挂了”，并将其剔除，比如100.19.20.02这台机器如果宕机了，那么zookeeper上的路径就会只剩/HelloWorldService/1.0.0/100.19.20.01:16888。</p><p>服务消费者会去监听相应路径（/HelloWorldService/1.0.0），一旦路径上的数据有任务变化（增加或减少），zookeeper都会通知服务消费方服务提供者地址列表已经发生改变，从而进行更新。</p><p>更为重要的是zookeeper与生俱来的容错容灾能力（比如leader选举），可以确保服务注册表的高可用性。</p><p></p><h2>3.Hadoop中<strong>RPC</strong>实例分析</h2><p>ipc.RPC类中有一些内部类，为了大家对RPC类有个初步的印象，就先罗列几个我们感兴趣的分析一下吧：</p><p><strong>Invocation</strong>：用于封装方法名和参数，作为数据传输层。</p><p><strong>ClientCache</strong>：用于存储client对象，用socket factory作为hash key,存储结构为hashMap &lt;SocketFactory, Client&gt;。</p><p><strong>Invoker</strong>：是动态代理中的调用实现类，继承了InvocationHandler.</p><p><strong>Server</strong>：是ipc.Server的实现类。</p><pre>public Object invoke(Object proxy, Method method, Object[] args)
+      throws Throwable {
+      •••
+      ObjectWritable value = (ObjectWritable)
+        client.call(new Invocation(method, args), remoteId);
+      •••
+      return value.get;
+    }</pre><p>如果你发现这个invoke方法实现的有些奇怪的话，那你就对了。一般我们看到的动态代理的invoke方法中总会有 method.invoke(ac, arg); 这句代码。而上面代码中却没有，这是为什么呢？其实使用 method.invoke(ac, arg); 是在本地JVM中调用；而在hadoop中，是将数据发送给服务端，服务端将处理的结果再返回给客户端，所以这里的invoke方法必然需要进行网络通信。而网络通信就是下面的这段代码实现的：</p><pre>ObjectWritable value = (ObjectWritable)
+client.call(new Invocation(method, args), remoteId);</pre><p>Invocation类在这里封装了方法名和参数。其实这里网络通信只是调用了Client类的call方法。那我们接下来分析一下ipc.Client源码吧。和第一章一样，同样是3个问题</p><ol><li>客户端和服务端的连接是怎样建立的？</li><li>客户端是怎样给服务端发送数据的？</li><li>客户端是怎样获取服务端的返回数据的？</li></ol><p></p><h3>3.1 客户端和服务端的连接是怎样建立的？</h3><pre>public Writable call(Writable param, ConnectionId remoteId)  
+ throws InterruptedException, IOException {
+    Call call = new Call(param);       //将传入的数据封装成call对象
+    Connection connection = getConnection(remoteId, call);   //获得一个连接
+    connection.sendParam(call);     // 向服务端发送call对象
+    boolean interrupted = false;
+    synchronized (call) {
+      while (!call.done) {
+        try {
+ call.wait; // 等待结果的返回，在Call类的callComplete方法里有notify方法用于唤醒线程
+        } catch (InterruptedException ie) {
+ // 因中断异常而终止，设置标志interrupted为true
+ interrupted = true;
+        }
+      }
+      if (interrupted) {
+        Thread.currentThread.interrupt;
+      }
+
+      if (call.error != null) {
+        if (call.error instanceof RemoteException) {
+ call.error.fillInStackTrace;
+ throw call.error;
+        } else { // 本地异常
+ throw wrapException(remoteId.getAddress, call.error);
+        }
+      } else {
+        return call.value; //返回结果数据
+      }
+    }
+  }</pre><p>具体代码的作用我已做了注释，所以这里不再赘述。但到目前为止，你依然不知道RPC机制底层的网络连接是怎么建立的。分析代码后，我们会发现和网络通信有关的代码只会是下面的两句了：</p><pre> Connection connection = getConnection(remoteId, call);   //获得一个连接
+  connection.sendParam(call);      // 向服务端发送call对象</pre><p>先看看是怎么获得一个到服务端的连接吧，下面贴出ipc.Client类中的getConnection方法。</p><pre>private Connection getConnection(ConnectionId remoteId,
+ Call call)
+ throws IOException, InterruptedException {
+    if (!running.get) {
+      // 如果client关闭了
+      throw new IOException("The client is stopped");
+    }
+    Connection connection;
+//如果connections连接池中有对应的连接对象，就不需重新创建了；如果没有就需重新创建一个连接对象。
+//但请注意，该//连接对象只是存储了remoteId的信息，其实还并没有和服务端建立连接。
+    do {
+      synchronized (connections) {
+        connection = connections.get(remoteId);
+        if (connection == null) {
+ connection = new Connection(remoteId);
+ connections.put(remoteId, connection);
+        }
+      }
+    } while (!connection.addCall(call)); //将call对象放入对应连接中的calls池，就不贴出源码了
+   //这句代码才是真正的完成了和服务端建立连接哦~
+    connection.setupIOstreams;
+    return connection;
+  }</pre><p>下面贴出Client.Connection类中的setupIOstreams方法：</p><pre> private synchronized void setupIOstreams throws InterruptedException {
+   •••
+      try {
+       •••
+        while (true) {
+ setupConnection;  //建立连接
+ InputStream inStream = NetUtils.getInputStream(socket);     //获得输入流
+ OutputStream outStream = NetUtils.getOutputStream(socket);  //获得输出流
+ writeRpcHeader(outStream);
+ •••
+ this.in = new DataInputStream(new BufferedInputStream
+ (new PingInputStream(inStream)));   //将输入流装饰成DataInputStream
+ this.out = new DataOutputStream
+ (new BufferedOutputStream(outStream));   //将输出流装饰成DataOutputStream
+ writeHeader;
+ // 跟新活动时间
+ touch;
+ //当连接建立时，启动接受线程等待服务端传回数据，注意：Connection继承了Tread
+ start;
+ return;
+        }
+      } catch (IOException e) {
+        markClosed(e);
+        close;
+      }
+    }</pre><p>再有一步我们就知道客户端的连接是怎么建立的啦，下面贴出Client.Connection类中的setupConnection方法：</p><pre> private synchronized void setupConnection throws IOException {
+      short ioFailures = 0;
+      short timeoutFailures = 0;
+      while (true) {
+        try {
+ this.socket = socketFactory.createSocket; //终于看到创建socket的方法了
+ this.socket.setTcpNoDelay(tcpNoDelay);
+         •••
+ // 设置连接超时为20s
+ NetUtils.connect(this.socket, remoteId.getAddress, 20000);
+ this.socket.setSoTimeout(pingInterval);
+ return;
+        } catch (SocketTimeoutException toe) {
+ /* 设置最多连接重试为45次。
+ * 总共有20s*45 = 15 分钟的重试时间。
+ */
+ handleConnectionFailure(timeoutFailures++, 45, toe);
+        } catch (IOException ie) {
+ handleConnectionFailure(ioFailures++, maxRetries, ie);
+        }
+      }
+    }</pre><p>终于，我们知道了客户端的连接是怎样建立的了，其实就是创建一个普通的socket进行通信。</p><p></p><h3>3.2 客户端是怎样给服务端发送数据的？</h3><p>下面贴出Client.Connection类的sendParam方法吧：</p><pre>public void sendParam(Call call) {
+      if (shouldCloseConnection.get) {
+        return;
+      }
+      DataOutputBuffer d=null;
+      try {
+        synchronized (this.out) {
+ if (LOG.isDebugEnabled)
+ LOG.debug(getName + " sending #" + call.id);
+ //创建一个缓冲区
+ d = new DataOutputBuffer;
+ d.writeInt(call.id);
+ call.param.write(d);
+ byte data = d.getData;
+ int dataLength = d.getLength;
+ out.writeInt(dataLength);        //首先写出数据的长度
+ out.write(data, 0, dataLength); //向服务端写数据
+ out.flush;
+        }
+      } catch(IOException e) {
+        markClosed(e);
+      } finally {
+        IOUtils.closeStream(d);
+      }
+    }</pre><p></p><h3>3.3 客户端是怎样获取服务端的返回数据的？</h3><p>下面贴出Client.Connection类和Client.Call类中的相关方法：</p><pre>方法一：  
+  public void run {
+      •••
+      while (waitForWork) {
+        receiveResponse;  //具体的处理方法
+      }
+      close;
+     •••
+}
+
+方法二：
+private void receiveResponse {
+      if (shouldCloseConnection.get) {
+        return;
+      }
+      touch;
+      try {
+        int id = in.readInt; // 阻塞读取id
+        if (LOG.isDebugEnabled)
+ LOG.debug(getName + " got value #" + id);
+ Call call = calls.get(id);    //在calls池中找到发送时的那个对象
+        int state = in.readInt;     // 阻塞读取call对象的状态
+        if (state == Status.SUCCESS.state) {
+ Writable value = ReflectionUtils.newInstance(valueClass, conf);
+ value.readFields(in); // 读取数据
+        //将读取到的值赋给call对象，同时唤醒Client等待线程，贴出setValue代码方法三
+ call.setValue(value); 
+ calls.remove(id); //删除已处理的call    
+        } else if (state == Status.ERROR.state) {
+        •••
+        } else if (state == Status.FATAL.state) {
+        •••
+        }
+      } catch (IOException e) {
+        markClosed(e);
+      }
+}
+
+方法三：
+public synchronized void setValue(Writable value) {
+      this.value = value;
+      callComplete;   //具体实现
+}
+protected synchronized void callComplete {
+      this.done = true;
+      notify;         // 唤醒client等待线程
+    }</pre><p>完成的功能主要是：启动一个处理线程，读取从服务端传来的call对象，将call对象读取完毕后，唤醒client处理线程。就这么简单，客户端就获取了服务端返回的数据了哦~。客户端的源码分析就到这里了哦，下面我们来分析Server端的源码吧。</p><p></p><h3>3.4 ipc.Server源码分析</h3><p>为了让大家对ipc.Server有个初步的了解，我们先分析一下它的几个内部类吧：</p><p><strong>Call</strong>：用于存储客户端发来的请求</p><p><strong>Listener</strong>： 监听类，用于监听客户端发来的请求，同时Listener内部还有一个静态类，Listener.Reader，当监听器监听到用户请求，便让Reader读取用户请求。</p><p><strong>Responder</strong>：响应RPC请求类，请求处理完毕，由Responder发送给请求客户端。</p><p><strong>Connection</strong>：连接类，真正的客户端请求读取逻辑在这个类中。</p><p><strong>Handler</strong>：请求处理类，会循环阻塞读取callQueue中的call对象，并对其进行操作。</p><pre>private void initialize(Configuration conf) throws IOException {
+   •••
+    // 创建 rpc server
+    InetSocketAddress dnSocketAddr = getServiceRpcServerAddress(conf);
+    if (dnSocketAddr != null) {
+      int serviceHandlerCount =
+        conf.getInt(DFSConfigKeys.DFS_NAMENODE_SERVICE_HANDLER_COUNT_KEY,
+ DFSConfigKeys.DFS_NAMENODE_SERVICE_HANDLER_COUNT_DEFAULT);
+      //获得serviceRpcServer
+      this.serviceRpcServer = RPC.getServer(this, dnSocketAddr.getHostName, 
+ dnSocketAddr.getPort, serviceHandlerCount,
+ false, conf, namesystem.getDelegationTokenSecretManager);
+      this.serviceRPCAddress = this.serviceRpcServer.getListenerAddress;
+      setRpcServiceServerAddress(conf);
+}
+//获得server
+    this.server = RPC.getServer(this, socAddr.getHostName,
+        socAddr.getPort, handlerCount, false, conf, namesystem
+        .getDelegationTokenSecretManager);
+
+   •••
+    this.server.start;  //启动 RPC server   Clients只允许连接该server
+    if (serviceRpcServer != null) {
+      serviceRpcServer.start;  //启动 RPC serviceRpcServer 为HDFS服务的server
+    }
+    startTrashEmptier(conf);
+  }</pre><p>查看Namenode初始化源码得知：RPC的server对象是通过ipc.RPC类的getServer方法获得的。下面咱们去看看ipc.RPC类中的getServer源码吧：</p><pre>public static Server getServer(final Object instance, final String bindAddress, final int port,
+ final int numHandlers,
+ final boolean verbose, Configuration conf,
+ SecretManager&lt;? extends TokenIdentifier&gt; secretManager) 
+    throws IOException {
+    return new Server(instance, conf, bindAddress, port, numHandlers, verbose, secretManager);
+  }</pre><p>这时我们发现getServer是一个创建Server对象的工厂方法，但创建的却是RPC.Server类的对象。哈哈，现在你明白了我前面说的“RPC.Server是ipc.Server的实现类”了吧。不过RPC.Server的构造函数还是调用了ipc.Server类的构造函数的，因篇幅所限，就不贴出相关源码了。</p><p>初始化Server后，Server端就运行起来了，看看ipc.Server的start源码吧：</p><pre> /** 启动服务 */
+  public synchronized void start {
+    responder.start;  //启动responder
+    listener.start;   //启动listener
+    handlers = new Handler[handlerCount];
+
+    for (int i = 0; i &lt; handlerCount; i++) {
+      handlers[i] = new Handler(i);
+      handlers[i].start;   //逐个启动Handler
+    }
+  }</pre><p>分析过ipc.Client源码后，我们知道Client端的底层通信直接采用了阻塞式IO编程，当时我们曾做出猜测：Server端是不是也采用了阻塞式IO。现在我们仔细地分析一下吧，如果Server端也采用阻塞式IO，当连接进来的Client端很多时，势必会影响Server端的性能。hadoop的实现者们考虑到了这点，所以他们采用了java NIO来实现Server端，那Server端采用java NIO是怎么建立连接的呢？分析源码得知，Server端采用Listener监听客户端的连接，下面先分析一下Listener的构造函数吧：</p><pre> public Listener throws IOException {
+      address = new InetSocketAddress(bindAddress, port);
+      // 创建ServerSocketChannel,并设置成非阻塞式
+      acceptChannel = ServerSocketChannel.open;
+      acceptChannel.configureBlocking(false);
+
+      // 将server socket绑定到本地端口
+      bind(acceptChannel.socket, address, backlogLength);
+      port = acceptChannel.socket.getLocalPort; 
+      // 获得一个selector
+      selector= Selector.open;
+      readers = new Reader[readThreads];
+      readPool = Executors.newFixedThreadPool(readThreads);
+      //启动多个reader线程，为了防止请求多时服务端响应延时的问题
+      for (int i = 0; i &lt; readThreads; i++) {       
+        Selector readSelector = Selector.open;
+        Reader reader = new Reader(readSelector);
+        readers[i] = reader;
+        readPool.execute(reader);
+      }
+      // 注册连接事件
+      acceptChannel.register(selector, SelectionKey.OP_ACCEPT);
+      this.setName("IPC Server listener on " + port);
+      this.setDaemon(true);
+    }</pre><p>在启动Listener线程时，服务端会一直等待客户端的连接，下面贴出Server.Listener类的run方法：</p><pre> public void run {
+     •••
+      while (running) {
+        SelectionKey key = null;
+        try {
+ selector.select;
+ Iterator&lt;SelectionKey&gt; iter = selector.selectedKeys.iterator;
+ while (iter.hasNext) {
+ key = iter.next;
+ iter.remove;
+ try {
+ if (key.isValid) {
+ if (key.isAcceptable)
+ doAccept(key);     //具体的连接方法
+ }
+ } catch (IOException e) {
+ }
+ key = null;
+ }
+        } catch (OutOfMemoryError e) {
+       •••         
+    }</pre><p>下面贴出Server.Listener类中doAccept方法中的关键源码吧：</p><pre> void doAccept(SelectionKey key) throws IOException,  OutOfMemoryError {
+      Connection c = null;
+      ServerSocketChannel server = (ServerSocketChannel) key.channel;
+      SocketChannel channel;
+      while ((channel = server.accept) != null) { //建立连接
+        channel.configureBlocking(false);
+        channel.socket.setTcpNoDelay(tcpNoDelay);
+        Reader reader = getReader;  //从readers池中获得一个reader
+        try {
+ reader.startAdd; // 激活readSelector，设置adding为true
+ SelectionKey readKey = reader.registerChannel(channel);//将读事件设置成兴趣事件
+ c = new Connection(readKey, channel, System.currentTimeMillis);//创建一个连接对象
+ readKey.attach(c);   //将connection对象注入readKey
+ synchronized (connectionList) {
+ connectionList.add(numConnections, c);
+ numConnections++;
+ }
+        ••• 
+        } finally {
+//设置adding为false，采用notify唤醒一个reader,其实代码十三中启动的每个reader都使
+//用了wait方法等待。因篇幅有限，就不贴出源码了。
+ reader.finishAdd;
+        }
+      }
+    }</pre><p>当reader被唤醒，reader接着执行doRead方法。</p><p>下面贴出Server.Listener.Reader类中的doRead方法和Server.Connection类中的readAndProcess方法源码：</p><pre>方法一：   
+ void doRead(SelectionKey key) throws InterruptedException {
+      int count = 0;
+      Connection c = (Connection)key.attachment;  //获得connection对象
+      if (c == null) {
+        return;  
+      }
+      c.setLastContact(System.currentTimeMillis);
+      try {
+        count = c.readAndProcess;    // 接受并处理请求  
+      } catch (InterruptedException ieo) {
+       •••
+      }
+     •••    
+}
+
+方法二：
+public int readAndProcess throws IOException, InterruptedException {
+      while (true) {
+        •••
+        if (!rpcHeaderRead) {
+ if (rpcHeaderBuffer == null) {
+ rpcHeaderBuffer = ByteBuffer.allocate(2);
+ }
+         //读取请求头
+ count = channelRead(channel, rpcHeaderBuffer);
+ if (count &lt; 0 || rpcHeaderBuffer.remaining &gt; 0) {
+ return count;
+ }
+        // 读取请求版本号  
+ int version = rpcHeaderBuffer.get(0);
+ byte method = new byte {rpcHeaderBuffer.get(1)};
+        •••  
+
+ data = ByteBuffer.allocate(dataLength);
+        }
+        // 读取请求  
+        count = channelRead(channel, data);
+
+        if (data.remaining == 0) {
+         •••
+ if (useSasl) {
+         •••
+ } else {
+ processOneRpc(data.array);//处理请求
+ }
+        •••
+ }
+        } 
+        return count;
+      }
+    }</pre><p>下面贴出Server.Connection类中的processOneRpc方法和processData方法的源码。</p><pre>方法一：   
+ private void processOneRpc(byte[] buf) throws IOException,
+        InterruptedException {
+      if (headerRead) {
+        processData(buf);
+      } else {
+        processHeader(buf);
+        headerRead = true;
+        if (!authorizeConnection) {
+ throw new AccessControlException("Connection from " + this
+ + " for protocol " + header.getProtocol
+ + " is unauthorized for user " + user);
+        }
+      }
+}
+方法二：
+    private void processData(byte[] buf) throws  IOException, InterruptedException {
+      DataInputStream dis =
+        new DataInputStream(new ByteArrayInputStream(buf));
+      int id = dis.readInt;      // 尝试读取id
+      Writable param = ReflectionUtils.newInstance(paramClass, conf);//读取参数
+      param.readFields(dis);        
+
+      Call call = new Call(id, param, this);  //封装成call
+      callQueue.put(call);   // 将call存入callQueue
+      incRpcCount;  // 增加rpc请求的计数
+    }</pre><p></p><h2>4. RPC与web service</h2><p>RPC：</p><p><img src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/f62000164a9ef38d658" img_width="819" img_height="460" alt="RPC原理及RPC实例分析" onerror="javascript:errorimg.call(this);"></p><p>Web service<img src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/f5f000766a77869e92d" img_width="819" img_height="460" alt="RPC原理及RPC实例分析" onerror="javascript:errorimg.call(this);"></p><p>web service接口就是RPC中的stub组件，规定了server能够提供的服务（web service），这在server和client上是一致的，但是也是跨语言跨平台的。同时，由于web service规范中的WSDL文件的存在，现在各平台的web service框架，都可以基于WSDL文件，自动生成web service接口 。</p><p>其实两者差不多，只是传输的协议不同。</p><p></p><h2>Reference：</h2><p>1. http://www.cnblogs.com/LBSer/p/4853234.html</p><p>2. http://weixiaolu.iteye.com/blog/1504898</p><p>3. http://kyfxbl.iteye.com/blog/1745550</p><p class="footnote">本文为头条号作者发布，不代表今日头条立场。</p></div>
+
+  <div class="article-actions">
+		
+<div class="labelList">
+	<i class="y-icon icon-tag"></i>
+	<ul class="label-list">
+		
+		<li class="label-item"><a class="label-link" href="http://www.toutiao.com/search/?keyword=%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80" target="_blank">编程语言</a></li>
+		
+		<li class="label-item"><a class="label-link" href="http://www.toutiao.com/search/?keyword=Java" target="_blank">Java</a></li>
+		
+		<li class="label-item"><a class="label-link" href="http://www.toutiao.com/search/?keyword=%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84" target="_blank">数据结构</a></li>
+		
+		<li class="label-item"><a class="label-link" href="http://www.toutiao.com/search/?keyword=%E9%80%9A%E4%BF%A1" target="_blank">通信</a></li>
+		
+	</ul>
+</div>
+
+		<div riot-tag="actionBox" class="actionBox"><div class="repin "> <i class="y-icon icon-favorite "></i><span>收藏</span> </div> <a href="javascript:;" class="areport"> <i class="y-icon icon-report"></i><span>举报</span> </a> <div id="J_articleReport"></div></div>
+  </div>
+</div>
+
+        <div style="text-align:center; margin-top: 30px; height: 60px;" id="J_ad_baidu_bottom"><iframe id="iframeu2643457_0" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/cclm.html" width="640" height="60" align="center,center" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="border:0; vertical-align:bottom;margin:0;" allowtransparency="true"></iframe></div>
+
+        <a id="comment_area" href="http://www.toutiao.com/i6342226431749128705/?tt_from=weixin&amp;utm_campaign=client_share&amp;app=news_article&amp;utm_source=weixin&amp;iid=4814822643&amp;utm_medium=toutiao_android&amp;wxshare_count=1#" style="display: inline-block;margin-bottom: 20px;"></a><!--评论锚点-->
+        <div riot-tag="comment" id="comment"><div class="c-header"> <em>15&nbsp;</em>条评论 </div> <div riot-tag="inputBox" ismain="true" avatar="" group_id="6342219502365245697" item_id="6342226431749128705"><div class="inputBox"> <div class="y-box"> <div class="avatar-wrap avatar-wrap-center">  </div> <div class="input-wrap  "> <div class="c-textarea" ga_event="click_input_comment"> <textarea name="inputText" placeholder="写下您的评论..."></textarea> </div> <div class="c-action" ga_event="click_publish_comment"> <div class="c-submit">评论</div> </div> </div> </div> </div></div> <ul> <li class="c-item"> <a target="_blank" class="avatar-wrap" href="http://www.toutiao.com/user/3662759360/"> <img alt="" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/5035712059"> </a> <div class="c-content"> <div class="c-user-info"> <a class="c-user-name" target="_blank" href="http://www.toutiao.com/user/3662759360/">peace_life</a> <span class="c-create-time">2月前</span> </div> <p>最近正用到相关知识</p> <div class="c-footer-action"> <span class="c-reply" ga_event="click_reply_comment">回复</span>   <span class="y-right c-report" title="举报"><i class="y-icon icon-report"></i></span> <span title="点赞" ga_event="click_good_comment" class="y-right c-digg ">0&nbsp;<i class="y-icon icon-digg"></i></span> </div> <div class="J_input_0"></div> <!--riot placeholder-->  </div> </li><li class="c-item"> <a target="_blank" class="avatar-wrap" href="http://www.toutiao.com/user/3852669136/"> <img alt="" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/2975850990"> </a> <div class="c-content"> <div class="c-user-info"> <a class="c-user-name" target="_blank" href="http://www.toutiao.com/user/3852669136/">冰封酷</a> <span class="c-create-time">1月前</span> </div> <p>抄袭携程员工博客 举报</p> <div class="c-footer-action"> <span class="c-reply" ga_event="click_reply_comment">回复</span>   <span class="y-right c-report" title="举报"><i class="y-icon icon-report"></i></span> <span title="点赞" ga_event="click_good_comment" class="y-right c-digg ">0&nbsp;<i class="y-icon icon-digg"></i></span> </div> <div class="J_input_1"></div> <!--riot placeholder-->  </div> </li><li class="c-item"> <a target="_blank" class="avatar-wrap" href="http://www.toutiao.com/user/6596997339/"> <img alt="" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/64"> </a> <div class="c-content"> <div class="c-user-info"> <a class="c-user-name" target="_blank" href="http://www.toutiao.com/user/6596997339/">sunny98423811</a> <span class="c-create-time">2月前</span> </div> <p>mark下慢慢消化</p> <div class="c-footer-action"> <span class="c-reply" ga_event="click_reply_comment">回复</span>   <span class="y-right c-report" title="举报"><i class="y-icon icon-report"></i></span> <span title="点赞" ga_event="click_good_comment" class="y-right c-digg ">1&nbsp;<i class="y-icon icon-digg"></i></span> </div> <div class="J_input_2"></div> <!--riot placeholder-->  </div> </li><li class="c-item"> <a target="_blank" class="avatar-wrap" href="http://www.toutiao.com/user/50249709816/"> <img alt="" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/bc200063cd6e709971e"> </a> <div class="c-content"> <div class="c-user-info"> <a class="c-user-name" target="_blank" href="http://www.toutiao.com/user/50249709816/">春暖花开杏吧入口九江1站</a> <span class="c-create-time">2月前</span> </div> <p>好！   启蒙源码</p> <div class="c-footer-action"> <span class="c-reply" ga_event="click_reply_comment">回复</span>   <span class="y-right c-report" title="举报"><i class="y-icon icon-report"></i></span> <span title="点赞" ga_event="click_good_comment" class="y-right c-digg ">0&nbsp;<i class="y-icon icon-digg"></i></span> </div> <div class="J_input_3"></div> <!--riot placeholder-->  </div> </li><li class="c-item"> <a target="_blank" class="avatar-wrap" href="http://www.toutiao.com/user/3144044597/"> <img alt="" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/1858423310"> </a> <div class="c-content"> <div class="c-user-info"> <a class="c-user-name" target="_blank" href="http://www.toutiao.com/user/3144044597/">ALEX7164683</a> <span class="c-create-time">2月前</span> </div> <p>客观的说，此文作者是把rpc弄懂了的。好多服务端开发几年的都不了解！</p> <div class="c-footer-action"> <span class="c-reply" ga_event="click_reply_comment">回复</span>   <span class="y-right c-report" title="举报"><i class="y-icon icon-report"></i></span> <span title="点赞" ga_event="click_good_comment" class="y-right c-digg ">0&nbsp;<i class="y-icon icon-digg"></i></span> </div> <div class="J_input_4"></div> <!--riot placeholder-->  </div> </li><!--riot placeholder--> </ul> <div class="c-load-more" ga_event="click_loadmore_comment">查看更多评论</div> <div id="J_report"></div></div>
+      </div>
+    </div>
+    <div class="y-box" style="margin-top: 30px;">
+      <div class="y-left index-left">
+        <div riot-tag="relatedChannel"><div name="relatedChannel" ga_event="related_channel_click" class="relatedChannel "> <h2 class="relatedChannel-header">相关推荐</h2> <ul class="relatedChannel-list"> <li> <a href="javacript:;" class="relatedChannel-item active"> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>推荐</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>热点</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>社会</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>娱乐</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>科技</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>体育</span> </a> </li><!--riot placeholder--> </ul> </div></div>
+      </div>
+      <div class="y-left index-middle">
+        <div class="index-cut-line" id="J_cut_line"></div>
+        <div riot-tag="feedBox"></div>
+      </div>
+    </div>
+  </div>
+  <div id="J_rindex" class="y-right index-right">
+    
+<div class="module">
+  <div class="pgcInfo">
+    <div class="pgc-head">
+      <a class="pgc-link" target="_blank" href="http://www.toutiao.com/m5842079752/" ga_event="click_into_pgc">
+          <img src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/2845222550" alt="达人科技">
+          <div class="pgc-username">
+            <span>达人科技</span>
+            <div riot-tag="subscribe" class="pgc-subscribe"><div class="subscribe" ga_event="follow_pgc">  <div class="article-unsubscribe left-arrow"> <span>立即关注</span> </div> </div></div>
+          </div>
+      </a>
+    </div>
+    <p class="pgc-description">最新科技资讯、独到的观点和前沿的科技产品信息,覆盖通信、互联网、IT和科普探索等领域</p>
+    <ul class="pgc-content">
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://toutiao.com/i6342326391605821953/" target="_blank" class="pgc-article-link">
+          angular利用ui-router登录检查
+        </a>
+    	</li>
+      
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://toutiao.com/i6342295630018249217/" target="_blank" class="pgc-article-link">
+          织梦 添加自由列表并进行操作
+        </a>
+    	</li>
+      
+      
+      
+      
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://toutiao.com/i6342224034406597121/" target="_blank" class="pgc-article-link">
+          微信小程序--火车票查询
+        </a>
+    	</li>
+      
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://toutiao.com/i6342116374629843457/" target="_blank" class="pgc-article-link">
+          泛型方法与桥方法
+        </a>
+    	</li>
+      
+      
+    </ul>
+  </div>
+</div>
+
+
+    <div style="margin-bottom:30px;">
+	<iframe src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/saved_resource.html" onload="var adWrap=this;setTimeout(function(){if(!adWrap.loaded){adWrap.src=&#39;//www.toutiao.com/api/pc/adsafe/&#39;+&#39;#group=detail_top_right&#39;;adWrap.loaded=true;}},1)" frameborder="0" width="300" height="250” scrolling=“no"></iframe>
+</div>
+
+    <div riot-tag="hotVideo" class="hotVideo module" ga_event="click_video_recommend"><div class="module-head video-head"><a href="http://www.toutiao.com/video/" target="_blank">热门视频</a></div> <ul> <li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6357255982724399361/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/1136000a0caf4ca6da04" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>04:17</span> </i> <p class="hot-title module-title">感谢当年化学老师的不杀之恩</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6366079598182383874/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/12ed000c471739966888" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>01:18</span> </i> <p class="hot-title module-title">德国男子用八百吨液压机圧湿毛巾，看完全傻了，有强迫症的人勿看</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6366084275493667330/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/12eb00076edba2297ba1" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>05:49</span> </i> <p class="hot-title module-title">迈克杰克逊经典演唱会，观众点燃打火机场面失控</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6365764082548998402/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/12f1000b7b706873f1d7" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>05:50</span> </i> <p class="hot-title module-title">游戏王 潘多拉以为稳操胜券 游戏召唤黑魔导女孩瞬间翻盘</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6366074316559221249/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/1208000ead635f343a15" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>03:46</span> </i> <p class="hot-title module-title">LOL徐老师来巡山：这位同学，你手还剁吗？</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6366110571889017089/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/12dd0007b8a4b6f6b023" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>02:45</span> </i> <p class="hot-title module-title">萌贱《小黄人3》回归啦！首发中文预告爆笑萌点不断！</p> </a> </li><!--riot placeholder--> </ul></div>
+    <div style="margin-bottom: 30px;" id="J_ad_baidu_top1"><iframe id="iframeu2793998_0" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/cclm(1).html" width="300" height="250" align="center,center" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="border:0; vertical-align:bottom;margin:0;" allowtransparency="true"></iframe></div>
+
+    
+<div class="module recpgc">
+	<div class="module-head">
+		相关头条号
+	</div>
+	<ul class="recpgc-content">
+		
+		
+		<li class="recpgc-list">
+    		<a class="recpgc-user" href="http://toutiao.com/m5858481053/" target="_blank" ga_event="click_related_pgc">
+        		<img src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/5158861846" alt="">
+        		<span class="user-name">高可用架构</span>
+    		</a>
+    		<ul>
+    			
+    				<li class="related-article">
+    					<a href="http://toutiao.com/group/6365696813773390081/" target="_blank">2016 GIAC全球互联网架构大会圆满结束，全部PPT开放下载</a>
+    				</li>
+    			
+    				<li class="related-article">
+    					<a href="http://toutiao.com/group/6363766994299486465/" target="_blank">陈皓、李智慧、Tim Yang同台探讨构师能力模型，只在本周GIAC大会(12.16-17)</a>
+    				</li>
+    			
+    		</ul>
+		</li>
+		
+		
+		
+		<li class="recpgc-list">
+    		<a class="recpgc-user" href="http://toutiao.com/m5855949296/" target="_blank" ga_event="click_related_pgc">
+        		<img src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/6918233257" alt="">
+        		<span class="user-name">技术鸟</span>
+    		</a>
+    		<ul>
+    			
+    				<li class="related-article">
+    					<a href="http://toutiao.com/group/6364683443514999041/" target="_blank">记录安卓模拟器 Genymotion 使用过程中遇到的问题</a>
+    				</li>
+    			
+    				<li class="related-article">
+    					<a href="http://toutiao.com/group/6361634957923713538/" target="_blank">Google 终于没有放弃我大中华区的千万个软件开发人员！</a>
+    				</li>
+    			
+    		</ul>
+		</li>
+		
+		
+		
+		<li class="recpgc-list">
+    		<a class="recpgc-user" href="http://toutiao.com/m3582741126/" target="_blank" ga_event="click_related_pgc">
+        		<img src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/5636763359" alt="">
+        		<span class="user-name">腾讯大讲堂</span>
+    		</a>
+    		<ul>
+    			
+    				<li class="related-article">
+    					<a href="http://toutiao.com/group/6365757215697666305/" target="_blank">设计师如何看穿需求本质</a>
+    				</li>
+    			
+    				<li class="related-article">
+    					<a href="http://toutiao.com/group/6364615746916188418/" target="_blank">老板说，这是腾讯史上人数最多的股东大会</a>
+    				</li>
+    			
+    		</ul>
+		</li>
+		
+		
+		
+		
+		
+		
+	</ul>
+</div>
+
+
+    <div style="margin-bottom: 30px;" id="J_ad_baidu_top2"><iframe id="iframeu2794021_0" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/cclm(2).html" width="300" height="250" align="center,center" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="border:0; vertical-align:bottom;margin:0;" allowtransparency="true"></iframe></div>
+
+    <div riot-tag="hotPicture" class="hotPicture module" ga_event="click_pictures_recommend"><div class="module-head pic-head"><a href="http://www.toutiao.com/news_image/" target="_blank">精彩图片</a></div> <ul> <li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6365776506840629506/">  <div class="pic-style style_2"> <div class="module-pic pic-middle"><img alt="" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/1233000b05177a006d28"></div> <div class="module-pic pic-small"><img alt="" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/1233000b0543f5123bd9"></div> <div class="module-pic pic-small"><img alt="" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/1233000b0545e3e46335"></div> </div>  <i class="hot-tag pic-tag"> <span>19图</span> </i> <p class="hot-title module-title">生活中那些让人忍俊不禁的意外</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6341233948773892354/">  <div class="pic-style style_2"> <div class="module-pic pic-middle"><img alt="" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/1355000212a13878bb80"></div> <div class="module-pic pic-small"><img alt="" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/1353000211ba9529873c"></div> <div class="module-pic pic-small"><img alt="" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/1353000211bdc1beee04"></div> </div>  <i class="hot-tag pic-tag"> <span>13图</span> </i> <p class="hot-title module-title">直击13张罕见催泪照：这是真情流露，第五张人人向往</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6365841544649441538/"> <div class="pic-style style_1"> <div class="module-pic pic-big"><img alt="" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/13530002cc5ec8188230"></div> </div>   <i class="hot-tag pic-tag"> <span>10图</span> </i> <p class="hot-title module-title">十张图揭示社会真相，不知当讲不当讲</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6365842559776899330/"> <div class="pic-style style_1"> <div class="module-pic pic-big"><img alt="" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/123200106fa3afc555ca"></div> </div>   <i class="hot-tag pic-tag"> <span>10图</span> </i> <p class="hot-title module-title">盘点AV女演员退役后现状，最后一张谁啊？</p> </a> </li><!--riot placeholder--> </ul></div>
+    <div>
+  <iframe src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/saved_resource(1).html" onload="var adWrap=this;setTimeout(function(){if(!adWrap.loaded){adWrap.src=&#39;//www.toutiao.com/api/pc/adsafe/&#39;+&#39;#group=detail_bottom_right&#39;;adWrap.loaded=true;}},1)" frameborder="0" width="300" height="250” scrolling=“no"></iframe>
+</div>
+
+    <div id="adindexhover" style="position: fixed; top: 20px; display: none;">
+	<iframe src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/saved_resource(2).html" onload="var adWrap=this;setTimeout(function(){if(!adWrap.loaded){adWrap.src=&#39;//www.toutiao.com/api/pc/adsafe/&#39;+&#39;#group=detail_bottom_right_hover&#39;;adWrap.loaded=true;}},1)" frameborder="0" width="300" height="250” scrolling=“no"></iframe>
+</div>
+
+  </div>
+</div>
+
+<div class="action-feedback">
+  <div riot-tag="feedback" class="feedback"><ul> <li class="tool-item" ga_event="go_top_click"> <a href="javascript:;"> <i class="y-icon icon-backtotopfeed"></i> </a> </li> </ul></div>
+</div>
+
+<!-- 公共尾部 -->
+<div id="footer">
+    <div>
+        <span class="fitem">© 2016 今日头条 www.toutiao.com</span>
+        <a class="fitem" href="http://www.12377.cn/" target="_blank">中国互联网举报中心</a>
+        <a class="fitem" href="http://www.miibeian.gov.cn/" target="_blank">京ICP证140141号</a>
+        <a class="fitem" href="http://www.miibeian.gov.cn/" target="_blank">京ICP备12025439号-3</a>
+        <a class="fitem" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11000002002023" target="_blank" ga_event="click_about">
+            <img src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/gongan_d0289dc.png">京公网安备 11000002002023号
+        </a>
+    </div>
+    <div>
+        <a class="fitem" href="http://www.toutiao.com/license/" target="_blank">网络文化经营许可证</a>
+        <a class="fitem" href="http://www.toutiao.com/a3642705768/" target="_blank">跟帖评论自律管理承诺书</a>
+        <span class="fitem">违法和不良信息举报电话：010-58341833</span>
+        <span class="fitem">公司名称：北京字节跳动科技有限公司</span>
+    </div>
+</div>
+
+
+
+    </div>
+
+    <script>
+        window.globals = window.globals || {};
+
+        taAnalysis && taAnalysis.setup({
+          c: 'detail_article'
+        });
+        taAnalysis && taAnalysis.send('pageview', {});
+
+        window.gaqpush = function (ga_action, ga_label){
+            ga('send', 'event','detail_article' , ga_action, ga_label);
+        };
+
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        // ga('create', 'UA-28423340-5', 'auto');
+        ga('create', 'UA-28423340-5', 'auto', {'sampleRate': 10});
+        ga('send', 'pageview');
+
+        utils.on(document.getElementsByTagName('body')[0], 'click', function(e) {
+            var target = utils.getTarget(e),
+                ga_event,
+                ga_category,
+                ga_label,
+                ga_value;
+
+            while(target && target.nodeName.toUpperCase() !== 'BODY') {
+                ga_event = utils.getAttribute(target, 'ga_event');
+                ga_category = utils.getAttribute(target, 'ga_category') || 'detail_article';
+                ga_label = utils.getAttribute(target, 'ga_label');
+                ga_value = utils.getAttribute(target, 'ga_value') || 1;
+
+                ga_event && ga('send', 'event', ga_category, ga_event, ga_label, ga_value);
+                ga_event && taAnalysis && taAnalysis.send('event', { ev: ga_event });
+                target = target.parentNode;
+            }
+        });
+
+        riot.observable(window);
+    </script>
+    
+
+<script>
+  // 用户信息
+  var userInfo = {
+      id: 0,
+      name: '',
+      avatarUrl: '',
+      isPgc: false,
+      isOwner: false
+  };
+
+
+  var group = {
+  	id:'6342219502365245697',
+  	repin:0,
+  };
+
+  var media = {
+  	id:5842079752,
+  	like:false
+  };
+
+  var siblingList = [{"media_avatar_url":"http:\/\/p3.pstatp.com\/large\/10948\/2745320029","is_feed_ad":false,"is_diversion_page":false,"title":"\u4f7f\u7528 acl \u5e93\u9488\u5bf9 C++ \u5bf9\u8c61\u8fdb\u884c\u5e8f\u5217\u5316\u53ca\u53cd\u5e8f\u5217\u7f16\u7a0b","single_mode":false,"middle_mode":false,"has_video":false,"video_duration_str":null,"source_url":"http:\/\/toutiao.com\/group\/6342218252118360322\/","source":"\u79d1\u6280\u4f18\u5bb6","more_mode":null,"article_genre":"article","has_gallery":false,"behot_time":1482228228158,"video_play_count":null,"comments_count":0,"group_id":"6342218252118360322","is_related":true,"media_url":"http:\/\/toutiao.com\/m5841160544\/"},{"comments_count":1,"media_avatar_url":"http:\/\/p3.pstatp.com\/large\/10948\/2745320029","is_feed_ad":false,"is_diversion_page":false,"title":"Swagger+AutoRest \u751f\u6210web api\u5ba2\u6237\u7aef(.Net)","single_mode":true,"middle_mode":false,"has_video":false,"video_duration_str":null,"source_url":"http:\/\/toutiao.com\/group\/6342273754388201730\/","source":"\u79d1\u6280\u4f18\u5bb6","more_mode":null,"article_genre":"article","has_gallery":false,"behot_time":1482228228158,"video_play_count":null,"image_url":"http:\/\/p3.pstatp.com\/list\/204x140\/f61000d86046753e3eb","group_id":"6342273754388201730","is_related":true,"media_url":"http:\/\/toutiao.com\/m5841160544\/"}];
+</script>
+
+<script src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/article_17bc30b.js.下载"></script>
+
+<script>
+  riot.mount('wtopbar', {
+    home: false,
+    userInfo: userInfo
+  });
+  riot.mount('login');
+  riot.mount('wsearch');
+</script>
+
+<script>
+  riot.mount('snsbox',{
+    share_url:"http://toutiao.com/item/6342226431749128705",
+    abstract:"在学校期间大家都写过不少程序，比如写个hello world服务类，然后本地调用下，如下所示。这些程序的特点是服务消费方和服务提供方是本地调用关系。".replace(/<br \/>/ig, ''),
+    group_id:"6342219502365245697",
+    comments_count: utils.numFormat('15', 1, 'en'),
+    fix: true
+  });
+  riot.mount('hotVideo');
+  riot.mount('hotPicture');
+  riot.mount('feedback');
+</script>
+
+<script>
+  riot.mount('comment', {
+    group_id: '6342219502365245697',
+    item_id: '6342226431749128705' || '6342226431749128705',
+    comments_count: utils.numCutByComma('15'),
+    userInfo: userInfo,
+    ban_comment: 0 + 0
+  });
+</script>
+
+<script>
+  riot.mount('relatedChannel', {
+    tag: '__all__'
+  });
+</script>
+
+<script src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/player.min.js.下载"></script>
+<script src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/video_0801e31.js.下载"></script>
+<!--[if lt IE 9]>
+  <script src="//s3.pstatp.com/toutiao/resource/ntoutiao_web/page/detail/article_detail/article_main/audio/audio_ie8_69f6c6f.js" charset="utf-8"></script>
+<![endif]-->
+<script src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/audio_2324d3c.js.下载"></script>
+
+<script type="text/javascript" src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/c.js.下载"></script>
+<script>
+  BAIDU_CLB_fillSlotAsync('u2793998', 'J_ad_baidu_top1');
+  BAIDU_CLB_fillSlotAsync('u2794021', 'J_ad_baidu_top2');
+  BAIDU_CLB_fillSlotAsync('u2643457', 'J_ad_baidu_bottom');
+</script>
+
+    <script src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/z_stat.php" language="JavaScript"></script><script src="./RPC原理及RPC实例分析 - 今日头条(www.toutiao.com)_files/core.php" charset="utf-8" type="text/javascript"></script><a href="http://www.cnzz.com/stat/website.php?web_id=1259612802" target="_blank" title="站长统计">站长统计</a>
+
+
+</body></html>

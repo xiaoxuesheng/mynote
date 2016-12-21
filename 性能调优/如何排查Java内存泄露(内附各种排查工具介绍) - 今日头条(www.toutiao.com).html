@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<!-- saved from url=(0178)http://www.toutiao.com/i6338682011124761090/?tt_from=weixin&utm_campaign=client_share&app=news_article&utm_source=weixin&iid=4814822643&utm_medium=toutiao_android&wxshare_count=1 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style class="vjs-styles-defaults">
+      .video-js {
+        width: 300px;
+        height: 150px;
+      }
+
+      .vjs-fluid {
+        padding-top: 56.25%
+      }
+    </style>
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="dns-prefetch" href="http://s3.pstatp.com/">
+    <link rel="dns-prefetch" href="http://s3a.pstatp.com/">
+    <link rel="dns-prefetch" href="http://s3b.pstatp.com/">
+    <link rel="dns-prefetch" href="http://p1.pstatp.com/">
+    <link rel="dns-prefetch" href="http://p3.pstatp.com/">
+    
+    
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+    
+    <meta name="baidu-site-verification" content="T239HZAbh7">
+    
+    <!--meta name="baidu_union_verify" content="94bb8bb3fa863f70e7fd926bffecd81e"-->
+    <meta name="360-site-verification" content="b96e1758dfc9156a410a4fb9520c5956">
+    <meta name="360_ssp_verify" content="2ae4ad39552c45425bddb738efda3dbb">
+    <meta name="google-site-verification" content="3PYTTW0s7IAfkReV8wAECfjIdKY-bQeSkVTyJNZpBKE">
+    <meta name="shenma-site-verification" content="34c05607e2a9430ad4249ed48faaf7cb_1432711730">
+    <meta name="baidu_union_verify" content="b88dd3920f970845bad8ad9f90d687f7">
+    <meta name="domain_verify" content="pmrgi33nmfuw4ir2ej2g65lunfqw6ltdn5wselbcm52wszbchirdqyztge3tenrsgq3dknjume2tayrvmqytemlfmiydimddgu4gcnzcfqrhi2lnmvjwc5tfei5dcnbwhazdcobuhe2dqobrpu">
+    
+    
+  <link rel="alternate" media="only screen and (max-width: 640px)" href="http://m.toutiao.com/a6338607444486406401/">
+
+  <title>如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)</title>
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta name="keywords" content="深入浅出JProfiler,Java,GC,内存泄露,Perm">
+  <meta name="description" content="今天刚刚才加一个故障review会议, 故障非常典型, google下也可以找到相似案例介绍。 在排查问题的过程中，使用了大量的工具, 发现有问题的地方还不只一个，总结一下. (本">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="shortcut icon" href="http://s3a.pstatp.com/toutiao/resource/ntoutiao_web/static/image/favicon_8e9c9c7.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/layout_a2bdebe.css">
+    <!--[if lt IE 9]>
+      <script src="//s3a.pstatp.com/toutiao/resource/ntoutiao_web/static/js/lib/es5-shim_110642e.js"></script>
+    <![endif]-->
+    <script async="" src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/analytics.js.下载"></script><script src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/lib_45674aa.js.下载"></script>
+    
+  <link rel="stylesheet" href="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/article_0f8bea2.css">
+  <link rel="stylesheet" href="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/video.min.css">
+  <!--[if lt IE 9]>
+    <script src="http://s3a.pstatp.com/site/tt_mfsroot/v-player/video-ie8.js" charset="utf-8"></script>
+  <![endif]-->
+
+</head>
+
+<body style="min-width: 1220px; overflow-x: hidden;"><div id="BAIDU_DUP_fp_wrapper" style="position: absolute; left: -1px; bottom: -1px; z-index: 0; width: 0px; height: 0px; overflow: hidden; visibility: hidden; display: none;"><iframe id="BAIDU_DUP_fp_iframe" src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/o.html" style="width: 0px; height: 0px; visibility: hidden; display: none;"></iframe></div>
+    <div style="display:none"><input type="hidden" name="csrfmiddlewaretoken" value="18b4c2dd50a67dabc20f982bd846f3f0"></div>
+
+    <a href="http://www.toutiao.com/articles_news_society/" style="display:none;"></a>
+
+    <div class="y-wrap">
+        
+
+<!-- 公共头部 -->
+<div id="header">
+  <div riot-tag="wtopbar" style="height: 34px; background: #222;"><div class="y-box wtopbar">  <div class="y-left y-nav-topbar" riot-tag="nav"><div class="nav"> <ul class="y-box nav-list" ga_event="mh_channel"> <li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/" ga_event="mh_channel_recommend">推荐</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_hot/" ga_event="mh_channel_hot">热点</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/video/" ga_event="mh_channel_video">视频</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_image/" ga_event="mh_channel_image">图片</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/essay_joke/" ga_event="mh_channel_essay">段子</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_society/" ga_event="mh_channel_society">社会</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_entertainment/" ga_event="mh_channel_entertainment">娱乐</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_tech/" ga_event="mh_channel_tech">科技</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_car/" ga_event="mh_channel_car">汽车</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_sports/" ga_event="mh_channel_sports">体育</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_finance/" ga_event="mh_channel_finance">财经</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_military/" ga_event="mh_channel_military">军事</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_world/" ga_event="mh_channel_world">国际</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_fashion/" ga_event="mh_channel_fashion">时尚</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_travel/" ga_event="mh_channel_travel">旅游</a> </li><!--riot placeholder--> <li class="y-left nav-item nav-more"> <a class="nav-link" href="javascript:;"> 更多<i class="y-icon icon-more"></i> </a> <div class="nav-layer"> <ul class="nav-more-list"> <li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_discovery/" ga_event="mh_channel_discovery">探索</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_baby/" ga_event="mh_channel_baby">育儿</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_regimen/" ga_event="mh_channel_regimen">养生</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_story/" ga_event="mh_channel_story">故事</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_essay/" ga_event="mh_channel_essay">美文</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_game/" ga_event="mh_channel_game">游戏</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_history/" ga_event="mh_channel_history">历史</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_food/" ga_event="mh_channel_food">美食</a> </li><!--riot placeholder--> </ul> </div> </li> </ul> </div></div> <ul class="y-right"> <li class="tb-item userbox"> <div riot-tag="wuserbox" abtype="" pageid=""><div class="y-box wuserbox">   <div class="nav-login"> <a ga_event="nav_login" href="javascript:;"> <span>登录</span> </a>  </div> </div></div> </li> <li class="tb-item"> <a class="tb-link" href="https://wenda.toutiao.com/" target="_blank" ga_event="mh_nav_others">问答</a> </li> <li class="tb-item"> <a class="tb-link" href="https://mp.toutiao.com/" target="_blank" ga_event="mh_nav_others">头条号</a> </li> <li class="tb-item"> <a class="tb-link" href="https://tuchong.com/" target="_blank" ga_event="mh_nav_others">图虫</a> </li> <li class="tb-item"> <a class="tb-link" href="javascript:void(0)">反馈</a> </li> <li class="tb-item more"> <a class="tb-link" href="http://www.toutiao.com/about/">更多</a> <div class="layer"> <ul> <li> <a href="http://www.toutiao.com/articles_news_society/" class="layer-item">头条简版</a> </li> <li> <a href="http://www.toutiao.com/about/" class="layer-item" rel="nofollow">关于头条</a> </li> <li> <a href="http://www.toutiao.com/join/" class="layer-item" rel="nofollow">加入头条</a> </li> <li> <a href="http://www.toutiao.com/report/" class="layer-item" rel="nofollow">媒体报道</a> </li> <li> <a href="http://www.toutiao.com/media_partners/" class="layer-item" rel="nofollow">媒体合作</a> </li> <li> <a href="http://www.toutiao.com/cooperation/" class="layer-item" rel="nofollow">产品合作</a> </li> <li> <a href="http://www.toutiao.com/media_cooperation/" class="layer-item" rel="nofollow">合作说明</a> </li> <li> <a href="https://ad.toutiao.com/e/" class="layer-item" target="_blank" rel="nofollow">广告投放</a> </li> <li> <a href="http://www.toutiao.com/contact/" class="layer-item" rel="nofollow">联系我们</a> </li> <li> <a href="http://www.toutiao.com/user_agreement/" class="layer-item" rel="nofollow">用户协议</a> </li> <li> <a href="http://www.toutiao.com/complain/" class="layer-item" rel="nofollow">投诉指引</a> </li> <li> <a href="http://www.toutiao.com/corrupt_report/" class="layer-item" rel="nofollow">廉洁举报</a> </li> </ul> </div> </li> </ul> <div riot-tag="userFeedback" class="userFeedback" style="display: none;"><div class="feedback_dialog"> <div class="dialog-header"> <h3>意见反馈</h3> </div> <div class="dialog-inner"> <div class="feedback_panel"> <form> <p class="label">联系方式（必填）</p> <div class="input-group"> <input class="email" placeholder="您的邮箱/QQ号" type="text" name="feedback-email"> </div> <p class="label">您的意见（必填）</p> <div class="input-group"> <textarea style="height:100px;" name="feedback-content" class="content" maxlength="140" placeholder="请填写您的意见，不超过140字"></textarea> </div> <div class="input-group"> <input type="submit" value="提交" class="submit-btn"> <span class="error"></span> <a class="close" href="javascript:void(0);">[关闭]</a> </div> </form> </div> </div> </div></div> </div></div>
+  
+  <div class="middlebar">
+  <div class="y-box middlebar-inner">
+    <div class="y-left logo-box">
+      <a class="logo-link" href="http://www.toutiao.com/" ga_event="go_home">
+        <img class="logo" src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/logo_201f80d.png">
+      </a>
+    </div>
+
+    
+      <div class="y-left chinese-tag">
+        <a href="http://www.toutiao.com/" target="_blank" ga_event="click_index">首页</a>
+        /
+        <a href="http://www.toutiao.com/search/?keyword=%E6%95%B0%E7%A0%81" target="_blank" ga_event="click_channel">数码</a>
+        /
+        <span class="text">正文</span>
+      </div>
+    
+
+    <div class="y-right">
+      <div riot-tag="wsearch" style="margin-top: 9px; width: 340px;"><div name="searchBox" class="wsearch"> <form name="searchForm" action="http://www.toutiao.com/search/" method="get" target="_blank"> <div name="inputbox" class="y-box input-group"> <input class="y-left input-text" name="keyword" autocomplete="off" ga_event="mh_search" type="text" placeholder="请输入关键字" onclick=""> <div class="y-right btn-submit"> <button type="submit" href="javascript:;"> <i class="y-icon icon-search" ga_event="mh_search"></i> </button> </div> </div> </form> <div class="layer "> <div class="layer-inner"> <ul ga_event="mh_search"> <li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-1">1</i> <span class="search-txt">雾霾天在操场考试</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-2">2</i> <span class="search-txt">六小龄童遇别车</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-3">3</i> <span class="search-txt">欲共同开发南海</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-4">4</i> <span class="search-txt">广外女生被割喉</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-5">5</i> <span class="search-txt">拿80万购房补贴</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-6">6</i> <span class="search-txt">居民贴纸条给小偷</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-7">7</i> <span class="search-txt">普天间机场搬迁案</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-8">8</i> <span class="search-txt">AC352首飞成功</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-9">9</i> <span class="search-txt">ppap猥琐大叔</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-10">10</i> <span class="search-txt">大龄女被骗财骗色</span> </a> </li><!--riot placeholder--> </ul> </div> </div> </div></div>
+    </div>
+  </div>
+</div>
+
+  
+</div>
+
+<div riot-tag="login"><div class="login-dialog hide"> <a class="btn" href="javascript:;"> <i class="icon icon-close"></i> </a> <div class="login-dialog-header"> <h3>邮箱登录</h3> </div> <div class="login-dialog-inner" data-node="inner"> <div class="login-pannel bottom-line"> <form action="http://www.toutiao.com/auth/login/" method="POST"> <ul> <li> <div class="input-group"> <div class="input"> <label>邮箱</label> <input class="name" name="name_or_email" type="text" placeholder="请使用您的注册邮箱" autocomplete="off" spellcheck="false"> </div> </div> </li> <li> <div class="input-group"> <div class="input"> <label>密码</label> <input class="password" name="password" type="password" data-node="password" placeholder="密码" autocomplete="off" spellcheck="false"> </div> </div> </li> <li class="captcha-box "> <div class="input-group"> <div class="input"> <input class="password" name="captcha" type="text" data-node="captcha" placeholder="验证码" autocomplete="off" spellcheck="false"> <img name="captchaImg"> </div> </div> </li> <li> <div class="input-group"> <input type="checkbox" name="remember_me" checked="" style="vertical-align:top"> <label for="remember_me" class="label">记住账号</label> </div> </li> <li> <div class="input-group" style="text-align: center;"> <input type="submit" class="submit-btn" value="登录"> <p class=""></p> </div> </li> </ul> </form> </div> <div class="login-dialog-header"> <h3>合作网站帐号登录</h3> </div> <div class=""> <ul class="y-box sns_login_list"> <li class="sinaweibo"> <a href="javascript:;" data-pid="sina_weibo" ga_event="login_sina_weibo"> <i class="icon"></i> 新浪微博 </a> </li> <li class="qqweibo"> <a href="javascript:;" data-pid="qq_weibo" ga_event="login_tencnet_weibo"> <i class="icon"></i> 腾讯微博 </a> </li> <li class="qzone"> <a href="javascript:;" data-pid="qzone_sns" ga_event="login_qqzone"> <i class="icon"></i> QQ空间 </a> </li> <li class="renren"> <a href="javascript:;" data-pid="renren_sns" ga_event="login_renren"> <i class="icon"></i> 人人网 </a> </li> <li class="weixin"> <a href="javascript:;" style="margin-right:0;" data-pid="weixin" ga_event="login_wechat"> <i class="icon"></i> 微信 </a> </li> </ul> </div> </div> </div> <div class="mask hide"></div></div>
+<div id="toast"></div>
+
+
+<div class="y-box container">
+  <div class="y-left">
+    <div class="y-box">
+      <div class="y-left index-left">
+        <div riot-tag="snsbox"><div class="snsbox" name="snsbox"> <a href="http://www.toutiao.com/i6338682011124761090/?tt_from=weixin&amp;utm_campaign=client_share&amp;app=news_article&amp;utm_source=weixin&amp;iid=4814822643&amp;utm_medium=toutiao_android&amp;wxshare_count=1#comment_area" class="share-count" ga_event="click_comment_anchor"> <i class="y-icon icon-comments"></i> <span>3</span> </a> <div class="share-hr"></div> <div class="share-box" ga_event="click_share_weibo"><i class="y-icon icon-sina"></i><span>微博</span></div> <div class="share-box" ga_event="click_share_qzone"><i class="y-icon icon-qzone"></i><span>Qzone</span></div> <div class="share-box share-weixin" ga_event="click_share_weixin"> <i class="y-icon icon-wechat"></i><span>微信</span> <div class="share-qrcode"> <div></div> </div> </div> </div></div>
+      </div>
+      <div class="y-left index-middle" id="J_content">
+        <div id="article-main">
+	
+
+  <h1 class="article-title">如何排查Java内存泄露(内附各种排查工具介绍)</h1>
+
+  <div class="articleInfo">
+	
+    
+    <span class="src">
+    	
+    		爱Java
+    	
+    </span>
+    
+    <span class="time">2016-10-07 19:23</span>
+</div>
+
+  <div class="article-content"><div><p>今天刚刚才加一个故障review会议, 故障非常典型, google下也可以找到相似案例介绍。 在排查问题的过程中，使用了大量的工具, 发现有问题的地方还不只一个，总结一下. (本篇文章不会重点描述案例本身，重点会介绍个人对java内存泄露问题的排查思路和各种工具的使用)。</p><p>java内存泄露典型特征</p><ul class=" list-paddingleft-2"><li><p><strong>现象一:</strong> 堆/Perm 区不断增长, 没有下降趋势(回收速度赶不上增长速度), 最后不断触发FullGC, 甚至crash(如下**两张图是同一个应用的GC和Perm数据, GC触发原因确认是Perm不足**) . 一般是现象二的晚期表现.</p></li></ul><p><img src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/ef900016f4f3d8465b2" img_width="521" img_height="283" alt="如何排查Java内存泄露(内附各种排查工具介绍)" onerror="javascript:errorimg.call(this);"></p><p><img src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/efc00016c22f982eac9" img_width="526" img_height="281" alt="如何排查Java内存泄露(内附各种排查工具介绍)" onerror="javascript:errorimg.call(this);"></p><ul class=" list-paddingleft-2"><li><p><strong>现象二:</strong> 每次FullGC后, 堆/Perm 区在慢慢的增长, 最后不断触发FullGC, 甚至crash(如下图: 示意图)</p><p><img src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/e960003025336e57c5f" img_width="523" img_height="272" alt="如何排查Java内存泄露(内附各种排查工具介绍)" onerror="javascript:errorimg.call(this);"></p></li></ul><p>java内存泄露场景---PermGen space</p><ul class=" list-paddingleft-2"><li><p>原因:说明Perm不足. Perm存放class,method相关对象，以及运行时常量对象. 如果一个应用加载了大量的class, 那么Perm区存储的信息一般会比较大.另外大量的intern String对象也会导致Perm区不断增长。 此区域大小由-XX:MaxPermSize参数进行设置. (jdk8相关参数已经改变, 这里不讨论)</p></li><li><p>案例:Groovy动态编译class, xstream String.intern</p></li><li><p>本质原因:ClassLoader.defineClass和java.lang.String.intern在大量不适宜的场景被调用.</p></li><li><p>**解决方案: **</p><p><img src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/efc00016c2319efaa77" img_width="550" img_height="253" alt="如何排查Java内存泄露(内附各种排查工具介绍)" onerror="javascript:errorimg.call(this);"></p></li><ul class=" list-paddingleft-2"><li><p>方案3: 增加-XX:+TraceClassLoading和-XX:+TraceClassUnloading, 看看哪些class加载了，哪些class卸载了. 如果一些特殊的class一直被加载而没有被卸载说明也是有问题的。(如下图)</p><p><img src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/ef900016f50b8901859" img_width="550" img_height="538" alt="如何排查Java内存泄露(内附各种排查工具介绍)" onerror="javascript:errorimg.call(this);"></p></li><li><p>方案4：执行jmap -permgen(jstat -gcutil 可以查看内存增长速度和区域)命令看看Perm区中的内容, 初步确定是否存在问题 (如下图)</p></li><li><p>**用JProfiler来trace String.intern方法栈</p></li><li><p>方案1(直接有效): 使用btrace相关工具输出调用ClassLoader.defineClass栈信息, 从栈信息来追溯问题. (代码如下图). 但Btrace 不能trace jvm native方法(官方release btrace 1.3.1 中版本声明可以trace native方法, 但尝试无效。如果你清楚如何使用，麻烦告知一下，谢谢).</p><p><img src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/e9600030255744176b4" img_width="531" img_height="271" alt="如何排查Java内存泄露(内附各种排查工具介绍)" onerror="javascript:errorimg.call(this);"></p></li><li><p>方案2: dump heap, 看看哪些class有异常现象(数量), String被Perm区引用的对象信息等.但这种方式不太直观，可以从String数据看看发现可疑问题，没有方案1直观。(如下图: 如果能在日常调试推荐JProfiler**)</p></li></ul></ul><p><img src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/ef900016f52a42e8d65" img_width="550" img_height="410" alt="如何排查Java内存泄露(内附各种排查工具介绍)" onerror="javascript:errorimg.call(this);"></p><p><img src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/f00000166cbb9af25bf" img_width="550" img_height="289" alt="如何排查Java内存泄露(内附各种排查工具介绍)" onerror="javascript:errorimg.call(this);"></p><p>java内存泄露场景---Java heap space</p><ul class=" list-paddingleft-2"><li><p>原因:长生命周期的对象引用了短生命周期(应该尽快GC回收掉)的对象，最后造成一个对象已经不能在堆区分配足够空间. 注: 这种现象不能完全肯定是内存泄露, 比如: heap本身的设置的过小.</p></li><li><p>案例:我个人没有遇到过这种案例, 但模拟过这种情形的Demo: 参考我的《深入浅出JProfiler》文章, 也学习过其他同学的案例: 例如:参数过大并且频繁超时导致内存泄露</p></li><li><p>解决方案:</p></li></ul><ol class=" list-paddingleft-2"><li><p>触发FullGC, dump live heap. 标记堆中对象数量, 重点关注可疑对象</p></li><li><p>触发FullGC, dump live heap. 标记堆中对象数量, 重点关注可疑对象</p></li><li><p>对比步骤1和步骤2 相同对象的数量和大小, 找出可疑对象一一进行排查确认。</p></li><li><p>如果步骤3依然无法明确有问题的对象, 那就多执行几次步骤1和步骤2。 在此过程中可以调整GC触发时间, 模拟真实的故障场景 :)</p></li><li><p>看看GC后堆的大小是否增长, 如果没有不断增长, 并且持续一段较长时间, 那基本正常(具体看看[深入浅出JProfiler][JProfiler]文章中的实践章节)。</p></li></ol><p>注: Java内存泄露的场景还有很多(可以参考下官方的一些文档 java memleaks ), 有机会后面会继续补充.</p><blockquote><p><strong>学习Java的同学注意了！！！</strong></p><p>学习过程中遇到什么问题或者想获取学习资源的话，欢迎加入Java学习交流群，群号码：<strong>184625948</strong>【长按复制】 我们一起学Java！</p></blockquote></div><p class="footnote">本文为头条号作者发布，不代表今日头条立场。</p></div>
+
+  <div class="article-actions">
+		
+<div class="labelList">
+	<i class="y-icon icon-tag"></i>
+	<ul class="label-list">
+		
+		<li class="label-item"><a class="label-link" href="http://www.toutiao.com/search/?keyword=%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80" target="_blank">编程语言</a></li>
+		
+		<li class="label-item"><a class="label-link" href="http://www.toutiao.com/search/?keyword=Java" target="_blank">Java</a></li>
+		
+		<li class="label-item"><a class="label-link" href="http://www.toutiao.com/search/?keyword=%E6%96%87%E7%AB%A0" target="_blank">文章</a></li>
+		
+		<li class="label-item"><a class="label-link" href="http://www.toutiao.com/search/?keyword=Groovy" target="_blank">Groovy</a></li>
+		
+	</ul>
+</div>
+
+		<div riot-tag="actionBox" class="actionBox"><div class="repin "> <i class="y-icon icon-favorite "></i><span>收藏</span> </div> <a href="javascript:;" class="areport"> <i class="y-icon icon-report"></i><span>举报</span> </a> <div id="J_articleReport"></div></div>
+  </div>
+</div>
+
+        <div style="text-align:center; margin-top: 30px; height: 60px;" id="J_ad_baidu_bottom"><iframe id="iframeu2643457_0" src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/lckm.html" width="640" height="60" align="center,center" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="border:0; vertical-align:bottom;margin:0;" allowtransparency="true"></iframe></div>
+
+        <a id="comment_area" href="http://www.toutiao.com/i6338682011124761090/?tt_from=weixin&amp;utm_campaign=client_share&amp;app=news_article&amp;utm_source=weixin&amp;iid=4814822643&amp;utm_medium=toutiao_android&amp;wxshare_count=1#" style="display: inline-block;margin-bottom: 20px;"></a><!--评论锚点-->
+        <div riot-tag="comment" id="comment"><div class="c-header"> <em>3&nbsp;</em>条评论 </div> <div riot-tag="inputBox" ismain="true" avatar="" group_id="6338607444486406401" item_id="6338682011124761090"><div class="inputBox"> <div class="y-box"> <div class="avatar-wrap avatar-wrap-center">  </div> <div class="input-wrap  "> <div class="c-textarea" ga_event="click_input_comment"> <textarea name="inputText" placeholder="写下您的评论..."></textarea> </div> <div class="c-action" ga_event="click_publish_comment"> <div class="c-submit">评论</div> </div> </div> </div> </div></div> <ul> <li class="c-item"> <a target="_blank" class="avatar-wrap" href="http://www.toutiao.com/user/6886388690/"> <img alt="" src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/ef4000ae47a046914fd"> </a> <div class="c-content"> <div class="c-user-info"> <a class="c-user-name" target="_blank" href="http://www.toutiao.com/user/6886388690/">无尽红叉轻语</a> <span class="c-create-time">2月前</span> </div> <p>厉害</p> <div class="c-footer-action"> <span class="c-reply" ga_event="click_reply_comment">回复</span>   <span class="y-right c-report" title="举报"><i class="y-icon icon-report"></i></span> <span title="点赞" ga_event="click_good_comment" class="y-right c-digg ">1&nbsp;<i class="y-icon icon-digg"></i></span> </div> <div class="J_input_0"></div> <!--riot placeholder-->  </div> </li><li class="c-item"> <a target="_blank" class="avatar-wrap" href="http://www.toutiao.com/user/5577583667/"> <img alt="" src="http://q.qlogo.cn/qqapp/100290348/37078AF4C772123DB46694A7A46959FF/100"> </a> <div class="c-content"> <div class="c-user-info"> <a class="c-user-name" target="_blank" href="http://www.toutiao.com/user/5577583667/">111111160684851</a> <span class="c-create-time">2月前</span> </div> <p>楼主干几年了</p> <div class="c-footer-action"> <span class="c-reply" ga_event="click_reply_comment">回复</span>   <span class="y-right c-report" title="举报"><i class="y-icon icon-report"></i></span> <span title="点赞" ga_event="click_good_comment" class="y-right c-digg ">2&nbsp;<i class="y-icon icon-digg"></i></span> </div> <div class="J_input_1"></div> <!--riot placeholder-->  </div> </li><li class="c-item"> <a target="_blank" class="avatar-wrap" href="http://www.toutiao.com/user/3927236212/"> <img alt="" src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/64"> </a> <div class="c-content"> <div class="c-user-info"> <a class="c-user-name" target="_blank" href="http://www.toutiao.com/user/3927236212/">花田里犯de错</a> <span class="c-create-time">2月前</span> </div> <p>干货</p> <div class="c-footer-action"> <span class="c-reply" ga_event="click_reply_comment">回复</span>   <span class="y-right c-report" title="举报"><i class="y-icon icon-report"></i></span> <span title="点赞" ga_event="click_good_comment" class="y-right c-digg ">0&nbsp;<i class="y-icon icon-digg"></i></span> </div> <div class="J_input_2"></div> <!--riot placeholder-->  </div> </li><!--riot placeholder--> </ul>  <div id="J_report"></div></div>
+      </div>
+    </div>
+    <div class="y-box" style="margin-top: 30px;">
+      <div class="y-left index-left">
+        <div riot-tag="relatedChannel"><div name="relatedChannel" ga_event="related_channel_click" class="relatedChannel "> <h2 class="relatedChannel-header">相关推荐</h2> <ul class="relatedChannel-list"> <li> <a href="javacript:;" class="relatedChannel-item active"> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>推荐</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>热点</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>社会</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>娱乐</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>科技</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>体育</span> </a> </li><!--riot placeholder--> </ul> </div></div>
+      </div>
+      <div class="y-left index-middle">
+        <div class="index-cut-line" id="J_cut_line"></div>
+        <div riot-tag="feedBox"></div>
+      </div>
+    </div>
+  </div>
+  <div id="J_rindex" class="y-right index-right">
+    
+<div class="module">
+  <div class="pgcInfo">
+    <div class="pgc-head">
+      <a class="pgc-link" target="_blank" href="http://www.toutiao.com/m6194069816/" ga_event="click_into_pgc">
+          <img src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/41100057f9c1fbcfc1b" alt="爱Java">
+          <div class="pgc-username">
+            <span>爱Java</span>
+            <div riot-tag="subscribe" class="pgc-subscribe"><div class="subscribe" ga_event="follow_pgc">  <div class="article-unsubscribe left-arrow"> <span>立即关注</span> </div> </div></div>
+          </div>
+      </a>
+    </div>
+    <p class="pgc-description">分享Java学习方法，提供Java免费学习资源！</p>
+    <ul class="pgc-content">
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://toutiao.com/i6338927506346738178/" target="_blank" class="pgc-article-link">
+          Java Web中的中文编码
+        </a>
+    	</li>
+      
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://toutiao.com/i6338925342920540673/" target="_blank" class="pgc-article-link">
+          深入分析 Java 中的中文编码问题
+        </a>
+    	</li>
+      
+      
+      
+      
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://toutiao.com/i6338681493870608898/" target="_blank" class="pgc-article-link">
+          深入理解Java try-with-resource
+        </a>
+    	</li>
+      
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://toutiao.com/i6338681022426644994/" target="_blank" class="pgc-article-link">
+          Java快速入门从这六条技能开始
+        </a>
+    	</li>
+      
+      
+    </ul>
+  </div>
+</div>
+
+
+    <div style="margin-bottom:30px;">
+	<iframe src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/saved_resource.html" onload="var adWrap=this;setTimeout(function(){if(!adWrap.loaded){adWrap.src=&#39;//www.toutiao.com/api/pc/adsafe/&#39;+&#39;#group=detail_top_right&#39;;adWrap.loaded=true;}},1)" frameborder="0" width="300" height="250” scrolling=“no"></iframe>
+</div>
+
+    <div riot-tag="hotVideo" class="hotVideo module" ga_event="click_video_recommend"><div class="module-head video-head"><a href="http://www.toutiao.com/video/" target="_blank">热门视频</a></div> <ul> <li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6366101930388750850/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/12de00042d667dbcbe46" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>05:56</span> </i> <p class="hot-title module-title">中国神童回答科学家提出的问题，让人出乎意料，全场掌声不断！</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6366193005242204418/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/1321000d41a2d690e336" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>07:14</span> </i> <p class="hot-title module-title">失去和中国的六年后 挪威该反思些什么？王毅与挪威外交大臣布伦德举行会谈</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6366363480190763266/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/1352000056a32f2db594" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>19:29</span> </i> <p class="hot-title module-title">“台独派”不要错估大陆“武统”实力</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6366392253485072642/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/12ee000a73fa65addeb1" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>03:31</span> </i> <p class="hot-title module-title">王健林揭秘成功秘诀：年轻人这么做，想不成功都难！</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6356026684793831682/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/11360006cf03f51c1624" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>05:47</span> </i> <p class="hot-title module-title">周立波当众讽刺倪萍，倪萍句句反击，太过瘾，真不愧姜还是老的辣</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6366420875943608834/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/13510003278111eebe92" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>02:15</span> </i> <p class="hot-title module-title">妹子光脚暴走｜告诉你日本街头有多干净</p> </a> </li><!--riot placeholder--> </ul></div>
+    <div style="margin-bottom: 30px;" id="J_ad_baidu_top1"><iframe id="iframeu2793998_0" src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/lckm(1).html" width="300" height="250" align="center,center" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="border:0; vertical-align:bottom;margin:0;" allowtransparency="true"></iframe></div>
+
+    
+<div class="module recpgc">
+	<div class="module-head">
+		相关头条号
+	</div>
+	<ul class="recpgc-content">
+		
+		
+		<li class="recpgc-list">
+    		<a class="recpgc-user" href="http://toutiao.com/m3360006196/" target="_blank" ga_event="click_related_pgc">
+        		<img src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/1453793470" alt="">
+        		<span class="user-name">Linux技术</span>
+    		</a>
+    		<ul>
+    			
+    				<li class="related-article">
+    					<a href="http://toutiao.com/group/6366124859974369538/" target="_blank">CentOS 7.3 安装指南</a>
+    				</li>
+    			
+    				<li class="related-article">
+    					<a href="http://toutiao.com/group/6366124666490519810/" target="_blank">Ubuntu 调查发现，大部分人从不更新他们的物联网设备</a>
+    				</li>
+    			
+    		</ul>
+		</li>
+		
+		
+	</ul>
+</div>
+
+
+    <div style="margin-bottom: 30px;" id="J_ad_baidu_top2"><iframe id="iframeu2794021_0" src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/lckm(2).html" width="300" height="250" align="center,center" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="border:0; vertical-align:bottom;margin:0;" allowtransparency="true"></iframe></div>
+
+    <div riot-tag="hotPicture" class="hotPicture module" ga_event="click_pictures_recommend"><div class="module-head pic-head"><a href="http://www.toutiao.com/news_image/" target="_blank">精彩图片</a></div> <ul> <li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6335177189382930689/">   <div class="pic-style style_3"> <div class="module-pic pic-middle"><img alt="" src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/e500004b20750d20e2f"></div> <div class="module-pic pic-small"><img alt="" src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/e910000222d87e40249"></div> <div class="module-pic pic-small"><img alt="" src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/e500004b20a32d10cf1"></div> </div> <i class="hot-tag pic-tag"> <span>19图</span> </i> <p class="hot-title module-title">女孩与诗：姑娘我们好像在哪里见过？</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6349257662920081665/"> <div class="pic-style style_1"> <div class="module-pic pic-big"><img alt="" src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/106d0004035d51671d12"></div> </div>   <i class="hot-tag pic-tag"> <span>9图</span> </i> <p class="hot-title module-title">这么大的姑娘找不到对象 成天在家就知道玩手机！</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6366370994743787778/"> <div class="pic-style style_1"> <div class="module-pic pic-big"><img alt="" src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/13550003dffb69f2a5cf"></div> </div>   <i class="hot-tag pic-tag"> <span>13图</span> </i> <p class="hot-title module-title">67岁的印度版‘韦小宝’：妻儿成群有房有车，能养活175口人</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6361189786615939330/">  <div class="pic-style style_2"> <div class="module-pic pic-middle"><img alt="" src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/ef5001727b1d3ab675d"></div> <div class="module-pic pic-small"><img alt="" src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/ef5001727b319ec002a"></div> <div class="module-pic pic-small"><img alt="" src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/12340006a9b59c0f13b3"></div> </div>  <i class="hot-tag pic-tag"> <span>10图</span> </i> <p class="hot-title module-title">细数影史上的十大赔钱角色，第一名导致电影损失1亿4890英镑</p> </a> </li><!--riot placeholder--> </ul></div>
+    <div>
+  <iframe src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/saved_resource(1).html" onload="var adWrap=this;setTimeout(function(){if(!adWrap.loaded){adWrap.src=&#39;//www.toutiao.com/api/pc/adsafe/&#39;+&#39;#group=detail_bottom_right&#39;;adWrap.loaded=true;}},1)" frameborder="0" width="300" height="250” scrolling=“no"></iframe>
+</div>
+
+    <div id="adindexhover" style="position: fixed; top: 20px; display: none;">
+	<iframe src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/saved_resource(2).html" onload="var adWrap=this;setTimeout(function(){if(!adWrap.loaded){adWrap.src=&#39;//www.toutiao.com/api/pc/adsafe/&#39;+&#39;#group=detail_bottom_right_hover&#39;;adWrap.loaded=true;}},1)" frameborder="0" width="300" height="250” scrolling=“no"></iframe>
+</div>
+
+  </div>
+</div>
+
+<div class="action-feedback">
+  
+</div>
+
+<!-- 公共尾部 -->
+<div id="footer">
+    <div>
+        <span class="fitem">© 2016 今日头条 www.toutiao.com</span>
+        <a class="fitem" href="http://www.12377.cn/" target="_blank">中国互联网举报中心</a>
+        <a class="fitem" href="http://www.miibeian.gov.cn/" target="_blank">京ICP证140141号</a>
+        <a class="fitem" href="http://www.miibeian.gov.cn/" target="_blank">京ICP备12025439号-3</a>
+        <a class="fitem" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11000002002023" target="_blank" ga_event="click_about">
+            <img src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/gongan_d0289dc.png">京公网安备 11000002002023号
+        </a>
+    </div>
+    <div>
+        <a class="fitem" href="http://www.toutiao.com/license/" target="_blank">网络文化经营许可证</a>
+        <a class="fitem" href="http://www.toutiao.com/a3642705768/" target="_blank">跟帖评论自律管理承诺书</a>
+        <span class="fitem">违法和不良信息举报电话：010-58341833</span>
+        <span class="fitem">公司名称：北京字节跳动科技有限公司</span>
+    </div>
+</div>
+
+
+
+    </div>
+
+    <script>
+        window.globals = window.globals || {};
+
+        taAnalysis && taAnalysis.setup({
+          c: 'detail_article'
+        });
+        taAnalysis && taAnalysis.send('pageview', {});
+
+        window.gaqpush = function (ga_action, ga_label){
+            ga('send', 'event','detail_article' , ga_action, ga_label);
+        };
+
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        // ga('create', 'UA-28423340-5', 'auto');
+        ga('create', 'UA-28423340-5', 'auto', {'sampleRate': 10});
+        ga('send', 'pageview');
+
+        utils.on(document.getElementsByTagName('body')[0], 'click', function(e) {
+            var target = utils.getTarget(e),
+                ga_event,
+                ga_category,
+                ga_label,
+                ga_value;
+
+            while(target && target.nodeName.toUpperCase() !== 'BODY') {
+                ga_event = utils.getAttribute(target, 'ga_event');
+                ga_category = utils.getAttribute(target, 'ga_category') || 'detail_article';
+                ga_label = utils.getAttribute(target, 'ga_label');
+                ga_value = utils.getAttribute(target, 'ga_value') || 1;
+
+                ga_event && ga('send', 'event', ga_category, ga_event, ga_label, ga_value);
+                ga_event && taAnalysis && taAnalysis.send('event', { ev: ga_event });
+                target = target.parentNode;
+            }
+        });
+
+        riot.observable(window);
+    </script>
+    
+
+<script>
+  // 用户信息
+  var userInfo = {
+      id: 0,
+      name: '',
+      avatarUrl: '',
+      isPgc: false,
+      isOwner: false
+  };
+
+
+  var group = {
+  	id:'6338607444486406401',
+  	repin:0,
+  };
+
+  var media = {
+  	id:6194069816,
+  	like:false
+  };
+
+  var siblingList = [];
+</script>
+
+<script src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/article_17bc30b.js.下载"></script>
+
+<script>
+  riot.mount('wtopbar', {
+    home: false,
+    userInfo: userInfo
+  });
+  riot.mount('login');
+  riot.mount('wsearch');
+</script>
+
+<script>
+  riot.mount('snsbox',{
+    share_url:"http://toutiao.com/item/6338682011124761090",
+    abstract:"今天刚刚才加一个故障review会议, 故障非常典型, google下也可以找到相似案例介绍。 在排查问题的过程中，使用了大量的工具, 发现有问题的地方还不只一个，总结一下. (本篇文章不会重点描述案例本身，重点会介绍个人对java内存泄露问题的排查思路和各种工具的使用)。".replace(/<br \/>/ig, ''),
+    group_id:"6338607444486406401",
+    comments_count: utils.numFormat('3', 1, 'en'),
+    fix: true
+  });
+  riot.mount('hotVideo');
+  riot.mount('hotPicture');
+  riot.mount('feedback');
+</script>
+
+<script>
+  riot.mount('comment', {
+    group_id: '6338607444486406401',
+    item_id: '6338682011124761090' || '6338682011124761090',
+    comments_count: utils.numCutByComma('3'),
+    userInfo: userInfo,
+    ban_comment: 0 + 0
+  });
+</script>
+
+<script>
+  riot.mount('relatedChannel', {
+    tag: '__all__'
+  });
+</script>
+
+<script src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/player.min.js.下载"></script>
+<script src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/video_0801e31.js.下载"></script>
+<!--[if lt IE 9]>
+  <script src="//s3.pstatp.com/toutiao/resource/ntoutiao_web/page/detail/article_detail/article_main/audio/audio_ie8_69f6c6f.js" charset="utf-8"></script>
+<![endif]-->
+<script src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/audio_2324d3c.js.下载"></script>
+
+<script type="text/javascript" src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/c.js.下载"></script>
+<script>
+  BAIDU_CLB_fillSlotAsync('u2793998', 'J_ad_baidu_top1');
+  BAIDU_CLB_fillSlotAsync('u2794021', 'J_ad_baidu_top2');
+  BAIDU_CLB_fillSlotAsync('u2643457', 'J_ad_baidu_bottom');
+</script>
+
+    <script src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/z_stat.php" language="JavaScript"></script><script src="./如何排查Java内存泄露(内附各种排查工具介绍) - 今日头条(www.toutiao.com)_files/core.php" charset="utf-8" type="text/javascript"></script><a href="http://www.cnzz.com/stat/website.php?web_id=1259612802" target="_blank" title="站长统计">站长统计</a>
+
+
+</body></html>

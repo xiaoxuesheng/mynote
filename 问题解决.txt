@@ -34,3 +34,8 @@ JAVA_OPTS="$JAVA_OPTS" -server -XX:PermSize=128m -XX:MaxSize=512m
 
 解决-dubbo已经提交服务了，却无法访问。java.lang.IllegalStateException: Failed to check the status of the service com.datayes.dataplat.webservice.DefaultDataCheckService. No provider available for the service com.datayes.dataplat.webservice.DefaultDataCheckService from the url zookeeper://10.21.141.50:2181/com.alibaba.dubbo.registry.RegistryService?
 需要看是否服务器host与ip一致，如果不一致，需要在provider的配置时在protocal配置host为服务器ip地址
+
+解决-新加的服务发布成功，但是调用时找不到，日志：exception is java.lang.NoSuchMethodError:com.ejlerp.saleorder.api.SaleOrderWarehouseService.clearRetryNum(Lcom/ejlerp/common/vo/CallerInfo;Ljava/util/List;)V
+问题描述：（1）在 SaleOrderWarehouseService 里面新增了方法 clearRetryNum，并在微服务项目中测试没有问题。（2）在 api项目中 执行命令 mvn clean compile package deploy -U -Dmaven.test.skip新方法发布成功（3）在web项目中调用，saleOrderWarehouseService.clearRetryNum。执行时报错exception is java.lang.NoSuchMethodError。解决方法：dubbo会有提供者缓存问题，清了缓存就可以了。home目录中有.dubbo文件，把这个文件夹下的文件都删除。
+
+
