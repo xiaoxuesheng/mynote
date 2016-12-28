@@ -1,0 +1,4 @@
+1....bin下启动mongo服务 mongod.exe --dbpath "E:\softwareworld\mongoDate"
+2.然后开一个命令行，直接mongo,进入。
+3.mongo里面存储文档的_id:12字节，每个字节两位16进制，共24位。前4个字节即8位代表时间戳、接着3个字节即6位代表机器号、接着2个字节即4位代表进程控制号、最后三个字节即6位代表计数器
+4.mongo连接 mongo -u admin -p admin 192.168.0.197:27017/pagedb
