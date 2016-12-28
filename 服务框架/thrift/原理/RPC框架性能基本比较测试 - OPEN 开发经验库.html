@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)http://www.open-open.com/lib/view/open1426302068107.html -->
+<html><head lang="cn"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>RPC框架性能基本比较测试 - OPEN 开发经验库</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="keywords" content="RPC,WEB服务/RPC/SOA">
+	<meta name="description" content="gRPC是Google最近公布的开源软件，基于最新的HTTP2.0协议，并支持常见的众多编程语言。 我们知道HTTP2.0是基于二进制的HTTP协议升级版本，目前各大浏览器都在快马加鞭的加以支持。 我们可以设想一下，未来浏览器支持HTTP2.0，并通过现有开源序列化库比如protobuf等，可以直接和各种语言的服务进行高效交互，这将是多么“美好”的场景！
+">
+	<link rel="shortcut icon" href="http://www.open-open.com/lib/favicon.ico">
+	<link rel="copyright" href="http://www.open-open.com/">
+
+	<link href="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/idea.min.css" rel="stylesheet">
+	<link href="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/jquery-ui.min.css" rel="stylesheet">
+	
+	<link href="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/bootstrap.min.css" rel="stylesheet">
+	<link href="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/font-awesome.min.css" rel="stylesheet">
+	<link href="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/jquery-confirm.css" rel="stylesheet">
+	<link href="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/styles.css" rel="stylesheet">
+
+	<style type="text/css" media="screen, projection">
+		/*<![CDATA[*/
+		@import "/lib/css/common.css";
+		@import "/lib/css/main.css";
+		@import "/lib/css/jGrowl.css";
+		/*]]>*/
+		.articleIndex li.active a {
+			color: #0099ff;
+		}
+	</style>
+	<style type="text/css">
+		.topheader h1{font-size: 24px;margin: 0;}
+		.crumbs{padding-bottom: 5px;font-size: 11px;}.crumbs,.crumbs a,.meta{color: #bbb;}
+		#tag-list{margin-top: 10px;}
+		#tag-list a{background: #fff;padding: 2px 10px;text-decoration: none;}
+		#tag-list a:hover{background: #c5e2ff;color: #0099ff;}
+		.crumbs a:hover{color: #0099ff;}
+		#readercontainer{background: #fff;padding: 40px 89px;}
+
+		.post-nav ul{
+			margin: 0;
+		}
+		.post-nav>ul>li a{
+			padding-left: 10px;
+		}
+		.post-nav>ul>li>ul>li a{
+			padding-left: 30px;
+		}
+		.post-nav>ul>li>ul>li>ul>li a{
+			padding-left: 50px;
+		}
+		.post-nav ul li.active a{
+			border-left: 2px solid #0099ff;
+		}
+
+		.aside-fixed {
+			left: 50%;
+			margin-left: 310px;
+			position: fixed;
+			top: 65px;
+			width: 260px;
+		}
+		.bdsharebuttonbox {
+			background: #eee none repeat scroll 0 0;
+			margin-top: 10px;
+			padding: 10px;
+			width: 100%;
+		}
+
+	</style>
+
+	<script src="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/push.js.下载"></script><script type="text/javascript">
+		if(window.location.toString().indexOf('pref=padindex') != -1){
+		}else{
+			if(/AppleWebKit.*Mobile/i.test(navigator.userAgent) || (/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/.test(navigator.userAgent))){
+				if(window.location.href.indexOf("?mobile")<0){
+					try{
+						if(/Android|Windows Phone|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)){
+							window.location.href="http://m.open-open.com/m/lib/view/1426302068107.html";
+						}else if(/iPad/i.test(navigator.userAgent)){
+							window.location.href="http://m.open-open.com/m/lib/view/1426302068107.html"
+						}else{
+							window.location.href="http://m.open-open.com/m/lib/view/1426302068107.html"
+						}
+					}catch(e){}
+				}
+			}
+		}
+	</script>
+
+
+	<script type="text/javascript">
+		var rooturl="/lib";
+		var wgDocKey='1426302068107';
+		var wgDocTitle='RPC框架性能基本比较测试';
+		var wgDocStatusFlag='';
+		var wgUserFolders=null;
+		var wgDownFrame=null;
+		var wgCostByUser=null;
+		var wgDocFavoriteByUser=false;
+		var wgDocScoreByUser=null;
+		var wgUserLogined=0;
+		var tb_pathToImage = "/lib/images/loadingAnimation.gif";
+
+
+	</script>
+
+
+
+
+<script src="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/share.js.下载"></script><link rel="stylesheet" href="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/share_style0_16.css"></head>
+<body id="view"><div id="BAIDU_DUP_fp_wrapper" style="position: absolute; left: -1px; bottom: -1px; z-index: 0; width: 0px; height: 0px; overflow: hidden; visibility: hidden; display: none;"><iframe id="BAIDU_DUP_fp_iframe" src="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/o.html" style="width: 0px; height: 0px; visibility: hidden; display: none;"></iframe></div>
+
+
+<style>
+	.global-tags{background: #333;color: #ababab;height: 30px;line-height: 30px;width: 100%;}
+	.global-tags .container{position: relative;}
+	.global-tags ul{ height: 30px; margin: 0; overflow: hidden;}
+	.global-tags a{color:#ababab;padding: 5px; }
+	.global-tags a:hover{color:#e0e0e0; }
+	.global-tags li { display: inline-block; padding: 0; }
+	.global-tags  .more { background-color: #333; height: 30px; position: absolute; right: 0; top: 0; width: 30px; }
+	.global-tags  .more:before { background-image: linear-gradient(90deg, rgba(0, 95, 60, 0), #333); background-size: 100% auto; content: ""; height: 100%; left: -20px; position: absolute; top: 0; width: 20px; }
+
+	/* menu */
+	.all-sort{z-index: 100;position: absolute;left: 15px;top: 30px;display: none;}
+	.all-sort-head{background: #ff3c00; color: #fff; margin-right: 20px; text-align: center; width: 160px;float: left;}
+	.all-sort-head a{color: #fff;}
+	.item-list .subitem{float:left;padding:20px;}
+	.all-sort-list{position:relative;width:160px;border:2px solid #393939;border-top:none;background:#393939;float: left;z-index: 100;}
+	.all-sort-list .item .parent{font-weight: 700;border: none;width: 120px;text-align: right;margin-right: 2px;}
+	.all-sort-list .item .parent i{font: 400 9px/14px consolas; height: 14px; margin-left: 10px; width: 4px;}
+	.all-sort-list .item.bo{border-top:none;}
+	.all-sort-list .item h3{height:40px;line-height:40px;font-size:14px;font-weight:normal;width:158px;overflow:hidden; color:#ffffff;margin: 0;}
+	.all-sort-list .item h3 a{color: #ffffff;}
+	.all-sort-list .item:hover h3,.all-sort-list .item:hover span,.all-sort-list .item:hover h3 a,.all-sort-list .item .active ,.all-sort-list .item .active a,.all-sort-list .item .active span{color:#E4393C;}
+	.all-sort-list .item span{padding:0px 5px;color:#ffffff;font-family:"\5B8B\4F53";}
+	.all-sort-list .item a{text-decoration:none;}
+	.all-sort-list .subitem a{ float: left;  margin:5px 20px 5px 0;border-left:1px solid #eee;line-height: 14px;height: 20px;}
+	.all-sort-list .item a:hover{color:#E4393C;}
+	.all-sort-list .item:hover h3,.all-sort-list .item .active{position:relative;z-index:13;background:#FFF;border-color:#DDD;border-width:1px 0px;border-style:solid;}
+	.all-sort-list .item-list{ display:none; position:absolute; width:705px; min-height:360px; _height:360px; background:#FFF; left:157px;  border:1px solid #DDD; top:0; z-index:10; }
+
+</style>
+
+
+<header class="site-header">
+	<div class="header-top ">
+		<div class="header-top-inner">
+			<div class="" style="margin: 0 30px;">
+				<div class="row">
+					
+						<div class="header-talet pull-left">
+							<a href="http://www.open-open.com/">首页</a> &nbsp;
+							<a class="" href="http://www.open-open.com/code/">代码</a> &nbsp;
+							<a class="" href="http://www.open-open.com/doc/">文档</a> &nbsp;
+							<a title="OPEN论坛频道" href="http://www.open-open.com/solution/">问答</a> &nbsp;
+							<a title="OPEN资讯" class="" href="http://www.open-open.com/news/">资讯</a> &nbsp;
+							<a title="OPEN经验库" class="active" href="http://www.open-open.com/lib/">经验</a> &nbsp;
+							<a title="GitHub日报" class="" href="http://www.open-open.com/github/">GitHub日报</a>
+							&nbsp;|&nbsp;
+							<a class="active" title=" 安卓开发专栏" target="_blank" href="http://www.open-open.com/lib/list/177">安卓开发专栏</a>
+							&nbsp;|&nbsp;
+							<a class="active" href="http://www.open-open.com/lib/tag/%E5%BC%80%E5%8F%91%E8%80%85%E5%91%A8%E5%88%8A" target="_blank" rel="tag">开发者周刊</a>&nbsp;|&nbsp;
+							<a class="active" href="http://www.open-open.com/lib/view/open1475497562965.html" target="_blank" rel="tag">Android Studio 使用推荐</a>&nbsp;|&nbsp;
+							<a class="active" href="http://www.open-open.com/lib/view/open1475497355674.html" target="_blank" rel="tag">Android开发推荐</a>
+							
+						</div>
+					
+						<div class="user-info pull-right" id="Personal">
+							
+								<a href="http://www.open-open.com/lib/view/open1426302068107.html#" title="登录OPEN经验库" class="login">登录</a>&nbsp;&nbsp;
+								<a href="http://www.open-open.com/lib/view/open1426302068107.html#" title="注册新的账号" class="register">注册</a>
+							
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	<nav class="navbar ">
+		<div class="container">
+			<div class="navbar-header" style="margin-right: 30px;">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span aria-hidden="true" class="glyphicon glyphicon-menu-hamburger"></span>
+					<span aria-hidden="true" class="glyphicon glyphicon-menu-up"></span>
+				</button>
+				<a class="top-logo" href="http://www.open-open.com/lib"><span>www.open-open.com/lib</span></a>
+				<span style="font-size: 26px;color: #db6d4c">OPEN经验</span>
+				<span style="font-size: 12px;color: #b5b5b5"></span>
+			</div>
+
+			<div class="pull-right" style="padding: 20px;">
+				<button class="btn btn-info br40" id="upload" type="button">投稿</button>
+			</div>
+			<div id="search">
+				<form onsubmit="document.charset=&#39;utf-8&#39;;" accept-charset="utf-8" method="post" action="http://www.open-open.com/lib/query" name="sf">
+					<input type="hidden" value="all" name="site">
+					<div class="input-group">
+						<input type="text" x-webkit-speech="" placeholder="经验搜索" class="form-control" name="q" id="kw">
+                      <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                      </span>
+
+					</div>
+				</form>
+
+				<!-- /input-group -->
+
+			</div>
+
+		</div>
+	</nav>
+	<div class="global-tags">
+		<div class="container">
+			<div class="all-sort-head"><a href="http://www.open-open.com/lib/list/all">全部经验分类</a>&nbsp;<i aria-hidden="true" class="fa fa-toggle-down"></i></div><div class="all-sort"><div class="all-sort-list"><div data-submenu-id="submenu1" class="item bo"><h3><span>·</span><a href="http://www.open-open.com/lib/list/1">软件开发</a></h3><div id="submenu1" class="item-list clearfix"><div class=" subitem"><a href="http://www.open-open.com/lib/list/405">VR</a><a href="http://www.open-open.com/lib/list/2">Web框架</a><a href="http://www.open-open.com/lib/list/3">GUI开发框架</a><a href="http://www.open-open.com/lib/list/4">图表/报表制作</a><a href="http://www.open-open.com/lib/list/5">搜索引擎</a><a href="http://www.open-open.com/lib/list/6">模板引擎</a><a href="http://www.open-open.com/lib/list/7">缓存组件</a><a href="http://www.open-open.com/lib/list/8">Ajax框架</a><a href="http://www.open-open.com/lib/list/9">XML操作类库</a><a href="http://www.open-open.com/lib/list/10">HTML操作类库</a><a href="http://www.open-open.com/lib/list/12">文件上传</a><a href="http://www.open-open.com/lib/list/347">3D图形处理库</a><a href="http://www.open-open.com/lib/list/14">图形/图像处理</a><a href="http://www.open-open.com/lib/list/15">常用工具包</a><a href="http://www.open-open.com/lib/list/16">JSON开发包</a><a href="http://www.open-open.com/lib/list/353">OAuth开发包</a><a href="http://www.open-open.com/lib/list/17">PDF工具包</a><a href="http://www.open-open.com/lib/list/18">Flex开发</a><a href="http://www.open-open.com/lib/list/19">Office文档处理</a><a href="http://www.open-open.com/lib/list/20">日志处理</a><a href="http://www.open-open.com/lib/list/21">网络工具包</a><a href="http://www.open-open.com/lib/list/22">多媒体处理</a><a href="http://www.open-open.com/lib/list/23">WEB服务/RPC/SOA</a><a href="http://www.open-open.com/lib/list/24">RSS/ATOM相关</a><a href="http://www.open-open.com/lib/list/25">持久层框架</a><a href="http://www.open-open.com/lib/list/26">作业调度框架</a><a href="http://www.open-open.com/lib/list/27">工作流引擎</a><a href="http://www.open-open.com/lib/list/28">业务规则引擎</a><a href="http://www.open-open.com/lib/list/29">面向方面AOP/IoC</a><a href="http://www.open-open.com/lib/list/30">JEE框架</a><a href="http://www.open-open.com/lib/list/31">安全相关</a><a href="http://www.open-open.com/lib/list/32">OpenID/单点登录SSO</a><a href="http://www.open-open.com/lib/list/34">条形码/二维码开发包</a><a href="http://www.open-open.com/lib/list/35">验证码(Captcha)</a><a href="http://www.open-open.com/lib/list/96">网络爬虫</a><a href="http://www.open-open.com/lib/list/214">OSGi</a><a href="http://www.open-open.com/lib/list/237">网络技术</a><a href="http://www.open-open.com/lib/list/324">Google相关API</a><a href="http://www.open-open.com/lib/list/328">Swing开发包</a><a href="http://www.open-open.com/lib/list/332">HTML编辑器</a><a href="http://www.open-open.com/lib/list/337" style="color:#FF3C00">JavaScript开发工具包</a><a href="http://www.open-open.com/lib/list/352">TTS/语音合成和处理</a><a href="http://www.open-open.com/lib/list/367">游戏开发</a><a href="http://www.open-open.com/lib/list/370">加密/解密软件包</a><a href="http://www.open-open.com/lib/list/374">源代码语法着色</a><a href="http://www.open-open.com/lib/list/376">WebSocket 开发</a><a href="http://www.open-open.com/lib/list/381">MathML显示与编辑</a><a href="http://www.open-open.com/lib/list/383">计算机视觉库/人脸识别</a><a href="http://www.open-open.com/lib/list/385">XML-RPC 开发</a><a href="http://www.open-open.com/lib/list/386">Markdown处理库</a><a href="http://www.open-open.com/lib/list/387">神经网络</a><a href="http://www.open-open.com/lib/list/389">多媒体播放器</a><a href="http://www.open-open.com/lib/list/391">推荐引擎</a><a href="http://www.open-open.com/lib/list/394">机器学习</a><a href="http://www.open-open.com/lib/list/401">算法</a></div><div class="cat-right"></div></div></div><div data-submenu-id="submenu2" class="item "><h3><span>·</span><a href="http://www.open-open.com/lib/list/36">开发语言与工具</a></h3><div id="submenu2" class="item-list clearfix"><div class=" subitem"><a href="http://www.open-open.com/lib/list/406">R语言</a><a href="http://www.open-open.com/lib/list/37" style="color:#FF3C00">Java开发</a><a href="http://www.open-open.com/lib/list/38">.NET开发</a><a href="http://www.open-open.com/lib/list/39">PHP开发</a><a href="http://www.open-open.com/lib/list/40">C/C++开发</a><a href="http://www.open-open.com/lib/list/42">Ruby开发</a><a href="http://www.open-open.com/lib/list/43">Python开发</a><a href="http://www.open-open.com/lib/list/148">ActionScript开发</a><a href="http://www.open-open.com/lib/list/145" style="color:#FF3C00">JavaScript开发</a><a href="http://www.open-open.com/lib/list/44">Perl开发</a><a href="http://www.open-open.com/lib/list/263">Delphi开发</a><a href="http://www.open-open.com/lib/list/243">Erlang开发</a><a href="http://www.open-open.com/lib/list/211">Google Go/Golang开发</a><a href="http://www.open-open.com/lib/list/201">Scala开发</a><a href="http://www.open-open.com/lib/list/240">Lua开发</a><a href="http://www.open-open.com/lib/list/392">Apple Swift开发</a><a href="http://www.open-open.com/lib/list/301">Objective-C开发</a><a href="http://www.open-open.com/lib/list/45">BUG跟踪管理</a><a href="http://www.open-open.com/lib/list/294">Lisp开发</a><a href="http://www.open-open.com/lib/list/46">项目构建</a><a href="http://www.open-open.com/lib/list/41">移动开发</a><a href="http://www.open-open.com/lib/list/47">单元测试</a><a href="http://www.open-open.com/lib/list/48">测试工具</a><a href="http://www.open-open.com/lib/list/49">性能测试和优化</a><a href="http://www.open-open.com/lib/list/50">程序调试</a><a href="http://www.open-open.com/lib/list/51">代码混淆和加密</a><a href="http://www.open-open.com/lib/list/52">UML/模型工具</a><a href="http://www.open-open.com/lib/list/53">安装制作</a><a href="http://www.open-open.com/lib/list/54">代码分析/审查/优化</a><a href="http://www.open-open.com/lib/list/55">前端技术</a><a href="http://www.open-open.com/lib/list/179">Eclipse开发工具</a><a href="http://www.open-open.com/lib/list/205">IntelliJ IDEA</a><a href="http://www.open-open.com/lib/list/281">NetBeans</a><a href="http://www.open-open.com/lib/list/349">程序文档工具</a><a href="http://www.open-open.com/lib/list/361">语法/词法分析器</a><a href="http://www.open-open.com/lib/list/362">脚本/动态语言</a><a href="http://www.open-open.com/lib/list/364">持续集成系统</a><a href="http://www.open-open.com/lib/list/375">Web开发工具</a><a href="http://www.open-open.com/lib/list/388">Node.js 开发</a><a href="http://www.open-open.com/lib/list/395">中文分词</a><a href="http://www.open-open.com/lib/list/399" style="color:#FF3C00">Android Studio开发工具</a></div><div class="cat-right"></div></div></div><div data-submenu-id="submenu3" class="item "><h3><span>·</span><a href="http://www.open-open.com/lib/list/57">网站系统</a></h3><div id="submenu3" class="item-list clearfix"><div class=" subitem"><a href="http://www.open-open.com/lib/list/58">论坛系统BBS</a><a href="http://www.open-open.com/lib/list/59">建站系统CMS</a><a href="http://www.open-open.com/lib/list/60">电子商务/商城</a><a href="http://www.open-open.com/lib/list/61">SNS社交网络/交友平台</a><a href="http://www.open-open.com/lib/list/62">百科系统Wiki</a><a href="http://www.open-open.com/lib/list/63">门户平台Portal</a><a href="http://www.open-open.com/lib/list/64">网络会议/视频会议</a><a href="http://www.open-open.com/lib/list/65">相册/照片/多媒体系统</a><a href="http://www.open-open.com/lib/list/66">微博工具/系统</a><a href="http://www.open-open.com/lib/list/363">博客系统</a><a href="http://www.open-open.com/lib/list/379">开源问答系统</a></div><div class="cat-right"></div></div></div><div data-submenu-id="submenu4" class="item "><h3><span>·</span><a href="http://www.open-open.com/lib/list/67">企业应用</a></h3><div id="submenu4" class="item-list clearfix"><div class=" subitem"><a href="http://www.open-open.com/lib/list/68">ERP/CRM</a><a href="http://www.open-open.com/lib/list/69">OA办公/协作平台</a><a href="http://www.open-open.com/lib/list/70">WebMail系统</a><a href="http://www.open-open.com/lib/list/71">地理信息系统GIS</a><a href="http://www.open-open.com/lib/list/72">数据挖掘</a><a href="http://www.open-open.com/lib/list/73">文档管理</a><a href="http://www.open-open.com/lib/list/74">项目/任务管理</a><a href="http://www.open-open.com/lib/list/333">教学科研相关</a><a href="http://www.open-open.com/lib/list/357">开源SIP项目</a><a href="http://www.open-open.com/lib/list/368">计算机辅助设计CAD/CAM</a></div><div class="cat-right"></div></div></div><div data-submenu-id="submenu5" class="item "><h3><span>·</span><a href="http://www.open-open.com/lib/list/75">服务器软件</a></h3><div id="submenu5" class="item-list clearfix"><div class=" subitem"><a href="http://www.open-open.com/lib/list/76">应用服务器</a><a href="http://www.open-open.com/lib/list/77">Web服务器</a><a href="http://www.open-open.com/lib/list/78">FTP服务器</a><a href="http://www.open-open.com/lib/list/79">邮件服务器</a><a href="http://www.open-open.com/lib/list/80">缓存服务器</a><a href="http://www.open-open.com/lib/list/81">版本控制系统</a><a href="http://www.open-open.com/lib/list/82">路由器/防火墙</a><a href="http://www.open-open.com/lib/list/83">电话/通讯/IM聊天</a><a href="http://www.open-open.com/lib/list/84">集群/负载均衡</a><a href="http://www.open-open.com/lib/list/85">流媒体服务器</a><a href="http://www.open-open.com/lib/list/86">消息系统</a><a href="http://www.open-open.com/lib/list/220">分布式/云计算/大数据</a><a href="http://www.open-open.com/lib/list/298">企业服务总线ESB</a><a href="http://www.open-open.com/lib/list/321">建站服务器套件</a><a href="http://www.open-open.com/lib/list/348">虚拟化</a><a href="http://www.open-open.com/lib/list/355">目录服务LDAP</a><a href="http://www.open-open.com/lib/list/393">容器系统</a></div><div class="cat-right"></div></div></div><div data-submenu-id="submenu6" class="item "><h3><span>·</span><a href="http://www.open-open.com/lib/list/87">插件和扩展</a></h3><div id="submenu6" class="item-list clearfix"><div class=" subitem"><a href="http://www.open-open.com/lib/list/88">Eclipse插件</a><a href="http://www.open-open.com/lib/list/89">jQuery插件</a><a href="http://www.open-open.com/lib/list/331">Node.js扩展</a><a href="http://www.open-open.com/lib/list/338">jQuery分页插件</a><a href="http://www.open-open.com/lib/list/346">Prototype扩展</a><a href="http://www.open-open.com/lib/list/356">Chrome插件/扩展</a></div><div class="cat-right"></div></div></div><div data-submenu-id="submenu7" class="item "><h3><span>·</span><a href="http://www.open-open.com/lib/list/90">数据库相关</a></h3><div id="submenu7" class="item-list clearfix"><div class=" subitem"><a href="http://www.open-open.com/lib/list/91">数据库服务器</a><a href="http://www.open-open.com/lib/list/92">数据库管理工具</a><a href="http://www.open-open.com/lib/list/93">数据库驱动程序</a><a href="http://www.open-open.com/lib/list/94">数据库建模</a><a href="http://www.open-open.com/lib/list/122">数据库连接池</a><a href="http://www.open-open.com/lib/list/154">SQL</a><a href="http://www.open-open.com/lib/list/307">NoSQL数据库</a></div><div class="cat-right"></div></div></div><div data-submenu-id="submenu8" class="item "><h3><span>·</span><a href="http://www.open-open.com/lib/list/155">操作系统</a></h3><div id="submenu8" class="item-list clearfix"><div class=" subitem"><a href="http://www.open-open.com/lib/list/156">Linux</a><a href="http://www.open-open.com/lib/list/182">CentOS</a><a href="http://www.open-open.com/lib/list/183">Ubuntu</a><a href="http://www.open-open.com/lib/list/224">UNIX</a><a href="http://www.open-open.com/lib/list/251">Fedora</a><a href="http://www.open-open.com/lib/list/274">FreeBSD</a><a href="http://www.open-open.com/lib/list/310">Solaris</a><a href="http://www.open-open.com/lib/list/311">openSUSE</a><a href="http://www.open-open.com/lib/list/312">Debian</a><a href="http://www.open-open.com/lib/list/313">OpenBSD</a></div><div class="cat-right"></div></div></div><div data-submenu-id="submenu9" class="item "><h3><span>·</span>其他分类</h3><div id="submenu9" class="item-list clearfix"><div class=" subitem"><p class="clearfix"><a href="http://www.open-open.com/lib/list/159" class="parent">软件开发管理<i>&gt;</i></a><a href="http://www.open-open.com/lib/list/174">敏捷开发</a><a href="http://www.open-open.com/lib/list/178">项目管理</a><a href="http://www.open-open.com/lib/list/196">软件架构</a><a href="http://www.open-open.com/lib/list/296">软件测试</a></p><p class="clearfix"><a href="http://www.open-open.com/lib/list/319" class="parent">管理和监控<i>&gt;</i></a><a href="http://www.open-open.com/lib/list/320">系统监控</a><a href="http://www.open-open.com/lib/list/360">日志分析和统计</a><a href="http://www.open-open.com/lib/list/366">备份工具</a></p><p class="clearfix"><a href="http://www.open-open.com/lib/list/322" class="parent">应用工具<i>&gt;</i></a><a href="http://www.open-open.com/lib/list/323">磁盘/光驱工具</a><a href="http://www.open-open.com/lib/list/359">文档/文本编辑</a><a href="http://www.open-open.com/lib/list/384">终端/远程登录</a></p><p class="clearfix"><a href="http://www.open-open.com/lib/list/329" class="parent">游戏相关<i>&gt;</i></a><a href="http://www.open-open.com/lib/list/330">网页游戏</a></p></div><div class="cat-right"></div></div></div></div></div>
+			<ul class="nav__list">
+				<li class="nav__item ">
+
+				</li>
+				<li class="nav__item"><i class="fa fa-tags"></i></li>
+
+				<li class="nav__item"><a href="http://www.open-open.com/lib/tag/Android" rel="tag">Android</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/lib/tag/IOS" rel="tag">IOS</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/lib/tag/JavaScript" rel="tag">JavaScript</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/lib/tag/HTML5" rel="tag">HTML5</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/lib/tag/CSS" rel="tag">CSS</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/lib/tag/jQuery" rel="tag">jQuery</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/lib/tag/Python" rel="tag">Python</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/lib/tag/PHP" rel="tag">PHP</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/lib/tag/NodeJS" rel="tag">NodeJS</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/lib/tag/Java" rel="tag">Java</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/lib/tag/Spring" rel="tag">Spring</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/lib/tag/MySQL" rel="tag">MySQL</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/lib/tag/MongoDB" rel="tag">MongoDB</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/lib/tag/Redis" rel="tag">Redis</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/lib/tag/NOSQL" rel="tag">NOSQL</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/lib/tag/Vim" rel="tag">Vim</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/lib/tag/C++" rel="tag">C++</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/lib/tag/C#" rel="tag">C#</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/lib/tag/JSON" rel="tag">JSON</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/lib/tag/Ruby" rel="tag">Ruby</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/lib/tag/Linux" rel="tag">Linux</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/lib/tag/Nginx" rel="tag">Nginx</a></li>
+				<li class="nav__item"><a href="http://www.open-open.com/lib/tag/Docker" rel="tag">Docker</a></li>
+				<li class="more"></li>
+
+			</ul>
+
+		</div>
+	</div>
+</header>
+
+
+
+<div class="topheader" style="background: #eee;padding: 10px 0 30px;">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+				<div class="crumbs">
+					<a href="http://www.open-open.com/lib/list/all">所有分类</a>
+					
+						&nbsp;&gt;&nbsp;
+						<a href="http://www.open-open.com/lib/list/1">软件开发</a>
+					
+						&nbsp;&gt;&nbsp;
+						<a href="http://www.open-open.com/lib/list/23">WEB服务/RPC/SOA</a>
+					
+				</div>
+				<h1 id="articleTitle">RPC框架性能基本比较测试</h1>
+				<div class="meta" style="margin-top: 10px;">
+					<span id="tag-list">
+					
+						<a href="http://www.open-open.com/lib/tag/RPC">RPC</a>
+					
+					</span>&nbsp;
+
+					<span class="item">2015-03-14 15:39:25 发布</span>
+				</div>
+
+
+			</div>
+			<div class="col-md-3">
+				<table>
+					<tbody>
+					<tr>
+						<td><strong>您的评价</strong>:</td>
+						<td>
+							<div id="rate" class="rate-container"><span id="star1" class="star-big-off" title="很差">&nbsp;</span><span id="star2" class="star-big-off" title="较差">&nbsp;</span><span id="star3" class="star-big-off" title="还行">&nbsp;</span><span id="star4" class="star-big-off" title="不错">&nbsp;</span><span id="star5" class="star-big-off" title="力荐">&nbsp;</span></div>
+						</td>
+						<td width="30">
+							<span id="score-num">0.0</span>
+						</td>
+						<td width="30">
+							<div id="rate-tip">不错</div>
+						</td>
+
+					</tr>
+					</tbody>
+				</table>
+				<div id="favorite-container"><a id="favorite" href="javascript:void(0)" class="btn btn-default">收藏</a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<span class="item">2收藏</span>
+					
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<div class="container">
+<div class="row">
+
+		<div id="readercontainer" class="col-md-9">
+				<article>
+					<div>
+	<div>
+		<div>
+			<p>
+				gRPC是Google最近公布的开源软件，基于最新的HTTP2.0协议，并支持常见的众多编程语言。 我们知道HTTP2.0是基于二进制的HTTP协议升级版本，目前各大浏览器都在快马加鞭的加以支持。 我们可以设想一下，未来浏览器支持HTTP2.0，并通过现有开源序列化库比如protobuf等，可以直接和各种语言的服务进行高效交互，这将是多么“美好”的场景！
+			</p>
+		</div>
+		<div>
+			<p>
+				gPRC的Java实现底层网络库是Netty，而且是用到最新的Netty5.0.0.Alpha3的开发版本，因为最新版本针对HTTP/2做了很多改进。 为了跨语言，gPRC也和其他方案一样，采用了类似古老IDL的接口描述语言，利用自家的Protobuf项目带的protoc编译器来生成框架代码。这和目前最流行的Facebook开源的，现为Apache顶级项目的Thrift原理一致。
+			</p>
+		</div>
+		<div>
+			<p>
+				我比较好奇，这个新出世的框架的性能怎么样，和现有的RPC开源方案比较如何。就花了一些时间进行简单比较。 我选择了以下四种开源项目进行测试：gRPC, Thrift, Wildfly, Dubbo。 为了简化，测试范例都使用项目自带的demo或者sample等进行简单修改，使得跨进程网络调用次数一致。
+			</p>
+		</div>
+	</div>
+</div>
+<div>
+	<h2 id="articleHeader0">
+		gRPC <a href="https://github.com/grpc/grpc">https://github.com/grpc/grpc</a> 
+	</h2>
+	<div>
+		<div>
+			<ol>
+				<li>
+					<p>
+						从Github master主干上获得最新版本，按照说明文件进行编译。如上所述，网络框架是Netty5，基于最新的HTTP/2.
+					</p>
+				</li>
+				<li>
+					<p>
+						测试例子为 <a href="https://github.com/grpc/grpc-java/blob/master/examples/src/main/java/io/grpc/examples/routeguide/RouteGuideClient.java">RouteGuideClient</a> 
+					</p>
+				</li>
+				<li>
+					<p>
+						IDL为 <a href="https://github.com/grpc/grpc-java/blob/master/examples/src/main/proto/route_guide.proto">route_guide.proto</a> 
+					</p>
+				</li>
+				<li>
+					<p>
+						选择其中getFeature方法，去除不用的语句和屏幕输出，进行10,000次同步调用。
+					</p>
+<pre class="brush:java; toolbar: true; auto-links: false;">TestClientSync client = new TestClientSync("localhost", 8980);
+try {
+  final long startTime = System.nanoTime();
+
+  for (int i = 0; i &lt; 10000; i++)
+    client.getFeature(409146138, -746188906);
+
+  final long endTime = System.nanoTime();
+  info("method 1 : " + (endTime - startTime));
+}</pre> <br>
+<pre class="brush:java; toolbar: true; auto-links: false;">public void getFeature(int lat, int lon) {
+  try {
+    Point request = Point.newBuilder().setLatitude(lat).setLongitude(lon).build();
+    Feature feature = blockingStub.getFeature(request);
+  } catch (RuntimeException e) {
+    logger.log(Level.WARNING, "RPC failed", e);
+    throw e;
+  }
+}</pre> 					<p>
+						<br>
+					</p>
+				</li>
+			</ol>
+		</div>
+		<div>
+			<p>
+				多次执行，记录需要的时间。
+			</p>
+		</div>
+		<div>
+			<p>
+				gRPC还有一种非阻塞的调用方法，不过因为时间有限，为了简化测试，我只用标准的server启动的方式，asyncStub在大并发访问时出错，用时也较长，故这次测试没有这种方法的结果数据。
+			</p>
+		</div>
+	</div>
+</div>
+<div>
+	<h2 id="articleHeader1">
+		Thrift <a href="http://thrift.apache.org/">http://thrift.apache.org</a> 
+	</h2>
+	<div>
+		<div>
+			<ol>
+				<li>
+					<p>
+						从Apache网站获得最新的0.9.2版本，本机编译获得C的编译器和Java运行环境。
+					</p>
+				</li>
+				<li>
+					<p>
+						测试例子为 <a href="https://github.com/apache/thrift/blob/master/tutorial/java/src/JavaClient.java">JavaClient.java</a> 
+					</p>
+				</li>
+				<li>
+					<p>
+						IDL <a href="https://github.com/apache/thrift/blob/master/tutorial/tutorial.thrift">tutorial.thrift</a> 
+					</p>
+<pre class="brush:java; toolbar: true; auto-links: false;">int diff;
+final long startTime = System.nanoTime();
+try {
+  for (int i = 0; i &lt; 10000; i++)
+     diff = client.calculate(1, work);
+} catch (InvalidOperation io) {
+  System.out.println("Invalid operation: " + io.why);
+}
+final long endTime = System.nanoTime();
+System.out.println("method 1 : " + (endTime - startTime));</pre> 					<p>
+						<br>
+					</p>
+				</li>
+			</ol>
+		</div>
+		<div>
+			<p>
+				Thrift采用经典的基于网络端口的RPC，效率最高，在最后的总结数据可以看到。
+			</p>
+		</div>
+	</div>
+</div>
+<div>
+	<h2 id="articleHeader2">
+		Wildfly 8.2.0 <a href="http://www.wildfly.org/">http://www.wildfly.org</a> 
+	</h2>
+	<div>
+		<div>
+			<p>
+				Wildfly是JBossAS改名后的JBoss应用服务器，实现了完整的JavaEE规范。我们知道JavaEE中远程RPC调用是在EJB规范中定义的。我们这里就是要测试Wildlfy中的远程EJB调用能力， 选用的Wildfly8.2是目前发布的最新稳定版本。这个版本也支持端口多路服用，也就是EJB远程调用是通过HTTP端口复用来进行的，利用HTTP的Upgrade机制做到二进制运行时刻协商升级。 尽管不是纯粹的HTTP/2，但也运行机理也相差无几。
+			</p>
+		</div>
+		<div>
+			<ol>
+				<li>
+					<p>
+						测试例子选用jboss-eap-quickstarts项目中的远程ejb调用例子 <a href="https://github.com/jboss-developer/jboss-eap-quickstarts/blob/wildfly/ejb-remote/client/src/main/java/org/jboss/as/quickstarts/ejb/remote/client/RemoteEJBClient.java">RemoteEJBClient.java</a> 
+					</p>
+				</li>
+				<li>
+					<p>
+						纯Java的RPC方案好处是不需要再有IDL文件定义和编译生成代码的过程，只要商议好接口就可以了
+					</p>
+<pre class="brush:java; toolbar: true; auto-links: false;">public interface RemoteCalculator {
+    int add(int a, int b);
+}</pre> <br>
+<pre class="brush:java; toolbar: true; auto-links: false;">int sum=0;
+final long startTime = System.nanoTime();
+
+for (int i = 0; i &lt; 10000; i++) {
+         sum = statelessRemoteCalculator.add(a, b);
+}
+
+final long endTime = System.nanoTime();
+System.out.println("method 1 : " + (endTime - startTime));</pre> 					<p>
+						<br>
+					</p>
+				</li>
+			</ol>
+		</div>
+		<div>
+			<p>
+				调用无状态的SessionBean方法10,000次,对应的远程EJB服务是部署在Wildfly应用服务器中的EJB。
+			</p>
+		</div>
+	</div>
+</div>
+<div>
+	<h2 id="articleHeader3">
+		Dubbo 2.5.4-SNAPSHOT <a href="https://github.com/alibaba/dubbo">https://github.com/alibaba/dubbo</a> 
+	</h2>
+	<div>
+		<div>
+			<p>
+				Dubbo是阿里集团开源的一个极为成员的RPC框架，在很多互联网公司和企业应用中广泛使用。协议和序列化框架都可以插拔是及其鲜明的特色。同样 的远程接口是基于Java Interface，并且依托于spring框架方便开发。可以方便的打包成单一文件，独立进程运行，和现在的微服务概念一致。
+			</p>
+		</div>
+		<div>
+			<ol>
+				<li>
+					<p>
+						采用github中master主干，目前版本是 2.5.4-SNAPSHOT
+					</p>
+				</li>
+				<li>
+					<p>
+						测试例子选用其中的demo进行修改 <a href="https://github.com/alibaba/dubbo/blob/master/dubbo-demo/dubbo-demo-consumer/src/main/java/com/alibaba/dubbo/demo/consumer/DemoAction.java">DemoAction.java</a> 
+					</p>
+<pre class="brush:java; toolbar: true; auto-links: false;">public interface DemoService {
+	String sayHello(String name);
+}</pre> <br>
+<pre class="brush:java; toolbar: true; auto-links: false;">final long startTime = System.nanoTime();
+
+for (int i = 0; i &lt; 10000; i ++) {
+    try {
+    	String hello = demoService.sayHello("world" + i);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+final long endTime = System.nanoTime();
+System.out.println("method 1 : " + (endTime - startTime));</pre> 					<p>
+						<br>
+					</p>
+				</li>
+			</ol>
+		</div>
+		<div>
+			<p>
+				调用完毕后查看输入log文件获得运行时间。
+			</p>
+		</div>
+	</div>
+</div>
+<div>
+	<h2 id="articleHeader4">
+		数据结果。
+	</h2>
+	<div>
+		<div>
+			<p>
+				最终经过4轮测试，不间断运行10,000次远程RPC调用后的结果如下：
+			</p>
+		</div>
+		<div>
+			<div>
+				<img src="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/20150314105859_599.png" alt="RPC框架性能基本比较测试" height="524" width="573"> 
+			</div>
+		</div>
+		<div>
+			<p>
+				我们可以看到Thrift的效率最高，大概领先一个数量级。而其他三个项目的性能数据在同数量级中，由高到低分别为dubbo, wildfly和gRPC。
+			</p>
+		</div>
+		<div>
+			<p>
+				需要说明的有以下几点：
+			</p>
+		</div>
+		<div>
+			<ol>
+				<li>
+					<p>
+						为了简化测试，我并没有选择同样的调用接口，而是顺手用了项目自带的，方便修改的示例程序。其中gRPC和Thrift的接口有对象传递，稍微复杂一些。
+					</p>
+				</li>
+				<li>
+					<p>
+						不是严格的性能测试流程，比如没有做预热过程，以及测试都运行在我的桌面用机上，没有完全恢复成“干净”的状态。
+					</p>
+				</li>
+				<li>
+					<p>
+						都是简单的服务器单一进程实例，标准示范例子，没有做特别优化和设置多个线程池之类的。而客户端调用也是最简单的阻塞式多次调用压力测试。应该是用多个机器多连接，多个线程，以及异步非阻塞的调用多种环境进行测试更为客观，有机会再继续完善。
+					</p>
+				</li>
+				<li>
+					<p>
+						之前没有看到过基于HTTP/2的RPC调用性能比较，理论上是应该低于经典的基于端口的RPC方案的。这个测试结果可以简单印证这个猜想。 Thrift的数据遥遥领先.gRPC还在开发之中，基于的Netty还是alpha版本，而且非阻塞的方式还没有最后的数据。我想耐心一些，给gRPC 一些时间，它会让我们惊艳的。
+					</p>
+				</li>
+				<li>
+					<p>
+						Wildfly表现良好，要知道它的服务端可是完整的JavaEE服务器啊。不过有时间的化，我试试看经典RMI连接的效率如何，要是能和thrift一个数量级就更好了。
+					</p>
+				</li>
+				<li>
+					<p>
+						dubbo性能也很出色，而且协议层可以更换的话，应该还能有更大提升。
+					</p>
+				</li>
+				<li>
+					<p>
+						我的测试在一台过时的笔记本上，受条件限制，没有先进的G级网络和多台服务器进行标准化性能测试。如果哪位在互联网或者企业工作的朋友有条件，也愿意充分完成这个测试，请和我联系，我会完整介绍我的测试搭建环境，共享代码，并帮助完成。我想那个结果会更有意义。
+					</p>
+				</li>
+			</ol>
+		</div>
+	</div>
+</div>
+来自：<a target="_blank" href="http://www.useopen.net/blog/2015/rpc-performance.html">http://www.useopen.net/blog/2015/rpc-performance.html</a>
+				</article>
+
+
+
+
+		
+
+
+
+		</div>
+
+
+
+	<div class="col-md-3">
+		<div class="bdsharebuttonbox bdshare-button-style0-16" data-bd-bind="1482385269423">
+			<a href="http://www.open-open.com/lib/view/open1426302068107.html#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+			<a href="http://www.open-open.com/lib/view/open1426302068107.html#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+			<a href="http://www.open-open.com/lib/view/open1426302068107.html#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+			<a href="http://www.open-open.com/lib/view/open1426302068107.html#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+			<a href="http://www.open-open.com/lib/view/open1426302068107.html#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+
+		</div>
+
+		<div class=" side-box" style="margin-top: 20px;">
+				<div class="title"><h3>同类热门经验</h3></div>
+				<ol class="hot">
+					
+						<li>
+							<a title="使用Java快速入门RPC框架" -="" thrift="" href="http://www.open-open.com/lib/view/open1341798273463.html"><span class="title">使用Java快速入门RPC框架 - Thrift</span></a>
+						</li>
+					
+						<li>
+							<a title="Spring提供的用于访问Rest服务的客户端：RestTemplate实践" href="http://www.open-open.com/lib/view/open1436018677419.html"><span class="title">Spring提供的用于访问Rest服务的客户端：RestTemplate实践</span></a>
+						</li>
+					
+						<li>
+							<a title="C#" 创建和调用="" webservice="" href="http://www.open-open.com/lib/view/open1330408551889.html"><span class="title">C# 创建和调用 WebService </span></a>
+						</li>
+					
+						<li>
+							<a title="Java" web="" 服务性能优化实践="" href="http://www.open-open.com/lib/view/open1356048814526.html"><span class="title">Java Web 服务性能优化实践</span></a>
+						</li>
+					
+						<li>
+							<a title="REST" 入门介绍="" href="http://www.open-open.com/lib/view/open1336819781369.html"><span class="title">REST 入门介绍</span></a>
+						</li>
+					
+						<li>
+							<a title="理解REST软件建构设计理念" href="http://www.open-open.com/lib/view/open1343635725774.html"><span class="title">理解REST软件建构设计理念 </span></a>
+						</li>
+					
+
+				</ol>
+			</div>
+		<p class="aiBar"></p>
+		<div class="side-box post-nav" style="margin-top: 20px;">
+			<div class="title"><h3>阅读目录</h3></div>
+			<ul class="articleIndex"><li class=""><a href="http://www.open-open.com/lib/view/open1426302068107.html#articleHeader0">gRPC https://github.com/grpc/grpc</a></li><li class=""><a href="http://www.open-open.com/lib/view/open1426302068107.html#articleHeader1">Thrift http://thrift.apache.org</a></li><li class=""><a href="http://www.open-open.com/lib/view/open1426302068107.html#articleHeader2">Wildfly 8.2.0 http://www.wildfly.org</a></li><li class=""><a href="http://www.open-open.com/lib/view/open1426302068107.html#articleHeader3">Dubbo 2.5.4-SNAPSHOT https://github.com/alibaba/dubbo</a></li><li class="active"><a href="http://www.open-open.com/lib/view/open1426302068107.html#articleHeader4">数据结果。</a></li></ul>
+		</div>
+	</div>
+
+
+
+</div>
+	</div>
+
+<div class="container">
+<script type="text/javascript">
+    var cpro_id = "u2690846";
+</script>
+<script type="text/javascript" src="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/c.js.下载"></script><div id="BAIDU_SSP__wrapper_u2690846_0"><iframe id="iframeu2690846_0" src="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/mckm.html" width="846" height="120" align="center,center" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="border:0; vertical-align:bottom;margin:0;" allowtransparency="true"></iframe></div>
+
+	<div class="row">
+		<div class="col-md-9">
+			<table width="100%"><tbody><tr>
+				<td valign="top" width="33%" class="Relatedb">
+					<div style="border-bottom: 1px #ccc solid;margin-top: 5px"><strong>相关文档</strong> 　—　<a href="http://www.open-open.com/doc" rel="nofollow" target="_blank">更多</a></div>
+					<ul>
+						
+							<li><a href="http://www.open-open.com/doc/view/1a9baca06d414f7f8fe547b6b7849727" rel="nofollow" target="_blank" title="Dubbo-RPC 功能介绍.pdf">Dubbo-RPC 功能介绍.pdf</a></li>
+						
+							<li><a href="http://www.open-open.com/doc/view/039cc0f415674a868d75bffbddeb6337" rel="nofollow" target="_blank" title="PHP中使用XML-RPC构造WebService简单入门.doc">PHP中使用XML-RPC构造WebService简单入门.doc</a></li>
+						
+							<li><a href="http://www.open-open.com/doc/view/ab8ad68185004aa188dcf8de1a90f640" rel="nofollow" target="_blank" title="Java RPC通信机制之XML-RPC.doc">Java RPC通信机制之XML-RPC.doc</a></li>
+						
+							<li><a href="http://www.open-open.com/doc/view/59a70fba326940efb747da57816f0d57" rel="nofollow" target="_blank" title="Dubbo 功能介绍.pdf">Dubbo 功能介绍.pdf</a></li>
+						
+							<li><a href="http://www.open-open.com/doc/view/9ed50c3098474e60821b6f313c7719c8" rel="nofollow" target="_blank" title="Dubbo 功能介绍.pdf">Dubbo 功能介绍.pdf</a></li>
+						
+							<li><a href="http://www.open-open.com/doc/view/ce0678a7812e459abd3d79aa853d4e82" rel="nofollow" target="_blank" title="Java XML-RPC 指南.ppt">Java XML-RPC 指南.ppt</a></li>
+						
+							<li><a href="http://www.open-open.com/doc/view/c92049e6a394403496c01212830b8c9d" rel="nofollow" target="_blank" title="JSON‐RPC for Java 使用说明.pdf">JSON‐RPC&nbsp;for&nbsp;Java&nbsp;使用说明.pdf</a></li>
+						
+							<li><a href="http://www.open-open.com/doc/view/d13d5ce73e7c4a259f1806871feaed73" rel="nofollow" target="_blank" title="RPC Restful 概念理解.pdf">RPC Restful 概念理解.pdf</a></li>
+						
+							<li><a href="http://www.open-open.com/doc/view/8f7f66242b174634b253f2db4102484f" rel="nofollow" target="_blank" title="RPC Restful 相关概念理解.pdf">RPC Restful 相关概念理解.pdf</a></li>
+						
+							<li><a href="http://www.open-open.com/doc/view/d9272c8d8c5f45ee806143ec31bd2b09" rel="nofollow" target="_blank" title="轻量级分布式服务化框架.pdf">轻量级分布式服务化框架.pdf</a></li>
+						
+							<li><a href="http://www.open-open.com/doc/view/532225c7f740462fa8c731fbfe12f207" rel="nofollow" target="_blank" title="利用 JSON-RPC-Java构建下一代 Web 应用程序.pdf">利用 JSON-RPC-Java构建下一代 Web 应用程序.pdf</a></li>
+						
+							<li><a href="http://www.open-open.com/doc/view/59251d2bed094828ac759e6dacb09be1" rel="nofollow" target="_blank" title=".net下rabbitmq的使用8-远程过程调用rpc.doc">.net下rabbitmq的使用8-远程过程调用rpc.doc</a></li>
+						
+							<li><a href="http://www.open-open.com/doc/view/1876493947b142fa8584a8fbf6290440" rel="nofollow" target="_blank" title="JSON RPC Java 简单交流提纲.ppt">JSON RPC Java 简单交流提纲.ppt</a></li>
+						
+							<li><a href="http://www.open-open.com/doc/view/21f1010f03744cab9576e7a2737a0c68" rel="nofollow" target="_blank" title="阿里NameNode性能诊断及优化.pdf">阿里NameNode性能诊断及优化.pdf</a></li>
+						
+							<li><a href="http://www.open-open.com/doc/view/9ce86f8c12b941c4ae28dcb19d7fa019" rel="nofollow" target="_blank" title="用Java实现基于SOAP的XML文档网络传输及远程过程调用(RPC).doc">用Java实现基于SOAP的XML文档网络传输及远程过程调用(RPC).doc</a></li>
+						
+							<li><a href="http://www.open-open.com/doc/view/f5c51a2eea1740b0b8fb9c39fff4703f" rel="nofollow" target="_blank" title="基于 GWT 和 J2EE 的 Web 开发框架的设计实现与应用(硕士学位论文).pdf">基于 GWT 和 J2EE 的 Web 开发框架的设计实现与应用(硕士学位论文).pdf</a></li>
+						
+							<li><a href="http://www.open-open.com/doc/view/c572a33da9844db7baebf2b571de0f3b" rel="nofollow" target="_blank" title="淘宝服务框架（HSF）介绍.pptx">淘宝服务框架（HSF）介绍.pptx</a></li>
+						
+							<li><a href="http://www.open-open.com/doc/view/5dead8b804a447f48456fce266b60301" rel="nofollow" target="_blank" title="Dubbo实现原理.doc">Dubbo实现原理.doc</a></li>
+						
+							<li><a href="http://www.open-open.com/doc/view/f2691c1029da4d9888c0d63806ce5617" rel="nofollow" target="_blank" title="使用 Apache CXF.doc">使用 Apache CXF.doc</a></li>
+						
+							<li><a href="http://www.open-open.com/doc/view/7c30b621698946dca547e3f01a8e9f72" rel="nofollow" target="_blank" title="Thrift与Gearman简介.ppt">Thrift与Gearman简介.ppt</a></li>
+						
+					</ul>
+				</td>
+				<td valign="top" width="33%" class="Relatedb">
+					<div style="border-bottom: 1px #ccc solid;margin-top: 5px"><strong>相关经验</strong> 　—　<a href="http://www.open-open.com/lib" rel="nofollow" target="_blank">更多</a></div>
+					<ul>
+						
+							<li>
+								<a title="Motan框架" -="" 轻量级="" rpc="" 框架="" href="http://www.open-open.com/lib/view/open1462520275298.html" target="_blank"><span class="title">Motan框架 - 轻量级 RPC 框架 </span></a>
+
+							</li>
+						
+							<li>
+								<a title="Java" restful框架的性能比较="" href="http://www.open-open.com/lib/view/open1447771506353.html" target="_blank"><span class="title">Java RESTful框架的性能比较</span></a>
+
+							</li>
+						
+							<li>
+								<a title="高性能的" rpc="" 框架="" nfs-rpc="" href="http://www.open-open.com/lib/view/open1335016376796.html" target="_blank"><span class="title">高性能的 RPC 框架 nfs-rpc</span></a>
+
+							</li>
+						
+							<li>
+								<a title="分布式RPC框架性能大比拼" href="http://www.open-open.com/lib/view/open1473128812008.html" target="_blank"><span class="title">分布式RPC框架性能大比拼</span></a>
+
+							</li>
+						
+							<li>
+								<a title="高性能RPC框架：Hetty" href="http://www.open-open.com/lib/view/open1352114909016.html" target="_blank"><span class="title">高性能RPC框架：Hetty</span></a>
+
+							</li>
+						
+							<li>
+								<a title="HRPC" ——="" 轻量级高性能="" rpc="" 框架="" href="http://www.open-open.com/lib/view/open1472799987037.html" target="_blank"><span class="title">HRPC —— 轻量级高性能 RPC 框架</span></a>
+
+							</li>
+						
+							<li>
+								<a title="Netty编解码框架分析" href="http://www.open-open.com/lib/view/open1430534192662.html" target="_blank"><span class="title">Netty编解码框架分析 </span></a>
+
+							</li>
+						
+							<li>
+								<a title="谈谈如何使用Netty开发实现高性能的RPC服务器" href="http://www.open-open.com/lib/view/open1468240093446.html" target="_blank"><span class="title">谈谈如何使用Netty开发实现高性能的RPC服务器</span></a>
+
+							</li>
+						
+							<li>
+								<a title="支撑微博千亿调用的轻量级RPC框架：Motan" href="http://www.open-open.com/lib/view/open1454584671464.html" target="_blank"><span class="title">支撑微博千亿调用的轻量级RPC框架：Motan</span></a>
+
+							</li>
+						
+							<li>
+								<a title="java" bean转化的利器：mapping4java="" href="http://www.open-open.com/lib/view/open1361497153314.html" target="_blank"><span class="title">java bean转化的利器：mapping4java </span></a>
+
+							</li>
+						
+							<li>
+								<a title="RPC原理详解" href="http://www.open-open.com/lib/view/open1425797146897.html" target="_blank"><span class="title">RPC原理详解</span></a>
+
+							</li>
+						
+							<li>
+								<a title="异步RPC框架：Missian" href="http://www.open-open.com/lib/view/open1362214082326.html" target="_blank"><span class="title">异步RPC框架：Missian </span></a>
+
+							</li>
+						
+							<li>
+								<a title="Java领域中的RPC开源方案" href="http://www.open-open.com/lib/view/open1442223117665.html" target="_blank"><span class="title">Java领域中的RPC开源方案</span></a>
+
+							</li>
+						
+							<li>
+								<a title="基于ZeroMQ的高性能分布式RPC框架：Zerorpc" href="http://www.open-open.com/lib/view/open1405478201087.html" target="_blank"><span class="title">基于ZeroMQ的高性能分布式RPC框架：Zerorpc</span></a>
+
+							</li>
+						
+					</ul>
+				</td>
+				<td valign="top" width="33%" class="Relatedb">
+					<div style="border-bottom: 1px #ccc solid;margin-top: 5px"><strong>相关讨论</strong> 　—　<a href="http://www.open-open.com/solution" rel="nofollow" target="_blank">更多</a></div>
+					<ul>
+						
+							<li>
+								<a title="程序员技术练级攻略" href="http://www.open-open.com/solution/view/1319276210452" rel="nofollow" target="_blank"><span class="title">程序员技术练级攻略</span></a>
+							</li>
+						
+							<li>
+								<a title="RESTful架构详解" href="http://www.open-open.com/solution/view/1437528859537" rel="nofollow" target="_blank"><span class="title">RESTful架构详解</span></a>
+							</li>
+						
+							<li>
+								<a title="REST会是SOA的未来吗？" href="http://www.open-open.com/solution/view/1324368925874" rel="nofollow" target="_blank"><span class="title">REST会是SOA的未来吗？</span></a>
+							</li>
+						
+							<li>
+								<a title="项目开发：速度" vs.="" 质量="" href="http://www.open-open.com/solution/view/1398389175171" rel="nofollow" target="_blank"><span class="title">项目开发：速度 vs. 质量 </span></a>
+							</li>
+						
+							<li>
+								<a title="从" windows="" 8="" 回顾微软平台的各种技术="" href="http://www.open-open.com/solution/view/1324792331468" rel="nofollow" target="_blank"><span class="title">从 Windows 8 回顾微软平台的各种技术</span></a>
+							</li>
+						
+							<li>
+								<a title="我为什么向后端工程师推荐Node.js" href="http://www.open-open.com/solution/view/1322451238921" rel="nofollow" target="_blank"><span class="title">我为什么向后端工程师推荐Node.js</span></a>
+							</li>
+						
+							<li>
+								<a title="Android" webservice访问实例="" href="http://www.open-open.com/solution/view/1320112121811" rel="nofollow" target="_blank"><span class="title">Android webService访问实例</span></a>
+							</li>
+						
+					</ul>
+				</td>
+			</tr></tbody></table>
+		</div>
+
+	</div>
+
+</div>
+
+
+
+
+
+<style>
+	footer{background-color: #fff;
+		border-top: 1px solid rgba(230, 230, 230, 0.75);
+		margin-top: 20px;
+		padding: 20px 0;}
+</style>
+<footer>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-xs-4" style="line-height: 60px;">
+				<span>©2006-2016 深度开源 </span>
+			</div>
+			<div class="col-md-4 col-xs-4 text-center"><span>
+				<a rel="nofollow" href="http://www.open-open.com/" class="brightbox-logo"><img src="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/logo-icon.png"></a>
+			</span></div>
+			<div class="col-md-4 col-xs-4" style="line-height: 60px;">
+				 <a target="_blank" href="http://www.miibeian.gov.cn/">浙ICP备09019653号-31</a>
+				<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257892335'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1257892335' type='text/javascript'%3E%3C/script%3E"));</script><span id="cnzz_stat_icon_1257892335"><a href="http://www.cnzz.com/stat/website.php?web_id=1257892335" target="_blank" title="站长统计">站长统计</a></span><script src="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/z_stat.php" type="text/javascript"></script><script src="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/core.php" charset="utf-8" type="text/javascript"></script>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<script src="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/jquery.min.js.下载"></script>
+<script type="text/javascript" src="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/jquery-confirm.js.下载"></script>
+<script type="text/javascript" src="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/app.js.下载"></script>
+<script type="text/javascript" src="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/scrolltopcontrol.js.下载"></script>
+<!-- the jScrollPane script -->
+<script type="text/javascript" src="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/jquery.contentcarousel.js.下载"></script>
+
+<script type="text/javascript">
+	var rooturl="/lib";
+	var tb_pathToImage = "/lib/images/loadingAnimation.gif";
+	var jc = {};
+	$(function (){
+		$('#ca-container').contentcarousel();
+		$('.login').on('click', function () {
+			jc = $.dialog({
+				title: '&nbsp;',
+				content: '<iframe id="dialog" scrolling="no" style="width:100%;border:none;height:300px;" src="/lib/members/login?keepThis=true&TB_iframe=true&height=177&width=280"></iframe>',
+				animation: 'top',
+				columnClass: 'col-md-5 col-md-offset-3',
+				closeAnimation: 'top',
+				backgroundDismiss: true
+			});
+		});
+		$('.register').on('click', function () {
+			jc = $.dialog({
+				title: '&nbsp;',
+				content: '<iframe id="dialog" scrolling="no" style="width:100%;border:none;height:460px;" src="/lib/members/register?keepThis=true&TB_iframe=true&height=460&width=460"></iframe>',
+				animation: 'top',
+				columnClass: 'col-md-6 col-md-offset-3',
+				closeAnimation: 'top',
+				backgroundDismiss: true
+			});
+		});
+
+
+	});
+
+
+</script>
+
+<script src="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/jquery-ui.min.js.下载"></script>
+<script type="text/javascript" src="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/scrolltopcontrol.js.下载"></script>
+<script type="text/javascript" src="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/view.js.下载"></script>
+
+<script type="text/javascript" src="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/jquery.jgrowl_minimized.js.下载"></script>
+
+<script type="text/javascript">
+	scrolltotop.offset(95,165);
+	scrolltotop.init();
+</script>
+<script src="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/highlight.min.js.下载"></script>
+<script>hljs.initHighlightingOnLoad();
+
+	(function(){
+		var c = new contentIndex();
+		c("article", ".articleIndex");
+		setAIActive();
+
+
+		$(window).scroll(function () {
+			if ($(window).scrollTop() > $(".aiBar").offset().top) {
+				$(".post-nav").addClass("aside-fixed");
+//          console.log($(window).scrollTop());
+			} else {
+//           console.log($(window).scrollTop());
+				$(".post-nav").removeClass("aside-fixed");
+			}
+		});
+		$("#readercontainer img").each(function(index, element) {
+			var $width=$("#readercontainer article").width();
+			if ( this.width>$width) {
+
+				this.height = this.height*$width/this.width;
+				this.width=$width;
+			}
+		});
+
+	})();
+</script>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		bp.src = '//push.zhanzhang.baidu.com/push.js';
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+</script>
+
+
+
+<div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-dialog-buttons ui-draggable" tabindex="-1" role="dialog" aria-describedby="favorite-box" aria-labelledby="ui-id-1" style="display: none;"><div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle"><span id="ui-id-1" class="ui-dialog-title">收藏提示</span><button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close" role="button" title="Close"><span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span><span class="ui-button-text">Close</span></button></div><div id="favorite-box" class="ui-dialog-content ui-widget-content" style="display: block;">
+						<table>
+							<tbody>
+							<tr>
+								<td width="70" align="right">文件夹</td>
+								<td><select id="fav_folderlist" name="folder">
+									<option selected="" value="0">请选择...</option>
+									<option id="newfolder-sp" disabled="" value="">-------------</option>
+									<option value="-1">新增文件夹...</option>
+								</select></td>
+							</tr>
+							<tr style="display: none" id="newfolder-input">
+								<td align="right">新增文件夹</td>
+								<td><input id="fav_newfolder" maxlength="50" type="text" name="newfolder"></td>
+							</tr>
+							<tr>
+								<td align="right">标签</td>
+								<td><input id="fav_tags" maxlength="135" size="20" type="text" name="tags"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="2">(多个标签用逗号分隔)</td>
+							</tr>
+							</tbody>
+						</table>
+					</div><div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix"><div class="ui-dialog-buttonset"><button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button"><span class="ui-button-text">取消</span></button><button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button"><span class="ui-button-text">确认</span></button></div></div></div><div id="topcontrol" title="回到顶部" style="position: fixed; bottom: 165px; right: 95px; cursor: pointer; display: none;"><img src="./RPC框架性能基本比较测试 - OPEN 开发经验库_files/gotop.gif" style="width:35px; height:35px;"></div></body></html>

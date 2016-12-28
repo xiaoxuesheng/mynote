@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<!-- saved from url=(0178)http://www.toutiao.com/i6350051245838828034/?tt_from=weixin&utm_campaign=client_share&app=news_article&utm_source=weixin&iid=4814822643&utm_medium=toutiao_android&wxshare_count=1 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style class="vjs-styles-defaults">
+      .video-js {
+        width: 300px;
+        height: 150px;
+      }
+
+      .vjs-fluid {
+        padding-top: 56.25%
+      }
+    </style>
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="dns-prefetch" href="http://s3.pstatp.com/">
+    <link rel="dns-prefetch" href="http://s3a.pstatp.com/">
+    <link rel="dns-prefetch" href="http://s3b.pstatp.com/">
+    <link rel="dns-prefetch" href="http://p1.pstatp.com/">
+    <link rel="dns-prefetch" href="http://p3.pstatp.com/">
+    
+    
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+    
+    <meta name="baidu-site-verification" content="T239HZAbh7">
+    
+    <!--meta name="baidu_union_verify" content="94bb8bb3fa863f70e7fd926bffecd81e"-->
+    <meta name="360-site-verification" content="b96e1758dfc9156a410a4fb9520c5956">
+    <meta name="360_ssp_verify" content="2ae4ad39552c45425bddb738efda3dbb">
+    <meta name="google-site-verification" content="3PYTTW0s7IAfkReV8wAECfjIdKY-bQeSkVTyJNZpBKE">
+    <meta name="shenma-site-verification" content="34c05607e2a9430ad4249ed48faaf7cb_1432711730">
+    <meta name="baidu_union_verify" content="b88dd3920f970845bad8ad9f90d687f7">
+    <meta name="domain_verify" content="pmrgi33nmfuw4ir2ej2g65lunfqw6ltdn5wselbcm52wszbchirdqyztge3tenrsgq3dknjume2tayrvmqytemlfmiydimddgu4gcnzcfqrhi2lnmvjwc5tfei5dcnbwhazdcobuhe2dqobrpu">
+    
+    
+  <link rel="alternate" media="only screen and (max-width: 640px)" href="http://m.toutiao.com/a6350047941701189890/">
+
+  <title>RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)</title>
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta name="keywords" content="Duty,用户组,RBAC,Separation,权限,模型">
+  <meta name="description" content="我们在做任何一款产品的时候，或多或少都会涉及到用户和权限的问题。譬如，做企业类软件，不同部门、不同职位的人的权限是不同的；做论坛类产品的时候，版主和访客权限也是不一样的；再例如一款">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="shortcut icon" href="http://s3a.pstatp.com/toutiao/resource/ntoutiao_web/static/image/favicon_8e9c9c7.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/layout_a2bdebe.css">
+    <!--[if lt IE 9]>
+      <script src="//s3a.pstatp.com/toutiao/resource/ntoutiao_web/static/js/lib/es5-shim_110642e.js"></script>
+    <![endif]-->
+    <script async="" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/analytics.js.下载"></script><script src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/lib_63840ce.js.下载"></script>
+    
+  <link rel="stylesheet" href="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/article_0f8bea2.css">
+  <link rel="stylesheet" href="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/video.min.css">
+  <!--[if lt IE 9]>
+    <script src="http://s3a.pstatp.com/site/tt_mfsroot/v-player/video-ie8.js" charset="utf-8"></script>
+  <![endif]-->
+
+</head>
+
+<body style="min-width: 1220px; overflow-x: hidden;"><div id="BAIDU_DUP_fp_wrapper" style="position: absolute; left: -1px; bottom: -1px; z-index: 0; width: 0px; height: 0px; overflow: hidden; visibility: hidden; display: none;"><iframe id="BAIDU_DUP_fp_iframe" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/o.html" style="width: 0px; height: 0px; visibility: hidden; display: none;"></iframe></div>
+    <div style="display:none"><input type="hidden" name="csrfmiddlewaretoken" value="18b4c2dd50a67dabc20f982bd846f3f0"></div>
+
+    <a href="http://www.toutiao.com/articles_news_society/" style="display:none;"></a>
+
+    <div class="y-wrap">
+        
+
+<!-- 公共头部 -->
+<div id="header">
+  <div riot-tag="wtopbar" style="height: 34px; background: #222;"><div class="y-box wtopbar">  <div class="y-left y-nav-topbar" riot-tag="nav"><div class="nav"> <ul class="y-box nav-list" ga_event="mh_channel"> <li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/" ga_event="mh_channel_recommend">推荐</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_hot/" ga_event="mh_channel_hot">热点</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/video/" ga_event="mh_channel_video">视频</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_image/" ga_event="mh_channel_image">图片</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/essay_joke/" ga_event="mh_channel_essay">段子</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_society/" ga_event="mh_channel_society">社会</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_entertainment/" ga_event="mh_channel_entertainment">娱乐</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_tech/" ga_event="mh_channel_tech">科技</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_car/" ga_event="mh_channel_car">汽车</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_sports/" ga_event="mh_channel_sports">体育</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_finance/" ga_event="mh_channel_finance">财经</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_military/" ga_event="mh_channel_military">军事</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_world/" ga_event="mh_channel_world">国际</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_fashion/" ga_event="mh_channel_fashion">时尚</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_travel/" ga_event="mh_channel_travel">旅游</a> </li><!--riot placeholder--> <li class="y-left nav-item nav-more"> <a class="nav-link" href="javascript:;"> 更多<i class="y-icon icon-more"></i> </a> <div class="nav-layer"> <ul class="nav-more-list"> <li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_discovery/" ga_event="mh_channel_discovery">探索</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_baby/" ga_event="mh_channel_baby">育儿</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_regimen/" ga_event="mh_channel_regimen">养生</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_story/" ga_event="mh_channel_story">故事</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_essay/" ga_event="mh_channel_essay">美文</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_game/" ga_event="mh_channel_game">游戏</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_history/" ga_event="mh_channel_history">历史</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_food/" ga_event="mh_channel_food">美食</a> </li><!--riot placeholder--> </ul> </div> </li> </ul> </div></div> <ul class="y-right"> <li class="tb-item userbox"> <div riot-tag="wuserbox" abtype="" pageid=""><div class="y-box wuserbox">   <div class="nav-login"> <a ga_event="nav_login" href="javascript:;"> <span>登录</span> </a>  </div> </div></div> </li> <li class="tb-item"> <a class="tb-link" href="https://wenda.toutiao.com/" target="_blank" ga_event="mh_nav_others">问答</a> </li> <li class="tb-item"> <a class="tb-link" href="https://mp.toutiao.com/" target="_blank" ga_event="mh_nav_others">头条号</a> </li> <li class="tb-item"> <a class="tb-link" href="https://tuchong.com/" target="_blank" ga_event="mh_nav_others">图虫</a> </li> <li class="tb-item"> <a class="tb-link" href="javascript:void(0)">反馈</a> </li> <li class="tb-item more"> <a class="tb-link" href="http://www.toutiao.com/about/">更多</a> <div class="layer"> <ul> <li> <a href="http://www.toutiao.com/articles_news_society/" class="layer-item">头条简版</a> </li> <li> <a href="http://www.toutiao.com/about/" class="layer-item" rel="nofollow">关于头条</a> </li> <li> <a href="http://www.toutiao.com/join/" class="layer-item" rel="nofollow">加入头条</a> </li> <li> <a href="http://www.toutiao.com/report/" class="layer-item" rel="nofollow">媒体报道</a> </li> <li> <a href="http://www.toutiao.com/media_partners/" class="layer-item" rel="nofollow">媒体合作</a> </li> <li> <a href="http://www.toutiao.com/cooperation/" class="layer-item" rel="nofollow">产品合作</a> </li> <li> <a href="http://www.toutiao.com/media_cooperation/" class="layer-item" rel="nofollow">合作说明</a> </li> <li> <a href="https://ad.toutiao.com/e/" class="layer-item" target="_blank" rel="nofollow">广告投放</a> </li> <li> <a href="http://www.toutiao.com/contact/" class="layer-item" rel="nofollow">联系我们</a> </li> <li> <a href="http://www.toutiao.com/user_agreement/" class="layer-item" rel="nofollow">用户协议</a> </li> <li> <a href="http://www.toutiao.com/complain/" class="layer-item" rel="nofollow">投诉指引</a> </li> <li> <a href="http://www.toutiao.com/corrupt_report/" class="layer-item" rel="nofollow">廉洁举报</a> </li> </ul> </div> </li> </ul> <div riot-tag="userFeedback" class="userFeedback" style="display: none;"><div class="feedback_dialog"> <div class="dialog-header"> <h3>意见反馈</h3> </div> <div class="dialog-inner"> <div class="feedback_panel"> <form> <p class="label">联系方式（必填）</p> <div class="input-group"> <input class="email" placeholder="您的邮箱/QQ号" type="text" name="feedback-email"> </div> <p class="label">您的意见（必填）</p> <div class="input-group"> <textarea style="height:100px;" name="feedback-content" class="content" maxlength="140" placeholder="请填写您的意见，不超过140字"></textarea> </div> <div class="input-group"> <input type="submit" value="提交" class="submit-btn"> <span class="error"></span> <a class="close" href="javascript:void(0);">[关闭]</a> </div> </form> </div> </div> </div></div> </div></div>
+  
+  <div class="middlebar">
+  <div class="y-box middlebar-inner">
+    <div class="y-left logo-box">
+      <a class="logo-link" href="http://www.toutiao.com/" ga_event="go_home">
+        <img class="logo" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/logo_201f80d.png">
+      </a>
+    </div>
+
+    
+      <div class="y-left chinese-tag">
+        <a href="http://www.toutiao.com/" target="_blank" ga_event="click_index">首页</a>
+        /
+        <a href="http://www.toutiao.com/news_tech" target="_blank" ga_event="click_channel">科技</a>
+        /
+        <span class="text">正文</span>
+      </div>
+    
+
+    <div class="y-right">
+      <div riot-tag="wsearch" style="margin-top: 9px; width: 340px;"><div name="searchBox" class="wsearch"> <form name="searchForm" action="http://www.toutiao.com/search/" method="get" target="_blank"> <div name="inputbox" class="y-box input-group"> <input class="y-left input-text" name="keyword" autocomplete="off" ga_event="mh_search" type="text" placeholder="请输入关键字" onclick=""> <div class="y-right btn-submit"> <button type="submit" href="javascript:;"> <i class="y-icon icon-search" ga_event="mh_search"></i> </button> </div> </div> </form> <div class="layer "> <div class="layer-inner"> <ul ga_event="mh_search"> <li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-1">1</i> <span class="search-txt">六小龄童遇别车</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-2">2</i> <span class="search-txt">广外女生被割喉</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-3">3</i> <span class="search-txt">拿80万购房补贴</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-4">4</i> <span class="search-txt">私宰猪肉2.6万斤</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-5">5</i> <span class="search-txt">官微发色情广告</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-6">6</i> <span class="search-txt">普天间机场搬迁案</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-7">7</i> <span class="search-txt">居民贴纸条给小偷</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-8">8</i> <span class="search-txt">快递业务量300亿</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-9">9</i> <span class="search-txt">ppap猥琐大叔</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-10">10</i> <span class="search-txt">大龄女被骗财骗色</span> </a> </li><!--riot placeholder--> </ul> </div> </div> </div></div>
+    </div>
+  </div>
+</div>
+
+  
+</div>
+
+<div riot-tag="login"><div class="login-dialog hide"> <a class="btn" href="javascript:;"> <i class="icon icon-close"></i> </a> <div class="login-dialog-header"> <h3>邮箱登录</h3> </div> <div class="login-dialog-inner" data-node="inner"> <div class="login-pannel bottom-line"> <form action="http://www.toutiao.com/auth/login/" method="POST"> <ul> <li> <div class="input-group"> <div class="input"> <label>邮箱</label> <input class="name" name="name_or_email" type="text" placeholder="请使用您的注册邮箱" autocomplete="off" spellcheck="false"> </div> </div> </li> <li> <div class="input-group"> <div class="input"> <label>密码</label> <input class="password" name="password" type="password" data-node="password" placeholder="密码" autocomplete="off" spellcheck="false"> </div> </div> </li> <li class="captcha-box "> <div class="input-group"> <div class="input"> <input class="password" name="captcha" type="text" data-node="captcha" placeholder="验证码" autocomplete="off" spellcheck="false"> <img name="captchaImg"> </div> </div> </li> <li> <div class="input-group"> <input type="checkbox" name="remember_me" checked="" style="vertical-align:top"> <label for="remember_me" class="label">记住账号</label> </div> </li> <li> <div class="input-group" style="text-align: center;"> <input type="submit" class="submit-btn" value="登录"> <p class=""></p> </div> </li> </ul> </form> </div> <div class="login-dialog-header"> <h3>合作网站帐号登录</h3> </div> <div class=""> <ul class="y-box sns_login_list"> <li class="sinaweibo"> <a href="javascript:;" data-pid="sina_weibo" ga_event="login_sina_weibo"> <i class="icon"></i> 新浪微博 </a> </li> <li class="qqweibo"> <a href="javascript:;" data-pid="qq_weibo" ga_event="login_tencnet_weibo"> <i class="icon"></i> 腾讯微博 </a> </li> <li class="qzone"> <a href="javascript:;" data-pid="qzone_sns" ga_event="login_qqzone"> <i class="icon"></i> QQ空间 </a> </li> <li class="renren"> <a href="javascript:;" data-pid="renren_sns" ga_event="login_renren"> <i class="icon"></i> 人人网 </a> </li> <li class="weixin"> <a href="javascript:;" style="margin-right:0;" data-pid="weixin" ga_event="login_wechat"> <i class="icon"></i> 微信 </a> </li> </ul> </div> </div> </div> <div class="mask hide"></div></div>
+<div id="toast"></div>
+
+
+<div class="y-box container">
+  <div class="y-left">
+    <div class="y-box">
+      <div class="y-left index-left">
+        <div riot-tag="snsbox"><div class="snsbox snsbox-fixed" name="snsbox"> <a href="http://www.toutiao.com/i6350051245838828034/?tt_from=weixin&amp;utm_campaign=client_share&amp;app=news_article&amp;utm_source=weixin&amp;iid=4814822643&amp;utm_medium=toutiao_android&amp;wxshare_count=1#comment_area" class="share-count" ga_event="click_comment_anchor"> <i class="y-icon icon-comments"></i> <span>7</span> </a> <div class="share-hr"></div> <div class="share-box" ga_event="click_share_weibo"><i class="y-icon icon-sina"></i><span>微博</span></div> <div class="share-box" ga_event="click_share_qzone"><i class="y-icon icon-qzone"></i><span>Qzone</span></div> <div class="share-box share-weixin" ga_event="click_share_weixin"> <i class="y-icon icon-wechat"></i><span>微信</span> <div class="share-qrcode"> <div></div> </div> </div> </div></div>
+      </div>
+      <div class="y-left index-middle" id="J_content">
+        <div id="article-main">
+	
+
+  <h1 class="article-title">RBAC权限管理模型：基本模型及角色模型解析及举例</h1>
+
+  <div class="articleInfo">
+	
+    
+    <span class="src">
+    	
+    		人人都是产品经理
+    	
+    </span>
+    
+    <span class="time">2016-11-07 10:41</span>
+</div>
+
+  <div class="article-content"><p><img src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/10ea0000eaab8b6d1148" img_width="680" img_height="320" alt="RBAC权限管理模型：基本模型及角色模型解析及举例" onerror="javascript:errorimg.call(this);"></p><p>我们在做任何一款产品的时候，或多或少都会涉及到用户和权限的问题。譬如，做企业类软件，不同部门、不同职位的人的权限是不同的；做论坛类产品的时候，版主和访客权限也是不一样的；再例如一款产品的收费用户和免费用户权限也是迥然不同的。</p><p>但在设计产品的用户和权限的关系的时候，很多产品经理可能按照感觉来，在并不清楚用户和权限是否存在优秀的理论模型的时候，就按照自我推理搭建了产品的用户和权限模型。而这种基于感觉和推理的模型肯定是有诸多问题的，譬如写死了关系导致权限不够灵活、考虑不周导致权限覆盖能力弱等等。</p><p>正如牛顿所言，站在巨人的肩膀上才能看的更远。我们不妨去参照已有的比较成熟的权限模型，如：RBAC（Role-Based Access Control）——基于角色的访问控制。我搜集了网上很多关于RBAC的资料，大多与如何用数据表实现RBCA相关，并不容易理解。所以，我会以产品经理的角度去解析RBAC模型，并分别举例如何运用这套已得到验证的成熟模型。</p><p></p><h2>一、RBAC模型是什么?</h2><p>RBAC是一套成熟的权限模型。在传统权限模型中，我们直接把权限赋予用户。而在RBAC中，增加了“角色”的概念，我们首先把权限赋予角色，再把角色赋予用户。这样，由于增加了角色，授权会更加灵活方便。在RBAC中，根据权限的复杂程度，又可分为RBAC0、RBAC1、RBAC2、RBAC3。其中，RBAC0是基础，RBAC1、RBAC2、RBAC3都是以RBAC0为基础的升级。我们可以根据自家产品权限的复杂程度，选取适合的权限模型。</p><p><img src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/10ea0000eaaceb409364" img_width="698" img_height="187" alt="RBAC权限管理模型：基本模型及角色模型解析及举例" onerror="javascript:errorimg.call(this);"></p><p></p><h2>二、基本模型RBAC0</h2><p><strong>解析：</strong></p><p>RBAC0是基础，很多产品只需基于RBAC0就可以搭建权限模型了。在这个模型中，我们把权限赋予角色，再把角色赋予用户。用户和角色，角色和权限都是多对多的关系。用户拥有的权限等于他所有的角色持有权限之和。</p><p><img src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/10e400118f9ea0092569" img_width="699" img_height="346" alt="RBAC权限管理模型：基本模型及角色模型解析及举例" onerror="javascript:errorimg.call(this);"></p><p><strong>举例：</strong></p><p>譬如我们做一款企业管理产品，如果按传统权限模型，给每一个用户赋予权限则会非常麻烦，并且做不到批量修改用户权限。这时候，可以抽象出几个角色，譬如销售经理、财务经理、市场经理等，然后把权限分配给这些角色，再把角色赋予用户。这样无论是分配权限还是以后的修改权限，只需要修改用户和角色的关系，或角色和权限的关系即可，更加灵活方便。此外，如果一个用户有多个角色，譬如王先生既负责销售部也负责市场部，那么可以给王先生赋予两个角色，即销售经理+市场经理，这样他就拥有这两个角色的所有权限。</p><p></p><h2>三、角色分层模型RBAC1</h2><p><strong>解析：</strong></p><p>RBAC1建立在RBAC0基础之上，在角色中引入了继承的概念。简单理解就是，给角色可以分成几个等级，每个等级权限不同，从而实现更细粒度的权限管理。</p><p><img src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/100f000c037992adaf87" img_width="698" img_height="346" alt="RBAC权限管理模型：基本模型及角色模型解析及举例" onerror="javascript:errorimg.call(this);"></p><p><strong>举例：</strong></p><p>基于之前RBAC0的例子，我们又发现一个公司的销售经理可能是分几个等级的，譬如除了销售经理，还有销售副经理，而销售副经理只有销售经理的部分权限。这时候，我们就可以采用RBAC1的分级模型，把销售经理这个角色分成多个等级，给销售副经理赋予较低的等级即可。</p><p></p><h2>四、角色限制模型RBAC2</h2><p><strong>解析：</strong></p><p>RBAC2同样建立在RBAC0基础之上，仅是对用户、角色和权限三者之间增加了一些限制。这些限制可以分成两类，即静态职责分离SSD(Static Separation of Duty)和动态职责分离DSD(Dynamic Separation of Duty)。具体限制如下图：</p><p><img src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/10e400118f9fa62d8fd4" img_width="699" img_height="347" alt="RBAC权限管理模型：基本模型及角色模型解析及举例" onerror="javascript:errorimg.call(this);"></p><p><strong>举例：</strong></p><p>还是基于之前RBAC0的例子，我们又发现有些角色之间是需要互斥的，譬如给一个用户分配了销售经理的角色，就不能给他再赋予财务经理的角色了，否则他即可以录入合同又能自己审核合同；再譬如，有些公司对角色的升级十分看重，一个销售员要想升级到销售经理，必须先升级到销售主管，这时候就要采用先决条件限制了。</p><p></p><h2>五、统一模型RBAC3</h2><p><strong>解析：</strong></p><p>RBAC3是RBAC1和RBAC2的合集，所以RBAC3既有角色分层，也包括可以增加各种限制。</p><p><img src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/10e1000b7bdd65d7acbd" img_width="700" img_height="211" alt="RBAC权限管理模型：基本模型及角色模型解析及举例" onerror="javascript:errorimg.call(this);"></p><p><strong>举例：</strong></p><p>这个就不举例了，统一模型RBAC3可以解决上面三个例子的所有问题。当然，只有在系统对权限要求非常复杂时，才考虑使用此权限模型。</p><p></p><h2>六、基于RBAC的延展——用户组</h2><p><strong>解析：</strong></p><p>基于RBAC模型，还可以适当延展，使其更适合我们的产品。譬如增加用户组概念，直接给用户组分配角色，再把用户加入用户组。这样用户除了拥有自身的权限外，还拥有了所属用户组的所有权限。</p><p><img src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/10e800089646e139c615" img_width="698" img_height="385" alt="RBAC权限管理模型：基本模型及角色模型解析及举例" onerror="javascript:errorimg.call(this);"></p><p><strong>举例：</strong></p><p>譬如，我们可以把一个部门看成一个用户组，如销售部，财务部，再给这个部门直接赋予角色，使部门拥有部门权限，这样这个部门的所有用户都有了部门权限。用户组概念可以更方便的给群体用户授权，且不影响用户本来就拥有的角色权限。</p><p></p><h2>七、最后的话</h2><p>无论是本次的权限模型，还是其他产品相关实现方案，很多都已经被前人所总结提炼，我们应深度掌握这些成熟的知识和经验，而不是绞尽脑汁自我推理。还是文章开头那句话，站在巨人的肩膀上我们可以看得更远，而不是再造一个轮子。</p><p>作者：Monster，小满科技产品经理，公众号：PM怪物Monster</p><p>本文由 @Monster 原创发布于人人都是产品经理。未经许可，禁止转载。</p><p class="footnote">本文为头条号作者发布，不代表今日头条立场。</p></div>
+
+  <div class="article-actions">
+		
+<div class="labelList">
+	<i class="y-icon icon-tag"></i>
+	<ul class="label-list">
+		
+		<li class="label-item"><a class="label-link" href="http://www.toutiao.com/search/?keyword=%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86" target="_blank">产品经理</a></li>
+		
+		<li class="label-item"><a class="label-link" href="http://www.toutiao.com/search/?keyword=%E8%AE%BE%E8%AE%A1" target="_blank">设计</a></li>
+		
+		<li class="label-item"><a class="label-link" href="http://www.toutiao.com/search/?keyword=%E8%BD%AF%E4%BB%B6" target="_blank">软件</a></li>
+		
+	</ul>
+</div>
+
+		<div riot-tag="actionBox" class="actionBox"><div class="repin "> <i class="y-icon icon-favorite "></i><span>收藏</span> </div> <a href="javascript:;" class="areport"> <i class="y-icon icon-report"></i><span>举报</span> </a> <div id="J_articleReport"></div></div>
+  </div>
+</div>
+
+        <div style="text-align:center; margin-top: 30px; height: 60px;" id="J_ad_baidu_bottom"><iframe id="iframeu2643457_0" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/ccmm.html" width="640" height="60" align="center,center" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="border:0; vertical-align:bottom;margin:0;" allowtransparency="true"></iframe></div>
+
+        <a id="comment_area" href="http://www.toutiao.com/i6350051245838828034/?tt_from=weixin&amp;utm_campaign=client_share&amp;app=news_article&amp;utm_source=weixin&amp;iid=4814822643&amp;utm_medium=toutiao_android&amp;wxshare_count=1#" style="display: inline-block;margin-bottom: 20px;"></a><!--评论锚点-->
+        <div riot-tag="comment" id="comment"><div class="c-header"> <em>7&nbsp;</em>条评论 </div> <div riot-tag="inputBox" ismain="true" avatar="" group_id="6350047941701189890" item_id="6350051245838828034"><div class="inputBox"> <div class="y-box"> <div class="avatar-wrap avatar-wrap-center">  </div> <div class="input-wrap  "> <div class="c-textarea" ga_event="click_input_comment"> <textarea name="inputText" placeholder="写下您的评论..."></textarea> </div> <div class="c-action" ga_event="click_publish_comment"> <div class="c-submit">评论</div> </div> </div> </div> </div></div> <ul> <li class="c-item"> <a target="_blank" class="avatar-wrap" href="http://www.toutiao.com/user/3732647093/"> <img alt="" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/2b7002515f636c24d7c"> </a> <div class="c-content"> <div class="c-user-info"> <a class="c-user-name" target="_blank" href="http://www.toutiao.com/user/3732647093/">Ta的姨妈90后</a> <span class="c-create-time">1月前</span> </div> <p>操作权限和数据权限！！两个！！</p> <div class="c-footer-action"> <span class="c-reply" ga_event="click_reply_comment">回复</span>   <span class="y-right c-report" title="举报"><i class="y-icon icon-report"></i></span> <span title="点赞" ga_event="click_good_comment" class="y-right c-digg ">2&nbsp;<i class="y-icon icon-digg"></i></span> </div> <div class="J_input_0"></div> <!--riot placeholder-->  </div> </li><li class="c-item"> <a target="_blank" class="avatar-wrap" href="http://www.toutiao.com/user/3252629754/"> <img alt="" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/1"> </a> <div class="c-content"> <div class="c-user-info"> <a class="c-user-name" target="_blank" href="http://www.toutiao.com/user/3252629754/">SLSKY</a> <span class="c-create-time">1月前</span> </div> <p>用户组的概念和角色差别不大</p> <div class="c-footer-action"> <span class="c-reply" ga_event="click_reply_comment">回复</span>   <span class="y-right c-report" title="举报"><i class="y-icon icon-report"></i></span> <span title="点赞" ga_event="click_good_comment" class="y-right c-digg ">3&nbsp;<i class="y-icon icon-digg"></i></span> </div> <div class="J_input_1"></div> <!--riot placeholder-->  </div> </li><li class="c-item"> <a target="_blank" class="avatar-wrap" href="http://www.toutiao.com/user/5549794838/"> <img alt="" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/64"> </a> <div class="c-content"> <div class="c-user-info"> <a class="c-user-name" target="_blank" href="http://www.toutiao.com/user/5549794838/">高瑞59524265</a> <span class="c-create-time">1月前</span> </div> <p>这些是纵向权限管理，还要有横向，即管理哪些区域的权限，如分公司，省内，片区，中华区，或更广。</p> <div class="c-footer-action"> <span class="c-reply" ga_event="click_reply_comment">回复</span>   <span class="y-right c-report" title="举报"><i class="y-icon icon-report"></i></span> <span title="点赞" ga_event="click_good_comment" class="y-right c-digg ">1&nbsp;<i class="y-icon icon-digg"></i></span> </div> <div class="J_input_2"></div> <!--riot placeholder-->  </div> </li><li class="c-item"> <a target="_blank" class="avatar-wrap" href="http://www.toutiao.com/user/3793373023/"> <img alt="" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/64(1)"> </a> <div class="c-content"> <div class="c-user-info"> <a class="c-user-name" target="_blank" href="http://www.toutiao.com/user/3793373023/">tombwen</a> <span class="c-create-time">1月前</span> </div> <p>晕，这不就是操作系统用户权限的模式吗。。。</p> <div class="c-footer-action"> <span class="c-reply" ga_event="click_reply_comment">回复</span>   <span class="y-right c-report" title="举报"><i class="y-icon icon-report"></i></span> <span title="点赞" ga_event="click_good_comment" class="y-right c-digg ">0&nbsp;<i class="y-icon icon-digg"></i></span> </div> <div class="J_input_3"></div> <!--riot placeholder-->  </div> </li><li class="c-item"> <a target="_blank" class="avatar-wrap" href="http://www.toutiao.com/user/4739449357/"> <img alt="" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/1(1)"> </a> <div class="c-content"> <div class="c-user-info"> <a class="c-user-name" target="_blank" href="http://www.toutiao.com/user/4739449357/">闽都土匪</a> <span class="c-create-time">1月前</span> </div> <p>写的很好，应该再加个作用域！ 用户-角色-权限-作用域</p> <div class="c-footer-action"> <span class="c-reply" ga_event="click_reply_comment">回复</span> <span class="c-reply-count" ga_event="click_expand_reply">&nbsp;⋅&nbsp;1条回复<i class="y-icon icon-more"></i></span>  <span class="y-right c-report" title="举报"><i class="y-icon icon-report"></i></span> <span title="点赞" ga_event="click_good_comment" class="y-right c-digg ">1&nbsp;<i class="y-icon icon-digg"></i></span> </div> <div class="J_input_4"></div> <!--riot placeholder-->  </div> </li><!--riot placeholder--> </ul> <div class="c-load-more" ga_event="click_loadmore_comment">查看更多评论</div> <div id="J_report"></div></div>
+      </div>
+    </div>
+    <div class="y-box" style="margin-top: 30px;">
+      <div class="y-left index-left">
+        <div riot-tag="relatedChannel"><div name="relatedChannel" ga_event="related_channel_click" class="relatedChannel "> <h2 class="relatedChannel-header">相关推荐</h2> <ul class="relatedChannel-list"> <li> <a href="javacript:;" class="relatedChannel-item active"> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>推荐</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>热点</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>社会</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>娱乐</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>科技</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>体育</span> </a> </li><!--riot placeholder--> </ul> </div></div>
+      </div>
+      <div class="y-left index-middle">
+        <div class="index-cut-line" id="J_cut_line"></div>
+        <div riot-tag="feedBox"></div>
+      </div>
+    </div>
+  </div>
+  <div id="J_rindex" class="y-right index-right">
+    
+<div class="module">
+  <div class="pgcInfo">
+    <div class="pgc-head">
+      <a class="pgc-link" target="_blank" href="http://www.toutiao.com/m3253671606/" ga_event="click_into_pgc">
+          <img src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/7019049228" alt="人人都是产品经理">
+          <div class="pgc-username">
+            <span>人人都是产品经理</span>
+            <div riot-tag="subscribe" class="pgc-subscribe"><div class="subscribe" ga_event="follow_pgc">  <div class="article-unsubscribe left-arrow"> <span>立即关注</span> </div> </div></div>
+          </div>
+      </a>
+    </div>
+    <p class="pgc-description">中国最大的产品经理学习、交流、分享平台；想要成为CEO，先从学做产品开始。</p>
+    <ul class="pgc-content">
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://toutiao.com/i6350072583211188737/" target="_blank" class="pgc-article-link">
+          产品实习生：第一次独立带项目的总结思考
+        </a>
+    	</li>
+      
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://toutiao.com/i6350056270875066881/" target="_blank" class="pgc-article-link">
+          双十一盘点：为了让用户掏钱，运营们用了多少心机
+        </a>
+    	</li>
+      
+      
+      
+      
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://toutiao.com/i6350046717185884674/" target="_blank" class="pgc-article-link">
+          一个成功的H5，要击中用户要害，达到运营目的
+        </a>
+    	</li>
+      
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://toutiao.com/i6350029094670828034/" target="_blank" class="pgc-article-link">
+          社交关系体系的搭建：解析关注与好友机制
+        </a>
+    	</li>
+      
+      
+    </ul>
+  </div>
+</div>
+
+
+    <div style="margin-bottom:30px;">
+	<iframe src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/saved_resource.html" onload="var adWrap=this;setTimeout(function(){if(!adWrap.loaded){adWrap.src=&#39;//www.toutiao.com/api/pc/adsafe/&#39;+&#39;#group=detail_top_right&#39;;adWrap.loaded=true;}},1)" frameborder="0" width="300" height="250” scrolling=“no"></iframe>
+</div>
+
+    <div riot-tag="hotVideo" class="hotVideo module" ga_event="click_video_recommend"><div class="module-head video-head"><a href="http://www.toutiao.com/video/" target="_blank">热门视频</a></div> <ul> <li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6366473388987777282/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/135200007e2bde56cf29" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>07:29</span> </i> <p class="hot-title module-title">火影中忍考试现场，各种作弊方式，不服不行</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6355583943433306369/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/119700055626f6101e32" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>05:50</span> </i> <p class="hot-title module-title">公主霸气救下卫青姐弟，甩鞭为证：卫青，从此以后，为我牛马</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6366436429078167810/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/12de0005d4621b77245e" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>00:26</span> </i> <p class="hot-title module-title">日本插手潜航器事件 华春莹：日方太操心了 跟你们有关系么？</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6366454805225455874/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/12eb0009b6f2c66c85e7" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>10:44</span> </i> <p class="hot-title module-title">《好先生番外篇》张艺兴顶替陆远的位置并拿下了彭佳禾，财色双收</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6366468483714433282/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/134a00076e39ddad7dbd" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>02:02</span> </i> <p class="hot-title module-title">吴京真人秀动真格脚踢范文芳，谢楠发火</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6366474235623244290/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/12f1000fe5658c3f6e8c" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>06:08</span> </i> <p class="hot-title module-title">岳云鹏的普通话秒杀主持人，现在的主持人都什么素质啊？</p> </a> </li><!--riot placeholder--> </ul></div>
+    <div style="margin-bottom: 30px;" id="J_ad_baidu_top1"><iframe id="iframeu2793998_0" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/ccmm(1).html" width="300" height="250" align="center,center" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="border:0; vertical-align:bottom;margin:0;" allowtransparency="true"></iframe></div>
+
+    
+<div class="module recpgc">
+	<div class="module-head">
+		相关头条号
+	</div>
+	<ul class="recpgc-content">
+		
+		
+		<li class="recpgc-list">
+    		<a class="recpgc-user" href="http://toutiao.com/m3221859568/" target="_blank" ga_event="click_related_pgc">
+        		<img src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/ef30019ef53b24f8547" alt="">
+        		<span class="user-name">36氪</span>
+    		</a>
+    		<ul>
+    			
+    				<li class="related-article">
+    					<a href="http://toutiao.com/group/6366480211215483137/" target="_blank">2017 年，传统媒体公司该如何转型？</a>
+    				</li>
+    			
+    				<li class="related-article">
+    					<a href="http://toutiao.com/group/6366475964961358082/" target="_blank">嘀嗒拼车回应上海北京拼车顺风车新政：对有政府支持的共享互助出行充满信心</a>
+    				</li>
+    			
+    		</ul>
+		</li>
+		
+		
+		
+		<li class="recpgc-list">
+    		<a class="recpgc-user" href="http://toutiao.com/m4876422751/" target="_blank" ga_event="click_related_pgc">
+        		<img src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/97d000e2fe11b380936" alt="">
+        		<span class="user-name">产品100</span>
+    		</a>
+    		<ul>
+    			
+    				<li class="related-article">
+    					<a href="http://toutiao.com/group/6366102739089015041/" target="_blank">荒漠化下的移动资讯业，内容党与标题党终有一战</a>
+    				</li>
+    			
+    				<li class="related-article">
+    					<a href="http://toutiao.com/group/6366361645857702145/" target="_blank">零经验怎么进入互联网行业工作？</a>
+    				</li>
+    			
+    		</ul>
+		</li>
+		
+		
+		
+		<li class="recpgc-list">
+    		<a class="recpgc-user" href="http://toutiao.com/m3235352099/" target="_blank" ga_event="click_related_pgc">
+        		<img src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/1426559667" alt="">
+        		<span class="user-name">i黑马</span>
+    		</a>
+    		<ul>
+    			
+    				<li class="related-article">
+    					<a href="http://toutiao.com/group/6366391098810073345/" target="_blank">盛大陈明峰：VR还处于基础技术瓶颈期，一旦障碍被解决，将再次进入快速发展期│投资</a>
+    				</li>
+    			
+    				<li class="related-article">
+    					<a href="http://toutiao.com/group/6366377132377719042/" target="_blank">美团点评与腾讯联手加速O2O布局 美团外卖全面接入微信钱包</a>
+    				</li>
+    			
+    		</ul>
+		</li>
+		
+		
+		
+		
+		
+		
+	</ul>
+</div>
+
+
+    <div style="margin-bottom: 30px;" id="J_ad_baidu_top2"><iframe id="iframeu2794021_0" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/ccmm(2).html" width="300" height="250" align="center,center" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="border:0; vertical-align:bottom;margin:0;" allowtransparency="true"></iframe></div>
+
+    <div riot-tag="hotPicture" class="hotPicture module" ga_event="click_pictures_recommend"><div class="module-head pic-head"><a href="http://www.toutiao.com/news_image/" target="_blank">精彩图片</a></div> <ul> <li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6366461998272463106/">   <div class="pic-style style_3"> <div class="module-pic pic-middle"><img alt="" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/134e00004da0282ee00d"></div> <div class="module-pic pic-small"><img alt="" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/134f0000940d08e424ac"></div> <div class="module-pic pic-small"><img alt="" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/134f0000942a545d7873"></div> </div> <i class="hot-tag pic-tag"> <span>9图</span> </i> <p class="hot-title module-title">赵丽颖出演《封神演义》定妆照新鲜出炉 最后一张简直美翻</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6363053645298614530/">  <div class="pic-style style_2"> <div class="module-pic pic-middle"><img alt="" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/12d80007887bc3b4bb6d"></div> <div class="module-pic pic-small"><img alt="" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/12810005007fb2e70b78"></div> <div class="module-pic pic-small"><img alt="" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/12d80007888059c06e03"></div> </div>  <i class="hot-tag pic-tag"> <span>8图</span> </i> <p class="hot-title module-title">娱乐圈“型男”，没有一身肌肉，怎么敢出来混！</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6365983135150915842/"> <div class="pic-style style_1"> <div class="module-pic pic-big"><img alt="" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/13550003f7fc1952d3fa"></div> </div>   <i class="hot-tag pic-tag"> <span>9图</span> </i> <p class="hot-title module-title">河南农村结婚八个习俗 见过三条的都是牛人</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6365754232389288193/">  <div class="pic-style style_2"> <div class="module-pic pic-middle"><img alt="" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/135400027b373e55e9c0"></div> <div class="module-pic pic-small"><img alt="" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/12320010308eedbbeffb"></div> <div class="module-pic pic-small"><img alt="" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/135300027c966abd7158"></div> </div>  <i class="hot-tag pic-tag"> <span>6图</span> </i> <p class="hot-title module-title">一对北方农村夫妻的日常伙食</p> </a> </li><!--riot placeholder--> </ul></div>
+    <div>
+  <iframe src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/saved_resource(1).html" onload="var adWrap=this;setTimeout(function(){if(!adWrap.loaded){adWrap.src=&#39;//www.toutiao.com/api/pc/adsafe/&#39;+&#39;#group=detail_bottom_right&#39;;adWrap.loaded=true;}},1)" frameborder="0" width="300" height="250” scrolling=“no"></iframe>
+</div>
+
+    <div id="adindexhover" style="position: fixed; top: 20px; display: none;">
+	<iframe src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/saved_resource(2).html" onload="var adWrap=this;setTimeout(function(){if(!adWrap.loaded){adWrap.src=&#39;//www.toutiao.com/api/pc/adsafe/&#39;+&#39;#group=detail_bottom_right_hover&#39;;adWrap.loaded=true;}},1)" frameborder="0" width="300" height="250” scrolling=“no"></iframe>
+</div>
+
+  </div>
+</div>
+
+<div class="action-feedback">
+  <div riot-tag="feedback" class="feedback"><ul> <li class="tool-item" ga_event="go_top_click"> <a href="javascript:;"> <i class="y-icon icon-backtotopfeed"></i> </a> </li> </ul></div>
+</div>
+
+<!-- 公共尾部 -->
+<div id="footer">
+    <div>
+        <span class="fitem">© 2016 今日头条 www.toutiao.com</span>
+        <a class="fitem" href="http://www.12377.cn/" target="_blank">中国互联网举报中心</a>
+        <a class="fitem" href="http://www.miibeian.gov.cn/" target="_blank">京ICP证140141号</a>
+        <a class="fitem" href="http://www.miibeian.gov.cn/" target="_blank">京ICP备12025439号-3</a>
+        <a class="fitem" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11000002002023" target="_blank" ga_event="click_about">
+            <img src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/gongan_d0289dc.png">京公网安备 11000002002023号
+        </a>
+    </div>
+    <div>
+        <a class="fitem" href="http://www.toutiao.com/license/" target="_blank">网络文化经营许可证</a>
+        <a class="fitem" href="http://www.toutiao.com/a3642705768/" target="_blank">跟帖评论自律管理承诺书</a>
+        <span class="fitem">违法和不良信息举报电话：010-58341833</span>
+        <span class="fitem">公司名称：北京字节跳动科技有限公司</span>
+    </div>
+</div>
+
+
+
+    </div>
+
+    <script>
+        window.globals = window.globals || {};
+
+        taAnalysis && taAnalysis.setup({
+          c: 'detail_article'
+        });
+        taAnalysis && taAnalysis.send('pageview', {});
+
+        window.gaqpush = function (ga_action, ga_label){
+            ga('send', 'event','detail_article' , ga_action, ga_label);
+        };
+
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        // ga('create', 'UA-28423340-5', 'auto');
+        ga('create', 'UA-28423340-5', 'auto', {'sampleRate': 10});
+        ga('send', 'pageview');
+
+        utils.on(document.getElementsByTagName('body')[0], 'click', function(e) {
+            var target = utils.getTarget(e),
+                ga_event,
+                ga_category,
+                ga_label,
+                ga_value;
+
+            while(target && target.nodeName.toUpperCase() !== 'BODY') {
+                ga_event = utils.getAttribute(target, 'ga_event');
+                ga_category = utils.getAttribute(target, 'ga_category') || 'detail_article';
+                ga_label = utils.getAttribute(target, 'ga_label');
+                ga_value = utils.getAttribute(target, 'ga_value') || 1;
+
+                ga_event && ga('send', 'event', ga_category, ga_event, ga_label, ga_value);
+                ga_event && taAnalysis && taAnalysis.send('event', { ev: ga_event });
+                target = target.parentNode;
+            }
+        });
+
+        riot.observable(window);
+    </script>
+    
+
+<script>
+  // 用户信息
+  var userInfo = {
+      id: 0,
+      name: '',
+      avatarUrl: '',
+      isPgc: false,
+      isOwner: false
+  };
+
+
+  var group = {
+  	id:'6350047941701189890',
+  	repin:0,
+  };
+
+  var media = {
+  	id:3253671606,
+  	like:false
+  };
+
+  var siblingList = [{"comments_count":0,"media_avatar_url":"http:\/\/p2.pstatp.com\/large\/4302\/6383948802","is_feed_ad":false,"is_diversion_page":false,"title":"WOT2016\u738b\u6653\u5cf0\uff1a\u5927\u6570\u636e\u52a9\u529b\u7269\u8054\u7f51\u6210\u4e3a\u5de5\u4e1a\u4f01\u4e1a\u6838\u5fc3\u7ade","single_mode":true,"middle_mode":true,"has_video":false,"video_duration_str":null,"source_url":"http:\/\/toutiao.com\/group\/6349687810982822146\/","source":"\u4e2d\u56fd\u7269\u8054\u7f51","more_mode":null,"article_genre":"article","has_gallery":false,"behot_time":1482312900180,"video_play_count":null,"image_url":"http:\/\/p3.pstatp.com\/list\/204x140\/10e00010fbd026398b0b","group_id":"6349687810982822146","is_related":true,"media_url":"http:\/\/toutiao.com\/m4493487482\/"},{"comments_count":1,"media_avatar_url":"http:\/\/p3.pstatp.com\/large\/1090\/439273757","is_feed_ad":false,"is_diversion_page":false,"title":"\u8c37\u6b4c\u6d4f\u89c8\u5668\u660e\u5e74\u4e00\u6708\u63a8\u51faWebVR\u7248\uff0c\u5b89\u5353\u7248\u548cPC\u7aef\u90fd\u6709","single_mode":true,"middle_mode":true,"has_video":false,"video_duration_str":null,"source_url":"http:\/\/toutiao.com\/group\/6350055075641278722\/","source":"\u592a\u5e73\u6d0b\u7535\u8111\u7f51","more_mode":null,"article_genre":"article","has_gallery":false,"behot_time":1482312900180,"video_play_count":null,"image_url":"http:\/\/p3.pstatp.com\/list\/204x140\/100f000c21aff558b82f","group_id":"6350055075641278722","is_related":true,"media_url":"http:\/\/toutiao.com\/m3391255467\/"}];
+</script>
+
+<script src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/article_17bc30b.js.下载"></script>
+
+<script>
+  riot.mount('wtopbar', {
+    home: false,
+    userInfo: userInfo
+  });
+  riot.mount('login');
+  riot.mount('wsearch');
+</script>
+
+<script>
+  riot.mount('snsbox',{
+    share_url:"http://toutiao.com/item/6350051245838828034",
+    abstract:"我们在做任何一款产品的时候，或多或少都会涉及到用户和权限的问题。譬如，做企业类软件，不同部门、不同职位的人的权限是不同的；做论坛类产品的时候，版主和访客权限也是不一样的；再例如一款产品的收费用户和免费用户权限也是迥然不同的。".replace(/<br \/>/ig, ''),
+    group_id:"6350047941701189890",
+    comments_count: utils.numFormat('7', 1, 'en'),
+    fix: true
+  });
+  riot.mount('hotVideo');
+  riot.mount('hotPicture');
+  riot.mount('feedback');
+</script>
+
+<script>
+  riot.mount('comment', {
+    group_id: '6350047941701189890',
+    item_id: '6350051245838828034' || '6350051245838828034',
+    comments_count: utils.numCutByComma('7'),
+    userInfo: userInfo,
+    ban_comment: 0 + 0
+  });
+</script>
+
+<script>
+  riot.mount('relatedChannel', {
+    tag: '__all__'
+  });
+</script>
+
+<script src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/player.min.js.下载"></script>
+<script src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/video_0801e31.js.下载"></script>
+<!--[if lt IE 9]>
+  <script src="//s3.pstatp.com/toutiao/resource/ntoutiao_web/page/detail/article_detail/article_main/audio/audio_ie8_69f6c6f.js" charset="utf-8"></script>
+<![endif]-->
+<script src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/audio_2324d3c.js.下载"></script>
+
+<script type="text/javascript" src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/c.js.下载"></script>
+<script>
+  BAIDU_CLB_fillSlotAsync('u2793998', 'J_ad_baidu_top1');
+  BAIDU_CLB_fillSlotAsync('u2794021', 'J_ad_baidu_top2');
+  BAIDU_CLB_fillSlotAsync('u2643457', 'J_ad_baidu_bottom');
+</script>
+
+    <script src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/z_stat.php" language="JavaScript"></script><script src="./RBAC权限管理模型：基本模型及角色模型解析及举例 - 今日头条(www.toutiao.com)_files/core.php" charset="utf-8" type="text/javascript"></script><a href="http://www.cnzz.com/stat/website.php?web_id=1259612802" target="_blank" title="站长统计">站长统计</a>
+
+
+</body></html>

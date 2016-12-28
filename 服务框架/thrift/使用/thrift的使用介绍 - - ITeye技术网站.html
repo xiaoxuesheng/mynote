@@ -1,0 +1,848 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0038)http://gemantic.iteye.com/blog/1199214 -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>thrift的使用介绍 -  - ITeye技术网站</title>
+    <meta name="description" content="一、About  thrift    二、什么是thrift，怎么工作？ 三、Thrift  IDL  四、Thrift   Demo  五、Thrift 协议栈 以及各层的使用（java 为例） 六、与protocolbuffer的区别 一、About  thrift             thrift是一种可伸缩的跨语言服务的发展软件框架。它结合了功能强大的软件堆栈的代码生成引擎，以建设服务， ...">
+    <meta name="keywords" content="thrift, thrift client, thrift server, thrift 0.7.0 thrift的使用介绍">
+    <link rel="shortcut icon" href="http://gemantic.iteye.com/images/favicon.ico" type="image/x-icon">
+    <link rel="search" type="application/opensearchdescription+xml" href="http://gemantic.iteye.com/open_search.xml" title="ITeye">
+    <link href="http://gemantic.iteye.com/rss" rel="alternate" title="" type="application/rss+xml">
+    <link href="./thrift的使用介绍 - - ITeye技术网站_files/blog.css" media="screen" rel="stylesheet" type="text/css">
+<link href="./thrift的使用介绍 - - ITeye技术网站_files/blue.css" media="screen" rel="stylesheet" type="text/css">
+    <script type="text/javascript" async="" src="./thrift的使用介绍 - - ITeye技术网站_files/ycsm"></script><script type="text/javascript" async="" src="./thrift的使用介绍 - - ITeye技术网站_files/ycsm(1)"></script><script type="text/javascript" async="" src="./thrift的使用介绍 - - ITeye技术网站_files/ycsm(2)"></script><script src="./thrift的使用介绍 - - ITeye技术网站_files/hm.js.下载"></script><script type="text/javascript" async="" src="./thrift的使用介绍 - - ITeye技术网站_files/ga.js.下载"></script><script src="./thrift的使用介绍 - - ITeye技术网站_files/application.js.下载" type="text/javascript"></script>    
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-535605-1']);
+  _gaq.push(['_setDomainName', 'iteye.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+      <link href="./thrift的使用介绍 - - ITeye技术网站_files/SyntaxHighlighter.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="./thrift的使用介绍 - - ITeye技术网站_files/shCoreCommon.js.下载" type="text/javascript"></script>
+<script src="./thrift的使用介绍 - - ITeye技术网站_files/hotkey.js.下载" type="text/javascript"></script>
+  <script src="./thrift的使用介绍 - - ITeye技术网站_files/code_favorites.js.下载" type="text/javascript"></script>
+<script src="./thrift的使用介绍 - - ITeye技术网站_files/weiboshare.js.下载" type="text/javascript"></script>
+  <script>
+		var _hmt = _hmt || [];
+		(function() {
+		 var hm = document.createElement("script");
+		 hm.src = "//hm.baidu.com/hm.js?e19a8b00cf63f716d774540875007664";
+		 var s = document.getElementsByTagName("script")[0]; 
+		 s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+    
+  <style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-j .annotation { color: #646464; }.dp-j .number { color: #C00000; }</style><style type="text/css">.dp-py .builtins { color: #ff1493; }.dp-py .magicmethods { color: #808080; }.dp-py .exceptions { color: brown; }.dp-py .types { color: brown; font-style: italic; }.dp-py .commonlibs { color: #8A2BE2; font-style: italic; }</style><style type="text/css">.dp-c .vars { color: #d00; }</style><script src="./thrift的使用介绍 - - ITeye技术网站_files/get_ads.php" type="text/javascript"></script></head>
+  <body><div id="BAIDU_DUP_fp_wrapper" style="position: absolute; left: -1px; bottom: -1px; z-index: 0; width: 0px; height: 0px; overflow: hidden; visibility: hidden; display: none;"><iframe id="BAIDU_DUP_fp_iframe" src="./thrift的使用介绍 - - ITeye技术网站_files/o.html" style="width: 0px; height: 0px; visibility: hidden; display: none;"></iframe></div>
+    <div id="header">
+	      <div id="blog_site_nav">
+  <a href="http://www.iteye.com/" class="homepage">首页</a>
+  <a href="http://www.iteye.com/news">资讯</a>
+  <a href="http://www.iteye.com/magazines">精华</a>
+  <a href="http://www.iteye.com/forums">论坛</a>
+  <a href="http://www.iteye.com/ask">问答</a>
+  <a href="http://www.iteye.com/blogs">博客</a>
+  <a href="http://www.iteye.com/blogs/subjects">专栏</a>
+  <a href="http://www.iteye.com/groups">群组</a>
+  <a href="http://gemantic.iteye.com/blog/1199214#" onclick="return false;" id="msna"><u>更多</u> <small>▼</small></a>
+  <div class="quick_menu" style="display:none;">
+    <a target="_blank" href="http://job.iteye.com/iteye">知识库</a>
+    <a href="http://www.iteye.com/search">搜索</a>
+  </div>
+</div>
+
+	      <div id="user_nav">
+      <a href="http://gemantic.iteye.com/login" class="welcome" title="登录">您还未登录 !</a>
+    <a href="http://gemantic.iteye.com/login">登录</a>
+    <a href="http://gemantic.iteye.com/signup" class="nobg">注册</a>
+  </div>
+
+	    
+    </div>
+
+    <div id="page">
+        <div id="branding" class="clearfix" style="overflow: hidden;background: none;padding:0 0 2px;">
+        	<div class="J_adv" data-view="true" data-mod="ad_popu_184" data-mtp="34" data-order="92" data-con="ad_content_1127" style="width: 960px; height: 90px;"><!-- 广告占位容器 --><div id="cpro_u2720131"><iframe id="iframeu2720131_0" src="./thrift的使用介绍 - - ITeye技术网站_files/ycsm.html" width="960" height="90" align="center,center" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="border:0; vertical-align:bottom;margin:0;" allowtransparency="true"></iframe></div><!-- 投放代码 --><script type="text/javascript">   /*服务器频道首页置顶Banner960*90，创建于2014-7-3*/    (window.cproArray = window.cproArray || []).push({        id: 'u2720131'      });  </script>  <script src="./thrift的使用介绍 - - ITeye技术网站_files/c.js.下载" type="text/javascript"></script></div>
+        </div>
+      <div id="branding" class="clearfix">
+        <div id="blog_name">
+          <h1><a href="http://gemantic.iteye.com/">gemantic</a></h1>
+        </div>
+        <div id="fd"></div>
+        <div id="blog_navbar">
+          <ul>
+            <li class="blog_navbar_for"><a href="http://gemantic.iteye.com/"><strong>博客</strong></a></li>
+            <li><a href="http://gemantic.iteye.com/weibo">微博</a></li>
+            <li><a href="http://gemantic.iteye.com/album">相册</a></li>
+            <li><a href="http://gemantic.iteye.com/link">收藏</a></li>
+            <li><a href="http://gemantic.iteye.com/blog/guest_book">留言</a></li>
+            <li><a href="http://gemantic.iteye.com/blog/profile">关于我</a></li>
+          </ul>
+    
+          <div class="search">
+            <form action="http://gemantic.iteye.com/blog/search" method="get">
+              <input class="search_text" id="query" name="query" style="margin-left: 10px;width: 110px;" type="text" value="">
+              <input class="submit_search" type="submit" value="">
+            </form>
+          </div> 
+          <div id="fd"></div>         
+        </div>
+      </div>
+      
+      <div id="content" class="clearfix">
+        <div id="main">
+          
+
+
+
+          
+
+
+<div class="h-entry" style="display:none">
+  <a href="http://gemantic.iteye.com/" class="p-author" target="_blank">gemantic</a>
+</div>
+
+
+<div class="blog_main">
+  <div class="blog_title">
+    <h3>
+      <a href="http://gemantic.iteye.com/blog/1199214">thrift的使用介绍</a>
+      <em class="actions">      </em>
+    </h3>
+    
+        <div class="news_tag"><a href="http://www.iteye.com/blogs/tag/thrift">thrift</a><a href="http://www.iteye.com/blogs/tag/thrift%20client">thrift client</a><a href="http://www.iteye.com/blogs/tag/thrift%20server">thrift server</a><a href="http://www.iteye.com/blogs/tag/thrift%200.7.0">thrift 0.7.0</a>&nbsp;</div>
+    	  
+    	
+    	
+  		
+      </div>
+
+  <div id="blog_content" class="blog_content">
+    <strong>一、About&nbsp; thrift&nbsp;&nbsp; </strong>
+<br><strong>二、什么是thrift，怎么工作？</strong>
+<br><strong>三、Thrift&nbsp; IDL </strong>
+<br><strong>四、Thrift&nbsp;&nbsp; Demo </strong>
+<br><strong>五、Thrift 协议栈 以及各层的使用（java 为例）</strong>
+<br><strong>六、与protocolbuffer的区别</strong>
+<br>
+<br><strong>一、About&nbsp; thrift&nbsp;&nbsp; </strong>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; thrift是一种可伸缩的跨语言服务的发展软件框架。它结合了功能强大的软件堆栈的代码生成引擎，以建设服务，工作效率和无缝地与C + +，C#，Java，Python和PHP和Ruby结合。thrift是facebook开发的，我们现在把它作为开源软件使用。thrift允许你定义一个简单的定义文件中的数据类型和服务接口。以作为输入文件，编译器生成代码用来方便地生成RPC客户端和服务器通信的无缝跨编程语言（来自百度百科）。&nbsp;&nbsp;&nbsp; 
+<br>&nbsp; &gt;&gt;&gt;最初由facebook开发用做系统内个语言之间的RPC通信 。
+<br>&nbsp; &gt;&gt;&gt;2007年由facebook贡献到apache基金 ，现在是apache下的opensource之一 。
+<br>&nbsp; &gt;&gt;&gt;支持多种语言之间的RPC方式的通信：php语言client可以构造一个对象，调用相应的服务方法来调用java语言的服务 ，跨越语言的C/S&nbsp;&nbsp; rpc&nbsp; 调用 。
+<br>
+<br>
+<br><strong>二、什么是thrift，怎么工作？</strong>
+<br>
+<br>java&nbsp; rmi的例子，代码见附件，建立一个java rmi的流程&nbsp; ：
+<br>&nbsp; &gt;&gt;&gt;定义一个服务调用接口 。
+<br>&nbsp; &gt;&gt;&gt;server端：接口实现---impl的实例---注册该服务实现（端口）---启动服务。
+<br>&nbsp; &gt;&gt;&gt;client端：通过ip、端口、服务名，得到服务，通过接口来调用 。
+<br>&nbsp; &gt;&gt;&gt;rmi数据传输方式：java对象序列化 。
+<br>
+<br>Thrift&nbsp; 服务&nbsp; 
+<br>&nbsp; &gt;&gt;&gt;例同rmi ，需要定义通信接口、实现、注册服务、绑定端口……
+<br>&nbsp; &gt;&gt;&gt;如何多种语言之间通信&nbsp; ？
+<br>&nbsp; &gt;&gt;&gt;数据传输走socket（多种语言均支持），数据再以特定的格式（String ），发送，接收方语言解析&nbsp;&nbsp; 。
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Object ---&gt;&nbsp; String ---&gt;&nbsp; Object&nbsp; 。
+<br>
+<br>&nbsp;&nbsp;&nbsp; 问题：编码、解析完全需要自己做 ，复杂的数据结构会编码困难 .
+<br>
+<br>
+<br>Thrift&nbsp; 服务 ：thrift的中间编码层 
+<br>&nbsp; &gt;&gt;&gt;java&nbsp; Object ---&gt; Thrift&nbsp; Object ---&gt; php&nbsp; Object&nbsp;&nbsp; 
+<br>&nbsp; &gt;&gt;&gt; 定义thrift的文件 ，由thrift文件（IDL）生成 双方语言的接口、model ，在生成的model以及接口中会有解码编码的代码 。
+<br>&nbsp; &gt;&gt;&gt;thrift&nbsp;&nbsp; 文件例子 
+<br>&nbsp;&nbsp;&nbsp;&nbsp; thrift-0.7.0.exe&nbsp;&nbsp; -r&nbsp;&nbsp; -gen&nbsp; java&nbsp;&nbsp;&nbsp; TestThrift.thrift&nbsp;&nbsp;&nbsp; 生成java 代码
+<br>&nbsp;&nbsp;&nbsp;&nbsp; thrift-0.7.0.exe&nbsp;&nbsp; -r&nbsp;&nbsp; -gen&nbsp; php&nbsp;&nbsp;&nbsp; TestThrift.thrift&nbsp;&nbsp;&nbsp; 生成php代码
+<br>&nbsp;&nbsp;&nbsp;&nbsp; thrift-0.7.0.exe&nbsp;&nbsp; -r&nbsp;&nbsp; -gen&nbsp; py&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TestThrift.thrift&nbsp;&nbsp;&nbsp; 生成python代码
+<br>&nbsp;&nbsp;&nbsp;&nbsp; thrift-0.7.0.exe&nbsp;&nbsp; -r&nbsp;&nbsp; -gen&nbsp; as3&nbsp;&nbsp;&nbsp;&nbsp; TestThrift.thrift&nbsp;&nbsp;&nbsp; 生成as3代码
+<br>&nbsp;&nbsp;&nbsp;&nbsp; thrift-0.7.0.exe&nbsp;&nbsp; -r&nbsp;&nbsp; -gen&nbsp; cpp&nbsp;&nbsp;&nbsp;&nbsp; TestThrift.thrift&nbsp;&nbsp;&nbsp; 生成C++代码
+<br>
+<br><strong>三、Thrift&nbsp; IDL </strong> 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; http://www.cnblogs.com/tianhuilove/archive/2011/09/05/2167669.html
+<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; http://wiki.apache.org/thrift/
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; http://wiki.apache.org/thrift/ThriftTypes
+<br>
+<br><strong>四、Thrift&nbsp;&nbsp; Demo </strong>
+<br>Thrift&nbsp; IDL 文件 
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed wmode="transparent" src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=namespace%20java%20com.gemantic.analyse.thrift.index%0A%0Astruct%20%20NewsModel%7B%0A1%3Ai32%20id%20%3B%0A2%3Astring%20title%3B%0A3%3Astring%20content%3B%0A4%3Astring%20media_from%3B%0A5%3Astring%20author%3B%0A%7D%0A%0Aservice%20IndexNewsOperatorServices%20%7B%0Abool%20indexNews(1%3ANewsModel%20indexNews)%2C%0Abool%20deleteArtificiallyNews(1%3Ai32%20id%20)%0A%7D%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./thrift的使用介绍 - - ITeye技术网站_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./thrift的使用介绍 - - ITeye技术网站_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span>namespace&nbsp;java&nbsp;com.gemantic.analyse.thrift.index&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span>struct&nbsp;&nbsp;NewsModel{&nbsp;&nbsp;</span></li><li><span><span class="number">1</span><span>:i32&nbsp;id&nbsp;;&nbsp;&nbsp;</span></span></li><li><span><span class="number">2</span><span>:string&nbsp;title;&nbsp;&nbsp;</span></span></li><li><span><span class="number">3</span><span>:string&nbsp;content;&nbsp;&nbsp;</span></span></li><li><span><span class="number">4</span><span>:string&nbsp;media_from;&nbsp;&nbsp;</span></span></li><li><span><span class="number">5</span><span>:string&nbsp;author;&nbsp;&nbsp;</span></span></li><li><span>}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>service&nbsp;IndexNewsOperatorServices&nbsp;{&nbsp;&nbsp;</span></li><li><span>bool&nbsp;indexNews(<span class="number">1</span><span>:NewsModel&nbsp;indexNews),&nbsp;&nbsp;</span></span></li><li><span>bool&nbsp;deleteArtificiallyNews(<span class="number">1</span><span>:i32&nbsp;id&nbsp;)&nbsp;&nbsp;</span></span></li><li><span>}&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" codeable_id="" codeable_type="BlogComment" source_url="http://gemantic.iteye.com/blog/1199214#" pre_index="0" title="thrift的使用介绍" style="display: none;">namespace java com.gemantic.analyse.thrift.index
+
+struct  NewsModel{
+1:i32 id ;
+2:string title;
+3:string content;
+4:string media_from;
+5:string author;
+}
+
+service IndexNewsOperatorServices {
+bool indexNews(1:NewsModel indexNews),
+bool deleteArtificiallyNews(1:i32 id )
+}
+</pre>
+<br>
+<br>java&nbsp; server 
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed wmode="transparent" src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=package%20com.gemantic.analyse.thrift.index%3B%0A%0Aimport%20java.net.InetSocketAddress%3B%0A%0Aimport%20org.apache.thrift.protocol.TBinaryProtocol%3B%0Aimport%20org.apache.thrift.server.TServer%3B%0Aimport%20org.apache.thrift.server.TThreadPoolServer%3B%0Aimport%20org.apache.thrift.server.TThreadPoolServer.Args%3B%0Aimport%20org.apache.thrift.transport.TServerSocket%3B%0Aimport%20org.apache.thrift.transport.TServerTransport%3B%0Aimport%20org.apache.thrift.transport.TTransportFactory%3B%0A%0Apublic%20class%20ThriftServerTest%20%7B%0A%0A%09%2F**%0A%09%20*%20%40param%20args%0A%09%20*%2F%0A%09public%20static%20void%20main(String%5B%5D%20args)%20%7B%0A%09%09%2F%2F%20TODO%20Auto-generated%20method%20stub%0A%09%09IndexNewsOperatorServices.Processor%20processor%20%3D%20new%20IndexNewsOperatorServices.Processor(new%20IndexNewsOperatorServicesImpl())%3B%0A%09%09try%7B%0A%09%09%09TServerTransport%20serverTransport%20%3D%20new%20TServerSocket(%20new%20InetSocketAddress(%220.0.0.0%22%2C9813))%3B%0A%09%09%09Args%20trArgs%3Dnew%20Args(serverTransport)%3B%0A%09%09%09trArgs.processor(processor)%3B%0A%09%09%09%2F%2F%E4%BD%BF%E7%94%A8%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%9D%A5%E7%BC%96%E7%A0%81%E5%BA%94%E7%94%A8%E5%B1%82%E7%9A%84%E6%95%B0%E6%8D%AE%0A%09%09%09trArgs.protocolFactory(new%20TBinaryProtocol.Factory(true%2C%20true))%3B%0A%09%09%09%2F%2F%E4%BD%BF%E7%94%A8%E6%99%AE%E9%80%9A%E7%9A%84socket%E6%9D%A5%E4%BC%A0%E8%BE%93%E6%95%B0%E6%8D%AE%0A%09%09%09trArgs.transportFactory(new%20TTransportFactory())%3B%0A%09%09%09TServer%20server%20%3D%20new%20TThreadPoolServer(trArgs)%3B%0A%09%09%09System.out.println(%22server%20begin%20......................%22)%3B%0A%09%09%09server.serve()%3B%0A%09%09%09System.out.println(%22---------------------------------------%22)%3B%0A%09%09%09server.stop()%3B%0A%09%09%7Dcatch(Exception%20e)%7B%0A%09%09%09throw%20new%20RuntimeException(%22index%20thrift%20server%20start%20failed!!%22%2B%22%2Fn%22%2Be.getMessage())%3B%0A%09%09%7D%0A%09%7D%0A%0A%7D%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./thrift的使用介绍 - - ITeye技术网站_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./thrift的使用介绍 - - ITeye技术网站_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span class="keyword">package</span><span>&nbsp;com.gemantic.analyse.thrift.index;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="keyword">import</span><span>&nbsp;java.net.InetSocketAddress;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="keyword">import</span><span>&nbsp;org.apache.thrift.protocol.TBinaryProtocol;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">import</span><span>&nbsp;org.apache.thrift.server.TServer;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">import</span><span>&nbsp;org.apache.thrift.server.TThreadPoolServer;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">import</span><span>&nbsp;org.apache.thrift.server.TThreadPoolServer.Args;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">import</span><span>&nbsp;org.apache.thrift.transport.TServerSocket;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">import</span><span>&nbsp;org.apache.thrift.transport.TServerTransport;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">import</span><span>&nbsp;org.apache.thrift.transport.TTransportFactory;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="keyword">public</span><span>&nbsp;</span><span class="keyword">class</span><span>&nbsp;ThriftServerTest&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;args</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span><span>&nbsp;</span><span class="keyword">static</span><span>&nbsp;</span><span class="keyword">void</span><span>&nbsp;main(String[]&nbsp;args)&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;TODO&nbsp;Auto-generated&nbsp;method&nbsp;stub</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IndexNewsOperatorServices.Processor&nbsp;processor&nbsp;=&nbsp;<span class="keyword">new</span><span>&nbsp;IndexNewsOperatorServices.Processor(</span><span class="keyword">new</span><span>&nbsp;IndexNewsOperatorServicesImpl());&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">try</span><span>{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TServerTransport&nbsp;serverTransport&nbsp;=&nbsp;<span class="keyword">new</span><span>&nbsp;TServerSocket(&nbsp;</span><span class="keyword">new</span><span>&nbsp;InetSocketAddress(</span><span class="string">"0.0.0.0"</span><span>,</span><span class="number">9813</span><span>));&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Args&nbsp;trArgs=<span class="keyword">new</span><span>&nbsp;Args(serverTransport);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;trArgs.processor(processor);&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//使用二进制来编码应用层的数据</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;trArgs.protocolFactory(<span class="keyword">new</span><span>&nbsp;TBinaryProtocol.Factory(</span><span class="keyword">true</span><span>,&nbsp;</span><span class="keyword">true</span><span>));&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//使用普通的socket来传输数据</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;trArgs.transportFactory(<span class="keyword">new</span><span>&nbsp;TTransportFactory());&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TServer&nbsp;server&nbsp;=&nbsp;<span class="keyword">new</span><span>&nbsp;TThreadPoolServer(trArgs);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"server&nbsp;begin&nbsp;......................"</span><span>);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server.serve();&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"---------------------------------------"</span><span>);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server.stop();&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<span class="keyword">catch</span><span>(Exception&nbsp;e){&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span><span>&nbsp;</span><span class="keyword">new</span><span>&nbsp;RuntimeException(</span><span class="string">"index&nbsp;thrift&nbsp;server&nbsp;start&nbsp;failed!!"</span><span>+</span><span class="string">"/n"</span><span>+e.getMessage());&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>}&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" codeable_id="" codeable_type="BlogComment" source_url="http://gemantic.iteye.com/blog/1199214#" pre_index="1" title="thrift的使用介绍" style="display: none;">package com.gemantic.analyse.thrift.index;
+
+import java.net.InetSocketAddress;
+
+import org.apache.thrift.protocol.TBinaryProtocol;
+import org.apache.thrift.server.TServer;
+import org.apache.thrift.server.TThreadPoolServer;
+import org.apache.thrift.server.TThreadPoolServer.Args;
+import org.apache.thrift.transport.TServerSocket;
+import org.apache.thrift.transport.TServerTransport;
+import org.apache.thrift.transport.TTransportFactory;
+
+public class ThriftServerTest {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		IndexNewsOperatorServices.Processor processor = new IndexNewsOperatorServices.Processor(new IndexNewsOperatorServicesImpl());
+		try{
+			TServerTransport serverTransport = new TServerSocket( new InetSocketAddress("0.0.0.0",9813));
+			Args trArgs=new Args(serverTransport);
+			trArgs.processor(processor);
+			//使用二进制来编码应用层的数据
+			trArgs.protocolFactory(new TBinaryProtocol.Factory(true, true));
+			//使用普通的socket来传输数据
+			trArgs.transportFactory(new TTransportFactory());
+			TServer server = new TThreadPoolServer(trArgs);
+			System.out.println("server begin ......................");
+			server.serve();
+			System.out.println("---------------------------------------");
+			server.stop();
+		}catch(Exception e){
+			throw new RuntimeException("index thrift server start failed!!"+"/n"+e.getMessage());
+		}
+	}
+
+}
+</pre>
+<br>
+<br>java client 
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Java代码 <embed wmode="transparent" src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=package%20com.gemantic.analyse.thrift.index%3B%0A%0Aimport%20org.apache.thrift.TException%3B%0Aimport%20org.apache.thrift.protocol.TBinaryProtocol%3B%0Aimport%20org.apache.thrift.protocol.TProtocol%3B%0Aimport%20org.apache.thrift.transport.TSocket%3B%0Aimport%20org.apache.thrift.transport.TTransport%3B%0A%0Apublic%20class%20ThriftClientTest%20%7B%0A%0A%09%2F**%0A%09%20*%20%40param%20args%0A%09%20*%20%40throws%20TException%20%0A%09%20*%2F%0A%09public%20static%20void%20main(String%5B%5D%20args)%20throws%20TException%20%7B%0A%09%09%2F%2F%20TODO%20Auto-generated%20method%20stub%0A%09%09TTransport%20transport%20%3D%20new%20TSocket(%2210.0.0.41%22%2C%209813)%3B%0A%09%09long%20start%3DSystem.currentTimeMillis()%3B%0A%2F%2F%09%09TTransport%20transport%20%3D%20new%20TSocket(%22218.11.178.110%22%2C9090)%3B%0A%20%20%20%20%20%20%20%20TProtocol%20protocol%20%3D%20new%20TBinaryProtocol(transport)%3B%0A%20%20%20%20%20%20%20%20IndexNewsOperatorServices.Client%20client%3Dnew%20IndexNewsOperatorServices.Client(protocol)%3B%0A%20%20%20%20%20%20%20%20transport.open()%3B%0A%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20client.deleteArtificiallyNews(123456)%3B%0A%20%20%20%20%20%20%20%20NewsModel%20newsModel%3Dnew%20NewsModel()%3B%0A%20%20%20%20%20%20%20%20newsModel.setId(789456)%3B%0A%20%20%20%20%20%20%20%20newsModel.setTitle(%22this%20from%20java%20client%22)%3B%0A%20%20%20%20%20%20%20%20newsModel.setContent(%22%E3%80%80%E4%B8%96%E7%95%8C%E6%9D%AF%E6%AF%94%E8%B5%9B%E5%89%8D%EF%BC%8C%E7%94%B1%E4%BA%8E%E5%A1%9E%E5%B0%94%E7%BB%B4%E4%BA%9A%E5%92%8C%E9%BB%91%E5%B1%B1%E7%AA%81%E7%84%B6%E5%AE%A3%E5%B8%83%E5%88%86%E8%A3%82%EF%BC%8C%E5%9B%BD%E9%99%85%E8%B6%B3%E8%81%94%E5%BC%80%E4%BC%9A%E5%86%B3%E5%AE%9A%E5%89%94%E9%99%A4%E5%A1%9E%E9%BB%91%EF%BC%8C%E7%94%B1%E4%B8%96%E7%95%8C%E4%B8%8A%E7%90%83%E8%BF%B7%E6%9C%80%E5%A4%9A%E7%9A%84%E5%9B%BD%E5%AE%B6%E9%A1%B6%E6%9B%BF%EF%BC%8C%E5%90%8D%E9%A2%9D%E6%81%B0%E5%B7%A7%E6%9D%A5%E5%88%B0%E4%B8%AD%E5%9B%BD%E3%80%82%E4%B8%BE%E5%9B%BD%E4%B8%8A%E4%B8%8B%E4%B8%80%E7%89%87%E6%AC%A2%E8%85%BE%EF%BC%8C%E4%B8%AD%E5%9B%BD%E8%B6%B3%E5%8D%8F%E5%86%B3%E5%AE%9A%E7%94%B1%E2%80%9C%E6%88%90%E4%B8%96%E9%93%8E%E2%80%9D%EF%BC%88%E6%88%90%E9%BE%99%2B%E9%98%8E%E4%B8%96%E9%93%8E%EF%BC%89%E7%BB%84%E9%98%9F%EF%BC%8C%E8%BF%9B%E5%86%9B%E4%B8%96%E7%95%8C%E6%9D%AF%E3%80%82%22)%3B%0A%20%20%20%20%20%20%20%20newsModel.setAuthor(%22ddc%22)%3B%0A%20%20%20%20%20%20%20%20newsModel.setMedia_from(%22%E6%96%B0%E5%8D%8E08%22)%3B%0A%20%20%20%20%20%20%20%20client.indexNews(newsModel)%3B%0A%20%20%20%20%20%20%20%20transport.close()%3B%0A%20%20%20%20%20%20%20%20System.out.println((System.currentTimeMillis()-start))%3B%0A%20%20%20%20%20%20%20%20System.out.println(%22client%20sucess!%22)%3B%0A%09%7D%0A%0A%7D%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./thrift的使用介绍 - - ITeye技术网站_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./thrift的使用介绍 - - ITeye技术网站_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-j"><li><span><span class="keyword">package</span><span>&nbsp;com.gemantic.analyse.thrift.index;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="keyword">import</span><span>&nbsp;org.apache.thrift.TException;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">import</span><span>&nbsp;org.apache.thrift.protocol.TBinaryProtocol;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">import</span><span>&nbsp;org.apache.thrift.protocol.TProtocol;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">import</span><span>&nbsp;org.apache.thrift.transport.TSocket;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">import</span><span>&nbsp;org.apache.thrift.transport.TTransport;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="keyword">public</span><span>&nbsp;</span><span class="keyword">class</span><span>&nbsp;ThriftClientTest&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;args</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@throws&nbsp;TException&nbsp;</span>&nbsp;</span></li><li><span><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span><span>&nbsp;</span><span class="keyword">static</span><span>&nbsp;</span><span class="keyword">void</span><span>&nbsp;main(String[]&nbsp;args)&nbsp;</span><span class="keyword">throws</span><span>&nbsp;TException&nbsp;{&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;TODO&nbsp;Auto-generated&nbsp;method&nbsp;stub</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TTransport&nbsp;transport&nbsp;=&nbsp;<span class="keyword">new</span><span>&nbsp;TSocket(</span><span class="string">"10.0.0.41"</span><span>,&nbsp;</span><span class="number">9813</span><span>);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">long</span><span>&nbsp;start=System.currentTimeMillis();&nbsp;&nbsp;</span></span></li><li><span><span class="comment">//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TTransport&nbsp;transport&nbsp;=&nbsp;new&nbsp;TSocket("218.11.178.110",9090);</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TProtocol&nbsp;protocol&nbsp;=&nbsp;<span class="keyword">new</span><span>&nbsp;TBinaryProtocol(transport);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IndexNewsOperatorServices.Client&nbsp;client=<span class="keyword">new</span><span>&nbsp;IndexNewsOperatorServices.Client(protocol);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;transport.open();&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;client.deleteArtificiallyNews(<span class="number">123456</span><span>);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NewsModel&nbsp;newsModel=<span class="keyword">new</span><span>&nbsp;NewsModel();&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;newsModel.setId(<span class="number">789456</span><span>);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;newsModel.setTitle(<span class="string">"this&nbsp;from&nbsp;java&nbsp;client"</span><span>);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;newsModel.setContent(<span class="string">"　世界杯比赛前，由于塞尔维亚和黑山突然宣布分裂，国际足联开会决定剔除塞黑，由世界上球迷最多的国家顶替，名额恰巧来到中国。举国上下一片欢腾，中国足协决定由“成世铎”（成龙+阎世铎）组队，进军世界杯。"</span><span>);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;newsModel.setAuthor(<span class="string">"ddc"</span><span>);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;newsModel.setMedia_from(<span class="string">"新华08"</span><span>);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;client.indexNews(newsModel);&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;transport.close();&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println((System.currentTimeMillis()-start));&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"client&nbsp;sucess!"</span><span>);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>}&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="java" codeable_id="" codeable_type="BlogComment" source_url="http://gemantic.iteye.com/blog/1199214#" pre_index="2" title="thrift的使用介绍" style="display: none;">package com.gemantic.analyse.thrift.index;
+
+import org.apache.thrift.TException;
+import org.apache.thrift.protocol.TBinaryProtocol;
+import org.apache.thrift.protocol.TProtocol;
+import org.apache.thrift.transport.TSocket;
+import org.apache.thrift.transport.TTransport;
+
+public class ThriftClientTest {
+
+	/**
+	 * @param args
+	 * @throws TException 
+	 */
+	public static void main(String[] args) throws TException {
+		// TODO Auto-generated method stub
+		TTransport transport = new TSocket("10.0.0.41", 9813);
+		long start=System.currentTimeMillis();
+//		TTransport transport = new TSocket("218.11.178.110",9090);
+        TProtocol protocol = new TBinaryProtocol(transport);
+        IndexNewsOperatorServices.Client client=new IndexNewsOperatorServices.Client(protocol);
+        transport.open();
+
+        
+        client.deleteArtificiallyNews(123456);
+        NewsModel newsModel=new NewsModel();
+        newsModel.setId(789456);
+        newsModel.setTitle("this from java client");
+        newsModel.setContent("　世界杯比赛前，由于塞尔维亚和黑山突然宣布分裂，国际足联开会决定剔除塞黑，由世界上球迷最多的国家顶替，名额恰巧来到中国。举国上下一片欢腾，中国足协决定由“成世铎”（成龙+阎世铎）组队，进军世界杯。");
+        newsModel.setAuthor("ddc");
+        newsModel.setMedia_from("新华08");
+        client.indexNews(newsModel);
+        transport.close();
+        System.out.println((System.currentTimeMillis()-start));
+        System.out.println("client sucess!");
+	}
+
+}
+</pre>
+<br>
+<br>php client 
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Php代码 <embed wmode="transparent" src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=%3C%3Fphp%0A%24GLOBALS%5B&#39;THRIFT_ROOT&#39;%5D%20%3D%20&#39;%2Fhome%2Ftjiang%2Fdemo%2Fthrift%2Flib%2Fphp%2Fsrc&#39;%3B%0Arequire_once%20%24GLOBALS%5B&#39;THRIFT_ROOT&#39;%5D.&#39;%2FThrift.php&#39;%3B%0Arequire_once%20%24GLOBALS%5B&#39;THRIFT_ROOT&#39;%5D.&#39;%2Fprotocol%2FTBinaryProtocol.php&#39;%3B%0Arequire_once%20%24GLOBALS%5B&#39;THRIFT_ROOT&#39;%5D.&#39;%2Ftransport%2FTSocket.php&#39;%3B%0Arequire_once%20%24GLOBALS%5B&#39;THRIFT_ROOT&#39;%5D.&#39;%2Ftransport%2FTHttpClient.php&#39;%3B%0Arequire_once%20%24GLOBALS%5B&#39;THRIFT_ROOT&#39;%5D.&#39;%2Ftransport%2FTBufferedTransport.php&#39;%3B%0Ainclude_once%20%24GLOBALS%5B&#39;THRIFT_ROOT&#39;%5D.&#39;%2Fpackages%2FTestThrift%2FTestThrift_types.php&#39;%3B%0Ainclude_once%20%24GLOBALS%5B&#39;THRIFT_ROOT&#39;%5D.&#39;%2Fpackages%2FTestThrift%2FIndexNewsOperatorServices.php&#39;%3B%0A%24data%3Darray(%0A&#39;id&#39;%3D%3E&#39;1&#39;%2C%0A&#39;title&#39;%3D%3E&#39;demo-%E6%A0%87%E9%A2%98&#39;%2C%0A&#39;content&#39;%3D%3E&#39;demo-%E5%86%85%E5%AE%B9&#39;%2C%0A&#39;media_from&#39;%3D%3E&#39;hexun&#39;%2C%0A&#39;author&#39;%3D%3E&#39;xiaodi667&#39;%0A)%3B%0A%24thrif_server_url%20%3D%20&#39;10.0.0.41&#39;%3B%0A%24transport%20%3D%20new%20TSocket(%24thrif_server_url%2C%209813)%3B%0A%24transport-%3Eopen()%3B%0A%0A%24protocol%20%3D%20new%20TBinaryProtocol(%24transport)%3B%0A%0A%24client%3D%20new%20IndexNewsOperatorServicesClient(%24protocol%2C%20%24protocol)%3B%0A%24obj%20%3D%20new%20NewsModel(%24data)%3B%0A%24result%20%3D%20%24client-%3EindexNews(%24obj)%3B%0A%0A%24transport-%3Eclose()%3B%0A%3F%3E%0A%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./thrift的使用介绍 - - ITeye技术网站_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./thrift的使用介绍 - - ITeye技术网站_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-c"><li><span><span>&lt;?php&nbsp;&nbsp;</span></span></li><li><span><span class="vars">$GLOBALS</span><span>[</span><span class="string">'THRIFT_ROOT'</span><span>]&nbsp;=&nbsp;</span><span class="string">'/home/tjiang/demo/thrift/lib/php/src'</span><span>;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">require_once</span><span>&nbsp;</span><span class="vars">$GLOBALS</span><span>[</span><span class="string">'THRIFT_ROOT'</span><span>].</span><span class="string">'/Thrift.php'</span><span>;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">require_once</span><span>&nbsp;</span><span class="vars">$GLOBALS</span><span>[</span><span class="string">'THRIFT_ROOT'</span><span>].</span><span class="string">'/protocol/TBinaryProtocol.php'</span><span>;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">require_once</span><span>&nbsp;</span><span class="vars">$GLOBALS</span><span>[</span><span class="string">'THRIFT_ROOT'</span><span>].</span><span class="string">'/transport/TSocket.php'</span><span>;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">require_once</span><span>&nbsp;</span><span class="vars">$GLOBALS</span><span>[</span><span class="string">'THRIFT_ROOT'</span><span>].</span><span class="string">'/transport/THttpClient.php'</span><span>;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">require_once</span><span>&nbsp;</span><span class="vars">$GLOBALS</span><span>[</span><span class="string">'THRIFT_ROOT'</span><span>].</span><span class="string">'/transport/TBufferedTransport.php'</span><span>;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">include_once</span><span>&nbsp;</span><span class="vars">$GLOBALS</span><span>[</span><span class="string">'THRIFT_ROOT'</span><span>].</span><span class="string">'/packages/TestThrift/TestThrift_types.php'</span><span>;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">include_once</span><span>&nbsp;</span><span class="vars">$GLOBALS</span><span>[</span><span class="string">'THRIFT_ROOT'</span><span>].</span><span class="string">'/packages/TestThrift/IndexNewsOperatorServices.php'</span><span>;&nbsp;&nbsp;</span></span></li><li><span><span class="vars">$data</span><span>=</span><span class="keyword">array</span><span>(&nbsp;&nbsp;</span></span></li><li><span><span class="string">'id'</span><span>=&gt;</span><span class="string">'1'</span><span>,&nbsp;&nbsp;</span></span></li><li><span><span class="string">'title'</span><span>=&gt;</span><span class="string">'demo-标题'</span><span>,&nbsp;&nbsp;</span></span></li><li><span><span class="string">'content'</span><span>=&gt;</span><span class="string">'demo-内容'</span><span>,&nbsp;&nbsp;</span></span></li><li><span><span class="string">'media_from'</span><span>=&gt;</span><span class="string">'hexun'</span><span>,&nbsp;&nbsp;</span></span></li><li><span><span class="string">'author'</span><span>=&gt;</span><span class="string">'xiaodi667'</span><span>&nbsp;&nbsp;</span></span></li><li><span>);&nbsp;&nbsp;</span></li><li><span><span class="vars">$thrif_server_url</span><span>&nbsp;=&nbsp;</span><span class="string">'10.0.0.41'</span><span>;&nbsp;&nbsp;</span></span></li><li><span><span class="vars">$transport</span><span>&nbsp;=&nbsp;</span><span class="keyword">new</span><span>&nbsp;TSocket(</span><span class="vars">$thrif_server_url</span><span>,&nbsp;9813);&nbsp;&nbsp;</span></span></li><li><span><span class="vars">$transport</span><span>-&gt;open();&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="vars">$protocol</span><span>&nbsp;=&nbsp;</span><span class="keyword">new</span><span>&nbsp;TBinaryProtocol(</span><span class="vars">$transport</span><span>);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="vars">$client</span><span>=&nbsp;</span><span class="keyword">new</span><span>&nbsp;IndexNewsOperatorServicesClient(</span><span class="vars">$protocol</span><span>,&nbsp;</span><span class="vars">$protocol</span><span>);&nbsp;&nbsp;</span></span></li><li><span><span class="vars">$obj</span><span>&nbsp;=&nbsp;</span><span class="keyword">new</span><span>&nbsp;NewsModel(</span><span class="vars">$data</span><span>);&nbsp;&nbsp;</span></span></li><li><span><span class="vars">$result</span><span>&nbsp;=&nbsp;</span><span class="vars">$client</span><span>-&gt;indexNews(</span><span class="vars">$obj</span><span>);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="vars">$transport</span><span>-&gt;close();&nbsp;&nbsp;</span></span></li><li><span>?&gt;&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="php" codeable_id="" codeable_type="BlogComment" source_url="http://gemantic.iteye.com/blog/1199214#" pre_index="3" title="thrift的使用介绍" style="display: none;">&lt;?php
+$GLOBALS['THRIFT_ROOT'] = '/home/tjiang/demo/thrift/lib/php/src';
+require_once $GLOBALS['THRIFT_ROOT'].'/Thrift.php';
+require_once $GLOBALS['THRIFT_ROOT'].'/protocol/TBinaryProtocol.php';
+require_once $GLOBALS['THRIFT_ROOT'].'/transport/TSocket.php';
+require_once $GLOBALS['THRIFT_ROOT'].'/transport/THttpClient.php';
+require_once $GLOBALS['THRIFT_ROOT'].'/transport/TBufferedTransport.php';
+include_once $GLOBALS['THRIFT_ROOT'].'/packages/TestThrift/TestThrift_types.php';
+include_once $GLOBALS['THRIFT_ROOT'].'/packages/TestThrift/IndexNewsOperatorServices.php';
+$data=array(
+'id'=&gt;'1',
+'title'=&gt;'demo-标题',
+'content'=&gt;'demo-内容',
+'media_from'=&gt;'hexun',
+'author'=&gt;'xiaodi667'
+);
+$thrif_server_url = '10.0.0.41';
+$transport = new TSocket($thrif_server_url, 9813);
+$transport-&gt;open();
+
+$protocol = new TBinaryProtocol($transport);
+
+$client= new IndexNewsOperatorServicesClient($protocol, $protocol);
+$obj = new NewsModel($data);
+$result = $client-&gt;indexNews($obj);
+
+$transport-&gt;close();
+?&gt;
+
+</pre>
+<br>
+<br>python client 
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">Python代码 <embed wmode="transparent" src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=%23!%2Fusr%2Fbin%2Fenv%20python%0A%0A%23%0A%23%20Licensed%20to%20the%20Apache%20Software%20Foundation%20(ASF)%20under%20one%0A%23%20or%20more%20contributor%20license%20agreements.%20See%20the%20NOTICE%20file%0A%23%20distributed%20with%20this%20work%20for%20additional%20information%0A%23%20regarding%20copyright%20ownership.%20The%20ASF%20licenses%20this%20file%0A%23%20to%20you%20under%20the%20Apache%20License%2C%20Version%202.0%20(the%0A%23%20%22License%22)%3B%20you%20may%20not%20use%20this%20file%20except%20in%20compliance%0A%23%20with%20the%20License.%20You%20may%20obtain%20a%20copy%20of%20the%20License%20at%0A%23%0A%23%20%20%20http%3A%2F%2Fwww.apache.org%2Flicenses%2FLICENSE-2.0%0A%23%0A%23%20Unless%20required%20by%20applicable%20law%20or%20agreed%20to%20in%20writing%2C%0A%23%20software%20distributed%20under%20the%20License%20is%20distributed%20on%20an%0A%23%20%22AS%20IS%22%20BASIS%2C%20WITHOUT%20WARRANTIES%20OR%20CONDITIONS%20OF%20ANY%0A%23%20KIND%2C%20either%20express%20or%20implied.%20See%20the%20License%20for%20the%0A%23%20specific%20language%20governing%20permissions%20and%20limitations%0A%23%20under%20the%20License.%0A%23%0A%0Aimport%20sys%0A%0Afrom%20TestThrift.ttypes%20import%20NewsModel%0Afrom%20TestThrift.IndexNewsOperatorServices%20import%20Client%0A%0Afrom%20thrift%20import%20Thrift%0Afrom%20thrift.transport%20import%20TSocket%0Afrom%20thrift.transport%20import%20TTransport%0Afrom%20thrift.protocol%20import%20TBinaryProtocol%0A%0Atry%3A%0A%0A%20%20%23%20Make%20socket%0A%20%20transport%20%3D%20TSocket.TSocket(&#39;10.0.0.41&#39;%2C%209813)%0A%0A%20%20%23%20Buffering%20is%20critical.%20Raw%20sockets%20are%20very%20slow%0A%20%20transport%20%3D%20TTransport.TBufferedTransport(transport)%0A%0A%20%20%23%20Wrap%20in%20a%20protocol%0A%20%20protocol%20%3D%20TBinaryProtocol.TBinaryProtocol(transport)%0A%0A%20%20%23%20Create%20a%20client%20to%20use%20the%20protocol%20encoder%0A%20%20client%20%3D%20Client(protocol)%0A%0A%20%20%23%20Connect!%0A%20%20transport.open()%0A%0A%20%20client.deleteArtificiallyNews(123)%0A%20%20%0A%20%20newsModel%3DNewsModel()%0A%20%20newsModel.id%3D123456%0A%20%20newsModel.title%3D%22python%20Test%22%0A%20%20newsModel.content%3D%22client%20test%20%20come%20from%20python%22%3B%0A%20%20newsModel.media_from%3D%22xinhua08%22%0A%20%20%0A%20%20client.indexNews(newsModel)%0A%20%20%0A%20%20%23close%0A%20%20transport.close()%0Aexcept%20Thrift.TException%2C%20tx%3A%0A%20%20print%20&#39;%25s&#39;%20%25%20(tx.message)%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./thrift的使用介绍 - - ITeye技术网站_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./thrift的使用介绍 - - ITeye技术网站_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-py"><li><span><span class="comment">#!/usr/bin/env&nbsp;python</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="comment">#</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="comment">#&nbsp;Licensed&nbsp;to&nbsp;the&nbsp;Apache&nbsp;Software&nbsp;Foundation&nbsp;(ASF)&nbsp;under&nbsp;one</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="comment">#&nbsp;or&nbsp;more&nbsp;contributor&nbsp;license&nbsp;agreements.&nbsp;See&nbsp;the&nbsp;NOTICE&nbsp;file</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="comment">#&nbsp;distributed&nbsp;with&nbsp;this&nbsp;work&nbsp;for&nbsp;additional&nbsp;information</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="comment">#&nbsp;regarding&nbsp;copyright&nbsp;ownership.&nbsp;The&nbsp;ASF&nbsp;licenses&nbsp;this&nbsp;file</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="comment">#&nbsp;to&nbsp;you&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="comment">#&nbsp;"License");&nbsp;you&nbsp;may&nbsp;not&nbsp;use&nbsp;this&nbsp;file&nbsp;except&nbsp;in&nbsp;compliance</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="comment">#&nbsp;with&nbsp;the&nbsp;License.&nbsp;You&nbsp;may&nbsp;obtain&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;License&nbsp;at</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="comment">#</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="comment">#&nbsp;&nbsp;&nbsp;http://www.apache.org/licenses/LICENSE-2.0</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="comment">#</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="comment">#&nbsp;Unless&nbsp;required&nbsp;by&nbsp;applicable&nbsp;law&nbsp;or&nbsp;agreed&nbsp;to&nbsp;in&nbsp;writing,</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="comment">#&nbsp;software&nbsp;distributed&nbsp;under&nbsp;the&nbsp;License&nbsp;is&nbsp;distributed&nbsp;on&nbsp;an</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="comment">#&nbsp;"AS&nbsp;IS"&nbsp;BASIS,&nbsp;WITHOUT&nbsp;WARRANTIES&nbsp;OR&nbsp;CONDITIONS&nbsp;OF&nbsp;ANY</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="comment">#&nbsp;KIND,&nbsp;either&nbsp;express&nbsp;or&nbsp;implied.&nbsp;See&nbsp;the&nbsp;License&nbsp;for&nbsp;the</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="comment">#&nbsp;specific&nbsp;language&nbsp;governing&nbsp;permissions&nbsp;and&nbsp;limitations</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="comment">#&nbsp;under&nbsp;the&nbsp;License.</span><span>&nbsp;&nbsp;</span></span></li><li><span><span class="comment">#</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="keyword">import</span><span>&nbsp;sys&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="keyword">from</span><span>&nbsp;TestThrift.ttypes&nbsp;</span><span class="keyword">import</span><span>&nbsp;NewsModel&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">from</span><span>&nbsp;TestThrift.IndexNewsOperatorServices&nbsp;</span><span class="keyword">import</span><span>&nbsp;Client&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="keyword">from</span><span>&nbsp;thrift&nbsp;</span><span class="keyword">import</span><span>&nbsp;Thrift&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">from</span><span>&nbsp;thrift.transport&nbsp;</span><span class="keyword">import</span><span>&nbsp;TSocket&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">from</span><span>&nbsp;thrift.transport&nbsp;</span><span class="keyword">import</span><span>&nbsp;TTransport&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">from</span><span>&nbsp;thrift.protocol&nbsp;</span><span class="keyword">import</span><span>&nbsp;TBinaryProtocol&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span><span class="keyword">try</span><span>:&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;<span class="comment">#&nbsp;Make&nbsp;socket</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;transport&nbsp;=&nbsp;TSocket.TSocket(<span class="string">'10.0.0.41'</span><span>,&nbsp;</span><span class="number">9813</span><span>)&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;<span class="comment">#&nbsp;Buffering&nbsp;is&nbsp;critical.&nbsp;Raw&nbsp;sockets&nbsp;are&nbsp;very&nbsp;slow</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;transport&nbsp;=&nbsp;TTransport.TBufferedTransport(transport)&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;<span class="comment">#&nbsp;Wrap&nbsp;in&nbsp;a&nbsp;protocol</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;protocol&nbsp;=&nbsp;TBinaryProtocol.TBinaryProtocol(transport)&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;<span class="comment">#&nbsp;Create&nbsp;a&nbsp;client&nbsp;to&nbsp;use&nbsp;the&nbsp;protocol&nbsp;encoder</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;client&nbsp;=&nbsp;Client(protocol)&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;<span class="comment">#&nbsp;Connect!</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;transport.open()&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;client.deleteArtificiallyNews(<span class="number">123</span><span>)&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;newsModel=NewsModel()&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;newsModel.id=<span class="number">123456</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;newsModel.title=<span class="string">"python&nbsp;Test"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;newsModel.content=<span class="string">"client&nbsp;test&nbsp;&nbsp;come&nbsp;from&nbsp;python"</span><span>;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;newsModel.media_from=<span class="string">"xinhua08"</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;client.indexNews(newsModel)&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;<span class="comment">#close</span><span>&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;transport.close()&nbsp;&nbsp;</span></li><li><span><span class="keyword">except</span><span>&nbsp;Thrift.TException,&nbsp;tx:&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;<span class="keyword">print</span><span>&nbsp;</span><span class="string">'%s'</span><span>&nbsp;%&nbsp;(tx.message)&nbsp;&nbsp;</span></span></li></ol></div><pre name="code" class="python" codeable_id="" codeable_type="BlogComment" source_url="http://gemantic.iteye.com/blog/1199214#" pre_index="4" title="thrift的使用介绍" style="display: none;">#!/usr/bin/env python
+
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements. See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership. The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License. You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied. See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+
+import sys
+
+from TestThrift.ttypes import NewsModel
+from TestThrift.IndexNewsOperatorServices import Client
+
+from thrift import Thrift
+from thrift.transport import TSocket
+from thrift.transport import TTransport
+from thrift.protocol import TBinaryProtocol
+
+try:
+
+  # Make socket
+  transport = TSocket.TSocket('10.0.0.41', 9813)
+
+  # Buffering is critical. Raw sockets are very slow
+  transport = TTransport.TBufferedTransport(transport)
+
+  # Wrap in a protocol
+  protocol = TBinaryProtocol.TBinaryProtocol(transport)
+
+  # Create a client to use the protocol encoder
+  client = Client(protocol)
+
+  # Connect!
+  transport.open()
+
+  client.deleteArtificiallyNews(123)
+  
+  newsModel=NewsModel()
+  newsModel.id=123456
+  newsModel.title="python Test"
+  newsModel.content="client test  come from python";
+  newsModel.media_from="xinhua08"
+  
+  client.indexNews(newsModel)
+  
+  #close
+  transport.close()
+except Thrift.TException, tx:
+  print '%s' % (tx.message)
+</pre>
+<br>
+<br>Csharp client 
+<br><div class="dp-highlighter" id=""><div class="bar"><div class="tools">C#代码 <embed wmode="transparent" src="/javascripts/syntaxhighlighter/clipboard_new.swf" width="14" height="15" flashvars="clipboard=%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20TTransport%20transport%20%3D%20new%20TSocket(%2210.0.0.41%22%2C%209813)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20TProtocol%20protocol%20%3D%20new%20TBinaryProtocol(transport)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20IndexNewsOperatorServices.Client%20client%20%3D%20new%20IndexNewsOperatorServices.Client(protocol)%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20transport.Open()%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20NewsModel%20model%20%3D%20new%20NewsModel()%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20model.Author%20%3D%20%22jww%22%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20model.Title%20%3D%20%22title%22%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20model.Content%20%3D%20%22client%20%20%20Come%20%20%20From%20%20%20CSharp%22%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20model.Id%20%3D%201%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20client.deleteArtificiallyNews(123)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Console.WriteLine(client.indexNews(model))%3B%0A%0A" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">&nbsp;<a href="javascript:void()" title="收藏这段代码" onclick="code_favorites_do_favorite(this);return false;"><img class="star" src="./thrift的使用介绍 - - ITeye技术网站_files/icon_star.png" alt="收藏代码"><img class="spinner" src="./thrift的使用介绍 - - ITeye技术网站_files/spinner.gif" style="display:none"></a></div></div><ol start="1" class="dp-c"><li><span><span>TTransport&nbsp;transport&nbsp;=&nbsp;</span><span class="keyword">new</span><span>&nbsp;TSocket(</span><span class="string">"10.0.0.41"</span><span>,&nbsp;9813);&nbsp;&nbsp;</span></span></li><li><span>TProtocol&nbsp;protocol&nbsp;=&nbsp;<span class="keyword">new</span><span>&nbsp;TBinaryProtocol(transport);&nbsp;&nbsp;</span></span></li><li><span>IndexNewsOperatorServices.Client&nbsp;client&nbsp;=&nbsp;<span class="keyword">new</span><span>&nbsp;IndexNewsOperatorServices.Client(protocol);&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;</span></li><li><span>transport.Open();&nbsp;&nbsp;</span></li><li><span>NewsModel&nbsp;model&nbsp;=&nbsp;<span class="keyword">new</span><span>&nbsp;NewsModel();&nbsp;&nbsp;</span></span></li><li><span>model.Author&nbsp;=&nbsp;<span class="string">"jww"</span><span>;&nbsp;&nbsp;</span></span></li><li><span>model.Title&nbsp;=&nbsp;<span class="string">"title"</span><span>;&nbsp;&nbsp;</span></span></li><li><span>model.Content&nbsp;=&nbsp;<span class="string">"client&nbsp;&nbsp;&nbsp;Come&nbsp;&nbsp;&nbsp;From&nbsp;&nbsp;&nbsp;CSharp"</span><span>;&nbsp;&nbsp;</span></span></li><li><span>model.Id&nbsp;=&nbsp;1;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;</span></li><li><span>client.deleteArtificiallyNews(123);&nbsp;&nbsp;</span></li><li><span>Console.WriteLine(client.indexNews(model));&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="C#" codeable_id="" codeable_type="BlogComment" source_url="http://gemantic.iteye.com/blog/1199214#" pre_index="5" title="thrift的使用介绍" style="display: none;">                TTransport transport = new TSocket("10.0.0.41", 9813);
+                TProtocol protocol = new TBinaryProtocol(transport);
+                IndexNewsOperatorServices.Client client = new IndexNewsOperatorServices.Client(protocol);
+
+                transport.Open();
+                NewsModel model = new NewsModel();
+                model.Author = "jww";
+                model.Title = "title";
+                model.Content = "client   Come   From   CSharp";
+                model.Id = 1;
+
+                client.deleteArtificiallyNews(123);
+                Console.WriteLine(client.indexNews(model));
+
+</pre>
+<br>
+<br>
+<br><strong>五、Thrift 协议栈 以及各层的使用（java 为例）</strong>
+<br><img src="./thrift的使用介绍 - - ITeye技术网站_files/4e271cc2-1589-3480-b556-3067ea04479e.png">
+<br>1、model&nbsp;&nbsp; interface
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 服务的调用接口以及接口参数model、返回值model
+<br>2、Tprotocol&nbsp;&nbsp;&nbsp; 协议层
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 将数据（model）编码 、解码 。
+<br>3、Ttramsport 传输层
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 编码后的数据传输（简单socket、http）
+<br>5、Tserver
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 服务的Tserver类型，实现了几种rpc调用（单线程、多线程、非阻塞IO）
+<br>
+<br><strong>六、与protocolbuffer的区别</strong>
+<br>http://liuchangit.com/development/346.html
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<br>http://stackoverflow.com/questions/69316/biggest-differences-of-thrift-vs-protocol-buffers
+<br>
+<br>区别：
+<br>1、Another important difference are the languages supported by default.&nbsp;&nbsp;&nbsp; protobuf: Java, C++, Python&nbsp;&nbsp;&nbsp; Thrift: Java, C++, Python, PHP, Ruby, Erlang, Perl, Haskell, C#, Cocoa, Smalltalk, Ocaml
+<br>支持语言不同，thrift支持着更多的语言 。
+<br>2、Thrift supports ‘exceptions 。
+<br>&nbsp;&nbsp; thrift支持服务的异常 。
+<br>3、Protocol Buffers much easier to read 。Protobuf API looks cleaner, though the generated classes are all packed as an inner classes which is not so nice.
+<br>&nbsp;&nbsp; Protocol Buffers 在文档方面比thrift丰富，而且比thrift简单 。
+<br>4、Protobuf serialized objects are about 30% smaller then Thrift.
+<br>&nbsp;&nbsp; Protocol Buffers在序列化/反序列化、传输上性能更优 。
+<br>5、RPC is another key difference. Thrift generates code to implement RPC clients and servers wheres Protocol Buffers seems mostly designed as a data-interchange format alone.&nbsp; 
+<br>&nbsp;&nbsp;&nbsp; thrift提供了一套完整的rpc服务实现（多线程socket、非阻塞的socket....）
+<br>6、And according to the wiki the Thrift runtime doesn't run on Windows.
+<br>&nbsp;&nbsp; thrift 对有些语言在windows上不支持：C++&nbsp;&nbsp; .....
+<br>
+<br>
+<br>
+<br>
+<br>
+  </div>
+
+  
+  <div class="attachments">
+    
+      
+        <ul>
+          <li><a href="http://dl.iteye.com/topics/download/488b0505-f544-3c25-aa72-60648b2dab5e">thrift.rar</a> (14.5 KB)</li>
+          
+          <li>下载次数: 1096</li>
+        </ul>
+      
+    
+      
+        <ul style="display:none;">
+          <li><a href="http://dl2.iteye.com/upload/attachment/0057/2021/4e271cc2-1589-3480-b556-3067ea04479e.png" target="_blank"><img src="./thrift的使用介绍 - - ITeye技术网站_files/4e271cc2-1589-3480-b556-3067ea04479e-thumb.png" class="magplus" title="点击查看原始大小图片"></a></li>
+          
+          <li>大小: 66.3 KB</li>
+        </ul>
+      
+    
+    
+      <ul>
+        <li><a href="http://gemantic.iteye.com/blog/1199214#" onclick="$$(&#39;div.attachments ul&#39;).invoke(&#39;show&#39;);$(this).up(1).hide();return false;">查看图片附件</a></li>
+      </ul>
+    
+  </div>
+
+
+  
+  <div class="J_adv" data-view="true" data-mod="ad_popu_201" data-mtp="43" data-order="93" data-con="ad_content_1811" style="width: 728px; height: 90px;"><script src="./thrift的使用介绍 - - ITeye技术网站_files/adsbygoogle.js.下载"></script><ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-8990951720398508" data-ad-slot="8267689356/1918544322"></ins><script>(adsbygoogle=window.adsbygoogle || []).push({});</script></div>
+  
+
+  <div id="bottoms" class="clearfix">
+    
+    <div id="share_weibo">分享到：
+      <a data-type="sina" href="javascript:;" title="分享到新浪微博"><img src="./thrift的使用介绍 - - ITeye技术网站_files/sina.jpg"></a>
+      <a data-type="qq" href="javascript:;" title="分享到腾讯微博"><img src="./thrift的使用介绍 - - ITeye技术网站_files/tec.jpg"></a>
+    </div>
+  </div>
+
+  <div class="blog_nav">
+    <div class="pre_next">
+      <a href="http://gemantic.iteye.com/blog/1202100" class="next" title="cassandra技术分享">cassandra技术分享</a>
+      
+      
+    </div>
+  </div>
+  <div class="blog_bottom">
+    <ul>
+      <li>2011-10-18 14:18</li>
+      <li>浏览 117381</li>
+      <li><a href="http://gemantic.iteye.com/blog/1199214#comments">评论(7)</a></li>
+      
+      
+      <li>分类:<a href="http://www.iteye.com/blogs/category/opensource">开源软件</a></li>      
+      <li class="last"><a href="http://www.iteye.com/wiki/blog/1199214" target="_blank" class="more">相关推荐</a></li>
+    </ul>    
+  </div>
+  
+		    
+		
+<div class="boutique-curr-box blog_comment">
+	  <div class="boutique-curr clearfix">
+	    <h5 class="h3titles">参考知识库</h5>
+	    
+	    <dl class="dlnewlist">
+	    
+          <dd><a target="_blank" href="http://lib.csdn.net/base/javase"><img src="./thrift的使用介绍 - - ITeye技术网站_files/1453169124297_297.jpg" width="58" height="58" alt=""></a></dd>
+          <dt>
+              <a target="_blank" href="http://lib.csdn.net/base/javase" classs="title">Java SE知识库</a>
+              <span>
+                 <em>18706</em>&nbsp;&nbsp;关注 <i>|</i> <em>512</em>&nbsp;&nbsp;收录                  
+              </span>
+          </dt>
+      
+	    </dl>
+	    
+	    <dl class="dlnewlist">
+	    
+          <dd><a target="_blank" href="http://lib.csdn.net/base/reactnative"><img src="./thrift的使用介绍 - - ITeye技术网站_files/1473751990490_490.jpg" width="58" height="58" alt=""></a></dd>
+          <dt>
+              <a target="_blank" href="http://lib.csdn.net/base/reactnative" classs="title">React Native知识库</a>
+              <span>
+                 <em>3858</em>&nbsp;&nbsp;关注 <i>|</i> <em>1101</em>&nbsp;&nbsp;收录                  
+              </span>
+          </dt>
+      
+	    </dl>
+	    
+	    <dl class="dlnewlist">
+	    
+          <dd><a target="_blank" href="http://lib.csdn.net/base/css3"><img src="./thrift的使用介绍 - - ITeye技术网站_files/1478154582437_437.jpg" width="58" height="58" alt=""></a></dd>
+          <dt>
+              <a target="_blank" href="http://lib.csdn.net/base/css3" classs="title">CSS3知识库</a>
+              <span>
+                 <em>8027</em>&nbsp;&nbsp;关注 <i>|</i> <em>1780</em>&nbsp;&nbsp;收录                  
+              </span>
+          </dt>
+      
+	    </dl>
+	    
+	    <dl class="dlnewlist">
+	    
+          <dd><a target="_blank" href="http://lib.csdn.net/base/ai"><img src="./thrift的使用介绍 - - ITeye技术网站_files/1479972981201_201.jpg" width="58" height="58" alt=""></a></dd>
+          <dt>
+              <a target="_blank" href="http://lib.csdn.net/base/ai" classs="title">人工智能知识库</a>
+              <span>
+                 <em>7625</em>&nbsp;&nbsp;关注 <i>|</i> <em>420</em>&nbsp;&nbsp;收录                  
+              </span>
+          </dt>
+      
+	    </dl>
+	    
+	  </div>
+</div>
+ 		
+      
+  <div class="blog_comment">
+    <h5>评论</h5>
+    <a id="comments" name="comments"></a>
+    <div id="bc2391613">
+  <div class="comment_title">
+    7 楼
+    <a href="http://l-jackson.iteye.com/" target="_blank" title="L_Jackson">L_Jackson</a>
+    2016-07-22&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content">请问 这边有异步调用的例子吗</div>
+</div>
+
+<div id="bc2373569">
+  <div class="comment_title">
+    6 楼
+    <a href="http://string2020.iteye.com/" target="_blank" title="string2020">string2020</a>
+    2015-06-16&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content">代码看起来好乱</div>
+</div>
+
+<div id="bc2371386">
+  <div class="comment_title">
+    5 楼
+    <a href="http://loovejava.iteye.com/" target="_blank" title="loovejava">loovejava</a>
+    2015-05-01&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content">不错，对比挺好</div>
+</div>
+
+<div id="bc2348404">
+  <div class="comment_title">
+    4 楼
+    <a href="http://126top.iteye.com/" target="_blank" title="126top">126top</a>
+    2014-05-19&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content"><img src="./thrift的使用介绍 - - ITeye技术网站_files/icon_idea.gif"> </div>
+</div>
+
+<div id="bc2223488">
+  <div class="comment_title">
+    3 楼
+    <a href="http://guochengduan.iteye.com/" target="_blank" title="guochengduan">guochengduan</a>
+    2011-10-19&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content"> 我要用flex调用thrift,,有那个哥给实现个加到thrift中去.</div>
+</div>
+
+<div id="bc2223485">
+  <div class="comment_title">
+    2 楼
+    <a href="http://biby.iteye.com/" target="_blank" title="biby">biby</a>
+    2011-10-19&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content">很好，加关注了，O(∩_∩)O~</div>
+</div>
+
+<div id="bc2223483">
+  <div class="comment_title">
+    1 楼
+    <a href="http://xiaodi667.iteye.com/" target="_blank" title="xiaodi667">xiaodi667</a>
+    2011-10-19&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content">绝对的好东西哟，居然有我的例子！</div>
+</div>
+
+
+    
+    
+  </div>
+
+  <div class="blog_comment">
+    <h5>发表评论</h5>
+            <p style="text-align:center; margin-top:30px;margin-bottom:0px;"><a href="http://gemantic.iteye.com/login" style="background-color:white;"> <img src="./thrift的使用介绍 - - ITeye技术网站_files/login_icon.png" style="vertical-align:middle; margin-right: 10px;"></a><a href="http://gemantic.iteye.com/login">  您还没有登录,请您登录后再发表评论 </a></p>
+      </div>
+</div>
+
+
+<script type="text/javascript">
+  dp.SyntaxHighlighter.HighlightAll('code', true, true);
+
+  $$('#main .blog_content pre[name=code]').each(function(pre, index){ // blog content
+    var post_id = 1199214;
+    var location = window.location;
+    source_url = location.protocol + "//" + location.host + location.pathname + location.search;
+    pre.writeAttribute('codeable_id', post_id);
+    pre.writeAttribute('codeable_type', "Blog");
+    pre.writeAttribute('source_url', source_url);
+    pre.writeAttribute('pre_index', index);
+    pre.writeAttribute('title', 'thrift的使用介绍');
+  });
+
+  fix_image_size($$('div.blog_content img'), 700);
+
+  function processComment() {
+    $$('#main .blog_comment > div').each(function(comment){// comment
+      var post_id = comment.id.substr(2);
+      $$("#"+comment.id+" pre[name=code]").each(function(pre, index){
+        var location = window.location;
+        source_url = location.protocol + "//" + location.host + location.pathname + location.search;
+        source_url += "#" + comment.id;
+        pre.writeAttribute('codeable_id', post_id);
+        pre.writeAttribute('codeable_type', "BlogComment");
+        pre.writeAttribute('source_url', source_url);
+        pre.writeAttribute('pre_index', index);
+        pre.writeAttribute('title', 'thrift的使用介绍');
+      });
+    });
+  }
+
+  function quote_comment(id) {
+    new Ajax.Request('/editor/quote', {
+      parameters: {'id':id, 'type':'BlogComment'},
+      onSuccess:function(response){editor.bbcode_editor.textarea.insertAfterSelection(response.responseText);
+        Element.scrollTo(editor.bbcode_editor.textarea.element);}
+    });
+  }
+
+  code_favorites_init();
+  processComment();
+  new WeiboShare({share_buttons: $('share_weibo'), img_scope: $('blog_content')});
+</script>
+
+
+
+
+        </div>
+
+        <div id="local">
+          <div class="local_top"></div>
+          <div id="blog_owner">
+  <div id="blog_owner_logo"><a href="http://gemantic.iteye.com/"><img alt="gemantic的博客" class="logo" src="./thrift的使用介绍 - - ITeye技术网站_files/user-logo.gif" title="gemantic的博客: " width=""></a></div>
+  <div id="blog_owner_name">gemantic</div>
+</div>
+
+          <div id="blog_actions">
+            <ul>
+              <li>浏览: 265356 次</li>
+              <li>性别: <img alt="Icon_minigender_1" src="./thrift的使用介绍 - - ITeye技术网站_files/icon_minigender_1.gif" title="男"></li>
+              <li>来自: 北京</li>
+              <li><img src="./thrift的使用介绍 - - ITeye技术网站_files/offline.gif"></li>
+              
+            </ul>
+          </div>
+          <div id="user_visits" class="clearfix">
+            <h5>最近访客 <span style="font-weight:normal;font-size:12px;padding-left:30px;"><a href="http://gemantic.iteye.com/blog/user_visits">更多访客&gt;&gt;</a></span></h5>
+            
+              <div class="user_visit">
+                <div class="logo"><a href="http://201612135738.iteye.com/" target="_blank"><img alt="芝麻开门之2013的博客" class="logo" src="./thrift的使用介绍 - - ITeye技术网站_files/user-logo-thumb.gif" title="芝麻开门之2013的博客: " width="48px"></a></div>
+                <div class="left"><a href="http://201612135738.iteye.com/" target="_blank" title="芝麻开门之2013">芝麻开门之2013</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href="http://dailindl.iteye.com/" target="_blank"><img alt="dailindl的博客" class="logo" src="./thrift的使用介绍 - - ITeye技术网站_files/3669282b-1c95-3778-8628-22bc9029f6b5-thumb.jpg" title="dailindl的博客: dailindl" width="48px"></a></div>
+                <div class="left"><a href="http://dailindl.iteye.com/" target="_blank" title="dailindl">dailindl</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href="http://tjgd1.iteye.com/" target="_blank"><img alt="tjgd1的博客" class="logo" src="./thrift的使用介绍 - - ITeye技术网站_files/user-logo-thumb.gif" title="tjgd1的博客: " width="48px"></a></div>
+                <div class="left"><a href="http://tjgd1.iteye.com/" target="_blank" title="tjgd1">tjgd1</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href="http://jiechuluck.iteye.com/" target="_blank"><img alt="jiechuluck的博客" class="logo" src="./thrift的使用介绍 - - ITeye技术网站_files/user-logo-thumb.gif" title="jiechuluck的博客: " width="48px"></a></div>
+                <div class="left"><a href="http://jiechuluck.iteye.com/" target="_blank" title="jiechuluck">jiechuluck</a></div>
+              </div>
+            
+          </div>
+
+          
+
+                      <div id="blog_menu">
+              <h5>文章分类</h5>
+              <ul>
+                <li><a href="http://gemantic.iteye.com/">全部博客 (25)</a></li>
+                
+                  <li><a href="http://gemantic.iteye.com/category/187580">项目管理 (2)</a></li>
+                
+                  <li><a href="http://gemantic.iteye.com/category/187592">系统监控 (1)</a></li>
+                
+                  <li><a href="http://gemantic.iteye.com/category/219627">SOA (1)</a></li>
+                
+                  <li><a href="http://gemantic.iteye.com/category/252126">算法 (1)</a></li>
+                
+              </ul>
+            </div>
+            <div id="month_blogs">
+              <h5>社区版块</h5>
+              <ul>
+                <li><a href="http://gemantic.iteye.com/blog/news">我的资讯</a> (0)</li>
+                <li>
+                  <a href="http://gemantic.iteye.com/blog/post">我的论坛</a> (0)
+                </li>
+                <li><a href="http://gemantic.iteye.com/blog/answered_problems">我的问答</a> (1)</li>
+              </ul>
+            </div>
+            <div id="month_blogs">
+              <h5>存档分类</h5>
+              <ul>
+                
+                  <li><a href="http://gemantic.iteye.com/blog/monthblog/2015-10">2015-10</a> (1)</li>
+                
+                  <li><a href="http://gemantic.iteye.com/blog/monthblog/2015-09">2015-09</a> (1)</li>
+                
+                  <li><a href="http://gemantic.iteye.com/blog/monthblog/2015-08">2015-08</a> (1)</li>
+                
+                <li><a href="http://gemantic.iteye.com/blog/monthblog_more">更多存档...</a></li>
+              </ul>
+            </div>
+            
+            
+
+            <div id="guest_books">
+              <h5>最新评论</h5>
+              <ul>
+                
+                <li>
+                  <a href="http://fengziit.iteye.com/" target="_blank" title="FengZiIT">FengZiIT</a>： 
+                  既想支持低版本IE浏览器如IE6,又想使用websocket作 ...<br>
+                  <a href="http://gemantic.iteye.com/blog/1553385#bc2393054">HTML服务器推送技术简介</a>
+                </li>
+                
+                <li>
+                  <a href="http://lord-is-layuping.iteye.com/" target="_blank" title="lord_is_layuping">lord_is_layuping</a>： 
+                  在Drools的眼里,世界是由是由各种规则/流程/事件构成的<br>
+                  <a href="http://gemantic.iteye.com/blog/1212720#bc2392097">Drools扫盲普及贴</a>
+                </li>
+                
+                <li>
+                  <a href="http://l-jackson.iteye.com/" target="_blank" title="L_Jackson">L_Jackson</a>： 
+                  请问 这边有异步调用的例子吗<br>
+                  <a href="http://gemantic.iteye.com/blog/1199214#bc2391613">thrift的使用介绍</a>
+                </li>
+                
+                <li>
+                  <a href="http://string2020.iteye.com/" target="_blank" title="string2020">string2020</a>： 
+                  代码看起来好乱<br>
+                  <a href="http://gemantic.iteye.com/blog/1199214#bc2373569">thrift的使用介绍</a>
+                </li>
+                
+                <li>
+                  <a href="http://loovejava.iteye.com/" target="_blank" title="loovejava">loovejava</a>： 
+                  不错，对比挺好<br>
+                  <a href="http://gemantic.iteye.com/blog/1199214#bc2371386">thrift的使用介绍</a>
+                </li>
+                
+              </ul>
+            </div>
+
+            <div class="local_bottom"></div>
+          
+        </div>
+        <div style="margin-top: 10px;float: left;clear: left;">
+					<div class="J_adv" data-view="true" data-mod="ad_popu_185" data-mtp="36" data-order="92" data-con="ad_content_1129" style="width: 200px; height: 200px;"><!-- 广告占位容器 --><div id="cpro_u2720202"><iframe id="iframeu2720202_0" src="./thrift的使用介绍 - - ITeye技术网站_files/ycsm(3).html" width="200" height="200" align="center,center" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="border:0; vertical-align:bottom;margin:0;" allowtransparency="true"></iframe></div><!-- 投放代码 --><script type="text/javascript">(window['cproStyleApi'] = window['cproStyleApi'] ||{})['u2720202']={at:'3',rsi0:'200',rsi1:'200',pat:'6',tn:'baiduCustNativeAD',rss1:'#FFFFFF',conBW:'1',adp:'1',ptt:'0',titFF:'%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91',titFS:'',rss2:'#000000',titSU:'0',ptbg:'90',piw:'0',pih:'0',ptp:'0'};/*服务器频道首页置顶Banner960*90，创建于2014-7-3*/(window.cproArray = window.cproArray || []).push({id:'u2720202'});  </script>  <script src="./thrift的使用介绍 - - ITeye技术网站_files/c.js.下载" type="text/javascript"></script></div>
+				</div>
+      </div>    
+
+      <div id="footer" class="clearfix">
+        <div id="copyright">
+          <hr>
+          声明：ITeye文章版权属于作者，受法律保护。没有作者书面许可不得转载。若作者同意转载，必须以超链接形式标明文章原始出处和作者。<br>
+          © 2003-2016 ITeye.com.   All rights reserved.  [ 京ICP证110151号  京公网安备110105010620 ]
+        </div>
+        <div class="J_adv" data-view="true" data-mod="ad_popu_186" data-mtp="37" data-order="92" data-con="ad_content_1132" style="width: 300px; height: 250px;"><!-- 广告占位容器 --><div id="cpro_u2720296"><iframe id="iframeu2720296_0" src="./thrift的使用介绍 - - ITeye技术网站_files/ycsm(4).html" width="300" height="250" align="center,center" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="border:0; vertical-align:bottom;margin:0;" allowtransparency="true"></iframe></div><!-- 投放代码 --><script type="text/javascript">(window['cproStyleApi'] = window['cproStyleApi'] || {})['u2720296']={at:'3',rsi0:'300',rsi1:'250',pat:'17',tn:'baiduCustNativeAD',rss1:'#FFFFFF',conBW:'1',adp:'1',ptt:'0',titFF:'%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91',titFS:'',rss2:'#000000',titSU:'0'};/*服务器频道首页置顶Banner960*90，创建于2014-7-3*/(window.cproArray = window.cproArray || []).push({id:'u2720296'});  </script>  <script src="./thrift的使用介绍 - - ITeye技术网站_files/c.js.下载" type="text/javascript"></script></div>
+      </div>
+    </div>
+    <script type="text/javascript">
+  document.write("<img src='http://stat.iteye.com/?url="+ encodeURIComponent(document.location.href) + "&referrer=" + encodeURIComponent(document.referrer) + "&user_id=' width='0' height='0' />");
+</script><img src="./thrift的使用介绍 - - ITeye技术网站_files/saved_resource" width="0" height="0">
+
+<script src="./thrift的使用介绍 - - ITeye技术网站_files/tracking.js.下载" type="text/javascript"></script>
+
+    
+    
+    <script language="javascript" type="text/javascript" src="./thrift的使用介绍 - - ITeye技术网站_files/async_new.js.下载"></script>
+<script src="./thrift的使用介绍 - - ITeye技术网站_files/jquery-1.11.1.min.js.下载" type="text/javascript"></script>
+<script type="text/javascript">var $csdn_iteye_jq = jQuery.noConflict();// 解决jq与prototype.js命名空间冲突的问题</script>
+<script src="./thrift的使用介绍 - - ITeye技术网站_files/tracking.js(1).下载" type="text/javascript"></script>
+    
+	    
+	    <script src="./thrift的使用介绍 - - ITeye技术网站_files/web-storage-cache.min.js.下载" type="text/javascript"></script>
+	    <script src="./thrift的使用介绍 - - ITeye技术网站_files/replace.min.js.下载" type="text/javascript"></script>
+    
+    
+  
+
+</body></html>

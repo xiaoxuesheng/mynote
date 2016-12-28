@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<!-- saved from url=(0178)http://www.toutiao.com/i6345426154068918786/?tt_from=weixin&utm_campaign=client_share&app=news_article&utm_source=weixin&iid=4814822643&utm_medium=toutiao_android&wxshare_count=1 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style class="vjs-styles-defaults">
+      .video-js {
+        width: 300px;
+        height: 150px;
+      }
+
+      .vjs-fluid {
+        padding-top: 56.25%
+      }
+    </style>
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="dns-prefetch" href="http://s3.pstatp.com/">
+    <link rel="dns-prefetch" href="http://s3a.pstatp.com/">
+    <link rel="dns-prefetch" href="http://s3b.pstatp.com/">
+    <link rel="dns-prefetch" href="http://p1.pstatp.com/">
+    <link rel="dns-prefetch" href="http://p3.pstatp.com/">
+    
+    
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+    
+    <meta name="baidu-site-verification" content="T239HZAbh7">
+    
+    <!--meta name="baidu_union_verify" content="94bb8bb3fa863f70e7fd926bffecd81e"-->
+    <meta name="360-site-verification" content="b96e1758dfc9156a410a4fb9520c5956">
+    <meta name="360_ssp_verify" content="2ae4ad39552c45425bddb738efda3dbb">
+    <meta name="google-site-verification" content="3PYTTW0s7IAfkReV8wAECfjIdKY-bQeSkVTyJNZpBKE">
+    <meta name="shenma-site-verification" content="34c05607e2a9430ad4249ed48faaf7cb_1432711730">
+    <meta name="baidu_union_verify" content="b88dd3920f970845bad8ad9f90d687f7">
+    <meta name="domain_verify" content="pmrgi33nmfuw4ir2ej2g65lunfqw6ltdn5wselbcm52wszbchirdqyztge3tenrsgq3dknjume2tayrvmqytemlfmiydimddgu4gcnzcfqrhi2lnmvjwc5tfei5dcnbwhazdcobuhe2dqobrpu">
+    
+    
+  <link rel="alternate" media="only screen and (max-width: 640px)" href="http://m.toutiao.com/a6345421355604787458/">
+
+  <title>用户及权限管理设计 - 今日头条(www.toutiao.com)</title>
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta name="keywords" content="DBA,QQ群,权限,超级用户">
+  <meta name="description" content="用户管理及权限管理的意义用户管理及权限管理一直是应用系统中不可缺少的一个部分系统用户很多，系统功能也很多不同用户对系统功能的需求不同出于安全等考虑，关键的、重要的系统功能需限制部分">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="shortcut icon" href="http://s3a.pstatp.com/toutiao/resource/ntoutiao_web/static/image/favicon_8e9c9c7.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/layout_a2bdebe.css">
+    <!--[if lt IE 9]>
+      <script src="//s3a.pstatp.com/toutiao/resource/ntoutiao_web/static/js/lib/es5-shim_110642e.js"></script>
+    <![endif]-->
+    <script async="" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/analytics.js.下载"></script><script src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/lib_63840ce.js.下载"></script>
+    
+  <link rel="stylesheet" href="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/article_0f8bea2.css">
+  <link rel="stylesheet" href="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/video.min.css">
+  <!--[if lt IE 9]>
+    <script src="http://s3a.pstatp.com/site/tt_mfsroot/v-player/video-ie8.js" charset="utf-8"></script>
+  <![endif]-->
+
+</head>
+
+<body style="min-width: 1220px; overflow-x: hidden;"><div id="BAIDU_DUP_fp_wrapper" style="position: absolute; left: -1px; bottom: -1px; z-index: 0; width: 0px; height: 0px; overflow: hidden; visibility: hidden; display: none;"><iframe id="BAIDU_DUP_fp_iframe" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/o.html" style="width: 0px; height: 0px; visibility: hidden; display: none;"></iframe></div>
+    <div style="display:none"><input type="hidden" name="csrfmiddlewaretoken" value="18b4c2dd50a67dabc20f982bd846f3f0"></div>
+
+    <a href="http://www.toutiao.com/articles_news_society/" style="display:none;"></a>
+
+    <div class="y-wrap">
+        
+
+<!-- 公共头部 -->
+<div id="header">
+  <div riot-tag="wtopbar" style="height: 34px; background: #222;"><div class="y-box wtopbar">  <div class="y-left y-nav-topbar" riot-tag="nav"><div class="nav"> <ul class="y-box nav-list" ga_event="mh_channel"> <li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/" ga_event="mh_channel_recommend">推荐</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_hot/" ga_event="mh_channel_hot">热点</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/video/" ga_event="mh_channel_video">视频</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_image/" ga_event="mh_channel_image">图片</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/essay_joke/" ga_event="mh_channel_essay">段子</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_society/" ga_event="mh_channel_society">社会</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_entertainment/" ga_event="mh_channel_entertainment">娱乐</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_tech/" ga_event="mh_channel_tech">科技</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_car/" ga_event="mh_channel_car">汽车</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_sports/" ga_event="mh_channel_sports">体育</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_finance/" ga_event="mh_channel_finance">财经</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_military/" ga_event="mh_channel_military">军事</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_world/" ga_event="mh_channel_world">国际</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_fashion/" ga_event="mh_channel_fashion">时尚</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/news_travel/" ga_event="mh_channel_travel">旅游</a> </li><!--riot placeholder--> <li class="y-left nav-item nav-more"> <a class="nav-link" href="javascript:;"> 更多<i class="y-icon icon-more"></i> </a> <div class="nav-layer"> <ul class="nav-more-list"> <li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_discovery/" ga_event="mh_channel_discovery">探索</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_baby/" ga_event="mh_channel_baby">育儿</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_regimen/" ga_event="mh_channel_regimen">养生</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_story/" ga_event="mh_channel_story">故事</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_essay/" ga_event="mh_channel_essay">美文</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_game/" ga_event="mh_channel_game">游戏</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_history/" ga_event="mh_channel_history">历史</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/news_food/" ga_event="mh_channel_food">美食</a> </li><!--riot placeholder--> </ul> </div> </li> </ul> </div></div> <ul class="y-right"> <li class="tb-item userbox"> <div riot-tag="wuserbox" abtype="" pageid=""><div class="y-box wuserbox">   <div class="nav-login"> <a ga_event="nav_login" href="javascript:;"> <span>登录</span> </a>  </div> </div></div> </li> <li class="tb-item"> <a class="tb-link" href="https://wenda.toutiao.com/" target="_blank" ga_event="mh_nav_others">问答</a> </li> <li class="tb-item"> <a class="tb-link" href="https://mp.toutiao.com/" target="_blank" ga_event="mh_nav_others">头条号</a> </li> <li class="tb-item"> <a class="tb-link" href="https://tuchong.com/" target="_blank" ga_event="mh_nav_others">图虫</a> </li> <li class="tb-item"> <a class="tb-link" href="javascript:void(0)">反馈</a> </li> <li class="tb-item more"> <a class="tb-link" href="http://www.toutiao.com/about/">更多</a> <div class="layer"> <ul> <li> <a href="http://www.toutiao.com/articles_news_society/" class="layer-item">头条简版</a> </li> <li> <a href="http://www.toutiao.com/about/" class="layer-item" rel="nofollow">关于头条</a> </li> <li> <a href="http://www.toutiao.com/join/" class="layer-item" rel="nofollow">加入头条</a> </li> <li> <a href="http://www.toutiao.com/report/" class="layer-item" rel="nofollow">媒体报道</a> </li> <li> <a href="http://www.toutiao.com/media_partners/" class="layer-item" rel="nofollow">媒体合作</a> </li> <li> <a href="http://www.toutiao.com/cooperation/" class="layer-item" rel="nofollow">产品合作</a> </li> <li> <a href="http://www.toutiao.com/media_cooperation/" class="layer-item" rel="nofollow">合作说明</a> </li> <li> <a href="https://ad.toutiao.com/e/" class="layer-item" target="_blank" rel="nofollow">广告投放</a> </li> <li> <a href="http://www.toutiao.com/contact/" class="layer-item" rel="nofollow">联系我们</a> </li> <li> <a href="http://www.toutiao.com/user_agreement/" class="layer-item" rel="nofollow">用户协议</a> </li> <li> <a href="http://www.toutiao.com/complain/" class="layer-item" rel="nofollow">投诉指引</a> </li> <li> <a href="http://www.toutiao.com/corrupt_report/" class="layer-item" rel="nofollow">廉洁举报</a> </li> </ul> </div> </li> </ul> <div riot-tag="userFeedback" class="userFeedback" style="display: none;"><div class="feedback_dialog"> <div class="dialog-header"> <h3>意见反馈</h3> </div> <div class="dialog-inner"> <div class="feedback_panel"> <form> <p class="label">联系方式（必填）</p> <div class="input-group"> <input class="email" placeholder="您的邮箱/QQ号" type="text" name="feedback-email"> </div> <p class="label">您的意见（必填）</p> <div class="input-group"> <textarea style="height:100px;" name="feedback-content" class="content" maxlength="140" placeholder="请填写您的意见，不超过140字"></textarea> </div> <div class="input-group"> <input type="submit" value="提交" class="submit-btn"> <span class="error"></span> <a class="close" href="javascript:void(0);">[关闭]</a> </div> </form> </div> </div> </div></div> </div></div>
+  
+  <div class="middlebar">
+  <div class="y-box middlebar-inner">
+    <div class="y-left logo-box">
+      <a class="logo-link" href="http://www.toutiao.com/" ga_event="go_home">
+        <img class="logo" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/logo_201f80d.png">
+      </a>
+    </div>
+
+    
+      <div class="y-left chinese-tag">
+        <a href="http://www.toutiao.com/" target="_blank" ga_event="click_index">首页</a>
+        /
+        <a href="http://www.toutiao.com/news_tech" target="_blank" ga_event="click_channel">科技</a>
+        /
+        <span class="text">正文</span>
+      </div>
+    
+
+    <div class="y-right">
+      <div riot-tag="wsearch" style="margin-top: 9px; width: 340px;"><div name="searchBox" class="wsearch"> <form name="searchForm" action="http://www.toutiao.com/search/" method="get" target="_blank"> <div name="inputbox" class="y-box input-group"> <input class="y-left input-text" name="keyword" autocomplete="off" ga_event="mh_search" type="text" placeholder="请输入关键字" onclick=""> <div class="y-right btn-submit"> <button type="submit" href="javascript:;"> <i class="y-icon icon-search" ga_event="mh_search"></i> </button> </div> </div> </form> <div class="layer "> <div class="layer-inner"> <ul ga_event="mh_search"> <li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-1">1</i> <span class="search-txt">六小龄童遇别车</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-2">2</i> <span class="search-txt">广外女生被割喉</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-3">3</i> <span class="search-txt">拿80万购房补贴</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-4">4</i> <span class="search-txt">私宰猪肉2.6万斤</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-5">5</i> <span class="search-txt">官微发色情广告</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-6">6</i> <span class="search-txt">普天间机场搬迁案</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-7">7</i> <span class="search-txt">居民贴纸条给小偷</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-8">8</i> <span class="search-txt">快递业务量300亿</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-9">9</i> <span class="search-txt">ppap猥琐大叔</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-10">10</i> <span class="search-txt">大龄女被骗财骗色</span> </a> </li><!--riot placeholder--> </ul> </div> </div> </div></div>
+    </div>
+  </div>
+</div>
+
+  
+</div>
+
+<div riot-tag="login"><div class="login-dialog hide"> <a class="btn" href="javascript:;"> <i class="icon icon-close"></i> </a> <div class="login-dialog-header"> <h3>邮箱登录</h3> </div> <div class="login-dialog-inner" data-node="inner"> <div class="login-pannel bottom-line"> <form action="http://www.toutiao.com/auth/login/" method="POST"> <ul> <li> <div class="input-group"> <div class="input"> <label>邮箱</label> <input class="name" name="name_or_email" type="text" placeholder="请使用您的注册邮箱" autocomplete="off" spellcheck="false"> </div> </div> </li> <li> <div class="input-group"> <div class="input"> <label>密码</label> <input class="password" name="password" type="password" data-node="password" placeholder="密码" autocomplete="off" spellcheck="false"> </div> </div> </li> <li class="captcha-box "> <div class="input-group"> <div class="input"> <input class="password" name="captcha" type="text" data-node="captcha" placeholder="验证码" autocomplete="off" spellcheck="false"> <img name="captchaImg"> </div> </div> </li> <li> <div class="input-group"> <input type="checkbox" name="remember_me" checked="" style="vertical-align:top"> <label for="remember_me" class="label">记住账号</label> </div> </li> <li> <div class="input-group" style="text-align: center;"> <input type="submit" class="submit-btn" value="登录"> <p class=""></p> </div> </li> </ul> </form> </div> <div class="login-dialog-header"> <h3>合作网站帐号登录</h3> </div> <div class=""> <ul class="y-box sns_login_list"> <li class="sinaweibo"> <a href="javascript:;" data-pid="sina_weibo" ga_event="login_sina_weibo"> <i class="icon"></i> 新浪微博 </a> </li> <li class="qqweibo"> <a href="javascript:;" data-pid="qq_weibo" ga_event="login_tencnet_weibo"> <i class="icon"></i> 腾讯微博 </a> </li> <li class="qzone"> <a href="javascript:;" data-pid="qzone_sns" ga_event="login_qqzone"> <i class="icon"></i> QQ空间 </a> </li> <li class="renren"> <a href="javascript:;" data-pid="renren_sns" ga_event="login_renren"> <i class="icon"></i> 人人网 </a> </li> <li class="weixin"> <a href="javascript:;" style="margin-right:0;" data-pid="weixin" ga_event="login_wechat"> <i class="icon"></i> 微信 </a> </li> </ul> </div> </div> </div> <div class="mask hide"></div></div>
+<div id="toast"></div>
+
+
+<div class="y-box container">
+  <div class="y-left">
+    <div class="y-box">
+      <div class="y-left index-left">
+        <div riot-tag="snsbox"><div class="snsbox snsbox-fixed" name="snsbox"> <a href="http://www.toutiao.com/i6345426154068918786/?tt_from=weixin&amp;utm_campaign=client_share&amp;app=news_article&amp;utm_source=weixin&amp;iid=4814822643&amp;utm_medium=toutiao_android&amp;wxshare_count=1#comment_area" class="share-count" ga_event="click_comment_anchor"> <i class="y-icon icon-comments"></i> <span>8</span> </a> <div class="share-hr"></div> <div class="share-box" ga_event="click_share_weibo"><i class="y-icon icon-sina"></i><span>微博</span></div> <div class="share-box" ga_event="click_share_qzone"><i class="y-icon icon-qzone"></i><span>Qzone</span></div> <div class="share-box share-weixin" ga_event="click_share_weixin"> <i class="y-icon icon-wechat"></i><span>微信</span> <div class="share-qrcode"> <div></div> </div> </div> </div></div>
+      </div>
+      <div class="y-left index-middle" id="J_content">
+        <div id="article-main">
+	
+
+  <h1 class="article-title">用户及权限管理设计</h1>
+
+  <div class="articleInfo">
+	
+    
+    <span class="src">
+    	
+    		Java开发之路
+    	
+    </span>
+    
+    <span class="time">2016-10-25 23:34</span>
+</div>
+
+  <div class="article-content"><div><p><strong>用户管理及权限管理的意义</strong></p><p>用户管理及权限管理一直是应用系统中不可缺少的一个部分</p><p>系统用户很多，系统功能也很多</p><p>不同用户对系统功能的需求不同</p><p>出于安全等考虑，关键的、重要的系统功能需限制部分用户的使用</p><p>出于方便性考虑，系统功能需要根据不同的用户而定制</p><p><strong>用户及权限管理涉及的几个概念</strong></p><p><span>用户分类：系统用户、超级用户、管理员用户、DBA用户、领导用户、专家用户、操作员用户、客户用户、……</span></p><p>系统权限：即对不同用户使用系统资源（功能菜单项、按钮、输入控件等）的使用或访问权限</p><p>用户：应用系统的具体操作者，用户可以拥有一定范围的权限</p><p>角色：为了对许多拥有相似权限的用户进行分类管理，定义了角色的概念，例如系统管理员、管理员、用户、访客等角色</p><p>组：为了更好地管理用户，对用户进行分组归类，简称为用户分组，如普通QQ群、高级QQ群；一级单位用户、二级单位用户等</p><p><strong>权限、用户、角色、组之间的关系</strong></p><p><img src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/f78000889f11f0c4793" img_width="885" img_height="569" alt="用户及权限管理设计" onerror="javascript:errorimg.call(this);"></p><p>用户的权限集 ＝</p><p>自身的权限 ＋ 所属的各角色权限 ＋ 所属的各组权限</p><p><strong>用户及权限管理设计方案</strong></p><ol class=" list-paddingleft-2"><li><p>基于角色的权限设计</p></li></ol><p><img src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/101e000112287ba39287" img_width="967" img_height="506" alt="用户及权限管理设计" onerror="javascript:errorimg.call(this);"></p><p>2. 基于操作的权限设计</p><p><img src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/101c0003e83bb4092869" img_width="1004" img_height="478" alt="用户及权限管理设计" onerror="javascript:errorimg.call(this);"></p><p>3. 基于角色和操作的权限设计</p><p><img src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/101f0001fae4e9f28181" img_width="971" img_height="567" alt="用户及权限管理设计" onerror="javascript:errorimg.call(this);"></p><p>4. 2&amp;3组合的权限设计</p><p><img src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/101f0001fafa50963c4f" img_width="1001" img_height="557" alt="用户及权限管理设计" onerror="javascript:errorimg.call(this);"></p><p>5. 精确至数据记录的权限设计</p><p><img src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/101f0001fb5012a37115" img_width="952" img_height="617" alt="用户及权限管理设计" onerror="javascript:errorimg.call(this);"></p><p>6. 涉及资源、权限和规则的权限设计</p><p><img src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/101e000112cca4b42062" img_width="845" img_height="505" alt="用户及权限管理设计" onerror="javascript:errorimg.call(this);"></p><p><strong>用户及权限管理通用功能设计</strong><br></p><p>用户及权限管理具体实现中，</p><p>通用的管理功能大致如图</p><p><img src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/10240000db8db5a48f8b" img_width="971" img_height="643" alt="用户及权限管理设计" onerror="javascript:errorimg.call(this);"></p><p><strong><br></strong><br></p></div><p class="footnote">本文为头条号作者发布，不代表今日头条立场。</p></div>
+
+  <div class="article-actions">
+		
+<div class="labelList">
+	<i class="y-icon icon-tag"></i>
+	<ul class="label-list">
+		
+		<li class="label-item"><a class="label-link" href="http://www.toutiao.com/search/?keyword=%E8%AE%BE%E8%AE%A1" target="_blank">设计</a></li>
+		
+		<li class="label-item"><a class="label-link" href="http://www.toutiao.com/search/?keyword=DBA" target="_blank">DBA</a></li>
+		
+		<li class="label-item"><a class="label-link" href="http://www.toutiao.com/search/?keyword=%E7%A7%91%E6%8A%80" target="_blank">科技</a></li>
+		
+	</ul>
+</div>
+
+		<div riot-tag="actionBox" class="actionBox"><div class="repin "> <i class="y-icon icon-favorite "></i><span>收藏</span> </div> <a href="javascript:;" class="areport"> <i class="y-icon icon-report"></i><span>举报</span> </a> <div id="J_articleReport"></div></div>
+  </div>
+</div>
+
+        <div style="text-align:center; margin-top: 30px; height: 60px;" id="J_ad_baidu_bottom"><iframe id="iframeu2643457_0" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/fcjm.html" width="640" height="60" align="center,center" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="border:0; vertical-align:bottom;margin:0;" allowtransparency="true"></iframe></div>
+
+        <a id="comment_area" href="http://www.toutiao.com/i6345426154068918786/?tt_from=weixin&amp;utm_campaign=client_share&amp;app=news_article&amp;utm_source=weixin&amp;iid=4814822643&amp;utm_medium=toutiao_android&amp;wxshare_count=1#" style="display: inline-block;margin-bottom: 20px;"></a><!--评论锚点-->
+        <div riot-tag="comment" id="comment"><div class="c-header"> <em>8&nbsp;</em>条评论 </div> <div riot-tag="inputBox" ismain="true" avatar="" group_id="6345421355604787458" item_id="6345426154068918786"><div class="inputBox"> <div class="y-box"> <div class="avatar-wrap avatar-wrap-center">  </div> <div class="input-wrap  "> <div class="c-textarea" ga_event="click_input_comment"> <textarea name="inputText" placeholder="写下您的评论..."></textarea> </div> <div class="c-action" ga_event="click_publish_comment"> <div class="c-submit">评论</div> </div> </div> </div> </div></div> <ul> <li class="c-item"> <a target="_blank" class="avatar-wrap" href="http://www.toutiao.com/user/5290964307/"> <img alt="" src="http://q.qlogo.cn/qqapp/100290348/15A9877E3693304C43916DD1E08D2F02/100"> </a> <div class="c-content"> <div class="c-user-info"> <a class="c-user-name" target="_blank" href="http://www.toutiao.com/user/5290964307/">Freedom8</a> <span class="c-create-time">1月前</span> </div> <p>收藏备用！</p> <div class="c-footer-action"> <span class="c-reply" ga_event="click_reply_comment">回复</span>   <span class="y-right c-report" title="举报"><i class="y-icon icon-report"></i></span> <span title="点赞" ga_event="click_good_comment" class="y-right c-digg ">2&nbsp;<i class="y-icon icon-digg"></i></span> </div> <div class="J_input_0"></div> <!--riot placeholder-->  </div> </li><li class="c-item"> <a target="_blank" class="avatar-wrap" href="http://www.toutiao.com/user/3584706744/"> <img alt="" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/6cb00236cd22ad61ca2"> </a> <div class="c-content"> <div class="c-user-info"> <a class="c-user-name" target="_blank" href="http://www.toutiao.com/user/3584706744/">你不懂__什么</a> <span class="c-create-time">1月前</span> </div> <p>shiro管理</p> <div class="c-footer-action"> <span class="c-reply" ga_event="click_reply_comment">回复</span>   <span class="y-right c-report" title="举报"><i class="y-icon icon-report"></i></span> <span title="点赞" ga_event="click_good_comment" class="y-right c-digg ">3&nbsp;<i class="y-icon icon-digg"></i></span> </div> <div class="J_input_1"></div> <!--riot placeholder-->  </div> </li><li class="c-item"> <a target="_blank" class="avatar-wrap" href="http://www.toutiao.com/user/4458132111/"> <img alt="" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/14f001009ecc640cb66"> </a> <div class="c-content"> <div class="c-user-info"> <a class="c-user-name" target="_blank" href="http://www.toutiao.com/user/4458132111/">zoujinxing</a> <span class="c-create-time">1月前</span> </div> <p>Mark</p> <div class="c-footer-action"> <span class="c-reply" ga_event="click_reply_comment">回复</span>   <span class="y-right c-report" title="举报"><i class="y-icon icon-report"></i></span> <span title="点赞" ga_event="click_good_comment" class="y-right c-digg ">1&nbsp;<i class="y-icon icon-digg"></i></span> </div> <div class="J_input_2"></div> <!--riot placeholder-->  </div> </li><li class="c-item"> <a target="_blank" class="avatar-wrap" href="http://www.toutiao.com/user/3763461611/"> <img alt="" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/78f001ce8598db67270"> </a> <div class="c-content"> <div class="c-user-info"> <a class="c-user-name" target="_blank" href="http://www.toutiao.com/user/3763461611/">田梓诣</a> <span class="c-create-time">1月前</span> </div> <p>太low</p> <div class="c-footer-action"> <span class="c-reply" ga_event="click_reply_comment">回复</span>   <span class="y-right c-report" title="举报"><i class="y-icon icon-report"></i></span> <span title="点赞" ga_event="click_good_comment" class="y-right c-digg ">2&nbsp;<i class="y-icon icon-digg"></i></span> </div> <div class="J_input_3"></div> <!--riot placeholder-->  </div> </li><li class="c-item"> <a target="_blank" class="avatar-wrap" href="http://www.toutiao.com/user/6594527372/"> <img alt="" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/76e42c98jw1e8qgp5bmzyj2050050aa8.jpg"> </a> <div class="c-content"> <div class="c-user-info"> <a class="c-user-name" target="_blank" href="http://www.toutiao.com/user/6594527372/">雨田house</a> <span class="c-create-time">1月前</span> </div> <p>建议去掉组..</p> <div class="c-footer-action"> <span class="c-reply" ga_event="click_reply_comment">回复</span> <span class="c-reply-count" ga_event="click_expand_reply">&nbsp;⋅&nbsp;2条回复<i class="y-icon icon-more"></i></span>  <span class="y-right c-report" title="举报"><i class="y-icon icon-report"></i></span> <span title="点赞" ga_event="click_good_comment" class="y-right c-digg ">1&nbsp;<i class="y-icon icon-digg"></i></span> </div> <div class="J_input_4"></div> <!--riot placeholder-->  </div> </li><!--riot placeholder--> </ul> <div class="c-load-more" ga_event="click_loadmore_comment">查看更多评论</div> <div id="J_report"></div></div>
+      </div>
+    </div>
+    <div class="y-box" style="margin-top: 30px;">
+      <div class="y-left index-left">
+        <div riot-tag="relatedChannel"><div name="relatedChannel" ga_event="related_channel_click" class="relatedChannel "> <h2 class="relatedChannel-header">相关推荐</h2> <ul class="relatedChannel-list"> <li> <a href="javacript:;" class="relatedChannel-item active"> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>推荐</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>热点</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>社会</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>娱乐</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>科技</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>体育</span> </a> </li><!--riot placeholder--> </ul> </div></div>
+      </div>
+      <div class="y-left index-middle">
+        <div class="index-cut-line" id="J_cut_line"></div>
+        <div riot-tag="feedBox"></div>
+      </div>
+    </div>
+  </div>
+  <div id="J_rindex" class="y-right index-right">
+    
+<div class="module">
+  <div class="pgcInfo">
+    <div class="pgc-head">
+      <a class="pgc-link" target="_blank" href="http://www.toutiao.com/m51165489999/" ga_event="click_into_pgc">
+          <img src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/d290017878286f447c6" alt="Java开发之路">
+          <div class="pgc-username">
+            <span>Java开发之路</span>
+            <div riot-tag="subscribe" class="pgc-subscribe"><div class="subscribe" ga_event="follow_pgc">  <div class="article-unsubscribe left-arrow"> <span>立即关注</span> </div> </div></div>
+          </div>
+      </a>
+    </div>
+    <p class="pgc-description">交流进步，不断积累总结反思，用思想和双手敲击出新世界</p>
+    <ul class="pgc-content">
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://toutiao.com/i6348558171270824449/" target="_blank" class="pgc-article-link">
+          Java面试题分享（一）
+        </a>
+    	</li>
+      
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://toutiao.com/i6346393947887108610/" target="_blank" class="pgc-article-link">
+          Web Service 学习笔记
+        </a>
+    	</li>
+      
+      
+      
+      
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://toutiao.com/i6345041285648220674/" target="_blank" class="pgc-article-link">
+          Java中关于heap堆和stack栈学习笔记
+        </a>
+    	</li>
+      
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://toutiao.com/i6344649852244197889/" target="_blank" class="pgc-article-link">
+          Java字节流与字符流的区别
+        </a>
+    	</li>
+      
+      
+    </ul>
+  </div>
+</div>
+
+
+    <div style="margin-bottom:30px;">
+	<iframe src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/saved_resource.html" onload="var adWrap=this;setTimeout(function(){if(!adWrap.loaded){adWrap.src=&#39;//www.toutiao.com/api/pc/adsafe/&#39;+&#39;#group=detail_top_right&#39;;adWrap.loaded=true;}},1)" frameborder="0" width="300" height="250” scrolling=“no"></iframe>
+</div>
+
+    <div riot-tag="hotVideo" class="hotVideo module" ga_event="click_video_recommend"><div class="module-head video-head"><a href="http://www.toutiao.com/video/" target="_blank">热门视频</a></div> <ul> <li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6366473388987777282/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/135200007e2bde56cf29" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>07:29</span> </i> <p class="hot-title module-title">火影中忍考试现场，各种作弊方式，不服不行</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6355583943433306369/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/119700055626f6101e32" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>05:50</span> </i> <p class="hot-title module-title">公主霸气救下卫青姐弟，甩鞭为证：卫青，从此以后，为我牛马</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6366436429078167810/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/12de0005d4621b77245e" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>00:26</span> </i> <p class="hot-title module-title">日本插手潜航器事件 华春莹：日方太操心了 跟你们有关系么？</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6366454805225455874/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/12eb0009b6f2c66c85e7" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>10:44</span> </i> <p class="hot-title module-title">《好先生番外篇》张艺兴顶替陆远的位置并拿下了彭佳禾，财色双收</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6366468483714433282/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/134a00076e39ddad7dbd" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>02:02</span> </i> <p class="hot-title module-title">吴京真人秀动真格脚踢范文芳，谢楠发火</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6366474235623244290/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/12f1000fe5658c3f6e8c" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>06:08</span> </i> <p class="hot-title module-title">岳云鹏的普通话秒杀主持人，现在的主持人都什么素质啊？</p> </a> </li><!--riot placeholder--> </ul></div>
+    <div style="margin-bottom: 30px;" id="J_ad_baidu_top1"><iframe id="iframeu2793998_0" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/fcjm(1).html" width="300" height="250" align="center,center" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="border:0; vertical-align:bottom;margin:0;" allowtransparency="true"></iframe></div>
+
+    
+<div class="module recpgc">
+	<div class="module-head">
+		相关头条号
+	</div>
+	<ul class="recpgc-content">
+		
+		
+		<li class="recpgc-list">
+    		<a class="recpgc-user" href="http://toutiao.com/m3163421883/" target="_blank" ga_event="click_related_pgc">
+        		<img src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/652987748" alt="">
+        		<span class="user-name">前瞻网</span>
+    		</a>
+    		<ul>
+    			
+    				<li class="related-article">
+    					<a href="http://toutiao.com/group/6366481786503512322/" target="_blank">这周末的圣诞妆，你准备好了吗？</a>
+    				</li>
+    			
+    				<li class="related-article">
+    					<a href="http://toutiao.com/group/6366461220380672258/" target="_blank">任天堂Switch主机CPU和GPU频率曝光 明年1月公布售价</a>
+    				</li>
+    			
+    		</ul>
+		</li>
+		
+		
+		
+		<li class="recpgc-list">
+    		<a class="recpgc-user" href="http://toutiao.com/m3235355706/" target="_blank" ga_event="click_related_pgc">
+        		<img src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/6928961690" alt="">
+        		<span class="user-name">极客公园</span>
+    		</a>
+    		<ul>
+    			
+    				<li class="related-article">
+    					<a href="http://toutiao.com/group/6366456312759763202/" target="_blank">「这届玩家不行」？任天堂的情怀和玩家的期待交错</a>
+    				</li>
+    			
+    				<li class="related-article">
+    					<a href="http://toutiao.com/group/6366479633465999874/" target="_blank">当电单车具备了「可折叠」的能力，会让更多人爱上它吗？</a>
+    				</li>
+    			
+    		</ul>
+		</li>
+		
+		
+		
+		<li class="recpgc-list">
+    		<a class="recpgc-user" href="http://toutiao.com/m3253671606/" target="_blank" ga_event="click_related_pgc">
+        		<img src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/7019049228" alt="">
+        		<span class="user-name">人人都是产品经理</span>
+    		</a>
+    		<ul>
+    			
+    				<li class="related-article">
+    					<a href="http://toutiao.com/group/6366473761012711682/" target="_blank">产品改版评估：如何规避新老用户混合的问题</a>
+    				</li>
+    			
+    				<li class="related-article">
+    					<a href="http://toutiao.com/group/6366465954918596865/" target="_blank">老司机运营套路：互联网基金该如何运营</a>
+    				</li>
+    			
+    		</ul>
+		</li>
+		
+		
+		
+		
+		
+		
+	</ul>
+</div>
+
+
+    <div style="margin-bottom: 30px;" id="J_ad_baidu_top2"><iframe id="iframeu2794021_0" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/fcjm(2).html" width="300" height="250" align="center,center" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="border:0; vertical-align:bottom;margin:0;" allowtransparency="true"></iframe></div>
+
+    <div riot-tag="hotPicture" class="hotPicture module" ga_event="click_pictures_recommend"><div class="module-head pic-head"><a href="http://www.toutiao.com/news_image/" target="_blank">精彩图片</a></div> <ul> <li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6366461998272463106/">   <div class="pic-style style_3"> <div class="module-pic pic-middle"><img alt="" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/134e00004da0282ee00d"></div> <div class="module-pic pic-small"><img alt="" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/134f0000940d08e424ac"></div> <div class="module-pic pic-small"><img alt="" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/134f0000942a545d7873"></div> </div> <i class="hot-tag pic-tag"> <span>9图</span> </i> <p class="hot-title module-title">赵丽颖出演《封神演义》定妆照新鲜出炉 最后一张简直美翻</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6363053645298614530/">  <div class="pic-style style_2"> <div class="module-pic pic-middle"><img alt="" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/12d80007887bc3b4bb6d"></div> <div class="module-pic pic-small"><img alt="" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/12810005007fb2e70b78"></div> <div class="module-pic pic-small"><img alt="" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/12d80007888059c06e03"></div> </div>  <i class="hot-tag pic-tag"> <span>8图</span> </i> <p class="hot-title module-title">娱乐圈“型男”，没有一身肌肉，怎么敢出来混！</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6365983135150915842/"> <div class="pic-style style_1"> <div class="module-pic pic-big"><img alt="" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/13550003f7fc1952d3fa"></div> </div>   <i class="hot-tag pic-tag"> <span>9图</span> </i> <p class="hot-title module-title">河南农村结婚八个习俗 见过三条的都是牛人</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6365754232389288193/">  <div class="pic-style style_2"> <div class="module-pic pic-middle"><img alt="" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/135400027b373e55e9c0"></div> <div class="module-pic pic-small"><img alt="" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/12320010308eedbbeffb"></div> <div class="module-pic pic-small"><img alt="" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/135300027c966abd7158"></div> </div>  <i class="hot-tag pic-tag"> <span>6图</span> </i> <p class="hot-title module-title">一对北方农村夫妻的日常伙食</p> </a> </li><!--riot placeholder--> </ul></div>
+    <div>
+  <iframe src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/saved_resource(1).html" onload="var adWrap=this;setTimeout(function(){if(!adWrap.loaded){adWrap.src=&#39;//www.toutiao.com/api/pc/adsafe/&#39;+&#39;#group=detail_bottom_right&#39;;adWrap.loaded=true;}},1)" frameborder="0" width="300" height="250” scrolling=“no"></iframe>
+</div>
+
+    <div id="adindexhover" style="position: fixed; top: 20px; display: none;">
+	<iframe src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/saved_resource(2).html" onload="var adWrap=this;setTimeout(function(){if(!adWrap.loaded){adWrap.src=&#39;//www.toutiao.com/api/pc/adsafe/&#39;+&#39;#group=detail_bottom_right_hover&#39;;adWrap.loaded=true;}},1)" frameborder="0" width="300" height="250” scrolling=“no"></iframe>
+</div>
+
+  </div>
+</div>
+
+<div class="action-feedback">
+  <div riot-tag="feedback" class="feedback"><ul> <li class="tool-item" ga_event="go_top_click"> <a href="javascript:;"> <i class="y-icon icon-backtotopfeed"></i> </a> </li> </ul></div>
+</div>
+
+<!-- 公共尾部 -->
+<div id="footer">
+    <div>
+        <span class="fitem">© 2016 今日头条 www.toutiao.com</span>
+        <a class="fitem" href="http://www.12377.cn/" target="_blank">中国互联网举报中心</a>
+        <a class="fitem" href="http://www.miibeian.gov.cn/" target="_blank">京ICP证140141号</a>
+        <a class="fitem" href="http://www.miibeian.gov.cn/" target="_blank">京ICP备12025439号-3</a>
+        <a class="fitem" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11000002002023" target="_blank" ga_event="click_about">
+            <img src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/gongan_d0289dc.png">京公网安备 11000002002023号
+        </a>
+    </div>
+    <div>
+        <a class="fitem" href="http://www.toutiao.com/license/" target="_blank">网络文化经营许可证</a>
+        <a class="fitem" href="http://www.toutiao.com/a3642705768/" target="_blank">跟帖评论自律管理承诺书</a>
+        <span class="fitem">违法和不良信息举报电话：010-58341833</span>
+        <span class="fitem">公司名称：北京字节跳动科技有限公司</span>
+    </div>
+</div>
+
+
+
+    </div>
+
+    <script>
+        window.globals = window.globals || {};
+
+        taAnalysis && taAnalysis.setup({
+          c: 'detail_article'
+        });
+        taAnalysis && taAnalysis.send('pageview', {});
+
+        window.gaqpush = function (ga_action, ga_label){
+            ga('send', 'event','detail_article' , ga_action, ga_label);
+        };
+
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        // ga('create', 'UA-28423340-5', 'auto');
+        ga('create', 'UA-28423340-5', 'auto', {'sampleRate': 10});
+        ga('send', 'pageview');
+
+        utils.on(document.getElementsByTagName('body')[0], 'click', function(e) {
+            var target = utils.getTarget(e),
+                ga_event,
+                ga_category,
+                ga_label,
+                ga_value;
+
+            while(target && target.nodeName.toUpperCase() !== 'BODY') {
+                ga_event = utils.getAttribute(target, 'ga_event');
+                ga_category = utils.getAttribute(target, 'ga_category') || 'detail_article';
+                ga_label = utils.getAttribute(target, 'ga_label');
+                ga_value = utils.getAttribute(target, 'ga_value') || 1;
+
+                ga_event && ga('send', 'event', ga_category, ga_event, ga_label, ga_value);
+                ga_event && taAnalysis && taAnalysis.send('event', { ev: ga_event });
+                target = target.parentNode;
+            }
+        });
+
+        riot.observable(window);
+    </script>
+    
+
+<script>
+  // 用户信息
+  var userInfo = {
+      id: 0,
+      name: '',
+      avatarUrl: '',
+      isPgc: false,
+      isOwner: false
+  };
+
+
+  var group = {
+  	id:'6345421355604787458',
+  	repin:0,
+  };
+
+  var media = {
+  	id:51165489999,
+  	like:false
+  };
+
+  var siblingList = [];
+</script>
+
+<script src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/article_17bc30b.js.下载"></script>
+
+<script>
+  riot.mount('wtopbar', {
+    home: false,
+    userInfo: userInfo
+  });
+  riot.mount('login');
+  riot.mount('wsearch');
+</script>
+
+<script>
+  riot.mount('snsbox',{
+    share_url:"http://toutiao.com/item/6345426154068918786",
+    abstract:"用户管理及权限管理的意义用户管理及权限管理一直是应用系统中不可缺少的一个部分系统用户很多，系统功能也很多不同用户对系统功能的需求不同出于安全等考虑，关键的、重要的系统功能需限制部分用户的使用出于方便性考虑，系统功能需要根据不同的用户而定制用户及权限管理涉及的几个概念用户分类：系统".replace(/<br \/>/ig, ''),
+    group_id:"6345421355604787458",
+    comments_count: utils.numFormat('8', 1, 'en'),
+    fix: true
+  });
+  riot.mount('hotVideo');
+  riot.mount('hotPicture');
+  riot.mount('feedback');
+</script>
+
+<script>
+  riot.mount('comment', {
+    group_id: '6345421355604787458',
+    item_id: '6345426154068918786' || '6345426154068918786',
+    comments_count: utils.numCutByComma('8'),
+    userInfo: userInfo,
+    ban_comment: 0 + 0
+  });
+</script>
+
+<script>
+  riot.mount('relatedChannel', {
+    tag: '__all__'
+  });
+</script>
+
+<script src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/player.min.js.下载"></script>
+<script src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/video_0801e31.js.下载"></script>
+<!--[if lt IE 9]>
+  <script src="//s3.pstatp.com/toutiao/resource/ntoutiao_web/page/detail/article_detail/article_main/audio/audio_ie8_69f6c6f.js" charset="utf-8"></script>
+<![endif]-->
+<script src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/audio_2324d3c.js.下载"></script>
+
+<script type="text/javascript" src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/c.js.下载"></script>
+<script>
+  BAIDU_CLB_fillSlotAsync('u2793998', 'J_ad_baidu_top1');
+  BAIDU_CLB_fillSlotAsync('u2794021', 'J_ad_baidu_top2');
+  BAIDU_CLB_fillSlotAsync('u2643457', 'J_ad_baidu_bottom');
+</script>
+
+    <script src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/z_stat.php" language="JavaScript"></script><script src="./用户及权限管理设计 - 今日头条(www.toutiao.com)_files/core.php" charset="utf-8" type="text/javascript"></script><a href="http://www.cnzz.com/stat/website.php?web_id=1259612802" target="_blank" title="站长统计">站长统计</a>
+
+
+</body></html>
