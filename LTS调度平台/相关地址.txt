@@ -1,3 +1,0 @@
-example地址：https://github.com/ltsopensource/lts-examples
-文档地址：https://www.gitbook.com/book/qq254963746/lts/details
-项目地址：https://github.com/ltsopensource/light-task-scheduler
