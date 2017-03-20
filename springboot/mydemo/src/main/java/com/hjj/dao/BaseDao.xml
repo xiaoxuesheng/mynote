@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.datayes.data.datacmp.dao.BaseDao">
+    <resultMap id="hm" type="java.util.HashMap"></resultMap>
+    <resultMap id="lhm" type="java.util.LinkedHashMap"></resultMap>
+
+    <!--<select id="getLastInsertId" resultType="long">-->
+        <!--SELECT LAST_INSERT_ID()-->
+    <!--</select>-->
+
+    <!--<select id="findPrimaryKeys">-->
+        <!--SELECT COLUMN_NAME-->
+        <!--FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE-->
+        <!--WHERE TABLE_NAME=#{tableName}-->
+    <!--</select>-->
+
+    <insert id="insert2">
+        INSERT INTO ${tableName}
+        <foreach collection="fieldMap" index="key" item="item" open="(" separator="," close=")">
+            ${key}
+        </foreach>
+        VALUES
+        <foreach collection="fieldMap" index="key" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </insert>
+
+    <insert id="insert" parameterType="map" useGeneratedKeys="true" keyProperty="_gen_key_">
+        INSERT INTO ${tableName}
+        <foreach collection="fieldMap" index="key" item="item" open="(" separator="," close=")">
+            ${key}
+        </foreach>
+        VALUES
+        <foreach collection="fieldMap" index="key" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </insert>
+
+    <update id="update">
+        UPDATE  ${tableName}
+        SET
+        <foreach collection="fieldMap" index="key" item="item" open="" separator="," close="">
+            ${key}=#{item}
+        </foreach>
+        WHERE
+        <foreach collection="keyMap" index="key" item="item" open="" separator=" AND " close="">
+            ${key}=#{item}
+        </foreach>
+    </update>
+
+    <select id="findByKeys" resultType="map">
+        SELECT * FROM ${tableName}
+        <foreach collection="keyMap" index="key" item="item" open="WHERE " separator=" AND " close="">
+            ${key}=#{item}
+        </foreach>
+    </select>
+
+    <!--<select id="find" resultMap="hm">-->
+        <!--SELECT * FROM sqlserver_${tableName}-->
+        <!--<if test="fieldMap!=null and fieldMap.size>0">-->
+            <!--<foreach collection="fieldMap" index="key" item="item" open="WHERE " separator=" AND " close="">-->
+                <!--${key}=#{item}-->
+            <!--</foreach>-->
+        <!--</if>-->
+        <!--LIMIT #{limit} OFFSET #{offset}-->
+    <!--</select>-->
+
+    <select id="findAll" resultMap="hm">
+        SELECT * FROM ${tableName}
+        <if test="fieldMap!=null and fieldMap.size>0">
+            <foreach collection="fieldMap" index="key" item="item" open="WHERE " separator=" AND " close="">
+                ${key}=#{item}
+            </foreach>
+        </if>
+    </select>
+
+    <!--<select id="count" resultType="long">-->
+        <!--SELECT COUNT(*) FROM sqlserver_${tableName}-->
+        <!--<if test="fieldMap!=null and fieldMap.size>0">-->
+            <!--<foreach collection="fieldMap" index="key" item="item" open="WHERE " separator=" AND " close="">-->
+                <!--${key}=#{item}-->
+            <!--</foreach>-->
+        <!--</if>-->
+    <!--</select>-->
+
+    <!--<select id="findWithClause" resultMap="hm">-->
+        <!--${clause}-->
+        <!--LIMIT #{limit} OFFSET #{offset}-->
+    <!--</select>-->
+
+    <!--<select id="findWithWhereClause" resultMap="hm">-->
+        <!--SELECT * FROM sqlserver_${tableName}-->
+        <!--${whereClause}-->
+        <!--LIMIT #{limit} OFFSET #{offset}-->
+    <!--</select>-->
+
+    <!--<select id="findByWhereClause" resultMap="hm">-->
+        <!--SELECT * FROM sqlserver_${tableName}-->
+        <!--${whereClause}-->
+    <!--</select>-->
+
+    <!--<select id="executeSelectSql" resultMap="lhm">-->
+        <!--${selectSql}-->
+    <!--</select>-->
+
+    <select id="countWithWhereClause" resultType="long">
+        SELECT COUNT(*) FROM ${tableName}
+        ${whereClause}
+    </select>
+
+    <select id="callProcedure" statementType="CALLABLE" parameterType="map" resultMap="hm">
+        {
+            <if test="returnType!=null">#{returnResult,jdbcType=${returnType},mode=OUT}=</if>
+            call ${procedureName} (
+                <foreach collection="inParamMap" index="key" item="item" open="" separator=" , " close="">
+                    #{item}
+                </foreach>
+                <if test="inParamMap!=null and inParamMap.size>0 and outParamMap!=null and outParamMap.size>0">,</if>
+                <foreach collection="outParamMap" index="key" item="item" open="" separator=" , " close="">
+                    #{${key},jdbcType=${item},mode=OUT}
+                </foreach>
+            )
+        }
+    </select>
+
+    <!--<delete id="deleteByKeys">-->
+        <!--DELETE FROM sqlserver_${tableName}-->
+        <!--WHERE-->
+        <!--<foreach collection="keyMap" index="key" item="item" open="" separator=" AND " close="">-->
+            <!--${key}=#{item}-->
+        <!--</foreach>-->
+    <!--</delete>-->
+
+    <delete id="deleteInvalidResults">
+        DELETE FROM ${tableName} WHERE JOB_ID=#{jobId} AND IS_IGNORED=0 AND EXE_GUID!=#{currentExecGuid}
+    </delete>
+
+    <select id="findBusinessPrimaryKeys" resultMap="hm">
+        SELECT sys_column.SHORT_NAME_EN AS columnName
+        FROM sys_column
+        WHERE
+            sys_column.PRIMARY_KEY=1
+            AND
+            sys_column.QA_ACTIVE_FLG=1
+            AND
+            sys_column.TABLE_ID IN (SELECT sys_table.TABLE_ID FROM sys_table WHERE sys_table.NAME_EN=#{tableName})
+    </select>
+
+    <select id="loadValidTasksByTime" resultMap="hm">
+        select sqlserver_cmp_job.JOB_ID,max(sqlserver_cmp_scheduler.SCHEDULE_TIME) as SCHEDULE_TIME
+        from sqlserver_cmp_job,sqlserver_cmp_scheduler
+        WHERE time_to_sec(sqlserver_cmp_scheduler.SCHEDULE_TIME) between time_to_sec(#{begin}) and time_to_sec(#{end})
+              and sqlserver_cmp_job.IS_ACTIVE=1
+              and is_sqlserver = 1
+              and sqlserver_cmp_job.JOB_ID=sqlserver_cmp_scheduler.JOB_ID
+        GROUP BY sqlserver_cmp_job.JOB_ID
+    </select>
+
+    <select id="findRightJob" resultType="map">
+        SELECT * FROM sqlserver_cmp_log
+        WHERE
+            EXE_STATUS='WAITING'
+            AND
+            RUNNER IS NULL
+        ORDER BY SCALE_TYPE <choose><when test="0==jobScaleType">ASC</when><otherwise>DESC</otherwise></choose>,ID ASC
+        LIMIT 1
+    </select>
+
+    <select id="findValidCmpLog" resultType="map">
+        SELECT * FROM sqlserver_cmp_log
+        WHERE
+            JOB_ID=#{jobId}
+            AND
+            EXE_STATUS IN ('WAITING','RUNNING')
+    </select>
+
+<!--    <select id="execCountSql" resultType="long">
+        ${countSql}
+    </select>-->
+
+    <update id="cleanInvalidCmpLogs">
+        UPDATE sqlserver_cmp_log
+        SET EXE_STATUS='FAILED',STATUS_DESC='cleanner set failed'
+        WHERE
+            EXE_STATUS='RUNNING'
+            AND
+            EXE_END_TIME IS NULL
+            AND
+            timestampdiff(minute,EXE_BEGIN_TIME,curtime())>=30
+    </update>
+
+</mapper>
