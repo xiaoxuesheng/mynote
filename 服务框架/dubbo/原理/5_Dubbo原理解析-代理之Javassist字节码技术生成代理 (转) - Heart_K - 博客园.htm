@@ -1,0 +1,178 @@
+﻿<!DOCTYPE HTML>
+<!-- saved from url=(0048)http://www.cnblogs.com/heart-king/p/5642866.html -->
+<!DOCTYPE html PUBLIC "" ""><HTML lang="zh-cn"><HEAD><META content="IE=10.0000" 
+http-equiv="X-UA-Compatible">
+ 
+<META charset="utf-8"> 
+<META name="viewport" content="width=device-width, initial-scale=1"> 
+<TITLE>5.Dubbo原理解析-代理之Javassist字节码技术生成代理 (转) - Heart_K - 博客园</TITLE> <LINK href="5_Dubbo原理解析-代理之Javassist字节码技术生成代理%20(转)%20-%20Heart_K%20-%20博客园_files/blog-common.css" 
+rel="stylesheet" type="text/css"> <LINK id="MainCss" href="5_Dubbo原理解析-代理之Javassist字节码技术生成代理%20(转)%20-%20Heart_K%20-%20博客园_files/bundle-LessIsMore.css" 
+rel="stylesheet" type="text/css"> <LINK id="mobile-style" href="5_Dubbo原理解析-代理之Javassist字节码技术生成代理%20(转)%20-%20Heart_K%20-%20博客园_files/bundle-LessIsMore-mobile.css" 
+rel="stylesheet" type="text/css" media="only screen and (max-width: 768px)"> 
+<LINK title="RSS" href="http://www.cnblogs.com/heart-king/rss" rel="alternate" 
+type="application/rss+xml"> <LINK title="RSD" href="http://www.cnblogs.com/heart-king/rsd.xml" 
+rel="EditURI" type="application/rsd+xml"> <LINK href="http://www.cnblogs.com/heart-king/wlwmanifest.xml" 
+rel="wlwmanifest" type="application/wlwmanifest+xml"> 
+<SCRIPT src="5_Dubbo原理解析-代理之Javassist字节码技术生成代理%20(转)%20-%20Heart_K%20-%20博客园_files/jquery.js" type="text/javascript"></SCRIPT>
+  
+<SCRIPT type="text/javascript">var currentBlogApp = 'heart-king', cb_enable_mathjax=false;var isLogined=false;</SCRIPT>
+ 
+<SCRIPT src="5_Dubbo原理解析-代理之Javassist字节码技术生成代理%20(转)%20-%20Heart_K%20-%20博客园_files/blog-common.js" type="text/javascript"></SCRIPT>
+ 
+<META name="GENERATOR" content="MSHTML 11.00.9600.17690"></HEAD> 
+<BODY><A name="top"></A> 
+<DIV id="home">
+<DIV id="header">
+<DIV id="blogTitle"><!--done--> 
+<DIV class="title"><A class="headermaintitle" id="Header1_HeaderTitle" href="http://www.cnblogs.com/heart-king/">Heart_K</A></DIV>
+<DIV class="subtitle"></DIV></DIV><!--end: blogTitle 博客的标题和副标题 -->	 
+<DIV id="navigator">
+<UL id="navList">
+  <LI id="nav_sitehome"><A class="menu" id="blog_nav_sitehome" href="http://www.cnblogs.com/">博客园</A></LI>
+  <LI id="nav_myhome"><A class="menu" id="blog_nav_myhome" href="http://www.cnblogs.com/heart-king/">首页</A></LI>
+  <LI id="nav_newpost"><A class="menu" id="blog_nav_newpost" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" 
+  rel="nofollow">新随笔</A></LI>
+  <LI id="nav_contact"><A class="menu" id="blog_nav_contact" href="https://msg.cnblogs.com/send/Heart_K" 
+  rel="nofollow">联系</A></LI>
+  <LI id="nav_rss"><A class="menu" id="blog_nav_rss" href="http://www.cnblogs.com/heart-king/rss">订阅</A> <!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/heart-king/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></LI>
+  <LI id="nav_admin"><A class="menu" id="blog_nav_admin" href="https://i.cnblogs.com/" 
+  rel="nofollow">管理</A></LI></UL>
+<DIV class="blogStats">
+<DIV id="blog_stats"><!--done--> 随笔-36&nbsp; 文章-0&nbsp; 评论-0&nbsp; </DIV></DIV><!--end: blogStats -->
+	 </DIV><!--end: navigator 博客导航栏 --> </DIV><!--end: header 头部 --> 
+<DIV id="main">
+<DIV id="mainContent">
+<DIV class="forFlow">
+<DIV id="post_detail"><!--done--> 
+<DIV id="topics">
+<DIV class="post">
+<H1 class="postTitle"><A class="postTitle2" id="cb_post_title_url" href="http://www.cnblogs.com/heart-king/p/5642866.html">5.Dubbo原理解析-代理之Javassist字节码技术生成代理 
+(转)</A>		 </H1>
+<DIV class="clear"></DIV>
+<DIV class="postBody">
+<DIV id="cnblogs_post_body">
+<P>转载自 &nbsp;<A 
+href="http://blog.csdn.net/quhongwei_zhanqiu">斩秋的专栏</A>&nbsp;&nbsp;http://blog.csdn.net/quhongwei_zhanqiu/article/details/41597219</P>
+<P>&nbsp;</P>
+<HR>
+
+<P>JavassistProxyFactory:利用字节码技术来创建对象</P>
+<DIV class="cnblogs_code">
+<PRE><SPAN style="font-size: 15px;"><SPAN style="color: rgb(0, 0, 255);">public</SPAN> &lt;T&gt; T getProxy(Invoker&lt;T&gt; invoker,Class&lt;?&gt;<SPAN style="color: rgb(0, 0, 0);">[] interfaces) {
+
+       </SPAN><SPAN style="color: rgb(0, 0, 255);">return</SPAN><SPAN style="color: rgb(0, 0, 0);"> (T) Proxy.getProxy(interfaces).newInstance(new InvokerInvocationHandler(invoker));
+
+}</SPAN></SPAN></PRE></DIV>
+<P>&nbsp;</P>
+<P>看似跟jdk生成代理一样， 其实这里的Proxy类不是jdk中自带那个生成代理对象的类是:</P>
+<P>　　<STRONG>com.alibaba.dubbo.common.bytecode.Proxy</STRONG>。</P>
+<P>这个dubbo自己写的Proxy类，利用要代理的接口利用javassist工具生成代理代码。</P>
+<P>获取Invoker&nbsp;对象</P>
+<DIV class="cnblogs_code">
+<PRE><SPAN style="font-size: 14px;">    <SPAN style="color: rgb(0, 0, 255);">public</SPAN> &lt;T&gt; Invoker&lt;T&gt; getInvoker(T proxy, Class&lt;T&gt;<SPAN style="color: rgb(0, 0, 0);"> type, URL url) {
+
+        </SPAN><SPAN style="color: rgb(0, 0, 255);">final</SPAN> Wrapper wrapper = Wrapper.getWrapper(proxy.getClass().getName().indexOf('$') &lt; 0 ?<SPAN style="color: rgb(0, 0, 0);"> proxy.getClass() : type);
+
+        </SPAN><SPAN style="color: rgb(0, 0, 255);">return</SPAN> <SPAN style="color: rgb(0, 0, 255);">new</SPAN> AbstractProxyInvoker&lt;T&gt;<SPAN style="color: rgb(0, 0, 0);">(proxy, type, url) {
+
+            </SPAN><SPAN style="color: rgb(0, 0, 255);">protected</SPAN><SPAN style="color: rgb(0, 0, 0);"> Object doInvoke(T proxy, String methodName, 
+                    Class</SPAN>&lt;?&gt;[] parameterTypes, Object[] arguments) <SPAN style="color: rgb(0, 0, 255);">throws</SPAN><SPAN style="color: rgb(0, 0, 0);"> Throwable {
+
+                </SPAN><SPAN style="color: rgb(0, 0, 255);">return</SPAN><SPAN style="color: rgb(0, 0, 0);"> wrapper.invokeMethod(proxy, methodName, parameterTypes, arguments);
+            }
+        };
+    }</SPAN></SPAN></PRE></DIV>
+<P>根据传入的 proxy对象的类信息创建对它的包装对象Wrapper</P>
+<P>返回Invoker对象实例， 这个invoker对象invoke方法可以根据传入的invocation对象中包含的方法名，</P>
+<P>方法参数来调用proxy对象返回调用结果</P>
+<P>com.alibaba.dubbo.common.bytecode.Proxy 生成代理对象的工具类</P>
+<P>1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 遍历所有入参接口，以；分割连接起来， 
+以它为key以map为缓存查找如果有，说明代理对象已创建返回</P>
+<P>2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 利用AtomicLong对象自增获取一个long数组来作为生产类的后缀，防止冲突</P>
+<P>3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 遍历接口获取所有定义的方法，加入到一个集合Set&lt;String&gt; 
+worked中 ，用来判重,</P>
+<P>　　　　获取方法y应该在methods数组中的索引下标ix</P>
+<P>　　　　获取方法的参数类型以及返回类型</P>
+<P>　　　　构建方法体return &nbsp;ret= handler.invoke(this, methods[ix], args);</P>
+<P>　　　　这里的方法调用其实是委托给InvokerInvocationHandler实例对象的，去调用真正的实例<SPAN style="line-height: 1.5;">方法加入到methods数组中</SPAN></P>
+<P>4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 创建代理实例对象ProxyInstance</P>
+<P>　　　　类名为&nbsp; pkg + “.poxy”+id = 包名 + “.poxy” +自增数值</P>
+<P>　　　　添加静态字段Method[] methods;</P>
+<P>　　　　添加实例对象InvokerInvocationHandler hanler</P>
+<P>　　　　添加构造器参数是InvokerInvocationHandler</P>
+<P>　　　　添加无参构造器</P>
+<P>　　　　利用工具类ClassGenerator生成对应的字节码</P>
+<P>5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+创建代理对象，它的newInstance(handler)方法用来创建基于我们接口的代理</P>
+<P>　　<IMG alt="" src="5_Dubbo原理解析-代理之Javassist字节码技术生成代理%20(转)%20-%20Heart_K%20-%20博客园_files/582873-20160705110621827-2110241731.png"></P>
+<P>代理对象名Proxy + id</P>
+<P>继承于Proxy, 所以要实现newInstance方法</P>
+<P>添加默认构造器</P>
+<P>实现方法newInstance代码， new pcn(hadler) 这里pcn就是前面生成的代理对象类名</P>
+<P>利用工具类ClassGenerator生成字节码并实例化对象返回</P>
+<P>&nbsp;</P></DIV>
+<DIV id="MySignature"></DIV>
+<DIV class="clear"></DIV>
+<DIV id="blog_post_info_block">
+<DIV id="BlogPostCategory"></DIV>
+<DIV id="EntryTag"></DIV>
+<DIV id="blog_post_info"></DIV>
+<DIV class="clear"></DIV>
+<DIV id="post_next_prev"></DIV></DIV></DIV>
+<DIV class="postDesc">posted @ <SPAN id="post-date">2016-07-05 11:07</SPAN> <A 
+href="http://www.cnblogs.com/heart-king/">Heart_K</A> 阅读(<SPAN id="post_view_count">...</SPAN>) 
+评论(<SPAN id="post_comment_count">...</SPAN>)  <A href="https://i.cnblogs.com/EditPosts.aspx?postid=5642866" 
+rel="nofollow">编辑</A> <A onclick="AddToWz(5642866);return false;" href="http://www.cnblogs.com/heart-king/p/5642866.html#">收藏</A></DIV></DIV>
+<SCRIPT type="text/javascript">var allowComments=true,cb_blogId=192111,cb_entryId=5642866,cb_blogApp=currentBlogApp,cb_blogUserGuid='74411703-834e-e311-8d02-90b11c0b17d6',cb_entryCreatedDate='2016/7/5 11:07:00';loadViewCount(cb_entryId);</SCRIPT>
+	 </DIV><!--end: topics 文章、评论容器--> </DIV><A name="!comments"></A>
+<DIV id="blog-comments-placeholder"></DIV>
+<SCRIPT type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</SCRIPT>
+ 
+<DIV class="commentform" id="comment_form"><A name="commentform"></A> 
+<DIV id="divCommentShow"></DIV>
+<DIV id="comment_nav"><SPAN id="span_refresh_tips"></SPAN><A id="lnk_RefreshComments" 
+onclick="return RefreshCommentList();" href="javascript:void(0);" clientidmode="Static" 
+runat="server">刷新评论</A><A onclick="return RefreshPage();" href="http://www.cnblogs.com/heart-king/p/5642866.html#">刷新页面</A><A 
+href="http://www.cnblogs.com/heart-king/p/5642866.html#top">返回顶部</A></DIV>
+<DIV id="comment_form_container"></DIV>
+<DIV class="ad_text_commentbox" id="ad_text_under_commentbox"></DIV>
+<DIV id="ad_t2"></DIV>
+<DIV id="opt_under_post"></DIV>
+<DIV class="c_ad_block" id="ad_c1"></DIV>
+<DIV id="under_post_news"></DIV>
+<DIV class="c_ad_block" id="ad_c2"></DIV>
+<DIV id="under_post_kb"></DIV>
+<DIV class="c_ad_block" id="HistoryToday"></DIV>
+<SCRIPT type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</SCRIPT>
+ </DIV></DIV><!--end: forFlow -->	 </DIV><!--end: mainContent 主体内容容器-->	 
+<DIV id="sideBar">
+<DIV id="sideBarMain"><!--done--> 
+<DIV class="newsItem">
+<H3 class="catListTitle">公告</H3>
+<DIV id="blog-news"></DIV>
+<SCRIPT type="text/javascript">loadBlogNews();</SCRIPT>
+ </DIV>
+<DIV id="calendar">
+<DIV id="blog-calendar" style="display: none;"></DIV>
+<SCRIPT type="text/javascript">loadBlogDefaultCalendar();</SCRIPT>
+</DIV>
+<DIV id="leftcontentcontainer">
+<DIV id="blog-sidecolumn"></DIV>
+<SCRIPT type="text/javascript">loadBlogSideColumn();</SCRIPT>
+			 </DIV></DIV><!--end: sideBarMain -->	 </DIV><!--end: sideBar 侧边栏容器 -->	 
+<DIV class="clear"></DIV></DIV><!--end: main -->	 
+<DIV class="clear"></DIV>
+<DIV id="footer"><!--done--> Copyright ©2017 Heart_K	 </DIV><!--end: footer --> 
+</DIV><!--end: home 自定义的最大容器 --> </BODY></HTML>

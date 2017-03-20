@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)http://www.cnblogs.com/javaee6/p/3714719.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script async="" src="./java中的SPI机制 - 天魂地煞 - 博客园_files/analytics.js.下载"></script><script async="" src="./java中的SPI机制 - 天魂地煞 - 博客园_files/adsbygoogle.js.下载"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>java中的SPI机制 - 天魂地煞 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./java中的SPI机制 - 天魂地煞 - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./java中的SPI机制 - 天魂地煞 - 博客园_files/bundle-darkgreentrip.css">
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="./java中的SPI机制 - 天魂地煞 - 博客园_files/bundle-darkgreentrip-mobile.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/javaee6/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/javaee6/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/javaee6/wlwmanifest.xml">
+<script src="./java中的SPI机制 - 天魂地煞 - 博客园_files/jquery.js.下载" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'javaee6', cb_enable_mathjax=true;var isLogined=false;</script>
+<script src="./java中的SPI机制 - 天魂地煞 - 博客园_files/blog-common.js.下载" type="text/javascript"></script>
+<script type="text/javascript" async="" src="./java中的SPI机制 - 天魂地煞 - 博客园_files/embed.js.下载" charset="UTF-8"></script><script type="text/x-mathjax-config;executed=true">MathJax.Hub.Config({
+  tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] },
+  TeX: { equationNumbers: { autoNumber: ['AMS'], useLabelIds: true }, extensions: ['extpfeil.js'] },
+  'HTML-CSS': { linebreaks: { automatic: true } },
+  SVG: { linebreaks: { automatic: true } }});</script><script type="text/javascript" src="./java中的SPI机制 - 天魂地煞 - 博客园_files/MathJax.js.下载"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><link type="text/css" rel="stylesheet" href="./java中的SPI机制 - 天魂地煞 - 博客园_files/embed.default.css"></head>
+<body><div id="MathJax_Message" style="display: none;"></div>
+<a name="top"></a>
+<!--PageBeginHtml Block Begin-->
+<link href="./java中的SPI机制 - 天魂地煞 - 博客园_files/blog-min.css" rel="stylesheet" type="text/css">
+<link href="./java中的SPI机制 - 天魂地煞 - 博客园_files/mulu.css" rel="stylesheet" type="text/css">
+<style>
+.postBody a:hover{
+   color:red;
+}
+#cnblogs_post_body table{
+    border:1px solid #9CF;
+    border-collapse:collapse;
+    margin:5px auto;
+    
+}
+#cnblogs_post_body table th{
+	  border:1px solid #9CF;
+	  background-color: #F4FFFC;
+ }
+ 
+ #cnblogs_post_body  table td{
+	  border:1px solid #9CF;
+	  padding: 3px 3px 3px 10px;;
+ }
+
+ #cnblogs_post_body table p{
+     margin:0px;
+     
+  }
+#sideBarContents dt{
+    margin-top:8px;
+    margin-left:10px;
+}
+#sideBarContents dd{
+    margin-left:20px;
+	 margin-top:8px;
+}
+#BlogPostCategory{
+   display:block;
+}
+</style>
+<div id="next_page" style="display:none"><a href="http://www.cnblogs.com/javaee6/default.html?page=2">下一页</a></div>
+<div id="my_navigator">
+            <ul id="my_navList">
+                <li>
+                    <a class="menu" href="http://www.cnblogs.com/javaee6/default.html?page=1">主页</a>
+                </li>
+                <li>
+                    <a class="menu" href="http://www.cnblogs.com/javaee6/p/">我的文章</a>
+                </li>
+                <li>
+                    <a class="menu" href="http://www.cnblogs.com/javaee6/category/576326.html">Web前端</a>
+                </li>
+                <li>
+                    <a class="menu" href="http://www.cnblogs.com/javaee6/category/576327.html">Java</a>
+                    <div class="dropdown-menu">
+                        <div>
+                            <a href="http://www.cnblogs.com/javaee6/category/576368.html">Core Java</a>
+                        </div>
+                         <div>
+                            <a href="http://www.cnblogs.com/javaee6/category/725346.html">并发与网络</a>
+                        </div>
+                        <div>
+                            <a href="http://www.cnblogs.com/javaee6/category/576372.html">JavaEE</a>
+                        </div>
+                        <div>
+                            <a href="http://www.cnblogs.com/javaee6/category/576369.html">JVM虚拟机</a>
+                        </div>
+                        <div>
+                            <a href="http://www.cnblogs.com/javaee6/category/576377.html">Java开源框架</a>
+                        </div>
+                        <div>
+                            <a href="http://www.cnblogs.com/javaee6/category/576370.html">Java设计模式</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a class="menu" href="http://www.cnblogs.com/javaee6/category/576329.html">数据库</a>
+                </li>
+                <li>
+                    <a class="menu" href="http://www.cnblogs.com/javaee6/category/576330.html">Linux</a>
+                     <div class="dropdown-menu">
+                        <div>
+                            <a href="http://www.cnblogs.com/javaee6/category/580515.html">基础与系统管理</a>
+                        </div>
+                        <div>
+                            <a href="http://www.cnblogs.com/javaee6/category/580516.html">Shell编程</a>
+                        </div>
+                          <div>
+                            <a href="http://www.cnblogs.com/javaee6/category/580520.html">软件安装部署</a>
+                        </div>
+                       <div>
+                            <a href="http://www.cnblogs.com/javaee6/category/715001.html">内核理论</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a class="menu" href="http://www.cnblogs.com/javaee6/category/576331.html">计算机理论</a>
+                    <div class="dropdown-menu">
+                        <div>
+                            <a href="http://www.cnblogs.com/javaee6/category/580999.html">基础理论</a>
+                        </div>
+                        <div>
+                            <a href="http://www.cnblogs.com/javaee6/category/576374.html">计算机网络</a>
+                        </div>
+                        <div>
+                            <a href="http://www.cnblogs.com/javaee6/category/576373.html">算法数据结构</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a class="menu" href="http://www.cnblogs.com/javaee6/category/576332.html">前沿技术</a>
+                    <div class="dropdown-menu">
+                        <div>
+                            <a href="http://www.cnblogs.com/javaee6/category/576375.html">云计算</a>
+                        </div>
+                         <div>
+                            <a href="http://www.cnblogs.com/javaee6/category/851918.html">qemu/libvirt</a>
+                        </div>
+                         <div>
+                            <a href="http://www.cnblogs.com/javaee6/category/851919.html">openstack</a>
+                        </div>
+                        <div>
+                            <a href="http://www.cnblogs.com/javaee6/category/576376.html">NOSQL</a>
+                        </div>
+                         <div>
+                            <a href="http://www.cnblogs.com/javaee6/category/609534.html">消息队列MQ</a>
+                        </div>
+                          <div>
+                            <a href="http://www.cnblogs.com/javaee6/category/580529.html">分布式/大数据</a>
+                        </div>
+                        <div>
+                            <a href="http://www.cnblogs.com/javaee6/category/623422.html">负载均衡</a>
+                        </div>
+                         <div>
+                            <a href="http://www.cnblogs.com/javaee6/category/747601.html">安全</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a class="menu" href="http://www.cnblogs.com/javaee6/category/580543.html">Python</a>
+                </li>
+                 <li>
+                    <a class="menu" href="http://www.cnblogs.com/javaee6/category/580544.html">Node.js</a>
+                </li>
+                <li>
+                    <a class="menu" href="http://www.cnblogs.com/javaee6/category/576334.html">其他</a>
+                    <div class="dropdown-menu">
+                        <div>
+                            <a href="http://www.cnblogs.com/javaee6/category/576379.html">开发工具</a>
+                        </div>
+                        <div>
+                            <a href="http://www.cnblogs.com/javaee6/category/576380.html">乱七八糟</a>
+                        </div>
+                       <div>
+                            <a href="http://www.cnblogs.com/javaee6/category/576335.html">程序人生</a>
+                        </div>
+                        <div>
+                            <a href="http://www.cnblogs.com/javaee6/category/580992.html">资源收藏</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a class="menu" href="http://www.cnblogs.com/javaee6/p/3708893.html">关于我</a>
+                </li>
+                <li>
+                    <a class="menu" href="http://www.cnblogs.com/javaee6/p/3709390.html">友情链接</a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/javaee6/rss" target="_blank" class="menu">订阅</a>
+                </li>
+            </ul>
+        </div>
+<!--PageBeginHtml Block End-->
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/javaee6/"><img id="blogLogo" src="./java中的SPI机制 - 天魂地煞 - 博客园_files/logo.gif" alt="返回主页"></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/javaee6/">爱老婆、爱生活、爱工作、爱编程</a></h1>
+<h2>生活的理想就是为了理想的生活</h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li>
+<!----></li>
+<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+			
+			
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/javaee6/p/3714719.html">java中的SPI机制</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><h1 id="blogTitle0">1 SPI机制简介</h1>
+<pre><span style="font-family: SimSun; font-size: 14px;">SPI的全名为Service Provider Interface.大多数开发人员可能不熟悉，因为这个是针对厂商或者插件的。在java.util.ServiceLoader的文档里有比较详细的介绍。简单的总结下java spi机制的思想。<span style="text-indent: 28px;">我们系统里抽象的各个模块，往往有很多不同的实现方案，</span><span style="text-indent: 28px;">比如日志模块的方案，xml解析模块、jdbc模块的方案等。</span><span style="text-indent: 28px;">面向的对象的设计里，我们一般推荐模块之间基于接口编程，</span><span style="text-indent: 28px;">模块之间不对实现类进行硬编码。一旦代码里涉及具体的实现类，</span><span style="text-indent: 28px;">就违反了可拔插的原则，如果需要替换一种实现，就需要修改代码。</span><span style="text-indent: 28px;">为了实现在模块装配的时候能不在程序里动态指明，这就需要一种服务发现机制。</span><span style="text-indent: 28px;">&nbsp;java spi就是提供这样的一个机制：为某个接口寻找服务实现的机制。</span><span style="text-indent: 28px;">有点类似IOC的思想，就是将装配的控制权移到程序之外，在模块化设计中这个机制尤其重要。</span></span></pre>
+<h1 id="blogTitle1">2 SPI具体约定</h1>
+<pre><span style="font-size: 14px;"><span style="text-indent: 28px;"><span style="font-family: SimSun;">java spi的具体约定为:</span></span><span style="font-family: SimSun;">当服务的提供者，提供了服务接口的一种实现之后，在jar包的META-INF/services/目录里同时创建一个以服务接口命名的文件。该文件里就是实现该服务接口的具体实现类。而当外部程序装配这个模块的时候，就能通过该jar包META-INF/services/里的配置文件找到具体的实现类名，并装载实例化，完成模块的注入。&nbsp;基于这样一个约定就能很好的找到服务接口的实现类，而不需要再代码里制定。jdk提供服务实现查找的一个工具类：java.util.ServiceLoader</span></span></pre>
+<h1 id="blogTitle2">3 应用场景</h1>
+<pre></pre>
+<pre><span style="font-family: SimSun;"><span style="font-size: 14px;"><strong>1.common-logging</strong>
+apache最早提供的日志的门面接口。只有接口，没有实现。具体方案由各提供商实现， 发现日志提供商是通过扫描 META-INF/services/org.apache.commons.logging.LogFactory配置文件，通过读取该文件的内容找到日志提工商实现类。只要我们的日志实现里包含了这个文件，并在文件里制定 LogFactory工厂接口的实现类即可。
+      <strong>2.jdbc</strong>
+&nbsp; &nbsp; jdbc4.0以前， 开发人员还需要基于Class.forName("xxx")的方式来装载驱动，jdbc4也基于spi的机制来发现驱动提供商了，可以通过META-INF/services/java.sql.Driver文件里指定实现类的方式来暴露驱动提供者.</span></span></pre>
+<h1 id="blogTitle3">4 案例说明</h1>
+<pre><span style="font-family: SimSun; font-size: 14px;">一个内容管理系统有一个搜索模块。是基于接口编程的。搜索的实现可能是基于文件系统的搜索，也可能是基于数据库的搜索</span></pre>
+<p style="margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px; font-size: 14px; line-height: 21px; text-indent: 28px;"><span style="font-family: Helvetica,Tahoma,Arial,sans-serif;">&nbsp; </span><span style="font-family: SimSun; color: #ff0000;">&nbsp; 接口定义如下</span></p>
+<div class="dp-highlighter" style="width: 694.515625px; overflow: auto; margin-left: 9px; padding: 1px; word-break: break-all; word-wrap: break-word; font-family: Monaco,&#39;DejaVu Sans Mono&#39;,&#39;Bitstream Vera Sans Mono&#39;,Consolas,&#39;Courier New&#39;,monospace;"><ol class="dp-j" style="font-size: 1em; line-height: 1.4em; margin: 0px 0px 1px; padding: 2px 0px; border: 1px solid #d1d7dc; list-style-position: initial; color: #2b91af;" start="1">
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;"><span class="keyword" style="color: #7f0055; font-weight: bold;">package</span>&nbsp;my.xyz.spi;&nbsp;&nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;"><span class="keyword" style="color: #7f0055; font-weight: bold;">import</span>&nbsp;java.util.List;&nbsp;&nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;"><span class="keyword" style="color: #7f0055; font-weight: bold;">public</span>&nbsp;<span class="keyword" style="color: #7f0055; font-weight: bold;">interface</span>&nbsp;Search&nbsp;{&nbsp;&nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;">&nbsp; &nbsp;<span class="keyword" style="color: #7f0055; font-weight: bold;">public</span>&nbsp;List&nbsp;serch(String&nbsp;keyword);&nbsp;&nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;">}&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+</ol></div>
+<p style="margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px; font-size: 14px; line-height: 21px; font-family: Helvetica,Tahoma,Arial,sans-serif;">&nbsp;</p>
+<p style="margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px;"><span style="font-family: SimSun; font-size: 14px;">&nbsp; &nbsp; &nbsp;A公司采用文件系统搜索的方式实现了 Search接口，B公司采用了数据库系统的方式实现了Search接口</span></p>
+<p style="margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px;"><span style="font-family: SimSun; font-size: 14px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; A公司实现的类 &nbsp;com.A.spi.impl.FileSearch &nbsp;</span></p>
+<p style="margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px;"><span style="font-family: SimSun; font-size: 14px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; B公司实现的类 &nbsp;com.B.spi.impl.DatabaseSearch &nbsp;</span></p>
+<p style="margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px;"><span style="font-family: SimSun; font-size: 14px;">&nbsp; &nbsp; &nbsp;那么A公司发布 实现jar包时，则要在jar包中META-INF/services/my.xyz.spi.Search文件中写下如下内容</span></p>
+<p style="margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px;"><span style="font-family: SimSun; font-size: 14px;">&nbsp; &nbsp; &nbsp;<strong>com.A.spi.impl.FileSearch</strong></span></p>
+<p style="margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px;"><span style="font-family: SimSun; font-size: 14px;">&nbsp; &nbsp; &nbsp;</span><span style="font-family: SimSun; font-size: 14px;">那么B公司发布 实现jar包时，则要在jar包中META-INF/services/my.xyz.spi.Search文件中写下如下内容</span></p>
+<p style="margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px; font-size: 14px; line-height: 21px; text-indent: 28px;"><span style="font-family: SimSun;">&nbsp;&nbsp;</span><span style="font-family: SimSun;">com.B.spi.impl.DatabaseSearch</span></p>
+<div class="dp-highlighter" style="width: 694.515625px; overflow: auto; margin-left: 9px; padding: 1px; word-break: break-all; word-wrap: break-word; font-family: Monaco,&#39;DejaVu Sans Mono&#39;,&#39;Bitstream Vera Sans Mono&#39;,Consolas,&#39;Courier New&#39;,monospace;"><ol class="dp-j" style="font-size: 1em; line-height: 1.4em; margin: 0px 0px 1px; padding: 2px 0px; border: 1px solid #d1d7dc; list-style-position: initial; color: #2b91af;" start="1">
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;"><span class="keyword" style="color: #7f0055; font-weight: bold;">package</span>&nbsp;com.xyz.factory; &nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;"><span class="keyword" style="color: #7f0055; font-weight: bold;">import</span>&nbsp;java.util.Iterator;&nbsp;&nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;"><span class="keyword" style="color: #7f0055; font-weight: bold;">import</span>&nbsp;java.util.ServiceLoader; &nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;"><span class="keyword" style="color: #7f0055; font-weight: bold;">import</span>&nbsp;my.xyz.spi.Search; &nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;"><span class="keyword" style="color: #7f0055; font-weight: bold;">public</span>&nbsp;<span class="keyword" style="color: #7f0055; font-weight: bold;">class</span>&nbsp;SearchFactory&nbsp;{ &nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;">&nbsp; &nbsp;&nbsp;<span class="keyword" style="color: #7f0055; font-weight: bold;">private</span>&nbsp;SearchFactory()&nbsp;{ &nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color: #7f0055; font-weight: bold;">public</span>&nbsp;<span class="keyword" style="color: #7f0055; font-weight: bold;">static</span>&nbsp;Search&nbsp;newSearch()&nbsp;{&nbsp;&nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search&nbsp;search&nbsp;=&nbsp;<span class="keyword" style="color: #7f0055; font-weight: bold;">null</span>;&nbsp;&nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ServiceLoader&lt;Search&gt;&nbsp;serviceLoader&nbsp;=&nbsp;ServiceLoader.load(Search.<span class="keyword" style="color: #7f0055; font-weight: bold;">class</span>);&nbsp;&nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterator&lt;Search&gt;&nbsp;searchs&nbsp;=&nbsp;serviceLoader.iterator();&nbsp;&nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color: #7f0055; font-weight: bold;">if</span>&nbsp;(searchs.hasNext())&nbsp;{&nbsp;&nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;search&nbsp;=&nbsp;searchs.next();&nbsp;&nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color: #7f0055; font-weight: bold;">return</span>&nbsp;search;&nbsp;&nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;">}&nbsp;&nbsp;</span></li>
+</ol></div>
+<p style="margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px; font-size: 14px; line-height: 21px; font-family: Helvetica,Tahoma,Arial,sans-serif;">&nbsp;</p>
+<div class="dp-highlighter" style="width: 694.515625px; overflow: auto; margin-left: 9px; padding: 1px; word-break: break-all; word-wrap: break-word; font-family: Monaco,&#39;DejaVu Sans Mono&#39;,&#39;Bitstream Vera Sans Mono&#39;,Consolas,&#39;Courier New&#39;,monospace;"><ol class="dp-j" style="font-size: 1em; line-height: 1.4em; margin: 0px 0px 1px; padding: 2px 0px; border: 1px solid #d1d7dc; list-style-position: initial; color: #2b91af;" start="1">
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;"><span class="keyword" style="color: #7f0055; font-weight: bold;">package</span>&nbsp;my.xyz.test;&nbsp;&nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;"><span class="keyword" style="color: #7f0055; font-weight: bold;">import</span>&nbsp;java.util.Iterator;&nbsp;&nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;"><span class="keyword" style="color: #7f0055; font-weight: bold;">import</span>&nbsp;java.util.ServiceLoader;&nbsp;&nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;"><span class="keyword" style="color: #7f0055; font-weight: bold;">import</span>&nbsp;com.xyz.factory.SearchFactory;&nbsp;&nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;"><span class="keyword" style="color: #7f0055; font-weight: bold;">import</span>&nbsp;my.xyz.spi.Search;&nbsp;&nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;"><span class="keyword" style="color: #7f0055; font-weight: bold;">public</span>&nbsp;<span class="keyword" style="color: #7f0055; font-weight: bold;">class</span>&nbsp;SearchTest&nbsp;{&nbsp;&nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color: #7f0055; font-weight: bold;">public</span>&nbsp;<span class="keyword" style="color: #7f0055; font-weight: bold;">static</span>&nbsp;<span class="keyword" style="color: #7f0055; font-weight: bold;">void</span>&nbsp;main(String[]&nbsp;args)&nbsp;{&nbsp;&nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search&nbsp;search&nbsp;=&nbsp;SearchFactory.newSearch();&nbsp;&nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;search.serch(<span class="string" style="color: blue;">"java&nbsp;spi&nbsp;test"</span>);&nbsp;&nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li>
+<li style="font-size: 1em; margin: 0px 0px 0px 38px; padding: 0px 0px 0px 10px; border-left-width: 1px; border-left-style: solid; border-left-color: #d1d7dc; background-color: #fafafa; line-height: 18px;"><span style="color: black;">} &nbsp;</span></li>
+</ol></div>
+<p><br>
+
+</p></div><div id="MySignature" style="display: block;"><div>作者：<a href="http://weibo.com/javaee6" target="_blank">天魂地煞</a></div>
+<div>网站：<a href="http://www.mypad.tk/" target="_blank">http://www.mypad.tk</a></div>
+<div>出处：<a href="http://www.cnblogs.com/javaee6/p/3714719.html" target="_blank" id="wzdz">http://www.cnblogs.com/javaee6/p/3714719.html</a></div>
+<div>如果，您认为阅读这篇博客让您有些收获，不妨收藏起来，给予评论下！</div>
+<div>如果，您希望更容易地发现我的新博客，不妨关注下我！</div>
+<div>如果，您对我的博客所讲述的内容有兴趣，请继续关注我的后续博文！</div>
+<div>本博客中未标明原文地址的文章归作者<a href="http://weibo.com/javaee6" target="_blank">天魂地煞</a>，欢迎转载，希望在文章页面明显位置给出原文连接！ 
+</div></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="http://www.cnblogs.com/javaee6/category/576368.html" target="_blank">Java-----Core Java</a>,<a href="http://www.cnblogs.com/javaee6/category/576327.html" target="_blank">Java</a></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(3714719,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;f3d945d1-4067-e011-a53f-842b2b196315&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./java中的SPI机制 - 天魂地煞 - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./java中的SPI机制 - 天魂地煞 - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/javaee6/" target="_blank"><img src="./java中的SPI机制 - 天魂地煞 - 博客园_files/20140503151052.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/javaee6/">天魂地煞</a><br>
+            <a href="http://home.cnblogs.com/u/javaee6/followees">关注 - 11</a><br>
+            <a href="http://home.cnblogs.com/u/javaee6/followers">粉丝 - 49</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;f3d945d1-4067-e011-a53f-842b2b196315&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(3714719,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">0</span>
+    </div>
+    <div class="buryit" onclick="votePost(3714719,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/javaee6/p/3722133.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/javaee6/p/3722133.html" title="发布于2014-05-11 19:31">Javascript 中的严格模式</a><br><a href="http://www.cnblogs.com/javaee6/p/3723209.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/javaee6/p/3723209.html" title="发布于2014-05-12 13:00">追MM的各种算法</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2014-05-11 23:37</span> <a href="http://www.cnblogs.com/javaee6/">天魂地煞</a> 阅读(<span id="post_view_count">4839</span>) |  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=3714719" rel="nofollow">编辑</a> <a href="http://www.cnblogs.com/javaee6/p/3714719.html#" onclick="AddToWz(3714719);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=87442,cb_entryId=3714719,cb_blogApp=currentBlogApp,cb_blogUserGuid='f3d945d1-4067-e011-a53f-842b2b196315',cb_entryCreatedDate='2014/5/11 23:37:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="http://www.cnblogs.com/javaee6/p/3714719.html#" onclick="return RefreshPage();">刷新页面</a><a href="http://www.cnblogs.com/javaee6/p/3714719.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="http://cn.udacity.com/fend/?utm_source=cnblogs&amp;utm_medium=referral&amp;utm_campaign=newFEND" target="_blank">【推荐】Google+GitHub联手打造前端工程师课程</a><br><a href="https://activity.ksyun.com/1701/index.html?ch=00033.00005.0011701&amp;hmsr=cnblogs&amp;hmpl=1701&amp;hmcu=&amp;hmkw=&amp;hmci=" target="_blank">【云上】在金山大米云，让云计算更简单</a><br><a href="http://click.aliyun.com/m/13679/" target="_blank">【推荐】阿里云香港云服务器65折，免备案</a><br></div>
+<div id="opt_under_post"></div>
+<div id="ad_c1" class="c_ad_block">     <ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-4210569241504288" data-ad-slot="5457903683"></ins></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="http://news.cnblogs.com/n/565281/" target="_blank">Google的云服务被低估了吗？</a><br> ·  <a href="http://news.cnblogs.com/n/565280/" target="_blank">比特币闹分裂，未来恐有两款打对台！价格大跌20%</a><br> ·  <a href="http://news.cnblogs.com/n/565279/" target="_blank">摩拜惊现充1元送110元漏洞 回应称不要求退款</a><br> ·  <a href="http://news.cnblogs.com/n/565278/" target="_blank">首款支持HomeKit家用安全监控摄像头体验</a><br> ·  <a href="http://news.cnblogs.com/n/565277/" target="_blank">破案、抓逃、寻找失踪人口：社交媒体还能帮助警察做这些事情</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="ad_c2" class="c_ad_block"><a href="http://bbs.h3bpm.com/index.php?m=app&amp;app=product_download&amp;a=reg&amp;utm_source=csdn&amp;utm_medium=pic&amp;utm_campaign=show&amp;utm_content=v10&amp;utm_term=%E5%85%8D%E8%B4%B9%E4%B8%8B%E8%BD%BD" target="_blank"><img width="468" height="60" src="./java中的SPI机制 - 天魂地煞 - 博客园_files/24442-20170118152220281-363324784.jpg" alt=""></a></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/559403/" target="_blank">为什么我要写自己的框架？</a><br> ·  <a href="http://kb.cnblogs.com/page/562433/" target="_blank">垃圾回收原来是这么回事</a><br> ·  <a href="http://kb.cnblogs.com/page/554260/" target="_blank">「代码家」的学习过程和学习经验分享</a><br> ·  <a href="http://kb.cnblogs.com/page/556770/" target="_blank">写给未来的程序媛</a><br> ·  <a href="http://kb.cnblogs.com/page/558087/" target="_blank">高质量的工程代码为什么难写</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	<div class="ds-thread" data-thread-key="3714719" data-title="java中的SPI机制" data-url="http://www.cnblogs.com/javaee6/p/3714719.html" id="ds-thread"><div id="ds-reset"><div class="ds-meta" style="display: none;"><a href="javascript:void(0)" class="ds-like-thread-button ds-rounded"><span class="ds-icon ds-icon-heart"></span> <span class="ds-thread-like-text">喜欢</span><span class="ds-thread-cancel-like">取消喜欢</span></a><span class="ds-like-panel"><span class="ds-highlight">2</span> 人喜欢</span></div><div class="ds-comments-info"><div class="ds-sort"><a class="ds-order-desc">最新</a><a class="ds-order-asc ds-current">最早</a><a class="ds-order-hot">最热</a></div><ul class="ds-comments-tabs"><li class="ds-tab"><a class="ds-comments-tab-duoshuo ds-current" href="javascript:void(0);"><span class="ds-highlight">1</span>条评论</a></li>  </ul></div><ul class="ds-comments"><li class="ds-post" data-post-id="6234094322711528193"><div class="ds-post-self" data-post-id="6234094322711528193" data-thread-id="1384706252323422212" data-root-id="0" data-source="duoshuo"><div class="ds-avatar" data-user-id="6290711564550931201"><a rel="nofollow author" target="_blank" href="javascript:void(0)" onclick="this.href=&#39;http://3lai8.duoshuo.com/user-url/?user_id=6290711564550931201&#39;;" title="Mike_Liu"><img src="./java中的SPI机制 - 天魂地煞 - 博客园_files/0" alt="Mike_Liu"></a></div><div class="ds-comment-body"><div class="ds-comment-header"><a class="ds-user-name ds-highlight" data-qqt-account="" href="javascript:void(0)" onclick="this.href=&#39;http://3lai8.duoshuo.com/user-url/?user_id=6290711564550931201&#39;;" rel="nofollow" target="_blank" data-user-id="6290711564550931201">Mike_Liu</a></div><p>谢谢。</p><div class="ds-comment-footer ds-comment-actions"><span class="ds-time" datetime="2015-12-30T23:09:53+08:00" title="2015年12月30日 下午11:09:53">2015年12月30日</span><a class="ds-post-reply" href="javascript:void(0);"><span class="ds-icon ds-icon-reply"></span>回复</a><a class="ds-post-likes" href="javascript:void(0);"><span class="ds-icon ds-icon-like"></span>顶</a><a class="ds-post-repost" href="javascript:void(0);"><span class="ds-icon ds-icon-share"></span>转发</a><a class="ds-post-report" href="javascript:void(0);"><span class="ds-icon ds-icon-report"></span>举报</a></div></div></div></li></ul><div class="ds-paginator" style="display: none;"><div class="ds-border"></div><a data-page="1" href="javascript:void(0);" class="ds-current">1</a></div><a name="respond"></a><div class="ds-login-buttons"><p>社交帐号登录:</p><div class="ds-social-links"><ul class="ds-service-list"><li><a href="http://3lai8.duoshuo.com/login/weixin/" rel="nofollow" class="ds-service-link ds-weixin">微信</a></li><li><a href="http://3lai8.duoshuo.com/login/weibo/" rel="nofollow" class="ds-service-link ds-weibo">微博</a></li><li><a href="http://3lai8.duoshuo.com/login/qq/" rel="nofollow" class="ds-service-link ds-qq">QQ</a></li><li><a href="http://3lai8.duoshuo.com/login/renren/" rel="nofollow" class="ds-service-link ds-renren">人人</a></li><li><a class="ds-more-services" href="javascript:void(0)">更多»</a></li></ul><ul class="ds-service-list ds-additional-services"><li><a href="http://3lai8.duoshuo.com/login/douban/" rel="nofollow" class="ds-service-link ds-douban">豆瓣</a></li><li><a href="http://3lai8.duoshuo.com/login/kaixin/" rel="nofollow" class="ds-service-link ds-kaixin">开心</a></li><li><a href="http://3lai8.duoshuo.com/login/baidu/" rel="nofollow" class="ds-service-link ds-baidu">百度</a></li><li><a href="http://3lai8.duoshuo.com/login/google/" rel="nofollow" class="ds-service-link ds-google">谷歌</a></li></ul></div></div><div class="ds-replybox"><a class="ds-avatar" href="javascript:void(0);" onclick="return false"><img src="./java中的SPI机制 - 天魂地煞 - 博客园_files/88418.jpg" alt=""></a><form method="post"><input type="hidden" name="thread_id" value="1384706252323422212">
+<input type="hidden" name="parent_id" value="">
+<input type="hidden" name="nonce" value="58bd4a14905d6"><div class="ds-textarea-wrapper ds-rounded-top"><textarea name="message" title="Ctrl+Enter快捷提交" placeholder="说点什么吧…"></textarea><pre class="ds-hidden-text"></pre></div><div class="ds-post-toolbar"><div class="ds-post-options ds-gradient-bg"><span class="ds-sync"></span></div><button class="ds-post-button" type="submit">发布</button><div class="ds-toolbar-buttons"><a class="ds-toolbar-button ds-add-emote" title="插入表情"></a></div></div></form></div><p class="ds-powered-by"><a href="http://duoshuo.com/" target="_blank" rel="nofollow">天魂地煞正在使用多说</a></p></div></div></div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+			<div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">文章搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+<div id="widget_my_google" class="div_my_zzk"><input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk"></div>
+</div>
+</div>
+
+</div><div id="sidebar_recentposts" class="sidebar-block">
+<div class="catListEssay">
+<h3 class="catListTitle">最新文章</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/javaee6/p/6375722.html">1. jvm系列文章收集</a></li><li><a href="http://www.cnblogs.com/javaee6/p/6346757.html">2. java调用c/c++</a></li><li><a href="http://www.cnblogs.com/javaee6/p/5757156.html">3. linux top命令结果参数详解</a></li><li><a href="http://www.cnblogs.com/javaee6/p/5668029.html">4. kvm/qemu/libvirt学习笔记 (1) qemu/kvm/libvirt介绍及虚拟化环境的安装</a></li><li><a href="http://www.cnblogs.com/javaee6/p/4961350.html">5. 云计算设计模式系列文章</a></li><li><a href="http://www.cnblogs.com/javaee6/p/5047635.html">6. RSA算法原理</a></li><li><a href="http://www.cnblogs.com/javaee6/p/4961326.html">7. 数据库Sharding系列文章</a></li><li><a href="http://www.cnblogs.com/javaee6/p/4955565.html">8. spring bean的生命周期</a></li><li><a href="http://www.cnblogs.com/javaee6/p/4952230.html">9. spring HttpInvoker相关学习资料</a></li><li><a href="http://www.cnblogs.com/javaee6/p/4944632.html">10. protobuf学习(2)-相关学习资料</a></li>
+</ul>
+</div>
+</div><div id="sidebar_categories">
+<div id="sidebar_postarchive" class="catListPostArchive sidebar-block">
+<h3 class="catListTitle">文章归档</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="http://www.cnblogs.com/javaee6/archive/2017/02.html">2017年2月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="http://www.cnblogs.com/javaee6/archive/2017/01.html">2017年1月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="http://www.cnblogs.com/javaee6/archive/2016/08.html">2016年8月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_3" href="http://www.cnblogs.com/javaee6/archive/2016/07.html">2016年7月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_4" href="http://www.cnblogs.com/javaee6/archive/2016/03.html">2016年3月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_5" href="http://www.cnblogs.com/javaee6/archive/2015/12.html">2015年12月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_6" href="http://www.cnblogs.com/javaee6/archive/2015/11.html">2015年11月 (7)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_7" href="http://www.cnblogs.com/javaee6/archive/2015/10.html">2015年10月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_8" href="http://www.cnblogs.com/javaee6/archive/2015/09.html">2015年9月 (8)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_9" href="http://www.cnblogs.com/javaee6/archive/2015/08.html">2015年8月 (17)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_10" href="http://www.cnblogs.com/javaee6/archive/2015/07.html">2015年7月 (10)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_11" href="http://www.cnblogs.com/javaee6/archive/2015/06.html">2015年6月 (7)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_12" href="http://www.cnblogs.com/javaee6/archive/2015/05.html">2015年5月 (8)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_13" href="http://www.cnblogs.com/javaee6/archive/2015/03.html">2015年3月 (6)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_14" href="http://www.cnblogs.com/javaee6/archive/2015/02.html">2015年2月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_15" href="http://www.cnblogs.com/javaee6/archive/2015/01.html">2015年1月 (7)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_16" href="http://www.cnblogs.com/javaee6/archive/2014/12.html">2014年12月 (7)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_17" href="http://www.cnblogs.com/javaee6/archive/2014/11.html">2014年11月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_18" href="http://www.cnblogs.com/javaee6/archive/2014/10.html">2014年10月 (10)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_19" href="http://www.cnblogs.com/javaee6/archive/2014/09.html">2014年9月 (13)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_20" href="http://www.cnblogs.com/javaee6/archive/2014/08.html">2014年8月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_21" href="http://www.cnblogs.com/javaee6/archive/2014/07.html">2014年7月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_22" href="http://www.cnblogs.com/javaee6/archive/2014/06.html">2014年6月 (12)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_23" href="http://www.cnblogs.com/javaee6/archive/2014/05.html">2014年5月 (39)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_24" href="http://www.cnblogs.com/javaee6/archive/2014/04.html">2014年4月 (56)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_25" href="http://www.cnblogs.com/javaee6/archive/2014/03.html">2014年3月 (4)</a> </li>
+
+</ul>
+
+</div>
+
+</div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">热门文章</h3>
+	<div id="TopViewPostsBlock"><ul><li><a href="http://www.cnblogs.com/javaee6/p/3756249.html">1. 用html5 js实现浏览器全屏(7952)</a></li><li><a href="http://www.cnblogs.com/javaee6/p/3784588.html">2. 代码提交时让svn忽略classpath、target、.project等(4982)</a></li><li><a href="http://www.cnblogs.com/javaee6/p/3714719.html">3. java中的SPI机制(4839)</a></li><li><a href="http://www.cnblogs.com/javaee6/p/3721932.html">4. js快速判断IE浏览器(兼容IE10与IE11)(3825)</a></li><li><a href="http://www.cnblogs.com/javaee6/p/3726812.html">5. IT技术思维导图(3062)</a></li><li><a href="http://www.cnblogs.com/javaee6/p/3735687.html">6. java中设置代理的两种方式(2845)</a></li><li><a href="http://www.cnblogs.com/javaee6/p/3714716.html">7. 从一道面试题来认识java类加载时机与过程(2503)</a></li><li><a href="http://www.cnblogs.com/javaee6/p/3738689.html">8. HttpUrlConnection 的 setDoOutput 与 setDoInput(1905)</a></li><li><a href="http://www.cnblogs.com/javaee6/p/4372433.html">9. The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.(1768)</a></li><li><a href="http://www.cnblogs.com/javaee6/p/4849051.html">10. protobuf学习(1)-ubuntu14.04下protobuf2.6安装(1712)</a></li><li><a href="http://www.cnblogs.com/javaee6/p/4057275.html">11. linux中tar之解压和压缩常用(1518)</a></li><li><a href="http://www.cnblogs.com/javaee6/p/4754523.html">12. 深入理解Thread.sleep的含义(1509)</a></li><li><a href="http://www.cnblogs.com/javaee6/p/4026108.html">13. linux特殊权限SUID、SGID、SBIT(1384)</a></li><li><a href="http://www.cnblogs.com/javaee6/p/4162795.html">14. linux中的输入从定向和输出重定向(1307)</a></li><li><a href="http://www.cnblogs.com/javaee6/p/3730750.html">15. html中的meta详解(1284)</a></li><li><a href="http://www.cnblogs.com/javaee6/p/3790128.html">16. 关于java中MessageFormat.format中单引号问题(1179)</a></li><li><a href="http://www.cnblogs.com/javaee6/p/3998188.html">17. linux 命令行中常用光标移动快捷键(1122)</a></li><li><a href="http://www.cnblogs.com/javaee6/p/3974729.html">18. python教程与资料(1108)</a></li><li><a href="http://www.cnblogs.com/javaee6/p/4126023.html">19. java http工具类和HttpUrlConnection上传文件分析(1055)</a></li><li><a href="http://www.cnblogs.com/javaee6/p/4642744.html">20. linux压力测试工具stress(1046)</a></li></ul></div>
+</div>
+</div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	<div class="castWeibo"><h3 class="catListTitle">我的微博</h3><iframe width="100%" height="400" class="share_self" frameborder="0" scrolling="no" src="./java中的SPI机制 - 天魂地煞 - 博客园_files/index.html"></iframe></div></div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+<!--PageEndHtml Block Begin-->
+<script>
+
+    yP_tourl='http://finead.cn/iclk/?s=ODMwODgxfHx8fHx8fHx8fHwxNDM0OTYyMTY4fDE4My4zMy4yMTMuMjA4fDExNjV8Y3BjfDExfDM5NjU4fDY0MDR8MTUzMDd8NDA4OQ==;ccacc988786c7c8c02defa7e28c2c060;http%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fspm%3Da1z10.1-c.w4004-10796831006.12.BXRYgB%26id%3D520140938778%26qq-pf-to%3Dpcqq.c2c';
+</script>
+
+<script src="./java中的SPI机制 - 天魂地煞 - 博客园_files/blog-min.js.下载"></script>
+<script src="./java中的SPI机制 - 天魂地煞 - 博客园_files/mulu.js.下载"></script><div class="sideBar" id="sideBar1"><div id="sideBarTab"><h2>目录导航</h2></div><div id="sideBarContents" style="display: none;"><dl><dt name="0">1 SPI机制简介</dt><dt name="1">2 SPI具体约定</dt><dt name="2">3 应用场景</dt><dt name="3">4 案例说明</dt></dl></div></div>
+<!--
+<script src="http://finead.cn/page/?s=15307"></script>
+-->
+<script>
+       var size=$('.entrylist').size();
+       if(size>=2){
+             $('.entrylist').eq(0).hide();
+        }
+      $('.postTitle2').each(function(){
+            var me=$(this);
+            var title=me.html();
+            if(/^\[置顶\].+/.test(title)){
+                  me.html(title.replace(/\[置顶\]/,''));
+            }
+      });
+</script>
+<!--PageEndHtml Block End-->
+
+
+<div id="topcontrol" title="Scroll Back to Top" style="position: fixed; bottom: 5px; right: 5px; opacity: 0; cursor: pointer;"><img src="./java中的SPI机制 - 天魂地煞 - 博客园_files/up.gif" style="width:24px; height:24px"></div></body></html>

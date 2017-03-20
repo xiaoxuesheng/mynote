@@ -1,0 +1,179 @@
+﻿<!DOCTYPE HTML>
+<!-- saved from url=(0048)http://www.cnblogs.com/heart-king/p/5632907.html -->
+<!DOCTYPE html PUBLIC "" ""><HTML lang="zh-cn"><HEAD><META content="IE=10.0000" 
+http-equiv="X-UA-Compatible">
+ 
+<META charset="utf-8"> 
+<META name="viewport" content="width=device-width, initial-scale=1"> <TITLE>3. 
+Dubbo原理解析-Dubbo内核实现之动态编译 （转） - Heart_K - 博客园</TITLE> <LINK href="3_%20Dubbo原理解析-Dubbo内核实现之动态编译%20（转）%20-%20Heart_K%20-%20博客园_files/blog-common.css" 
+rel="stylesheet" type="text/css"> <LINK id="MainCss" href="3_%20Dubbo原理解析-Dubbo内核实现之动态编译%20（转）%20-%20Heart_K%20-%20博客园_files/bundle-LessIsMore.css" 
+rel="stylesheet" type="text/css"> <LINK id="mobile-style" href="3_%20Dubbo原理解析-Dubbo内核实现之动态编译%20（转）%20-%20Heart_K%20-%20博客园_files/bundle-LessIsMore-mobile.css" 
+rel="stylesheet" type="text/css" media="only screen and (max-width: 768px)"> 
+<LINK title="RSS" href="http://www.cnblogs.com/heart-king/rss" rel="alternate" 
+type="application/rss+xml"> <LINK title="RSD" href="http://www.cnblogs.com/heart-king/rsd.xml" 
+rel="EditURI" type="application/rsd+xml"> <LINK href="http://www.cnblogs.com/heart-king/wlwmanifest.xml" 
+rel="wlwmanifest" type="application/wlwmanifest+xml"> 
+<SCRIPT src="3_%20Dubbo原理解析-Dubbo内核实现之动态编译%20（转）%20-%20Heart_K%20-%20博客园_files/jquery.js" type="text/javascript"></SCRIPT>
+  
+<SCRIPT type="text/javascript">var currentBlogApp = 'heart-king', cb_enable_mathjax=false;var isLogined=false;</SCRIPT>
+ 
+<SCRIPT src="3_%20Dubbo原理解析-Dubbo内核实现之动态编译%20（转）%20-%20Heart_K%20-%20博客园_files/blog-common.js" type="text/javascript"></SCRIPT>
+ 
+<META name="GENERATOR" content="MSHTML 11.00.9600.17690"></HEAD> 
+<BODY><A name="top"></A> 
+<DIV id="home">
+<DIV id="header">
+<DIV id="blogTitle"><!--done--> 
+<DIV class="title"><A class="headermaintitle" id="Header1_HeaderTitle" href="http://www.cnblogs.com/heart-king/">Heart_K</A></DIV>
+<DIV class="subtitle"></DIV></DIV><!--end: blogTitle 博客的标题和副标题 -->	 
+<DIV id="navigator">
+<UL id="navList">
+  <LI id="nav_sitehome"><A class="menu" id="blog_nav_sitehome" href="http://www.cnblogs.com/">博客园</A></LI>
+  <LI id="nav_myhome"><A class="menu" id="blog_nav_myhome" href="http://www.cnblogs.com/heart-king/">首页</A></LI>
+  <LI id="nav_newpost"><A class="menu" id="blog_nav_newpost" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" 
+  rel="nofollow">新随笔</A></LI>
+  <LI id="nav_contact"><A class="menu" id="blog_nav_contact" href="https://msg.cnblogs.com/send/Heart_K" 
+  rel="nofollow">联系</A></LI>
+  <LI id="nav_rss"><A class="menu" id="blog_nav_rss" href="http://www.cnblogs.com/heart-king/rss">订阅</A> <!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/heart-king/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></LI>
+  <LI id="nav_admin"><A class="menu" id="blog_nav_admin" href="https://i.cnblogs.com/" 
+  rel="nofollow">管理</A></LI></UL>
+<DIV class="blogStats">
+<DIV id="blog_stats"><!--done--> 随笔-36&nbsp; 文章-0&nbsp; 评论-0&nbsp; </DIV></DIV><!--end: blogStats -->
+	 </DIV><!--end: navigator 博客导航栏 --> </DIV><!--end: header 头部 --> 
+<DIV id="main">
+<DIV id="mainContent">
+<DIV class="forFlow">
+<DIV id="post_detail"><!--done--> 
+<DIV id="topics">
+<DIV class="post">
+<H1 class="postTitle"><A class="postTitle2" id="cb_post_title_url" href="http://www.cnblogs.com/heart-king/p/5632907.html">3. 
+Dubbo原理解析-Dubbo内核实现之动态编译 （转）</A>		 </H1>
+<DIV class="clear"></DIV>
+<DIV class="postBody">
+<DIV id="cnblogs_post_body">
+<P>转载自 &nbsp;<A 
+href="http://blog.csdn.net/quhongwei_zhanqiu">斩秋的专栏</A>&nbsp;&nbsp;http://blog.csdn.net/quhongwei_zhanqiu/article/details/41577159</P>
+<P>&nbsp;</P>
+<HR>
+
+<P>我们运行的<A title="Java EE知识库" class="replace_word" href="http://lib.csdn.net/base/17" 
+target="_blank">Java</A>代码，一般都是编译之后的字节码。Dubbo为了实现基于spi思想的扩展特性，特别是能够灵活添加额外功能，</P>
+<P>对于扩展或者说是策略的选择这个叫做控制类也好设配类也好的类要能够动态生成。当然对应已知需求如Protocol, ProxyFactory</P>
+<P>他们的策略选择的设配类代码dubbo直接提供也无妨，但是dubbo作为一个高扩展性的框架，使得用户能够添加自己的需求，</P>
+<P>根据配置动态生成自己的设配类代码，这样就需要在运行的时候去编译加载这个设配类的代码。下面我们就是来了解下Dubbo的动态编译。</P>
+<P><SPAN style="text-decoration: underline;">动态编译的实现的类图</SPAN></P>
+<P><SPAN style="text-decoration: underline;"><IMG alt="" src="3_%20Dubbo原理解析-Dubbo内核实现之动态编译%20（转）%20-%20Heart_K%20-%20博客园_files/582873-20160701141317468-1221357090.png"></SPAN></P>
+<P>&nbsp;</P>
+<P><SPAN 
+style="color: rgb(128, 0, 0); background-color: rgb(204, 255, 255);"><STRONG>编译接口定义</STRONG></SPAN></P>
+<DIV class="cnblogs_code">
+<PRE>@SPI("javassist"<SPAN style="color: rgb(0, 0, 0);">)
+
+</SPAN><SPAN style="font-size: 13px;"><SPAN style="color: rgb(0, 0, 255);">public</SPAN> <SPAN style="color: rgb(0, 0, 255);">interface</SPAN><SPAN style="color: rgb(0, 0, 0);"> Compiler {
+
+　　Class</SPAN>&lt;?&gt;<SPAN style="color: rgb(0, 0, 0);"> compile(String code, ClassLoader classLoader);
+
+}</SPAN></SPAN></PRE></DIV>
+<P>SPI注解表示如果没有配置，dubbo默认选用javassist编译源代码</P>
+<P>接口方法compile第一个入参code，就是java的源代码</P>
+<P>接口方法compile第二个入参classLoader，按理是类加载器用来加载编译后的字节码，其实没用到，都是根据当前线程或者调用方的classLoader加载的</P>
+<DIV class="cnblogs_code">
+<PRE><SPAN style="color: rgb(0, 0, 0);">@Adaptive
+</SPAN><SPAN style="color: rgb(0, 0, 255);">public</SPAN> <SPAN style="color: rgb(0, 0, 255);">class</SPAN> AdaptiveCompiler <SPAN style="color: rgb(0, 0, 255);">implements</SPAN><SPAN style="color: rgb(0, 0, 0);"> Compiler {
+
+    </SPAN><SPAN style="color: rgb(0, 0, 255);">private</SPAN> <SPAN style="color: rgb(0, 0, 255);">static</SPAN> <SPAN style="color: rgb(0, 0, 255);">volatile</SPAN><SPAN style="color: rgb(0, 0, 0);"> String DEFAULT_COMPILER;
+
+    public Class</SPAN>&lt;?&gt;<SPAN style="color: rgb(0, 0, 0);"> compile(String code, ClassLoader classLoader) {
+
+        Compiler compiler;
+
+        ExtensionLoader</SPAN>&lt;Compiler&gt; loader = ExtensionLoader.getExtensionLoader(Compiler.<SPAN style="color: rgb(0, 0, 255);">class</SPAN><SPAN style="color: rgb(0, 0, 0);">);
+
+        String name </SPAN>= DEFAULT_COMPILER;<SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN style="color: rgb(0, 128, 0);"> copyreference</SPAN>
+
+        <SPAN style="color: rgb(0, 0, 255);">if</SPAN> (name !=<SPAN style="color: rgb(0, 0, 255);">null</SPAN> &amp;&amp; name.length() &gt; 0<SPAN style="color: rgb(0, 0, 0);">) {
+
+            compiler </SPAN>=<SPAN style="color: rgb(0, 0, 0);">loader.getExtension(name);<BR>
+        } </SPAN><SPAN style="color: rgb(0, 0, 255);">else</SPAN><SPAN style="color: rgb(0, 0, 0);"> {
+
+            compiler </SPAN>=<SPAN style="color: rgb(0, 0, 0);">loader.getDefaultExtension();
+
+        }
+
+        return compiler.compile(code, classLoader);
+    }
+}</SPAN></PRE></DIV>
+<P>&nbsp;</P>
+<P>AdaptiveCompiler是Compiler的设配类， 它有类注解@Adaptive表示这个Compile r的设配类不是动态编译生成的。</P>
+<P>AdaptiveCompiler作用就是策略的选择，根据条件选择何种编译策略来编译动态生成的源代码。</P>
+<P>&nbsp;</P>
+<P>AbstractCompiler为编译的抽象类，抽象出公用逻辑，这里它主要是利用正则匹配出源代码中的包名和类名后先在jvm中Class.forName看下是否存在，</P>
+<P>如果存在反回，不存在在执行编译与加载。</P>
+<P>&nbsp;</P>
+<P>关于JavassistCompiler和JdkCompiler执行doCompile的过程都是利用Javassit和Jdk提供的相关api或者扩展接口实现的。</P>
+<P>&nbsp;</P></DIV>
+<DIV id="MySignature"></DIV>
+<DIV class="clear"></DIV>
+<DIV id="blog_post_info_block">
+<DIV id="BlogPostCategory"></DIV>
+<DIV id="EntryTag"></DIV>
+<DIV id="blog_post_info"></DIV>
+<DIV class="clear"></DIV>
+<DIV id="post_next_prev"></DIV></DIV></DIV>
+<DIV class="postDesc">posted @ <SPAN id="post-date">2016-07-01 14:20</SPAN> <A 
+href="http://www.cnblogs.com/heart-king/">Heart_K</A> 阅读(<SPAN id="post_view_count">...</SPAN>) 
+评论(<SPAN id="post_comment_count">...</SPAN>)  <A href="https://i.cnblogs.com/EditPosts.aspx?postid=5632907" 
+rel="nofollow">编辑</A> <A onclick="AddToWz(5632907);return false;" href="http://www.cnblogs.com/heart-king/p/5632907.html#">收藏</A></DIV></DIV>
+<SCRIPT type="text/javascript">var allowComments=true,cb_blogId=192111,cb_entryId=5632907,cb_blogApp=currentBlogApp,cb_blogUserGuid='74411703-834e-e311-8d02-90b11c0b17d6',cb_entryCreatedDate='2016/7/1 14:20:00';loadViewCount(cb_entryId);</SCRIPT>
+	 </DIV><!--end: topics 文章、评论容器--> </DIV><A name="!comments"></A>
+<DIV id="blog-comments-placeholder"></DIV>
+<SCRIPT type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</SCRIPT>
+ 
+<DIV class="commentform" id="comment_form"><A name="commentform"></A> 
+<DIV id="divCommentShow"></DIV>
+<DIV id="comment_nav"><SPAN id="span_refresh_tips"></SPAN><A id="lnk_RefreshComments" 
+onclick="return RefreshCommentList();" href="javascript:void(0);" clientidmode="Static" 
+runat="server">刷新评论</A><A onclick="return RefreshPage();" href="http://www.cnblogs.com/heart-king/p/5632907.html#">刷新页面</A><A 
+href="http://www.cnblogs.com/heart-king/p/5632907.html#top">返回顶部</A></DIV>
+<DIV id="comment_form_container"></DIV>
+<DIV class="ad_text_commentbox" id="ad_text_under_commentbox"></DIV>
+<DIV id="ad_t2"></DIV>
+<DIV id="opt_under_post"></DIV>
+<DIV class="c_ad_block" id="ad_c1"></DIV>
+<DIV id="under_post_news"></DIV>
+<DIV class="c_ad_block" id="ad_c2"></DIV>
+<DIV id="under_post_kb"></DIV>
+<DIV class="c_ad_block" id="HistoryToday"></DIV>
+<SCRIPT type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</SCRIPT>
+ </DIV></DIV><!--end: forFlow -->	 </DIV><!--end: mainContent 主体内容容器-->	 
+<DIV id="sideBar">
+<DIV id="sideBarMain"><!--done--> 
+<DIV class="newsItem">
+<H3 class="catListTitle">公告</H3>
+<DIV id="blog-news"></DIV>
+<SCRIPT type="text/javascript">loadBlogNews();</SCRIPT>
+ </DIV>
+<DIV id="calendar">
+<DIV id="blog-calendar" style="display: none;"></DIV>
+<SCRIPT type="text/javascript">loadBlogDefaultCalendar();</SCRIPT>
+</DIV>
+<DIV id="leftcontentcontainer">
+<DIV id="blog-sidecolumn"></DIV>
+<SCRIPT type="text/javascript">loadBlogSideColumn();</SCRIPT>
+			 </DIV></DIV><!--end: sideBarMain -->	 </DIV><!--end: sideBar 侧边栏容器 -->	 
+<DIV class="clear"></DIV></DIV><!--end: main -->	 
+<DIV class="clear"></DIV>
+<DIV id="footer"><!--done--> Copyright ©2017 Heart_K	 </DIV><!--end: footer --> 
+</DIV><!--end: home 自定义的最大容器 --> </BODY></HTML>

@@ -1,0 +1,336 @@
+﻿<!DOCTYPE HTML>
+<!-- saved from url=(0048)http://www.cnblogs.com/heart-king/p/5632524.html -->
+<!DOCTYPE html PUBLIC "" ""><HTML lang="zh-cn"><HEAD><META content="IE=10.0000" 
+http-equiv="X-UA-Compatible">
+ 
+<META charset="utf-8"> 
+<META name="viewport" content="width=device-width, initial-scale=1"> <TITLE>2. 
+Dubbo原理解析-Dubbo内核实现之基于SPI思想Dubbo内核实现（转） - Heart_K - 博客园</TITLE> <LINK href="2_%20Dubbo原理解析-Dubbo内核实现之基于SPI思想Dubbo内核实现（转）%20-%20Heart_K%20-%20博客园_files/blog-common.css" 
+rel="stylesheet" type="text/css"> <LINK id="MainCss" href="2_%20Dubbo原理解析-Dubbo内核实现之基于SPI思想Dubbo内核实现（转）%20-%20Heart_K%20-%20博客园_files/bundle-LessIsMore.css" 
+rel="stylesheet" type="text/css"> <LINK id="mobile-style" href="2_%20Dubbo原理解析-Dubbo内核实现之基于SPI思想Dubbo内核实现（转）%20-%20Heart_K%20-%20博客园_files/bundle-LessIsMore-mobile.css" 
+rel="stylesheet" type="text/css" media="only screen and (max-width: 768px)"> 
+<LINK title="RSS" href="http://www.cnblogs.com/heart-king/rss" rel="alternate" 
+type="application/rss+xml"> <LINK title="RSD" href="http://www.cnblogs.com/heart-king/rsd.xml" 
+rel="EditURI" type="application/rsd+xml"> <LINK href="http://www.cnblogs.com/heart-king/wlwmanifest.xml" 
+rel="wlwmanifest" type="application/wlwmanifest+xml"> 
+<SCRIPT src="2_%20Dubbo原理解析-Dubbo内核实现之基于SPI思想Dubbo内核实现（转）%20-%20Heart_K%20-%20博客园_files/jquery.js" type="text/javascript"></SCRIPT>
+  
+<SCRIPT type="text/javascript">var currentBlogApp = 'heart-king', cb_enable_mathjax=false;var isLogined=false;</SCRIPT>
+ 
+<SCRIPT src="2_%20Dubbo原理解析-Dubbo内核实现之基于SPI思想Dubbo内核实现（转）%20-%20Heart_K%20-%20博客园_files/blog-common.js" type="text/javascript"></SCRIPT>
+ 
+<META name="GENERATOR" content="MSHTML 11.00.9600.17690"></HEAD> 
+<BODY><A name="top"></A> 
+<DIV id="home">
+<DIV id="header">
+<DIV id="blogTitle"><!--done--> 
+<DIV class="title"><A class="headermaintitle" id="Header1_HeaderTitle" href="http://www.cnblogs.com/heart-king/">Heart_K</A></DIV>
+<DIV class="subtitle"></DIV></DIV><!--end: blogTitle 博客的标题和副标题 -->	 
+<DIV id="navigator">
+<UL id="navList">
+  <LI id="nav_sitehome"><A class="menu" id="blog_nav_sitehome" href="http://www.cnblogs.com/">博客园</A></LI>
+  <LI id="nav_myhome"><A class="menu" id="blog_nav_myhome" href="http://www.cnblogs.com/heart-king/">首页</A></LI>
+  <LI id="nav_newpost"><A class="menu" id="blog_nav_newpost" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" 
+  rel="nofollow">新随笔</A></LI>
+  <LI id="nav_contact"><A class="menu" id="blog_nav_contact" href="https://msg.cnblogs.com/send/Heart_K" 
+  rel="nofollow">联系</A></LI>
+  <LI id="nav_rss"><A class="menu" id="blog_nav_rss" href="http://www.cnblogs.com/heart-king/rss">订阅</A> <!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/heart-king/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></LI>
+  <LI id="nav_admin"><A class="menu" id="blog_nav_admin" href="https://i.cnblogs.com/" 
+  rel="nofollow">管理</A></LI></UL>
+<DIV class="blogStats">
+<DIV id="blog_stats"><!--done--> 随笔-36&nbsp; 文章-0&nbsp; 评论-0&nbsp; </DIV></DIV><!--end: blogStats -->
+	 </DIV><!--end: navigator 博客导航栏 --> </DIV><!--end: header 头部 --> 
+<DIV id="main">
+<DIV id="mainContent">
+<DIV class="forFlow">
+<DIV id="post_detail"><!--done--> 
+<DIV id="topics">
+<DIV class="post">
+<H1 class="postTitle"><A class="postTitle2" id="cb_post_title_url" href="http://www.cnblogs.com/heart-king/p/5632524.html">2. 
+Dubbo原理解析-Dubbo内核实现之基于SPI思想Dubbo内核实现（转）</A>		 </H1>
+<DIV class="clear"></DIV>
+<DIV class="postBody">
+<DIV id="cnblogs_post_body">
+<P>转载自 &nbsp;<A 
+href="http://blog.csdn.net/quhongwei_zhanqiu">斩秋的专栏</A>&nbsp;&nbsp;http://blog.csdn.net/quhongwei_zhanqiu/article/details/41577159</P>
+<HR>
+
+<P>&nbsp;</P>
+<H3>SPI接口定义</H3>
+<P>定义了@SPI注解</P>
+<DIV class="cnblogs_code">
+<PRE><SPAN style="color: rgb(0, 0, 255);">public</SPAN> @<SPAN style="color: rgb(0, 0, 255);">interface</SPAN><SPAN style="color: rgb(0, 0, 0);"> SPI {
+
+　　String value() </SPAN><SPAN style="color: rgb(0, 0, 255);">default</SPAN> ""; <SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN style="color: rgb(0, 128, 0);">指定默认的扩展点</SPAN>
+<SPAN style="color: rgb(0, 0, 0);">
+} </SPAN></PRE></DIV>
+<P>只有在接口打了@SPI注解的接口类才会去查找扩展点实现</P>
+<P>会依次从这几个文件中读取扩展点</P>
+<P>META-INF/dubbo/internal/&nbsp;&nbsp; //dubbo内部实现的各种扩展都放在了这个目录了</P>
+<P>META-INF/dubbo/</P>
+<P>META-INF/services/</P>
+<P>&nbsp;</P>
+<P>我们以Protocol接口为例， 接口上打上SPI注解，默认扩展点名字为dubbo</P>
+<DIV class="cnblogs_code">
+<PRE>@SPI("dubbo"<SPAN style="color: rgb(0, 0, 0);">)
+
+</SPAN><SPAN style="color: rgb(0, 0, 255);">public</SPAN> <SPAN style="color: rgb(0, 0, 255);">interface</SPAN><SPAN style="color: rgb(0, 0, 0);"> Protocol{
+
+}</SPAN></PRE></DIV>
+<P>&nbsp;</P>
+<P>dubbo中内置实现了各种协议如：DubboProtocol InjvmProtocolHessianProtocol 
+WebServiceProtocol等等</P>
+<P><IMG alt="" src="2_%20Dubbo原理解析-Dubbo内核实现之基于SPI思想Dubbo内核实现（转）%20-%20Heart_K%20-%20博客园_files/582873-20160701111632562-1335778457.png"></P>
+<P>Dubbo默认rpc模块默认protocol实现DubboProtocol，key为dubbo</P>
+<P><IMG alt="" src="2_%20Dubbo原理解析-Dubbo内核实现之基于SPI思想Dubbo内核实现（转）%20-%20Heart_K%20-%20博客园_files/582873-20160701111653546-1696988931.png"></P>
+<HR>
+
+<H3>下面我们来细讲ExtensionLoader类</H3>
+<P><STRONG>1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+ExtensionLoader.getExtensionLoader(Protocol.class)</STRONG></P>
+<P style="margin-left: 30px;">每个定义的spi的接口都会构建一个ExtensionLoader实例，存储在</P>
+<P 
+style="margin-left: 30px;">ConcurrentMap&lt;Class&lt;?&gt;,ExtensionLoader&lt;?&gt;&gt; 
+EXTENSION_LOADERS 这个map对象中</P>
+<P>&nbsp;</P>
+<P><STRONG>2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; loadExtensionClasses 
+读取扩展点中的实现类</STRONG></P>
+<P 
+style="margin-left: 30px;">a)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;先读取SPI注解的value值，有值作为默认扩展实现的key</P>
+<P 
+style="margin-left: 30px;">b)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;依次读取路径的文件</P>
+<DIV class="cnblogs_code">
+<PRE>META-INF/dubbo/internal/<SPAN style="color: rgb(0, 0, 0);">com.alibaba.dubbo.rpc.Protocol
+
+META</SPAN>-INF/dubbo/<SPAN style="color: rgb(0, 0, 0);">com.alibaba.dubbo.rpc.Protocol
+
+META</SPAN>-INF/services/ com.alibaba.dubbo.rpc.Protocol</PRE></DIV>
+<P>&nbsp;</P>
+<P><STRONG>3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+loadFile逐行读取com.alibaba.dubbo.rpc.Protocol文件中的内容，每行内容以key/value形式存储的。</STRONG></P>
+<P style="margin-left: 30px;">a) &nbsp; 
+&nbsp;判断类实现（如：DubboProtocol）上有米有打上@Adaptive注解，如果打上了注解，将此类作为Protocol协议的设配类缓存起来，</P>
+<P 
+style="margin-left: 30px;">　　&nbsp;读取下一行；否则适配类通过javasisit修改字节码生成，关于设配类功能作用后续介绍</P>
+<P style="margin-left: 30px;">b) &nbsp; &nbsp;如果类实现没有打上@Adaptive， 
+判断实现类是否存在入参为接口的构造器（就是DubbboProtocol类是否还有入参为Protocol的构造器），</P>
+<P>　　&nbsp;有的话作为包装类缓存到此ExtensionLoader的Set&lt;Class&lt;?&gt;&gt;集合中，这个其实是个装饰模式</P>
+<P style="margin-left: 30px;"><IMG alt="" src="2_%20Dubbo原理解析-Dubbo内核实现之基于SPI思想Dubbo内核实现（转）%20-%20Heart_K%20-%20博客园_files/582873-20160701111938249-616337846.png"></P>
+<P>c)　&nbsp;如果即不是设配对象也不是wrapped的对象，那就是扩展点的具体实现对象</P>
+<P>　　 查找实现类上有没有打上@Activate注解，有缓存到变量cachedActivates的map中</P>
+<P>&nbsp; &nbsp; &nbsp; 将实现类缓存到cachedClasses中，以便于使用时获取</P>
+<P><STRONG>4. &nbsp; &nbsp; &nbsp;获取或者创建设配对象getAdaptiveExtension<A name="OLE_LINK6" 
+target="_blank"></A></STRONG></P>
+<P style="margin-left: 30px;">a)如果cachedAdaptiveClass有值，说明有且仅有一个实现类打了@Adaptive, 
+实例化这个对象返回</P>
+<P style="margin-left: 30px;">b) 如果cachedAdaptiveClass为空， 创建设配类字节码。</P>
+<P 
+style="margin-left: 30px;">为什么要创建设配类，一个接口多种实现，SPI机制也是如此，这是策略模式，但是我们在代码执行过程中选择哪种具体的策略呢。Dubbo采用统一数据模式com.alibaba.dubbo.common.URL(它是dubbo定义的数据模型不是jdk的类)，它会穿插于系统的整个执行过程，URL中定义的协议类型字段protocol，会根据具体业务设置不同的协议。url.getProtocol()值可以是dubbo也是可以webservice， 
+可以是zookeeper也可以是redis。</P>
+<P 
+style="margin-left: 30px;">设配类的作用是根据url.getProtocol()的值extName，去ExtensionLoader. 
+getExtension( extName)选取具体的扩展点实现。</P>
+<P style="margin-left: 30px;">所以能够利用javasist生成设配类的条件</P>
+<P style="margin-left: 30px;">1）接口方法中必须至少有一个方法打上了@Adaptive注解</P>
+<P 
+style="margin-left: 30px;">2）打上了@Adaptive注解的方法参数必须有URL类型参数或者有参数中存在getURL()方法</P>
+<P 
+style="margin-left: 30px;">下面给出createAdaptiveExtensionClassCode()方法生成javasist用来生成Protocol适配类后的代码</P>
+<P>　　</P>
+<DIV class="cnblogs_code">
+<PRE><SPAN style="font-size: 13px;"><SPAN style="color: rgb(0, 128, 128);"> 1</SPAN> <SPAN style="color: rgb(0, 0, 255);">package</SPAN><SPAN style="color: rgb(0, 0, 0);"> com.alibaba.dubbo.demo.rayhong.test;
+</SPAN><SPAN style="color: rgb(0, 128, 128);"> 2</SPAN> 
+<SPAN style="color: rgb(0, 128, 128);"> 3</SPAN> <SPAN style="color: rgb(0, 0, 255);">import</SPAN><SPAN style="color: rgb(0, 0, 0);"> com.alibaba.dubbo.common.extension.ExtensionLoader;
+</SPAN><SPAN style="color: rgb(0, 128, 128);"> 4</SPAN> 
+<SPAN style="color: rgb(0, 128, 128);"> 5</SPAN> <SPAN style="color: rgb(0, 0, 255);">public</SPAN> <SPAN style="color: rgb(0, 0, 255);">class</SPAN> Protocol$Adpative <SPAN style="color: rgb(0, 0, 255);">implements</SPAN><SPAN style="color: rgb(0, 0, 0);"> com.alibaba.dubbo.rpc.Protocol {
+</SPAN><SPAN style="color: rgb(0, 128, 128);"> 6</SPAN> 
+<SPAN style="color: rgb(0, 128, 128);"> 7</SPAN>     <SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN style="color: rgb(0, 128, 0);"> 没有打上@Adaptive的方法如果被调到抛异常</SPAN>
+<SPAN style="color: rgb(0, 128, 128);"> 8</SPAN>     <SPAN style="color: rgb(0, 0, 255);">public</SPAN> <SPAN style="color: rgb(0, 0, 255);">void</SPAN><SPAN style="color: rgb(0, 0, 0);"> destroy() {
+</SPAN><SPAN style="color: rgb(0, 128, 128);"> 9</SPAN>         <SPAN style="color: rgb(0, 0, 255);">throw</SPAN> <SPAN style="color: rgb(0, 0, 255);">new</SPAN><SPAN style="color: rgb(0, 0, 0);"> UnsupportedOperationException(
+</SPAN><SPAN style="color: rgb(0, 128, 128);">10</SPAN>                 "method public abstract void com.alibaba.dubbo.rpc.Protocol.destroy() "
+<SPAN style="color: rgb(0, 128, 128);">11</SPAN>                 + "of interface com.alibaba.dubbo.rpc.Protocol is not adaptive method!"<SPAN style="color: rgb(0, 0, 0);">);
+</SPAN><SPAN style="color: rgb(0, 128, 128);">12</SPAN> 
+<SPAN style="color: rgb(0, 128, 128);">13</SPAN> <SPAN style="color: rgb(0, 0, 0);">    }
+</SPAN><SPAN style="color: rgb(0, 128, 128);">14</SPAN> 
+<SPAN style="color: rgb(0, 128, 128);">15</SPAN>     <SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN style="color: rgb(0, 128, 0);"> 没有打上@Adaptive的方法如果被调到抛异常</SPAN>
+<SPAN style="color: rgb(0, 128, 128);">16</SPAN>     <SPAN style="color: rgb(0, 0, 255);">public</SPAN> <SPAN style="color: rgb(0, 0, 255);">int</SPAN><SPAN style="color: rgb(0, 0, 0);"> getDefaultPort() {
+</SPAN><SPAN style="color: rgb(0, 128, 128);">17</SPAN>         <SPAN style="color: rgb(0, 0, 255);">throw</SPAN> <SPAN style="color: rgb(0, 0, 255);">new</SPAN><SPAN style="color: rgb(0, 0, 0);"> UnsupportedOperationException(
+</SPAN><SPAN style="color: rgb(0, 128, 128);">18</SPAN>                 "method public abstractint com.alibaba.dubbo.rpc.Protocol.getDefaultPort() "
+<SPAN style="color: rgb(0, 128, 128);">19</SPAN>                 + "of interfacecom.alibaba.dubbo.rpc.Protocol is not adaptive method!"<SPAN style="color: rgb(0, 0, 0);">);
+</SPAN><SPAN style="color: rgb(0, 128, 128);">20</SPAN> <SPAN style="color: rgb(0, 0, 0);">    }
+</SPAN><SPAN style="color: rgb(0, 128, 128);">21</SPAN> 
+<SPAN style="color: rgb(0, 128, 128);">22</SPAN>     <SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN style="color: rgb(0, 128, 0);"> 接口中export方法打上@Adaptive注册</SPAN>
+<SPAN style="color: rgb(0, 128, 128);">23</SPAN>     <SPAN style="color: rgb(0, 0, 255);">public</SPAN><SPAN style="color: rgb(0, 0, 0);"> com.alibaba.dubbo.rpc.Exporter export(com.alibaba.dubbo.rpc.Invoker arg0) {
+</SPAN><SPAN style="color: rgb(0, 128, 128);">24</SPAN>         <SPAN style="color: rgb(0, 0, 255);">if</SPAN> (arg0 == <SPAN style="color: rgb(0, 0, 255);">null</SPAN><SPAN style="color: rgb(0, 0, 0);">)
+</SPAN><SPAN style="color: rgb(0, 128, 128);">25</SPAN>             <SPAN style="color: rgb(0, 0, 255);">throw</SPAN> <SPAN style="color: rgb(0, 0, 255);">new</SPAN> IllegalArgumentException("com.alibaba.dubbo.rpc.Invokerargument == null"<SPAN style="color: rgb(0, 0, 0);">);
+</SPAN><SPAN style="color: rgb(0, 128, 128);">26</SPAN>         
+<SPAN style="color: rgb(0, 128, 128);">27</SPAN>         <SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN style="color: rgb(0, 128, 0);"> 参数类中要有URL属性</SPAN>
+<SPAN style="color: rgb(0, 128, 128);">28</SPAN>         <SPAN style="color: rgb(0, 0, 255);">if</SPAN> (arg0.getUrl() == <SPAN style="color: rgb(0, 0, 255);">null</SPAN><SPAN style="color: rgb(0, 0, 0);">)
+</SPAN><SPAN style="color: rgb(0, 128, 128);">29</SPAN>             <SPAN style="color: rgb(0, 0, 255);">throw</SPAN> <SPAN style="color: rgb(0, 0, 255);">new</SPAN> IllegalArgumentException("com.alibaba.dubbo.rpc.Invokerargument getUrl() == null"<SPAN style="color: rgb(0, 0, 0);">);
+</SPAN><SPAN style="color: rgb(0, 128, 128);">30</SPAN>     
+<SPAN style="color: rgb(0, 128, 128);">31</SPAN>         <SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN style="color: rgb(0, 128, 0);"> 从入参获取统一数据模型URL</SPAN>
+<SPAN style="color: rgb(0, 128, 128);">32</SPAN>         com.alibaba.dubbo.common.URL url =<SPAN style="color: rgb(0, 0, 0);"> arg0.getUrl();
+</SPAN><SPAN style="color: rgb(0, 128, 128);">33</SPAN>         String extName = (url.getProtocol() == <SPAN style="color: rgb(0, 0, 255);">null</SPAN> ? "dubbo"<SPAN style="color: rgb(0, 0, 0);"> : url.getProtocol());
+</SPAN><SPAN style="color: rgb(0, 128, 128);">34</SPAN>         
+<SPAN style="color: rgb(0, 128, 128);">35</SPAN>         <SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN style="color: rgb(0, 128, 0);"> 从统一数据模型URL获取协议，协议名就是spi扩展点实现类的key</SPAN>
+<SPAN style="color: rgb(0, 128, 128);">36</SPAN>         <SPAN style="color: rgb(0, 0, 255);">if</SPAN> (extName == <SPAN style="color: rgb(0, 0, 255);">null</SPAN><SPAN style="color: rgb(0, 0, 0);">)
+</SPAN><SPAN style="color: rgb(0, 128, 128);">37</SPAN>             <SPAN style="color: rgb(0, 0, 255);">throw</SPAN> <SPAN style="color: rgb(0, 0, 255);">new</SPAN> IllegalStateException("Fail to getextension(com.alibaba.dubbo.rpc.Protocol) "
+<SPAN style="color: rgb(0, 128, 128);">38</SPAN>                     + "name from url(" + url.toString() + ") usekeys([protocol])"<SPAN style="color: rgb(0, 0, 0);">);
+</SPAN><SPAN style="color: rgb(0, 128, 128);">39</SPAN> 
+<SPAN style="color: rgb(0, 128, 128);">40</SPAN>         <SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN style="color: rgb(0, 128, 0);"> 利用dubbo服务查找机制根据名称找到具体的扩展点实现</SPAN>
+<SPAN style="color: rgb(0, 128, 128);">41</SPAN>         com.alibaba.dubbo.rpc.Protocol extension =<SPAN style="color: rgb(0, 0, 0);"> (com.alibaba.dubbo.rpc.Protocol) 
+</SPAN><SPAN style="color: rgb(0, 128, 128);">42</SPAN>                 ExtensionLoader.getExtensionLoader(com.alibaba.dubbo.rpc.Protocol.<SPAN style="color: rgb(0, 0, 255);">class</SPAN><SPAN style="color: rgb(0, 0, 0);">).getExtension(extName);
+</SPAN><SPAN style="color: rgb(0, 128, 128);">43</SPAN> 
+<SPAN style="color: rgb(0, 128, 128);">44</SPAN>         <SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN style="color: rgb(0, 128, 0);"> 调具体扩展点的方法</SPAN>
+<SPAN style="color: rgb(0, 128, 128);">45</SPAN>         <SPAN style="color: rgb(0, 0, 255);">return</SPAN><SPAN style="color: rgb(0, 0, 0);"> extension.export(arg0);
+</SPAN><SPAN style="color: rgb(0, 128, 128);">46</SPAN> <SPAN style="color: rgb(0, 0, 0);">    }
+</SPAN><SPAN style="color: rgb(0, 128, 128);">47</SPAN> 
+<SPAN style="color: rgb(0, 128, 128);">48</SPAN>     <SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN style="color: rgb(0, 128, 0);"> 接口中refer方法打上@Adaptive注册</SPAN>
+<SPAN style="color: rgb(0, 128, 128);">49</SPAN>     <SPAN style="color: rgb(0, 0, 255);">public</SPAN><SPAN style="color: rgb(0, 0, 0);"> com.alibaba.dubbo.rpc.Invoker refer(java.lang.Class arg0, com.alibaba.dubbo.common.URL arg1) {
+</SPAN><SPAN style="color: rgb(0, 128, 128);">50</SPAN> 
+<SPAN style="color: rgb(0, 128, 128);">51</SPAN>         <SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN style="color: rgb(0, 128, 0);"> 统一数据模型URL不能为空</SPAN>
+<SPAN style="color: rgb(0, 128, 128);">52</SPAN>         <SPAN style="color: rgb(0, 0, 255);">if</SPAN> (arg1 == <SPAN style="color: rgb(0, 0, 255);">null</SPAN><SPAN style="color: rgb(0, 0, 0);">)
+</SPAN><SPAN style="color: rgb(0, 128, 128);">53</SPAN>             <SPAN style="color: rgb(0, 0, 255);">throw</SPAN> <SPAN style="color: rgb(0, 0, 255);">new</SPAN> IllegalArgumentException("url == null"<SPAN style="color: rgb(0, 0, 0);">);
+</SPAN><SPAN style="color: rgb(0, 128, 128);">54</SPAN> 
+<SPAN style="color: rgb(0, 128, 128);">55</SPAN>         com.alibaba.dubbo.common.URL url =<SPAN style="color: rgb(0, 0, 0);"> arg1;
+</SPAN><SPAN style="color: rgb(0, 128, 128);">56</SPAN>         
+<SPAN style="color: rgb(0, 128, 128);">57</SPAN>         <SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN style="color: rgb(0, 128, 0);"> 从统一数据模型URL获取协议，协议名就是spi扩展点实现类的key</SPAN>
+<SPAN style="color: rgb(0, 128, 128);">58</SPAN>         String extName = (url.getProtocol() == <SPAN style="color: rgb(0, 0, 255);">null</SPAN> ? "dubbo"<SPAN style="color: rgb(0, 0, 0);"> : url.getProtocol());
+</SPAN><SPAN style="color: rgb(0, 128, 128);">59</SPAN>         <SPAN style="color: rgb(0, 0, 255);">if</SPAN> (extName == <SPAN style="color: rgb(0, 0, 255);">null</SPAN><SPAN style="color: rgb(0, 0, 0);">)
+</SPAN><SPAN style="color: rgb(0, 128, 128);">60</SPAN>             <SPAN style="color: rgb(0, 0, 255);">throw</SPAN> <SPAN style="color: rgb(0, 0, 255);">new</SPAN> IllegalStateException("Fail to get extension(com.alibaba.dubbo.rpc.Protocol) "
+<SPAN style="color: rgb(0, 128, 128);">61</SPAN>                     + "name from url(" + url.toString() + ") use keys([protocol])"<SPAN style="color: rgb(0, 0, 0);">);
+</SPAN><SPAN style="color: rgb(0, 128, 128);">62</SPAN> 
+<SPAN style="color: rgb(0, 128, 128);">63</SPAN>         <SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN style="color: rgb(0, 128, 0);"> 利用dubbo服务查找机制根据名称找到具体的扩展点实现</SPAN>
+<SPAN style="color: rgb(0, 128, 128);">64</SPAN>         com.alibaba.dubbo.rpc.Protocol extension =<SPAN style="color: rgb(0, 0, 0);"> (com.alibaba.dubbo.rpc.Protocol) 
+</SPAN><SPAN style="color: rgb(0, 128, 128);">65</SPAN>                 ExtensionLoader.getExtensionLoader(com.alibaba.dubbo.rpc.Protocol.<SPAN style="color: rgb(0, 0, 255);">class</SPAN><SPAN style="color: rgb(0, 0, 0);">).getExtension(extName);
+</SPAN><SPAN style="color: rgb(0, 128, 128);">66</SPAN>         <SPAN style="color: rgb(0, 128, 0);">//</SPAN><SPAN style="color: rgb(0, 128, 0);"> 调具体扩展点的方法</SPAN>
+<SPAN style="color: rgb(0, 128, 128);">67</SPAN> 
+<SPAN style="color: rgb(0, 128, 128);">68</SPAN>         <SPAN style="color: rgb(0, 0, 255);">return</SPAN><SPAN style="color: rgb(0, 0, 0);"> extension.refer(arg0, arg1);
+</SPAN><SPAN style="color: rgb(0, 128, 128);">69</SPAN> 
+<SPAN style="color: rgb(0, 128, 128);">70</SPAN> <SPAN style="color: rgb(0, 0, 0);">    }
+</SPAN><SPAN style="color: rgb(0, 128, 128);">71</SPAN> 
+<SPAN style="color: rgb(0, 128, 128);">72</SPAN> }</SPAN></PRE></DIV>
+<P>&nbsp;</P>
+<P><STRONG>5.&nbsp;通过createAdaptiveExtensionClassCode() 
+生成如上的java源码代码，</STRONG></P>
+<P>&nbsp; &nbsp; 要被java虚拟机加载执行必须得编译成字节码，<SPAN 
+style="line-height: 1.5;">dubbo提供两种方式去执行代码的编译：</SPAN></P>
+<P>&nbsp; &nbsp;1）利用JDK工具类编译</P>
+<P>&nbsp; &nbsp;2）利用javassit根据源代码生成字节码。</P>
+<P><IMG alt="" src="2_%20Dubbo原理解析-Dubbo内核实现之基于SPI思想Dubbo内核实现（转）%20-%20Heart_K%20-%20博客园_files/582873-20160701113423421-2079299980.png"></P>
+<P>如上图：</P>
+<P>1）生成Adaptive代码code</P>
+<P>2）利用dubbo的spi扩展机制获取compiler的设配类</P>
+<P>3）编译生成的adaptive代码</P>
+<P>在此顺便介绍下<A name="OLE_LINK8" 
+target="_blank"></A>&nbsp;@Adaptive注解打在实现类上跟打在接口方法上的区别</P>
+<P>1）如果有打在接口方法上，调ExtensionLoader.getAdaptiveExtension()获取设配类，会先通过前面的过程生成java的源代码，</P>
+<P>&nbsp; &nbsp; 
+在通过编译器编译成class加载。但是Compiler的实现策略选择也是通过ExtensionLoader.getAdaptiveExtension()，</P>
+<P>&nbsp; &nbsp; 如果也通过编译器编译成class文件那岂不是要死循环下去了吗？</P>
+<P>ExtensionLoader.getAdaptiveExtension()，对于有实现类上去打了注解@Adaptive的dubbo 
+spi扩展机制，它获取设配类不在通过前面过程生成设配类java源代码，而是在读取扩展文件的时候遇到实现类打了注解@Adaptive就把这个类作为设配类缓存在ExtensionLoader中，调用是直接返回</P>
+<P>&nbsp;</P>
+<P><STRONG>6. &nbsp;自动Wrap上扩展点的Wrap类</STRONG></P>
+<P>这是一种装饰模式的实现，在jdk的输入输出流实现中有很多这种设计，在于增强扩展点功能。这里我们拿对于Protocol接口的扩展点实现作为实例讲解。</P>
+<P>&nbsp;<IMG alt="" src="2_%20Dubbo原理解析-Dubbo内核实现之基于SPI思想Dubbo内核实现（转）%20-%20Heart_K%20-%20博客园_files/582873-20160701113527171-603020765.png"></P>
+<P>如图Protocol继承关系ProtocolFilterWrapper, 
+ProtocolListenerWrapper这个两个类是装饰对象用来增强其他扩展点实现的功能。ProtocolFilterWrapper功能主要是在refer 
+引用远程服务的中透明的设置一系列的过滤器链用来记录日志，处理超时，权限控制等等功能；ProtocolListenerWrapper在provider的exporter,unporter服务和consumer 
+的refer服务，destory调用时添加监听器，dubbo提供了扩展但是没有默认实现哪些监听器。</P>
+<P>&nbsp;</P>
+<P>Dubbo是如何自动的给扩展点wrap上装饰对象的呢？</P>
+<P>1）在ExtensionLoader.loadFile加载扩展点配置文件的时候</P>
+<P>对扩展点类有接口类型为参数的构造器就是包转对象，缓存到集合中去</P>
+<P>2）在调ExtensionLoader的createExtension(name)根据扩展点key创建扩展的时候， 先实例化扩展点的实现，</P>
+<P>&nbsp; &nbsp; &nbsp;在判断时候有此扩展时候有包装类缓存，有的话利用包转器增强这个扩展点实现的功能。如下图是实现流程</P>
+<P><IMG alt="" src="2_%20Dubbo原理解析-Dubbo内核实现之基于SPI思想Dubbo内核实现（转）%20-%20Heart_K%20-%20博客园_files/582873-20160701113603452-479150181.png"></P>
+<P><STRONG>7. IOC 大家所熟知的ioc是<A title="Java EE知识库" class="replace_word" href="http://lib.csdn.net/base/17" 
+target="_blank">spring</A>的三大基础功能之一， 
+dubbo的ExtensionLoader在加载扩展实现的时候</STRONG></P>
+<P>&nbsp; &nbsp; 
+内部实现了个简单的ioc机制来实现对扩展实现所依赖的参数的注入，dubbo对扩展实现中公有的set方法且入参个数为一个的方法，</P>
+<P>&nbsp; &nbsp; 尝试从对象工厂ObjectFactory获取值注入到扩展点实现中去。</P>
+<P><IMG alt="" src="2_%20Dubbo原理解析-Dubbo内核实现之基于SPI思想Dubbo内核实现（转）%20-%20Heart_K%20-%20博客园_files/582873-20160701113637859-1732614771.png"></P>
+<P>&nbsp;</P>
+<P>&nbsp;&nbsp; 
+上图代码应该不能理解，下面我们来看看ObjectFactory是如何根据类型和名字来获取对象的，ObjectFactory也是基于dubbo的spi扩展机制的</P>
+<P>&nbsp;<IMG alt="" src="2_%20Dubbo原理解析-Dubbo内核实现之基于SPI思想Dubbo内核实现（转）%20-%20Heart_K%20-%20博客园_files/582873-20160701113654702-17831193.png"></P>
+<P>它跟Compiler接口一样设配类注解@Adaptive是打在类AdaptiveExtensionFactory上的不是通过javassist编译生成的。</P>
+<P>AdaptiveExtensionFactory持有所有ExtensionFactory对象的集合，dubbo内部默认实现的对象工厂是SpiExtensionFactory和SrpingExtensionFactory，</P>
+<P>他们经过TreeMap排好序的查找顺序是优先先从SpiExtensionFactory获取，如果返回空在从SpringExtensionFactory获取。</P>
+<P>1） SpiExtensionFactory工厂获取要被注入的对象，就是要获取dubbo spi扩展的实现，</P>
+<P>　　所以传入的参数类型必须是接口类型并且接口上打上了@SPI注解，返回的是一个设配类对象。</P>
+<P><IMG alt="" src="2_%20Dubbo原理解析-Dubbo内核实现之基于SPI思想Dubbo内核实现（转）%20-%20Heart_K%20-%20博客园_files/582873-20160701113833749-10392549.png"></P>
+<P>2） 
+SpringExtensionFactory，Dubbo利用spring的扩展机制跟spring做了很好的融合。在发布或者去引用一个服务的时候，会把spring的容器添加到SpringExtensionFactory工厂集合中去， 
+当SpiExtensionFactory没有获取到对象的时候会遍历SpringExtensionFactory中的spring容器来获取要注入的对象</P>
+<P>&nbsp;<IMG alt="" src="2_%20Dubbo原理解析-Dubbo内核实现之基于SPI思想Dubbo内核实现（转）%20-%20Heart_K%20-%20博客园_files/582873-20160701113846406-1794346151.png"></P>
+<P><STRONG>8. 下面 给出整体活动图</STRONG></P>
+<P>&nbsp;<IMG alt="" src="2_%20Dubbo原理解析-Dubbo内核实现之基于SPI思想Dubbo内核实现（转）%20-%20Heart_K%20-%20博客园_files/582873-20160701113858749-529450093.png"></P>
+<P>&nbsp;</P></DIV>
+<DIV id="MySignature"></DIV>
+<DIV class="clear"></DIV>
+<DIV id="blog_post_info_block">
+<DIV id="BlogPostCategory"></DIV>
+<DIV id="EntryTag"></DIV>
+<DIV id="blog_post_info"></DIV>
+<DIV class="clear"></DIV>
+<DIV id="post_next_prev"></DIV></DIV></DIV>
+<DIV class="postDesc">posted @ <SPAN id="post-date">2016-07-01 11:39</SPAN> <A 
+href="http://www.cnblogs.com/heart-king/">Heart_K</A> 阅读(<SPAN id="post_view_count">...</SPAN>) 
+评论(<SPAN id="post_comment_count">...</SPAN>)  <A href="https://i.cnblogs.com/EditPosts.aspx?postid=5632524" 
+rel="nofollow">编辑</A> <A onclick="AddToWz(5632524);return false;" href="http://www.cnblogs.com/heart-king/p/5632524.html#">收藏</A></DIV></DIV>
+<SCRIPT type="text/javascript">var allowComments=true,cb_blogId=192111,cb_entryId=5632524,cb_blogApp=currentBlogApp,cb_blogUserGuid='74411703-834e-e311-8d02-90b11c0b17d6',cb_entryCreatedDate='2016/7/1 11:39:00';loadViewCount(cb_entryId);</SCRIPT>
+	 </DIV><!--end: topics 文章、评论容器--> </DIV><A name="!comments"></A>
+<DIV id="blog-comments-placeholder"></DIV>
+<SCRIPT type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</SCRIPT>
+ 
+<DIV class="commentform" id="comment_form"><A name="commentform"></A> 
+<DIV id="divCommentShow"></DIV>
+<DIV id="comment_nav"><SPAN id="span_refresh_tips"></SPAN><A id="lnk_RefreshComments" 
+onclick="return RefreshCommentList();" href="javascript:void(0);" clientidmode="Static" 
+runat="server">刷新评论</A><A onclick="return RefreshPage();" href="http://www.cnblogs.com/heart-king/p/5632524.html#">刷新页面</A><A 
+href="http://www.cnblogs.com/heart-king/p/5632524.html#top">返回顶部</A></DIV>
+<DIV id="comment_form_container"></DIV>
+<DIV class="ad_text_commentbox" id="ad_text_under_commentbox"></DIV>
+<DIV id="ad_t2"></DIV>
+<DIV id="opt_under_post"></DIV>
+<DIV class="c_ad_block" id="ad_c1"></DIV>
+<DIV id="under_post_news"></DIV>
+<DIV class="c_ad_block" id="ad_c2"></DIV>
+<DIV id="under_post_kb"></DIV>
+<DIV class="c_ad_block" id="HistoryToday"></DIV>
+<SCRIPT type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</SCRIPT>
+ </DIV></DIV><!--end: forFlow -->	 </DIV><!--end: mainContent 主体内容容器-->	 
+<DIV id="sideBar">
+<DIV id="sideBarMain"><!--done--> 
+<DIV class="newsItem">
+<H3 class="catListTitle">公告</H3>
+<DIV id="blog-news"></DIV>
+<SCRIPT type="text/javascript">loadBlogNews();</SCRIPT>
+ </DIV>
+<DIV id="calendar">
+<DIV id="blog-calendar" style="display: none;"></DIV>
+<SCRIPT type="text/javascript">loadBlogDefaultCalendar();</SCRIPT>
+</DIV>
+<DIV id="leftcontentcontainer">
+<DIV id="blog-sidecolumn"></DIV>
+<SCRIPT type="text/javascript">loadBlogSideColumn();</SCRIPT>
+			 </DIV></DIV><!--end: sideBarMain -->	 </DIV><!--end: sideBar 侧边栏容器 -->	 
+<DIV class="clear"></DIV></DIV><!--end: main -->	 
+<DIV class="clear"></DIV>
+<DIV id="footer"><!--done--> Copyright ©2017 Heart_K	 </DIV><!--end: footer --> 
+</DIV><!--end: home 自定义的最大容器 --> </BODY></HTML>
