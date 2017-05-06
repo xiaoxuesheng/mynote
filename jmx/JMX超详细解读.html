@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<!-- saved from url=(0064)http://m.blog.csdn.net/article/details?id=53420948#weixin.qq.com -->
+<html style="font-size: 40px;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./JMX超详细解读_files/id.php" charset="utf-8"></script>
+   
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="yes">
+    <script src="./JMX超详细解读_files/hm.js.下载"></script><script src="./JMX超详细解读_files/jquery-1.9.1.min.js.下载" type="text/javascript"></script>
+    <!--link( rel="stylesheet" href="http://c.csdnimg.cn/public/common/toolbar/css/index.css" )-->
+    <link rel="stylesheet" href="./JMX超详细解读_files/bootstrap.css">
+    <link rel="stylesheet" href="./JMX超详细解读_files/avatar.css">
+    <link rel="stylesheet" href="./JMX超详细解读_files/common.css">
+    <!-- [if IE 7]-->
+    <!--link( rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" )-->
+    <!-- [endif]-->
+    <link rel="stylesheet" href="./JMX超详细解读_files/main.css">
+    <!-- [if lt IE 9]-->
+    <script src="./JMX超详细解读_files/html5shiv.min.js.下载"></script>
+    <!-- [endif]-->
+    <title>JMX超详细解读</title>
+    <script type="text/javascript" src="./JMX超详细解读_files/blog_mobile.js.下载"></script>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script src="./JMX超详细解读_files/get_ads.php" type="text/javascript"></script></head>
+<body style="height: auto; overflow-y: auto;"><div id="BAIDU_DUP_fp_wrapper" style="position: absolute; left: -1px; bottom: -1px; z-index: 0; width: 0px; height: 0px; overflow: hidden; visibility: hidden; display: none;"><iframe id="BAIDU_DUP_fp_iframe" src="./JMX超详细解读_files/o.html" style="width: 0px; height: 0px; visibility: hidden; display: none;"></iframe></div><link href="./JMX超详细解读_files/jiathis_share.css" rel="stylesheet" type="text/css"><iframe frameborder="0" style="position: absolute; display: none; opacity: 0;" src="./JMX超详细解读_files/saved_resource.html"></iframe><div class="jiathis_style" style="position: absolute; z-index: 1000000000; display: none; top: 50%; left: 50%; overflow: auto;"></div><div class="jiathis_style" style="position: absolute; z-index: 1000000000; display: none; overflow: auto;"></div><iframe frameborder="0" src="./JMX超详细解读_files/jiathis_utility.html" style="display: none;"></iframe>
+    
+<!-- 广告位开始 --> 
+<ins data-revive-zoneid="202" data-revive-id="8c38e720de1c90a6f6ff52f3f89c4d57" id="revive-0-0"></ins> 
+<!-- 广告位结束 -->
+
+<script language="javascript" type="text/javascript" src="./JMX超详细解读_files/async_new.js.下载"></script>
+
+<script language="JavaScript" type="text/javascript" src="./JMX超详细解读_files/jquery.cookie.js.下载"></script>
+<script type="text/javascript" src="./JMX超详细解读_files/main.js.下载"></script>
+<script type="text/javascript">
+    var fileName = '53420948';
+    var commentscount = 0;
+    var islock = false;
+    var currentUserName='';
+    
+</script>
+
+<script type="text/javascript" src="./JMX超详细解读_files/digg.js.下载"></script>
+
+
+<div class="blog_main">
+      <div class="blog_top_wrap">
+        <div class="blog_top"><i id="menu_J" class="iconfont icon_l"></i>
+            <form method="get" action="http://m.blog.csdn.net/search/index" id="searchform">
+    <i id="search_J" class="iconfont icon_r"></i>
+    <div id="search_c_J" class="search">
+         <input type="text" placeholder="请输入" id="search" name="keyword" page="1" value=""><i class="iconfont icon_search"></i><i class="iconfont icon_close"></i>
+    </div>
+</form>
+<script type="text/javascript" src="./JMX超详细解读_files/search.js.下载"></script>
+
+
+
+
+          <h2 class="blog_top_t">CSDN博客</h2>
+        </div>
+      </div>
+      <div class="main_list">
+        <div class="blog_article">
+          <div class="blog_article_t">
+            <div class="article_l"><a href="http://m.blog.csdn.net/blog/index?username=WZD2012"><img src="./JMX超详细解读_files/1_wzd2012.jpg" alt="img"></a>
+                <a href="http://m.blog.csdn.net/blog/index?username=WZD2012" class="article_user">WZD2012</a></div>
+            <div class="article_r">
+            </div>
+          </div>
+          <div class="blog_article_c clearfix">
+            <h3 class="article_t">JMX超详细解读</h3>
+            <p class="date"><i>发表于</i><em>2016/12/1 14:18:12  &nbsp;</em><i>222</i><span>人阅读</span></p>
+            <p class="category_p">
+                    分类：
+                        <span>java基础</span>
+            </p>
+             
+<div class="article_c">
+
+<h1 class="postTitle" style="margin:0px 0px 20px; padding:0px; font-size:28px; font-weight:400; line-height:1.8; color:rgb(51,51,51); font-family:Verdana,Arial,Helvetica,sans-serif">
+<a target="_blank" id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/dongguacai/p/5900507.html" style="margin:0px; padding:0px; color:rgb(51,51,51); text-decoration:none">JMX超详细解读</a></h1>
+<div class="clear" style="margin:0px; padding:0px; clear:both; color:rgb(125,139,141); font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px; line-height:25px">
+</div>
+<div class="postBody" style="margin:0px; padding:0px; color:rgb(125,139,141); font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px; line-height:25px">
+<div id="cnblogs_post_body" style="margin:0px 0px 20px; padding:0px; word-break:break-word; color:rgb(51,51,51); line-height:1.8">
+<h3 style="margin:0px; padding:0px; font-size:16px; line-height:1.5">一、JMX的定义　　</h3>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">　　JMX(Java Management Extensions)是一个为应用程序植入管理功能的框架。JMX是一套标准的代理和服务，实际上，用户可以在任何Java应用程序中使用这些代理和服务实现管理。这是官方文档上的定义，我看过很多次也无法很好的理解。我个人的理解是JMX让程序有被管理的功能，例如你开发一个WEB网站，它是在24小时不间断运行，那么你肯定会对网站进行监控，如每天的UV、PV是多少；又或者在业务高峰的期间，你想对接口进行限流，就必须去修改接口并发的配置值。</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">　　应用场景：中间件软件WebLogic的管理页面就是基于JMX开发的，而JBoss则整个系统都基于JMX构架。</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">对于一些参数的修改，网上有一段描述还是比较形象的：</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">1、程序初哥一般是写死在程序中，到要改变的时候就去修改代码，然后重新编译发布。</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">2、程序熟手则配置在文件中（JAVA一般都是properties文件），到要改变的时候只要修改配置文件，但还是必须重启系统，以便读取配置文件里最新的值。</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">3、程序好手则会写一段代码，把配置值缓存起来，系统在获取的时候，先看看配置文件有没有改动，如有改动则重新从配置里读取，否则从缓存里读取。</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">4、程序高手则懂得物为我所用，用JMX把需要配置的属性集中在一个类中，然后写一个MBean，再进行相关配置。另外JMX还提供了一个工具页，以方便我们对参数值进行修改。</p>
+<h3 style="margin:0px; padding:0px; font-size:16px; line-height:1.5">二、JMX架构图：</h3>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px"><img src="./JMX超详细解读_files/831179-20160924113748309-1785034710.png" alt="" style="margin:0px; padding:0px; border:none; max-width:800px"></p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">从图中我们可以看到，JMX的结构一共分为三层：</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">1、基础层：主要是MBean，被管理的资源。</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">MBean分为如下四种，我接下来主要介绍standard MBean</p>
+<table border="1" style="margin:0px; padding:0px; border-collapse:collapse; border-spacing:0px; max-width:850px; border:1px solid silver; word-break:break-word">
+<tbody style="margin:0px; padding:0px">
+<tr style="margin:0px; padding:0px">
+<td width="21%" style="margin:0px; padding:3px; border:1px solid silver; border-collapse:collapse">
+类型</td>
+<td width="79%" style="margin:0px; padding:3px; border:1px solid silver; border-collapse:collapse">
+描述</td>
+</tr>
+<tr style="margin:0px; padding:0px">
+<td width="21%" style="margin:0px; padding:3px; border:1px solid silver; border-collapse:collapse">
+standard MBean</td>
+<td width="79%" style="margin:0px; padding:3px; border:1px solid silver; border-collapse:collapse">
+这种类型的MBean最简单，它能管理的资源（包括属性，方法，时间）必须定义在接口中，然后MBean必须实现这个接口。它的命名也必须遵循一定的规范，例如我们的MBean为Hello，则接口必须为HelloMBean。</td>
+</tr>
+<tr style="margin:0px; padding:0px">
+<td width="21%" style="margin:0px; padding:3px; border:1px solid silver; border-collapse:collapse">
+dynamic MBean</td>
+<td width="79%" style="margin:0px; padding:3px; border:1px solid silver; border-collapse:collapse">
+必须实现javax.management.DynamicMBean接口，所有的属性，方法都在运行时定义</td>
+</tr>
+<tr style="margin:0px; padding:0px">
+<td width="21%" style="margin:0px; padding:3px; border:1px solid silver; border-collapse:collapse">
+open MBean</td>
+<td width="79%" style="margin:0px; padding:3px; border:1px solid silver; border-collapse:collapse">
+此MBean的规范还不完善，正在改进中</td>
+</tr>
+<tr style="margin:0px; padding:0px">
+<td width="21%" style="margin:0px; padding:3px; border:1px solid silver; border-collapse:collapse">
+model MBean</td>
+<td width="79%" style="margin:0px; padding:3px; border:1px solid silver; border-collapse:collapse">
+与标准和动态MBean相比，你可以不用写MBean类，只需使用javax.management.modelmbean.RequiredModelMBean即可。RequiredModelMBean实现了ModelMBean接口，而ModelMBean扩展了DynamicMBean接口，因此与DynamicMBean相似，Model MBean的管理资源也是在运行时定义的。与DynamicMBean不同的是，DynamicMBean管理的资源一般定义在DynamicMBean中（运行时才决定管理那些资源），而model
+ MBean管理的资源并不在MBean中，而是在外部（通常是一个类），只有在运行时，才通过set方法将其加入到model MBean中。后面的例子会有详细介绍</td>
+</tr>
+</tbody>
+</table>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">2、适配层：MBeanServer，主要是提供对资源的注册和管理。</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">3、接入层：提供远程访问的入口。</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">&nbsp;</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">接下来我这里会用程序来介绍三种访问JMX的方式：</p>
+<h3 style="margin:0px; padding:0px; font-size:16px; line-height:1.5">三、JDK的小工具Jconsole访问</h3>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px"><span style="margin:0px; padding:0px; line-height:1.5">&nbsp;1、</span>&nbsp;首先定义一个MBean接口，接口的命名规范为以具体的实现类为前缀（这个规范很重要）</p>
+<div class="cnblogs_code" style="margin:5px 0px; padding:5px; border:1px solid rgb(204,204,204); overflow:auto; color:rgb(0,0,0); font-family:&#39;Courier New&#39;!important; font-size:12px!important; background-color:rgb(245,245,245)">
+<div class="cnblogs_code_toolbar" style="margin:5px 0px 0px; padding:0px"><span class="cnblogs_code_copy" style="margin:0px; padding:0px 5px 0px 0px; line-height:1.5!important"><a target="_blank" title="复制代码" style="margin:0px; padding:0px; text-decoration:underline; border:none!important"><img src="./JMX超详细解读_files/copycode.gif" alt="复制代码" style="margin:0px; padding:0px; max-width:800px; border:none!important"></a></span></div>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Courier New&quot; !important; width: 100%; overflow: hidden;"><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 1</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">package</span><span style="margin:0px; padding:0px; line-height:1.5!important"> jmx;
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 2</span> 
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 3</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">interface</span><span style="margin:0px; padding:0px; line-height:1.5!important"> HelloMBean
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 4</span> <span style="margin:0px; padding:0px; line-height:1.5!important">{
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 5</span>      <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span><span style="margin:0px; padding:0px; line-height:1.5!important"> String getName();
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 6</span>         
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 7</span>      <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">void</span><span style="margin:0px; padding:0px; line-height:1.5!important"> setName(String name);
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 8</span>         
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 9</span>      <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span><span style="margin:0px; padding:0px; line-height:1.5!important"> String getAge();
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">10</span> 
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">11</span>      <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">void</span><span style="margin:0px; padding:0px; line-height:1.5!important"> setAge(String age);
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">12</span>         
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">13</span>      <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">void</span><span style="margin:0px; padding:0px; line-height:1.5!important"> helloWorld();
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">14</span>         
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">15</span>      <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">void</span><span style="margin:0px; padding:0px; line-height:1.5!important"> helloWorld(String str);
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">16</span>         
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">17</span>      <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">void</span><span style="margin:0px; padding:0px; line-height:1.5!important"> getTelephone();
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">18</span> }</pre>
+<div class="cnblogs_code_toolbar" style="margin:5px 0px 0px; padding:0px"><span class="cnblogs_code_copy" style="margin:0px; padding:0px 5px 0px 0px; line-height:1.5!important"><a target="_blank" title="复制代码" style="margin:0px; padding:0px; text-decoration:underline; border:none!important"><img src="./JMX超详细解读_files/copycode.gif" alt="复制代码" style="margin:0px; padding:0px; max-width:800px; border:none!important"></a></span></div>
+</div>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">2、定义一个实现类，实现上面的接口：</p>
+<div class="cnblogs_code" style="margin:5px 0px; padding:5px; border:1px solid rgb(204,204,204); overflow:auto; color:rgb(0,0,0); font-family:&#39;Courier New&#39;!important; font-size:12px!important; background-color:rgb(245,245,245)">
+<div class="cnblogs_code_toolbar" style="margin:5px 0px 0px; padding:0px"><span class="cnblogs_code_copy" style="margin:0px; padding:0px 5px 0px 0px; line-height:1.5!important"><a target="_blank" title="复制代码" style="margin:0px; padding:0px; text-decoration:underline; border:none!important"><img src="./JMX超详细解读_files/copycode.gif" alt="复制代码" style="margin:0px; padding:0px; max-width:800px; border:none!important"></a></span></div>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Courier New&quot; !important; width: 100%; overflow: hidden;"><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 1</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">package</span><span style="margin:0px; padding:0px; line-height:1.5!important"> jmx;
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 2</span> 
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 3</span> <span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">/*</span>
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 4</span> <span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important"> * 该类名称必须与实现的接口的前缀保持一致（即MBean前面的名称
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 5</span>  <span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">*/</span>
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 6</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">class</span> Hello <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">implements</span><span style="margin:0px; padding:0px; line-height:1.5!important"> HelloMBean
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 7</span> <span style="margin:0px; padding:0px; line-height:1.5!important">{
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 8</span>     <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">private</span><span style="margin:0px; padding:0px; line-height:1.5!important"> String name;
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 9</span>         
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">10</span>     <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">private</span><span style="margin:0px; padding:0px; line-height:1.5!important"> String age;
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">11</span> 
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">12</span>     <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">void</span><span style="margin:0px; padding:0px; line-height:1.5!important"> getTelephone()
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">13</span> <span style="margin:0px; padding:0px; line-height:1.5!important">    {
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">14</span>         System.out.println("get Telephone"<span style="margin:0px; padding:0px; line-height:1.5!important">);
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">15</span> <span style="margin:0px; padding:0px; line-height:1.5!important">    }
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">16</span> 
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">17</span>     <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">void</span><span style="margin:0px; padding:0px; line-height:1.5!important"> helloWorld()
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">18</span> <span style="margin:0px; padding:0px; line-height:1.5!important">    {
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">19</span>         System.out.println("hello world"<span style="margin:0px; padding:0px; line-height:1.5!important">);
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">20</span> <span style="margin:0px; padding:0px; line-height:1.5!important">    }
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">21</span> 
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">22</span>     <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">void</span><span style="margin:0px; padding:0px; line-height:1.5!important"> helloWorld(String str)
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">23</span> <span style="margin:0px; padding:0px; line-height:1.5!important">    {
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">24</span>         System.out.println("helloWorld:" +<span style="margin:0px; padding:0px; line-height:1.5!important"> str);
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">25</span> <span style="margin:0px; padding:0px; line-height:1.5!important">    }
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">26</span> 
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">27</span>     <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span><span style="margin:0px; padding:0px; line-height:1.5!important"> String getName()
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">28</span> <span style="margin:0px; padding:0px; line-height:1.5!important">    {
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">29</span>         System.out.println("get name 123"<span style="margin:0px; padding:0px; line-height:1.5!important">);
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">30</span>         <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">return</span><span style="margin:0px; padding:0px; line-height:1.5!important"> name;
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">31</span> <span style="margin:0px; padding:0px; line-height:1.5!important">    }
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">32</span> 
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">33</span>     <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">void</span><span style="margin:0px; padding:0px; line-height:1.5!important"> setName(String name)
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">34</span> <span style="margin:0px; padding:0px; line-height:1.5!important">    {
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">35</span>         System.out.println("set name 123"<span style="margin:0px; padding:0px; line-height:1.5!important">);
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">36</span>         <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">this</span>.name =<span style="margin:0px; padding:0px; line-height:1.5!important"> name;
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">37</span> <span style="margin:0px; padding:0px; line-height:1.5!important">    }
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">38</span> 
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">39</span>     <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span><span style="margin:0px; padding:0px; line-height:1.5!important"> String getAge()
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">40</span> <span style="margin:0px; padding:0px; line-height:1.5!important">    {
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">41</span>         System.out.println("get age 123"<span style="margin:0px; padding:0px; line-height:1.5!important">);
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">42</span>         <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">return</span><span style="margin:0px; padding:0px; line-height:1.5!important"> age;
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">43</span> <span style="margin:0px; padding:0px; line-height:1.5!important">    }
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">44</span> 
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">45</span>     <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">void</span><span style="margin:0px; padding:0px; line-height:1.5!important"> setAge(String age)
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">46</span> <span style="margin:0px; padding:0px; line-height:1.5!important">    {
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">47</span>         System.out.println("set age 123"<span style="margin:0px; padding:0px; line-height:1.5!important">);
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">48</span>         <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">this</span>.age =<span style="margin:0px; padding:0px; line-height:1.5!important"> age;
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">49</span> <span style="margin:0px; padding:0px; line-height:1.5!important">    }</span>      
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">53</span> }</pre>
+<div class="cnblogs_code_toolbar" style="margin:5px 0px 0px; padding:0px"><span class="cnblogs_code_copy" style="margin:0px; padding:0px 5px 0px 0px; line-height:1.5!important"><a target="_blank" title="复制代码" style="margin:0px; padding:0px; text-decoration:underline; border:none!important"><img src="./JMX超详细解读_files/copycode.gif" alt="复制代码" style="margin:0px; padding:0px; max-width:800px; border:none!important"></a></span></div>
+</div>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">3、定义agent层：</p>
+<div class="cnblogs_code" style="margin:5px 0px; padding:5px; border:1px solid rgb(204,204,204); overflow:auto; color:rgb(0,0,0); font-family:&#39;Courier New&#39;!important; font-size:12px!important; background-color:rgb(245,245,245)">
+<div class="cnblogs_code_toolbar" style="margin:5px 0px 0px; padding:0px"><span class="cnblogs_code_copy" style="margin:0px; padding:0px 5px 0px 0px; line-height:1.5!important"><a target="_blank" title="复制代码" style="margin:0px; padding:0px; text-decoration:underline; border:none!important"><img src="./JMX超详细解读_files/copycode.gif" alt="复制代码" style="margin:0px; padding:0px; max-width:800px; border:none!important"></a></span></div>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Courier New&quot; !important; width: 100%; overflow: hidden;"><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 1</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">package</span><span style="margin:0px; padding:0px; line-height:1.5!important"> jmx;
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 2</span> 
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 3</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> java.lang.management.ManagementFactory;
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 4</span> 
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 5</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.JMException;
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 6</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.MBeanServer;
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 7</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.ObjectName;
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 8</span> 
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 9</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">class</span><span style="margin:0px; padding:0px; line-height:1.5!important"> HelloAgent
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">10</span> <span style="margin:0px; padding:0px; line-height:1.5!important">{
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">11</span>     <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">static</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">void</span> main(String[] args) <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">throws</span><span style="margin:0px; padding:0px; line-height:1.5!important"> JMException, Exception
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">12</span> <span style="margin:0px; padding:0px; line-height:1.5!important">    {
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">13</span>          MBeanServer server =<span style="margin:0px; padding:0px; line-height:1.5!important"> ManagementFactory.getPlatformMBeanServer();
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">14</span>          ObjectName helloName = <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">new</span> ObjectName("jmxBean:name=hello"<span style="margin:0px; padding:0px; line-height:1.5!important">);
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">15</span>          <span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">//</span><span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">create mbean and register mbean</span>
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">16</span>          server.registerMBean(<span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">new</span><span style="margin:0px; padding:0px; line-height:1.5!important"> Hello(), helloName);
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">17</span>          Thread.sleep(60*60*1000<span style="margin:0px; padding:0px; line-height:1.5!important">);
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">18</span> <span style="margin:0px; padding:0px; line-height:1.5!important">    }
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">19</span> }</pre>
+<div class="cnblogs_code_toolbar" style="margin:5px 0px 0px; padding:0px"><span class="cnblogs_code_copy" style="margin:0px; padding:0px 5px 0px 0px; line-height:1.5!important"><a target="_blank" title="复制代码" style="margin:0px; padding:0px; text-decoration:underline; border:none!important"><img src="./JMX超详细解读_files/copycode.gif" alt="复制代码" style="margin:0px; padding:0px; max-width:800px; border:none!important"></a></span></div>
+</div>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">1、其中第13行是通过工厂类获取MBeanServer，用来做MBean的容器 。</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px"><span style="margin:0px; padding:0px"><span style="margin:0px; padding:0px; color:rgb(255,0,0)">2、第14行中的ObjectName中的取名是有一定规范的，格式为：“域名：name=MBean名称”，其中域名和MBean的名称可以任意取。这样定义后，就可以唯一标识我们定义的这个MBean的实现类了。</span></span></p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">3、第16行是将Hello这个类注入到MBeanServer中，注入需要创建一个ObjectName类&nbsp;</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">这样，一个简单的JMX的DEMO已经写完了，现在我们通过JDK提供的Jconsole来进行操作。</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">1、首先在自己的本地路径下：C:\Program Files (x86)\Java\jdk1.6.0_43\bin找到jconsole.exe这个小工具，双击打开：</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px"><img src="./JMX超详细解读_files/831179-20160924124335246-1901901350.png" alt="" style="margin:0px; padding:0px; border:none; max-width:800px"></p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">2、双击打开我们的本地进程：HelloAgent：</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px"><img src="./JMX超详细解读_files/831179-20160924124913418-1109424699.png" alt="" style="margin:0px; padding:0px; border:none; max-width:800px"></p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">3.在这个界面上，我们可以给程序中HelloMBean的属性赋值，也可以调用其中的方法：</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px"><img src="./JMX超详细解读_files/831179-20160924125008402-1800281938.png" alt="" style="margin:0px; padding:0px; border:none; max-width:800px"></p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">4、控制台打印如下：</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px"><img src="./JMX超详细解读_files/831179-20160924125111012-686348815.png" alt="" style="margin:0px; padding:0px; border:none; max-width:800px"></p>
+<h3 style="margin:0px; padding:0px; font-size:16px; line-height:1.5">四、通过JMX提供的工具页访问</h3>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">这里，我们复用上面的接口和实现类，只需要改动适配层，这里需要到导入外部jar包jdmk</p>
+<div class="cnblogs_code" style="margin:5px 0px; padding:5px; border:1px solid rgb(204,204,204); overflow:auto; color:rgb(0,0,0); font-family:&#39;Courier New&#39;!important; font-size:12px!important; background-color:rgb(245,245,245)">
+<div class="cnblogs_code_toolbar" style="margin:5px 0px 0px; padding:0px"><span class="cnblogs_code_copy" style="margin:0px; padding:0px 5px 0px 0px; line-height:1.5!important"><a target="_blank" title="复制代码" style="margin:0px; padding:0px; text-decoration:underline; border:none!important"><img src="./JMX超详细解读_files/copycode.gif" alt="复制代码" style="margin:0px; padding:0px; max-width:800px; border:none!important"></a></span></div>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Courier New&quot; !important; width: 100%; overflow: hidden;"><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">package</span><span style="margin:0px; padding:0px; line-height:1.5!important"> jmx;
+
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> java.lang.management.ManagementFactory;
+
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.JMException;
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.MBeanServer;
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.ObjectName;
+
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> com.sun.jdmk.comm.HtmlAdaptorServer;
+
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">class</span><span style="margin:0px; padding:0px; line-height:1.5!important"> HelloAgent
+{
+    </span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">static</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">void</span> main(String[] args) <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">throws</span><span style="margin:0px; padding:0px; line-height:1.5!important"> JMException, Exception
+    {
+         MBeanServer server </span>=<span style="margin:0px; padding:0px; line-height:1.5!important"> ManagementFactory.getPlatformMBeanServer();
+         ObjectName helloName </span>= <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">new</span> ObjectName("jmxBean:name=hello"<span style="margin:0px; padding:0px; line-height:1.5!important">);
+         </span><span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">//</span><span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">create mbean and register mbean</span>
+         server.registerMBean(<span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">new</span><span style="margin:0px; padding:0px; line-height:1.5!important"> Hello(), helloName);
+         
+         ObjectName adapterName </span>= <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">new</span> ObjectName("HelloAgent:name=htmladapter,port=8082"<span style="margin:0px; padding:0px; line-height:1.5!important">);   
+         HtmlAdaptorServer adapter </span>= <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">new</span><span style="margin:0px; padding:0px; line-height:1.5!important"> HtmlAdaptorServer();   
+         server.registerMBean(adapter, adapterName);  
+         adapter.start();
+    }
+}</span></pre>
+<div class="cnblogs_code_toolbar" style="margin:5px 0px 0px; padding:0px"><span class="cnblogs_code_copy" style="margin:0px; padding:0px 5px 0px 0px; line-height:1.5!important"><a target="_blank" title="复制代码" style="margin:0px; padding:0px; text-decoration:underline; border:none!important"><img src="./JMX超详细解读_files/copycode.gif" alt="复制代码" style="margin:0px; padding:0px; max-width:800px; border:none!important"></a></span></div>
+</div>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">我们访问地址：<a target="_blank" href="http://localhost:8082/" style="margin:0px; padding:0px; color:rgb(0,0,0)">http://localhost:8082</a>，点击name=hello：</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px"><img src="./JMX超详细解读_files/831179-20160924130035559-139451735.png" alt="" style="margin:0px; padding:0px; border:none; max-width:800px"></p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px"><img src="./JMX超详细解读_files/831179-20160924130043996-887167280.png" alt="" style="margin:0px; padding:0px; border:none; max-width:800px"></p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">1、在这里创建一个AdaptorServer，这个类将决定MBean的管理界面，这里用最普通的Html型界面。AdaptorServer其实也是一个MBean。&nbsp;</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">2、我们可以看到这个工具页，其实与我们上一个案例中的Jconsole中的管理界面类似，都可以操作资源中的属性和方法。</p>
+<h3 style="margin:0px; padding:0px; font-size:16px; line-height:1.5">五、通过客户端程序进行远程访问</h3>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">&nbsp;1、这里需要对agent进行修改，增加ip和porta绑定部分的逻辑</p>
+<div class="cnblogs_code" style="margin:5px 0px; padding:5px; border:1px solid rgb(204,204,204); overflow:auto; color:rgb(0,0,0); font-family:&#39;Courier New&#39;!important; font-size:12px!important; background-color:rgb(245,245,245)">
+<div class="cnblogs_code_toolbar" style="margin:5px 0px 0px; padding:0px"><span class="cnblogs_code_copy" style="margin:0px; padding:0px 5px 0px 0px; line-height:1.5!important"><a target="_blank" title="复制代码" style="margin:0px; padding:0px; text-decoration:underline; border:none!important"><img src="./JMX超详细解读_files/copycode.gif" alt="复制代码" style="margin:0px; padding:0px; max-width:800px; border:none!important"></a></span></div>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Courier New&quot; !important; width: 100%; overflow: hidden;"><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">package</span><span style="margin:0px; padding:0px; line-height:1.5!important"> jmxTest;
+
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> java.io.IOException;
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> java.lang.management.ManagementFactory;
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> java.rmi.RemoteException;
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> java.rmi.registry.LocateRegistry;
+
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.JMException;
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.MBeanServer;
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.ObjectName;
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.remote.JMXConnectorServer;
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.remote.JMXConnectorServerFactory;
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.remote.JMXServiceURL;
+
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">class</span><span style="margin:0px; padding:0px; line-height:1.5!important"> HelloAgent
+{
+    </span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">static</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">void</span> main(String[] args) <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">throws</span><span style="margin:0px; padding:0px; line-height:1.5!important"> JMException, NullPointerException
+    {
+        MBeanServer server </span>=<span style="margin:0px; padding:0px; line-height:1.5!important"> ManagementFactory.getPlatformMBeanServer();
+        ObjectName helloName </span>= <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">new</span> ObjectName("jmxBean:name=hello"<span style="margin:0px; padding:0px; line-height:1.5!important">);
+        </span><span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">//</span><span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">create mbean and register mbean</span>
+        server.registerMBean(<span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">new</span><span style="margin:0px; padding:0px; line-height:1.5!important"> Hello(), helloName);
+        </span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">try</span><span style="margin:0px; padding:0px; line-height:1.5!important">
+        {
+            </span><span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">//</span><span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">这个步骤很重要，注册一个端口，绑定url后用于客户端通过rmi方式连接JMXConnectorServer</span>
+            LocateRegistry.createRegistry(9999<span style="margin:0px; padding:0px; line-height:1.5!important">);
+            </span><span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">//</span><span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">URL路径的结尾可以随意指定，但如果需要用Jconsole来进行连接，则必须使用jmxrmi</span>
+            JMXServiceURL url = <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">new</span><span style="margin:0px; padding:0px; line-height:1.5!important"> JMXServiceURL
+                  (</span>"service:jmx:rmi:///jndi/rmi://localhost:9999/jmxrmi"<span style="margin:0px; padding:0px; line-height:1.5!important">);
+            JMXConnectorServer jcs </span>= JMXConnectorServerFactory.newJMXConnectorServer(url, <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">null</span><span style="margin:0px; padding:0px; line-height:1.5!important">, server);
+            System.out.println(</span>"begin rmi start"<span style="margin:0px; padding:0px; line-height:1.5!important">);
+            jcs.start();
+            System.out.println(</span>"rmi start"<span style="margin:0px; padding:0px; line-height:1.5!important">);
+        }
+        </span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">catch</span><span style="margin:0px; padding:0px; line-height:1.5!important"> (RemoteException e)
+        {
+            e.printStackTrace();
+        }
+        </span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">catch</span><span style="margin:0px; padding:0px; line-height:1.5!important"> (IOException e)
+        {
+            e.printStackTrace();
+        }
+      <br style="margin:0px; padding:0px"><span style="margin:0px; padding:0px; line-height:1.5">    }</span><br style="margin:0px; padding:0px">}</span></pre>
+<div class="cnblogs_code_toolbar" style="margin:5px 0px 0px; padding:0px"><span class="cnblogs_code_copy" style="margin:0px; padding:0px 5px 0px 0px; line-height:1.5!important"><a target="_blank" title="复制代码" style="margin:0px; padding:0px; text-decoration:underline; border:none!important"><img src="./JMX超详细解读_files/copycode.gif" alt="复制代码" style="margin:0px; padding:0px; max-width:800px; border:none!important"></a></span></div>
+</div>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">&nbsp; 写到这里，如果没有client进行远程连接，可以使用Jconsole进行远程访问：</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px"><img src="./JMX超详细解读_files/831179-20160924131112949-403128486.png" alt="" style="margin:0px; padding:0px; border:none; max-width:800px"></p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">2、客户端Client程序，用于与agent进行远程连接：</p>
+<div class="cnblogs_code" style="margin:5px 0px; padding:5px; border:1px solid rgb(204,204,204); overflow:auto; color:rgb(0,0,0); font-family:&#39;Courier New&#39;!important; font-size:12px!important; background-color:rgb(245,245,245)">
+<div class="cnblogs_code_toolbar" style="margin:5px 0px 0px; padding:0px"><span class="cnblogs_code_copy" style="margin:0px; padding:0px 5px 0px 0px; line-height:1.5!important"><a target="_blank" title="复制代码" style="margin:0px; padding:0px; text-decoration:underline; border:none!important"><img src="./JMX超详细解读_files/copycode.gif" alt="复制代码" style="margin:0px; padding:0px; max-width:800px; border:none!important"></a></span></div>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Courier New&quot; !important; width: 100%; overflow: hidden;"><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 1</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">package</span><span style="margin:0px; padding:0px; line-height:1.5!important"> jmx;
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 2</span> 
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 3</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> java.io.IOException;
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 4</span> 
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 5</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.Attribute;
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 6</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.MBeanServerConnection;
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 7</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.MBeanServerInvocationHandler;
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 8</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.ObjectName;
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important"> 9</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.remote.JMXConnector;
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">10</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.remote.JMXConnectorFactory;
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">11</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.remote.JMXServiceURL;
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">12</span> 
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">13</span> 
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">14</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">class</span><span style="margin:0px; padding:0px; line-height:1.5!important"> Client
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">15</span> <span style="margin:0px; padding:0px; line-height:1.5!important">{
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">16</span>     <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">static</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">void</span> main(String[] args) <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">throws</span><span style="margin:0px; padding:0px; line-height:1.5!important"> IOException, Exception, NullPointerException
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">17</span> <span style="margin:0px; padding:0px; line-height:1.5!important">    {
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">18</span>         JMXServiceURL url = <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">new</span><span style="margin:0px; padding:0px; line-height:1.5!important"> JMXServiceURL
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">19</span>             ("service:jmx:rmi:///jndi/rmi://localhost:9999/jmxrmi"<span style="margin:0px; padding:0px; line-height:1.5!important">);
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">20</span>         JMXConnector jmxc = JMXConnectorFactory.connect(url,<span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">null</span><span style="margin:0px; padding:0px; line-height:1.5!important">);
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">21</span>         
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">22</span>         MBeanServerConnection mbsc =<span style="margin:0px; padding:0px; line-height:1.5!important"> jmxc.getMBeanServerConnection();
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">23</span>         <span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">//</span><span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">ObjectName的名称与前面注册时候的保持一致</span>
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">24</span>         ObjectName mbeanName = <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">new</span> ObjectName("jmxBean:name=hello"<span style="margin:0px; padding:0px; line-height:1.5!important">);
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">25</span>         
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">26</span>         System.out.println("Domains ......"<span style="margin:0px; padding:0px; line-height:1.5!important">);
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">27</span>         String[] domains =<span style="margin:0px; padding:0px; line-height:1.5!important"> mbsc.getDomains();
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">28</span>         
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">29</span>         <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">for</span>(<span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">int</span> i=0;i&lt;domains.length;i++<span style="margin:0px; padding:0px; line-height:1.5!important">)
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">30</span> <span style="margin:0px; padding:0px; line-height:1.5!important">        {
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">31</span>             System.out.println("doumain[" + i + "]=" +<span style="margin:0px; padding:0px; line-height:1.5!important"> domains[i] );
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">32</span> <span style="margin:0px; padding:0px; line-height:1.5!important">        }
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">33</span>         
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">34</span>         System.out.println("MBean count = " +<span style="margin:0px; padding:0px; line-height:1.5!important"> mbsc.getMBeanCount());
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">35</span>         <span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">//</span><span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">设置指定Mbean的特定属性值
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">36</span>         <span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">//</span><span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">这里的setAttribute、getAttribute操作只能针对bean的属性
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">37</span>         <span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">//</span><span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">例如对getName或者setName进行操作，只能使用Name，需要去除方法的前缀</span>
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">38</span>         mbsc.setAttribute(mbeanName, <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">new</span> Attribute("Name","杭州"<span style="margin:0px; padding:0px; line-height:1.5!important">));
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">39</span>         mbsc.setAttribute(mbeanName, <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">new</span> Attribute("Age","1990"<span style="margin:0px; padding:0px; line-height:1.5!important">));
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">40</span>         String age = (String)mbsc.getAttribute(mbeanName, "Age"<span style="margin:0px; padding:0px; line-height:1.5!important">);
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">41</span>         String name = (String)mbsc.getAttribute(mbeanName, "Name"<span style="margin:0px; padding:0px; line-height:1.5!important">);
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">42</span>         System.out.println("age=" + age + ";name=" +<span style="margin:0px; padding:0px; line-height:1.5!important"> name);
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">43</span>         
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">44</span>         HelloMBean proxy =<span style="margin:0px; padding:0px; line-height:1.5!important"> MBeanServerInvocationHandler.
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">45</span>             newProxyInstance(mbsc, mbeanName, HelloMBean.<span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">class</span>, <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">false</span><span style="margin:0px; padding:0px; line-height:1.5!important">);
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">46</span> <span style="margin:0px; padding:0px; line-height:1.5!important">        proxy.helloWorld();
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">47</span>         proxy.helloWorld("migu"<span style="margin:0px; padding:0px; line-height:1.5!important">);
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">48</span> <span style="margin:0px; padding:0px; line-height:1.5!important">        proxy.getTelephone();
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">49</span>         <span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">//</span><span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">invoke调用bean的方法，只针对非设置属性的方法
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">50</span>         <span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">//</span><span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">例如invoke不能对getName方法进行调用</span>
+<span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">51</span>         mbsc.invoke(mbeanName, "getTelephone", <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">null</span>, <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">null</span><span style="margin:0px; padding:0px; line-height:1.5!important">);
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">52</span>         mbsc.invoke(mbeanName, "helloWorld"<span style="margin:0px; padding:0px; line-height:1.5!important">, 
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">53</span>             <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">new</span> String[]{"I'll connect to JMX Server via client2"}, <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">new</span> String[]{"java.lang.String"<span style="margin:0px; padding:0px; line-height:1.5!important">});
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">54</span>         mbsc.invoke(mbeanName, "helloWorld", <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">null</span>, <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">null</span><span style="margin:0px; padding:0px; line-height:1.5!important">);
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">55</span> <span style="margin:0px; padding:0px; line-height:1.5!important">    }
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,128); line-height:1.5!important">56</span> }</pre>
+<div class="cnblogs_code_toolbar" style="margin:5px 0px 0px; padding:0px"><span class="cnblogs_code_copy" style="margin:0px; padding:0px 5px 0px 0px; line-height:1.5!important"><a target="_blank" title="复制代码" style="margin:0px; padding:0px; text-decoration:underline; border:none!important"><img src="./JMX超详细解读_files/copycode.gif" alt="复制代码" style="margin:0px; padding:0px; max-width:800px; border:none!important"></a></span></div>
+</div>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px"><span style="margin:0px; padding:0px"><span style="margin:0px; padding:0px; color:rgb(255,0,0)">a、在35到41行，是对属性进行赋值和取值，这里我们不能直接调用方法，而是通过setAttribute、getAttrubute方法来进行操作，则属性的首字母要大写。</span></span></p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px"><span style="margin:0px; padding:0px"><span style="margin:0px; padding:0px; color:rgb(255,0,0)">b、对资源里面的方法进行操作有两种方式：一是通过代理直接调用方法；二是通过JAVA的反射注入的方式进行方法的调用。</span></span></p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">下面我们来看看执行结果，先执行agent，再执行客户端：</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px"><span style="margin:0px; padding:0px"><span style="margin:0px; padding:0px; color:rgb(255,0,0)">c、client的控制台打印结果：</span></span></p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px"><img src="./JMX超详细解读_files/831179-20160924135421918-1513969425.png" alt="" style="margin:0px; padding:0px; border:none; max-width:800px"></p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">&nbsp;</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px"><span style="margin:0px; padding:0px; color:rgb(255,0,0)"><span style="margin:0px; padding:0px">d、agent控制台打印结果：</span></span></p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px"><img src="./JMX超详细解读_files/831179-20160924135412762-1352288595.png" alt="" style="margin:0px; padding:0px; border:none; max-width:800px"></p>
+<h3 style="margin:0px; padding:0px; font-size:16px; line-height:1.5">&nbsp;六、Notification</h3>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">&nbsp;MBean之间的通信是必不可少的，Notification就起到了在MBean之间沟通桥梁的作用。JMX 的通知由四部分组成：</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">1、Notification这个相当于一个信息包，封装了需要传递的信息</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">2、Notification broadcaster这个相当于一个广播器，把消息广播出。</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">3、Notification listener 这是一个监听器，用于监听广播出来的通知信息。</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">4、Notification filiter 这个一个过滤器，过滤掉不需要的通知。这个一般很少使用。</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">这里我们使用日常打招呼的场景：jack与我偶遇，jack说：hi；我礼貌的回答：hello，jack。</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">这里我们先分别创建两个资源：</p>
+<div class="cnblogs_code" style="margin:5px 0px; padding:5px; border:1px solid rgb(204,204,204); overflow:auto; color:rgb(0,0,0); font-family:&#39;Courier New&#39;!important; font-size:12px!important; background-color:rgb(245,245,245)">
+<div class="cnblogs_code_toolbar" style="margin:5px 0px 0px; padding:0px"><span class="cnblogs_code_copy" style="margin:0px; padding:0px 5px 0px 0px; line-height:1.5!important"><a target="_blank" title="复制代码" style="margin:0px; padding:0px; text-decoration:underline; border:none!important"><img src="./JMX超详细解读_files/copycode.gif" alt="复制代码" style="margin:0px; padding:0px; max-width:800px; border:none!important"></a></span></div>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Courier New&quot; !important; width: 100%; overflow: hidden;"><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">package</span><span style="margin:0px; padding:0px; line-height:1.5!important"> jmx;
+
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">/*</span><span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">
+ * 该类名称必须与实现的接口的前缀保持一致（即MBean前面的名称
+ </span><span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">*/</span>
+<span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">class</span> Hello <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">implements</span><span style="margin:0px; padding:0px; line-height:1.5!important"> HelloMBean
+{
+    </span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">private</span><span style="margin:0px; padding:0px; line-height:1.5!important"> String name;
+
+    </span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span><span style="margin:0px; padding:0px; line-height:1.5!important"> String getName()
+    {
+        </span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">return</span><span style="margin:0px; padding:0px; line-height:1.5!important"> name;
+    }
+
+    </span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">void</span><span style="margin:0px; padding:0px; line-height:1.5!important"> setName(String name)
+    {
+        </span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">this</span>.name =<span style="margin:0px; padding:0px; line-height:1.5!important"> name;
+    }
+
+    </span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">void</span><span style="margin:0px; padding:0px; line-height:1.5!important"> printHello()
+    {
+        System.out.println(</span>"Hello World, " +<span style="margin:0px; padding:0px; line-height:1.5!important"> name);
+    }
+
+    </span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">void</span><span style="margin:0px; padding:0px; line-height:1.5!important"> printHello(String whoName)
+    {
+        System.out.println(</span>"Hello , " +<span style="margin:0px; padding:0px; line-height:1.5!important"> whoName);
+    }
+}</span></pre>
+<div class="cnblogs_code_toolbar" style="margin:5px 0px 0px; padding:0px"><span class="cnblogs_code_copy" style="margin:0px; padding:0px 5px 0px 0px; line-height:1.5!important"><a target="_blank" title="复制代码" style="margin:0px; padding:0px; text-decoration:underline; border:none!important"><img src="./JMX超详细解读_files/copycode.gif" alt="复制代码" style="margin:0px; padding:0px; max-width:800px; border:none!important"></a></span></div>
+</div>
+<div class="cnblogs_code" style="margin:5px 0px; padding:5px; border:1px solid rgb(204,204,204); overflow:auto; color:rgb(0,0,0); font-family:&#39;Courier New&#39;!important; font-size:12px!important; background-color:rgb(245,245,245)">
+<div class="cnblogs_code_toolbar" style="margin:5px 0px 0px; padding:0px"><span class="cnblogs_code_copy" style="margin:0px; padding:0px 5px 0px 0px; line-height:1.5!important"><a target="_blank" title="复制代码" style="margin:0px; padding:0px; text-decoration:underline; border:none!important"><img src="./JMX超详细解读_files/copycode.gif" alt="复制代码" style="margin:0px; padding:0px; max-width:800px; border:none!important"></a></span></div>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Courier New&quot; !important; width: 100%; overflow: hidden;"><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">package</span><span style="margin:0px; padding:0px; line-height:1.5!important"> jmx;
+
+</span><span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">/*</span><span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">
+ * 接口名必须以MBean结尾
+ </span><span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">*/</span>
+<span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">interface</span><span style="margin:0px; padding:0px; line-height:1.5!important"> HelloMBean
+{
+    </span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span><span style="margin:0px; padding:0px; line-height:1.5!important"> String getName();   
+    
+    </span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">void</span><span style="margin:0px; padding:0px; line-height:1.5!important"> setName(String name);   
+  
+    </span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">void</span><span style="margin:0px; padding:0px; line-height:1.5!important"> printHello();   
+  
+    </span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">void</span><span style="margin:0px; padding:0px; line-height:1.5!important"> printHello(String whoName);
+}</span></pre>
+<div class="cnblogs_code_toolbar" style="margin:5px 0px 0px; padding:0px"><span class="cnblogs_code_copy" style="margin:0px; padding:0px 5px 0px 0px; line-height:1.5!important"><a target="_blank" title="复制代码" style="margin:0px; padding:0px; text-decoration:underline; border:none!important"><img src="./JMX超详细解读_files/copycode.gif" alt="复制代码" style="margin:0px; padding:0px; max-width:800px; border:none!important"></a></span></div>
+</div>
+<div class="cnblogs_code" style="margin:5px 0px; padding:5px; border:1px solid rgb(204,204,204); overflow:auto; color:rgb(0,0,0); font-family:&#39;Courier New&#39;!important; font-size:12px!important; background-color:rgb(245,245,245)">
+<div class="cnblogs_code_toolbar" style="margin:5px 0px 0px; padding:0px"><span class="cnblogs_code_copy" style="margin:0px; padding:0px 5px 0px 0px; line-height:1.5!important"><a target="_blank" title="复制代码" style="margin:0px; padding:0px; text-decoration:underline; border:none!important"><img src="./JMX超详细解读_files/copycode.gif" alt="复制代码" style="margin:0px; padding:0px; max-width:800px; border:none!important"></a></span></div>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Courier New&quot; !important; width: 100%; overflow: hidden;"><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">package</span><span style="margin:0px; padding:0px; line-height:1.5!important"> jmx;
+
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.Notification;
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.NotificationBroadcasterSupport;
+
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">class</span> Jack <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">extends</span> NotificationBroadcasterSupport <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">implements</span><span style="margin:0px; padding:0px; line-height:1.5!important"> JackMBean
+{
+    </span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">private</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">int</span> seq = 0<span style="margin:0px; padding:0px; line-height:1.5!important">;
+    </span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">void</span><span style="margin:0px; padding:0px; line-height:1.5!important"> hi()
+    {
+         </span><span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">//</span><span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">创建一个信息包</span>
+        Notification notify = 
+            <span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">//</span><span style="margin:0px; padding:0px; color:rgb(0,128,0); line-height:1.5!important">通知名称；谁发起的通知；序列号；发起通知时间；发送的消息</span>
+            <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">new</span> Notification("jack.hi",<span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">this</span>,++seq,System.currentTimeMillis(),"jack"<span style="margin:0px; padding:0px; line-height:1.5!important">);
+        sendNotification(notify);
+    }
+
+}</span></pre>
+<div class="cnblogs_code_toolbar" style="margin:5px 0px 0px; padding:0px"><span class="cnblogs_code_copy" style="margin:0px; padding:0px 5px 0px 0px; line-height:1.5!important"><a target="_blank" title="复制代码" style="margin:0px; padding:0px; text-decoration:underline; border:none!important"><img src="./JMX超详细解读_files/copycode.gif" alt="复制代码" style="margin:0px; padding:0px; max-width:800px; border:none!important"></a></span></div>
+</div>
+<div class="cnblogs_code" style="margin:5px 0px; padding:5px; border:1px solid rgb(204,204,204); overflow:auto; color:rgb(0,0,0); font-family:&#39;Courier New&#39;!important; font-size:12px!important; background-color:rgb(245,245,245)">
+<div class="cnblogs_code_toolbar" style="margin:5px 0px 0px; padding:0px"><span class="cnblogs_code_copy" style="margin:0px; padding:0px 5px 0px 0px; line-height:1.5!important"><a target="_blank" title="复制代码" style="margin:0px; padding:0px; text-decoration:underline; border:none!important"><img src="./JMX超详细解读_files/copycode.gif" alt="复制代码" style="margin:0px; padding:0px; max-width:800px; border:none!important"></a></span></div>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Courier New&quot; !important; width: 100%; overflow: hidden;"><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">package</span><span style="margin:0px; padding:0px; line-height:1.5!important"> jmx;
+
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">interface</span><span style="margin:0px; padding:0px; line-height:1.5!important"> JackMBean
+{
+    </span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">void</span><span style="margin:0px; padding:0px; line-height:1.5!important"> hi();
+}</span></pre>
+<div class="cnblogs_code_toolbar" style="margin:5px 0px 0px; padding:0px"><span class="cnblogs_code_copy" style="margin:0px; padding:0px 5px 0px 0px; line-height:1.5!important"><a target="_blank" title="复制代码" style="margin:0px; padding:0px; text-decoration:underline; border:none!important"><img src="./JMX超详细解读_files/copycode.gif" alt="复制代码" style="margin:0px; padding:0px; max-width:800px; border:none!important"></a></span></div>
+</div>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">这里的类Jack不仅实现了MBean接口，还继承了NotificationBroadcasterSupport。jack在这里创建并发送了一个消息包。</p>
+<div class="cnblogs_code" style="margin:5px 0px; padding:5px; border:1px solid rgb(204,204,204); overflow:auto; color:rgb(0,0,0); font-family:&#39;Courier New&#39;!important; font-size:12px!important; background-color:rgb(245,245,245)">
+<div class="cnblogs_code_toolbar" style="margin:5px 0px 0px; padding:0px"><span class="cnblogs_code_copy" style="margin:0px; padding:0px 5px 0px 0px; line-height:1.5!important"><a target="_blank" title="复制代码" style="margin:0px; padding:0px; text-decoration:underline; border:none!important"><img src="./JMX超详细解读_files/copycode.gif" alt="复制代码" style="margin:0px; padding:0px; max-width:800px; border:none!important"></a></span></div>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Courier New&quot; !important; width: 100%; overflow: hidden;"><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">package</span><span style="margin:0px; padding:0px; line-height:1.5!important"> jmx;
+
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.Notification;
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.NotificationListener;
+
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">class</span> HelloListener <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">implements</span><span style="margin:0px; padding:0px; line-height:1.5!important"> NotificationListener
+{
+
+    </span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">void</span><span style="margin:0px; padding:0px; line-height:1.5!important"> handleNotification(Notification notification, Object handback)
+    {
+        </span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">if</span>(handback <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">instanceof</span><span style="margin:0px; padding:0px; line-height:1.5!important"> Hello)
+        {
+            Hello hello </span>=<span style="margin:0px; padding:0px; line-height:1.5!important"> (Hello)handback;
+            hello.printHello(notification.getMessage());
+        }
+    }
+    
+}</span></pre>
+<div class="cnblogs_code_toolbar" style="margin:5px 0px 0px; padding:0px"><span class="cnblogs_code_copy" style="margin:0px; padding:0px 5px 0px 0px; line-height:1.5!important"><a target="_blank" title="复制代码" style="margin:0px; padding:0px; text-decoration:underline; border:none!important"><img src="./JMX超详细解读_files/copycode.gif" alt="复制代码" style="margin:0px; padding:0px; max-width:800px; border:none!important"></a></span></div>
+</div>
+<div class="cnblogs_code" style="margin:5px 0px; padding:5px; border:1px solid rgb(204,204,204); overflow:auto; color:rgb(0,0,0); font-family:&#39;Courier New&#39;!important; font-size:12px!important; background-color:rgb(245,245,245)">
+<div class="cnblogs_code_toolbar" style="margin:5px 0px 0px; padding:0px"><span class="cnblogs_code_copy" style="margin:0px; padding:0px 5px 0px 0px; line-height:1.5!important"><a target="_blank" title="复制代码" style="margin:0px; padding:0px; text-decoration:underline; border:none!important"><img src="./JMX超详细解读_files/copycode.gif" alt="复制代码" style="margin:0px; padding:0px; max-width:800px; border:none!important"></a></span></div>
+<pre style="margin-top: 0px; margin-bottom: 0px; padding: 0px; white-space: pre-wrap; word-wrap: break-word; font-family: &quot;Courier New&quot; !important; width: 100%; overflow: hidden;"><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">package</span><span style="margin:0px; padding:0px; line-height:1.5!important"> jmx;
+
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> java.lang.management.ManagementFactory;
+
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.JMException;
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.MBeanServer;
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">import</span><span style="margin:0px; padding:0px; line-height:1.5!important"> javax.management.ObjectName;
+
+</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">class</span><span style="margin:0px; padding:0px; line-height:1.5!important"> HelloAgent
+{
+    </span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">public</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">static</span> <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">void</span> main(String[] args) <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">throws</span><span style="margin:0px; padding:0px; line-height:1.5!important"> JMException, Exception
+    {
+        MBeanServer server </span>=<span style="margin:0px; padding:0px; line-height:1.5!important"> ManagementFactory.getPlatformMBeanServer();
+        ObjectName helloName </span>= <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">new</span> ObjectName("yunge:name=Hello"<span style="margin:0px; padding:0px; line-height:1.5!important">);    
+        Hello hello</span>=<span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">new</span><span style="margin:0px; padding:0px; line-height:1.5!important"> Hello();          
+        server.registerMBean(hello, helloName);  
+        Jack jack </span>= <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">new</span><span style="margin:0px; padding:0px; line-height:1.5!important"> Jack();
+        server.registerMBean(jack, </span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">new</span> ObjectName("jack:name=Jack"<span style="margin:0px; padding:0px; line-height:1.5!important">));
+        jack.addNotificationListener(</span><span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">new</span> HelloListener(), <span style="margin:0px; padding:0px; color:rgb(0,0,255); line-height:1.5!important">null</span><span style="margin:0px; padding:0px; line-height:1.5!important">, hello);
+        Thread.sleep(</span>500000<span style="margin:0px; padding:0px; line-height:1.5!important">);
+    }
+}</span></pre>
+<div class="cnblogs_code_toolbar" style="margin:5px 0px 0px; padding:0px"><span class="cnblogs_code_copy" style="margin:0px; padding:0px 5px 0px 0px; line-height:1.5!important"><a target="_blank" title="复制代码" style="margin:0px; padding:0px; text-decoration:underline; border:none!important"><img src="./JMX超详细解读_files/copycode.gif" alt="复制代码" style="margin:0px; padding:0px; max-width:800px; border:none!important"></a></span></div>
+</div>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">我们用Jconsole来进行访问：</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px"><img src="./JMX超详细解读_files/831179-20160924142010965-974125585.png" alt="" style="margin:0px; padding:0px; border:none; max-width:800px"></p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">这里我们可以看到有两个MBean，一个是yunge，一个是jack。我们执行jack的hi方法后，去看下控制台上的打印信息；</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px"><img src="./JMX超详细解读_files/831179-20160924142100449-2002084480.png" alt="" style="margin:0px; padding:0px; border:none; max-width:800px"></p>
+<h3 style="margin:0px; padding:0px; font-size:16px; line-height:1.5">&nbsp;七、linux下利用JMX监控Tomcat</h3>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">　　利用JMX监控Tomcat，就是相当于部署在tomcat上的应用作为服务端，也就是被管理资源的对象。然后通过程序或者jconsole远程连接到该应用上来。远程连接需要服务器端提供ip和port。如果需要加密访问的话，还需要配置用户名、密码等参数。</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">主要是在tomcat下的文件catalina.sh中进行一些环境变量的配置配置：</p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px">&nbsp;<img src="./JMX超详细解读_files/831179-20160924143209527-838035940.png" alt="" style="margin:0px; padding:0px; border:none; max-width:800px; line-height:1.5"></p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px"><span style="margin:0px; padding:0px"><span style="margin:0px; padding:0px; color:rgb(255,0,0)">-Dcom.sun.management.jmxremote=true &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;相关 JMX 代理侦听开关</span></span></p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px"><span style="margin:0px; padding:0px"><span style="margin:0px; padding:0px; color:rgb(255,0,0)">-Djava.rmi.server.hostname &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 服务器端的IP</span></span><br style="margin:0px; padding:0px">
+<span style="margin:0px; padding:0px"><span style="margin:0px; padding:0px; color:rgb(255,0,0)">-Dcom.sun.management.jmxremote.port=29094 &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;相关 JMX 代理侦听请求的端口</span></span></p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px"><span style="margin:0px; padding:0px"><span style="margin:0px; padding:0px; color:rgb(255,0,0)">-Dcom.sun.management.jmxremote.ssl=false &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;指定是否使用 SSL 通讯</span></span></p>
+<p style="margin:10px auto; padding-top:0px; padding-bottom:0px"><span style="margin:0px; padding:0px"><span style="margin:0px; padding:0px; color:rgb(255,0,0)">-Dcom.sun.management.jmxremote.authenticate=false &nbsp;&nbsp; &nbsp;指定是否需要密码验证</span></span><br style="margin:0px; padding:0px">
+<br style="margin:0px; padding:0px">
+这样就可以通过客户端或者jconsole对tomcat进行监控。</p>
+</div>
+</div>
+ </div>
+
+          </div>
+
+                               
+
+             <div class="blog_handle">
+        <span id="digg" style="cursor:pointer"><i class="iconfont"></i><em>0</em></span>
+        <span id="bury" style="cursor:pointer"><i class="iconfont"></i><em>0</em></span>
+       
+    </div>
+
+
+
+              <div class="prev_next">
+                        <a href="http://m.blog.csdn.net/article/details?id=53411481" class="prev" onclick="_gaq.push([&#39;_trackEvent&#39;,&#39;function&#39;, &#39;onclick&#39;, &#39;blog_articles_shangyipian&#39;]);">上一篇</a>                                                                       
+                        <a href="http://m.blog.csdn.net/article/details?id=53422463" class="next" onclick="_gaq.push([&#39;_trackEvent&#39;,&#39;function&#39;, &#39;onclick&#39;, &#39;blog_articles_shangyipian&#39;])">下一篇</a>
+              </div>         
+        </div>
+        
+       <!-- 广告位开始 -->
+        <div class="J_adv" data-view="true" data-mod="ad_popu_174" data-mtp="49" data-order="112" data-con="ad_content_651"><!-- 广告占位容器 --><div id="cpro_u2634430" style="box-sizing: content-box; text-align: center; display: block; font-size: 0px; width: 100%; height: 925px;"><div style="box-sizing: content-box;width:925px;height:925px;position:relative;margin:0 auto;"><iframe id="iframeu2634430_0" src="./JMX超详细解读_files/tcwm.html" width="925" height="925" align="center,center" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="border:0; vertical-align:bottom;margin:0;" allowtransparency="true"></iframe></div></div><!-- 投放代码 --><script type="text/javascript">       (window['cproStyleApi'] = window['cproStyleApi'] || {})['u2634430']={at:'3',hn:'0',wn:'0',imgRatio:'1.7',scale:'20.20',pat:'6',tn:'template_inlay_all_mobile_lu_native',rss1:'#FFFFFF',adp:'1',ptt:'0',titFF:'%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91',titFS:'14',rss2:'#000000',titSU:'0',ptbg:'70',ptp:'1'};(window.cproArray = window.cproArray || []).push({id:'u2634430'});  </script>  <script src="./JMX超详细解读_files/cm.js.下载" type="text/javascript"></script> </div>
+        <!-- 广告位结束 -->   
+
+       
+<script type="text/javascript" src="./JMX超详细解读_files/highcode.js.下载"></script>
+<script type="text/javascript">
+    var fileName = '53420948';
+    var commentscount = 0;
+    var islock = false;
+    var currentUserName='';
+    var topSize=3;
+    var listId = ".blog_comment_list";
+</script>
+
+<div class="no_comment" style=""><i class="iconfont"></i><span>暂无评论，</span><a href="http://m.blog.csdn.net/comment/post?id=53420948">我去发表</a><em>~</em></div>
+
+ <div class="blog_comment" style="display:none">
+       <h3 class="isComment">评论<span>（0）</span></h3>
+       <dl class="blog_comment_list"></dl>
+       <div class="checkAll"></div>
+ </div>
+
+<script type="text/javascript" src="./JMX超详细解读_files/comment.js.下载"></script>
+
+
+
+               <div style="display:none" id="tags">java,url,color,jmx,应用,管理,框架,文档,并发,标准,web,rgb</div>
+
+       <div class="my_hot_article">
+          <h3 class="isArticle">我的热门文章</h3>
+          <ul class="hot_article">
+                <li><a href="http://m.blog.csdn.net/article/details?id=53420948">JMX超详细解读</a></li>
+                <li><a href="http://m.blog.csdn.net/article/details?id=43341331">tomcat服务器值HTTP请求</a></li>
+                <li><a href="http://m.blog.csdn.net/article/details?id=43120239">反射获取方法</a></li>
+                <li><a href="http://m.blog.csdn.net/article/details?id=50771453">java多线程之CAS</a></li>
+                <li><a href="http://m.blog.csdn.net/article/details?id=43113087">MyEclipse 快捷键</a></li>
+          </ul>
+        </div>
+
+        <div class="my_hot_article">
+          <h3 class="isArticle">相关博文</h3>
+          <ul class="hot_article" id="res" data-mod="popu_36"><li><a href="http://blog.csdn.net/healxp/article/details/19610753" title="为Web应用建立JMX管理系统一" strategy="SearchAlgorithm">为Web应用建立JMX管理系统一</a></li><li><a href="http://blog.csdn.net/zhangxiaogen/article/details/52207" title="为Web应用建立JMX管理系统二" strategy="SearchAlgorithm">为Web应用建立JMX管理系统二</a></li><li><a href="http://blog.csdn.net/zmxj/article/details/326508" title="用JMX管理你的web应用" strategy="SearchAlgorithm">用JMX管理你的web应用</a></li><li><a href="http://blog.csdn.net/qi8660306/article/details/46503401" title="Java web高级JMX管理基础一" strategy="SearchAlgorithm">Java web高级JMX管理基础一</a></li><li><a href="http://blog.csdn.net/currying/article/details/50942998" title="JAVA标准系列JMX" strategy="SearchAlgorithm">JAVA标准系列JMX</a></li><li><a href="http://blog.csdn.net/xy18930914/article/details/51210967" title="websocket 与 jmx和jms 协作工作来管理web项目" strategy="SearchAlgorithm">websocket 与 jmx和jms 协作工作来管理web项目</a></li><li><a href="http://blog.csdn.net/asmallrole/article/details/7337073" title="Java SE 6 新特性 JMX 与系统管理2" strategy="SearchAlgorithm">Java SE 6 新特性 JMX 与系统管理2</a></li><li><a href="http://blog.csdn.net/dwarcheng/article/details/52449204" title="Java SE 6 新特性 JMX 与系统管理" strategy="SearchAlgorithm">Java SE 6 新特性 JMX 与系统管理</a></li><li><a href="http://blog.csdn.net/ecjtuxuan/article/details/5045004" title="Java SE 6 新特性 JMX 与系统管理" strategy="SearchAlgorithm">Java SE 6 新特性 JMX 与系统管理</a></li><li><a href="http://blog.csdn.net/dashi99/article/details/2946890" title="Java SE 6 新特性系列  第 3 部分JMX 与系统管理 " strategy="SearchAlgorithm">Java SE 6 新特性系列  第 3 部分JMX 与系统管理 </a></li></ul>
+        </div>
+
+<script type="text/javascript">
+    $(function () {
+        setTimeout(function () {
+            var searchtitletags = 'JMX超详细解读' + ',' + $("#tags").html();
+            searchService({
+                index: 'blog',
+                query: searchtitletags,
+                from: 0,
+                size: 5,
+                appendTo: '#res',
+                url: 'recommend',
+                his: 2,
+                client: "blog_cf_enhance",
+                tmpl: '<li><a href="#{ url }" title="#{ title }" strategy="#{ strategy }">#{ title }</a></li>'
+            });
+        }, 500);
+    });    
+
+ </script>  
+
+
+
+
+       
+      </div>
+
+        
+   <div class="leftNav" style="left: -40rem;">
+      
+<div class="left_top">
+        <a href="https://passport.csdn.net/account/login?from=http%3a%2f%2fm.blog.csdn.net%2farticle%2fdetails%3fid%3d53420948"><img src="./JMX超详细解读_files/1_csdn.jpg"></a>
+        <a href="https://passport.csdn.net/account/login?from=http%3a%2f%2fm.blog.csdn.net%2farticle%2fdetails%3fid%3d53420948" class="sign">未登录</a> 
+</div>
+        
+        <ul class="nav_list">
+            <li><a href="http://m.blog.csdn.net/home/index"><i>•</i><span>首页</span><img src="./JMX超详细解读_files/iconfont-youjiantou.png" alt="img" class="arrow_r"></a></li>
+                <li><a href="http://m.blog.csdn.net/Column/Column?Channel=mobile&amp;Type="><i>•</i><span>移动开发</span><img src="./JMX超详细解读_files/iconfont-youjiantou.png" alt="img" class="arrow_r"></a></li>
+                <li><a href="http://m.blog.csdn.net/Column/Column?Channel=web&amp;Type="><i>•</i><span>Web前端</span><img src="./JMX超详细解读_files/iconfont-youjiantou.png" alt="img" class="arrow_r"></a></li>
+                <li><a href="http://m.blog.csdn.net/Column/Column?Channel=enterprise&amp;Type="><i>•</i><span>架构设计</span><img src="./JMX超详细解读_files/iconfont-youjiantou.png" alt="img" class="arrow_r"></a></li>
+                <li><a href="http://m.blog.csdn.net/Column/Column?Channel=code&amp;Type="><i>•</i><span>编程语言</span><img src="./JMX超详细解读_files/iconfont-youjiantou.png" alt="img" class="arrow_r"></a></li>
+                <li><a href="http://m.blog.csdn.net/Column/Column?Channel=www&amp;Type="><i>•</i><span>互联网</span><img src="./JMX超详细解读_files/iconfont-youjiantou.png" alt="img" class="arrow_r"></a></li>
+                <li><a href="http://m.blog.csdn.net/Column/Column?Channel=database&amp;Type="><i>•</i><span>数据库</span><img src="./JMX超详细解读_files/iconfont-youjiantou.png" alt="img" class="arrow_r"></a></li>
+                <li><a href="http://m.blog.csdn.net/Column/Column?Channel=system&amp;Type="><i>•</i><span>系统运维</span><img src="./JMX超详细解读_files/iconfont-youjiantou.png" alt="img" class="arrow_r"></a></li>
+                <li><a href="http://m.blog.csdn.net/Column/Column?Channel=cloud&amp;Type="><i>•</i><span>云计算</span><img src="./JMX超详细解读_files/iconfont-youjiantou.png" alt="img" class="arrow_r"></a></li>
+                <li><a href="http://m.blog.csdn.net/Column/Column?Channel=software&amp;Type="><i>•</i><span>研发管理</span><img src="./JMX超详细解读_files/iconfont-youjiantou.png" alt="img" class="arrow_r"></a></li>
+                <li><a href="http://m.blog.csdn.net/Column/Column?Channel=other&amp;Type="><i>•</i><span>综合</span><img src="./JMX超详细解读_files/iconfont-youjiantou.png" alt="img" class="arrow_r"></a></li>
+        </ul>
+   </div>
+   
+
+      <div id="mask" style="display: none;"></div>
+    </div>
+
+
+   
+
+    <div class="backToTop" style="display: block;"><img src="./JMX超详细解读_files/iconfont-fudongxiangshang.png" alt="img"></div>
+    <!--分享弹窗：-->
+    <div class="popup_cover"></div>
+    <div class="sharePopup_box">
+      <div class="sharePopup">
+        <!--JiaThis Button BEGIN-->
+        <div class="jiathis_style_32x32"><a class="jiathis_button_weixin" title="分享到微信"><span class="jiathis_txt jiathis_separator jtico jtico_weixin"><b><i class="iconfont"></i></b><em>微信分享</em></span></a><a class="jiathis_button_tsina" title="分享到微博"><span class="jiathis_txt jiathis_separator jtico jtico_tsina"><b><i class="iconfont"></i></b><em>新浪微博</em></span></a><a class="jiathis_button_cqq" title="分享到QQ好友"><span class="jiathis_txt jiathis_separator jtico jtico_cqq"><b><i class="iconfont"></i></b><em>QQ好友</em></span></a><a class="jiathis_button_qzone" title="分享到QQ空间"><span class="jiathis_txt jiathis_separator jtico jtico_qzone"><b><i class="iconfont"></i></b><em>QQ空间</em></span></a></div>
+        <script type="text/javascript" src="./JMX超详细解读_files/jia.js.下载" charset="utf-8"></script><script type="text/javascript" src="./JMX超详细解读_files/plugin.client.js.下载" charset="utf-8"></script>
+        <!--JiaThis Button END-->
+      </div>
+      <div class="sharePopup_cancel">取 消</div>
+    </div>
+    <script>
+      $(function(){
+        $('#share_btn').click(function(){
+          $('.popup_cover').stop().show();
+          $('.sharePopup_box').stop().slideDown();
+        });
+        $('.sharePopup_cancel').click(function(){
+          $('.popup_cover').stop().hide();
+          $('.sharePopup_box').stop().slideUp();
+        });
+      })
+    </script>
+
+
+
+
+ <div class="ad_box">
+      <div class="ad_l"><a href="http://ms.csdn.net/download.html"><img src="./JMX超详细解读_files/index_AD.jpg" alt="img"></a><span>即使是一小步<br>也想与你分享</span></div>
+      <div class="ad_r"><a href="http://ms.csdn.net/download.html" class="open_btn">打开</a><i class="ad_close iconfont"></i></div>
+    </div>
+
+   <div class="backToTop" style="z-index: 9999999; display: block;"><img src="./JMX超详细解读_files/iconfont-fudongxiangshang.png" alt="img"></div>
+    <div class="blog_footer">©1999-2012, csdn.net, All Rights Reserved</div>
+    <script type="text/javascript" src="./JMX超详细解读_files/fontSize.js.下载"></script>
+<script type="text/javascript" charset="utf-8" src="./JMX超详细解读_files/tracking.js.下载"></script>
+
+
+
+
+
+</body></html>
