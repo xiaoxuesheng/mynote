@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<!-- saved from url=(0034)http://www.importnew.com/2466.html -->
+<html dir="ltr" lang="zh-CN" xmlns:wb="http://open.weibo.com/wb" class=" js rgba borderradius boxshadow textshadow opacity cssanimations cssgradients csstransitions fontface generatedcontent video audio js"><!--<![endif]--><!-- BEGIN head --><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./深入理解JDBC的超时设置 - ImportNew_files/shares.php" charset="utf-8"></script>
+
+	<!-- Title -->
+	<title>深入理解JDBC的超时设置 - ImportNew</title>
+	
+	<!-- Meta Tags -->
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<!-- Favicon & Mobileicon -->
+	<link rel="shortcut icon" href="http://www.importnew.com/wp-content/uploads/2014/12/d02a42d9cb3dec9320e5f550278911c7.ico">
+	<link rel="apple-touch-icon" href="http://www.importnew.com/wp-content/themes/jobbolev4blog/mobileicon.png">
+	
+	<!-- RSS, Atom & Pingbacks -->
+		<link rel="alternate" title="ImportNew RSS Feed" href="http://www.importnew.com/feed">
+		<link rel="alternate" title="RSS .92" href="http://www.importnew.com/feed/rss">
+	<link rel="alternate" title="Atom 0.3" href="http://www.importnew.com/feed/atom">
+	<link rel="pingback" href="http://www.importnew.com/xmlrpc.php">
+	
+	<!-- Theme Hook -->
+	<link rel="stylesheet" id="lightboxStyle-css" href="./深入理解JDBC的超时设置 - ImportNew_files/colorbox.css" type="text/css" media="screen">
+<link rel="stylesheet" id="core3.0-css" href="./深入理解JDBC的超时设置 - ImportNew_files/shCore.css" type="text/css" media="all">
+<link rel="stylesheet" id="core-Default3.0-css" href="./深入理解JDBC的超时设置 - ImportNew_files/shCoreDefault.css" type="text/css" media="all">
+<link rel="stylesheet" id="theme-Default3.0-css" href="./深入理解JDBC的超时设置 - ImportNew_files/shThemeDefault.css" type="text/css" media="all">
+<div class="fit-vids-style">­<style>               .fluid-width-video-wrapper {                 width: 100%;                              position: relative;                       padding: 0;                            }                                                                                   .fluid-width-video-wrapper iframe,        .fluid-width-video-wrapper object,        .fluid-width-video-wrapper embed {           position: absolute;                       top: 0;                                   left: 0;                                  width: 100%;                              height: 100%;                          }                                       </style></div><script type="text/javascript" src="./深入理解JDBC的超时设置 - ImportNew_files/jquery.js.下载"></script>
+<script type="text/javascript" src="./深入理解JDBC的超时设置 - ImportNew_files/q2w3-fixed-widget.min.js.下载"></script>
+<script type="text/javascript" src="./深入理解JDBC的超时设置 - ImportNew_files/modernizr.js.下载"></script>
+<script type="text/javascript" src="./深入理解JDBC的超时设置 - ImportNew_files/comment-reply.js.下载"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.importnew.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.importnew.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Android一周开发要闻 – 第一期字幕" href="http://www.importnew.com/2434.html">
+<link rel="next" title="Android开发案例——Smule" href="http://www.importnew.com/2488.html">
+<link rel="shortlink" href="http://www.importnew.com/?p=2466">
+
+<!-- All in One SEO Pack 1.6.15.2 by Michael Torbert of Semper Fi Web Design[465,505] -->
+<meta name="description" content="恰当的JDBC超时设置能够有效地减少服务失效的时间。本文将对数据库的各种超时设置及其设置方法做介绍。">
+<meta name="keywords" content="jdbc">
+<link rel="canonical" href="http://www.importnew.com/2466.html">
+<!-- /all in one seo pack -->
+
+<!-- Comment Rating plugin Version: 2.9.32 by Bob King, http://wealthynetizen.com/, dynamic comment voting & styling. --> 
+<style type="text/css" media="screen">
+   .ckrating_highly_rated {background-color:#FFFFCC !important;}
+   .ckrating_poorly_rated {opacity:0.6;filter:alpha(opacity=60) !important;}
+   .ckrating_hotly_debated {background-color:#FFF0F5 !important;}
+</style>
+
+
+<!-- WP SyntaxHighlighter Ver.1.7.3 CSS for code Begin -->
+<style type="text/css">
+.syntaxhighlighter,
+.syntaxhighlighter a,
+.syntaxhighlighter div,
+.syntaxhighlighter code,
+.syntaxhighlighter table,
+.syntaxhighlighter table td,
+.syntaxhighlighter table tr,
+.syntaxhighlighter table tbody,
+.syntaxhighlighter table thead,
+.syntaxhighlighter table caption,
+.syntaxhighlighter textarea {
+font-size: 12px !important; /* Set the font size in pixels */  
+font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important; /* Set the font type */  
+}
+.syntaxhighlighter table caption {
+/* For Title(Caption) */  
+font-size: 14px !important; /* Set the font size in pixels */  
+font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important; /* Set the font type */  
+}
+.syntaxhighlighter.nogutter td.code .line {
+/* Set the left padding space when no-gutter in ver. 3.0 */  
+padding-left: 3px !important;
+}
+.syntaxhighlighter {
+/* For Chrome/Safari(WebKit) */  
+/* Hide the superfluous vertical scrollbar in ver. 3.0 */  
+overflow-y: hidden !important;
+padding: 1px !important;
+}
+.widget-area.syntaxhighlighter a,
+.widget-area.syntaxhighlighter div,
+.widget-area.syntaxhighlighter code,
+.widget-area.syntaxhighlighter table,
+.widget-area.syntaxhighlighter table td,
+.widget-area.syntaxhighlighter table tr,
+.widget-area.syntaxhighlighter table tbody,
+.widget-area.syntaxhighlighter table thead,
+.widget-area.syntaxhighlighter table caption,
+.widget-area.syntaxhighlighter textarea {
+/* For Widget */  
+font-size: 14px !important; /* Set the font size in pixels */  
+font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important; /* Set the font type */  
+}
+.widget-area table caption {
+/* For Widget */  
+/* For Title(Caption) */  
+font-size: 10px !important; /* Set the font size in pixels */  
+font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important; /* Set the font type */  
+}
+</style>
+<!-- WP SyntaxHighlighter Ver.1.7.3 CSS for code End -->
+	
+	<!-- CSS -->
+	<link rel="stylesheet" href="./深入理解JDBC的超时设置 - ImportNew_files/style.css" media="screen">
+	<!-- link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Noticia+Text:400,700italic,700,400italic" media="screen" / -->
+	<style>
+				*::selection { background: #0099cc; }
+		*::-moz-selection { background: #0099cc; }
+		body { background: #ffffff  }
+		a, .tabs ul.nav li a:hover, .tabs ul.nav li.active a, .dropcap, .toggle.hover .toggle-title, li.comment cite a:hover, h3.widget-title, .post-meta .meta-title:hover, .the-latest a:hover h4, .aw_socialcounter_widget li a:hover, .aw_tabbed_widget #tab-latest-comments a:hover { color: #0099cc; }
+		a:hover { color: #b30000; }
+		input:focus, textarea:focus { border-color: #0099cc; }
+		#searchsubmit, .highlight, .aw_tabbed_widget .tabs ul.nav li.active a, footer .aw_tabbed_widget .tabs ul.nav li.active a, #top .aw_tabbed_widget .tabs ul.nav li.active a, .aw_tabbed_widget .tabs ul.nav li a:hover, footer .aw_tabbed_widget .tabs ul.nav li a:hover, #top .aw_tabbed_widget .tabs ul.nav li a:hover, .aw_twitter_widget .twitter-icon, .testimonial-icon, #top-closed:hover, .flex-control-nav a:hover, .flex-control-nav a.flex-active { background-color: #0099cc; }
+		.submit { background-color: #0099cc; border-color: #007399; }
+		.submit:hover { background-color: #b30000; border-color: #860000; }
+		#searchsubmit:hover { background-color: #b30000; }
+		.toggle.hover .toggle-icon { border-top-color: #0099cc; }
+		.toggle.hover.active .toggle-icon { border-bottom-color: #0099cc; }
+		.flex-direction-nav li .flex-prev:hover { border-right-color: #0099cc; }
+		.flex-direction-nav li .flex-next:hover { border-left-color: #0099cc; }
+		@media only screen and (min-width: 768px) and (max-width: 959px) {
+			.aw_tabbed_widget .tabs ul.nav li a:hover, .tabs ul.nav li.active a { color: #0099cc; }
+		}
+		@media screen and (max-width: 767px) {
+			.tabs ul.nav li a:hover, .tabs ul.nav li.active a { color: #0099cc; }
+		}
+	</style>
+		
+	<!--[if IE 8]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+    <![endif]-->
+
+	<!-- Links: RSS + Atom Syndication + Pingback etc. -->
+	<link rel="alternate" type="application/rss+xml" title="ImportNew RSS Feed" href="http://www.importnew.com/feed">
+	<link rel="alternate" type="text/xml" title="RSS .92" href="http://www.importnew.com/feed/rss">
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://www.importnew.com/feed/atom">
+	<link rel="pingback" href="http://www.importnew.com/xmlrpc.php">
+    <script src="./深入理解JDBC的超时设置 - ImportNew_files/wb.js.下载" type="text/javascript" charset="utf-8"></script><script charset="UTF-8" src="./深入理解JDBC的超时设置 - ImportNew_files/query"></script>
+
+<!-- END head -->
+</head>
+
+<!-- BEGIN body -->
+<body class="single single-post postid-2466 single-format-standard chrome"><link href="./深入理解JDBC的超时设置 - ImportNew_files/jiathis_counter.css" rel="stylesheet" type="text/css"><link href="./深入理解JDBC的超时设置 - ImportNew_files/jiathis_share.css" rel="stylesheet" type="text/css"><iframe frameborder="0" style="position: absolute; display: none; opacity: 0;" src="./深入理解JDBC的超时设置 - ImportNew_files/saved_resource.html"></iframe><div class="jiathis_style" style="position: absolute; z-index: 1000000000; display: none; top: 50%; left: 50%; overflow: auto;"></div><div class="jiathis_style" style="position: absolute; z-index: 1000000000; display: none; overflow: auto;"></div><iframe frameborder="0" src="./深入理解JDBC的超时设置 - ImportNew_files/jiathis_utility.html" style="display: none;"></iframe>
+
+		
+	
+	<!-- BEGIN #top-nav -->
+	<nav id="top-nav" class="menu-nav">
+		
+		<!-- BEGIN .container -->
+		<div class="container">
+
+			            <div class="grid-12">
+            </div>
+			<div class="clear"></div>
+		
+		</div>
+		<!-- END .container -->
+    
+	</nav>
+	<!-- END #top-nav -->
+	
+	  	
+	<!-- BEGIN #wrapper -->
+	<div id="wrapper" class="container">
+
+		<!-- BEGIN header -->
+		<header>
+		
+						
+			<div class="header-wrapper">
+								
+				<!-- BEGIN #logo -->
+				<div id="logo" class="leaderboard-true">
+				
+										<a href="http://www.importnew.com/"><img src="./深入理解JDBC的超时设置 - ImportNew_files/6c537425c9ad078efe656a346e5facec.png" width="137" height="85" alt="ImportNew"></a>
+									
+				</div>
+				<!-- END #logo -->
+				
+				<!-- BEGIN #leaderboard -->
+				<div id="leaderboard">
+				
+									
+				</div>
+				<!-- END #leaderboard -->
+				
+				<div class="clear"></div>
+			
+			</div>
+			
+						
+			<div class="clear"></div>
+			
+			<!-- BEGIN #main-nav -->
+			<nav id="main-nav" class="grid-12 menu-nav">
+
+				<div class="menu-main-container"><ul id="main-nav-menu" class="menu sf-js-enabled"><li id="menu-item-14265" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14265"><a href="http://www.importnew.com/">首页</a></li>
+<li id="menu-item-14278" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-14278"><a href="http://www.importnew.com/all-posts">所有文章</a></li>
+<li id="menu-item-858" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-858"><a href="http://www.importnew.com/cat/news">资讯</a></li>
+<li id="menu-item-1120" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1120"><a href="http://www.importnew.com/cat/web-development">Web</a></li>
+<li id="menu-item-1923" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1923"><a href="http://www.importnew.com/cat/architecture">架构</a></li>
+<li id="menu-item-832" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-832"><a href="http://www.importnew.com/cat/basic">基础技术</a></li>
+<li id="menu-item-836" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-836"><a href="http://www.importnew.com/cat/books">书籍</a></li>
+<li id="menu-item-2183" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2183"><a href="http://www.importnew.com/cat/tutorial">教程</a></li>
+<li id="menu-item-20858" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-20858"><a href="http://group.jobbole.com/category/tech/java/" class="external" rel="nofollow" target="_blank">Java小组</a></li>
+<li id="menu-item-20859" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-20859"><a href="http://hao.jobbole.com/?catid=32" class="external" rel="nofollow" target="_blank">工具资源</a></li>
+</ul><select class="selectnav" id="selectnav1"><option value="">- 导航条 -</option><option value="http://www.importnew.com/">首页</option><option value="http://www.importnew.com/all-posts">所有文章</option><option value="http://www.importnew.com/cat/news">资讯</option><option value="http://www.importnew.com/cat/web-development">Web</option><option value="http://www.importnew.com/cat/architecture">架构</option><option value="http://www.importnew.com/cat/basic">基础技术</option><option value="http://www.importnew.com/cat/books">书籍</option><option value="http://www.importnew.com/cat/tutorial">教程</option><option value="http://group.jobbole.com/category/tech/java/">Java小组</option><option value="http://hao.jobbole.com/?catid=32">工具资源</option></select></div>				
+				<div class="clear"></div>
+            
+			</nav>
+			<!-- END #main-nav -->
+			
+			<div class="clear"></div>
+		
+		</header>
+		<!-- END header -->
+		
+		
+
+<!-- BEGIN .grid-8 -->
+<div class="grid-8">
+
+		
+	<!-- BEGIN .post -->
+<div class="post-2466 post type-post status-publish format-standard hentry category-basic tag-jdbc odd" id="post-2466">
+	
+	<!-- BEGIN .entry-header -->
+	<div class="entry-header">
+	
+				
+		<h1>深入理解JDBC的超时设置</h1>
+		
+							
+	</div>
+	<!-- BEGIN .entry-header -->
+	
+	<!-- BEGIN .entry-meta -->
+	<div class="entry-meta">
+	
+		<p class="entry-meta-hide-on-mobile">2013/01/20 | 分类： <a href="http://www.importnew.com/cat/basic" title="查看 基础技术 中的全部文章" rel="category tag">基础技术</a> | <a href="http://www.importnew.com/2466.html#comments" title="《深入理解JDBC的超时设置》上的评论">3  条评论</a>
+
+		 | 标签： <a href="http://www.importnew.com/tag/jdbc">JDBC</a></p>
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style" style="display: block; margin: 0 0px; clear: both;"><span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_tsina" title="分享到微博"><span class="jiathis_txt jtico jtico_tsina"></span></a>
+<a class="jiathis_button_weixin" title="分享到微信"><span class="jiathis_txt jtico jtico_weixin"></span></a>
+<a class="jiathis_button_qzone" title="分享到QQ空间"><span class="jiathis_txt jtico jtico_qzone"></span></a>
+<a class="jiathis_button_fb" title="分享到Facebook"><span class="jiathis_txt jtico jtico_fb"></span></a>
+<a class="jiathis_button_renren" title="分享到人人网"><span class="jiathis_txt jtico jtico_renren"></span></a>
+<a class="jiathis_button_douban" title="分享到豆瓣"><span class="jiathis_txt jtico jtico_douban"></span></a>
+<a class="jiathis_button_readitlater"></a>
+<a class="jiathis_button_evernote" title="分享到印象笔记"><span class="jiathis_txt jtico jtico_evernote"></span></a>
+<a class="jiathis_button_ydnote" title="分享到有道云笔记"><span class="jiathis_txt jtico jtico_ydnote"></span></a>
+<a href="http://www.jiathis.com/share?uid=1745061" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"><span class="jiathis_button_expanded jiathis_counter jiathis_bubble_style" id="jiathis_counter_25" title="累计分享81次">81</span></a>
+</div>
+<!-- JiaThis Button END -->
+
+
+	</div>
+	<!-- END .entry-meta -->
+
+	<!-- BEGIN .entry -->
+	<div class="entry">
+
+        
+		<div class="copyright-area">本文作者： <a href="http://www.importnew.com/">ImportNew</a> - <a href="http://www.importnew.com/author/gemoji">刘翀</a> 未经许可，禁止转载！</div>
+<p>ImportNew注： 本文由新浪微博：<a href="http://www.weibo.com/lc87624" target="_blank" class="external" rel="nofollow">@哥墨迹</a> 投稿至ImportNew。感谢 <a href="http://www.weibo.com/lc87624" target="_blank" class="external" rel="nofollow">@哥墨迹</a> ! 如果你希望分享好的原创文章或者译文，欢迎<a href="http://www.importnew.com/guest-post" target="_blank">投稿到ImportNew</a>。</p>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">恰当的JDBC超时设置能够有效地减少服务失效的时间。本文将对数据库的各种超时设置及其设置方法做介绍。&nbsp;</span></p>
+<p><strong><span style="font-size: large;">真实案例：应用服务器在遭到DDos攻击后无法响应</span></strong><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">&nbsp;</span></p>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">在遭到DDos攻击后，整个服务都垮掉了。由于第四层交换机不堪重负，网络变得无法连接，从而导致业务系统也无法正常运转。安全组很快屏蔽了所有的DDos攻击，并恢复了网络，但业务系统却还是无法工作。 </span><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">通过分析系统的thread dump发现，业务系统停在了JDBC API的调用上。20分钟后，系统仍处于WAITING状态，无法响应。30分钟后，系统抛出异常，服务恢复正常。&nbsp;<span id="more-2466"></span></span></p>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">为什么我们明明将query timeout设置成了3秒，系统却持续了30分钟的WAITING状态？为什么30分钟后系统又恢复正常了？ </span><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">当你对理解了JDBC的超时设置后，就能找到问题的答案。&nbsp;</span></p>
+<p><strong><span style="font-size: large;">为什么我们要了解JDBC？</span></strong><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">当遇到性能问题或系统出错时，业务系统和数据库通常是我们最关心的两个部分。在公司里，这两个部分是交由两个不同的部门来负责的，因此各个部门都会集中精力地在自身领域内寻找问题，这样的话，在业务系统和数据库之间的部分就会成为一个盲区。对于Java应用而言，这个盲区就是DBCP数据库连接池和JDBC，本文将集中介绍JDBC。&nbsp;</span></p>
+<p><strong><span style="font-size: large;">什么是JDBC？</span></strong><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">&nbsp;</span></p>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">JDBC是Java应用中用来连接关系型数据库的标准API。Sun公司一共定义了</span><a href="http://en.wikipedia.org/wiki/JDBC_driver" target="_blank" class="external" rel="nofollow">4种类型的JDBC</a><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">，我们主要使用的是第4种，该类型的Driver完全由Java代码实现，通过使用socket与数据库进行通信。&nbsp;</span></p>
+<div style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px; text-align: center;"><img src="./深入理解JDBC的超时设置 - ImportNew_files/jdbc-type-4.png" alt=""></div>
+<p>&nbsp;</p>
+<div style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px; text-align: center;">图1 JDBC Type 4.</div>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">第4种类型的JDBC通过socket对字节流进行处理，因此也会有一些基本网络操作，类似于HttpClient这种用于网络操作的代码库。当在网络操作中遇到问题的时候，将会消耗大量的cpu资源，并且失去响应超时。如果你之前用过HttpClient，那么你一定遇到过未设置timeout造成的错误。同样，第4种类型的JDBC，若没有合理地设置socket timeout，也会有相同的错误——连接被阻塞。&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">接下来，就让我们来学习一下如何正确地设置socket timeout，以及需要考虑的问题。&nbsp;</span></p>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">应用与数据库间的timeout层级&nbsp;</span></p>
+<div style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px; text-align: center;"><img src="./深入理解JDBC的超时设置 - ImportNew_files/timeout-class.png" alt=""></div>
+<p>&nbsp;</p>
+<div style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px; text-align: center;">图2 Timeout Class.</div>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">上图展示了简化后应用与数据库间的timeout层级。（译者注：WAS/BLOC是作者公司的具体应用名称，无需深究）&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">高级别的timeout依赖于低级别的timeout，只有当低级别的timeout无误时，高级别的timeout才能确保正常。例如，当socket timeout出现问题时，高级别的statement timeout和transaction timeout都将失效。&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">我们收到的很多评论中提到：&nbsp;</span></p>
+<div class="quote_title" style="font-weight: bold; padding: 5px; margin: 5px 0px 0px 15px; font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">引用</div>
+<div class="quote_div" style="border: 1px solid #cccccc; margin: 0px 5px 5px 15px; padding: 3px; background-color: #fafafa; font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">即使设置了statement timeout，当网络出错时，应用也无法从错误中恢复。</div>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">statement timeout无法处理网络连接失败时的超时，它能做的仅仅是限制statement的操作时间。网络连接失败时的timeout必须交由JDBC来处理。&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">JDBC的socket timeout会受到操作系统socket timeout设置的影响，这就解释了为什么在之前的案例中，JDBC连接会在网络出错后阻塞30分钟，然后又奇迹般恢复，即使我们并没有对JDBC的socket timeout进行设置。&nbsp;</span></p>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">DBCP连接池位于图2的左侧，你会发现timeout层级与DBCP是相互独立的。DBCP负责的是数据库连接的创建和管理，并不干涉timeout的处理。当连接在DBCP中创建，或是DBCP发送校验query检查连接有效性的时候，socket timeout将会影响这些过程，但并不直接对应用造成影响。&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">当在应用中调用DBCP的getConnection()方法时，你可以设置获取数据库连接的超时时间，但是这和JDBC的timeout毫不相关。&nbsp;</span></p>
+<div style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px; text-align: center;"><img src="./深入理解JDBC的超时设置 - ImportNew_files/timeout-of-each-level.png" alt=""></div>
+<p>&nbsp;</p>
+<div style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px; text-align: center;">图3 Timeout for Each Levels.</div>
+<p><strong><span style="font-size: large;">什么是Transaction Timeout？</span></strong><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">&nbsp;</span></p>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">transaction timeout一般存在于框架（Spring, EJB）或应用级。transaction timeout或许是个相对陌生的概念，简单地说，transaction timeout就是“statement Timeout * N（需要执行的statement数量） + @（垃圾回收等其他时间）”。transaction timeout用来限制执行statement的总时长。&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">例如，假设执行一个statement需要0.1秒，那么执行少量statement不会有什么问题，但若是要执行100,000个statement则需要10,000秒（约7个小时）。这时，transaction timeout就派上用场了。EJB CMT (Container Managed Transaction)就是一种典型的实现，它提供了多种方法供开发者选择。但我们并不使用EJB，Spring的transaction timeout设置会更常用一些。在Spring中，你可以使用下面展示的XML或是在源码中使用@Transactional注解来进行设置。&nbsp;</span></p>
+<div class="dp-highlighter" style="font-family: Monaco, &#39;DejaVu Sans Mono&#39;, &#39;Bitstream Vera Sans Mono&#39;, Consolas, &#39;Courier New&#39;, monospace; width: 694.515625px; overflow: auto; margin-left: 9px; padding: 1px; line-height: 18px;">
+<div class="bar">
+<div class="tools" style="padding: 3px; margin: 0px; font-weight: bold;">Xml代码</div>
+</div>
+<ol class="dp-xml" style="font-size: 1em; line-height: 1.4em; margin: 0px 0px 1px; padding: 2px 0px; border: 1px solid #d1d7dc; color: #2b91af;">
+<li><span style="color: black;"><span class="tag" style="color: #006699; font-weight: bold;">&lt;</span><span class="tag-name" style="color: #006699; font-weight: bold;">tx:attributes</span><span class="tag" style="color: #006699; font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+<li><span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag" style="color: #006699; font-weight: bold;">&lt;</span><span class="tag-name" style="color: #006699; font-weight: bold;">tx:method</span>&nbsp;<span class="attribute" style="color: red;">name</span>=<span class="attribute-value" style="color: blue;">“…”</span>&nbsp;<span class="attribute" style="color: red;">timeout</span>=<span class="attribute-value" style="color: blue;">“3″</span><span class="tag" style="color: #006699; font-weight: bold;">/&gt;</span>&nbsp;&nbsp;</span></li>
+<li><span style="color: black;"><span class="tag" style="color: #006699; font-weight: bold;">&lt;/</span><span class="tag-name" style="color: #006699; font-weight: bold;">tx:attributes</span><span class="tag" style="color: #006699; font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+</ol>
+</div>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">Spring提供的transaction timeout配置非常简单，它会记录每个事务的开始时间和消耗时间，当特定的事件发生时就会对消耗时间做校验，当超出timeout值时将抛出异常。&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">Spring中，数据库连接被保存在ThreadLocal里，这被称为事务同步（Transaction Synchronization），与此同时，事务的开始时间和消耗时间也被保存下来。当使用这种代理连接创建statement时，就会校验事务的消耗时间。EJB CMT的实现方式与之类似，其结构本身也十分简单。&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">当你选用的容器或框架并不支持transaction timeout这一特性，你可以考虑自己来实现。transaction timeout并没有标准的API。Lucy框架的1.5和1.6版本都不支持transaction timeout，但是你可以通过使用Spring的Transaction Manager来达到与之同样的效果。&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">假设某个事务中包含5个statement，每个statement的执行时间是200ms，其他业务逻辑的执行时间是100ms，那么transaction timeout至少应该设置为1,100ms（200 * 5 + 100）。&nbsp;</span></p>
+<p><strong><span style="font-size: large;">什么是Statement Timeout？</span></strong><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">statement timeout用来限制statement的执行时长，timeout的值通过调用JDBC的java.sql.Statement.setQueryTimeout(int timeout) API进行设置。不过现在开发者已经很少直接在代码中设置，而多是通过框架来进行设置。&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">以iBatis为例，statement timeout的默认值可以通过sql-map-config.xml中的defaultStatementTimeout 属性进行设置。同时，你还可以设置sqlmap中select，insert，update标签的timeout属性，从而对不同sql语句的超时时间进行独立的配置。&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">如果你使用的是Lucy1.5或1.6版本，通过设置queryTimeout属性可以在datasource层面对statement timeout进行设置。&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">statement timeout的具体值需要依据应用本身的特性而定，并没有可供推荐的配置。&nbsp;</span></p>
+<p><strong><span style="font-size: large;">JDBC的statement timeout处理过程</span></strong><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">不同的关系型数据库，以及不同的JDBC驱动，其statement timeout处理过程会有所不同。其中，Oracle和MS SQLServer的处理相类似，MySQL和</span><a href="http://www.cubrid.org/" target="_blank" class="external" rel="nofollow">CUBRID</a><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">类似。&nbsp;</span></p>
+<p><strong><span style="font-size: medium;">Oracle JDBC Statement的QueryTimeout处理过程</span></strong><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">1. 通过调用Connection的createStatement()方法创建statement&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">2. 调用Statement的executeQuery()方法&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">3. statement通过自身connection将query发送给Oracle数据库&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">4. statement在OracleTimeoutPollingThread（每个classloader一个）上进行注册&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">5. 达到超时时间&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">6. OracleTimeoutPollingThread调用OracleStatement的cancel()方法&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">7. 通过connection向正在执行的query发送cancel消息&nbsp;</span></p>
+<div style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px; text-align: center;"><img src="./深入理解JDBC的超时设置 - ImportNew_files/query-timeout-execution-process-for-oracle-jdbc-statement.png" alt=""></div>
+<p>&nbsp;</p>
+<div style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px; text-align: center;">图4 Query Timeout Execution Process for Oracle JDBC Statement.</div>
+<p><strong><span style="font-size: medium;">JTDS (MS SQLServer) Statement的QueryTimeout处理过程</span></strong><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">1. 通过调用Connection的createStatement()方法创建statement&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">2. 调用Statement的executeQuery()方法&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">3. statement通过自身connection将query发送给MS SqlServer数据库&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">4. statement在TimerThread上进行注册&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">5. 达到超时时间&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">6. TimerThread调用JtdsStatement实例中的TsdCore.cancel()方法&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">7. 通过ConnectionJDBC向正在执行的query发送cancel消息&nbsp;</span></p>
+<div style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px; text-align: center;"><img src="./深入理解JDBC的超时设置 - ImportNew_files/query-timeout-execution-process-for-jtds-ms-sql-server-statement.png" alt=""></div>
+<p>&nbsp;</p>
+<div style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px; text-align: center;">图5 QueryTimeout Execution Process for JTDS (MS SQLServer) Statement.</div>
+<p><strong><span style="font-size: medium;">MySQL JDBC Statement的QueryTimeout处理过程</span></strong><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">1. 通过调用Connection的createStatement()方法创建statement&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">2. 调用Statement的executeQuery()方法&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">3. statement通过自身connection将query发送给MySQL数据库&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">4. statement创建一个新的timeout-execution线程用于超时处理&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">5. 5.1版本后改为每个connection分配一个timeout-execution线程&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">6. 向timeout-execution线程进行注册&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">7. 达到超时时间&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">6. TimerThread调用JtdsStatement实例中的TsdCore.cancel()方法&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">7. timeout-execution线程创建一个和statement配置相同的connection&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">8. 使用新创建的connection向超时query发送cancel query（KILL QUERY “connectionId”）&nbsp;</span></p>
+<div style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px; text-align: center;"><img src="./深入理解JDBC的超时设置 - ImportNew_files/query-timeout-execution-process-for-mysql-jdbc-statement.png" alt=""></div>
+<p>&nbsp;</p>
+<div style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px; text-align: center;">图6 QueryTimeout Execution Process for MySQL JDBC Statement (5.0.8).</div>
+<p><strong><span style="font-size: medium;">CUBRID JDBC Statement的QueryTimeout处理过程</span></strong><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">1. 通过调用Connection的createStatement()方法创建statement&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">2. 调用Statement的executeQuery()方法&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">3. statement通过自身connection将query发送给CUBRID数据库&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">4. statement创建一个新的timeout-execution线程用于超时处理&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">5. 5.1版本后改为每个connection分配一个timeout-execution线程&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">6. 向timeout-execution线程进行注册&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">7. 达到超时时间&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">6. TimerThread调用JtdsStatement实例中的TsdCore.cancel()方法&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">7. timeout-execution线程创建一个和statement配置相同的connection&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">8. 使用新创建的connection向超时query发送cancel消息&nbsp;</span></p>
+<div style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px; text-align: center;"><img src="./深入理解JDBC的超时设置 - ImportNew_files/query-timeout-execution-process-for-cubrid-jdbc-statement.png" alt=""></div>
+<p>&nbsp;</p>
+<div style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px; text-align: center;">图7 QueryTimeout Execution Process for CUBRID JDBC Statement.</div>
+<p><strong><span style="font-size: large;">什么是JDBC的socket timeout？</span></strong><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">第4种类型的JDBC使用socket与数据库连接，数据库并不对应用与数据库间的连接超时进行处理。&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">JDBC的socket timeout在数据库被突然停掉或是发生网络错误（由于设备故障等原因）时十分重要。由于TCP/IP的结构原因，socket没有办法探测到网络错误，因此应用也无法主动发现数据库连接断开。如果没有设置socket timeout的话，应用在数据库返回结果前会无期限地等下去，这种连接被称为dead connection。&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">为了避免dead connections，socket必须要有超时配置。socket timeout可以通过JDBC设置，socket timeout能够避免应用在发生网络错误时产生无休止等待的情况，缩短服务失效的时间。&nbsp;</span></p>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">不推荐使用socket timeout来限制statement的执行时长，因此socket timeout的值必须要高于statement timeout，否则，socket timeout将会先生效，这样statement timeout就变得毫无意义，也无法生效。&nbsp;</span></p>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">下面展示了socket timeout的两个设置项，不同的JDBC驱动其配置方式会有所不同。&nbsp;</span></p>
+<ul style="margin: 0px 0px 1.5em; padding: 0px; font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">
+<li>socket连接时的timeout：通过Socket.connect(SocketAddress endpoint, int timeout)设置</li>
+<li>socket读写时的timeout：通过Socket.setSoTimeout(int timeout)设置</li>
+</ul>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">通过查看CUBRID，MySQL，MS SQL Server (JTDS)和Oracle的JDBC驱动源码，我们发现所有的驱动内部都是使用上面的2个API来设置socket timeout的。&nbsp;</span></p>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">下面是不同驱动的socket timeout配置方式。&nbsp;</span></p>
+<table class="bbcode" style="border: 1px solid #cccccc; color: #000000; font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 12px; line-height: 18px;">
+<tbody>
+<tr>
+<td style="font-size: 1em; border: 1px solid #cccccc; padding: 3px;">JDBC Driver</td>
+<td style="font-size: 1em; border: 1px solid #cccccc; padding: 3px;">connectTimeout配置项</td>
+<td style="font-size: 1em; border: 1px solid #cccccc; padding: 3px;">socketTimeout配置项</td>
+<td style="font-size: 1em; border: 1px solid #cccccc; padding: 3px;">url格式</td>
+<td style="font-size: 1em; border: 1px solid #cccccc; padding: 3px;">示例</td>
+</tr>
+<tr>
+<td style="font-size: 1em; border: 1px solid #cccccc; padding: 3px;">MySQL Driver</td>
+<td style="font-size: 1em; border: 1px solid #cccccc; padding: 3px;">connectTimeout（默认值：0，单位：ms）</td>
+<td style="font-size: 1em; border: 1px solid #cccccc; padding: 3px;">socketTimeout（默认值：0，单位：ms）</td>
+<td style="font-size: 1em; border: 1px solid #cccccc; padding: 3px;">jdbc:mysql://[host:port],[host:port]…/[database][?propertyName1][=propertyValue1][&amp;propertyName2][=propertyValue2]…</td>
+<td style="font-size: 1em; border: 1px solid #cccccc; padding: 3px;">jdbc:mysql://xxx.xx.xxx.xxx:3306/database?connectTimeout=60000&amp;socketTimeout=60000</td>
+</tr>
+<tr>
+<td style="font-size: 1em; border: 1px solid #cccccc; padding: 3px;">MS-SQL DriverjTDS Driver</td>
+<td style="font-size: 1em; border: 1px solid #cccccc; padding: 3px;">loginTimeout（默认值：0，单位：s）</td>
+<td style="font-size: 1em; border: 1px solid #cccccc; padding: 3px;">socketTimeout（默认值：0，单位：s）</td>
+<td style="font-size: 1em; border: 1px solid #cccccc; padding: 3px;">jdbc:jtds:&lt;server_type&gt;://&lt;server&gt;[:&lt;port&gt;][/&lt;database&gt;][;&lt;property&gt;=&lt;value&gt;[;...]]</td>
+<td style="font-size: 1em; border: 1px solid #cccccc; padding: 3px;">jdbc:jtds:sqlserver://server:port/database;loginTimeout=60;socketTimeout=60</td>
+</tr>
+<tr>
+<td style="font-size: 1em; border: 1px solid #cccccc; padding: 3px;">Oracle Thin Driver</td>
+<td style="font-size: 1em; border: 1px solid #cccccc; padding: 3px;">oracle.net.CONNECT_TIMEOUT （默认值：0，单位：ms）</td>
+<td style="font-size: 1em; border: 1px solid #cccccc; padding: 3px;">oracle.jdbc.ReadTimeout（默认值：0，单位：ms）</td>
+<td style="font-size: 1em; border: 1px solid #cccccc; padding: 3px;">不支持通过url配置，只能通过OracleDatasource.setConnectionProperties() API设置，使用DBCP时可以调用BasicDatasource.setConnectionProperties()或BasicDatasource.addConnectionProperties()进行设置</td>
+<td style="font-size: 1em; border: 1px solid #cccccc; padding: 3px;"></td>
+</tr>
+<tr>
+<td style="font-size: 1em; border: 1px solid #cccccc; padding: 3px;">CUBRID Thin Driver</td>
+<td style="font-size: 1em; border: 1px solid #cccccc; padding: 3px;">无独立配置项（默认值：5,000，单位：ms）</td>
+<td style="font-size: 1em; border: 1px solid #cccccc; padding: 3px;">无独立配置项（默认值：5,000，单位：ms）</td>
+<td style="font-size: 1em; border: 1px solid #cccccc; padding: 3px;"></td>
+<td style="font-size: 1em; border: 1px solid #cccccc; padding: 3px;"></td>
+</tr>
+</tbody>
+</table>
+<ul style="margin: 0px 0px 1.5em; padding: 0px; font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">
+<li>connectTimeout和socketTimeout的默认值为0时，timeout不生效。</li>
+<li>除了调用DBCP的API以外，还可以通过properties属性进行配置。</li>
+</ul>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">通过properties属性进行配置时，需要传入key为“connectionProperties”的键值对，value的格式为“[propertyName=property;]*”。下面是iBatis中的properties配置。&nbsp;</span></p>
+<div class="dp-highlighter" style="font-family: Monaco, &#39;DejaVu Sans Mono&#39;, &#39;Bitstream Vera Sans Mono&#39;, Consolas, &#39;Courier New&#39;, monospace; width: 694.515625px; overflow: auto; margin-left: 9px; padding: 1px; line-height: 18px;">
+<div class="bar">
+<div class="tools" style="padding: 3px; margin: 0px; font-weight: bold;">Xml代码</div>
+</div>
+<ol class="dp-xml" style="font-size: 1em; line-height: 1.4em; margin: 0px 0px 1px; padding: 2px 0px; border: 1px solid #d1d7dc; color: #2b91af;">
+<li><span style="color: black;"><span class="tag" style="color: #006699; font-weight: bold;">&lt;</span><span class="tag-name" style="color: #006699; font-weight: bold;">transactionManager</span>&nbsp;<span class="attribute" style="color: red;">type</span>=<span class="attribute-value" style="color: blue;">“JDBC”</span><span class="tag" style="color: #006699; font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+<li><span style="color: black;">&nbsp;&nbsp;<span class="tag" style="color: #006699; font-weight: bold;">&lt;</span><span class="tag-name" style="color: #006699; font-weight: bold;">dataSource</span>&nbsp;<span class="attribute" style="color: red;">type</span>=<span class="attribute-value" style="color: blue;">“com.nhncorp.lucy.db.DbcpDSFactory”</span><span class="tag" style="color: #006699; font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+<li><span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;….&nbsp;&nbsp;</span></li>
+<li><span style="color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag" style="color: #006699; font-weight: bold;">&lt;</span><span class="tag-name" style="color: #006699; font-weight: bold;">property</span>&nbsp;<span class="attribute" style="color: red;">name</span>=<span class="attribute-value" style="color: blue;">“connectionProperties”</span>&nbsp;<span class="attribute" style="color: red;">value</span>=<span class="attribute-value" style="color: blue;">“oracle.net.CONNECT_TIMEOUT=6000;oracle.jdbc.ReadTimeout=6000″</span><span class="tag" style="color: #006699; font-weight: bold;">/&gt;</span>&nbsp;&nbsp;&nbsp;</span></li>
+<li><span style="color: black;">&nbsp;&nbsp;<span class="tag" style="color: #006699; font-weight: bold;">&lt;/</span><span class="tag-name" style="color: #006699; font-weight: bold;">dataSource</span><span class="tag" style="color: #006699; font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+<li><span style="color: black;"><span class="tag" style="color: #006699; font-weight: bold;">&lt;/</span><span class="tag-name" style="color: #006699; font-weight: bold;">transactionManager</span><span class="tag" style="color: #006699; font-weight: bold;">&gt;</span>&nbsp;&nbsp;</span></li>
+</ol>
+</div>
+<p><strong><span style="font-size: large;">操作系统的socket timeout配置</span></strong><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">如果不设置socket timeout或connect timeout，应用多数情况下是无法发现网络错误的。因此，当网络错误发生后，在连接重新连接成功或成功接收到数据之前，应用会无限制地等下去。但是，通过本文开篇处的实际案例我们发现，30分钟后应用的连接问题奇迹般的解决了，这是因为操作系统同样能够对socket timeout进行配置。公司的Linux服务器将socket timeout设置为了30分钟，从而会在操作系统的层面对网络连接做校验，因此即使JDBC的socket timeout设置为0，由网络错误造成的数据库连接问题的持续时间也不会超过30分钟。&nbsp;</span></p>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">通常，应用会在调用Socket.read()时由于网络问题被阻塞住，而很少在调用Socket.write()时进入waiting状态，这取决于网络构成和错误类型。当Socket.write()被调用时，数据被写入到操作系统内核的缓冲区，控制权立即回到应用手上。因此，一旦数据被写入内核缓冲区，Socket.write()调用就必然会成功。但是，如果系统内核缓冲区由于某种网络错误而满了的话，Socket.write()也会进入waiting状态。这种情况下，操作系统会尝试重新发包，当达到重试的时间限制时，将产生系统错误。在我们公司，重新发包的超时时间被设置为15分钟。&nbsp;</span></p>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">至此，我已经对JDBC的内部操作做了讲解，希望能够让大家学会如何正确的配置超时时间，从而减少错误的发生。&nbsp;</span></p>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">最后，我将列出一些常见的问题。&nbsp;</span></p>
+<p><strong><span style="font-size: large;">FAQ</span></strong><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">&nbsp;</span><br>
+<span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">Q1. 我已经使用Statement.setQueryTimeout()方法设置了查询超时，但在网络出错时并没有产生作用。&nbsp;</span></p>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">➔ 查询超时仅在socket timeout生效的前提下才有效，它并不能用来解决外部的网络错误，要解决这种问题，必须设置JDBC的socket timeout。&nbsp;</span></p>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">Q2. transaction timeout，statement timeout和socket timeout和DBCP的配置有什么关系？&nbsp;</span></p>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">➔ 当通过DBCP获取数据库连接时，除了DBCP获取连接时的waitTimeout配置以外，其他配置对JDBC没有什么影响。&nbsp;</span></p>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">Q3. 如果设置了JDBC的socket timeout，那DBCP连接池中处于IDLE状态的连接是否也会在达到超时时间后被关闭？&nbsp;</span></p>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">➔ 不会。socket的设置只会在产生数据读写时生效，而不会对DBCP中的IDLE连接产生影响。当DBCP中发生新连接创建，老的IDLE连接被移除，或是连接有效性校验的时候，socket设置会对其产生一定的影响，但除非发生网络问题，否则影响很小。&nbsp;</span></p>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">Q4. socket timeout应该设置为多少？&nbsp;</span></p>
+<p><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; line-height: 18px;">➔ 就像我在正文中提的那样，socket timeout必须高于statement timeout，但并没有什么推荐值。在发生网络错误的时候，socket timeout将会生效，但是再小心的配置也无法避免网络错误的发生，只是在网络错误发生后缩短服务失效的时间（如果网络恢复正常的话）。</span></p>
+<p>英文原文：<a href="http://www.cubrid.org/blog/dev-platform/understanding-jdbc-internals-and-timeout-configuration/" target="_blank" class="external" rel="nofollow">Cubrid</a>，翻译：<a href="http://www.weibo.com/lc87624" target="_blank" class="external" rel="nofollow">@哥墨迹</a></p>
+<p>译文链接：<a href="http://www.importnew.com/2466.html" target="_blank">http://www.importnew.com/2466.html</a></p>
+<p><span style="color: #ff0000;">【如需转载，请联系译者 <a href="http://www.weibo.com/lc87624" target="_blank" class="external" rel="nofollow"><span style="color: #ff0000;">@哥墨迹</span></a>！】</span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+        
+        
+        <!-- BEGIN #author-bio -->
+
+<div id="author-bio">
+	
+	<h3 class="widget-title">
+	关于作者： <a href="http://www.importnew.com/author/gemoji">刘翀</a>
+	</h3>
+	<div class="alignleft">
+		<a href="http://www.importnew.com/author/gemoji">
+					</a>
+	</div>
+	<p>去哪儿网-搜索技术部-开发工程师。 过去时:淘宝北京 花名“青雉”（新浪微博 <a href="http://weibo.com/lc87624" class="external" rel="nofollow" target="_blank">@哥墨迹</a> ）</p>
+	<p>
+		<a style="text-decoration: none;" href="http://www.importnew.com/author/gemoji">查看刘翀的更多文章 &gt;&gt; </a>
+	</p>
+	<div class="clear"></div>
+	
+</div>
+
+<!-- END #author-bio -->
+	</div>
+	<!-- END .entry -->
+
+
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+<a class="jiathis_button_tsina" title="分享到微博"><span class="jiathis_txt jtico jtico_tsina"></span></a>
+<a class="jiathis_button_weixin" title="分享到微信"><span class="jiathis_txt jtico jtico_weixin"></span></a>
+<a class="jiathis_button_qzone" title="分享到QQ空间"><span class="jiathis_txt jtico jtico_qzone"></span></a>
+<a class="jiathis_button_fb" title="分享到Facebook"><span class="jiathis_txt jtico jtico_fb"></span></a>
+<a class="jiathis_button_renren" title="分享到人人网"><span class="jiathis_txt jtico jtico_renren"></span></a>
+<a class="jiathis_button_douban" title="分享到豆瓣"><span class="jiathis_txt jtico jtico_douban"></span></a>
+<a class="jiathis_button_googleplus" title="分享到Google+"><span class="jiathis_txt jtico jtico_googleplus"></span></a>
+<a class="jiathis_button_readitlater"></a>
+<a class="jiathis_button_evernote" title="分享到印象笔记"><span class="jiathis_txt jtico jtico_evernote"></span></a>
+<a class="jiathis_button_ydnote" title="分享到有道云笔记"><span class="jiathis_txt jtico jtico_ydnote"></span></a>
+<a href="http://www.jiathis.com/share?uid=1745061" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis external" target="_blank" rel="nofollow"></a>
+<a class="jiathis_counter_style"><span class="jiathis_button_expanded jiathis_counter jiathis_bubble_style" id="jiathis_counter_52" title="累计分享81次">81</span></a>
+</div>
+
+
+<script type="text/javascript">
+var jiathis_config={
+	data_track_clickback:false,
+	title:"《深入理解JDBC的超时设置》",
+	summary:"在遭到DDos攻击后，整个服务都垮掉了。由于第四层交换机不堪重负，网络变得无法连接，从而导致业务系统也无法正常运转。安全组很快屏蔽了所有的DDos攻击，并恢复了网络，但业务系统却还是无法工作。 通过分析系统的thread dump发现，业务系统停在了JDBC API的调用上。20分钟后，系统仍处于WAITING状态，无法响应。30分钟后，系统抛出异常，服务恢复正常。 ",
+	pic:"http://www.cubrid.org/files/attach/images/220547/584/303/jdbc-type-4.png",
+	appkey:{
+                "tsina":2284713194 //for importnew
+        },
+	ralateuid:{
+		"tsina":2991905905 //for importnew
+	},
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="./深入理解JDBC的超时设置 - ImportNew_files/jia.js.下载" charset="utf-8"></script><script type="text/javascript" src="./深入理解JDBC的超时设置 - ImportNew_files/plugin.client.js.下载" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+<br><br>
+<div id="text-13">			<div class="textwidget"><p><a href="http://blog.jobbole.com/106093/" target="_blank" class="external" rel="nofollow"><img src="./深入理解JDBC的超时设置 - ImportNew_files/bfdcef89gw1f9cf7iwi24j20h802sjrz.jpg"></a></p>
+</div>
+		</div>
+</div>
+<!-- END .post -->	
+	
+<script type="text/javascript">
+window._wp_rp_static_base_url = "http://dtmvdvtzf8rz0.cloudfront.net/static/";
+
+</script>
+<h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp" style="visibility:visible;"><li position="0"><a href="http://www.importnew.com/25114.html">Mysql Java 驱动代码阅读笔记及 JDBC 规范笔记</a></li><li position="1"><a href="http://www.importnew.com/18104.html">跟我学Spring3（7.5）：对JDBC的支持之集成Spring JDBC及最佳实践</a></li><li position="2"><a href="http://www.importnew.com/18016.html">跟我学Spring3（7.4）：对JDBC的支持之Spring提供的其它帮助</a></li><li position="3"><a href="http://www.importnew.com/18013.html"> 跟我学Spring3（7.3）：对JDBC的支持之关系数据库操作对象化</a></li><li position="4"><a href="http://www.importnew.com/17939.html">跟我学Spring3（ 7.2 ）：对JDBC的支持之JDBC模板类</a></li><li position="5"><a href="http://www.importnew.com/17932.html">JDBC基础</a></li><li position="6"><a href="http://www.importnew.com/17927.html">跟我学Spring3（ 7.1 ）：对JDBC的支持之概述 </a></li><li position="7"><a href="http://www.importnew.com/17477.html">Java Web系列：JDBC 基础</a></li><li position="8"><a href="http://www.importnew.com/16799.html">JDBC 实现篇(1)：Dirver 注册和获取及 Connection 获取原理</a></li><li position="9"><a href="http://www.importnew.com/11469.html">数据库连接池浅析</a></li></ul>
+
+			
+	
+<!-- BEGIN #respond -->
+<div id="respond">
+
+	<h3 class="widget-title">发表评论</h3>
+	
+	<!-- BEGIN .cancel-comment-reply -->
+	<p class="cancel-comment-reply">
+		
+		<a rel="nofollow" id="cancel-comment-reply-link" href="http://www.importnew.com/2466.html#respond" style="display:none;">点击这里取消回复。</a>		
+	</p>
+	<!-- END .cancel-comment-reply -->
+
+		
+	<!-- BEGIN #comment-form -->
+	<form action="http://www.importnew.com/wp-comments-post.php" method="post" id="comment-form">
+		
+		<fieldset>
+		
+			<legend class="none">Comment form</legend>
+			
+			<!-- BEGIN .container -->
+			<div class="container">
+			
+							
+				<div class="grid-4 margin-20">
+					<label for="author">Name<span class="red">*</span></label>
+				</div>
+				
+				<div class="grid-4 margin-20">
+					<div class="input-wrapper"><input type="text" name="author" id="author" value="" tabindex="1" size="30" class="required" placeholder="姓名"></div>
+				</div>
+				<div class="clear"></div>
+				
+				<div class="grid-4 margin-20">
+					<label for="email">邮箱<span class="red">*</span></label>
+				</div>
+				
+				<div class="grid-4 margin-20">
+					<div class="input-wrapper"><input type="email" name="email" id="email" value="" tabindex="2" size="30" class="required email" placeholder="请填写邮箱"></div>
+				</div>
+				<div class="clear"></div>
+				
+				<div class="grid-4 margin-20">
+					<label for="url">网站 (请以 http://开头)</label>
+				</div>
+				
+				<div class="grid-4 margin-20">
+					<div class="input-wrapper"><input type="url" name="url" id="url" value="" tabindex="3" size="30" placeholder="请填写网站地址"></div>
+				</div>
+				<div class="clear"></div>
+				
+								
+				<div class="grid-8 margin-20">
+					<label for="comment" class="none margin-20">评论内容<span class="red">*</span></label>
+					<div class="input-wrapper"><textarea name="comment" id="comment" rows="20" cols="30" class="required" tabindex="4" onkeydown="if(event.ctrlKey &amp;&amp; event.keyCode==13){document.getElementById(&#39;comment-form-submit&#39;).click(); return false;}" placeholder="请填写评论内容"></textarea></div>
+				</div>
+				<div class="clear"></div>
+				
+			</div>
+			<!-- END .container -->
+			
+			<p>(<span class="red">*</span>) 表示必填项</p>
+			<p></p><div class="submit-wrapper"><a id="comment-form-submit" class="submit">提交评论</a></div><p></p>
+			<input type="hidden" name="comment_post_ID" value="2466" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+			<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="555d602e1d"></p>			
+		</fieldset>
+		
+	</form>
+	<!-- END #comment-form -->
+	
+	
+</div>
+<!-- END #respond -->
+
+	<h3 id="comments" class="widget-title">3 条评论</h3>
+	
+	<!-- BEGIN .commentlist -->
+	<ol class="commentlist">
+	
+				<li class="comment even thread-even depth-1" id="comment-509173">
+				<div id="div-comment-509173" class="comment-body">
+				<div class="comment-author vcard">
+				<cite class="fn">十年一梦</cite> <span class="says">说道：</span>		</div>
+
+		<div class="comment-meta commentmetadata"><a href="http://www.importnew.com/2466.html#comment-509173">
+			2016/09/12 上午 10:11</a>		</div>
+
+		<p>我连接池使用com.alibaba.druid.pool.DruidDataSource设置socketTimeout为什么没有效果jdbc:mysql://ip:port/db?useUnicode=true&amp;characterEncoding=UTF-8&amp;connectTimeout=5000&amp;socketTimeout=15000</p>
+<p> <img style="padding: 0px; border: none; cursor: pointer;" onmouseover="this.width=this.width*1.3" onmouseout="this.width=this.width/1.2" id="up-509173" src="./深入理解JDBC的超时设置 - ImportNew_files/1_14_up.png" alt="Thumb up" onclick="javascript:ckratingKarma(&#39;509173&#39;, &#39;add&#39;, &#39;www.importnew.com/wp-content/plugins/comment-rating/&#39;, &#39;1_14_&#39;);" title="赞同"> <span id="karma-509173-up" style="font-size:12px; color:#009933;">0</span>&nbsp;<img style="padding: 0px; border: none; cursor: pointer;" onmouseover="this.width=this.width*1.3" onmouseout="this.width=this.width/1.2" id="down-509173" src="./深入理解JDBC的超时设置 - ImportNew_files/1_14_down.png" alt="Thumb down" onclick="javascript:ckratingKarma(&#39;509173&#39;, &#39;subtract&#39;, &#39;www.importnew.com/wp-content/plugins/comment-rating/&#39;, &#39;1_14_&#39;)" title="反对"> <span id="karma-509173-down" style="font-size:12px; color:#990033;">0</span></p>
+		<div class="reply">
+		<a class="comment-reply-link" href="http://www.importnew.com/2466.html?replytocom=509173#respond" onclick="return addComment.moveForm(" div-comment-509173",="" "509173",="" "respond",="" "2466")"="">回复</a>		</div>
+				</div>
+		</li>
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-532466">
+				<div id="div-comment-532466" class="comment-body">
+				<div class="comment-author vcard">
+				<cite class="fn">徐东焱</cite> <span class="says">说道：</span>		</div>
+
+		<div class="comment-meta commentmetadata"><a href="http://www.importnew.com/2466.html#comment-532466">
+			2016/11/11 上午 8:20</a>		</div>
+
+		<p>querytime SQL处理逻辑层面的，超时后 JDBC Driver会根据条件向服务端发送 ROLLBACK, QUIT指令，或者起一个新连接发送“KILL QUERY”. 这些操作是没有TIMEOUT的。 个人感觉SOCKET TIMEOUT最好小于或等于QUERYTIMEOUT， 一个SQL至少有发送和接收两个SOKET操作，如果返回的行数多会有多个SOKET接收，理想状态 SOCKETTIME 是 QUERYTIMEOUT / TCP 包数。</p>
+<p> <img style="padding: 0px; border: none; cursor: pointer;" onmouseover="this.width=this.width*1.3" onmouseout="this.width=this.width/1.2" id="up-532466" src="./深入理解JDBC的超时设置 - ImportNew_files/1_14_up.png" alt="Thumb up" onclick="javascript:ckratingKarma(&#39;532466&#39;, &#39;add&#39;, &#39;www.importnew.com/wp-content/plugins/comment-rating/&#39;, &#39;1_14_&#39;);" title="赞同"> <span id="karma-532466-up" style="font-size:12px; color:#009933;">0</span>&nbsp;<img style="padding: 0px; border: none; cursor: pointer;" onmouseover="this.width=this.width*1.3" onmouseout="this.width=this.width/1.2" id="down-532466" src="./深入理解JDBC的超时设置 - ImportNew_files/1_14_down.png" alt="Thumb down" onclick="javascript:ckratingKarma(&#39;532466&#39;, &#39;subtract&#39;, &#39;www.importnew.com/wp-content/plugins/comment-rating/&#39;, &#39;1_14_&#39;)" title="反对"> <span id="karma-532466-down" style="font-size:12px; color:#990033;">0</span></p>
+		<div class="reply">
+		<a class="comment-reply-link" href="http://www.importnew.com/2466.html?replytocom=532466#respond" onclick="return addComment.moveForm(" div-comment-532466",="" "532466",="" "respond",="" "2466")"="">回复</a>		</div>
+				</div>
+		</li>
+		<li class="comment even thread-even depth-1" id="comment-537053">
+				<div id="div-comment-537053" class="comment-body">
+				<div class="comment-author vcard">
+				<cite class="fn"><a href="http://www.zhangleiup.com/" rel="external nofollow" class="url external" target="_blank">zl</a></cite> <span class="says">说道：</span>		</div>
+
+		<div class="comment-meta commentmetadata"><a href="http://www.importnew.com/2466.html#comment-537053">
+			2016/12/19 下午 10:16</a>		</div>
+
+		<p>分析的很到位</p>
+<p> <img style="padding: 0px; border: none; cursor: pointer;" onmouseover="this.width=this.width*1.3" onmouseout="this.width=this.width/1.2" id="up-537053" src="./深入理解JDBC的超时设置 - ImportNew_files/1_14_up.png" alt="Thumb up" onclick="javascript:ckratingKarma(&#39;537053&#39;, &#39;add&#39;, &#39;www.importnew.com/wp-content/plugins/comment-rating/&#39;, &#39;1_14_&#39;);" title="赞同"> <span id="karma-537053-up" style="font-size:12px; color:#009933;">0</span>&nbsp;<img style="padding: 0px; border: none; cursor: pointer;" onmouseover="this.width=this.width*1.3" onmouseout="this.width=this.width/1.2" id="down-537053" src="./深入理解JDBC的超时设置 - ImportNew_files/1_14_down.png" alt="Thumb down" onclick="javascript:ckratingKarma(&#39;537053&#39;, &#39;subtract&#39;, &#39;www.importnew.com/wp-content/plugins/comment-rating/&#39;, &#39;1_14_&#39;)" title="反对"> <span id="karma-537053-down" style="font-size:12px; color:#990033;">0</span></p>
+		<div class="reply">
+		<a class="comment-reply-link" href="http://www.importnew.com/2466.html?replytocom=537053#respond" onclick="return addComment.moveForm(" div-comment-537053",="" "537053",="" "respond",="" "2466")"="">回复</a>		</div>
+				</div>
+		</li>
+	
+	</ol>
+
+	<!-- END .commentlist -->
+
+		
+ 
+
+
+
+		
+				
+	<!-- BEGIN .navigation -->
+	<div class="navigation margin-20">
+	
+		<div class="alignleft"><a href="http://www.importnew.com/2410.html" rel="prev">« JVM 性能优化, Part 4: C4 垃圾回收</a></div>
+		<div class="alignright"><a href="http://www.importnew.com/2782.html" rel="next">了解CMS(Concurrent Mark-Sweep)垃圾回收器 »</a></div>
+		<div class="clear"></div>
+
+	</div>
+	<!-- END .navigation -->
+	
+		
+</div>
+<!-- END .grid-8 -->
+
+<!-- BEGIN #sidebar -->
+<div id="sidebar" class="grid-4">
+
+	<div id="search-3" class="widget widget_search"><!-- BEGIN #searchform -->
+<form method="get" id="searchform" action="http://www.importnew.com/">
+
+	<label class="none" for="s">Search for:</label>
+	<div class="input-wrapper"><input type="text" value="" name="s" id="s" placeholder="Search"></div>
+	<input type="submit" id="searchsubmit" value="Search">
+	
+</form>
+<!-- END #searchform --></div><div id="text-14" class="widget widget_text">			<div class="textwidget"><p><a href="http://blog.jobbole.com/84342/?utm_source=www.importnew.com&amp;utm_medium=rightBanner-1&amp;utm_content=2015.9.16" target="_blank" class="external" rel="nofollow"><img src="./深入理解JDBC的超时设置 - ImportNew_files/e5298966gw1evyjrd4iqcj208c03c0t0.jpg"></a></p>
+</div>
+		</div><div id="aw_tabbed_widget-2" class="widget aw_tabbed_widget"><div class="tabs"><ul class="nav clearfix"><li class="active"><a id="link-most-discussed" href="http://www.importnew.com/2466.html#tab-most-discussed" title="本周热门文章">本周热门文章</a></li><li><a id="link-latest-comments" href="http://www.importnew.com/2466.html#tab-latest-comments" title="本月热门">本月热门</a></li><li><a id="link-tags" href="http://www.importnew.com/2466.html#tab-tags" title="热门标签">热门标签</a></li></ul><div id="tab-most-discussed" class="tab" style="display: block;"><div class="floated-thumb">							
+							
+							<!-- BEGIN .post-meta -->
+							<div class="post-meta  no-thumb">
+							
+								<p>
+								    <span class="numb">0</span>
+								    <a class="meta-title" target="_blank" href="http://www.importnew.com/25114.html" title="Mysql Java 驱动代码阅读笔记及 JDBC 规范笔记">Mysql Java 驱动代码阅读笔记及...</a><br>
+								</p>
+									
+							</div>
+							<!-- END .post-meta -->
+							
+							<div class="clear"></div>
+							
+													
+							
+							<!-- BEGIN .post-meta -->
+							<div class="post-meta  no-thumb">
+							
+								<p>
+								    <span class="numb">1</span>
+								    <a class="meta-title" target="_blank" href="http://www.importnew.com/25180.html" title="【译】Reddit如何统计每个帖子的浏览量">【译】Reddit如何统计每个帖子的浏...</a><br>
+								</p>
+									
+							</div>
+							<!-- END .post-meta -->
+							
+							<div class="clear"></div>
+							
+													
+							
+							<!-- BEGIN .post-meta -->
+							<div class="post-meta  no-thumb">
+							
+								<p>
+								    <span class="numb">2</span>
+								    <a class="meta-title" target="_blank" href="http://www.importnew.com/25223.html" title="深入 JVM 分析 spring-boot 应用 hibernate-validator NoClassDefFoundError">深入 JVM 分析 spring-boot 应用 hibernate-val...</a><br>
+								</p>
+									
+							</div>
+							<!-- END .post-meta -->
+							
+							<div class="clear"></div>
+							
+													
+							
+							<!-- BEGIN .post-meta -->
+							<div class="post-meta  no-thumb">
+							
+								<p>
+								    <span class="numb">3</span>
+								    <a class="meta-title" target="_blank" href="http://www.importnew.com/25089.html" title="TThreadedSelectorServer 介绍及 Direct Memory OOM 分析">TThreadedSelectorServer 介绍及 Dir...</a><br>
+								</p>
+									
+							</div>
+							<!-- END .post-meta -->
+							
+							<div class="clear"></div>
+							
+													
+							
+							<!-- BEGIN .post-meta -->
+							<div class="post-meta  no-thumb">
+							
+								<p>
+								    <span class="numb">4</span>
+								    <a class="meta-title" target="_blank" href="http://www.importnew.com/25103.html" title="图解集合 6 : LinkedHashMap">图解集合 6 : LinkedHashMap</a><br>
+								</p>
+									
+							</div>
+							<!-- END .post-meta -->
+							
+							<div class="clear"></div>
+							
+													
+							
+							<!-- BEGIN .post-meta -->
+							<div class="post-meta  no-thumb">
+							
+								<p>
+								    <span class="numb">5</span>
+								    <a class="meta-title" target="_blank" href="http://www.importnew.com/25125.html" title="图解集合 8 : 红黑树的移除节点操作">图解集合 8 : 红黑树的移除节点...</a><br>
+								</p>
+									
+							</div>
+							<!-- END .post-meta -->
+							
+							<div class="clear"></div>
+							
+													
+							
+							<!-- BEGIN .post-meta -->
+							<div class="post-meta  no-thumb">
+							
+								<p>
+								    <span class="numb">6</span>
+								    <a class="meta-title" target="_blank" href="http://www.importnew.com/25166.html" title="MyBatis 7 ：MyBatis 插件及示例 — 打印每条 SQL 语句及其执行时间 ">MyBatis 7 ：MyBatis 插件及...</a><br>
+								</p>
+									
+							</div>
+							<!-- END .post-meta -->
+							
+							<div class="clear"></div>
+							
+													
+							
+							<!-- BEGIN .post-meta -->
+							<div class="post-meta  no-thumb">
+							
+								<p>
+								    <span class="numb">7</span>
+								    <a class="meta-title" target="_blank" href="http://www.importnew.com/25171.html" title="JSON Web Token - 在 Web 应用间安全地传递信息">JSON Web Token - 在 We...</a><br>
+								</p>
+									
+							</div>
+							<!-- END .post-meta -->
+							
+							<div class="clear"></div>
+							
+													
+							
+							<!-- BEGIN .post-meta -->
+							<div class="post-meta  no-thumb">
+							
+								<p>
+								    <span class="numb">8</span>
+								    <a class="meta-title" target="_blank" href="http://www.importnew.com/25189.html" title="谈谈对Canal（ 增量数据订阅与消费 ）的理解 ">谈谈对Canal（ 增量数据订阅与消费...</a><br>
+								</p>
+									
+							</div>
+							<!-- END .post-meta -->
+							
+							<div class="clear"></div>
+							
+													
+							
+							<!-- BEGIN .post-meta -->
+							<div class="post-meta  no-thumb">
+							
+								<p>
+								    <span class="numb">9</span>
+								    <a class="meta-title" target="_blank" href="http://www.importnew.com/25228.html" title="Kafka 端到端审计">Kafka 端到端审计</a><br>
+								</p>
+									
+							</div>
+							<!-- END .post-meta -->
+							
+							<div class="clear"></div>
+							
+						</div></div><div id="tab-latest-comments" class="tab" style="display: none;"><div class="floated-thumb">							
+											
+							<!-- BEGIN .post-meta -->
+							<div class="post-meta  no-thumb">
+							
+								<p>
+								    <span class="numb">0</span>
+								    <a class="meta-title" target="_blank" href="http://www.importnew.com/25023.html" title="图解集合 2 ：LinkedList">图解集合 2 ：LinkedList</a><br>
+								</p>
+									
+							</div>
+							<!-- END .post-meta -->
+							
+							<div class="clear"></div>
+							
+													
+											
+							<!-- BEGIN .post-meta -->
+							<div class="post-meta  no-thumb">
+							
+								<p>
+								    <span class="numb">1</span>
+								    <a class="meta-title" target="_blank" href="http://www.importnew.com/25008.html" title="图解集合 1 ：ArrayList">图解集合 1 ：ArrayList</a><br>
+								</p>
+									
+							</div>
+							<!-- END .post-meta -->
+							
+							<div class="clear"></div>
+							
+													
+											
+							<!-- BEGIN .post-meta -->
+							<div class="post-meta  no-thumb">
+							
+								<p>
+								    <span class="numb">2</span>
+								    <a class="meta-title" target="_blank" href="http://www.importnew.com/24875.html" title="Spring Boot 启动流程详解（一）">Spring Boot 启动流程详解（一）</a><br>
+								</p>
+									
+							</div>
+							<!-- END .post-meta -->
+							
+							<div class="clear"></div>
+							
+													
+											
+							<!-- BEGIN .post-meta -->
+							<div class="post-meta  no-thumb">
+							
+								<p>
+								    <span class="numb">3</span>
+								    <a class="meta-title" target="_blank" href="http://www.importnew.com/24896.html" title="java 调试技能之 dubbo 调试 -- telnet">java 调试技能之 dubbo 调试 -- t...</a><br>
+								</p>
+									
+							</div>
+							<!-- END .post-meta -->
+							
+							<div class="clear"></div>
+							
+													
+											
+							<!-- BEGIN .post-meta -->
+							<div class="post-meta  no-thumb">
+							
+								<p>
+								    <span class="numb">4</span>
+								    <a class="meta-title" target="_blank" href="http://www.importnew.com/24930.html" title="图解集合7：红黑树概念、红黑树的插入及旋转操作详细解读 ">图解集合7：红黑树概念、红黑树的插...</a><br>
+								</p>
+									
+							</div>
+							<!-- END .post-meta -->
+							
+							<div class="clear"></div>
+							
+													
+											
+							<!-- BEGIN .post-meta -->
+							<div class="post-meta  no-thumb">
+							
+								<p>
+								    <span class="numb">5</span>
+								    <a class="meta-title" target="_blank" href="http://www.importnew.com/25034.html" title="图解集合 3 : CopyOnWriteArrayList">图解集合 3 : CopyOnWriteArray...</a><br>
+								</p>
+									
+							</div>
+							<!-- END .post-meta -->
+							
+							<div class="clear"></div>
+							
+													
+											
+							<!-- BEGIN .post-meta -->
+							<div class="post-meta  no-thumb">
+							
+								<p>
+								    <span class="numb">6</span>
+								    <a class="meta-title" target="_blank" href="http://www.importnew.com/24804.html" title="怎样写一个 RefererFilter ">怎样写一个 RefererFilter </a><br>
+								</p>
+									
+							</div>
+							<!-- END .post-meta -->
+							
+							<div class="clear"></div>
+							
+													
+											
+							<!-- BEGIN .post-meta -->
+							<div class="post-meta  no-thumb">
+							
+								<p>
+								    <span class="numb">7</span>
+								    <a class="meta-title" target="_blank" href="http://www.importnew.com/24769.html" title="从为什么 String=String 谈到 StringBuilder 和 StringBuffer">从为什么 String=String 谈到 StringBuil...</a><br>
+								</p>
+									
+							</div>
+							<!-- END .post-meta -->
+							
+							<div class="clear"></div>
+							
+													
+											
+							<!-- BEGIN .post-meta -->
+							<div class="post-meta  no-thumb">
+							
+								<p>
+								    <span class="numb">8</span>
+								    <a class="meta-title" target="_blank" href="http://www.importnew.com/24851.html" title="Spring Boot异常处理详解">Spring Boot异常处理详解</a><br>
+								</p>
+									
+							</div>
+							<!-- END .post-meta -->
+							
+							<div class="clear"></div>
+							
+													
+											
+							<!-- BEGIN .post-meta -->
+							<div class="post-meta  no-thumb">
+							
+								<p>
+								    <span class="numb">9</span>
+								    <a class="meta-title" target="_blank" href="http://www.importnew.com/24789.html" title="Java语法糖 2 ：自动装箱和自动拆箱">Java语法糖 2 ：自动装箱和自动拆箱</a><br>
+								</p>
+									
+							</div>
+							<!-- END .post-meta -->
+							
+							<div class="clear"></div>
+							
+						</div></div><div id="tab-tags" class="tab" style="display: none;"><p><a href="http://www.importnew.com/tag/android23days" class="tag-link-240" title="8 个话题" style="font-size: 8.5645161290323px;">android23days</a>
+<a href="http://www.importnew.com/tag/android" class="tag-link-36" title="66 个话题" style="font-size: 18.5px;">Android开发</a>
+<a href="http://www.importnew.com/tag/aop" class="tag-link-204" title="18 个话题" style="font-size: 12.290322580645px;">AOP</a>
+<a href="http://www.importnew.com/tag/arraylist" class="tag-link-314" title="7 个话题" style="font-size: 8px;">ArrayList</a>
+<a href="http://www.importnew.com/tag/concurrenthashmap" class="tag-link-355" title="13 个话题" style="font-size: 10.822580645161px;">ConcurrentHashMap</a>
+<a href="http://www.importnew.com/tag/eclipse" class="tag-link-81" title="30 个话题" style="font-size: 14.661290322581px;">Eclipse</a>
+<a href="http://www.importnew.com/tag/gc" class="tag-link-87" title="39 个话题" style="font-size: 15.903225806452px;">GC</a>
+<a href="http://www.importnew.com/tag/gson" class="tag-link-643" title="7 个话题" style="font-size: 8px;">Gson</a>
+<a href="http://www.importnew.com/tag/guava" class="tag-link-554" title="11 个话题" style="font-size: 10.032258064516px;">Guava</a>
+<a href="http://www.importnew.com/tag/hadoop" class="tag-link-140" title="13 个话题" style="font-size: 10.822580645161px;">Hadoop</a>
+<a href="http://www.importnew.com/tag/hashmap" class="tag-link-284" title="30 个话题" style="font-size: 14.661290322581px;">HashMap</a>
+<a href="http://www.importnew.com/tag/hashset" class="tag-link-60" title="9 个话题" style="font-size: 9.1290322580645px;">HashSet</a>
+<a href="http://www.importnew.com/tag/hbase" class="tag-link-128" title="14 个话题" style="font-size: 11.161290322581px;">HBase</a>
+<a href="http://www.importnew.com/tag/hibernate" class="tag-link-109" title="14 个话题" style="font-size: 11.161290322581px;">Hibernate</a>
+<a href="http://www.importnew.com/tag/intellij" class="tag-link-213" title="8 个话题" style="font-size: 8.5645161290323px;">IntelliJ</a>
+<a href="http://www.importnew.com/tag/io" class="tag-link-70" title="13 个话题" style="font-size: 10.822580645161px;">io</a>
+<a href="http://www.importnew.com/tag/java" class="tag-link-35" title="127 个话题" style="font-size: 21.661290322581px;">Java</a>
+<a href="http://www.importnew.com/tag/java8" class="tag-link-354" title="33 个话题" style="font-size: 15.112903225806px;">java8</a>
+<a href="http://www.importnew.com/tag/java-8" class="tag-link-50" title="32 个话题" style="font-size: 15px;">java 8</a>
+<a href="http://www.importnew.com/tag/java9" class="tag-link-436" title="9 个话题" style="font-size: 9.1290322580645px;">Java9</a>
+<a href="http://www.importnew.com/tag/javaee" class="tag-link-379" title="7 个话题" style="font-size: 8px;">javaee</a>
+<a href="http://www.importnew.com/tag/javaee%e4%b8%8emaven%e6%95%99%e7%a8%8b" class="tag-link-462" title="7 个话题" style="font-size: 8px;">JavaEE与Maven教程</a>
+<a href="http://www.importnew.com/tag/java-nio" class="tag-link-750" title="13 个话题" style="font-size: 10.822580645161px;">Java NIO</a>
+<a href="http://www.importnew.com/tag/java%e4%b9%b1%e7%a0%81" class="tag-link-807" title="8 个话题" style="font-size: 8.5645161290323px;">Java乱码</a>
+<a href="http://www.importnew.com/tag/java%e7%bc%96%e7%a8%8b%e5%85%a5%e9%97%a8" class="tag-link-639" title="24 个话题" style="font-size: 13.645161290323px;">Java编程入门</a>
+<a href="http://www.importnew.com/tag/java%e8%99%9a%e6%8b%9f%e6%9c%ba" class="tag-link-671" title="7 个话题" style="font-size: 8px;">java虚拟机</a>
+<a href="http://www.importnew.com/tag/jdbc" class="tag-link-122" title="16 个话题" style="font-size: 11.725806451613px;">JDBC</a>
+<a href="http://www.importnew.com/tag/jdk" class="tag-link-44" title="12 个话题" style="font-size: 10.370967741935px;">JDK</a>
+<a href="http://www.importnew.com/tag/jpa" class="tag-link-161" title="8 个话题" style="font-size: 8.5645161290323px;">JPA</a>
+<a href="http://www.importnew.com/tag/jsoup" class="tag-link-703" title="9 个话题" style="font-size: 9.1290322580645px;">Jsoup</a>
+<a href="http://www.importnew.com/tag/junit" class="tag-link-337" title="8 个话题" style="font-size: 8.5645161290323px;">JUnit</a>
+<a href="http://www.importnew.com/tag/jvm" class="tag-link-80" title="132 个话题" style="font-size: 21.774193548387px;">JVM</a>
+<a href="http://www.importnew.com/tag/lambda" class="tag-link-92" title="9 个话题" style="font-size: 9.1290322580645px;">Lambda</a>
+<a href="http://www.importnew.com/tag/linkedhashmap" class="tag-link-306" title="7 个话题" style="font-size: 8px;">LinkedHashMap</a>
+<a href="http://www.importnew.com/tag/log4j" class="tag-link-117" title="7 个话题" style="font-size: 8px;">log4j</a>
+<a href="http://www.importnew.com/tag/mapreduce" class="tag-link-106" title="7 个话题" style="font-size: 8px;">MapReduce</a>
+<a href="http://www.importnew.com/tag/maven" class="tag-link-385" title="16 个话题" style="font-size: 11.725806451613px;">maven</a>
+<a href="http://www.importnew.com/tag/mybatis" class="tag-link-820" title="25 个话题" style="font-size: 13.758064516129px;">Mybatis</a>
+<a href="http://www.importnew.com/tag/netty" class="tag-link-130" title="19 个话题" style="font-size: 12.516129032258px;">Netty</a>
+<a href="http://www.importnew.com/tag/nio" class="tag-link-69" title="18 个话题" style="font-size: 12.290322580645px;">nio</a>
+<a href="http://www.importnew.com/tag/oracle" class="tag-link-153" title="9 个话题" style="font-size: 9.1290322580645px;">oracle</a>
+<a href="http://www.importnew.com/tag/orm" class="tag-link-451" title="10 个话题" style="font-size: 9.5806451612903px;">ORM</a>
+<a href="http://www.importnew.com/tag/redis" class="tag-link-772" title="10 个话题" style="font-size: 9.5806451612903px;">redis</a>
+<a href="http://www.importnew.com/tag/restful" class="tag-link-196" title="12 个话题" style="font-size: 10.370967741935px;">RESTful</a>
+<a href="http://www.importnew.com/tag/scala" class="tag-link-89" title="18 个话题" style="font-size: 12.290322580645px;">Scala</a>
+<a href="http://www.importnew.com/tag/servlet" class="tag-link-320" title="9 个话题" style="font-size: 9.1290322580645px;">Servlet</a>
+<a href="http://www.importnew.com/tag/socket" class="tag-link-559" title="11 个话题" style="font-size: 10.032258064516px;">Socket</a>
+<a href="http://www.importnew.com/tag/solr" class="tag-link-429" title="10 个话题" style="font-size: 9.5806451612903px;">solr</a>
+<a href="http://www.importnew.com/tag/spring" class="tag-link-53" title="137 个话题" style="font-size: 22px;">Spring</a>
+<a href="http://www.importnew.com/tag/spring4" class="tag-link-771" title="8 个话题" style="font-size: 8.5645161290323px;">Spring4</a>
+<a href="http://www.importnew.com/tag/spring-boot" class="tag-link-779" title="8 个话题" style="font-size: 8.5645161290323px;">spring boot</a>
+<a href="http://www.importnew.com/tag/springmvc" class="tag-link-614" title="20 个话题" style="font-size: 12.741935483871px;">SpringMVC</a>
+<a href="http://www.importnew.com/tag/spring-mvc" class="tag-link-443" title="13 个话题" style="font-size: 10.822580645161px;">Spring MVC</a>
+<a href="http://www.importnew.com/tag/string" class="tag-link-252" title="33 个话题" style="font-size: 15.112903225806px;">String</a>
+<a href="http://www.importnew.com/tag/synchronized" class="tag-link-737" title="8 个话题" style="font-size: 8.5645161290323px;">synchronized</a>
+<a href="http://www.importnew.com/tag/threadlocal" class="tag-link-376" title="12 个话题" style="font-size: 10.370967741935px;">ThreadLocal</a>
+<a href="http://www.importnew.com/tag/tomcat" class="tag-link-225" title="21 个话题" style="font-size: 12.967741935484px;">Tomcat</a>
+<a href="http://www.importnew.com/tag/volatile" class="tag-link-433" title="10 个话题" style="font-size: 9.5806451612903px;">volatile</a>
+<a href="http://www.importnew.com/tag/web-service" class="tag-link-103" title="7 个话题" style="font-size: 8px;">Web Service</a>
+<a href="http://www.importnew.com/tag/zookeeper" class="tag-link-828" title="10 个话题" style="font-size: 9.5806451612903px;">Zookeeper</a>
+<a href="http://www.importnew.com/tag/%e4%ba%8b%e5%8a%a1" class="tag-link-339" title="9 个话题" style="font-size: 9.1290322580645px;">事务</a>
+<a href="http://www.importnew.com/tag/%e5%86%85%e5%ad%98%e7%ae%a1%e7%90%86" class="tag-link-273" title="18 个话题" style="font-size: 12.290322580645px;">内存管理</a>
+<a href="http://www.importnew.com/tag/%e5%88%86%e5%b8%83%e5%bc%8f" class="tag-link-598" title="9 个话题" style="font-size: 9.1290322580645px;">分布式</a>
+<a href="http://www.importnew.com/tag/%e5%8a%a8%e6%80%81%e4%bb%a3%e7%90%86" class="tag-link-644" title="7 个话题" style="font-size: 8px;">动态代理</a>
+<a href="http://www.importnew.com/tag/%e5%8f%82%e6%95%b0%e5%a4%aa%e5%a4%9a%e6%80%8e%e4%b9%88%e5%8a%9e" class="tag-link-470" title="8 个话题" style="font-size: 8.5645161290323px;">参数太多怎么办</a>
+<a href="http://www.importnew.com/tag/%e5%8f%8d%e5%b0%84" class="tag-link-301" title="10 个话题" style="font-size: 9.5806451612903px;">反射</a>
+<a href="http://www.importnew.com/tag/%e5%9e%83%e5%9c%be%e5%9b%9e%e6%94%b6" class="tag-link-575" title="15 个话题" style="font-size: 11.387096774194px;">垃圾回收</a>
+<a href="http://www.importnew.com/tag/%e5%9f%ba%e7%a1%80%e6%8a%80%e6%9c%af" class="tag-link-58" title="65 个话题" style="font-size: 18.387096774194px;">基础技术</a>
+<a href="http://www.importnew.com/tag/%e5%a4%9a%e7%ba%bf%e7%a8%8b" class="tag-link-46" title="22 个话题" style="font-size: 13.193548387097px;">多线程</a>
+<a href="http://www.importnew.com/tag/%e5%ad%97%e7%ac%a6%e4%b8%b2" class="tag-link-636" title="8 个话题" style="font-size: 8.5645161290323px;">字符串</a>
+<a href="http://www.importnew.com/tag/%e5%ad%97%e8%8a%82%e7%a0%81" class="tag-link-38" title="8 个话题" style="font-size: 8.5645161290323px;">字节码</a>
+<a href="http://www.importnew.com/tag/%e5%ae%89%e5%85%a8" class="tag-link-235" title="7 个话题" style="font-size: 8px;">安全</a>
+<a href="http://www.importnew.com/tag/%e5%b7%a5%e5%85%b7" class="tag-link-126" title="7 个话题" style="font-size: 8px;">工具</a>
+<a href="http://www.importnew.com/tag/%e5%b9%b6%e5%8f%91" class="tag-link-401" title="49 个话题" style="font-size: 17.032258064516px;">并发</a>
+<a href="http://www.importnew.com/tag/%e5%b9%b6%e5%8f%91%e7%bc%96%e7%a8%8b" class="tag-link-64" title="26 个话题" style="font-size: 13.983870967742px;">并发编程</a>
+<a href="http://www.importnew.com/tag/%e5%ba%8f%e5%88%97%e5%8c%96" class="tag-link-298" title="11 个话题" style="font-size: 10.032258064516px;">序列化</a>
+<a href="http://www.importnew.com/tag/%e5%bc%82%e5%b8%b8%e5%a4%84%e7%90%86" class="tag-link-214" title="18 个话题" style="font-size: 12.290322580645px;">异常处理</a>
+<a href="http://www.importnew.com/tag/%e6%80%a7%e8%83%bd" class="tag-link-47" title="17 个话题" style="font-size: 12.064516129032px;">性能</a>
+<a href="http://www.importnew.com/tag/%e6%80%a7%e8%83%bd%e4%bc%98%e5%8c%96" class="tag-link-88" title="17 个话题" style="font-size: 12.064516129032px;">性能优化</a>
+<a href="http://www.importnew.com/tag/%e6%80%a7%e8%83%bd%e8%b0%83%e4%bc%98" class="tag-link-282" title="9 个话题" style="font-size: 9.1290322580645px;">性能调优</a>
+<a href="http://www.importnew.com/tag/%e6%95%99%e7%a8%8b" class="tag-link-156" title="17 个话题" style="font-size: 12.064516129032px;">教程</a>
+<a href="http://www.importnew.com/tag/%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84" class="tag-link-283" title="12 个话题" style="font-size: 10.370967741935px;">数据结构</a>
+<a href="http://www.importnew.com/tag/%e6%97%a5%e5%bf%97" class="tag-link-29" title="10 个话题" style="font-size: 9.5806451612903px;">日志</a>
+<a href="http://www.importnew.com/tag/%e6%9e%b6%e6%9e%84" class="tag-link-139" title="9 个话题" style="font-size: 9.1290322580645px;">架构</a>
+<a href="http://www.importnew.com/tag/%e6%b3%9b%e5%9e%8b" class="tag-link-246" title="15 个话题" style="font-size: 11.387096774194px;">泛型</a>
+<a href="http://www.importnew.com/tag/%e6%b3%a8%e8%a7%a3" class="tag-link-360" title="13 个话题" style="font-size: 10.822580645161px;">注解</a>
+<a href="http://www.importnew.com/tag/%e6%b5%8b%e8%af%95" class="tag-link-237" title="8 个话题" style="font-size: 8.5645161290323px;">测试</a>
+<a href="http://www.importnew.com/tag/%e6%b8%b8%e6%88%8f" class="tag-link-184" title="9 个话题" style="font-size: 9.1290322580645px;">游戏</a>
+<a href="http://www.importnew.com/tag/%e6%ba%90%e7%a0%81%e5%88%86%e6%9e%90" class="tag-link-280" title="7 个话题" style="font-size: 8px;">源码分析</a>
+<a href="http://www.importnew.com/tag/%e7%ae%97%e6%b3%95" class="tag-link-270" title="8 个话题" style="font-size: 8.5645161290323px;">算法</a>
+<a href="http://www.importnew.com/tag/%e7%b1%bb%e5%8a%a0%e8%bd%bd" class="tag-link-556" title="7 个话题" style="font-size: 8px;">类加载</a>
+<a href="http://www.importnew.com/tag/%e7%ba%bf%e7%a8%8b" class="tag-link-374" title="11 个话题" style="font-size: 10.032258064516px;">线程</a>
+<a href="http://www.importnew.com/tag/%e7%ba%bf%e7%a8%8b%e6%b1%a0" class="tag-link-297" title="13 个话题" style="font-size: 10.822580645161px;">线程池</a>
+<a href="http://www.importnew.com/tag/%e7%bc%93%e5%ad%98" class="tag-link-353" title="9 个话题" style="font-size: 9.1290322580645px;">缓存</a>
+<a href="http://www.importnew.com/tag/%e8%99%9a%e6%8b%9f%e6%9c%ba" class="tag-link-685" title="11 个话题" style="font-size: 10.032258064516px;">虚拟机</a>
+<a href="http://www.importnew.com/tag/%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%bc%8f" class="tag-link-30" title="52 个话题" style="font-size: 17.258064516129px;">设计模式</a>
+<a href="http://www.importnew.com/tag/%e8%b5%84%e8%ae%af" class="tag-link-108" title="9 个话题" style="font-size: 9.1290322580645px;">资讯</a>
+<a href="http://www.importnew.com/tag/%e9%9b%86%e5%90%88" class="tag-link-311" title="15 个话题" style="font-size: 11.387096774194px;">集合</a>
+<a href="http://www.importnew.com/tag/%e9%9d%a2%e8%af%95" class="tag-link-31" title="23 个话题" style="font-size: 13.41935483871px;">面试</a>
+<a href="http://www.importnew.com/tag/%e9%9d%a2%e8%af%95%e9%a2%98" class="tag-link-27" title="11 个话题" style="font-size: 10.032258064516px;">面试题</a></p></div></div></div><div id="text-18" class="widget widget_text">			<div class="textwidget"><p><a href="http://date.jobbole.com/?utm_source=www.importnew.com&amp;utm_medium=rightBanner-2&amp;utm_content=2015.9.16" target="_blank" class="external" rel="nofollow"><img src="./深入理解JDBC的超时设置 - ImportNew_files/bfdcef89gw1esk2g5dvq1j208c03cglu.jpg"></a></p>
+</div>
+		</div><div id="recent_comments_widget-2" class="widget recent_comments_widget">		<h3 class="widget-title">最新评论</h3>
+		<ul>
+		
+					
+			<li id="rc-comment-561049" class="rc-item rc-comment rc-clearfix">
+				<img class="rc-avatar rc-left" width="32" height="32" alt="" src="./深入理解JDBC的超时设置 - ImportNew_files/cb962c0fddc4ba5282bbf2996f3ee0d2.png">
+				<div class="rc-info">
+				Re:
+				<a class="rc-post" target="_blank" href="http://www.importnew.com/24254.html#comment-561049" rel="nofollow">Spring源码分析：Bean加载流程...</a>
+				</div>
+				<div class="rc-timestamp"></div>
+				<div class="rc-excerpt">
+				可以的, 转载请保留出处和原文链接								<span class="rc-reviewer"> 唐尤华</span>
+								</div>
+			</li>
+			
+						
+			<li id="rc-comment-561048" class="rc-item rc-comment rc-clearfix">
+				<img class="rc-avatar rc-left" width="32" height="32" alt="" src="./深入理解JDBC的超时设置 - ImportNew_files/cb962c0fddc4ba5282bbf2996f3ee0d2.png">
+				<div class="rc-info">
+				Re:
+				<a class="rc-post" target="_blank" href="http://www.importnew.com/7336.html#comment-561048" rel="nofollow">使用Java创建RESTful Web Se...</a>
+				</div>
+				<div class="rc-timestamp"></div>
+				<div class="rc-excerpt">
+				404-&gt;HTTP 404或Not Found错误信息是HTTP的其中一种“标准回应信息”（HTTP...								<span class="rc-reviewer"> 唐尤华</span>
+								</div>
+			</li>
+			
+						
+			<li id="rc-comment-561047" class="rc-item rc-comment rc-clearfix">
+				<img class="rc-avatar rc-left" width="32" height="32" alt="" src="./深入理解JDBC的超时设置 - ImportNew_files/cb962c0fddc4ba5282bbf2996f3ee0d2.png">
+				<div class="rc-info">
+				Re:
+				<a class="rc-post" target="_blank" href="http://www.importnew.com/25008.html#comment-561047" rel="nofollow">图解集合 1 ：ArrayList</a>
+				</div>
+				<div class="rc-timestamp"></div>
+				<div class="rc-excerpt">
+				可以动手实验的								<span class="rc-reviewer"> 唐尤华</span>
+								</div>
+			</li>
+			
+						
+			<li id="rc-comment-561045" class="rc-item rc-comment rc-clearfix">
+				<img class="rc-avatar rc-left" width="32" height="32" alt="" src="./深入理解JDBC的超时设置 - ImportNew_files/cb962c0fddc4ba5282bbf2996f3ee0d2.png">
+				<div class="rc-info">
+				Re:
+				<a class="rc-post" target="_blank" href="http://www.importnew.com/14841.html#comment-561045" rel="nofollow">Java 8：不要再用循环了</a>
+				</div>
+				<div class="rc-timestamp"></div>
+				<div class="rc-excerpt">
+				Hi，请到伯乐在线的小组发帖提问，支持微信登录。链接是： http://group.jobbole....								<span class="rc-reviewer"> 唐尤华</span>
+								</div>
+			</li>
+			
+						
+			<li id="rc-comment-561043" class="rc-item rc-comment rc-clearfix">
+				<img class="rc-avatar rc-left" width="32" height="32" alt="" src="./深入理解JDBC的超时设置 - ImportNew_files/cb962c0fddc4ba5282bbf2996f3ee0d2.png">
+				<div class="rc-info">
+				Re:
+				<a class="rc-post" target="_blank" href="http://www.importnew.com/25008.html#comment-561043" rel="nofollow">图解集合 1 ：ArrayList</a>
+				</div>
+				<div class="rc-timestamp"></div>
+				<div class="rc-excerpt">
+				可以列一下各版本的差别, 欢迎投稿								<span class="rc-reviewer"> 唐尤华</span>
+								</div>
+			</li>
+			
+						
+			<li id="rc-comment-561042" class="rc-item rc-comment rc-clearfix">
+				<img class="rc-avatar rc-left" width="32" height="32" alt="" src="./深入理解JDBC的超时设置 - ImportNew_files/cb962c0fddc4ba5282bbf2996f3ee0d2.png">
+				<div class="rc-info">
+				Re:
+				<a class="rc-post" target="_blank" href="http://www.importnew.com/25023.html#comment-561042" rel="nofollow">图解集合 2 ：LinkedList</a>
+				</div>
+				<div class="rc-timestamp"></div>
+				<div class="rc-excerpt">
+				没有特指								<span class="rc-reviewer"> 唐尤华</span>
+								</div>
+			</li>
+			
+						
+			<li id="rc-comment-560954" class="rc-item rc-comment rc-clearfix">
+				<img class="rc-avatar rc-left" width="32" height="32" alt="" src="./深入理解JDBC的超时设置 - ImportNew_files/cb962c0fddc4ba5282bbf2996f3ee0d2.png">
+				<div class="rc-info">
+				Re:
+				<a class="rc-post" target="_blank" href="http://www.importnew.com/25023.html#comment-560954" rel="nofollow">图解集合 2 ：LinkedList</a>
+				</div>
+				<div class="rc-timestamp"></div>
+				<div class="rc-excerpt">
+				这个系列是java哪个版本的？								<span class="rc-reviewer"> loong</span>
+								</div>
+			</li>
+			
+						
+			<li id="rc-comment-560796" class="rc-item rc-comment rc-clearfix">
+				<img class="rc-avatar rc-left" width="32" height="32" alt="" src="./深入理解JDBC的超时设置 - ImportNew_files/cb962c0fddc4ba5282bbf2996f3ee0d2.png">
+				<div class="rc-info">
+				Re:
+				<a class="rc-post" target="_blank" href="http://www.importnew.com/25008.html#comment-560796" rel="nofollow">图解集合 1 ：ArrayList</a>
+				</div>
+				<div class="rc-timestamp"></div>
+				<div class="rc-excerpt">
+				作者应该声明 JDK版本呀。 每个差别很大的 这个扩容方案								<span class="rc-reviewer"> 冷冷</span>
+								</div>
+			</li>
+			
+					
+		</ul>
+        </div><div id="text-19" class="widget widget_text">			<div class="textwidget"><p><a href="http://fanyi.jobbole.com/" target="_blank" class="external" rel="nofollow"><img src="./深入理解JDBC的超时设置 - ImportNew_files/bfdcef89gw1esnyzyrczej208c03cgm3.jpg"></a></p>
+</div>
+		</div>	
+	<!-- BEGIN .container -->
+	<div class="container">
+	
+		<!-- BEGIN .grid-2 -->
+		<div class="grid-2">
+			
+						
+		</div>
+		<!-- END .grid-2 -->
+		
+		<!-- BEGIN .grid-2 -->
+		<div class="grid-2">
+			
+						
+		</div>
+		<!-- END .grid-2 -->
+		
+		<div class="clear"></div>
+			
+	</div>
+	<!-- END .container -->
+
+</div>
+<!-- END #sidebar -->
+<div class="clear"></div>	
+
+
+</div>
+<!-- END #wrapper -->
+
+<!-- BEGIN footer -->
+<footer>
+
+	<!-- BEGIN .container -->
+	<div class="container">
+		
+		<!-- BEGIN .grid-4 -->
+		<div class="grid-4">
+			
+			<div id="text-15" class="widget widget_text"><h3 class="widget-title">关于ImportNew</h3>			<div class="textwidget"><p>ImportNew 专注于 Java 技术分享。于2012年11月11日 11:11正式上线。是的，这是一个很特别的时刻 :) </p>
+<p>ImportNew 由两个 Java 关键字 import 和 new 组成，意指：Java 开发者学习新知识的网站。 import 可认为是学习和吸收， new 则可认为是新知识、新技术圈子和新朋友……</p>
+<div id="aw_socialcounter_widget-2" class="widget aw_socialcounter_widget">
+<ul>
+<li>
+<a target="_blank" href="http://weibo.com/importnew" class="external" rel="nofollow"><img class="alignleft" src="./深入理解JDBC的超时设置 - ImportNew_files/sina_32.png" alt="关注我们的新浪微博" title="关注我们的新浪微博"></a><p></p>
+<div class="view-rss"><a target="_blank" href="http://www.importnew.com/feed/" class="rss-link"><img class="alignleft" src="./深入理解JDBC的超时设置 - ImportNew_files/rss_32.png" alt="RSS订阅" title="RSS订阅"></a></div>
+</li>
+</ul>
+</div>
+</div>
+		</div>			
+		</div>
+		<!-- END .grid-4 -->
+		
+		<!-- BEGIN .grid-4 -->
+		<div class="grid-4">
+			
+			<div id="text-17" class="widget widget_text"><h3 class="widget-title">联系我们</h3>			<div class="textwidget"><p>Email：<a href="mailto:ImportNew.com@gmail.com">ImportNew.com@gmail.com</a><br>
+新浪微博：<a href="http://weibo.com/importnew" target="_blank" class="external" rel="nofollow">@ImportNew</a><br>
+推荐微信号<br>
+<img src="./深入理解JDBC的超时设置 - ImportNew_files/ImportNew_weixin.png" width="100" height="110"><img src="./深入理解JDBC的超时设置 - ImportNew_files/android_weixin.png" width="100" height="110"><img src="./深入理解JDBC的超时设置 - ImportNew_files/Linux_weixin.png" width="100" height="110"></p>
+<p>反馈建议：ImportNew.com@gmail.com<br>
+广告与商务合作QQ：2302462408 </p>
+</div>
+		</div>			
+		</div>
+		<!-- END .grid-4 -->
+		
+		<!-- BEGIN .grid-4 -->
+		<div class="grid-4">
+			
+			<div id="text-16" class="widget widget_text"><h3 class="widget-title">推荐关注</h3>			<div class="textwidget"><p><a href="http://group.jobbole.com/?utm_source=www.importnew.com&amp;utm_medium=bottomText" target="_blank" class="external" rel="nofollow">小组</a> – 好的话题、有启发的回复、值得信赖的圈子<br>
+<a href="http://top.jobbole.com/?utm_source=www.importnew.com&amp;utm_medium=bottomText" target="_blank" class="external" rel="nofollow">头条</a> – 写了文章？看干货？去头条！<br>
+<a href="http://date.jobbole.com/?utm_source=www.importnew.com&amp;utm_medium=bottomText" target="_blank" class="external" rel="nofollow">相亲</a> – 为IT单身男女服务的征婚传播平台<br>
+<a href="http://hao.jobbole.com/?utm_source=www.importnew.com&amp;utm_medium=bottomText" target="_blank" class="external" rel="nofollow">资源</a> – 优秀的工具资源导航<br>
+<a href="http://fanyi.jobbole.com/?utm_source=www.importnew.com&amp;utm_medium=bottomText" target="_blank" class="external" rel="nofollow">翻译</a> – 活跃 &amp; 专业的翻译小组<br>
+<a href="http://blog.jobbole.com/?utm_source=www.importnew.com&amp;utm_medium=bottomText" target="_blank" class="external" rel="nofollow">博客</a> – 国内外的精选博客文章<br>
+<a href="http://design.jobbole.com/?utm_source=www.importnew.com&amp;utm_medium=bottomText" target="_blank" class="external" rel="nofollow">设计</a> – UI,网页，交互和用户体验<br>
+<a href="http://web.jobbole.com/?utm_source=www.importnew.com&amp;utm_medium=bottomText" target="_blank" class="external" rel="nofollow">前端</a> – JavaScript, HTML5, CSS<br>
+<a href="http://android.jobbole.com/?utm_source=www.importnew.com&amp;utm_medium=bottomText" target="_blank" class="external" rel="nofollow">安卓</a> – 专注Android技术分享<br>
+<a href="http://ios.jobbole.com/?utm_source=www.importnew.com&amp;utm_medium=bottomText" target="_blank" class="external" rel="nofollow">iOS</a> – 专注iOS技术分享<br>
+<a href="http://www.importnew.com/?utm_source=www.importnew.com&amp;utm_medium=bottomText" target="_blank">Java</a> – 专注Java技术分享<br>
+<a href="http://python.jobbole.com/?utm_source=www.importnew.com&amp;utm_medium=bottomText" target="_blank" class="external" rel="nofollow">Python</a> – 专注Python技术分享</p>
+</div>
+		</div>			
+		</div>
+		<!-- END .grid-4 -->
+		
+		<div class="clear"></div>
+	
+	</div>
+	<!-- END .container -->
+
+	<!-- BEGIN #bottom -->
+	<div id="bottom">
+	
+		<!-- BEGIN .container -->
+		<div class="container">
+		
+			<!-- BEGIN .grid-12 -->
+			<div class="grid-12">
+	
+				<p>© 2017 ImportNew</p>
+			
+			</div>
+			<!-- END .grid-12 -->
+			
+			<div class="clear"></div>
+						
+		</div>
+		<!-- END .container -->
+		
+	</div>
+	<!-- END #bottom -->
+	
+</footer>
+<!-- END footer -->
+
+
+	
+<!-- Lightbox Plus v2.3 - 2011.08.11 - Message: 0-->
+<script type="text/javascript">
+jQuery(document).ready(function($){
+  $("a[rel*=lightbox]").colorbox({opacity:0.8});
+});
+</script>
+<link rel="stylesheet" id="wp_rp_scrollup-css" href="http://dtmvdvtzf8rz0.cloudfront.net/static/css-img/scrollup.css?ver=3.4.2" type="text/css" media="all">
+<script type="text/javascript" src="./深入理解JDBC的超时设置 - ImportNew_files/ck-karma.js.下载"></script>
+<script type="text/javascript" src="./深入理解JDBC的超时设置 - ImportNew_files/jquery.colorbox-min.js.下载"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var viewsCacheL10n = {"admin_ajax_url":"http:\/\/www.importnew.com\/wp-admin\/admin-ajax.php","post_id":"2466"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./深入理解JDBC的超时设置 - ImportNew_files/postviews-cache.js.下载"></script>
+<script type="text/javascript" src="./深入理解JDBC的超时设置 - ImportNew_files/ready.js.下载"></script>
+<script type="text/javascript" src="./深入理解JDBC的超时设置 - ImportNew_files/easing.js.下载"></script>
+<script type="text/javascript" src="./深入理解JDBC的超时设置 - ImportNew_files/superfish.js.下载"></script>
+<script type="text/javascript" src="./深入理解JDBC的超时设置 - ImportNew_files/validate.js.下载"></script>
+<script type="text/javascript" src="./深入理解JDBC的超时设置 - ImportNew_files/touchwipe.js.下载"></script>
+<script type="text/javascript" src="./深入理解JDBC的超时设置 - ImportNew_files/caroufredsel.js.下载"></script>
+<script type="text/javascript" src="./深入理解JDBC的超时设置 - ImportNew_files/flexslider.js.下载"></script>
+<script type="text/javascript" src="./深入理解JDBC的超时设置 - ImportNew_files/jplayer.js.下载"></script>
+<script type="text/javascript" src="./深入理解JDBC的超时设置 - ImportNew_files/fitvids.js.下载"></script>
+<script type="text/javascript" src="./深入理解JDBC的超时设置 - ImportNew_files/selectnav.js.下载"></script>
+<script type="text/javascript" src="./深入理解JDBC的超时设置 - ImportNew_files/effects.js.下载"></script>
+<script type="text/javascript" src="http://dtmvdvtzf8rz0.cloudfront.net/static/js/scrollup.js?ver=3.4.2"></script>
+
+
+<div id="full-btm" style="position:fixed; left:50%; top:550px;  z-index:100; text-align:center; cursor:pointer;">
+<a><img src="./深入理解JDBC的超时设置 - ImportNew_files/back-btm.png" width="20" border="0" alt="跳到底部" title="跳到底部"></a>
+</div>
+
+<script type="text/javascript">
+jQuery('#full-btm').click(function(){
+    jQuery('html, body').animate({scrollTop:jQuery(document).height()}, 'slow');
+    return false;
+});
+</script>
+
+<div id="full-top" style="position:fixed; left:50%; top:520px; margin-left:495px; z-index:100; text-align:center; cursor:pointer;">
+<a><img src="./深入理解JDBC的超时设置 - ImportNew_files/back-top.png" width="20" border="0" alt="返回顶部" title="返回顶部"></a>
+</div>
+
+<script type="text/javascript">
+jQuery('#full-top').click(function(){
+    jQuery('html, body').animate({scrollTop:0}, 'slow');
+    return false;
+});
+</script>
+
+<!-- script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','/_assets/js/analytics.js','ga');
+
+    ga('create', 'UA-15621043-1', 'jobbole.com');
+    ga('send', 'pageview');
+
+</script -->
+
+
+<!-- END body -->
+
+
+<!-- END html -->
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+ Served from: importnew.com @ 2017-06-21 13:17:19 by W3 Total Cache --><div id="cboxOverlay" style="display: none;"></div><div id="colorbox" class="" style="padding-bottom: 50px; padding-right: 50px; display: none;"><div id="cboxWrapper"><div><div id="cboxTopLeft" style="float: left;"></div><div id="cboxTopCenter" style="float: left;"></div><div id="cboxTopRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxMiddleLeft" style="float: left;"></div><div id="cboxContent" style="float: left;"><div id="cboxLoadedContent" style="width: 0px; height: 0px; overflow: hidden; float: left;"></div><div id="cboxLoadingOverlay" style="float: left;"></div><div id="cboxLoadingGraphic" style="float: left;"></div><div id="cboxTitle" style="float: left;"></div><div id="cboxCurrent" style="float: left;"></div><div id="cboxNext" style="float: left;"></div><div id="cboxPrevious" style="float: left;"></div><div id="cboxSlideshow" style="float: left;"></div><div id="cboxClose" style="float: left;"></div></div><div id="cboxMiddleRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxBottomLeft" style="float: left;"></div><div id="cboxBottomCenter" style="float: left;"></div><div id="cboxBottomRight" style="float: left;"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none;"></div></div></body></html>

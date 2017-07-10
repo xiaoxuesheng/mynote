@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)http://www.toutiao.com/i6265641778112627202/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script charset="utf-8" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/probe.js.下载" async="" mod_name="tanxssp-probe"></script><style class="vjs-styles-defaults">
+      .video-js {
+        width: 300px;
+        height: 150px;
+      }
+
+      .vjs-fluid {
+        padding-top: 56.25%
+      }
+    </style>
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="dns-prefetch" href="http://s3.pstatp.com/">
+    <link rel="dns-prefetch" href="http://s3a.pstatp.com/">
+    <link rel="dns-prefetch" href="http://s3b.pstatp.com/">
+    <link rel="dns-prefetch" href="http://p1.pstatp.com/">
+    <link rel="dns-prefetch" href="http://p3.pstatp.com/">
+    
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+    
+    <meta name="baidu-site-verification" content="T239HZAbh7">
+    
+    <!--meta name="baidu_union_verify" content="94bb8bb3fa863f70e7fd926bffecd81e"-->
+    <meta name="360-site-verification" content="b96e1758dfc9156a410a4fb9520c5956">
+    <meta name="360_ssp_verify" content="2ae4ad39552c45425bddb738efda3dbb">
+    <meta name="google-site-verification" content="3PYTTW0s7IAfkReV8wAECfjIdKY-bQeSkVTyJNZpBKE">
+    <meta name="shenma-site-verification" content="34c05607e2a9430ad4249ed48faaf7cb_1432711730">
+    <meta name="baidu_union_verify" content="b88dd3920f970845bad8ad9f90d687f7">
+    <meta name="domain_verify" content="pmrgi33nmfuw4ir2ej2g65lunfqw6ltdn5wselbcm52wszbchirdqyztge3tenrsgq3dknjume2tayrvmqytemlfmiydimddgu4gcnzcfqrhi2lnmvjwc5tfei5dcnbwhazdcobuhe2dqobrpu">
+    
+  <link rel="alternate" media="only screen and (max-width: 640px)" href="http://m.toutiao.com/a6264330372231053569/">
+
+  <title>MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)</title>
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta name="keywords" content="">
+  <meta name="description" content="对于一些数据量较大的系统，数据库面临的问题除了查询效率低下，还有就是数据入库时间长。特别像报表系统，每天花费在数据导入上的时间可能会长达几个小时或十几个小时之久。因此，优化数据库插">
+  <meta name="pathname" content="toutiao_pc_article_detail">
+
+    <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="http://s3a.pstatp.com/toutiao/resource/ntoutiao_web/static/image/favicon_8e9c9c7.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/layout_5fcc025.css">
+    <!--[if lt IE 9]>
+      <script src="//s3a.pstatp.com/toutiao/resource/ntoutiao_web/static/js/lib/es5-shim_110642e.js"></script>
+    <![endif]-->
+    <script async="" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/analytics.js.下载"></script><script src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/lib_060bfbf.js.下载" crossorigin="anonymous"></script>
+    
+  <link rel="stylesheet" href="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/article_97557fd.css">
+  <link rel="stylesheet" href="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/tt-video.css" media="screen" title="no title">
+  <!--[if lt IE 9]>
+  <script src="//s3.pstatp.com/toutiao/video_player/dist/videojs-ie8.js" charset="utf-8" crossorigin="anonymous"></script>
+  <script src="//s3.pstatp.com/toutiao/video_player/dist/examples/webfont.js" charset="utf-8" crossorigin="anonymous"></script>
+  <script>
+      WebFont.load({
+          custom: {
+              families: ['iconfont','yFont'],
+              urls:['//s3.pstatp.com/toutiao/video_player/dist/tt-video.css','//www.toutiao.com/static/style/lib/layout.css']
+          }
+      });
+  </script>
+  <![endif]-->
+
+<style id="b6d6273">.imga_wrapper{position:relative;display:inline-block;}.imga_flag{display: inline-block;position: absolute;bottom: 8px;left: 8px;border: 1px solid #fff;color: #fff;font-size: 12px;line-height: 12px;height: 12px;padding: 1px 2px;text-align: center;}</style><style id="593d560">.bd-bottom-1{padding-left: 10px}</style><style id="58dc75e">.right-top-1{margin-bottom: 30px}</style><style id="fdc8d96">.right-top-2{margin-bottom: 30px}</style><style id="0c2678e">.right-top-3{margin-bottom: 30px}</style><style id="b543320">.right-top-4{margin-bottom: 30px}</style><style id="a691d99">.right-hover-1{position: fixed; top: 20px;} #imagindexhover > ins {position: absolute !important}</style></head>
+
+<body style="min-width: 1220px; overflow-x: hidden;"><iframe src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/acbeacon2.html" style="width: 0px; height: 0px; display: none;"></iframe>
+    
+
+    <a href="http://www.toutiao.com/articles_news_society/" style="display:none;"></a>
+
+    <div class="y-wrap">
+        
+
+<!-- 公共头部 -->
+<div id="header">
+  <div riot-tag="wtopbar" style="height: 34px; background: #222;"><div class="y-box wtopbar">  <div class="y-left y-nav-topbar" riot-tag="nav"><div class="nav"> <ul class="y-box nav-list" ga_event="mh_channel"> <li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/" ga_event="mh_channel_recommend">推荐</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_hot/" ga_event="mh_channel_hot">热点</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/video/" ga_event="mh_channel_video">视频</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_image/" ga_event="mh_channel_image">图片</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/essay_joke/" ga_event="mh_channel_essay">段子</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_society/" ga_event="mh_channel_society">社会</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_entertainment/" ga_event="mh_channel_entertainment">娱乐</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_tech/" ga_event="mh_channel_tech">科技</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_car/" ga_event="mh_channel_car">汽车</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_sports/" ga_event="mh_channel_sports">体育</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_finance/" ga_event="mh_channel_finance">财经</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_military/" ga_event="mh_channel_military">军事</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_world/" ga_event="mh_channel_world">国际</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_fashion/" ga_event="mh_channel_fashion">时尚</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_travel/" ga_event="mh_channel_travel">旅游</a> </li><!--riot placeholder--> <li class="y-left nav-item nav-more"> <a class="nav-link" href="javascript:;"> 更多<i class="y-icon icon-more"></i> </a> <div class="nav-layer"> <ul class="nav-more-list"> <li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/ch/news_discovery/" ga_event="mh_channel_discovery">探索</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/ch/news_baby/" ga_event="mh_channel_baby">育儿</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/ch/news_regimen/" ga_event="mh_channel_regimen">养生</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/ch/news_story/" ga_event="mh_channel_story">故事</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/ch/news_essay/" ga_event="mh_channel_essay">美文</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/ch/news_game/" ga_event="mh_channel_game">游戏</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/ch/news_history/" ga_event="mh_channel_history">历史</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/ch/news_food/" ga_event="mh_channel_food">美食</a> </li><!--riot placeholder--> </ul> </div> </li> </ul> </div></div> <ul class="y-right"> <li class="tb-item userbox"> <div riot-tag="wuserbox" abtype="" pageid=""><div class="y-box wuserbox">  <div class="y-right username"> <a ga_event="mh_nav_user" class="user-head" target="_blank" rel="nofollow" href="http://www.toutiao.com/c/user/7170056853/"> <div class="user-image"> <img onload="this.style.opacity=1;" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/5070639578" style="opacity: 1;"> </div> <span>东北小凤凰</span> </a> <div class="user-layer"> <ul ga_event="mh_nav_user"> <li><a class="layer-item" target="_blank" rel="nofollow" href="http://www.toutiao.com/c/user/7170056853/?tab=favourite">我的收藏</a></li> <li><a class="layer-item" target="_blank" rel="nofollow" href="http://www.toutiao.com/c/user/relation/7170056853/?tab=following">我的关注</a></li> <li><a class="layer-item" target="_blank" rel="nofollow" href="http://www.toutiao.com/c/user/relation/7170056853/?tab=followed">我的粉丝</a></li> <li> <a href="https://sso.toutiao.com/logout/" class="layer-item" rel="nofollow">退出</a> </li> </ul> </div> </div>  </div></div> </li> <li class="tb-item"> <a class="tb-link" href="javascript:void(0)">反馈</a> </li> <li class="tb-item"> <a class="tb-link" href="http://www.toutiao.com/complain/" ga_event="mh_nav_complain">投诉侵权</a> </li> <li class="tb-item more"> <a class="tb-link" href="http://www.toutiao.com/about/">头条产品</a> <div class="layer"> <ul> <li> <a href="https://wenda.toutiao.com/" class="layer-item" ga_event="mh_nav_others" target="_blank">问答</a> </li> <li> <a href="https://mp.toutiao.com/" class="layer-item" target="_blank" ga_event="mh_nav_others">头条号</a> </li> <li> <a href="https://tuchong.com/" class="layer-item" target="_blank" ga_event="mh_nav_others">图虫</a> </li> <li> <a href="https://ad.toutiao.com/promotion/?source2=pchometop" class="layer-item" target="_blank" ga_event="mh_nav_ad">广告投放</a> </li> </ul> </div> </li> </ul> <div id="J_userFeedback"></div> </div></div>
+  
+  <div class="middlebar">
+  <div class="y-box middlebar-inner">
+    <div class="y-left logo-box">
+      <a class="logo-link" href="http://www.toutiao.com/" ga_event="go_home">
+        <img class="logo" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/logo_201f80d.png">
+      </a>
+    </div>
+
+    
+      <div class="y-left chinese-tag">
+        <a href="http://www.toutiao.com/" target="_blank" ga_event="click_index">首页</a>
+        /
+        <a href="http://www.toutiao.com/search/?keyword=%E5%85%B6%E5%AE%83" target="_blank" ga_event="click_channel">其它</a>
+        /
+        <span class="text">正文</span>
+      </div>
+    
+
+    <div class="y-right">
+      <div riot-tag="wsearch" style="margin-top: 9px; width: 340px;"><div name="searchBox" class="wsearch"> <form name="searchForm" action="http://www.toutiao.com/search/" method="get" target="_blank"> <div name="inputbox" class="y-box input-group"> <input class="y-left input-text" name="keyword" autocomplete="off" ga_event="mh_search" type="text" placeholder="请输入关键字"> <div class="y-right btn-submit"> <button type="submit" href="javascript:;"> <i class="y-icon icon-search" ga_event="mh_search"></i> </button> </div> </div> </form> <div class="layer "> <ul ga_event="mh_search"> <li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-1">1</i>  <span class="search-txt">工业废液倾倒中毒</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-2">2</i>  <span class="search-txt">广东打击校园贷</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-3">3</i>  <span class="search-txt">何炅调侃谢娜</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-4">4</i>  <span class="search-txt">被蛇咬死前咬妻子</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-5">5</i>  <span class="search-txt">盘古氏案一审宣判</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-6">6</i>  <span class="search-txt">误把驱鼠药当零食</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-7">7</i>  <span class="search-txt">女生被舍友欺凌</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-8">8</i>  <span class="search-txt">暴雨中为孩子挡雨</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-9">9</i>  <span class="search-txt">银监会检查延期</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-10">10</i>  <span class="search-txt">抗拒执法掀执法车</span> </a> </li><!--riot placeholder--> </ul> </div> </div></div>
+    </div>
+  </div>
+</div>
+
+  
+</div>
+
+<div riot-tag="login"><div class="login-dialog hide"> <a class="btn" href="javascript:;"> <i class="icon icon-close"></i> </a> <div class="login-dialog-header"> <h3>邮箱登录</h3> </div> <div class="login-dialog-inner" data-node="inner"> <div class="login-pannel bottom-line"> <form action="http://www.toutiao.com/auth/login/" method="POST"> <ul> <li> <div class="input-group"> <div class="input"> <label>邮箱</label> <input class="name" name="name_or_email" type="text" placeholder="请使用您的注册邮箱" autocomplete="off" spellcheck="false"> </div> </div> </li> <li> <div class="input-group"> <div class="input"> <label>密码</label> <input class="password" name="password" type="password" data-node="password" placeholder="密码" autocomplete="off" spellcheck="false"> </div> </div> </li> <li class="captcha-box "> <div class="input-group"> <div class="input"> <input class="password" name="captcha" type="text" data-node="captcha" placeholder="验证码" autocomplete="off" spellcheck="false"> <img name="captchaImg"> </div> </div> </li> <li> <div class="input-group"> <input type="checkbox" name="remember_me" checked="" style="vertical-align:top"> <label for="remember_me" class="label">记住账号</label> </div> </li> <li> <div class="input-group" style="text-align: center;"> <input type="submit" class="submit-btn" value="登录"> <p class=""></p> </div> </li> </ul> </form> </div> <div class="login-dialog-header"> <h3>合作网站帐号登录</h3> </div> <div class=""> <ul class="y-box sns_login_list"> <li class="sinaweibo"> <a href="javascript:;" data-pid="sina_weibo" ga_event="login_sina_weibo"> <i class="icon"></i> 新浪微博 </a> </li> <li class="qqweibo"> <a href="javascript:;" data-pid="qq_weibo" ga_event="login_tencnet_weibo"> <i class="icon"></i> 腾讯微博 </a> </li> <li class="qzone"> <a href="javascript:;" data-pid="qzone_sns" ga_event="login_qqzone"> <i class="icon"></i> QQ空间 </a> </li> <li class="renren"> <a href="javascript:;" data-pid="renren_sns" ga_event="login_renren"> <i class="icon"></i> 人人网 </a> </li> <li class="weixin"> <a href="javascript:;" style="margin-right:0;" data-pid="weixin" ga_event="login_wechat"> <i class="icon"></i> 微信 </a> </li> </ul> </div> </div> </div> <div class="mask hide"></div></div>
+<div id="toast"></div>
+
+
+<div class="y-box container">
+  <div class="y-left">
+    <div class="y-box">
+      <div class="y-left index-left">
+        <div riot-tag="snsbox"><div class="snsbox snsbox-fixed" name="snsbox">  <a href="http://www.toutiao.com/i6265641778112627202/#comment_area" class="share-count" ga_event="click_comment_anchor"> <i class="y-icon icon-comments"></i> <span>0</span> </a> <div class="share-hr"></div> <div class="share-box" ga_event="click_share_weibo"><i class="y-icon icon-sina"></i><span>微博</span></div> <div class="share-box" ga_event="click_share_qzone"><i class="y-icon icon-qzone"></i><span>Qzone</span></div> <div class="share-box share-weixin" ga_event="click_share_weixin"> <i class="y-icon icon-wechat"></i><span>微信</span> <div class="share-qrcode"> <div></div> </div> </div> </div></div>
+      </div>
+      <div class="y-left index-middle" id="J_content">
+        <div id="article-main">
+	
+
+  <h1 class="article-title">MySQL批量SQL插入各种性能优化</h1>
+
+  <div class="articleInfo">
+	
+    
+    <span class="src">
+    	
+    		DBAplus社群
+    	
+    </span>
+    
+    <span class="time">2016-03-24 06:05</span>
+</div>
+
+  <div class="article-content"><p>对于一些数据量较大的系统，数据库面临的问题除了查询效率低下，还有就是数据入库时间长。特别像报表系统，每天花费在数据导入上的时间可能会长达几个小时或十几个小时之久。因此，优化数据库插入性能是很有意义的。</p><p>经过对MySQL innodb的一些性能测试，发现一些可以提高insert效率的方法，供大家参考参考。</p><p><strong>1. 一条SQL语句插入多条数据。</strong></p><p>常用的插入语句如：</p><blockquote><p><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/41800093eee3887a4a1" img_width="415" img_height="178" alt="MySQL批量SQL插入各种性能优化" inline="0"></p></blockquote><p>修改成：</p><blockquote><p><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/44e0001b80152403a18" img_width="501" img_height="487" alt="MySQL批量SQL插入各种性能优化" inline="0"></p></blockquote><p>修改后的插入操作能够提高程序的插入效率。这里第二种SQL执行效率高的主要原因是合并后日志量（MySQL的binlog和innodb的事务让日志）减少了，降低日志刷盘的数据量和频率，从而提高效率。通过合并SQL语句，同时也能减少SQL语句解析的次数，减少网络传输的IO。</p><p>这里提供一些测试对比数据，分别是进行单条数据的导入与转化成一条SQL语句进行导入，分别测试1百、1千、1万条数据记录。</p><p><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/447000a4796aed18eb6" img_width="295" img_height="109" alt="MySQL批量SQL插入各种性能优化" inline="0"></p><p><strong>2. 在事务中进行插入处理。</strong></p><p>把插入修改成：</p><blockquote><p><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/448000a4ae6960fe8fd" img_width="519" img_height="202" alt="MySQL批量SQL插入各种性能优化" inline="0"></p></blockquote><p>使用事务可以提高数据的插入效率，这是因为进行一个INSERT操作时，MySQL内部会建立一个事务，在事务内才进行真正插入处理操作。通过使用事务可以减少创建事务的消耗，所有插入都在执行后才进行提交操作。</p><p>这里也提供了测试对比，分别是不使用事务与使用事务在记录数为1百、1千、1万的情况。</p><p><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/44a000a53b4b21bc24d" img_width="295" img_height="109" alt="MySQL批量SQL插入各种性能优化" inline="0"></p><p><strong>3. 数据有序插入。</strong></p><p>数据有序的插入是指插入记录在主键上是有序排列，例如datetime是记录的主键：</p><blockquote><p><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/447000a479721ecf2f1" img_width="497" img_height="608" alt="MySQL批量SQL插入各种性能优化" inline="0"></p><br><p><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/44d000a53aecb856e0f" img_width="495" img_height="510" alt="MySQL批量SQL插入各种性能优化" inline="0"></p></blockquote><p>修改成：</p><blockquote><p><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/448000a4ae8e2739680" img_width="487" img_height="602" alt="MySQL批量SQL插入各种性能优化" inline="0"></p><br><p><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/44c0005f1b2b213f0ac" img_width="476" img_height="521" alt="MySQL批量SQL插入各种性能优化" inline="0"></p></blockquote><p>由于数据库插入时，需要维护索引数据，无序的记录会增大维护索引的成本。我们可以参照innodb使用的B+tree索引，如果每次插入记录都在索引的最后面，索引的定位效率很高，并且对索引调整较小；如果插入的记录在索引中间，需要B+tree进行分裂合并等处理，会消耗比较多计算资源，并且插入记录的索引定位效率会下降，数据量较大时会有频繁的磁盘操作。</p><p>下面提供随机数据与顺序数据的性能对比，分别是记录为1百、1千、1万、10万、100万。</p><p><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/44e0001b80220743dbd" img_width="362" img_height="152" alt="MySQL批量SQL插入各种性能优化" inline="0"></p><p>从测试结果来看，该优化方法的性能有所提高，但是提高并不是很明显。</p><p>性能综合测试：</p><p>这里提供了同时使用上面三种方法进行INSERT效率优化的测试。</p><p><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/44c0005f1b3d076ef77" img_width="529" img_height="196" alt="MySQL批量SQL插入各种性能优化" inline="0"></p><p>从测试结果可以看到，合并数据+事务的方法在较小数据量时，性能提高是很明显的，数据量较大时（1千万以上），性能会急剧下降，这是由于此时数据量超过了innodb_buffer的容量，每次定位索引涉及较多的磁盘读写操作，性能下降较快。而使用合并数据+事务+有序数据的方式在数据量达到千万级以上表现依旧是良好，在数据量较大时，有序数据索引定位较为方便，不需要频繁对磁盘进行读写操作，所以可以维持较高的性能。</p><p><strong>注意事项：</strong></p><blockquote><p>1. SQL语句是有长度限制，在进行数据合并在同一SQL中务必不能超过SQL长度限制，通过max_allowed_packet配置可以修改，默认是1M，测试时修改为8M。</p><br><p>2. 事务需要控制大小，事务太大可能会影响执行的效率。MySQL有innodb_log_buffer_size配置项，超过这个值会把innodb的数据刷到磁盘中，这时，效率会有所下降。所以比较好的做法是，在数据达到这个这个值前进行事务提交。</p></blockquote><blockquote><p>平台授权转载</p><p>来源：“程序人生”订阅号</p><p>作者：one_isi_all</p><p>原文链接：http://mp.weixin.qq.com/s?__biz=MzA5MzY4NTQwMA==&amp;mid=403182899&amp;idx=1&amp;sn=74edf28b0bd29f78f91d02785f34bdeb&amp;scene=1&amp;srcid=0321uOEPgpS6sv7mSmgM5Pe1#wechat_redirect</p></blockquote><p><strong>全球敏捷运维峰会【杭州站】</strong></p><p><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/4140008f58ce89db97b" img_width="640" img_height="307" alt="MySQL批量SQL插入各种性能优化" inline="0"></p><p>2016 年4月16日，与你相约杭州，来一场敏捷与运维的美丽邂逅！DBA+社群联合三墩IT人开启全球敏捷运维峰会第一站：杭州站！峰会力邀来自互联网与传统企 业的资深专家，各路大咖齐聚，汇聚500+行业精英，聚焦架构、敏捷、运维三大主线，开启一场专属于IT人的年度之约！</p><p><strong>专家阵容：</strong>或行业资深派、或著书力作派、或传统转型派、或一线实战派，总有一款是你喜欢！</p><p><strong>绝对干货：</strong>聚焦架构、敏捷、运维三大主线，共讨传统企业在技术转型过程中的实践与困境、互联网企业在前沿技术方面的应用与心得、技术服务型企业在新老技术之间如何切换与落地，拒绝无营养的广告，绝对干货，精彩不容错过！</p><p><strong>连接联动：</strong>汇聚社群数百顶级专家人脉，携数万社群成员声势，联合数十家媒体单位，共同打造一场连接敏捷与运维圈子的年度之约！</p><p><strong>购票优惠</strong></p><p>DBA+社群专属门票优惠码：<strong>dbaplus001</strong>，限额5</p><p>专属VIP票优惠码：<strong>dbaplusvip</strong>，限额5</p><p><strong>报名方式：猛戳“阅读原文”抢票吧！</strong></p></div>
+
+  <div class="y-box article-actions">
+		
+<div class="labelList">
+	<i class="y-icon icon-tag"></i>
+	<ul class="label-list">
+		
+		<li class="label-item"><a class="label-link" href="http://www.toutiao.com/search/?keyword=%E6%95%B0%E6%8D%AE%E5%BA%93" target="_blank">数据库</a></li>
+		
+		<li class="label-item"><a class="label-link" href="http://www.toutiao.com/search/?keyword=MySQL" target="_blank">MySQL</a></li>
+		
+		<li class="label-item"><a class="label-link" href="http://www.toutiao.com/search/?keyword=SQL" target="_blank">SQL</a></li>
+		
+		<li class="label-item"><a class="label-link" href="http://www.toutiao.com/search/?keyword=DBA" target="_blank">DBA</a></li>
+		
+	</ul>
+</div>
+
+		<div riot-tag="actionBox" class="actionBox"><div class="repin "> <i class="y-icon icon-favorite "></i><span>收藏</span> </div> <a href="javascript:;" class="areport"> <i class="y-icon icon-report"></i><span>举报</span> </a> <div id="J_articleReport"></div></div>
+  </div>
+</div>
+
+        <div class="bd-bottom-1" ad-cursor="" name="adetail_main*bottom_1" id="J_ad_baidu_bottom" ad_name="h_640*60_TB_146" done="1" show=""><script src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/ex" id="tanx-s-mm_32479643_3494618_75352146" charset="gbk"></script><script charset="utf-8" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/tanxssp.js.下载"></script><ins style="display:inline-block;padding:0;margin:0;width:640px;height:90px;*zoom:1;*display:inline; position:relative;" id="tanxssp-outer-conmm_32479643_3494618_75352146"><div id="tanxssp_con_mm_32479643_3494618_75352146" style="overflow:hidden;display:inline-block;position:relative;width:640px;height:90px;*display:inline;*zoom:1;font:12px/1.5 tahoma,&#39;Hiragino Sans GB&#39;,&#39;microsoft yahei&#39;,sans-serif;"><iframe id="tanxssp-tuwen-iframemm_32479643_3494618_75352146" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/TB1nJtlPFXXXXaUXFXXXXXXXXXX.html" style="width:640px;height:90px" border="0" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="true"></iframe><a id="iconmm_32479643_3494618_75352146" title="我也要申请橱窗推广" target="_blank" href="http://pro.taobao.com/index.htm?spm=a2320.7388781.1998051528.5.JOvNkN" style="overflow:hidden;width:15px;height:13px;right:20px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;">   <span id="icon_smallmm_32479643_3494618_75352146" style="border-right:2px solid #eee;float:none;width:13px;display:block;height:13px;box-sizing:content-box"><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/TB1DmcoJXXXXXavXpXXXXXXXXXX-26-26.png" border="0" style="width:13px;height:13px;margin:auto;display:block;"></span>   <span id="icon_bigmm_32479643_3494618_75352146" style="float:none;width:60px;height:13px;display: none;"><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/TB1Lt7aJXXXXXcjXVXXXXXXXXXX-117-26.png" style="width:60px;height:13px;margin:auto;display:block;" border="0/"></span></a><a id="sxmm_32479643_3494618_75352146" href="javascript:;" style="width:20px;height:13px;right:0px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;margin:0;">   <span id="sx1mm_32479643_3494618_75352146" style="float:none;width:20px;display:block;height:13px;"><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/TB1tWvVJFXXXXc_aXXXXXXXXXXX-40-26.png" style="width:20px;height:13px;margin:auto;display:block;min-height:13px;" border="0/"></span><div id="sxtipmm_32479643_3494618_75352146" style="display:none;position:absolute;left:-38px;bottom:13px;"><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/TB1upAiJXXXXXa5aXXXXXXXXXXX-116-30.png" style="width:58px;height:15px;margin:auto;display:block;min-height:15px;" border="0"></div></a></div></ins><a style="display:none;" id="tanx-a-mm_32479643_3494618_75352146"></a><script src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/ex(1)"></script></div>
+        <a id="comment_area" href="http://www.toutiao.com/i6265641778112627202/#" style="display: inline-block;margin-bottom: 20px;"></a><!--评论锚点-->
+        <div riot-tag="comment" id="comment"><div class="c-header"> <em>0&nbsp;</em>条评论 </div> <div riot-tag="inputBox" ismain="true" avatar="http://p0.pstatp.com/origin/3791/5070639578" group_id="6264330372231053569" item_id="6265641778112627202"><div class="inputBox"> <div class="y-box"> <div class="avatar-wrap avatar-wrap-center"> <img alt="" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/5070639578"> </div> <div class="input-wrap  "> <div class="c-textarea" ga_event="click_input_comment"> <textarea name="inputText" placeholder="写下您的评论..."></textarea> </div> <div class="c-action" ga_event="click_publish_comment"> <div class="c-submit">评论</div> </div> </div> </div> </div></div> <ul> <!--riot placeholder--> </ul>  <div id="J_report"></div></div>
+      </div>
+    </div>
+    <div class="y-box" style="margin-top: 30px;">
+      <div class="y-left index-left">
+        <div riot-tag="relatedChannel"><div name="relatedChannel" ga_event="related_channel_click" class="relatedChannel "> <h2 class="relatedChannel-header">相关推荐</h2> <ul class="relatedChannel-list"> <li> <a href="javacript:;" class="relatedChannel-item active"> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>推荐</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>热点</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>社会</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>娱乐</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>科技</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>体育</span> </a> </li><!--riot placeholder--> </ul> </div></div>
+      </div>
+      <div class="y-left index-middle">
+        <div class="index-cut-line" id="J_cut_line"></div>
+        <div riot-tag="feedBox"></div>
+      </div>
+    </div>
+  </div>
+  <div id="J_rindex" class="y-right index-right">
+    
+<div class="module">
+  <div class="pgcInfo">
+    <div class="pgc-head">
+      <a class="pgc-link" target="_blank" href="http://www.toutiao.com/c/user/5762119086/" ga_event="click_into_pgc">
+          <img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/2987698995" alt="DBAplus社群">
+          <div class="pgc-username">
+            <span>DBAplus社群</span>
+            <div riot-tag="subscribe" class="pgc-subscribe"><div class="subscribe" ga_event="follow_pgc"> <div class="article-subscribe left-arrow"> <i class="y-icon icon-check"></i><span>已关注</span> </div>  </div></div>
+          </div>
+      </a>
+    </div>
+    <p class="pgc-description"></p>
+    <ul>
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://www.toutiao.com/item/6368280367392096770" target="_blank" class="pgc-article-link">
+          15年2B老司机：企业服务市场创业和产品该往哪走？
+        </a>
+    	</li>
+      
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://www.toutiao.com/item/6339299456214630913" target="_blank" class="pgc-article-link">
+          大数据开发项目最佳实践
+        </a>
+    	</li>
+      
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://www.toutiao.com/item/6338928772087054849" target="_blank" class="pgc-article-link">
+          Oracle高并发系列1：DML引起的常见问题及优化思路
+        </a>
+    	</li>
+      
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://www.toutiao.com/item/6338928359984071170" target="_blank" class="pgc-article-link">
+          日均十亿级别的数据如何做到秒导、秒查？
+        </a>
+    	</li>
+      
+      
+    </ul>
+  </div>
+</div>
+
+
+    <div class="right-top-1 right-img" name="adetail_right*top_1" ad-cursor="1" ad_name="h_300*250_TB_456" done="1" show=""><script src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/ex(2)" id="tanx-s-mm_32479643_3494618_56064456" charset="gbk"></script><ins style="display:inline-block;padding:0;margin:0;width:300px;height:250px;*zoom:1;*display:inline; position:relative;" id="tanxssp-outer-conmm_32479643_3494618_56064456"><div id="tanxssp_con_mm_32479643_3494618_56064456" style="overflow:hidden;display:inline-block;position:relative;width:300px;height:250px;*display:inline;*zoom:1;font:12px/1.5 tahoma,&#39;Hiragino Sans GB&#39;,&#39;microsoft yahei&#39;,sans-serif;"><iframe id="tanxssp-tuwen-iframemm_32479643_3494618_56064456" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/creation-245057E3sJ6U0UZ8D-2830683.html" style="width:300px;height:250px" border="0" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="true"></iframe><a id="iconmm_32479643_3494618_56064456" title="我也要申请橱窗推广" target="_blank" href="http://pro.taobao.com/index.htm?spm=a2320.7388781.1998051528.5.JOvNkN" style="overflow:hidden;width:15px;height:13px;right:20px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;">   <span id="icon_smallmm_32479643_3494618_56064456" style="border-right:2px solid #eee;float:none;width:13px;display:block;height:13px;box-sizing:content-box"><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/TB1DmcoJXXXXXavXpXXXXXXXXXX-26-26.png" border="0" style="width:13px;height:13px;margin:auto;display:block;"></span>   <span id="icon_bigmm_32479643_3494618_56064456" style="float:none;width:60px;height:13px;display: none;"><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/TB1Lt7aJXXXXXcjXVXXXXXXXXXX-117-26.png" style="width:60px;height:13px;margin:auto;display:block;" border="0/"></span></a><a id="sxmm_32479643_3494618_56064456" href="javascript:;" style="width:20px;height:13px;right:0px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;margin:0;">   <span id="sx1mm_32479643_3494618_56064456" style="float:none;width:20px;display:block;height:13px;"><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/TB1tWvVJFXXXXc_aXXXXXXXXXXX-40-26.png" style="width:20px;height:13px;margin:auto;display:block;min-height:13px;" border="0/"></span><div id="sxtipmm_32479643_3494618_56064456" style="display:none;position:absolute;left:-38px;bottom:13px;"><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/TB1upAiJXXXXXa5aXXXXXXXXXXX-116-30.png" style="width:58px;height:15px;margin:auto;display:block;min-height:15px;" border="0"></div></a></div></ins><a style="display:none;" id="tanx-a-mm_32479643_3494618_56064456"></a><script src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/ex(3)"></script></div>
+    <div riot-tag="hotVideo" class="hotVideo module" ga_event="click_video_recommend"><div class="module-head video-head"><a href="http://www.toutiao.com/video/" target="_blank">热门视频</a></div> <ul> <li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6411243521440743937/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/1c610004e207fa9e2259" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>22:49</span> </i> <p class="hot-title module-title">中越战争为何如此惨烈？中国版《狂怒》4天战损530辆坦克</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6431794750805770754/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/26f20004aa719484e985" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>04:46</span> </i> <p class="hot-title module-title">高三班主任可能都是同一个妈生的</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6430268652012503297/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/2611000187f86155b1a8" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>11:53</span> </i> <p class="hot-title module-title">德国的机械化程度，服不服 有本事你收蒜台我看看</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6415760992580894977/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/1ea000081cdba260947f" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>04:58</span> </i> <p class="hot-title module-title">黑社会老大当众被嘲笑，直接灭掉了在场所有大哥</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6431857813403959554/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/28870003d5f564b90cb0" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>04:12</span> </i> <p class="hot-title module-title">注意！皮肤有这种痣的人，85%人都可能患有肝癌！现在发现还来得及！</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6423187496133198337/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/22cc0000c6c584a1be0a" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>02:51</span> </i> <p class="hot-title module-title">要装逼的后果，裤子都笑掉了！</p> </a> </li><!--riot placeholder--> </ul></div>
+    <div class="right-top-2 right-img" name="adetail_right*top_2" ad-cursor="1" ad_name="h_300*250_TB_903" done="1" show=""><script src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/ex(4)" id="tanx-s-mm_32479643_3494618_75342903" charset="gbk"></script><ins style="display:inline-block;padding:0;margin:0;width:300px;height:250px;*zoom:1;*display:inline; position:relative;" id="tanxssp-outer-conmm_32479643_3494618_75342903"><div id="tanxssp_con_mm_32479643_3494618_75342903" style="overflow:hidden;display:inline-block;position:relative;width:300px;height:250px;*display:inline;*zoom:1;font:12px/1.5 tahoma,&#39;Hiragino Sans GB&#39;,&#39;microsoft yahei&#39;,sans-serif;"><iframe id="tanxssp-tuwen-iframemm_32479643_3494618_75342903" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/creation-245057E3sJ6U0UZ8D-2830683(1).html" style="width:300px;height:250px" border="0" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="true"></iframe><a id="iconmm_32479643_3494618_75342903" title="我也要申请橱窗推广" target="_blank" href="http://pro.taobao.com/index.htm?spm=a2320.7388781.1998051528.5.JOvNkN" style="overflow:hidden;width:15px;height:13px;right:20px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;">   <span id="icon_smallmm_32479643_3494618_75342903" style="border-right:2px solid #eee;float:none;width:13px;display:block;height:13px;box-sizing:content-box"><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/TB1DmcoJXXXXXavXpXXXXXXXXXX-26-26.png" border="0" style="width:13px;height:13px;margin:auto;display:block;"></span>   <span id="icon_bigmm_32479643_3494618_75342903" style="float:none;width:60px;height:13px;display: none;"><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/TB1Lt7aJXXXXXcjXVXXXXXXXXXX-117-26.png" style="width:60px;height:13px;margin:auto;display:block;" border="0/"></span></a><a id="sxmm_32479643_3494618_75342903" href="javascript:;" style="width:20px;height:13px;right:0px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;margin:0;">   <span id="sx1mm_32479643_3494618_75342903" style="float:none;width:20px;display:block;height:13px;"><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/TB1tWvVJFXXXXc_aXXXXXXXXXXX-40-26.png" style="width:20px;height:13px;margin:auto;display:block;min-height:13px;" border="0/"></span><div id="sxtipmm_32479643_3494618_75342903" style="display:none;position:absolute;left:-38px;bottom:13px;"><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/TB1upAiJXXXXXa5aXXXXXXXXXXX-116-30.png" style="width:58px;height:15px;margin:auto;display:block;min-height:15px;" border="0"></div></a></div></ins><a style="display:none;" id="tanx-a-mm_32479643_3494618_75342903"></a><script src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/ex(5)"></script></div>
+    
+
+    <div class="right-top-3 right-img" name="adetail_right*top_3" ad-cursor="1" ad_name="h_300*250_TB_4454" done="1" show=""><script src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/ex(6)" id="tanx-s-mm_32479643_3494618_107024454" charset="gbk"></script><ins style="display:inline-block;padding:0;margin:0;width:300px;height:250px;*zoom:1;*display:inline; position:relative;" id="tanxssp-outer-conmm_32479643_3494618_107024454"><div id="tanxssp_con_mm_32479643_3494618_107024454" style="overflow:hidden;display:inline-block;position:relative;width:300px;height:250px;*display:inline;*zoom:1;font:12px/1.5 tahoma,&#39;Hiragino Sans GB&#39;,&#39;microsoft yahei&#39;,sans-serif;"><iframe id="tanxssp-tuwen-iframemm_32479643_3494618_107024454" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/creation-245057E3sJ6U0UZ8D-2830683(2).html" style="width:300px;height:250px" border="0" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="true"></iframe><a id="iconmm_32479643_3494618_107024454" title="我也要申请橱窗推广" target="_blank" href="http://pro.taobao.com/index.htm?spm=a2320.7388781.1998051528.5.JOvNkN" style="overflow:hidden;width:15px;height:13px;right:20px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;">   <span id="icon_smallmm_32479643_3494618_107024454" style="border-right:2px solid #eee;float:none;width:13px;display:block;height:13px;box-sizing:content-box"><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/TB1DmcoJXXXXXavXpXXXXXXXXXX-26-26.png" border="0" style="width:13px;height:13px;margin:auto;display:block;"></span>   <span id="icon_bigmm_32479643_3494618_107024454" style="float:none;width:60px;height:13px;display: none;"><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/TB1Lt7aJXXXXXcjXVXXXXXXXXXX-117-26.png" style="width:60px;height:13px;margin:auto;display:block;" border="0/"></span></a><a id="sxmm_32479643_3494618_107024454" href="javascript:;" style="width:20px;height:13px;right:0px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;margin:0;">   <span id="sx1mm_32479643_3494618_107024454" style="float:none;width:20px;display:block;height:13px;"><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/TB1tWvVJFXXXXc_aXXXXXXXXXXX-40-26.png" style="width:20px;height:13px;margin:auto;display:block;min-height:13px;" border="0/"></span><div id="sxtipmm_32479643_3494618_107024454" style="display:none;position:absolute;left:-38px;bottom:13px;"><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/TB1upAiJXXXXXa5aXXXXXXXXXXX-116-30.png" style="width:58px;height:15px;margin:auto;display:block;min-height:15px;" border="0"></div></a></div></ins><a style="display:none;" id="tanx-a-mm_32479643_3494618_107024454"></a><script src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/ex(7)"></script></div>
+    <div riot-tag="hotPicture" class="hotPicture module" ga_event="click_pictures_recommend"><div class="module-head pic-head"><a href="http://www.toutiao.com/news_image/" target="_blank">精彩图片</a></div> <ul> <li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6432136016115515650/">  <div class="pic-style style_2"> <div class="module-pic pic-middle"><img alt="" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/2889000522507e6751c2"></div> <div class="module-pic pic-small"><img alt="" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/288600018dec86ecc0e1"></div> <div class="module-pic pic-small"><img alt="" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/2888000493c0c3179f78"></div> </div>  <i class="hot-tag pic-tag"> <span>8图</span> </i> <p class="hot-title module-title">晋豫交界的“外荒”村，一村仅一户人家，六代与世隔绝，而立之儿至今未娶</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6377329668181852417/">  <div class="pic-style style_2"> <div class="module-pic pic-middle"><img alt="" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/289d000340575eeba3c3"></div> <div class="module-pic pic-small"><img alt="" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/289d00034075b0f978e5"></div> <div class="module-pic pic-small"><img alt="" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/289d000340968f86a2e7"></div> </div>  <i class="hot-tag pic-tag"> <span>10图</span> </i> <p class="hot-title module-title">窥探女同性情侣私密生活</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6431263772279095554/"> <div class="pic-style style_1"> <div class="module-pic pic-big"><img alt="" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/26f0000360de981dc63d"></div> </div>   <i class="hot-tag pic-tag"> <span>8图</span> </i> <p class="hot-title module-title">清朝末年百姓真实生活场景，和电视剧似乎不太一样</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6426228957993943298/">   <div class="pic-style style_3"> <div class="module-pic pic-middle"><img alt="" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/22d90003af0d0bb0cc9b"></div> <div class="module-pic pic-small"><img alt="" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/22d80003bbcda5cf3f0c"></div> <div class="module-pic pic-small"><img alt="" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/242900006eab890cdf92"></div> </div> <i class="hot-tag pic-tag"> <span>9图</span> </i> <p class="hot-title module-title">超级赞的微景观，这创意……101分</p> </a> </li><!--riot placeholder--> </ul></div>
+    <div class="right-top-4 right-img" name="adetail_right*top_4" ad-cursor="1" ad_name="h_300*250_TB_461" done="1" show="1"><script src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/ex(8)" id="tanx-s-mm_32479643_3494618_56068461" charset="gbk"></script><ins style="display:inline-block;padding:0;margin:0;width:300px;height:250px;*zoom:1;*display:inline; position:relative;" id="tanxssp-outer-conmm_32479643_3494618_56068461"><div id="tanxssp_con_mm_32479643_3494618_56068461" style="overflow:hidden;display:inline-block;position:relative;width:300px;height:250px;*display:inline;*zoom:1;font:12px/1.5 tahoma,&#39;Hiragino Sans GB&#39;,&#39;microsoft yahei&#39;,sans-serif;"><iframe id="tanxssp-tuwen-iframemm_32479643_3494618_56068461" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/creation-245057E3sJ6U0UZ8D-2830683(3).html" style="width:300px;height:250px" border="0" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="true"></iframe><a id="iconmm_32479643_3494618_56068461" title="我也要申请橱窗推广" target="_blank" href="http://pro.taobao.com/index.htm?spm=a2320.7388781.1998051528.5.JOvNkN" style="overflow:hidden;width:15px;height:13px;right:20px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;">   <span id="icon_smallmm_32479643_3494618_56068461" style="border-right:2px solid #eee;float:none;width:13px;display:block;height:13px;box-sizing:content-box"><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/TB1DmcoJXXXXXavXpXXXXXXXXXX-26-26.png" border="0" style="width:13px;height:13px;margin:auto;display:block;"></span>   <span id="icon_bigmm_32479643_3494618_56068461" style="float:none;width:60px;height:13px;display: none;"><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/TB1Lt7aJXXXXXcjXVXXXXXXXXXX-117-26.png" style="width:60px;height:13px;margin:auto;display:block;" border="0/"></span></a><a id="sxmm_32479643_3494618_56068461" href="javascript:;" style="width:20px;height:13px;right:0px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;margin:0;">   <span id="sx1mm_32479643_3494618_56068461" style="float:none;width:20px;display:block;height:13px;"><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/TB1tWvVJFXXXXc_aXXXXXXXXXXX-40-26.png" style="width:20px;height:13px;margin:auto;display:block;min-height:13px;" border="0/"></span><div id="sxtipmm_32479643_3494618_56068461" style="display:none;position:absolute;left:-38px;bottom:13px;"><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/TB1upAiJXXXXXa5aXXXXXXXXXXX-116-30.png" style="width:58px;height:15px;margin:auto;display:block;min-height:15px;" border="0"></div></a></div></ins><a style="display:none;" id="tanx-a-mm_32479643_3494618_56068461"></a><script src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/ex(9)"></script></div>
+    <div class="right-hover-1 right-img" id="imagindexhover" name="adetail_right*hover_1" ad-cursor="1" ad_name="h_300*250_TB_469" done="1" show="" style="display: none;"><script src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/ex(10)" id="tanx-s-mm_32479643_3494618_63260469" charset="gbk"></script><ins style="display: inline-block; padding: 0px; margin: 0px; width: 300px; height: 250px; position: fixed; top: 0px; left: 0px; z-index: 2147483647;" id="tanxssp-outer-conmm_32479643_3494618_63260469"><div id="tanxssp_con_mm_32479643_3494618_63260469" style="overflow:hidden;display:inline-block;position:relative;width:300px;height:250px;*display:inline;*zoom:1;font:12px/1.5 tahoma,&#39;Hiragino Sans GB&#39;,&#39;microsoft yahei&#39;,sans-serif;"><iframe id="tanxssp-outer-iframemm_32479643_3494618_63260469" style="width: 300px; height: 250px;" border="0" frameborder="0" scrolling="no" marginwidth="0" allowtransparency="true" marginheight="0" src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/saved_resource.html"></iframe><a style="display:none !important;" id="tanx_frameanchor_mm_32479643_3494618_63260469" data-mid="17534123"></a><a id="iconmm_32479643_3494618_63260469" title="我也要申请橱窗推广" target="_blank" href="http://pro.taobao.com/index.htm?spm=a2320.7388781.1998051528.5.JOvNkN" style="overflow:hidden;width:15px;height:13px;right:20px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;">   <span id="icon_smallmm_32479643_3494618_63260469" style="border-right:2px solid #FBE008;float:none;width:13px;display:block;height:13px;box-sizing:content-box"><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/TB1DmcoJXXXXXavXpXXXXXXXXXX-26-26.png" border="0" style="width:13px;height:13px;margin:auto;display:block;"></span>   <span id="icon_bigmm_32479643_3494618_63260469" style="float:none;width:60px;height:13px;display: none;"><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/TB1Lt7aJXXXXXcjXVXXXXXXXXXX-117-26.png" style="width:60px;height:13px;margin:auto;display:block;" border="0/"></span></a><a id="sxmm_32479643_3494618_63260469" href="javascript:;" style="width:20px;height:13px;right:0px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;margin:0;">   <span id="sx1mm_32479643_3494618_63260469" style="float:none;width:20px;display:block;height:13px;"><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/TB1tWvVJFXXXXc_aXXXXXXXXXXX-40-26.png" style="width:20px;height:13px;margin:auto;display:block;min-height:13px;" border="0/"></span><div id="sxtipmm_32479643_3494618_63260469" style="display:none;position:absolute;left:-38px;bottom:13px;"><img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/TB1upAiJXXXXXa5aXXXXXXXXXXX-116-30.png" style="width:58px;height:15px;margin:auto;display:block;min-height:15px;" border="0"></div></a></div></ins><a style="display: block; width: 0px; height: 0px;" id="tanx-a-mm_32479643_3494618_63260469"></a><script src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/ex(11)"></script></div>
+  </div>
+</div>
+
+<div class="action-feedback">
+  <div riot-tag="feedback" class="feedback"><ul> <li class="tool-item" ga_event="go_top_click"> <a href="javascript:;"> <i class="y-icon icon-backtotopfeed"></i> </a> </li> </ul></div>
+</div>
+
+<!-- 公共尾部 -->
+<div id="footer">
+    <div>
+        <span class="fitem">© 2017 今日头条 </span>
+        <a class="fitem" href="http://www.12377.cn/" target="_blank">中国互联网举报中心</a>
+        <a class="fitem" href="http://www.miibeian.gov.cn/" target="_blank">京ICP证140141号</a>
+        <a class="fitem" href="http://www.miibeian.gov.cn/" target="_blank">京ICP备12025439号-3</a>
+        <a class="fitem" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11000002002023" target="_blank" ga_event="click_about">
+            <img src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/gongan_d0289dc.png">京公网安备 11000002002023号
+        </a>
+    </div>
+    <div>
+        <a class="fitem" href="http://www.toutiao.com/license/" target="_blank">网络文化经营许可证</a>
+        <a class="fitem" href="http://www.toutiao.com/a3642705768/" target="_blank">跟帖评论自律管理承诺书</a>
+        <span class="fitem">违法和不良信息举报电话：010-58341833</span>
+        <span class="fitem">公司名称：北京字节跳动科技有限公司</span>
+    </div>
+</div>
+
+
+
+      <div riot-tag="promotion-ext" id="promotion-ext"></div>
+    </div>
+
+    <script>
+
+        if (window.Raven) {
+          if (1||Math.floor(Math.random()*2)) {
+            Raven.config('http://key@m.toutiao.com/log/sentry/v2/51', {
+              whitelistUrls: [/pstatp\.com/]
+            }).install();
+          }
+        }
+
+        window.globals = window.globals || {};
+
+        taAnalysis && taAnalysis.setup({
+          c: 'detail_article'
+        });
+        taAnalysis && taAnalysis.send('pageview', {});
+
+        var antiPVHandler = utils.on(window, 'scroll', function(e) {
+          taAnalysis && taAnalysis.send('antipageview', {});
+          utils.off(window, 'scroll', antiPVHandler);
+        });
+
+        window.gaqpush = function (ga_action, ga_label){
+            ga('send', 'event','detail_article' , ga_action, ga_label);
+        };
+
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        // ga('create', 'UA-28423340-5', 'auto');
+        ga('create', 'UA-28423340-5', 'auto', {'sampleRate': 10});
+        ga('send', 'pageview');
+
+        utils.on(document.getElementsByTagName('body')[0], 'click', function(e) {
+            var target = utils.getTarget(e),
+                ga_event,
+                ga_category,
+                ga_label,
+                ga_value;
+
+            while(target && target.nodeName.toUpperCase() !== 'BODY') {
+                ga_event = utils.getAttribute(target, 'ga_event');
+                ga_category = utils.getAttribute(target, 'ga_category') || 'detail_article';
+                ga_label = utils.getAttribute(target, 'ga_label');
+                ga_value = utils.getAttribute(target, 'ga_value') || 1;
+
+                ga_event && ga('send', 'event', ga_category, ga_event, ga_label, ga_value);
+                ga_event && taAnalysis && taAnalysis.send('event', { ev: ga_event });
+                target = target.parentNode;
+            }
+        });
+
+        riot.observable(window);
+    </script>
+    <script src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/toutiao.web.toutiao_pc-pc-fe_switch.js.下载"></script>
+    <script>
+      var PAGE_SWITCH = window['toutiao.web.toutiao_pc/pc/fe_switch'] || {};
+    </script>
+    
+
+<script>
+  // 用户信息
+  var userInfo = {
+      id: 7170056853,
+      name: '东北小凤凰',
+      avatarUrl: 'http://p0.pstatp.com/origin/3791/5070639578',
+      isPgc: false,
+      isOwner: false
+  };
+
+
+  var group = {
+  	id: '6264330372231053569',
+    item_id: '6265641778112627202',
+  	repin:0,
+  };
+
+  var media = {
+    user_id: 5762119086,
+  	id:5762164771,
+  	like:true
+  };
+
+  var siblingList = [{"comments_count":4575,"media_avatar_url":"http:\/\/p5a.pstatp.com\/large\/1a6a000879a3a676f0f8","is_feed_ad":false,"is_diversion_page":false,"title":"\u519c\u6751\u5c0f\u4f19\u4e0b\u7530\u641e\u91ce \u624b\u4e00\u8fdb\u6d1e\u611f\u89c9\u4e0d\u5999 \u7acb\u9a6c\u540e\u9000","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"03:08","source_url":"\/group\/6417257874729189633\/","source":"\u578b\u7537\u884c\u8d70\u4e61\u6751","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":12901753,"image_url":"http:\/\/p1.pstatp.com\/list\/190x124\/1f7e0000d5ca8443ebfb","group_id":"6417257874729189633","is_related":true,"media_url":"\/c\/user\/52624419301\/"},{"comments_count":18830,"media_avatar_url":"http:\/\/p3.pstatp.com\/large\/97d0009ab4a8573a78c","is_feed_ad":false,"is_diversion_page":false,"title":"\u53ea\u6709\u8fd9\u4e00\u4e2a\u56fd\u5bb6\u7684\u4eba\uff0c\u603b\u662f\u770b\u4e0d\u8d77\u4e2d\u56fd\u4eba","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"03:48","source_url":"\/group\/6310427020909461762\/","source":"\u5b66\u59d0\u8bb2\u7b11\u8bdd","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":4004689,"image_url":"http:\/\/p1.pstatp.com\/list\/190x124\/b0a000165e4960b9098","group_id":"6310427020909461762","is_related":true,"media_url":"\/c\/user\/6103330032\/"},{"comments_count":10907,"media_avatar_url":"http:\/\/p2.pstatp.com\/large\/14f00256e1ca33e8b57","is_feed_ad":false,"is_diversion_page":false,"title":"\u8457\u540d\u5f71\u661f\u53e4\u5929\u4e50\u7684\u771f\u5b9e\u8eab\u4efd\u66dd\u5149\uff0c\u9707\u60ca56\u4e2a\u6c11\u65cf\uff01","single_mode":true,"gallary_image_count":21,"middle_mode":true,"has_video":true,"video_duration_str":"01:48","source_url":"\/group\/6312686805690876417\/","source":"\u5e7f\u5dde\u4e50\u7ffb\u5929","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":2009279,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/b0e0009114eccb33b4f","group_id":"6312686805690876417","is_related":true,"media_url":"\/c\/user\/6108245701\/"},{"comments_count":12605,"media_avatar_url":"http:\/\/p3.pstatp.com\/large\/41200033204317c2828","is_feed_ad":false,"is_diversion_page":false,"title":"\u786c\u6c14\uff01\u5357\u6d77\u5b98\u5175\u6700\u5f3a\u519b\u4ee4\uff1a\u5357\u6d77\u6709\u6211\u4eec\uff0c\u7956\u56fd\u8bf7\u653e\u5fc3\uff01","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"02:39","source_url":"\/group\/6296668997312053761\/","source":"\u7b2c\u4e00\u519b\u60c5","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":2329209,"image_url":"http:\/\/p1.pstatp.com\/list\/190x124\/7da000732a5cc297c9a","group_id":"6296668997312053761","is_related":true,"media_url":"\/c\/user\/6264649967\/"},{"comments_count":10662,"media_avatar_url":"http:\/\/p3.pstatp.com\/large\/4110004fd2681eb7cb7","is_feed_ad":false,"is_diversion_page":false,"title":"\u5982\u679c\u4f60\u5bf9\u751f\u6d3b\u5931\u53bb\u4fe1\u5fc3\uff0c\u90a3\u4e48\u8bf7\u770b\u4e0b\u8fd9\u4e2a\u89c6\u9891\u5427","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"03:15","source_url":"\/group\/6293274175373050369\/","source":"\u52a8\u7269\u96c6\u7ed3\u53f7","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":3777313,"image_url":"http:\/\/p1.pstatp.com\/list\/190x124\/72100070329606cbfee","group_id":"6293274175373050369","is_related":true,"media_url":"\/c\/user\/6093141211\/"},{"comments_count":30637,"media_avatar_url":"http:\/\/p10.pstatp.com\/large\/216e002773ed977d0d2d","is_feed_ad":false,"is_diversion_page":false,"title":"\u8fd9\u662f\u53f2\u4e0a\u6700\u9738\u6c14\u7684\u6b66\u4fa0\u6b4c\uff0c\u81f3\u4eca\u65e0\u4eba\u6562\u7ffb\u5531\uff0c\u5468\u534e\u5065\u90fd\u6ca1\u6562\u5531\u7b2c\u4e8c\u904d","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"04:39","source_url":"\/group\/6301896049099276802\/","source":"\u679c\u9171\u97f3\u4e50","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":3691563,"image_url":"http:\/\/p9.pstatp.com\/list\/190x124\/91200121a73f2d17596","group_id":"6301896049099276802","is_related":true,"media_url":"\/c\/user\/5361077151\/"},{"comments_count":10527,"media_avatar_url":"http:\/\/p3.pstatp.com\/large\/14f0006c8fa52978d9c","is_feed_ad":false,"is_diversion_page":false,"title":"\u9ad8\u901f\u516c\u8def\u5076\u9047\u5b59\u7ea2\u96f7\u5927\u54e5\uff0c\u6ca1\u6709\u660e\u661f\u67b6\u5b50","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"00:17","source_url":"\/group\/6313292543870664961\/","source":"\u6709\u8272\u7b11\u8bdd","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":5301746,"image_url":"http:\/\/p9.pstatp.com\/list\/190x124\/ba00000bd06e5120b25","group_id":"6313292543870664961","is_related":true,"media_url":"\/c\/user\/6001094783\/"},{"comments_count":51237,"media_avatar_url":"http:\/\/p2.pstatp.com\/large\/8709\/490794124","is_feed_ad":false,"is_diversion_page":false,"title":"\u7537\u4eba\u770b\u5230\u81ea\u5df1\u5973\u670b\u53cb\u88ab\u4eba\u7fa4\u6bb4\u540e\u7684\u53cd\u5e94","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"01:19","source_url":"\/group\/6296997200505340418\/","source":"\u6218\u98ce\u4e91","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":5134982,"image_url":"http:\/\/p1.pstatp.com\/list\/190x124\/71900133af15f193b7f","group_id":"6296997200505340418","is_related":true,"media_url":"\/c\/user\/5559074407\/"},{"comments_count":15250,"media_avatar_url":"http:\/\/p3.pstatp.com\/large\/78f0012156f131df6ea","is_feed_ad":false,"is_diversion_page":false,"title":"\u6b66\u5f53\u5c71\u4e0a\u89c1\u9ad8\u4eba\uff1a\u4e0d\u8981\u5f55\u4e86\uff0c\u4e0d\u8981\u9f13\u638c\uff0c\u8ba9\u6211\u5e08\u7236\u77e5\u9053\u4e86\u8981\u9a82\u6211","single_mode":true,"gallary_image_count":1,"middle_mode":true,"has_video":true,"video_duration_str":"00:28","source_url":"\/group\/6315168461911753218\/","source":"\u4e2d\u534e\u4eba\u624d\u7f51","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":3043086,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/ba200069237fb745eb5","group_id":"6315168461911753218","is_related":true,"media_url":"\/c\/user\/6637306187\/"},{"comments_count":520,"media_avatar_url":"http:\/\/p3.pstatp.com\/large\/41200167c12e1d04450","is_feed_ad":false,"is_diversion_page":false,"title":"\u8fd9\u624d\u662f\u8ba9\u654c\u4eba\u80c6\u98a4\u7684\u4e2d\u56fd\u89e3\u653e\u519b","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"02:44","source_url":"\/group\/6287868315289256450\/","source":"\u5927\u56fd\u4e4b\u5175\u957f","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":2417145,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/5890012acab342e9976","group_id":"6287868315289256450","is_related":true,"media_url":"\/c\/user\/6241153515\/"},{"comments_count":7417,"is_related":true,"is_feed_ad":false,"is_diversion_page":false,"title":"\u8fbd\u5b81\u53f7\u822a\u6bcd\u9738\u6c14\u8fdb\u5165\u5357\u6d77\uff0c\u5bf9\u5f3a\u6743\u8bf4\u4e0d\uff01\u4e2d\u56fd\u5c31\u8981\u5f3a\u786c\u4e00\u4e9b\uff01","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"03:27","source_url":"\/group\/6303444883520619009\/","source":"\u519b\u4e2d\u6620\u50cf","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":5476535,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/9dd00035983ba4b5e67","group_id":"6303444883520619009","media_url":"\/c\/user\/5535146731\/"},{"comments_count":20245,"media_avatar_url":"http:\/\/p3.pstatp.com\/large\/78f0005e7340a6c0133","is_feed_ad":false,"is_diversion_page":false,"title":"\u65e5\u672c\u9009\u624b\u88ab\u4e2d\u56fd\u4e52\u4e53\u8650\u54ed\uff0c\u6559\u7ec3\u8bf4\u4f60\u8ba9\u7740\u5979\u70b9\uff0c\u4e8e\u662f\u8fd0\u52a8\u5458\u8fd9\u6837\u8ba9\u4e86","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"03:21","source_url":"\/group\/6317080297842999554\/","source":"\u6c11\u54e5\u89e3\u8bf4","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":6154557,"image_url":"http:\/\/p1.pstatp.com\/list\/190x124\/c0c00002aa92636ec15","group_id":"6317080297842999554","is_related":true,"media_url":"\/c\/user\/6827899831\/"},{"comments_count":929,"media_avatar_url":"http:\/\/p3.pstatp.com\/large\/11955\/581418340","is_feed_ad":false,"is_diversion_page":false,"title":"\u8fd9\u662f\u4e00\u6bb5\u795e\u4eba\u4e91\u96c6\u7684\u89c6\u9891\uff0c\u80fd\u8ba9\u4f60\u7b11\u5230\u7aef\u5348\u6536\u5047","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"03:13","source_url":"\/group\/6294056325420679682\/","source":"\u5c81\u6708","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":4068613,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/7780009c22b0a402dfb","group_id":"6294056325420679682","is_related":true,"media_url":"\/c\/user\/3317390750\/"},{"comments_count":2987,"media_avatar_url":"http:\/\/p3.pstatp.com\/large\/16aa00080aeb1ad82e8e","is_feed_ad":false,"is_diversion_page":false,"title":"\u5468\u661f\u9a70\u5e26\u9648\u767e\u7965\u6284\u9ccc\u62dc\u7684\u5bb6\uff01\u8fd9\u4e00\u6bb5\u6211\u770b\u4e8610\u904d\uff0c\u6c38\u8fdc\u4e0d\u4f1a\u89c9\u5f97\u817b","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"03:23","source_url":"\/group\/6419898683222917634\/","source":"\u5317\u57ce\u6545\u4e8b","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":4429394,"image_url":"http:\/\/p1.pstatp.com\/list\/190x124\/1f8e00049f3cae36ef02","group_id":"6419898683222917634","is_related":true,"media_url":"\/c\/user\/55757148500\/"},{"comments_count":7182,"media_avatar_url":"http:\/\/p2.pstatp.com\/large\/2b7002633e1e034621a","is_feed_ad":false,"is_diversion_page":false,"title":"\u77ed\u77ed\u51e0\u5341\u79d2\u89c6\u9891\uff0c\u770b\u54ed\u4e86\u591a\u5c11\u4eba","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"00:26","source_url":"\/group\/6295690056862532098\/","source":"\u6211\u7f6a\u73cd\u8d35","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":3365887,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/71c000f56ea96160a7e","group_id":"6295690056862532098","is_related":true,"media_url":"\/c\/user\/6106471028\/"},{"comments_count":6577,"media_avatar_url":"http:\/\/p1.pstatp.com\/large\/97e001719bd85ce4618","is_feed_ad":false,"is_diversion_page":false,"title":"\u7537\u5b50\u6d77\u4e0a\u9493\u9c7c\u65f6\u611f\u89c9\u9493\u7ebf\u5f02\u5e38\u6c89\u91cd\uff0c\u6700\u540e\u9493\u4e0a\u6765\u7684\u5bb6\u4f19\u628a\u4ed6\u5413\u4e86\u4e00\u8df3","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"01:00","source_url":"\/group\/6286534798869529090\/","source":"\u706b\u9f99\u679c\u4f20\u5a92","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":3135853,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/6ce00053c7f8fb9718c","group_id":"6286534798869529090","is_related":true,"media_url":"\/c\/user\/6044739145\/"},{"comments_count":8542,"media_avatar_url":"http:\/\/p8.pstatp.com\/large\/411000279db713abf38","is_feed_ad":false,"is_diversion_page":false,"title":"\u52c7\u6562\u53f8\u673a\u5f00\u8f66\u51b2\u8fdb\u6d2a\u6c34\uff0c\u6551\u4e0b\u4e00\u5bb6\u4e09\u53e3","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"01:02","source_url":"\/group\/6299284556621021698\/","source":"\u7a7a\u4e2d\u6025\u6551","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":2267237,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/91200072a9016506868","group_id":"6299284556621021698","is_related":true,"media_url":"\/c\/user\/6220458934\/"},{"comments_count":9627,"media_avatar_url":"http:\/\/p1.pstatp.com\/large\/2b6001db95fe0affca2","is_feed_ad":false,"is_diversion_page":false,"title":"\u611f\u52a8\u4e0a\u4ebf\u4eba\u7684\u89c6\u9891","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"02:45","source_url":"\/group\/6278575020214632705\/","source":"\u7279\u4e8b\u513f","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":2017974,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/52e0007380789757f88","group_id":"6278575020214632705","is_related":true,"media_url":"\/c\/user\/6172603992\/"}];
+</script>
+
+<script src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/article_07b03ea.js.下载"></script>
+
+<script>
+  riot.mount('wtopbar', {
+    home: false,
+    userInfo: userInfo
+  });
+  riot.mount('login');
+  riot.mount('wsearch');
+</script>
+
+<script>
+  riot.mount('snsbox',{
+    share_url:"http://www.toutiao.com/item/6265641778112627202/",
+    abstract:"对于一些数据量较大的系统，数据库面临的问题除了查询效率低下，还有就是数据入库时间长。特别像报表系统，每天花费在数据导入上的时间可能会长达几个小时或十几个小时之久。因此，优化数据库插入性能是很有意义的。".replace(/<br \/>/ig, ''),
+    group_id:"6264330372231053569",
+    comments_count: utils.numFormat('0', 1, 'en'),
+    fix: true
+  });
+  riot.mount('hotVideo');
+  riot.mount('hotPicture');
+  riot.mount('feedback');
+</script>
+
+<script>
+  riot.mount('comment', {
+    group_id: '6264330372231053569',
+    item_id: '6265641778112627202' || '',
+    comments_count: utils.numCutByComma('0'),
+    userInfo: userInfo,
+    ban_comment: 0 + 0
+  });
+</script>
+
+<script>
+  riot.mount('relatedChannel', {
+    tag: '__all__'
+  });
+</script>
+<script src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/tt-video.js.下载" charset="utf-8" crossorigin="anonymous"></script>
+<script src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/video_a99722f.js.下载" crossorigin="anonymous"></script>
+<!--[if lt IE 9]>
+  <script src="//s3.pstatp.com/toutiao/resource/ntoutiao_web/page/detail/article_detail/article_main/audio/audio_ie8_8f6ccc5.js" charset="utf-8"></script>
+<![endif]-->
+<script src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/audio_a4dce16.js.下载" crossorigin="anonymous"></script>
+<script type="text/javascript">
+window.jsblock=function(){
+  setTimeout(function () {
+    window._czc && _czc.push(['_trackEvent', 'jsblock', 'article', 'block', 1, ''])
+  }, 1500);
+}
+</script>
+<script>
+  ;(function(win) {
+    var picVersion = win.PAGE_SWITCH && win.PAGE_SWITCH.picVersion;
+    if (!picVersion) {
+      var d = new Date();
+      picVersion = d.getFullYear() + '' + (d.getMonth() + 1) + '' + d.getDate() + '_01';
+    }
+    var url = '//s3a.pstatp.com/toutiao/gallery_img/dist/img.min.js?ver=' + picVersion;
+    window.utils && window.utils.loadScript(url, function() {
+      setTimeout(function() {
+        window.trigger('ad_put');
+      });
+    }, function() {
+      return window.jsblock();
+    });
+  })(window);
+</script><script src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/img.min.js.下载" crossorigin="anonymous"></script>
+<script>
+  var TT_PERF_CONFIG = {
+      metrics: true,
+      percent: 20
+  };
+</script>
+<script src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/ta.js.下载"></script>
+
+    <script src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/z_stat.php" language="JavaScript"></script><script src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/core.php" charset="utf-8" type="text/javascript"></script><a href="http://www.cnzz.com/stat/website.php?web_id=1259612802" target="_blank" title="站长统计">站长统计</a>
+    <script src="./MySQL批量SQL插入各种性能优化 - 今日头条(www.toutiao.com)_files/promotion_c49e139.js.下载"></script>
+    <script>
+      var is360 = window.uaCheck && window.uaCheck.is360se();
+      var isShowed = window.localStorage && window.localStorage.getItem('is_ext_pop_showed');
+      var isInstalled = window.sessionStorage && window.sessionStorage.getItem('is_ext_installed');
+      if (is360 && isShowed !== '1' && isInstalled !== '1') {
+        window.riot && riot.mount('#promotion-ext', 'promotion');
+      }
+    </script>
+
+
+</body></html>

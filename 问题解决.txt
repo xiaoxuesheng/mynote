@@ -38,4 +38,13 @@ JAVA_OPTS="$JAVA_OPTS" -server -XX:PermSize=128m -XX:MaxSize=512m
 解决-新加的服务发布成功，但是调用时找不到，日志：exception is java.lang.NoSuchMethodError:com.ejlerp.saleorder.api.SaleOrderWarehouseService.clearRetryNum(Lcom/ejlerp/common/vo/CallerInfo;Ljava/util/List;)V
 问题描述：（1）在 SaleOrderWarehouseService 里面新增了方法 clearRetryNum，并在微服务项目中测试没有问题。（2）在 api项目中 执行命令 mvn clean compile package deploy -U -Dmaven.test.skip新方法发布成功（3）在web项目中调用，saleOrderWarehouseService.clearRetryNum。执行时报错exception is java.lang.NoSuchMethodError。解决方法：dubbo会有提供者缓存问题，清了缓存就可以了。home目录中有.dubbo文件，把这个文件夹下的文件都删除。
 
+解决-Forbid consumer 10.0.1.158 access service com.esteel.account.service.ScmEgesyslogService from registry 10.0.1.220:2181 use dubbo version 2.5.3,Please check registry access list (whitelist/blacklist).要么方法名冲突，要么在注册服务的时候加了版本号，和使用的目前用的dubbo不一致，要么在控制台被禁止<dubbo:service interface="com.esteel.account.service.ScmEgesyslogService" ref="scmEgesyslogService" timeout="5000" version="1.1.1"/>这里多加了version='1.1.1'导致报错
+
+解决-日志：exception is java.lang.NoSuchMethodError: com.ejlerp.saleorder.api.SaleOrderWarehouseService.clearRetryNum(Lcom/ejlerp/common/vo/CallerInfo;Ljava/util/List;)V
+问题描述：
+（1）在 SaleOrderWarehouseService 里面新增了方法 clearRetryNum，并在微服务项目中测试没有问题。
+（2）在 api项目中 执行命令 mvn clean compile package deploy -U -Dmaven.test.skip 新方法发布成功
+（3）在web项目中调用，saleOrderWarehouseService.clearRetryNum。执行时报错 exception is java.lang.NoSuchMethodError
+解决方法：dubbo会有提供者缓存问题，清了缓存就可以了。home目录中 有 .dubbo文件，把这个文件夹下的文件都删除。
+
 

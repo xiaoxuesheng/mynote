@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)http://www.toutiao.com/i6233514880230490626/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script charset="utf-8" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/probe.js.下载" async="" mod_name="tanxssp-probe"></script><style class="vjs-styles-defaults">
+      .video-js {
+        width: 300px;
+        height: 150px;
+      }
+
+      .vjs-fluid {
+        padding-top: 56.25%
+      }
+    </style>
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="dns-prefetch" href="http://s3.pstatp.com/">
+    <link rel="dns-prefetch" href="http://s3a.pstatp.com/">
+    <link rel="dns-prefetch" href="http://s3b.pstatp.com/">
+    <link rel="dns-prefetch" href="http://p1.pstatp.com/">
+    <link rel="dns-prefetch" href="http://p3.pstatp.com/">
+    
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+    
+    <meta name="baidu-site-verification" content="T239HZAbh7">
+    
+    <!--meta name="baidu_union_verify" content="94bb8bb3fa863f70e7fd926bffecd81e"-->
+    <meta name="360-site-verification" content="b96e1758dfc9156a410a4fb9520c5956">
+    <meta name="360_ssp_verify" content="2ae4ad39552c45425bddb738efda3dbb">
+    <meta name="google-site-verification" content="3PYTTW0s7IAfkReV8wAECfjIdKY-bQeSkVTyJNZpBKE">
+    <meta name="shenma-site-verification" content="34c05607e2a9430ad4249ed48faaf7cb_1432711730">
+    <meta name="baidu_union_verify" content="b88dd3920f970845bad8ad9f90d687f7">
+    <meta name="domain_verify" content="pmrgi33nmfuw4ir2ej2g65lunfqw6ltdn5wselbcm52wszbchirdqyztge3tenrsgq3dknjume2tayrvmqytemlfmiydimddgu4gcnzcfqrhi2lnmvjwc5tfei5dcnbwhazdcobuhe2dqobrpu">
+    
+  <link rel="alternate" media="only screen and (max-width: 640px)" href="http://m.toutiao.com/a6232064900786815234/">
+
+  <title>Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)</title>
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta name="keywords" content="">
+  <meta name="description" content="我们已经从SVN 切换到Git很多年了，现在几乎所有的项目都在使用Github管理, 本篇文章讲一下为什么使用Git, 以及如何在团队中正确使用。Git的优点Git的优点很多，但是">
+  <meta name="pathname" content="toutiao_pc_article_detail">
+
+    <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="http://s3a.pstatp.com/toutiao/resource/ntoutiao_web/static/image/favicon_8e9c9c7.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/layout_5fcc025.css">
+    <!--[if lt IE 9]>
+      <script src="//s3a.pstatp.com/toutiao/resource/ntoutiao_web/static/js/lib/es5-shim_110642e.js"></script>
+    <![endif]-->
+    <script async="" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/analytics.js.下载"></script><script src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/lib_060bfbf.js.下载" crossorigin="anonymous"></script>
+    
+  <link rel="stylesheet" href="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/article_97557fd.css">
+  <link rel="stylesheet" href="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/tt-video.css" media="screen" title="no title">
+  <!--[if lt IE 9]>
+  <script src="//s3.pstatp.com/toutiao/video_player/dist/videojs-ie8.js" charset="utf-8" crossorigin="anonymous"></script>
+  <script src="//s3.pstatp.com/toutiao/video_player/dist/examples/webfont.js" charset="utf-8" crossorigin="anonymous"></script>
+  <script>
+      WebFont.load({
+          custom: {
+              families: ['iconfont','yFont'],
+              urls:['//s3.pstatp.com/toutiao/video_player/dist/tt-video.css','//www.toutiao.com/static/style/lib/layout.css']
+          }
+      });
+  </script>
+  <![endif]-->
+
+<style id="cae7407">.imga_wrapper{position:relative;display:inline-block;}.imga_flag{display: inline-block;position: absolute;bottom: 8px;left: 8px;border: 1px solid #fff;color: #fff;font-size: 12px;line-height: 12px;height: 12px;padding: 1px 2px;text-align: center;}</style><style id="3f29760">.bd-bottom-1{padding-left: 10px}</style><style id="5c0aac3">.right-top-1{margin-bottom: 30px}</style><style id="dcb5f28">.right-top-2{margin-bottom: 30px}</style><style id="126c616">.right-top-3{margin-bottom: 30px}</style><style id="ee4bf55">.right-top-4{margin-bottom: 30px}</style><style id="94138ee">.right-hover-1{position: fixed; top: 20px;} #imagindexhover > ins {position: absolute !important}</style></head>
+
+<body style="min-width: 1220px; overflow-x: hidden;">
+    
+
+    <a href="http://www.toutiao.com/articles_news_society/" style="display:none;"></a>
+
+    <div class="y-wrap">
+        
+
+<!-- 公共头部 -->
+<div id="header">
+  <div riot-tag="wtopbar" style="height: 34px; background: #222;"><div class="y-box wtopbar">  <div class="y-left y-nav-topbar" riot-tag="nav"><div class="nav"> <ul class="y-box nav-list" ga_event="mh_channel"> <li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/" ga_event="mh_channel_recommend">推荐</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_hot/" ga_event="mh_channel_hot">热点</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/video/" ga_event="mh_channel_video">视频</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_image/" ga_event="mh_channel_image">图片</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/essay_joke/" ga_event="mh_channel_essay">段子</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_society/" ga_event="mh_channel_society">社会</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_entertainment/" ga_event="mh_channel_entertainment">娱乐</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_tech/" ga_event="mh_channel_tech">科技</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_car/" ga_event="mh_channel_car">汽车</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_sports/" ga_event="mh_channel_sports">体育</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_finance/" ga_event="mh_channel_finance">财经</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_military/" ga_event="mh_channel_military">军事</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_world/" ga_event="mh_channel_world">国际</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_fashion/" ga_event="mh_channel_fashion">时尚</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_travel/" ga_event="mh_channel_travel">旅游</a> </li><!--riot placeholder--> <li class="y-left nav-item nav-more"> <a class="nav-link" href="javascript:;"> 更多<i class="y-icon icon-more"></i> </a> <div class="nav-layer"> <ul class="nav-more-list"> <li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/ch/news_discovery/" ga_event="mh_channel_discovery">探索</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/ch/news_baby/" ga_event="mh_channel_baby">育儿</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/ch/news_regimen/" ga_event="mh_channel_regimen">养生</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/ch/news_story/" ga_event="mh_channel_story">故事</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/ch/news_essay/" ga_event="mh_channel_essay">美文</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/ch/news_game/" ga_event="mh_channel_game">游戏</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/ch/news_history/" ga_event="mh_channel_history">历史</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/ch/news_food/" ga_event="mh_channel_food">美食</a> </li><!--riot placeholder--> </ul> </div> </li> </ul> </div></div> <ul class="y-right"> <li class="tb-item userbox"> <div riot-tag="wuserbox" abtype="" pageid=""><div class="y-box wuserbox">  <div class="y-right username"> <a ga_event="mh_nav_user" class="user-head" target="_blank" rel="nofollow" href="http://www.toutiao.com/c/user/7170056853/"> <div class="user-image"> <img onload="this.style.opacity=1;" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/5070639578" style="opacity: 1;"> </div> <span>东北小凤凰</span> </a> <div class="user-layer"> <ul ga_event="mh_nav_user"> <li><a class="layer-item" target="_blank" rel="nofollow" href="http://www.toutiao.com/c/user/7170056853/?tab=favourite">我的收藏</a></li> <li><a class="layer-item" target="_blank" rel="nofollow" href="http://www.toutiao.com/c/user/relation/7170056853/?tab=following">我的关注</a></li> <li><a class="layer-item" target="_blank" rel="nofollow" href="http://www.toutiao.com/c/user/relation/7170056853/?tab=followed">我的粉丝</a></li> <li> <a href="https://sso.toutiao.com/logout/" class="layer-item" rel="nofollow">退出</a> </li> </ul> </div> </div>  </div></div> </li> <li class="tb-item"> <a class="tb-link" href="javascript:void(0)">反馈</a> </li> <li class="tb-item"> <a class="tb-link" href="http://www.toutiao.com/complain/" ga_event="mh_nav_complain">投诉侵权</a> </li> <li class="tb-item more"> <a class="tb-link" href="http://www.toutiao.com/about/">头条产品</a> <div class="layer"> <ul> <li> <a href="https://wenda.toutiao.com/" class="layer-item" ga_event="mh_nav_others" target="_blank">问答</a> </li> <li> <a href="https://mp.toutiao.com/" class="layer-item" target="_blank" ga_event="mh_nav_others">头条号</a> </li> <li> <a href="https://tuchong.com/" class="layer-item" target="_blank" ga_event="mh_nav_others">图虫</a> </li> <li> <a href="https://ad.toutiao.com/promotion/?source2=pchometop" class="layer-item" target="_blank" ga_event="mh_nav_ad">广告投放</a> </li> </ul> </div> </li> </ul> <div id="J_userFeedback"></div> </div></div>
+  
+  <div class="middlebar">
+  <div class="y-box middlebar-inner">
+    <div class="y-left logo-box">
+      <a class="logo-link" href="http://www.toutiao.com/" ga_event="go_home">
+        <img class="logo" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/logo_201f80d.png">
+      </a>
+    </div>
+
+    
+      <div class="y-left chinese-tag">
+        <a href="http://www.toutiao.com/" target="_blank" ga_event="click_index">首页</a>
+        /
+        <a href="http://www.toutiao.com/search/?keyword=%E6%8A%80%E6%9C%AF" target="_blank" ga_event="click_channel">技术</a>
+        /
+        <span class="text">正文</span>
+      </div>
+    
+
+    <div class="y-right">
+      <div riot-tag="wsearch" style="margin-top: 9px; width: 340px;"><div name="searchBox" class="wsearch"> <form name="searchForm" action="http://www.toutiao.com/search/" method="get" target="_blank"> <div name="inputbox" class="y-box input-group"> <input class="y-left input-text" name="keyword" autocomplete="off" ga_event="mh_search" type="text" placeholder="请输入关键字"> <div class="y-right btn-submit"> <button type="submit" href="javascript:;"> <i class="y-icon icon-search" ga_event="mh_search"></i> </button> </div> </div> </form> <div class="layer "> <ul ga_event="mh_search"> <li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-1">1</i>  <span class="search-txt">男子策划仙人跳</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-2">2</i>  <span class="search-txt">女子照片上色情卡</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-3">3</i>  <span class="search-txt">飞机上做不雅之事</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-4">4</i>  <span class="search-txt">第一代蝙蝠侠去世</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-5">5</i>  <span class="search-txt">韩济州岛游客减少</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-6">6</i>  <span class="search-txt">导演齐柏林遇难</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-7">7</i>  <span class="search-txt">疑婚闹伴娘被猥亵</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-8">8</i>  <span class="search-txt">城管高考索矿泉水</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-9">9</i>  <span class="search-txt">空姐住店发现探头</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-10">10</i>  <span class="search-txt">老外求职回复走红</span> </a> </li><!--riot placeholder--> </ul> </div> </div></div>
+    </div>
+  </div>
+</div>
+
+  
+</div>
+
+<div riot-tag="login"><div class="login-dialog hide"> <a class="btn" href="javascript:;"> <i class="icon icon-close"></i> </a> <div class="login-dialog-header"> <h3>邮箱登录</h3> </div> <div class="login-dialog-inner" data-node="inner"> <div class="login-pannel bottom-line"> <form action="http://www.toutiao.com/auth/login/" method="POST"> <ul> <li> <div class="input-group"> <div class="input"> <label>邮箱</label> <input class="name" name="name_or_email" type="text" placeholder="请使用您的注册邮箱" autocomplete="off" spellcheck="false"> </div> </div> </li> <li> <div class="input-group"> <div class="input"> <label>密码</label> <input class="password" name="password" type="password" data-node="password" placeholder="密码" autocomplete="off" spellcheck="false"> </div> </div> </li> <li class="captcha-box "> <div class="input-group"> <div class="input"> <input class="password" name="captcha" type="text" data-node="captcha" placeholder="验证码" autocomplete="off" spellcheck="false"> <img name="captchaImg"> </div> </div> </li> <li> <div class="input-group"> <input type="checkbox" name="remember_me" checked="" style="vertical-align:top"> <label for="remember_me" class="label">记住账号</label> </div> </li> <li> <div class="input-group" style="text-align: center;"> <input type="submit" class="submit-btn" value="登录"> <p class=""></p> </div> </li> </ul> </form> </div> <div class="login-dialog-header"> <h3>合作网站帐号登录</h3> </div> <div class=""> <ul class="y-box sns_login_list"> <li class="sinaweibo"> <a href="javascript:;" data-pid="sina_weibo" ga_event="login_sina_weibo"> <i class="icon"></i> 新浪微博 </a> </li> <li class="qqweibo"> <a href="javascript:;" data-pid="qq_weibo" ga_event="login_tencnet_weibo"> <i class="icon"></i> 腾讯微博 </a> </li> <li class="qzone"> <a href="javascript:;" data-pid="qzone_sns" ga_event="login_qqzone"> <i class="icon"></i> QQ空间 </a> </li> <li class="renren"> <a href="javascript:;" data-pid="renren_sns" ga_event="login_renren"> <i class="icon"></i> 人人网 </a> </li> <li class="weixin"> <a href="javascript:;" style="margin-right:0;" data-pid="weixin" ga_event="login_wechat"> <i class="icon"></i> 微信 </a> </li> </ul> </div> </div> </div> <div class="mask hide"></div></div>
+<div id="toast"></div>
+
+
+<div class="y-box container">
+  <div class="y-left">
+    <div class="y-box">
+      <div class="y-left index-left">
+        <div riot-tag="snsbox"><div class="snsbox" name="snsbox">  <a href="http://www.toutiao.com/i6233514880230490626/#comment_area" class="share-count" ga_event="click_comment_anchor"> <i class="y-icon icon-comments"></i> <span>0</span> </a> <div class="share-hr"></div> <div class="share-box" ga_event="click_share_weibo"><i class="y-icon icon-sina"></i><span>微博</span></div> <div class="share-box" ga_event="click_share_qzone"><i class="y-icon icon-qzone"></i><span>Qzone</span></div> <div class="share-box share-weixin" ga_event="click_share_weixin"> <i class="y-icon icon-wechat"></i><span>微信</span> <div class="share-qrcode"> <div></div> </div> </div> </div></div>
+      </div>
+      <div class="y-left index-middle" id="J_content">
+        <div id="article-main">
+	
+
+  <h1 class="article-title">Git 在团队中的最佳实践</h1>
+
+  <div class="articleInfo">
+	
+    
+    <span class="src">
+    	
+    		达人科技
+    	
+    </span>
+    
+    <span class="time">2015-12-29 09:32</span>
+</div>
+
+  <div class="article-content"><p>我们已经从SVN 切换到Git很多年了，现在几乎所有的项目都在使用Github管理, 本篇文章讲一下为什么使用Git, 以及如何在团队中正确使用。</p><p></p><h2>Git的优点</h2><p>Git的优点很多，但是这里只列出我认为非常突出的几点。</p><ol><li>由于是分布式，所有本地库包含了远程库的所有内容。</li><li>优秀的分支模型，打分支以及合并分支，机器方便。</li><li>快速，在这个时间就是金钱的时代，Git由于代码都在本地，打分支和合并分支机器快速，使用个SVN的能深刻体会到这种优势。</li></ol><p>感兴趣的，可以去看一下Git本身的设计，内在的架构体现了很多的优势，不愧是出资天才程序员Linus (Linux之父) 之手</p><p></p><h2>版本管理的挑战</h2><p>虽然有这么优秀的版本管理工具，但是我们面对版本管理的时候，依然有非常大得挑战，我们都知道大家工作在同一个仓库上，那么彼此的代码协作必然带来很多问题和挑战，如下：</p><ol><li>如何开始一个Feature的开发，而不影响别的Feature？</li><li>由于很容易创建新分支，分支多了如何管理，时间久了，如何知道每个分支是干什么的？</li><li>哪些分支已经合并回了主干？</li><li>如何进行Release的管理？开始一个Release的时候如何冻结Feature, 如何在Prepare Release的时候，开发人员可以继续开发新的功能？</li><li>线上代码出Bug了，如何快速修复？而且修复的代码要包含到开发人员的分支以及下一个Release?</li></ol><p>大部分开发人员现在使用Git就只是用三个甚至两个分支，一个是Master, 一个是Develop, 还有一个是基于Develop打得各种分支。这个在小项目规模的时候还勉强可以支撑，因为很多人做项目就只有一个Release, 但是人员一多，而且项目周期一长就会出现各种问题。</p><p></p><h2>Git Flow</h2><p>就像代码需要代码规范一样，代码管理同样需要一个清晰的流程和规范</p><p>Vincent Driessen 同学为了解决这个问题提出了 A Successful Git Branching Model</p><p>下面是Git Flow的流程图</p><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/79000dfb20576e6257" img_width="1240" img_height="1669" alt="Git 在团队中的最佳实践" inline="0"><p>git-flow-nvie.png</p><p>上面的图你理解不了？ 没关系，这不是你的错，我觉得这张图本身有点问题，这张图应该左转90度，大家应该就很用以理解了。</p><p></p><h3>Git Flow常用的分支</h3><blockquote><p>也就是我们经常使用的Master分支，这个分支最近发布到生产环境的代码，最近发布的Release， 这个分支只能从其他分支合并，不能在这个分支直接修改</p></blockquote><blockquote><p>这个分支是我们是我们的主开发分支，包含所有要发布到下一个Release的代码，这个主要合并与其他分支，比如Feature分支</p></blockquote><blockquote><p>这个分支主要是用来开发一个新的功能，一旦开发完成，我们合并回Develop分支进入下一个Release</p></blockquote><blockquote><p>当你需要一个发布一个新Release的时候，我们基于Develop分支创建一个Release分支，完成Release后，我们合并到Master和Develop分支</p></blockquote><blockquote><p>当我们在Production发现新的Bug时候，我们需要创建一个Hotfix, 完成Hotfix后，我们合并回Master和Develop分支，所以Hotfix的改动会进入下一个Release</p></blockquote><p></p><h3>Git Flow如何工作</h3><h4>初始分支</h4><p>所有在Master分支上的Commit应该Tag</p><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/7d0007b7ba6c5f1701" img_width="614" img_height="148" alt="Git 在团队中的最佳实践" inline="0"><p>git-workflow-release-cycle-1historical.png</p><p></p><h4>Feature 分支</h4><p>分支名 feature/*</p><p>Feature分支做完后，必须合并回Develop分支, 合并完分支后一般会删点这个Feature分支，但是我们也可以保留</p><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/7c0007cfe4bf267504" img_width="614" img_height="268" alt="Git 在团队中的最佳实践" inline="0"><p>git-workflow-release-cycle-2feature.png</p><p></p><h4>Release分支</h4><p>分支名 release/*</p><p>Release分支基于Develop分支创建，打完Release分之后，我们可以在这个Release分支上测试，修改Bug等。同时，其它开发人员可以基于开发新的Feature (记住：&lt;font style="color:red"&gt;一旦打了Release分支之后不要从Develop分支上合并新的改动到Release分支&lt;/font&gt;)</p><p>发布Release分支时，合并Release到Master和Develop， 同时在Master分支上打个Tag记住Release版本号，然后可以删除Release分支了。</p><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/750007c2fc4ca28eec" img_width="614" img_height="320" alt="Git 在团队中的最佳实践" inline="0"><p>git-workflow-release-cycle-3release.png</p><p></p><h4>维护分支 Hotfix</h4><p>分支名 hotfix/*</p><p>hotfix分支基于Master分支创建，开发完后需要合并回Master和Develop分支，同时在Master上打一个tag</p><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/79000dfb259575a40b" img_width="614" img_height="380" alt="Git 在团队中的最佳实践" inline="0"><p>git-workflow-release-cycle-4maintenance.png</p><p></p><h3>Git Flow代码示例</h3><p>a. 创建develop分支</p><pre><code>git branch develop
+git push -u origin develop</code></pre><p>b. 开始新Feature开发</p><pre><code>git checkout -b some-feature develop
+
+# Optionally, push branch to origin:
+git push -u origin some-feature    
+
+# 做一些改动
+
+git status
+git add some-file
+git commit</code></pre><p>c. 完成Feature</p><pre><code>git pull origin develop
+git checkout develop
+git merge --no-ff some-feature
+git push origin develop
+
+git branch -d some-feature
+
+# If you pushed branch to origin:
+git push origin --delete some-feature</code></pre><p>d. 开始Relase</p><pre><code>git checkout -b release-0.1.0 develop
+
+# Optional: Bump version number, commit
+# Prepare release, commit</code></pre><p>e. 完成Release</p><pre><code>git checkout master
+git merge --no-ff release-0.1.0
+git push
+
+git checkout develop
+git merge --no-ff release-0.1.0
+git push
+
+git branch -d release-0.1.0
+
+# If you pushed branch to origin:
+git push origin --delete release-0.1.0
+
+git tag -a v0.1.0 master
+git push --tags</code></pre><p>f. 开始Hotfix</p><pre><code>git checkout -b hotfix-0.1.1 master</code></pre><p>g. 完成Hotfix</p><pre><code>git checkout master
+git merge --no-ff hotfix-0.1.1
+git push
+
+git checkout develop
+git merge --no-ff hotfix-0.1.1
+git push
+
+git branch -d hotfix-0.1.1
+
+git tag -a v0.1.1 master
+git push --tags</code></pre><p></p><h3>Git flow工具</h3><p>实际上，当你理解了上面的流程后，你完全不用使用工具，但是实际上我们大部分人很多命令就是记不住呀，流程就是记不住呀，肿么办呢？</p><p>总有聪明的人创造好的工具给大家用, 那就是Git flow script.</p><p></p><h4>安装</h4><blockquote><p>brew install git-flow</p></blockquote><blockquote><p>apt-get install git-flow</p></blockquote><p></p><h4>使用</h4><ul><li> <p><strong>初始化:</strong>git flow init</p></li><li> <p><strong>开始新Feature:</strong>git flow feature start MYFEATURE</p></li><li> <p><strong>Publish一个Feature(也就是push到远程):</strong>git flow feature publish MYFEATURE</p></li><li> <p><strong>获取Publish的Feature:</strong>git flow feature pull origin MYFEATURE</p></li><li> <p><strong>完成一个Feature:</strong>git flow feature finish MYFEATURE</p></li><li> <p><strong>开始一个Release:</strong>git flow release start RELEASE [BASE]</p></li><li> <p><strong>Publish一个Release:</strong>git flow release publish RELEASE</p></li><li> <p><strong>发布Release:</strong>git flow release finish RELEASE</p><p>别忘了git push --tags</p></li><li> <p><strong>开始一个Hotfix:</strong>git flow hotfix start VERSION [BASENAME]</p></li><li> <p><strong>发布一个Hotfix:</strong>git flow hotfix finish VERSION</p></li></ul><p>&lt;img class="img-responsive" src="/assets/images/agile/git-flow/git-flow-commands.png"/&gt;</p><p></p><h3>Git Flow GUI</h3><p>上面讲了这么多，我知道还有人记不住，那么又有人做出了GUI 工具，你只需要点击下一步就行，工具帮你干这些事！！！</p><p></p><h4>SourceTree</h4><p>当你用Git-flow初始化后，基本上你只需要点击git flow菜单选择start feature, release或者hotfix, 做完后再次选择git flow菜单，点击Done Action. 我勒个去，我实在想不到还有比这更简单的了。</p><p>目前SourceTree支持Mac, Windows, Linux.</p><p>这么好的工具请问多少钱呢？ <strong>免费!!!!</strong></p><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/7c0007cfe7fb81d1c0" img_width="960" img_height="484" alt="Git 在团队中的最佳实践" inline="0"><p>sourcetree-hero-mac-log.png</p><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/7c0007cfe9c28f42f1" img_width="441" img_height="354" alt="Git 在团队中的最佳实践" inline="0"><p>source-tree-git-flow-init.png</p><p></p><h4>Git flow for visual studio</h4><p>广大VS的福音</p><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/7d0007b7c045fab738" img_width="351" img_height="314" alt="Git 在团队中的最佳实践" inline="0"><p>gf_init-vs.png</p><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/780008078c1c9fe5f1" img_width="352" img_height="135" alt="Git 在团队中的最佳实践" inline="0"><p>gf_startfeature.png</p><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/79000dfb2ac0e187f0" img_width="350" img_height="189" alt="Git 在团队中的最佳实践" inline="0"><p>gf_finishfeature.png</p><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/7800080799bab0df42" img_width="376" img_height="218" alt="Git 在团队中的最佳实践" inline="0"><p>gf_features.png</p></div>
+
+  <div class="y-box article-actions">
+		
+<div class="labelList">
+	<i class="y-icon icon-tag"></i>
+	<ul class="label-list">
+		
+		<li class="label-item"><a class="label-link" href="http://www.toutiao.com/search/?keyword=Git" target="_blank">Git</a></li>
+		
+		<li class="label-item"><a class="label-link" href="http://www.toutiao.com/search/?keyword=FLOW" target="_blank">FLOW</a></li>
+		
+		<li class="label-item"><a class="label-link" href="http://www.toutiao.com/search/?keyword=Origin" target="_blank">Origin</a></li>
+		
+		<li class="label-item"><a class="label-link" href="http://www.toutiao.com/search/?keyword=Branch" target="_blank">Branch</a></li>
+		
+	</ul>
+</div>
+
+		<div riot-tag="actionBox" class="actionBox"><div class="repin "> <i class="y-icon icon-favorite "></i><span>收藏</span> </div> <a href="javascript:;" class="areport"> <i class="y-icon icon-report"></i><span>举报</span> </a> <div id="J_articleReport"></div></div>
+  </div>
+</div>
+
+        <div class="bd-bottom-1" ad-cursor="" name="adetail_main*bottom_1" id="J_ad_baidu_bottom" ad_name="h_640*60_TB_146" done="1"><script src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/ex" id="tanx-s-mm_32479643_3494618_75352146" charset="gbk"></script><script charset="utf-8" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/tanxssp.js.下载"></script><ins style="display:inline-block;padding:0;margin:0;width:640px;height:90px;*zoom:1;*display:inline; position:relative;" id="tanxssp-outer-conmm_32479643_3494618_75352146"><div id="tanxssp_con_mm_32479643_3494618_75352146" style="overflow:hidden;display:inline-block;position:relative;width:640px;height:90px;*display:inline;*zoom:1;font:12px/1.5 tahoma,&#39;Hiragino Sans GB&#39;,&#39;microsoft yahei&#39;,sans-serif;"><iframe id="tanxssp-tuwen-iframemm_32479643_3494618_75352146" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/TB1iXhkPFXXXXcwXFXXXXXXXXXX.html" style="width:640px;height:90px" border="0" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="true"></iframe><a id="iconmm_32479643_3494618_75352146" title="我也要申请橱窗推广" target="_blank" href="http://pro.taobao.com/index.htm?spm=a2320.7388781.1998051528.5.JOvNkN" style="overflow:hidden;width:15px;height:13px;right:20px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;">   <span id="icon_smallmm_32479643_3494618_75352146" style="border-right:2px solid #eee;float:none;width:13px;display:block;height:13px;box-sizing:content-box"><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/TB1DmcoJXXXXXavXpXXXXXXXXXX-26-26.png" border="0" style="width:13px;height:13px;margin:auto;display:block;"></span>   <span id="icon_bigmm_32479643_3494618_75352146" style="float:none;width:60px;height:13px;display: none;"><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/TB1Lt7aJXXXXXcjXVXXXXXXXXXX-117-26.png" style="width:60px;height:13px;margin:auto;display:block;" border="0/"></span></a><a id="sxmm_32479643_3494618_75352146" href="javascript:;" style="width:20px;height:13px;right:0px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;margin:0;">   <span id="sx1mm_32479643_3494618_75352146" style="float:none;width:20px;display:block;height:13px;"><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/TB1tWvVJFXXXXc_aXXXXXXXXXXX-40-26.png" style="width:20px;height:13px;margin:auto;display:block;min-height:13px;" border="0/"></span><div id="sxtipmm_32479643_3494618_75352146" style="display:none;position:absolute;left:-38px;bottom:13px;"><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/TB1upAiJXXXXXa5aXXXXXXXXXXX-116-30.png" style="width:58px;height:15px;margin:auto;display:block;min-height:15px;" border="0"></div></a></div></ins><a style="display:none;" id="tanx-a-mm_32479643_3494618_75352146"></a><script src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/ex(1)"></script></div>
+        <a id="comment_area" href="http://www.toutiao.com/i6233514880230490626/#" style="display: inline-block;margin-bottom: 20px;"></a><!--评论锚点-->
+        <div riot-tag="comment" id="comment"><div class="c-header"> <em>0&nbsp;</em>条评论 </div> <div riot-tag="inputBox" ismain="true" avatar="http://p0.pstatp.com/origin/3791/5070639578" group_id="6232064900786815234" item_id="6233514880230490626"><div class="inputBox"> <div class="y-box"> <div class="avatar-wrap avatar-wrap-center"> <img alt="" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/5070639578"> </div> <div class="input-wrap  "> <div class="c-textarea" ga_event="click_input_comment"> <textarea name="inputText" placeholder="写下您的评论..."></textarea> </div> <div class="c-action" ga_event="click_publish_comment"> <div class="c-submit">评论</div> </div> </div> </div> </div></div> <ul> <!--riot placeholder--> </ul>  <div id="J_report"></div></div>
+      </div>
+    </div>
+    <div class="y-box" style="margin-top: 30px;">
+      <div class="y-left index-left">
+        <div riot-tag="relatedChannel"><div name="relatedChannel" ga_event="related_channel_click" class="relatedChannel "> <h2 class="relatedChannel-header">相关推荐</h2> <ul class="relatedChannel-list"> <li> <a href="javacript:;" class="relatedChannel-item active"> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>推荐</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>热点</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>社会</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>娱乐</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>科技</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>体育</span> </a> </li><!--riot placeholder--> </ul> </div></div>
+      </div>
+      <div class="y-left index-middle">
+        <div class="index-cut-line" id="J_cut_line"></div>
+        <div riot-tag="feedBox"></div>
+      </div>
+    </div>
+  </div>
+  <div id="J_rindex" class="y-right index-right">
+    
+<div class="module">
+  <div class="pgcInfo">
+    <div class="pgc-head">
+      <a class="pgc-link" target="_blank" href="http://www.toutiao.com/c/user/5842079752/" ga_event="click_into_pgc">
+          <img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/2845222550" alt="达人科技">
+          <div class="pgc-username">
+            <span>达人科技</span>
+            <div riot-tag="subscribe" class="pgc-subscribe"><div class="subscribe" ga_event="follow_pgc"> <div class="article-subscribe left-arrow"> <i class="y-icon icon-check"></i><span>已关注</span> </div>  </div></div>
+          </div>
+      </a>
+    </div>
+    <p class="pgc-description">最新科技资讯、独到的观点和前沿的科技产品信息,覆盖通信、互联网、IT和科普探索等领域</p>
+    <ul>
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://www.toutiao.com/item/6428604285654663682" target="_blank" class="pgc-article-link">
+          Mina IoService接口定义及抽象实现
+        </a>
+    	</li>
+      
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://www.toutiao.com/item/6428522762561651202" target="_blank" class="pgc-article-link">
+          vue-cli项目中怎么mock数据
+        </a>
+    	</li>
+      
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://www.toutiao.com/item/6427726439566541313" target="_blank" class="pgc-article-link">
+          print2flash文档在线预览应用
+        </a>
+    	</li>
+      
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://www.toutiao.com/item/6427740089765331458" target="_blank" class="pgc-article-link">
+          Try My Best 尽力而为
+        </a>
+    	</li>
+      
+      
+    </ul>
+  </div>
+</div>
+
+
+    <div class="right-top-1" ad-cursor="" name="adetail_right*top_1" ad_name="h_300*250_TB_456" done="1"><script src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/ex(2)" id="tanx-s-mm_32479643_3494618_56064456" charset="gbk"></script><ins style="display:inline-block;padding:0;margin:0;width:300px;height:250px;*zoom:1;*display:inline; position:relative;" id="tanxssp-outer-conmm_32479643_3494618_56064456"><div id="tanxssp_con_mm_32479643_3494618_56064456" style="overflow:hidden;display:inline-block;position:relative;width:300px;height:250px;*display:inline;*zoom:1;font:12px/1.5 tahoma,&#39;Hiragino Sans GB&#39;,&#39;microsoft yahei&#39;,sans-serif;"><iframe id="tanxssp-tuwen-iframemm_32479643_3494618_56064456" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/creation-245057E3sJ6U0UZ8D-2830683.html" style="width:300px;height:250px" border="0" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="true"></iframe><a id="iconmm_32479643_3494618_56064456" title="我也要申请橱窗推广" target="_blank" href="http://pro.taobao.com/index.htm?spm=a2320.7388781.1998051528.5.JOvNkN" style="overflow:hidden;width:15px;height:13px;right:20px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;">   <span id="icon_smallmm_32479643_3494618_56064456" style="border-right:2px solid #eee;float:none;width:13px;display:block;height:13px;box-sizing:content-box"><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/TB1DmcoJXXXXXavXpXXXXXXXXXX-26-26.png" border="0" style="width:13px;height:13px;margin:auto;display:block;"></span>   <span id="icon_bigmm_32479643_3494618_56064456" style="float:none;width:60px;height:13px;display: none;"><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/TB1Lt7aJXXXXXcjXVXXXXXXXXXX-117-26.png" style="width:60px;height:13px;margin:auto;display:block;" border="0/"></span></a><a id="sxmm_32479643_3494618_56064456" href="javascript:;" style="width:20px;height:13px;right:0px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;margin:0;">   <span id="sx1mm_32479643_3494618_56064456" style="float:none;width:20px;display:block;height:13px;"><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/TB1tWvVJFXXXXc_aXXXXXXXXXXX-40-26.png" style="width:20px;height:13px;margin:auto;display:block;min-height:13px;" border="0/"></span><div id="sxtipmm_32479643_3494618_56064456" style="display:none;position:absolute;left:-38px;bottom:13px;"><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/TB1upAiJXXXXXa5aXXXXXXXXXXX-116-30.png" style="width:58px;height:15px;margin:auto;display:block;min-height:15px;" border="0"></div></a></div></ins><a style="display:none;" id="tanx-a-mm_32479643_3494618_56064456"></a><script src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/ex(3)"></script></div>
+    <div riot-tag="hotVideo" class="hotVideo module" ga_event="click_video_recommend"><div class="module-head video-head"><a href="http://www.toutiao.com/video/" target="_blank">热门视频</a></div> <ul> <li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6430282489150914818/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/261300060aba2290aa51" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>01:55</span> </i> <p class="hot-title module-title">苏联飞行员穿越到古埃及，目睹金字塔建造全过程，这是怎么回事？</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6367623037928096001/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/134f0006e0bb3fe821f3" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>02:23</span> </i> <p class="hot-title module-title">厉害了word哥 武装大拉练原来可以这么炫</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6429266394940391682/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/25a9000c5b594023e239" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>03:36</span> </i> <p class="hot-title module-title">老妈做的家常菜，青椒塞肉，下饭很美味</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6430289506239398145/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/2611000777d9b2190b7e" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>03:04</span> </i> <p class="hot-title module-title">恩静当着TARA成员的面打电话试探章宇，结果章宇祝她生日快乐</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6421409689975996674/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/213b000456a276910f48" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>13:41</span> </i> <p class="hot-title module-title">陈翔六点半：球球在公交车被屌丝扇耳光，委屈的不要不要的</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6430207663267807489/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/26040005fbb6c0dba14c" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>03:56</span> </i> <p class="hot-title module-title">歼-16利刃出鞘 换装国产发动机 对空对海作战更强</p> </a> </li><!--riot placeholder--> </ul></div>
+    <div class="right-top-2" ad-cursor="" name="adetail_right*top_2" id="J_ad_baidu_top1" ad_name="h_300*250_TB_903" done="1"><script src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/ex(4)" id="tanx-s-mm_32479643_3494618_75342903" charset="gbk"></script><ins style="display:inline-block;padding:0;margin:0;width:300px;height:250px;*zoom:1;*display:inline; position:relative;" id="tanxssp-outer-conmm_32479643_3494618_75342903"><div id="tanxssp_con_mm_32479643_3494618_75342903" style="overflow:hidden;display:inline-block;position:relative;width:300px;height:250px;*display:inline;*zoom:1;font:12px/1.5 tahoma,&#39;Hiragino Sans GB&#39;,&#39;microsoft yahei&#39;,sans-serif;"><iframe id="tanxssp-tuwen-iframemm_32479643_3494618_75342903" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/creation-245057E3sJ6U0UZ8D-2830683(1).html" style="width:300px;height:250px" border="0" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="true"></iframe><a id="iconmm_32479643_3494618_75342903" title="我也要申请橱窗推广" target="_blank" href="http://pro.taobao.com/index.htm?spm=a2320.7388781.1998051528.5.JOvNkN" style="overflow:hidden;width:15px;height:13px;right:20px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;">   <span id="icon_smallmm_32479643_3494618_75342903" style="border-right:2px solid #eee;float:none;width:13px;display:block;height:13px;box-sizing:content-box"><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/TB1DmcoJXXXXXavXpXXXXXXXXXX-26-26.png" border="0" style="width:13px;height:13px;margin:auto;display:block;"></span>   <span id="icon_bigmm_32479643_3494618_75342903" style="float:none;width:60px;height:13px;display: none;"><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/TB1Lt7aJXXXXXcjXVXXXXXXXXXX-117-26.png" style="width:60px;height:13px;margin:auto;display:block;" border="0/"></span></a><a id="sxmm_32479643_3494618_75342903" href="javascript:;" style="width:20px;height:13px;right:0px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;margin:0;">   <span id="sx1mm_32479643_3494618_75342903" style="float:none;width:20px;display:block;height:13px;"><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/TB1tWvVJFXXXXc_aXXXXXXXXXXX-40-26.png" style="width:20px;height:13px;margin:auto;display:block;min-height:13px;" border="0/"></span><div id="sxtipmm_32479643_3494618_75342903" style="display:none;position:absolute;left:-38px;bottom:13px;"><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/TB1upAiJXXXXXa5aXXXXXXXXXXX-116-30.png" style="width:58px;height:15px;margin:auto;display:block;min-height:15px;" border="0"></div></a></div></ins><a style="display:none;" id="tanx-a-mm_32479643_3494618_75342903"></a><script src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/ex(5)"></script></div>
+    
+
+    <div class="right-top-3" ad-cursor="" name="adetail_right*top_3" ad_name="h_300*250_TB_4454" done="1"><script src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/ex(6)" id="tanx-s-mm_32479643_3494618_107024454" charset="gbk"></script><ins style="display:inline-block;padding:0;margin:0;width:300px;height:250px;*zoom:1;*display:inline; position:relative;" id="tanxssp-outer-conmm_32479643_3494618_107024454"><div id="tanxssp_con_mm_32479643_3494618_107024454" style="overflow:hidden;display:inline-block;position:relative;width:300px;height:250px;*display:inline;*zoom:1;font:12px/1.5 tahoma,&#39;Hiragino Sans GB&#39;,&#39;microsoft yahei&#39;,sans-serif;"><iframe id="tanxssp-tuwen-iframemm_32479643_3494618_107024454" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/creation-245057E3sJ6U0UZ8D-2830683(2).html" style="width:300px;height:250px" border="0" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="true"></iframe><a id="iconmm_32479643_3494618_107024454" title="我也要申请橱窗推广" target="_blank" href="http://pro.taobao.com/index.htm?spm=a2320.7388781.1998051528.5.JOvNkN" style="overflow:hidden;width:15px;height:13px;right:20px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;">   <span id="icon_smallmm_32479643_3494618_107024454" style="border-right:2px solid #eee;float:none;width:13px;display:block;height:13px;box-sizing:content-box"><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/TB1DmcoJXXXXXavXpXXXXXXXXXX-26-26.png" border="0" style="width:13px;height:13px;margin:auto;display:block;"></span>   <span id="icon_bigmm_32479643_3494618_107024454" style="float:none;width:60px;height:13px;display: none;"><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/TB1Lt7aJXXXXXcjXVXXXXXXXXXX-117-26.png" style="width:60px;height:13px;margin:auto;display:block;" border="0/"></span></a><a id="sxmm_32479643_3494618_107024454" href="javascript:;" style="width:20px;height:13px;right:0px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;margin:0;">   <span id="sx1mm_32479643_3494618_107024454" style="float:none;width:20px;display:block;height:13px;"><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/TB1tWvVJFXXXXc_aXXXXXXXXXXX-40-26.png" style="width:20px;height:13px;margin:auto;display:block;min-height:13px;" border="0/"></span><div id="sxtipmm_32479643_3494618_107024454" style="display:none;position:absolute;left:-38px;bottom:13px;"><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/TB1upAiJXXXXXa5aXXXXXXXXXXX-116-30.png" style="width:58px;height:15px;margin:auto;display:block;min-height:15px;" border="0"></div></a></div></ins><a style="display:none;" id="tanx-a-mm_32479643_3494618_107024454"></a><script src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/ex(7)"></script></div>
+    <div riot-tag="hotPicture" class="hotPicture module" ga_event="click_pictures_recommend"><div class="module-head pic-head"><a href="http://www.toutiao.com/news_image/" target="_blank">精彩图片</a></div> <ul> <li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6429855449088524545/">  <div class="pic-style style_2"> <div class="module-pic pic-middle"><img alt="" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/26e900013c4ef2c5a662"></div> <div class="module-pic pic-small"><img alt="" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/26e900013c5965358042"></div> <div class="module-pic pic-small"><img alt="" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/26e40003ed9dad4fae50"></div> </div>  <i class="hot-tag pic-tag"> <span>12图</span> </i> <p class="hot-title module-title">用过这些小电器的朋友都“老了”，好怀念曾经那些朴实的慢生活</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6403265481402810626/">   <div class="pic-style style_3"> <div class="module-pic pic-middle"><img alt="" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/18a4001a7012b73d1ac1"></div> <div class="module-pic pic-small"><img alt="" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/18a4001a7005003dad7f"></div> <div class="module-pic pic-small"><img alt="" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/1a6c0003c74c25a38db8"></div> </div> <i class="hot-tag pic-tag"> <span>15图</span> </i> <p class="hot-title module-title">事件发生前一秒的惊心，摄影师太厉害了！</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6429791639711252738/">   <div class="pic-style style_3"> <div class="module-pic pic-middle"><img alt="" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/26e10004155dd0e2c48d"></div> <div class="module-pic pic-small"><img alt="" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/26e000014e7bfcb6d3fd"></div> <div class="module-pic pic-small"><img alt="" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/26e50000a4a1c5c20def"></div> </div> <i class="hot-tag pic-tag"> <span>11图</span> </i> <p class="hot-title module-title">熟男酒保：或许你需要一个这样的调酒师</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6429189190408077570/"> <div class="pic-style style_1"> <div class="module-pic pic-big"><img alt="" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/26e40004f0756a08aead"></div> </div>   <i class="hot-tag pic-tag"> <span>15图</span> </i> <p class="hot-title module-title">被人冒名顶替上大学14年后，34岁开始了“高三”式的备考生活</p> </a> </li><!--riot placeholder--> </ul></div>
+    <div class="right-top-4" ad-cursor="" name="adetail_right*top_4" ad_name="h_300*250_TB_461" done="1"><script src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/ex(8)" id="tanx-s-mm_32479643_3494618_56068461" charset="gbk"></script><ins style="display:inline-block;padding:0;margin:0;width:300px;height:250px;*zoom:1;*display:inline; position:relative;" id="tanxssp-outer-conmm_32479643_3494618_56068461"><div id="tanxssp_con_mm_32479643_3494618_56068461" style="overflow:hidden;display:inline-block;position:relative;width:300px;height:250px;*display:inline;*zoom:1;font:12px/1.5 tahoma,&#39;Hiragino Sans GB&#39;,&#39;microsoft yahei&#39;,sans-serif;"><iframe id="tanxssp-tuwen-iframemm_32479643_3494618_56068461" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/creation-245057E3sJ6U0UZ8D-2830683(3).html" style="width:300px;height:250px" border="0" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="true"></iframe><a id="iconmm_32479643_3494618_56068461" title="我也要申请橱窗推广" target="_blank" href="http://pro.taobao.com/index.htm?spm=a2320.7388781.1998051528.5.JOvNkN" style="overflow:hidden;width:15px;height:13px;right:20px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;">   <span id="icon_smallmm_32479643_3494618_56068461" style="border-right:2px solid #eee;float:none;width:13px;display:block;height:13px;box-sizing:content-box"><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/TB1DmcoJXXXXXavXpXXXXXXXXXX-26-26.png" border="0" style="width:13px;height:13px;margin:auto;display:block;"></span>   <span id="icon_bigmm_32479643_3494618_56068461" style="float:none;width:60px;height:13px;display: none;"><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/TB1Lt7aJXXXXXcjXVXXXXXXXXXX-117-26.png" style="width:60px;height:13px;margin:auto;display:block;" border="0/"></span></a><a id="sxmm_32479643_3494618_56068461" href="javascript:;" style="width:20px;height:13px;right:0px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;margin:0;">   <span id="sx1mm_32479643_3494618_56068461" style="float:none;width:20px;display:block;height:13px;"><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/TB1tWvVJFXXXXc_aXXXXXXXXXXX-40-26.png" style="width:20px;height:13px;margin:auto;display:block;min-height:13px;" border="0/"></span><div id="sxtipmm_32479643_3494618_56068461" style="display:none;position:absolute;left:-38px;bottom:13px;"><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/TB1upAiJXXXXXa5aXXXXXXXXXXX-116-30.png" style="width:58px;height:15px;margin:auto;display:block;min-height:15px;" border="0"></div></a></div></ins><a style="display:none;" id="tanx-a-mm_32479643_3494618_56068461"></a><script src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/ex(9)"></script></div>
+    <div class="right-hover-1" id="imagindexhover" ad-cursor="" name="adetail_right*hover_1" ad_name="h_300*250_TB_469" done="1"><script src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/ex(10)" id="tanx-s-mm_32479643_3494618_63260469" charset="gbk"></script><ins style="display:inline-block;padding:0;margin:0;width:300px;height:250px;*zoom:1;*display:inline; position:relative;" id="tanxssp-outer-conmm_32479643_3494618_63260469"><div id="tanxssp_con_mm_32479643_3494618_63260469" style="overflow:hidden;display:inline-block;position:relative;width:300px;height:250px;*display:inline;*zoom:1;font:12px/1.5 tahoma,&#39;Hiragino Sans GB&#39;,&#39;microsoft yahei&#39;,sans-serif;"><iframe id="tanxssp-outer-iframemm_32479643_3494618_63260469" style="width: 300px; height: 250px;" border="0" frameborder="0" scrolling="no" marginwidth="0" allowtransparency="true" marginheight="0" src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/saved_resource.html"></iframe><a style="display:none !important;" id="tanx_frameanchor_mm_32479643_3494618_63260469" data-mid="17534123"></a><a id="iconmm_32479643_3494618_63260469" title="我也要申请橱窗推广" target="_blank" href="http://pro.taobao.com/index.htm?spm=a2320.7388781.1998051528.5.JOvNkN" style="overflow:hidden;width:15px;height:13px;right:20px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;">   <span id="icon_smallmm_32479643_3494618_63260469" style="border-right:2px solid #FBE008;float:none;width:13px;display:block;height:13px;box-sizing:content-box"><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/TB1DmcoJXXXXXavXpXXXXXXXXXX-26-26.png" border="0" style="width:13px;height:13px;margin:auto;display:block;"></span>   <span id="icon_bigmm_32479643_3494618_63260469" style="float:none;width:60px;height:13px;display: none;"><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/TB1Lt7aJXXXXXcjXVXXXXXXXXXX-117-26.png" style="width:60px;height:13px;margin:auto;display:block;" border="0/"></span></a><a id="sxmm_32479643_3494618_63260469" href="javascript:;" style="width:20px;height:13px;right:0px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;margin:0;">   <span id="sx1mm_32479643_3494618_63260469" style="float:none;width:20px;display:block;height:13px;"><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/TB1tWvVJFXXXXc_aXXXXXXXXXXX-40-26.png" style="width:20px;height:13px;margin:auto;display:block;min-height:13px;" border="0/"></span><div id="sxtipmm_32479643_3494618_63260469" style="display:none;position:absolute;left:-38px;bottom:13px;"><img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/TB1upAiJXXXXXa5aXXXXXXXXXXX-116-30.png" style="width:58px;height:15px;margin:auto;display:block;min-height:15px;" border="0"></div></a></div></ins><a style="display:none;" id="tanx-a-mm_32479643_3494618_63260469"></a><script src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/ex(11)"></script></div>
+  </div>
+</div>
+
+<div class="action-feedback">
+  
+</div>
+
+<!-- 公共尾部 -->
+<div id="footer">
+    <div>
+        <span class="fitem">© 2017 今日头条 </span>
+        <a class="fitem" href="http://www.12377.cn/" target="_blank">中国互联网举报中心</a>
+        <a class="fitem" href="http://www.miibeian.gov.cn/" target="_blank">京ICP证140141号</a>
+        <a class="fitem" href="http://www.miibeian.gov.cn/" target="_blank">京ICP备12025439号-3</a>
+        <a class="fitem" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11000002002023" target="_blank" ga_event="click_about">
+            <img src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/gongan_d0289dc.png">京公网安备 11000002002023号
+        </a>
+    </div>
+    <div>
+        <a class="fitem" href="http://www.toutiao.com/license/" target="_blank">网络文化经营许可证</a>
+        <a class="fitem" href="http://www.toutiao.com/a3642705768/" target="_blank">跟帖评论自律管理承诺书</a>
+        <span class="fitem">违法和不良信息举报电话：010-58341833</span>
+        <span class="fitem">公司名称：北京字节跳动科技有限公司</span>
+    </div>
+</div>
+
+
+
+      <div riot-tag="promotion-ext" id="promotion-ext"></div>
+    </div>
+
+    <script>
+
+        if (window.Raven) {
+          if (1||Math.floor(Math.random()*2)) {
+            Raven.config('http://key@m.toutiao.com/log/sentry/v2/51', {
+              whitelistUrls: [/pstatp\.com/]
+            }).install();
+          }
+        }
+
+        window.globals = window.globals || {};
+
+        taAnalysis && taAnalysis.setup({
+          c: 'detail_article'
+        });
+        taAnalysis && taAnalysis.send('pageview', {});
+
+        var antiPVHandler = utils.on(window, 'scroll', function(e) {
+          taAnalysis && taAnalysis.send('antipageview', {});
+          utils.off(window, 'scroll', antiPVHandler);
+        });
+
+        window.gaqpush = function (ga_action, ga_label){
+            ga('send', 'event','detail_article' , ga_action, ga_label);
+        };
+
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        // ga('create', 'UA-28423340-5', 'auto');
+        ga('create', 'UA-28423340-5', 'auto', {'sampleRate': 10});
+        ga('send', 'pageview');
+
+        utils.on(document.getElementsByTagName('body')[0], 'click', function(e) {
+            var target = utils.getTarget(e),
+                ga_event,
+                ga_category,
+                ga_label,
+                ga_value;
+
+            while(target && target.nodeName.toUpperCase() !== 'BODY') {
+                ga_event = utils.getAttribute(target, 'ga_event');
+                ga_category = utils.getAttribute(target, 'ga_category') || 'detail_article';
+                ga_label = utils.getAttribute(target, 'ga_label');
+                ga_value = utils.getAttribute(target, 'ga_value') || 1;
+
+                ga_event && ga('send', 'event', ga_category, ga_event, ga_label, ga_value);
+                ga_event && taAnalysis && taAnalysis.send('event', { ev: ga_event });
+                target = target.parentNode;
+            }
+        });
+
+        riot.observable(window);
+    </script>
+    <script src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/toutiao.web.toutiao_pc-pc-fe_switch.js.下载"></script>
+    <script>
+      var PAGE_SWITCH = window['toutiao.web.toutiao_pc/pc/fe_switch'] || {};
+    </script>
+    
+
+<script>
+  // 用户信息
+  var userInfo = {
+      id: 7170056853,
+      name: '东北小凤凰',
+      avatarUrl: 'http://p0.pstatp.com/origin/3791/5070639578',
+      isPgc: false,
+      isOwner: false
+  };
+
+
+  var group = {
+  	id: '6232064900786815234',
+    item_id: '6233514880230490626',
+  	repin:0,
+  };
+
+  var media = {
+    user_id: 5842079752,
+  	id:5842079752,
+  	like:true
+  };
+
+  var siblingList = [{"comments_count":8480,"media_avatar_url":"http:\/\/p8.pstatp.com\/large\/411000279db713abf38","is_feed_ad":false,"is_diversion_page":false,"title":"\u52c7\u6562\u53f8\u673a\u5f00\u8f66\u51b2\u8fdb\u6d2a\u6c34\uff0c\u6551\u4e0b\u4e00\u5bb6\u4e09\u53e3","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"01:02","source_url":"\/group\/6299284556621021698\/","source":"\u7a7a\u4e2d\u6025\u6551","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":2239686,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/91200072a9016506868","group_id":"6299284556621021698","is_related":true,"media_url":"\/c\/user\/6220458934\/"},{"comments_count":18950,"media_avatar_url":"http:\/\/p7.pstatp.com\/large\/150c0007db6e7c072909","is_feed_ad":false,"is_diversion_page":false,"title":"\u5b9e\u62cd\u5927\u8c61\u751f\u5b9d\u5b9d \u5c0f\u8c61\u843d\u5730\u77ac\u95f4\u592a\u611f\u4eba\u4e86\uff01","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"05:23","source_url":"\/group\/6320182587756167425\/","source":"\u61d2\u592a\u5b50","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":9150175,"image_url":"http:\/\/p9.pstatp.com\/list\/190x124\/c5f0002672ff3a1f0fd","group_id":"6320182587756167425","is_related":true,"media_url":"\/c\/user\/6007472079\/"},{"comments_count":827,"media_avatar_url":"http:\/\/p3.pstatp.com\/large\/97e001c9cc1a34d78cc","is_feed_ad":false,"is_diversion_page":false,"title":"80\u540e\u5c0f\u4f19\u5356\u547d\u8d5a\u94b1\u592a\u96be\u4e86\uff0c\u81ea\u5236\u4e00\u53f0\u65b0\u673a\u5668\uff0c\u79d2\u6740\u540c\u884c10\u500d","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"05:15","source_url":"\/group\/6418714671049605633\/","source":"\u53d1\u660e\u8ff7","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":3548771,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/1f8b0000d2e63c294c18","group_id":"6418714671049605633","is_related":true,"media_url":"\/c\/user\/5870703541\/"},{"comments_count":40,"media_avatar_url":"http:\/\/p3.pstatp.com\/large\/411001d5de9e0981fe2","is_feed_ad":false,"is_diversion_page":false,"title":"\u5929\u5b89\u95e8\u5feb\u95ea","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"04:57","source_url":"\/group\/6306298370868642305\/","source":"\u5e73\u5b89\u51fa\u884c","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":650496,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/9e3000c94f444612246","group_id":"6306298370868642305","is_related":true,"media_url":"\/c\/user\/3641093633\/"},{"comments_count":12860,"media_avatar_url":"http:\/\/p1.pstatp.com\/large\/1599\/5195029566","is_feed_ad":false,"is_diversion_page":false,"title":"\u6bdb\u4e3b\u5e2d\u9738\u6c14\u8c08\u5916\u56fd\u519b\u8230\u786c\u95ef\uff1a\u6765\u4e00\u8258\u6253\u4e00\u8258\uff01\u8fd9\u89c6\u9891\u8981\u706b\uff01","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"02:50","source_url":"\/group\/6284445024843203073\/","source":"\u897f\u5b89\u65c5\u6e38\u793e\u533a","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":2257473,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/58b000b4cda6ecd7f20","group_id":"6284445024843203073","is_related":true,"media_url":"\/c\/user\/3687875446\/"},{"comments_count":3172,"media_avatar_url":"http:\/\/p1.pstatp.com\/large\/41200090a851ec72824","is_feed_ad":false,"is_diversion_page":false,"title":"\u4ee4\u4eba\u6f78\u7136\u6cea\u4e0b\u7684\u6bdb\u4e3b\u5e2d\u665a\u5e74\u73cd\u8d35\u89c6\u9891\u7247\u6bb5\uff01","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"15:51","source_url":"\/group\/6285565183569953282\/","source":"\u8bfb\u53f2\u5de5\u4f5c\u5ba4","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":1505412,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/587000e7e0607a56350","group_id":"6285565183569953282","is_related":true,"media_url":"\/c\/user\/6379015356\/"},{"comments_count":51055,"media_avatar_url":"http:\/\/p2.pstatp.com\/large\/8709\/490794124","is_feed_ad":false,"is_diversion_page":false,"title":"\u7537\u4eba\u770b\u5230\u81ea\u5df1\u5973\u670b\u53cb\u88ab\u4eba\u7fa4\u6bb4\u540e\u7684\u53cd\u5e94","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"01:19","source_url":"\/group\/6296997200505340418\/","source":"\u6218\u98ce\u4e91","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":5094582,"image_url":"http:\/\/p1.pstatp.com\/list\/190x124\/71900133af15f193b7f","group_id":"6296997200505340418","is_related":true,"media_url":"\/c\/user\/5559074407\/"},{"comments_count":6437,"media_avatar_url":"http:\/\/p5a.pstatp.com\/large\/1dcf0023aa9c1f57d56d","is_feed_ad":false,"is_diversion_page":false,"title":"\u5317\u4eac\u5965\u8fd0\u4f1a\u5f00\u5e55\u5f0f\uff0c\u4e2d\u56fd\u519b\u4eba\u51fa\u573a\u65f6\u5168\u573a\u90fd\u6cb8\u817e\u4e86","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"01:51","source_url":"\/group\/6311473834756571393\/","source":"\u6b4c\u8005\u6587\u660e","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":4092862,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/acb000c5e2db8f214d4","group_id":"6311473834756571393","is_related":true,"media_url":"\/c\/user\/5530947067\/"},{"comments_count":6392,"media_avatar_url":"http:\/\/p2.pstatp.com\/large\/97d0001c8a422e43c58","is_feed_ad":false,"is_diversion_page":false,"title":"\u8ba9\u7f8e\u56fd\u4eba\u90fd\u6cb8\u817e\u7684\u4e2d\u56fd\u9605\u5175","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"02:38","source_url":"\/group\/6322800450853568769\/","source":"\u81f3\u6c5f\u5c0a\u5b9d","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":4565310,"image_url":"http:\/\/p1.pstatp.com\/list\/190x124\/cdc0001eba37e66dd4d","group_id":"6322800450853568769","is_related":true,"media_url":"\/c\/user\/6798806426\/"},{"comments_count":923,"media_avatar_url":"http:\/\/p3.pstatp.com\/large\/11955\/581418340","is_feed_ad":false,"is_diversion_page":false,"title":"\u8fd9\u662f\u4e00\u6bb5\u795e\u4eba\u4e91\u96c6\u7684\u89c6\u9891\uff0c\u80fd\u8ba9\u4f60\u7b11\u5230\u7aef\u5348\u6536\u5047","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"03:13","source_url":"\/group\/6294056325420679682\/","source":"\u5c81\u6708","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":4038707,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/7780009c22b0a402dfb","group_id":"6294056325420679682","is_related":true,"media_url":"\/c\/user\/3317390750\/"},{"comments_count":17057,"media_avatar_url":"http:\/\/p3.pstatp.com\/large\/9641\/7055518326","is_feed_ad":false,"is_diversion_page":false,"title":"\u89c6\u9891\uff5c\u9996\u98de\u5706\u6ee1\u6210\u529f\uff01C919\u5b89\u5168\u8fd4\u822a\u7740\u9646\uff01","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"00:31","source_url":"\/group\/6416547664435822850\/","source":"\u6211\u5728\u73b0\u573a","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":4664882,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/1f7b000585cf25a5674e","group_id":"6416547664435822850","is_related":true,"media_url":"\/c\/user\/5768104188\/"},{"comments_count":14175,"is_related":true,"is_feed_ad":false,"is_diversion_page":false,"title":"1979\u5e74\u6218\u5730\u8bb0\u8005\u674e\u7389\u8c26\u62cd\u6444\u7684\u4e2d\u8d8a\u771f\u5b9e\u6218\u4e89\u89c6\u9891\uff0c\u770b\u54ed\u4e86\u65e0\u6570\u4eba","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"08:41","source_url":"\/group\/6306456764929802754\/","source":"\u4e16\u754c\u5947\u95fb\u602a\u4e8b","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":7276385,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/a790003a1b1e0f51581","group_id":"6306456764929802754","media_url":"\/c\/user\/6829272511\/"},{"comments_count":5830,"media_avatar_url":"http:\/\/p2.pstatp.com\/large\/2b700107f409bcf792b","is_feed_ad":false,"is_diversion_page":false,"title":"\u8361\u6c14\u56de\u80a0\u2014\u2014\u6731\u9555\u57fa\u8b66\u544a\u53f0\u6e7e\uff0c\u9738\u6c14\u5916\u9732\uff0c\u9707\u64bc\u89c6\u9891","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"05:36","source_url":"\/group\/6287386255973941761\/","source":"\u6885\u6c0f\u7f51","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":2573772,"image_url":"http:\/\/p1.pstatp.com\/list\/190x124\/58700119cf78a31f7ad","group_id":"6287386255973941761","is_related":true,"media_url":"\/c\/user\/6118756777\/"},{"comments_count":3967,"media_avatar_url":"http:\/\/p3.pstatp.com\/large\/9047\/4861668963","is_feed_ad":false,"is_diversion_page":false,"title":"\u5927\u56fd\u603b\u7406\u98ce\u91c7\uff0c\u6731\u9555\u57fa\u667a\u8005\u98ce\u8303\uff01\u9738\u6c14\u593a\u56de\u4e86\u6cf1\u6cf1\u5927\u56fd\u5e94\u6709\u7684\u5730\u4f4d\uff01","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"05:32","source_url":"\/group\/6293820981433598465\/","source":"\u519b\u9012","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":5325898,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/71b000b0a2ceaa7f34a","group_id":"6293820981433598465","is_related":true,"media_url":"\/c\/user\/5715302584\/"},{"comments_count":10655,"media_avatar_url":"http:\/\/p3.pstatp.com\/large\/7837\/1894637559","is_feed_ad":false,"is_diversion_page":false,"title":"\u97e9\u56fd\u62f3\u624b\u8d5b\u524d\u6c14\u7130\u56a3\u5f20 \u4e2d\u56fd\u5c0f\u80d6\u4e0d\u4e88\u7406\u4f1a\u5f00\u8d5b\u5c31\u662f\u4e00\u901a\u7206\u6253","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"02:42","source_url":"\/group\/6309686447684567298\/","source":"\u683c\u6597\u7ede\u6740KO\u699c","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":2667290,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/ac700034f671b6a9208","group_id":"6309686447684567298","is_related":true,"media_url":"\/c\/user\/4373686607\/"},{"comments_count":53857,"media_avatar_url":"http:\/\/p3.pstatp.com\/large\/78f000884cf40203ac4","is_feed_ad":false,"is_diversion_page":false,"title":"\u4e2d\u56fd\u4eba\u662f\u4e0d\u53ef\u6218\u80dc\u7684","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"04:48","source_url":"\/group\/6300007771311964674\/","source":"\u4fe1\u4ef0\u7684\u5c0a\u8d35","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":4147655,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/90e0009ce8d0c4c8945","group_id":"6300007771311964674","is_related":true,"media_url":"\/c\/user\/3607688975\/"},{"comments_count":5905,"media_avatar_url":"http:\/\/p3.pstatp.com\/large\/11763\/3106052454","is_feed_ad":false,"is_diversion_page":false,"title":"\u534e\u4eba\u5c0f\u4f19\u906d\u5230\u9ed1\u4eba\u8001\u5916\u6311\u8845 \u4e00\u4e2a\u65cb\u98ce\u817f\u77ac\u95f4KO","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"00:38","source_url":"\/group\/6285896675231793666\/","source":"\u640f\u51fb\u683c\u6597","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":4848310,"image_url":"http:\/\/p1.pstatp.com\/list\/190x124\/589000e9ef734af79f2","group_id":"6285896675231793666","is_related":true,"media_url":"\/c\/user\/5878413871\/"}];
+</script>
+
+<script src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/article_07b03ea.js.下载"></script>
+
+<script>
+  riot.mount('wtopbar', {
+    home: false,
+    userInfo: userInfo
+  });
+  riot.mount('login');
+  riot.mount('wsearch');
+</script>
+
+<script>
+  riot.mount('snsbox',{
+    share_url:"http://www.toutiao.com/item/6233514880230490626/",
+    abstract:"我们已经从SVN 切换到Git很多年了，现在几乎所有的项目都在使用Github管理, 本篇文章讲一下为什么使用Git, 以及如何在团队中正确使用。Git的优点Git的优点很多，但是这里只列出我认为非常突出的几点。由于是分布式，所有本地库包含了远程库的所有内容。".replace(/<br \/>/ig, ''),
+    group_id:"6232064900786815234",
+    comments_count: utils.numFormat('0', 1, 'en'),
+    fix: true
+  });
+  riot.mount('hotVideo');
+  riot.mount('hotPicture');
+  riot.mount('feedback');
+</script>
+
+<script>
+  riot.mount('comment', {
+    group_id: '6232064900786815234',
+    item_id: '6233514880230490626' || '',
+    comments_count: utils.numCutByComma('0'),
+    userInfo: userInfo,
+    ban_comment: 0 + 0
+  });
+</script>
+
+<script>
+  riot.mount('relatedChannel', {
+    tag: '__all__'
+  });
+</script>
+<script src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/tt-video.js.下载" charset="utf-8" crossorigin="anonymous"></script>
+<script src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/video_a99722f.js.下载" crossorigin="anonymous"></script>
+<!--[if lt IE 9]>
+  <script src="//s3.pstatp.com/toutiao/resource/ntoutiao_web/page/detail/article_detail/article_main/audio/audio_ie8_8f6ccc5.js" charset="utf-8"></script>
+<![endif]-->
+<script src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/audio_a4dce16.js.下载" crossorigin="anonymous"></script>
+<script type="text/javascript">
+window.jsblock=function(){
+  setTimeout(function () {
+    window._czc && _czc.push(['_trackEvent', 'jsblock', 'article', 'block', 1, ''])
+  }, 1500);
+}
+</script>
+<script>
+  ;(function(win) {
+    var picVersion = win.PAGE_SWITCH && win.PAGE_SWITCH.picVersion;
+    if (!picVersion) {
+      var d = new Date();
+      picVersion = d.getFullYear() + '' + (d.getMonth() + 1) + '' + d.getDate() + '_01';
+    }
+    var url = '//s3a.pstatp.com/toutiao/pic_putting/dist/pic.min.js?ver=' + picVersion;
+    window.utils && window.utils.loadScript(url, function() {
+      setTimeout(function() {
+        window.trigger('ad_put');
+      });
+    }, function() {
+      return window.jsblock();
+    });
+  })(window);
+</script><script src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/pic.min.js.下载" crossorigin="anonymous"></script>
+<script>
+  var TT_PERF_CONFIG = {
+      metrics: true,
+      percent: 20
+  };
+</script>
+<script src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/ta.js.下载"></script>
+
+    <script src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/z_stat.php" language="JavaScript"></script><script src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/core.php" charset="utf-8" type="text/javascript"></script><a href="http://www.cnzz.com/stat/website.php?web_id=1259612802" target="_blank" title="站长统计">站长统计</a>
+    <script src="./Git 在团队中的最佳实践 - 今日头条(www.toutiao.com)_files/promotion_c49e139.js.下载"></script>
+    <script>
+      var is360 = window.uaCheck && window.uaCheck.is360se();
+      var isShowed = window.localStorage && window.localStorage.getItem('is_ext_pop_showed');
+      var isInstalled = window.sessionStorage && window.sessionStorage.getItem('is_ext_installed');
+      if (is360 && isShowed !== '1' && isInstalled !== '1') {
+        window.riot && riot.mount('#promotion-ext', 'promotion');
+      }
+    </script>
+
+
+</body></html>

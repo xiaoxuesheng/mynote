@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)http://www.toutiao.com/i6275057804382306817/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script charset="utf-8" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/probe.js.下载" async="" mod_name="tanxssp-probe"></script><style class="vjs-styles-defaults">
+      .video-js {
+        width: 300px;
+        height: 150px;
+      }
+
+      .vjs-fluid {
+        padding-top: 56.25%
+      }
+    </style>
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="dns-prefetch" href="http://s3.pstatp.com/">
+    <link rel="dns-prefetch" href="http://s3a.pstatp.com/">
+    <link rel="dns-prefetch" href="http://s3b.pstatp.com/">
+    <link rel="dns-prefetch" href="http://p1.pstatp.com/">
+    <link rel="dns-prefetch" href="http://p3.pstatp.com/">
+    
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+    
+    <meta name="baidu-site-verification" content="T239HZAbh7">
+    
+    <!--meta name="baidu_union_verify" content="94bb8bb3fa863f70e7fd926bffecd81e"-->
+    <meta name="360-site-verification" content="b96e1758dfc9156a410a4fb9520c5956">
+    <meta name="360_ssp_verify" content="2ae4ad39552c45425bddb738efda3dbb">
+    <meta name="google-site-verification" content="3PYTTW0s7IAfkReV8wAECfjIdKY-bQeSkVTyJNZpBKE">
+    <meta name="shenma-site-verification" content="34c05607e2a9430ad4249ed48faaf7cb_1432711730">
+    <meta name="baidu_union_verify" content="b88dd3920f970845bad8ad9f90d687f7">
+    <meta name="domain_verify" content="pmrgi33nmfuw4ir2ej2g65lunfqw6ltdn5wselbcm52wszbchirdqyztge3tenrsgq3dknjume2tayrvmqytemlfmiydimddgu4gcnzcfqrhi2lnmvjwc5tfei5dcnbwhazdcobuhe2dqobrpu">
+    
+  <link rel="alternate" media="only screen and (max-width: 640px)" href="http://m.toutiao.com/a6275053905785176322/">
+
+  <title>保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)</title>
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta name="keywords" content="">
+  <meta name="description" content="编者按：本文由「高可用架构后花园」群讨论整理而成，后花园是一个面向架构师的增值服务，如需了解，请关注「高可用架构」后回复 VIP有人的地方，就有江湖有江湖的地方，就有纷争问题的起源">
+  <meta name="pathname" content="toutiao_pc_article_detail">
+
+    <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="http://s3a.pstatp.com/toutiao/resource/ntoutiao_web/static/image/favicon_8e9c9c7.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/layout_5fcc025.css">
+    <!--[if lt IE 9]>
+      <script src="//s3a.pstatp.com/toutiao/resource/ntoutiao_web/static/js/lib/es5-shim_110642e.js"></script>
+    <![endif]-->
+    <script async="" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/analytics.js.下载"></script><script src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/lib_060bfbf.js.下载" crossorigin="anonymous"></script>
+    
+  <link rel="stylesheet" href="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/article_97557fd.css">
+  <link rel="stylesheet" href="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/tt-video.css" media="screen" title="no title">
+  <!--[if lt IE 9]>
+  <script src="//s3.pstatp.com/toutiao/video_player/dist/videojs-ie8.js" charset="utf-8" crossorigin="anonymous"></script>
+  <script src="//s3.pstatp.com/toutiao/video_player/dist/examples/webfont.js" charset="utf-8" crossorigin="anonymous"></script>
+  <script>
+      WebFont.load({
+          custom: {
+              families: ['iconfont','yFont'],
+              urls:['//s3.pstatp.com/toutiao/video_player/dist/tt-video.css','//www.toutiao.com/static/style/lib/layout.css']
+          }
+      });
+  </script>
+  <![endif]-->
+
+<style id="b6adabc">.imga_wrapper{position:relative;display:inline-block;}.imga_flag{display: inline-block;position: absolute;bottom: 8px;left: 8px;border: 1px solid #fff;color: #fff;font-size: 12px;line-height: 12px;height: 12px;padding: 1px 2px;text-align: center;}</style><style id="7b308d8">.bd-bottom-1{padding-left: 10px}</style><style id="8b5e8dc">.right-top-1{margin-bottom: 30px}</style><style id="19187a4">.right-top-2{margin-bottom: 30px}</style><style id="bfc0a11">.right-top-3{margin-bottom: 30px}</style><style id="f01665e">.right-top-4{margin-bottom: 30px}</style><style id="d7b536c">.right-hover-1{position: fixed; top: 20px;} #imagindexhover > ins {position: absolute !important}</style></head>
+
+<body style="min-width: 1220px; overflow-x: hidden;">
+    
+
+    <a href="http://www.toutiao.com/articles_news_society/" style="display:none;"></a>
+
+    <div class="y-wrap">
+        
+
+<!-- 公共头部 -->
+<div id="header">
+  <div riot-tag="wtopbar" style="height: 34px; background: #222;"><div class="y-box wtopbar">  <div class="y-left y-nav-topbar" riot-tag="nav"><div class="nav"> <ul class="y-box nav-list" ga_event="mh_channel"> <li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/" ga_event="mh_channel_recommend">推荐</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_hot/" ga_event="mh_channel_hot">热点</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/video/" ga_event="mh_channel_video">视频</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_image/" ga_event="mh_channel_image">图片</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/essay_joke/" ga_event="mh_channel_essay">段子</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_society/" ga_event="mh_channel_society">社会</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_entertainment/" ga_event="mh_channel_entertainment">娱乐</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_tech/" ga_event="mh_channel_tech">科技</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_car/" ga_event="mh_channel_car">汽车</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_sports/" ga_event="mh_channel_sports">体育</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_finance/" ga_event="mh_channel_finance">财经</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_military/" ga_event="mh_channel_military">军事</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_world/" ga_event="mh_channel_world">国际</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_fashion/" ga_event="mh_channel_fashion">时尚</a> </li><li class="y-left nav-item"> <a target="_blank" class="nav-link " href="http://www.toutiao.com/ch/news_travel/" ga_event="mh_channel_travel">旅游</a> </li><!--riot placeholder--> <li class="y-left nav-item nav-more"> <a class="nav-link" href="javascript:;"> 更多<i class="y-icon icon-more"></i> </a> <div class="nav-layer"> <ul class="nav-more-list"> <li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/ch/news_discovery/" ga_event="mh_channel_discovery">探索</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/ch/news_baby/" ga_event="mh_channel_baby">育儿</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/ch/news_regimen/" ga_event="mh_channel_regimen">养生</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/ch/news_story/" ga_event="mh_channel_story">故事</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/ch/news_essay/" ga_event="mh_channel_essay">美文</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/ch/news_game/" ga_event="mh_channel_game">游戏</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/ch/news_history/" ga_event="mh_channel_history">历史</a> </li><li class="nav-more-item"> <a target="_blank" href="http://www.toutiao.com/ch/news_food/" ga_event="mh_channel_food">美食</a> </li><!--riot placeholder--> </ul> </div> </li> </ul> </div></div> <ul class="y-right"> <li class="tb-item userbox"> <div riot-tag="wuserbox" abtype="" pageid=""><div class="y-box wuserbox">  <div class="y-right username"> <a ga_event="mh_nav_user" class="user-head" target="_blank" rel="nofollow" href="http://www.toutiao.com/c/user/7170056853/"> <div class="user-image"> <img onload="this.style.opacity=1;" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/5070639578" style="opacity: 1;"> </div> <span>东北小凤凰</span> </a> <div class="user-layer"> <ul ga_event="mh_nav_user"> <li><a class="layer-item" target="_blank" rel="nofollow" href="http://www.toutiao.com/c/user/7170056853/?tab=favourite">我的收藏</a></li> <li><a class="layer-item" target="_blank" rel="nofollow" href="http://www.toutiao.com/c/user/relation/7170056853/?tab=following">我的关注</a></li> <li><a class="layer-item" target="_blank" rel="nofollow" href="http://www.toutiao.com/c/user/relation/7170056853/?tab=followed">我的粉丝</a></li> <li> <a href="https://sso.toutiao.com/logout/" class="layer-item" rel="nofollow">退出</a> </li> </ul> </div> </div>  </div></div> </li> <li class="tb-item"> <a class="tb-link" href="javascript:void(0)">反馈</a> </li> <li class="tb-item"> <a class="tb-link" href="http://www.toutiao.com/complain/" ga_event="mh_nav_complain">投诉侵权</a> </li> <li class="tb-item more"> <a class="tb-link" href="http://www.toutiao.com/about/">头条产品</a> <div class="layer"> <ul> <li> <a href="https://wenda.toutiao.com/" class="layer-item" ga_event="mh_nav_others" target="_blank">问答</a> </li> <li> <a href="https://mp.toutiao.com/" class="layer-item" target="_blank" ga_event="mh_nav_others">头条号</a> </li> <li> <a href="https://tuchong.com/" class="layer-item" target="_blank" ga_event="mh_nav_others">图虫</a> </li> <li> <a href="https://ad.toutiao.com/promotion/?source2=pchometop" class="layer-item" target="_blank" ga_event="mh_nav_ad">广告投放</a> </li> </ul> </div> </li> </ul> <div id="J_userFeedback"></div> </div></div>
+  
+  <div class="middlebar">
+  <div class="y-box middlebar-inner">
+    <div class="y-left logo-box">
+      <a class="logo-link" href="http://www.toutiao.com/" ga_event="go_home">
+        <img class="logo" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/logo_201f80d.png">
+      </a>
+    </div>
+
+    
+      <div class="y-left chinese-tag">
+        <a href="http://www.toutiao.com/" target="_blank" ga_event="click_index">首页</a>
+        /
+        <a href="http://www.toutiao.com/search/?keyword=%E5%85%B6%E5%AE%83" target="_blank" ga_event="click_channel">其它</a>
+        /
+        <span class="text">正文</span>
+      </div>
+    
+
+    <div class="y-right">
+      <div riot-tag="wsearch" style="margin-top: 9px; width: 340px;"><div name="searchBox" class="wsearch"> <form name="searchForm" action="http://www.toutiao.com/search/" method="get" target="_blank"> <div name="inputbox" class="y-box input-group"> <input class="y-left input-text" name="keyword" autocomplete="off" ga_event="mh_search" type="text" placeholder="请输入关键字"> <div class="y-right btn-submit"> <button type="submit" href="javascript:;"> <i class="y-icon icon-search" ga_event="mh_search"></i> </button> </div> </div> </form> <div class="layer "> <ul ga_event="mh_search"> <li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-1">1</i>  <span class="search-txt">儿童网游暗藏色魔</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-2">2</i>  <span class="search-txt">曝章泽天六级成绩</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-3">3</i>  <span class="search-txt">短信怂恿男友自杀</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-4">4</i>  <span class="search-txt">普京隔空喊话科米</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-5">5</i>  <span class="search-txt">日媒感慨中国手机</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-6">6</i>  <span class="search-txt">德国前总理去世</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-7">7</i>  <span class="search-txt">比特币暴跌</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-8">8</i>  <span class="search-txt">中甲美女老总上任</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-9">9</i>  <span class="search-txt">新版外国人身份证</span> </a> </li><li class="search-item"> <a href="javascript:;"> <i class="search-no search-no-10">10</i>  <span class="search-txt">广西遭遇暴雨</span> </a> </li><!--riot placeholder--> </ul> </div> </div></div>
+    </div>
+  </div>
+</div>
+
+  
+</div>
+
+<div riot-tag="login"><div class="login-dialog hide"> <a class="btn" href="javascript:;"> <i class="icon icon-close"></i> </a> <div class="login-dialog-header"> <h3>邮箱登录</h3> </div> <div class="login-dialog-inner" data-node="inner"> <div class="login-pannel bottom-line"> <form action="http://www.toutiao.com/auth/login/" method="POST"> <ul> <li> <div class="input-group"> <div class="input"> <label>邮箱</label> <input class="name" name="name_or_email" type="text" placeholder="请使用您的注册邮箱" autocomplete="off" spellcheck="false"> </div> </div> </li> <li> <div class="input-group"> <div class="input"> <label>密码</label> <input class="password" name="password" type="password" data-node="password" placeholder="密码" autocomplete="off" spellcheck="false"> </div> </div> </li> <li class="captcha-box "> <div class="input-group"> <div class="input"> <input class="password" name="captcha" type="text" data-node="captcha" placeholder="验证码" autocomplete="off" spellcheck="false"> <img name="captchaImg"> </div> </div> </li> <li> <div class="input-group"> <input type="checkbox" name="remember_me" checked="" style="vertical-align:top"> <label for="remember_me" class="label">记住账号</label> </div> </li> <li> <div class="input-group" style="text-align: center;"> <input type="submit" class="submit-btn" value="登录"> <p class=""></p> </div> </li> </ul> </form> </div> <div class="login-dialog-header"> <h3>合作网站帐号登录</h3> </div> <div class=""> <ul class="y-box sns_login_list"> <li class="sinaweibo"> <a href="javascript:;" data-pid="sina_weibo" ga_event="login_sina_weibo"> <i class="icon"></i> 新浪微博 </a> </li> <li class="qqweibo"> <a href="javascript:;" data-pid="qq_weibo" ga_event="login_tencnet_weibo"> <i class="icon"></i> 腾讯微博 </a> </li> <li class="qzone"> <a href="javascript:;" data-pid="qzone_sns" ga_event="login_qqzone"> <i class="icon"></i> QQ空间 </a> </li> <li class="renren"> <a href="javascript:;" data-pid="renren_sns" ga_event="login_renren"> <i class="icon"></i> 人人网 </a> </li> <li class="weixin"> <a href="javascript:;" style="margin-right:0;" data-pid="weixin" ga_event="login_wechat"> <i class="icon"></i> 微信 </a> </li> </ul> </div> </div> </div> <div class="mask hide"></div></div>
+<div id="toast"></div>
+
+
+<div class="y-box container">
+  <div class="y-left">
+    <div class="y-box">
+      <div class="y-left index-left">
+        <div riot-tag="snsbox"><div class="snsbox snsbox-fixed" name="snsbox">  <a href="http://www.toutiao.com/i6275057804382306817/#comment_area" class="share-count" ga_event="click_comment_anchor"> <i class="y-icon icon-comments"></i> <span>15</span> </a> <div class="share-hr"></div> <div class="share-box" ga_event="click_share_weibo"><i class="y-icon icon-sina"></i><span>微博</span></div> <div class="share-box" ga_event="click_share_qzone"><i class="y-icon icon-qzone"></i><span>Qzone</span></div> <div class="share-box share-weixin" ga_event="click_share_weixin"> <i class="y-icon icon-wechat"></i><span>微信</span> <div class="share-qrcode"> <div></div> </div> </div> </div></div>
+      </div>
+      <div class="y-left index-middle" id="J_content">
+        <div id="article-main">
+	
+
+  <h1 class="article-title">保证分布式系统数据一致性的6种方案</h1>
+
+  <div class="articleInfo">
+	
+    
+    <span class="src">
+    	
+    		高可用架构
+    	
+    </span>
+    
+    <span class="time">2016-04-19 08:29</span>
+</div>
+
+  <div class="article-content"><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/5b30008086ae7a9f52e" img_width="564" img_height="564" alt="保证分布式系统数据一致性的6种方案" inline="0"><p>编者按：本文由「高可用架构后花园」群讨论整理而成，后花园是一个面向架构师的增值服务，如需了解，请关注「高可用架构」后回复 VIP</p><p>有人的地方，就有江湖</p><p>有江湖的地方，就有纷争</p><p><strong>问题的起源</strong></p><p>在电商等业务中，系统一般由多个独立的服务组成，如何解决分布式调用时候数据的一致性？</p><p>具体业务场景如下，比如一个业务操作，如果同时调用服务 A、B、C，需要满足要么同时成功；要么同时失败。A、B、C 可能是多个不同部门开发、部署在不同服务器上的远程服务。</p><p>在分布式系统来说，如果不想牺牲一致性，CAP 理论告诉我们只能放弃可用性，这显然不能接受。为了便于讨论问题，先简单介绍下数据一致性的基础理论。</p><p><strong>强一致</strong></p><blockquote><p>当更新操作完成之后，任何多个后续进程或者线程的访问都会返回最新的更新过的值。这种是对用户最友好的，就是用户上一次写什么，下一次就保证能读到什么。根据 CAP 理论，这种实现需要牺牲可用性。</p></blockquote><p><strong>弱一致性</strong></p><blockquote><p>系统并不保证续进程或者线程的访问都会返回最新的更新过的值。系统在数据写入成功之后，不承诺立即可以读到最新写入的值，也不会具体的承诺多久之后可以读到。</p></blockquote><p><strong>最终一致性</strong></p><blockquote><p>弱一致性的特定形式。系统保证在没有后续更新的前提下，系统<strong>最终</strong>返回上一次更新操作的值。在没有故障发生的前提下，不一致窗口的时间主要受通信延迟，系统负载和复制副本的个数影响。DNS 是一个典型的最终一致性系统。</p></blockquote><p>在工程实践上，为了保障系统的可用性，互联网系统大多将强一致性需求转换成最终一致性的需求，并通过系统执行幂等性的保证，保证数据的最终一致性。但在电商等场景中，对于数据一致性的解决方法和常见的互联网系统（如 MySQL 主从同步）又有一定区别，群友的讨论分成以下 6 种解决方案。</p><p><strong>1. 规避分布式事务——业务整合</strong></p><p>业务整合方案主要采用将接口整合到本地执行的方法。拿问题场景来说，则可以将服务 A、B、C 整合为一个服务 D 给业务，这个服务 D 再通过转换为本地事务的方式，比如服务 D 包含本地服务和服务 E，而服务 E 是本地服务 A ~ C 的整合。</p><p><strong>优点：</strong>解决（规避）了分布式事务。</p><p><strong>缺点：</strong>显而易见，把本来规划拆分好的业务，又耦合到了一起，业务职责不清晰，不利于维护。</p><p>由于这个方法存在明显缺点，通常不建议使用。</p><p><strong>2. 经典方案 - eBay 模式</strong></p><p>此方案的核心是将需要分布式处理的任务通过消息日志的方式来异步执行。消息日志可以存储到本地文本、数据库或消息队列，再通过业务规则自动或人工发起重试。人工重试更多的是应用于支付场景，通过对账系统对事后问题的处理。</p><p><strong>消息日志方案的核心是保证服务接口的幂等性。</strong></p><p>考虑到网络通讯失败、数据丢包等原因，如果接口不能保证幂等性，数据的唯一性将很难保证。</p><p>eBay 方式的主要思路如下。</p><p><strong>Base：一种 Acid 的替代方案</strong></p><p>此方案是 eBay 的架构师 Dan Pritchett 在 2008 年发表给 ACM 的文章，是一篇解释 BASE 原则，或者说最终一致性的经典文章。文中讨论了 BASE 与 ACID 原则在保证数据一致性的基本差异。</p><p>如果 ACID 为分区的数据库提供一致性的选择，那么如何实现可用性呢？答案是</p><p><strong>BASE (basically available, soft state, eventually consistent)</strong></p><p>BASE 的可用性是通过<strong>支持局部故障</strong>而不是系统全局故障来实现的。下面是一个简单的例子：如果将用户分区在 5 个数据库服务器上，BASE 设计鼓励类似的处理方式，一个用户数据库的故障只影响这台特定主机那 20% 的用户。这里不涉及任何魔法，不过它确实可以带来更高的可感知的系统可用性。</p><p>文章中描述了一个最常见的场景，如果产生了一笔交易，需要在交易表增加记录，同时还要修改用户表的金额。这两个表属于不同的远程服务，所以就涉及到分布式事务一致性的问题。</p><p>文中提出了一个经典的解决方法，将主要修改操作以及更新用户表的消息<strong>放在一个本地事务</strong>来完成。同时为了避免重复消费用户表消息带来的问题，达到多次重试的幂等性，<strong>增加一个更新记录表 updates_applied</strong>来记录已经处理过的消息。</p><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/5ad0007faf14d9018dc" img_width="318" img_height="195" alt="保证分布式系统数据一致性的6种方案" inline="0"><p>系统的执行伪代码如下</p><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/5bd0002b66b92973061" img_width="475" img_height="463" alt="保证分布式系统数据一致性的6种方案" inline="0"><p>（点击可全屏缩放图片）</p><p>基于以上方法，在第一阶段，通过本地的数据库的事务保障，增加了 transaction 表及消息队列 。</p><p>在第二阶段，分别读出消息队列（但不删除），通过判断更新记录表 updates_applied 来检测相关记录是否被执行，未被执行的记录会修改 user 表，然后增加一条操作记录到 updates_applied，事务执行成功之后再删除队列。</p><p>通过以上方法，达到了分布式系统的最终一致性。进一步了解 eBay 的方案可以参考文末链接。</p><p><strong>3. 去哪儿网分布式事务方案</strong></p><p>随着业务规模不断地扩大，电商网站一般都要面临拆分之路。就是将原来一个单体应用拆分成多个不同职责的子系统。比如以前可能将面向用户、客户和运营的功能都放在一个系统里，现在拆分为订单中心、代理商管理、运营系统、报价中心、库存管理等多个子系统。</p><p><strong>拆分首先要面临的是什么呢？</strong></p><p>最开始的单体应用所有功能都在一起，存储也在一起。比如运营要取消某个订单，那直接去更新订单表状态，然后更新库存表就 ok 了。因为是单体应用，库在一起，这些都可以在一个事务里，由关系数据库来保证一致性。</p><p>但拆分之后就不同了，不同的子系统都有自己的存储。比如订单中心就只管理自己的订单库，而库存管理也有自己的库。那么运营系统取消订单的时候就是通过接口调用等方式来调用订单中心和库存管理的服务了，而不是直接去操作库。这就涉及一个『<strong>分布式事务</strong>』的问题。</p><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/5bd0002b66dc70ed910" img_width="284" img_height="287" alt="保证分布式系统数据一致性的6种方案" inline="0"><p>分布式事务有两种解决方式</p><p><strong>1. 优先使用异步消息。</strong></p><p>上文已经说过，使用异步消息 Consumer 端需要实现幂等。</p><p>幂等有两种方式，<strong>一种方式是业务逻辑保证幂等</strong>。比如接到支付成功的消息订单状态变成支付完成，如果当前状态是支付完成，则再收到一个支付成功的消息则说明消息重复了，直接作为消息成功处理。</p><p><strong>另外一种方式如果业务逻辑无法保证幂等，则要增加一个去重表或者类似的实现</strong>。对于 producer 端在业务数据库的同实例上放一个消息库，发消息和业务操作在同一个本地事务里。发消息的时候消息并不立即发出，而是向消息库插入一条消息记录，然后在事务提交的时候再异步将消息发出，发送消息如果成功则将消息库里的消息删除，如果遇到消息队列服务异常或网络问题，消息没有成功发出那么消息就留在这里了，会有另外一个服务不断地将这些消息扫出重新发送。</p><p><strong>2. 有的业务不适合异步消息的方式，事务的各个参与方都需要同步的得到结果。</strong>这种情况的实现方式其实和上面类似，每个参与方的本地业务库的同实例上面放一个事务记录库。</p><p>比如 A 同步调用 B，C。A 本地事务成功的时候更新本地事务记录状态，B 和 C 同样。如果有一次 A 调用 B 失败了，这个失败可能是 B 真的失败了，也可能是调用超时，实际 B 成功。则由一个中心服务对比三方的事务记录表，做一个最终决定。假设现在三方的事务记录是 A 成功，B 失败，C 成功。那么最终决定有两种方式，根据具体场景：</p><ol><li><p>重试 B，直到 B 成功，事务记录表里记录了各项调用参数等信息；</p></li><li><p>执行 A 和 B 的补偿操作(一种可行的补偿方式是回滚)。</p></li></ol><p>对 b 场景做一个特殊说明：比如 B 是扣库存服务，在第一次调用的时候因为某种原因失败了，但是重试的时候库存已经变为 0，无法重试成功，这个时候只有回滚 A 和 C 了。</p><p>那么可能有人觉得在业务库的同实例里放消息库或事务记录库，会对业务侵入，业务还要关心这个库，是否一个合理的设计？</p><p>实际上可以依靠运维的手段来简化开发的侵入，我们的方法是让 DBA 在公司所有 MySQL 实例上预初始化这个库，通过框架层（消息的客户端或事务 RPC 框架）透明的在背后操作这个库，业务开发人员只需要关心自己的业务逻辑，不需要直接访问这个库。</p><p>总结起来，其实两种方式的根本原理是类似的，也就是<strong>将分布式事务转换为多个本地事务，然后依靠重试等方式达到最终一致性</strong>。</p><p><strong>4. 蘑菇街交易创建过程中的分布式一致性方案</strong></p><p><strong>交易创建的一般性流程</strong></p><p>我们把交易创建流程抽象出一系列可扩展的功能点，每个功能点都可以有多个实现（具体的实现之间有组合/互斥关系）。把各个功能点按照一定流程串起来，就完成了交易创建的过程。</p><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/5ad0007faf4df6af7f3" img_width="640" img_height="301" alt="保证分布式系统数据一致性的6种方案" inline="0"><p><strong>面临的问题</strong></p><p>每个功能点的实现都可能会依赖外部服务。那么如何保证各个服务之间的数据是一致的呢？比如锁定优惠券服务调用超时了，不能确定到底有没有锁券成功，该如何处理？再比如锁券成功了，但是扣减库存失败了，该如何处理？</p><p><strong>方案选型</strong></p><p>服务依赖过多，会带来管理复杂性增加和稳定性风险增大的问题。试想如果我们强依赖 10 个服务，9 个都执行成功了，最后一个执行失败了，那么是不是前面 9 个都要回滚掉？这个成本还是非常高的。</p><p>所以在拆分大的流程为多个小的本地事务的前提下，对于非实时、非强一致性的关联业务写入，在本地事务执行成功后，我们选择发消息通知、关联事务异步化执行的方案。</p><p><strong>消息通知往往不能保证 100% 成功；且消息通知后，接收方业务是否能执行成功还是未知数。前者问题可以通过重试解决；后者可以选用事务消息来保证。</strong></p><p>但是事务消息框架本身会给业务代码带来侵入性和复杂性，所以我们选择<strong>基于 DB 事件变化通知到 MQ 的方式</strong>做系统间解耦，通过订阅方消费 MQ 消息时的 ACK 机制，保证消息一定消费成功，达到最终一致性。由于消息可能会被重发，消息订阅方业务逻辑处理要做好幂等保证。</p><p>所以目前只剩下需要实时同步做、有强一致性要求的业务场景了。在交易创建过程中，锁券和扣减库存是这样的两个典型场景。</p><p>要保证多个系统间数据一致，乍一看，必须要引入分布式事务框架才能解决。但引入非常重的类似二阶段提交分布式事务框架会带来复杂性的急剧上升；在电商领域，绝对的强一致是过于理想化的，我们可以选择准实时的最终一致性。</p><p>我们在交易创建流程中，<strong>首先创建一个不可见订单</strong>，然后在同步调用锁券和扣减库存时，针对调用异常（失败或者超时），发出废单消息到MQ。如果消息发送失败，本地会做时间阶梯式的异步重试；优惠券系统和库存系统收到消息后，会进行判断是否需要做业务回滚，这样就准实时地保证了多个本地事务的最终一致性。</p><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/5b30008086e9f8d9583" img_width="218" img_height="640" alt="保证分布式系统数据一致性的6种方案" inline="0"><p>5. 支付宝及蚂蚁金融云的分布式服务 <strong>DTS </strong>方案</p><p>业界常用的还有支付宝的一种 xts 方案，由支付宝在 2PC 的基础上改进而来。主要思路如下，大部分信息引用自官方网站。</p><p><strong>分布式事务服务简介</strong></p><p>分布式事务服务 (Distributed Transaction Service, DTS) 是一个分布式事务框架，用来保障在大规模分布式环境下事务的最终一致性。DTS 从架构上分为 xts-client 和 xts-server 两部分，前者是一个嵌入客户端应用的 JAR 包，主要负责事务数据的写入和处理；后者是一个独立的系统，主要负责异常事务的恢复。</p><p><strong>核心特性</strong></p><p>传统关系型数据库的事务模型必须遵守 ACID 原则。在单数据库模式下，ACID 模型能有效保障数据的完整性，但是在大规模分布式环境下，一个业务往往会跨越多个数据库，如何保证这多个数据库之间的数据一致性，需要其他行之有效的策略。在 JavaEE 规范中使用 2PC (2 Phase Commit, 两阶段提交) 来处理跨 DB 环境下的事务问题，但是 2PC 是反可伸缩模式，也就是说，在事务处理过程中，参与者需要一直持有资源直到整个分布式事务结束。这样，当业务规模达到千万级以上时，2PC 的局限性就越来越明显，系统可伸缩性会变得很差。基于此，我们采用 BASE 的思想实现了一套类似 2PC 的分布式事务方案，这就是 DTS。DTS在充分保障分布式环境下高可用性、高可靠性的同时兼顾数据一致性的要求，其最大的特点是保证数据最终一致 (Eventually consistent)。</p><p>简单的说，DTS 框架有如下特性：</p><ul><li><p>最终一致：事务处理过程中，会有短暂不一致的情况，但通过恢复系统，可以让事务的数据达到最终一致的目标。</p></li><li><p>协议简单：DTS 定义了类似 2PC 的标准两阶段接口，业务系统只需要实现对应的接口就可以使用 DTS 的事务功能。</p></li><li><p>与 RPC 服务协议无关：在 SOA 架构下，一个或多个 DB 操作往往被包装成一个一个的 Service，Service 与 Service 之间通过 RPC 协议通信。DTS 框架构建在 SOA 架构上，与底层协议无关。</p></li><li><p>与底层事务实现无关： DTS 是一个抽象的基于 Service 层的概念，与底层事务实现无关，也就是说在 DTS 的范围内，无论是关系型数据库 MySQL，Oracle，还是 KV 存储 MemCache，或者列存数据库 HBase，只要将对其的操作包装成 DTS 的参与者，就可以接入到 DTS 事务范围内。</p></li></ul><p>以下是分布式事务框架的流程图</p><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/5c000029fd4a5102725" img_width="345" img_height="395" alt="保证分布式系统数据一致性的6种方案" inline="0"><p><strong>实现</strong></p><ol><li><p>一个完整的业务活动由一个主业务服务与若干从业务服务组成。</p></li><li><p>主业务服务负责发起并完成整个业务活动。</p></li><li><p>从业务服务提供 TCC 型业务操作。</p></li><li><p>业务活动管理器控制业务活动的一致性，它登记业务活动中的操作，并在活动提交时确认所有的两阶段事务的 confirm 操作，在业务活动取消时调用所有两阶段事务的 cancel 操作。”</p></li></ol><p><strong>与 2PC 协议比较</strong></p><ol><li><p>没有单独的 Prepare 阶段，降低协议成本</p></li><li><p>系统故障容忍度高，恢复简单</p></li></ol><p><strong>6. 农信网数据一致性方案</strong></p><p><strong>1. 电商业务</strong></p><p>公司的支付部门，通过接入其它第三方支付系统来提供支付服务给业务部门，支付服务是一个基于 Dubbo 的 RPC 服务。</p><p>对于业务部门来说，电商部门的订单支付，需要调用</p><ol><li><p>支付平台的支付接口来处理订单；</p></li><li><p>同时需要调用积分中心的接口，按照业务规则，给用户增加积分。</p></li></ol><p>从业务规则上需要同时保证业务数据的实时性和一致性，也就是支付成功必须加积分。</p><p>我们采用的方式是同步调用，首先处理本地事务业务。考虑到积分业务比较单一且业务影响低于支付，由积分平台提供增加与回撤接口。</p><p>具体的流程是先调用积分平台增加用户积分，再调用支付平台进行支付处理，如果处理失败，catch 方法调用积分平台的回撤方法，将本次处理的积分订单回撤。</p><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/5bd0002b671c5f212f4" img_width="746" img_height="412" alt="保证分布式系统数据一致性的6种方案" inline="0"><p><strong>2. 用户信息变更</strong></p><p>公司的用户信息，统一由用户中心维护，而用户信息的变更需要同步给各业务子系统，业务子系统再根据变更内容，处理各自业务。用户中心作为 MQ 的 producer，添加通知给 MQ。APP Server 订阅该消息，同步本地数据信息，再处理相关业务比如 APP 退出下线等。</p><p>我们采用异步消息通知机制，目前主要使用 ActiveMQ，基于 Virtual Topic 的订阅方式，保证单个业务集群订阅的单次消费。</p><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/5ad0007faf7a576a640" img_width="652" img_height="313" alt="保证分布式系统数据一致性的6种方案" inline="0"><p><strong>总结</strong></p><p>分布式服务对衍生的配套系统要求比较多，特别是我们基于消息、日志的最终一致性方案，需要考虑消息的积压、消费情况、监控、报警等。</p><p><strong>参考资料</strong></p><ul><li><p><strong>Base: An Acid Alternative (eBay 方案)</strong></p></li></ul><p><em>In partitioned databases, trading some consistency for availability can lead to dramatic improvements in scalability.</em></p><p>http://queue.acm.org/detail.cfm?id=1394128 英文版</p><p>http://article.yeeyan.org/view/167444/125572 中文版</p><p>https://www.cloud.alipay.com/docs/middleware/xts/index.html</p><p>感谢<em>李玉福、</em>余昭辉、蘑菇街七公提供方案，其他多位群成员对本文内容亦有贡献。对于上述方案表述不完善之处，欢迎读者留言指出。</p><p><strong>高可用架构</strong></p><p><strong>改变互联网的构建方式</strong></p><p>长按二维码 关注「高可用架构」公众号</p><p>欢迎技术文章投稿，关注公众号后回复 投稿</p></div>
+
+  <div class="y-box article-actions">
+		
+<div class="labelList">
+	<i class="y-icon icon-tag"></i>
+	<ul class="label-list">
+		
+		<li class="label-item"><a class="label-link" href="http://www.toutiao.com/search/?keyword=%E7%A7%91%E6%8A%80" target="_blank">科技</a></li>
+		
+		<li class="label-item"><a class="label-link" href="http://www.toutiao.com/search/?keyword=%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97" target="_blank">分布式计算</a></li>
+		
+		<li class="label-item"><a class="label-link" href="http://www.toutiao.com/search/?keyword=%E6%95%B0%E6%8D%AE%E5%BA%93" target="_blank">数据库</a></li>
+		
+	</ul>
+</div>
+
+		<div riot-tag="actionBox" class="actionBox"><div class="repin "> <i class="y-icon icon-favorite "></i><span>收藏</span> </div> <a href="javascript:;" class="areport"> <i class="y-icon icon-report"></i><span>举报</span> </a> <div id="J_articleReport"></div></div>
+  </div>
+</div>
+
+        <div class="bd-bottom-1" ad-cursor="" name="adetail_main*bottom_1" id="J_ad_baidu_bottom" ad_name="h_640*60_TB_146" done="1" show=""><script src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/ex" id="tanx-s-mm_32479643_3494618_75352146" charset="gbk"></script><script charset="utf-8" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/tanxssp.js.下载"></script><ins style="display:inline-block;padding:0;margin:0;width:640px;height:90px;*zoom:1;*display:inline; position:relative;" id="tanxssp-outer-conmm_32479643_3494618_75352146"><div id="tanxssp_con_mm_32479643_3494618_75352146" style="overflow:hidden;display:inline-block;position:relative;width:640px;height:90px;*display:inline;*zoom:1;font:12px/1.5 tahoma,&#39;Hiragino Sans GB&#39;,&#39;microsoft yahei&#39;,sans-serif;"><iframe id="tanxssp-tuwen-iframemm_32479643_3494618_75352146" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/TB1iXhkPFXXXXcwXFXXXXXXXXXX.html" style="width:640px;height:90px" border="0" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="true"></iframe><a id="iconmm_32479643_3494618_75352146" title="我也要申请橱窗推广" target="_blank" href="http://pro.taobao.com/index.htm?spm=a2320.7388781.1998051528.5.JOvNkN" style="overflow:hidden;width:15px;height:13px;right:20px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;">   <span id="icon_smallmm_32479643_3494618_75352146" style="border-right:2px solid #eee;float:none;width:13px;display:block;height:13px;box-sizing:content-box"><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/TB1DmcoJXXXXXavXpXXXXXXXXXX-26-26.png" border="0" style="width:13px;height:13px;margin:auto;display:block;"></span>   <span id="icon_bigmm_32479643_3494618_75352146" style="float:none;width:60px;height:13px;display: none;"><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/TB1Lt7aJXXXXXcjXVXXXXXXXXXX-117-26.png" style="width:60px;height:13px;margin:auto;display:block;" border="0/"></span></a><a id="sxmm_32479643_3494618_75352146" href="javascript:;" style="width:20px;height:13px;right:0px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;margin:0;">   <span id="sx1mm_32479643_3494618_75352146" style="float:none;width:20px;display:block;height:13px;"><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/TB1tWvVJFXXXXc_aXXXXXXXXXXX-40-26.png" style="width:20px;height:13px;margin:auto;display:block;min-height:13px;" border="0/"></span><div id="sxtipmm_32479643_3494618_75352146" style="display:none;position:absolute;left:-38px;bottom:13px;"><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/TB1upAiJXXXXXa5aXXXXXXXXXXX-116-30.png" style="width:58px;height:15px;margin:auto;display:block;min-height:15px;" border="0"></div></a></div></ins><a style="display:none;" id="tanx-a-mm_32479643_3494618_75352146"></a><script src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/ex(1)"></script></div>
+        <a id="comment_area" href="http://www.toutiao.com/i6275057804382306817/#" style="display: inline-block;margin-bottom: 20px;"></a><!--评论锚点-->
+        <div riot-tag="comment" id="comment"><div class="c-header"> <em>15&nbsp;</em>条评论 </div> <div riot-tag="inputBox" ismain="true" avatar="http://p0.pstatp.com/origin/3791/5070639578" group_id="6275053905785176322" item_id="6275057804382306817"><div class="inputBox"> <div class="y-box"> <div class="avatar-wrap avatar-wrap-center"> <img alt="" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/5070639578"> </div> <div class="input-wrap  "> <div class="c-textarea" ga_event="click_input_comment"> <textarea name="inputText" placeholder="写下您的评论..."></textarea> </div> <div class="c-action" ga_event="click_publish_comment"> <div class="c-submit">评论</div> </div> </div> </div> </div></div> <ul> <li class="c-item"> <a target="_blank" class="avatar-wrap" href="http://www.toutiao.com/c/user/6107783333/"> <img alt="" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/5070639578"> </a> <div class="c-content"> <div class="c-user-info"> <a class="c-user-name" target="_blank" href="http://www.toutiao.com/c/user/6107783333/">xingqi123</a> <span class="c-create-time">1年前</span> </div> <p>好文收藏，mark</p> <div class="c-footer-action"> <span class="c-reply" ga_event="click_reply_comment">回复</span>   <span class="y-right c-report" title="举报"><i class="y-icon icon-report"></i></span> <span title="点赞" ga_event="click_good_comment" class="y-right c-digg ">1&nbsp;<i class="y-icon icon-digg"></i></span> </div> <div class="J_input_0"></div> <!--riot placeholder-->  </div> </li><li class="c-item"> <a target="_blank" class="avatar-wrap" href="http://www.toutiao.com/c/user/3106008880/"> <img alt="" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/5206792038"> </a> <div class="c-content"> <div class="c-user-info"> <a class="c-user-name" target="_blank" href="http://www.toutiao.com/c/user/3106008880/">KK6115012</a> <span class="c-create-time">1年前</span> </div> <p>好文，说得很清晰</p> <div class="c-footer-action"> <span class="c-reply" ga_event="click_reply_comment">回复</span>   <span class="y-right c-report" title="举报"><i class="y-icon icon-report"></i></span> <span title="点赞" ga_event="click_good_comment" class="y-right c-digg ">0&nbsp;<i class="y-icon icon-digg"></i></span> </div> <div class="J_input_1"></div> <!--riot placeholder-->  </div> </li><li class="c-item"> <a target="_blank" class="avatar-wrap" href="http://www.toutiao.com/c/user/5710756340/"> <img alt="" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/216b00256e13221a3b4d"> </a> <div class="c-content"> <div class="c-user-info"> <a class="c-user-name" target="_blank" href="http://www.toutiao.com/c/user/5710756340/">keep-looking</a> <span class="c-create-time">1年前</span> </div> <p>好文收藏</p> <div class="c-footer-action"> <span class="c-reply" ga_event="click_reply_comment">回复</span>   <span class="y-right c-report" title="举报"><i class="y-icon icon-report"></i></span> <span title="点赞" ga_event="click_good_comment" class="y-right c-digg ">1&nbsp;<i class="y-icon icon-digg"></i></span> </div> <div class="J_input_2"></div> <!--riot placeholder-->  </div> </li><li class="c-item"> <a target="_blank" class="avatar-wrap" href="http://www.toutiao.com/c/user/6050999171/"> <img alt="" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/14f001d948c2cec17e5"> </a> <div class="c-content"> <div class="c-user-info"> <a class="c-user-name" target="_blank" href="http://www.toutiao.com/c/user/6050999171/">tclii</a> <span class="c-create-time">1年前</span> </div> <p>功能在那里摆着，保证是没有用的。萨德系统保护不了韩国，韩国人心里清楚。</p> <div class="c-footer-action"> <span class="c-reply" ga_event="click_reply_comment">回复</span>   <span class="y-right c-report" title="举报"><i class="y-icon icon-report"></i></span> <span title="点赞" ga_event="click_good_comment" class="y-right c-digg ">0&nbsp;<i class="y-icon icon-digg"></i></span> </div> <div class="J_input_3"></div> <!--riot placeholder-->  </div> </li><li class="c-item"> <a target="_blank" class="avatar-wrap" href="http://www.toutiao.com/c/user/5914532839/"> <img alt="" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/24980015d5c2e5042929"> </a> <div class="c-content"> <div class="c-user-info"> <a class="c-user-name" target="_blank" href="http://www.toutiao.com/c/user/5914532839/">zan无觞</a> <span class="c-create-time">1年前</span> </div> <p>马克</p> <div class="c-footer-action"> <span class="c-reply" ga_event="click_reply_comment">回复</span>   <span class="y-right c-report" title="举报"><i class="y-icon icon-report"></i></span> <span title="点赞" ga_event="click_good_comment" class="y-right c-digg ">0&nbsp;<i class="y-icon icon-digg"></i></span> </div> <div class="J_input_4"></div> <!--riot placeholder-->  </div> </li><!--riot placeholder--> </ul> <div class="c-load-more" ga_event="click_loadmore_comment">查看更多评论</div> <div id="J_report"></div></div>
+      </div>
+    </div>
+    <div class="y-box" style="margin-top: 30px;">
+      <div class="y-left index-left">
+        <div riot-tag="relatedChannel"><div name="relatedChannel" ga_event="related_channel_click" class="relatedChannel "> <h2 class="relatedChannel-header">相关推荐</h2> <ul class="relatedChannel-list"> <li> <a href="javacript:;" class="relatedChannel-item active"> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>推荐</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>热点</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>社会</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>娱乐</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>科技</span> </a> </li><li> <a href="javacript:;" class="relatedChannel-item "> <i class="y-icon icon-refreshfeed " style="display: none;"></i><span>体育</span> </a> </li><!--riot placeholder--> </ul> </div></div>
+      </div>
+      <div class="y-left index-middle">
+        <div class="index-cut-line" id="J_cut_line"></div>
+        <div riot-tag="feedBox"></div>
+      </div>
+    </div>
+  </div>
+  <div id="J_rindex" class="y-right index-right">
+    
+<div class="module">
+  <div class="pgcInfo">
+    <div class="pgc-head">
+      <a class="pgc-link" target="_blank" href="http://www.toutiao.com/c/user/5858481053/" ga_event="click_into_pgc">
+          <img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/5158861846" alt="高可用架构">
+          <div class="pgc-username">
+            <span>高可用架构</span>
+            <div riot-tag="subscribe" class="pgc-subscribe"><div class="subscribe" ga_event="follow_pgc"> <div class="article-subscribe left-arrow"> <i class="y-icon icon-check"></i><span>已关注</span> </div>  </div></div>
+          </div>
+      </a>
+    </div>
+    <p class="pgc-description"></p>
+    <ul>
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://www.toutiao.com/item/6431929889200275969" target="_blank" class="pgc-article-link">
+          如何使用火焰图来降低服务器负载
+        </a>
+    	</li>
+      
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://www.toutiao.com/item/6428793604440850945" target="_blank" class="pgc-article-link">
+          被忽视的位图数据库：Pilosa查询十亿级出租车搭乘数据案例
+        </a>
+    	</li>
+      
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://www.toutiao.com/item/6421441728678461954" target="_blank" class="pgc-article-link">
+          分布式服务框架选型：面对Dubbo，阿里巴巴为什么选择了HSF？
+        </a>
+    	</li>
+      
+      
+      
+    	<li class="pgc-article" ga_event="click_pgc_news">
+        <a href="http://www.toutiao.com/item/6420963282076566017" target="_blank" class="pgc-article-link">
+          是的，为了更好的支持微服务，我们从PHP迁移到了Go
+        </a>
+    	</li>
+      
+      
+    </ul>
+  </div>
+</div>
+
+
+    <div class="right-top-1 right-img" name="adetail_right*top_1" ad-cursor="1" ad_name="h_300*250_TB_456" done="1" show=""><script src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/ex(2)" id="tanx-s-mm_32479643_3494618_56064456" charset="gbk"></script><ins style="display:inline-block;padding:0;margin:0;width:300px;height:250px;*zoom:1;*display:inline; position:relative;" id="tanxssp-outer-conmm_32479643_3494618_56064456"><div id="tanxssp_con_mm_32479643_3494618_56064456" style="overflow:hidden;display:inline-block;position:relative;width:300px;height:250px;*display:inline;*zoom:1;font:12px/1.5 tahoma,&#39;Hiragino Sans GB&#39;,&#39;microsoft yahei&#39;,sans-serif;"><iframe id="tanxssp-tuwen-iframemm_32479643_3494618_56064456" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/creation-245057E3sJ6U0UZ8D-2830683.html" style="width:300px;height:250px" border="0" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="true"></iframe><a id="iconmm_32479643_3494618_56064456" title="我也要申请橱窗推广" target="_blank" href="http://pro.taobao.com/index.htm?spm=a2320.7388781.1998051528.5.JOvNkN" style="overflow:hidden;width:15px;height:13px;right:20px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;">   <span id="icon_smallmm_32479643_3494618_56064456" style="border-right:2px solid #eee;float:none;width:13px;display:block;height:13px;box-sizing:content-box"><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/TB1DmcoJXXXXXavXpXXXXXXXXXX-26-26.png" border="0" style="width:13px;height:13px;margin:auto;display:block;"></span>   <span id="icon_bigmm_32479643_3494618_56064456" style="float:none;width:60px;height:13px;display: none;"><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/TB1Lt7aJXXXXXcjXVXXXXXXXXXX-117-26.png" style="width:60px;height:13px;margin:auto;display:block;" border="0/"></span></a><a id="sxmm_32479643_3494618_56064456" href="javascript:;" style="width:20px;height:13px;right:0px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;margin:0;">   <span id="sx1mm_32479643_3494618_56064456" style="float:none;width:20px;display:block;height:13px;"><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/TB1tWvVJFXXXXc_aXXXXXXXXXXX-40-26.png" style="width:20px;height:13px;margin:auto;display:block;min-height:13px;" border="0/"></span><div id="sxtipmm_32479643_3494618_56064456" style="display:none;position:absolute;left:-38px;bottom:13px;"><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/TB1upAiJXXXXXa5aXXXXXXXXXXX-116-30.png" style="width:58px;height:15px;margin:auto;display:block;min-height:15px;" border="0"></div></a></div></ins><a style="display:none;" id="tanx-a-mm_32479643_3494618_56064456"></a><script src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/ex(3)"></script></div>
+    <div riot-tag="hotVideo" class="hotVideo module" ga_event="click_video_recommend"><div class="module-head video-head"><a href="http://www.toutiao.com/video/" target="_blank">热门视频</a></div> <ul> <li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6407619407014527490/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/1b7a0003cc91995bb7b3" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>02:12</span> </i> <p class="hot-title module-title">这对英国老头老太 每周都要度假和性生活</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6432234447269429506/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/288d0000b3d98a520641" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>03:28</span> </i> <p class="hot-title module-title">小河的水快被放干了，水草下竟藏了这么多野味！</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6428153623259889921/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/254d000a5375a7631f6a" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>02:41</span> </i> <p class="hot-title module-title">一男一女被困荒山，为了生存，不惜一切代价！</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6432495451727085825/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/28380007742bfcc1d1b2" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>06:03</span> </i> <p class="hot-title module-title">用一根筷子捅入活鸭胸膛 手指伸进去掏出鸭心 厨艺大比拼 杀蛇比赛 鲜吃活鱼</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6390079311215755521/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/282200080cca2693a79a" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>01:17</span> </i> <p class="hot-title module-title">沃兹恐怖三围：莎娃当场傻眼，费德勒一脸坏笑</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6432447746988409089/"> <div class="module-pic video-image"> <img onload="this.style.opacity=1" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/288a0003475e50ad0307" style="opacity: 1;"> </div> <i class="hot-tag video-tag"> <span>01:51</span> </i> <p class="hot-title module-title">螳螂捕鼠，刺猬在后？</p> </a> </li><!--riot placeholder--> </ul></div>
+    <div class="right-top-2 right-img" name="adetail_right*top_2" ad-cursor="1" ad_name="h_300*250_TB_903" done="1" show=""><script src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/ex(4)" id="tanx-s-mm_32479643_3494618_75342903" charset="gbk"></script><ins style="display:inline-block;padding:0;margin:0;width:300px;height:250px;*zoom:1;*display:inline; position:relative;" id="tanxssp-outer-conmm_32479643_3494618_75342903"><div id="tanxssp_con_mm_32479643_3494618_75342903" style="overflow:hidden;display:inline-block;position:relative;width:300px;height:250px;*display:inline;*zoom:1;font:12px/1.5 tahoma,&#39;Hiragino Sans GB&#39;,&#39;microsoft yahei&#39;,sans-serif;"><iframe id="tanxssp-tuwen-iframemm_32479643_3494618_75342903" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/creation-245057E3sJ6U0UZ8D-2830683(1).html" style="width:300px;height:250px" border="0" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="true"></iframe><a id="iconmm_32479643_3494618_75342903" title="我也要申请橱窗推广" target="_blank" href="http://pro.taobao.com/index.htm?spm=a2320.7388781.1998051528.5.JOvNkN" style="overflow:hidden;width:15px;height:13px;right:20px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;">   <span id="icon_smallmm_32479643_3494618_75342903" style="border-right:2px solid #eee;float:none;width:13px;display:block;height:13px;box-sizing:content-box"><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/TB1DmcoJXXXXXavXpXXXXXXXXXX-26-26.png" border="0" style="width:13px;height:13px;margin:auto;display:block;"></span>   <span id="icon_bigmm_32479643_3494618_75342903" style="float:none;width:60px;height:13px;display: none;"><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/TB1Lt7aJXXXXXcjXVXXXXXXXXXX-117-26.png" style="width:60px;height:13px;margin:auto;display:block;" border="0/"></span></a><a id="sxmm_32479643_3494618_75342903" href="javascript:;" style="width:20px;height:13px;right:0px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;margin:0;">   <span id="sx1mm_32479643_3494618_75342903" style="float:none;width:20px;display:block;height:13px;"><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/TB1tWvVJFXXXXc_aXXXXXXXXXXX-40-26.png" style="width:20px;height:13px;margin:auto;display:block;min-height:13px;" border="0/"></span><div id="sxtipmm_32479643_3494618_75342903" style="display:none;position:absolute;left:-38px;bottom:13px;"><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/TB1upAiJXXXXXa5aXXXXXXXXXXX-116-30.png" style="width:58px;height:15px;margin:auto;display:block;min-height:15px;" border="0"></div></a></div></ins><a style="display:none;" id="tanx-a-mm_32479643_3494618_75342903"></a><script src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/ex(5)"></script></div>
+    
+
+    <div class="right-top-3 right-img" name="adetail_right*top_3" ad-cursor="1" ad_name="h_300*250_TB_4454" done="1" show=""><script src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/ex(6)" id="tanx-s-mm_32479643_3494618_107024454" charset="gbk"></script><ins style="display:inline-block;padding:0;margin:0;width:300px;height:250px;*zoom:1;*display:inline; position:relative;" id="tanxssp-outer-conmm_32479643_3494618_107024454"><div id="tanxssp_con_mm_32479643_3494618_107024454" style="overflow:hidden;display:inline-block;position:relative;width:300px;height:250px;*display:inline;*zoom:1;font:12px/1.5 tahoma,&#39;Hiragino Sans GB&#39;,&#39;microsoft yahei&#39;,sans-serif;"><iframe id="tanxssp-tuwen-iframemm_32479643_3494618_107024454" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/creation-245057E3sJ6U0UZ8D-2830683(2).html" style="width:300px;height:250px" border="0" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="true"></iframe><a id="iconmm_32479643_3494618_107024454" title="我也要申请橱窗推广" target="_blank" href="http://pro.taobao.com/index.htm?spm=a2320.7388781.1998051528.5.JOvNkN" style="overflow:hidden;width:15px;height:13px;right:20px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;">   <span id="icon_smallmm_32479643_3494618_107024454" style="border-right:2px solid #eee;float:none;width:13px;display:block;height:13px;box-sizing:content-box"><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/TB1DmcoJXXXXXavXpXXXXXXXXXX-26-26.png" border="0" style="width:13px;height:13px;margin:auto;display:block;"></span>   <span id="icon_bigmm_32479643_3494618_107024454" style="float:none;width:60px;height:13px;display: none;"><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/TB1Lt7aJXXXXXcjXVXXXXXXXXXX-117-26.png" style="width:60px;height:13px;margin:auto;display:block;" border="0/"></span></a><a id="sxmm_32479643_3494618_107024454" href="javascript:;" style="width:20px;height:13px;right:0px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;margin:0;">   <span id="sx1mm_32479643_3494618_107024454" style="float:none;width:20px;display:block;height:13px;"><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/TB1tWvVJFXXXXc_aXXXXXXXXXXX-40-26.png" style="width:20px;height:13px;margin:auto;display:block;min-height:13px;" border="0/"></span><div id="sxtipmm_32479643_3494618_107024454" style="display:none;position:absolute;left:-38px;bottom:13px;"><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/TB1upAiJXXXXXa5aXXXXXXXXXXX-116-30.png" style="width:58px;height:15px;margin:auto;display:block;min-height:15px;" border="0"></div></a></div></ins><a style="display:none;" id="tanx-a-mm_32479643_3494618_107024454"></a><script src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/ex(7)"></script></div>
+    <div riot-tag="hotPicture" class="hotPicture module" ga_event="click_pictures_recommend"><div class="module-head pic-head"><a href="http://www.toutiao.com/news_image/" target="_blank">精彩图片</a></div> <ul> <li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6432505056322453762/">  <div class="pic-style style_2"> <div class="module-pic pic-middle"><img alt="" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/28860003adcf4f1abd69"></div> <div class="module-pic pic-small"><img alt="" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/288b00043fa320a1e868"></div> <div class="module-pic pic-small"><img alt="" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/288a0003a8ee7b06f181"></div> </div>  <i class="hot-tag pic-tag"> <span>14图</span> </i> <p class="hot-title module-title">我收藏的这几张钱币，猜猜哪种最值钱</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6432445531834908930/"> <div class="pic-style style_1"> <div class="module-pic pic-big"><img alt="" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/288e0000d05fd4400d1e"></div> </div>   <i class="hot-tag pic-tag"> <span>27图</span> </i> <p class="hot-title module-title">世界超模全球冠军总决赛前三甲新鲜出炉！31国世界超模魔鬼身材天使脸蛋亮瞎你钛合金双眼！</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6432435822791868674/">   <div class="pic-style style_3"> <div class="module-pic pic-middle"><img alt="" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/249c0002e46285bd89c7"></div> <div class="module-pic pic-small"><img alt="" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/288c0004a18c4ecd9081"></div> <div class="module-pic pic-small"><img alt="" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/26f300031f62b564f20e"></div> </div> <i class="hot-tag pic-tag"> <span>19图</span> </i> <p class="hot-title module-title">700多年老街始于南宋，看今天繁华依旧游人如织</p> </a> </li><li class="hot-item"> <a class="hot-link" target="_blank" href="http://www.toutiao.com/group/6432450575888367873/"> <div class="pic-style style_1"> <div class="module-pic pic-big"><img alt="" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/26ef00046abf6788d3a0"></div> </div>   <i class="hot-tag pic-tag"> <span>7图</span> </i> <p class="hot-title module-title">实拍中国唯一的白种人少数民族</p> </a> </li><!--riot placeholder--> </ul></div>
+    <div class="right-top-4 right-img" name="adetail_right*top_4" ad-cursor="1" ad_name="h_300*250_TB_461" done="1" show=""><script src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/ex(8)" id="tanx-s-mm_32479643_3494618_56068461" charset="gbk"></script><ins style="display:inline-block;padding:0;margin:0;width:300px;height:250px;*zoom:1;*display:inline; position:relative;" id="tanxssp-outer-conmm_32479643_3494618_56068461"><div id="tanxssp_con_mm_32479643_3494618_56068461" style="overflow:hidden;display:inline-block;position:relative;width:300px;height:250px;*display:inline;*zoom:1;font:12px/1.5 tahoma,&#39;Hiragino Sans GB&#39;,&#39;microsoft yahei&#39;,sans-serif;"><iframe id="tanxssp-tuwen-iframemm_32479643_3494618_56068461" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/creation-245057E3sJ6U0UZ8D-2830683(3).html" style="width:300px;height:250px" border="0" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="true"></iframe><a id="iconmm_32479643_3494618_56068461" title="我也要申请橱窗推广" target="_blank" href="http://pro.taobao.com/index.htm?spm=a2320.7388781.1998051528.5.JOvNkN" style="overflow:hidden;width:15px;height:13px;right:20px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;">   <span id="icon_smallmm_32479643_3494618_56068461" style="border-right:2px solid #eee;float:none;width:13px;display:block;height:13px;box-sizing:content-box"><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/TB1DmcoJXXXXXavXpXXXXXXXXXX-26-26.png" border="0" style="width:13px;height:13px;margin:auto;display:block;"></span>   <span id="icon_bigmm_32479643_3494618_56068461" style="float:none;width:60px;height:13px;display: none;"><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/TB1Lt7aJXXXXXcjXVXXXXXXXXXX-117-26.png" style="width:60px;height:13px;margin:auto;display:block;" border="0/"></span></a><a id="sxmm_32479643_3494618_56068461" href="javascript:;" style="width:20px;height:13px;right:0px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;margin:0;">   <span id="sx1mm_32479643_3494618_56068461" style="float:none;width:20px;display:block;height:13px;"><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/TB1tWvVJFXXXXc_aXXXXXXXXXXX-40-26.png" style="width:20px;height:13px;margin:auto;display:block;min-height:13px;" border="0/"></span><div id="sxtipmm_32479643_3494618_56068461" style="display:none;position:absolute;left:-38px;bottom:13px;"><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/TB1upAiJXXXXXa5aXXXXXXXXXXX-116-30.png" style="width:58px;height:15px;margin:auto;display:block;min-height:15px;" border="0"></div></a></div></ins><a style="display:none;" id="tanx-a-mm_32479643_3494618_56068461"></a><script src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/ex(9)"></script></div>
+    <div class="right-hover-1 right-img" id="imagindexhover" name="adetail_right*hover_1" ad-cursor="1" ad_name="h_300*250_TB_469" done="1" show="1" style="display: block;"><script src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/ex(10)" id="tanx-s-mm_32479643_3494618_63260469" charset="gbk"></script><ins style="display: inline-block; padding: 0px; margin: 0px; width: 300px; height: 250px; position: fixed; top: 0px; left: 0px; z-index: 2147483647;" id="tanxssp-outer-conmm_32479643_3494618_63260469"><div id="tanxssp_con_mm_32479643_3494618_63260469" style="overflow:hidden;display:inline-block;position:relative;width:300px;height:250px;*display:inline;*zoom:1;font:12px/1.5 tahoma,&#39;Hiragino Sans GB&#39;,&#39;microsoft yahei&#39;,sans-serif;"><iframe id="tanxssp-outer-iframemm_32479643_3494618_63260469" style="width: 300px; height: 250px;" border="0" frameborder="0" scrolling="no" marginwidth="0" allowtransparency="true" marginheight="0" src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/saved_resource.html"></iframe><a style="display:none !important;" id="tanx_frameanchor_mm_32479643_3494618_63260469" data-mid="17534123"></a><a id="iconmm_32479643_3494618_63260469" title="我也要申请橱窗推广" target="_blank" href="http://pro.taobao.com/index.htm?spm=a2320.7388781.1998051528.5.JOvNkN" style="overflow:hidden;width:15px;height:13px;right:20px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;">   <span id="icon_smallmm_32479643_3494618_63260469" style="border-right:2px solid #FBE008;float:none;width:13px;display:block;height:13px;box-sizing:content-box"><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/TB1DmcoJXXXXXavXpXXXXXXXXXX-26-26.png" border="0" style="width:13px;height:13px;margin:auto;display:block;"></span>   <span id="icon_bigmm_32479643_3494618_63260469" style="float:none;width:60px;height:13px;display: none;"><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/TB1Lt7aJXXXXXcjXVXXXXXXXXXX-117-26.png" style="width:60px;height:13px;margin:auto;display:block;" border="0/"></span></a><a id="sxmm_32479643_3494618_63260469" href="javascript:;" style="width:20px;height:13px;right:0px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;margin:0;">   <span id="sx1mm_32479643_3494618_63260469" style="float:none;width:20px;display:block;height:13px;"><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/TB1tWvVJFXXXXc_aXXXXXXXXXXX-40-26.png" style="width:20px;height:13px;margin:auto;display:block;min-height:13px;" border="0/"></span><div id="sxtipmm_32479643_3494618_63260469" style="display:none;position:absolute;left:-38px;bottom:13px;"><img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/TB1upAiJXXXXXa5aXXXXXXXXXXX-116-30.png" style="width:58px;height:15px;margin:auto;display:block;min-height:15px;" border="0"></div></a></div></ins><a style="display: block; width: 0px; height: 0px;" id="tanx-a-mm_32479643_3494618_63260469"></a><script src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/ex(11)"></script></div>
+  </div>
+</div>
+
+<div class="action-feedback">
+  <div riot-tag="feedback" class="feedback"><ul> <li class="tool-item" ga_event="go_top_click"> <a href="javascript:;"> <i class="y-icon icon-backtotopfeed"></i> </a> </li> </ul></div>
+</div>
+
+<!-- 公共尾部 -->
+<div id="footer">
+    <div>
+        <span class="fitem">© 2017 今日头条 </span>
+        <a class="fitem" href="http://www.12377.cn/" target="_blank">中国互联网举报中心</a>
+        <a class="fitem" href="http://www.miibeian.gov.cn/" target="_blank">京ICP证140141号</a>
+        <a class="fitem" href="http://www.miibeian.gov.cn/" target="_blank">京ICP备12025439号-3</a>
+        <a class="fitem" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11000002002023" target="_blank" ga_event="click_about">
+            <img src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/gongan_d0289dc.png">京公网安备 11000002002023号
+        </a>
+    </div>
+    <div>
+        <a class="fitem" href="http://www.toutiao.com/license/" target="_blank">网络文化经营许可证</a>
+        <a class="fitem" href="http://www.toutiao.com/a3642705768/" target="_blank">跟帖评论自律管理承诺书</a>
+        <span class="fitem">违法和不良信息举报电话：010-58341833</span>
+        <span class="fitem">公司名称：北京字节跳动科技有限公司</span>
+    </div>
+</div>
+
+
+
+      <div riot-tag="promotion-ext" id="promotion-ext"></div>
+    </div>
+
+    <script>
+
+        if (window.Raven) {
+          if (1||Math.floor(Math.random()*2)) {
+            Raven.config('http://key@m.toutiao.com/log/sentry/v2/51', {
+              whitelistUrls: [/pstatp\.com/]
+            }).install();
+          }
+        }
+
+        window.globals = window.globals || {};
+
+        taAnalysis && taAnalysis.setup({
+          c: 'detail_article'
+        });
+        taAnalysis && taAnalysis.send('pageview', {});
+
+        var antiPVHandler = utils.on(window, 'scroll', function(e) {
+          taAnalysis && taAnalysis.send('antipageview', {});
+          utils.off(window, 'scroll', antiPVHandler);
+        });
+
+        window.gaqpush = function (ga_action, ga_label){
+            ga('send', 'event','detail_article' , ga_action, ga_label);
+        };
+
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        // ga('create', 'UA-28423340-5', 'auto');
+        ga('create', 'UA-28423340-5', 'auto', {'sampleRate': 10});
+        ga('send', 'pageview');
+
+        utils.on(document.getElementsByTagName('body')[0], 'click', function(e) {
+            var target = utils.getTarget(e),
+                ga_event,
+                ga_category,
+                ga_label,
+                ga_value;
+
+            while(target && target.nodeName.toUpperCase() !== 'BODY') {
+                ga_event = utils.getAttribute(target, 'ga_event');
+                ga_category = utils.getAttribute(target, 'ga_category') || 'detail_article';
+                ga_label = utils.getAttribute(target, 'ga_label');
+                ga_value = utils.getAttribute(target, 'ga_value') || 1;
+
+                ga_event && ga('send', 'event', ga_category, ga_event, ga_label, ga_value);
+                ga_event && taAnalysis && taAnalysis.send('event', { ev: ga_event });
+                target = target.parentNode;
+            }
+        });
+
+        riot.observable(window);
+    </script>
+    <script src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/toutiao.web.toutiao_pc-pc-fe_switch.js.下载"></script>
+    <script>
+      var PAGE_SWITCH = window['toutiao.web.toutiao_pc/pc/fe_switch'] || {};
+    </script>
+    
+
+<script>
+  // 用户信息
+  var userInfo = {
+      id: 7170056853,
+      name: '东北小凤凰',
+      avatarUrl: 'http://p0.pstatp.com/origin/3791/5070639578',
+      isPgc: false,
+      isOwner: false
+  };
+
+
+  var group = {
+  	id: '6275053905785176322',
+    item_id: '6275057804382306817',
+  	repin:0,
+  };
+
+  var media = {
+    user_id: 5858481053,
+  	id:5858481053,
+  	like:true
+  };
+
+  var siblingList = [{"comments_count":4607,"media_avatar_url":"http:\/\/p5a.pstatp.com\/large\/1a6a000879a3a676f0f8","is_feed_ad":false,"is_diversion_page":false,"title":"\u519c\u6751\u5c0f\u4f19\u4e0b\u7530\u641e\u91ce \u624b\u4e00\u8fdb\u6d1e\u611f\u89c9\u4e0d\u5999 \u7acb\u9a6c\u540e\u9000","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"03:08","source_url":"\/group\/6417257874729189633\/","source":"\u578b\u7537\u884c\u8d70\u4e61\u6751","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":12973002,"image_url":"http:\/\/p1.pstatp.com\/list\/190x124\/1f7e0000d5ca8443ebfb","group_id":"6417257874729189633","is_related":true,"media_url":"\/c\/user\/52624419301\/"},{"comments_count":8460,"is_related":true,"is_feed_ad":false,"is_diversion_page":false,"title":"\u5386\u6b21\u6700\u7ecf\u5178\u7684\u9605\u5175\u5288\u67aa\u526a\u8f91\uff0c\u5c31\u662f\u8fd9\u4e48\u5e05!","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"05:09","source_url":"\/group\/6297133759103762945\/","source":"\u8d81\u5e74\u8f7b\u53bb\u65c5\u6e38","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":2066094,"image_url":"http:\/\/p1.pstatp.com\/list\/190x124\/7fc00040d3c2a0b0518","group_id":"6297133759103762945","media_url":"\/c\/user\/5968864396\/"},{"comments_count":51375,"is_related":true,"is_feed_ad":false,"is_diversion_page":false,"title":"\u7537\u4eba\u770b\u5230\u81ea\u5df1\u5973\u670b\u53cb\u88ab\u4eba\u7fa4\u6bb4\u540e\u7684\u53cd\u5e94","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"01:19","source_url":"\/group\/6296997200505340418\/","source":"\u6218\u98ce\u4e91","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":5181293,"image_url":"http:\/\/p1.pstatp.com\/list\/190x124\/71900133af15f193b7f","group_id":"6296997200505340418","media_url":"\/c\/user\/5559074407\/"},{"comments_count":10565,"is_related":true,"is_feed_ad":false,"is_diversion_page":false,"title":"\u9ad8\u901f\u516c\u8def\u5076\u9047\u5b59\u7ea2\u96f7\u5927\u54e5\uff0c\u6ca1\u6709\u660e\u661f\u67b6\u5b50","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"00:17","source_url":"\/group\/6313292543870664961\/","source":"\u6709\u8272\u7b11\u8bdd","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":5342959,"image_url":"http:\/\/p9.pstatp.com\/list\/190x124\/ba00000bd06e5120b25","group_id":"6313292543870664961","media_url":"\/c\/user\/6001094783\/"},{"comments_count":830,"is_related":true,"is_feed_ad":false,"is_diversion_page":false,"title":"80\u540e\u5c0f\u4f19\u5356\u547d\u8d5a\u94b1\u592a\u96be\u4e86\uff0c\u81ea\u5236\u4e00\u53f0\u65b0\u673a\u5668\uff0c\u79d2\u6740\u540c\u884c10\u500d","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"05:15","source_url":"\/group\/6418714671049605633\/","source":"\u53d1\u660e\u8ff7","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":3593262,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/1f8b0000d2e63c294c18","group_id":"6418714671049605633","media_url":"\/c\/user\/5870703541\/"},{"comments_count":6465,"is_related":true,"is_feed_ad":false,"is_diversion_page":false,"title":"\u795e\u4e00\u822c\u7684\u8001\u7238\uff0c\u4ed6\u4eec\u662f\u5982\u4f55\u77ac\u95f4\u6293\u4f4f\u6b7b\u4ea1\u8fb9\u7f18\u7684\u5b69\u5b50\u7684","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"04:03","source_url":"\/group\/6297532530027397633\/","source":"\u673a\u8f66\u7f51","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":2646897,"image_url":"http:\/\/p1.pstatp.com\/list\/190x124\/71b0014c6ddac4bbdad","group_id":"6297532530027397633","media_url":"\/c\/user\/5466818871\/"},{"comments_count":508,"media_avatar_url":"http:\/\/p1.pstatp.com\/large\/6cb000f2007b2087acf","is_feed_ad":false,"is_diversion_page":false,"title":"\u89c1\u8fc7\u6c11\u95f4\u9ad8\u624b\uff0c\u53ef\u662f\u6ca1\u89c1\u8fc7\u8fd9\u4e48\u591a\u6c11\u95f4\u9ad8\u624b\uff0c\u4e0d\u670d\u6765\u6218","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"03:13","source_url":"\/group\/6296730064822206977\/","source":"\u90fd\u6765\u77a7","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":6611359,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/7f90002eda46f116287","group_id":"6296730064822206977","is_related":true,"media_url":"\/c\/user\/6682800148\/"},{"comments_count":15022,"media_avatar_url":"http:\/\/p4.pstatp.com\/large\/1354000e053715933317","is_feed_ad":false,"is_diversion_page":false,"title":"\u4ed6\u53ea\u60f3\u62cd\u6d77\u6d6a\u548c\u6c99\u6ee9\uff0c\u6c92\u60f3\u5230\u5374\u610f\u5916\u62cd\u4e0b\u8fd9\u60ca\u4eba\u7684\u4e00\u5e55","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"03:44","source_url":"\/group\/6289731063350559234\/","source":"\u7ecf\u5178\u5f71\u89c6\u4f20\u5947","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":3098925,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/6d100089fee7ddd3075","group_id":"6289731063350559234","is_related":true,"media_url":"\/c\/user\/6565734979\/"},{"comments_count":5492,"media_avatar_url":"http:\/\/p1.pstatp.com\/large\/e580012acf921174e09","is_feed_ad":false,"is_diversion_page":false,"title":"\u5973\u9500\u552e\u5e26\u5ba2\u6237\u8bd5\u9a7e\u5b9d\u9a6cM4\uff0c\u6253\u5f00\u540e\u5907\u7bb1\u624d\u77e5\u9053\u8fd9\u8f86\u8f66\u6709\u591a\u9738\u6c14","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"02:44","source_url":"\/group\/6417381897692774914\/","source":"\u6c7d\u8f66\u5947\u8469\u8bf4","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":7773623,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/1f800002c2e910836b41","group_id":"6417381897692774914","is_related":true,"media_url":"\/c\/user\/6908066048\/"},{"comments_count":540,"media_avatar_url":"http:\/\/p3.pstatp.com\/large\/41200167c12e1d04450","is_feed_ad":false,"is_diversion_page":false,"title":"\u8fd9\u624d\u662f\u8ba9\u654c\u4eba\u80c6\u98a4\u7684\u4e2d\u56fd\u89e3\u653e\u519b","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"02:44","source_url":"\/group\/6287868315289256450\/","source":"\u5927\u56fd\u4e4b\u5175\u957f","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":2444185,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/5890012acab342e9976","group_id":"6287868315289256450","is_related":true,"media_url":"\/c\/user\/6241153515\/"},{"comments_count":12852,"is_related":true,"is_feed_ad":false,"is_diversion_page":false,"title":"\u4e09\u519b\u4eea\u4ed7\u961f\u51fa\u56fd\u8bad\u7ec3\u7684\u65e5\u5e38\uff0c\u592a\u957f\u8138\u4e86\uff0c\u5916\u56fd\u4eba\u90fd\u5fcd\u4e0d\u4f4f\u5408\u5f71","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"01:58","source_url":"\/group\/6300044258615230977\/","source":"\u8d81\u5e74\u8f7b\u53bb\u65c5\u6e38","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":3920520,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/9700001e5973dc31caa","group_id":"6300044258615230977","media_url":"\/c\/user\/5968864396\/"},{"comments_count":15295,"media_avatar_url":"http:\/\/p3.pstatp.com\/large\/78f0012156f131df6ea","is_feed_ad":false,"is_diversion_page":false,"title":"\u6b66\u5f53\u5c71\u4e0a\u89c1\u9ad8\u4eba\uff1a\u4e0d\u8981\u5f55\u4e86\uff0c\u4e0d\u8981\u9f13\u638c\uff0c\u8ba9\u6211\u5e08\u7236\u77e5\u9053\u4e86\u8981\u9a82\u6211","single_mode":true,"gallary_image_count":1,"middle_mode":true,"has_video":true,"video_duration_str":"00:28","source_url":"\/group\/6315168461911753218\/","source":"\u4e2d\u534e\u4eba\u624d\u7f51","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":3077688,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/ba200069237fb745eb5","group_id":"6315168461911753218","is_related":true,"media_url":"\/c\/user\/6637306187\/"},{"comments_count":23297,"media_avatar_url":"http:\/\/p3.pstatp.com\/large\/411000b2498daefc476","is_feed_ad":false,"is_diversion_page":false,"title":"20\u5c81\u91cd\u5e86\u59b9\u5b50\u4e0b\u5de5\u5730\u51fa\u82e6\u529b\u8d70\u7ea2\u7f51\u7edc \u7f51\u53cb\uff1a\u6211\u8981\u5a36\u5979","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"01:24","source_url":"\/group\/6290665924932403714\/","source":"\u89c6\u8baf\u751f\u6d3b","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":4427197,"image_url":"http:\/\/p9.pstatp.com\/list\/190x124\/723000501d5811b4e48","group_id":"6290665924932403714","is_related":true,"media_url":"\/c\/user\/6086954845\/"},{"comments_count":54175,"media_avatar_url":"http:\/\/p3.pstatp.com\/large\/78f000884cf40203ac4","is_feed_ad":false,"is_diversion_page":false,"title":"\u4e2d\u56fd\u4eba\u662f\u4e0d\u53ef\u6218\u80dc\u7684","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"04:48","source_url":"\/group\/6300007771311964674\/","source":"\u4fe1\u4ef0\u7684\u5c0a\u8d35","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":4185804,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/90e0009ce8d0c4c8945","group_id":"6300007771311964674","is_related":true,"media_url":"\/c\/user\/3607688975\/"},{"comments_count":8740,"is_related":true,"is_feed_ad":false,"is_diversion_page":false,"title":"\u6cf0\u56fd\u53c8\u51fa\u795e\u7ea7\u77ed\u7247\uff0c\u771f\u597d\u770b","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"04:02","source_url":"\/group\/6300736637932405250\/","source":"\u6f33\u5dde\u4e4b\u7a97","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":1852957,"image_url":"http:\/\/p1.pstatp.com\/list\/190x124\/97000037ea0049b7670","group_id":"6300736637932405250","media_url":"\/c\/user\/4176112501\/"},{"comments_count":10682,"media_avatar_url":"http:\/\/p3.pstatp.com\/large\/4110004fd2681eb7cb7","is_feed_ad":false,"is_diversion_page":false,"title":"\u5982\u679c\u4f60\u5bf9\u751f\u6d3b\u5931\u53bb\u4fe1\u5fc3\uff0c\u90a3\u4e48\u8bf7\u770b\u4e0b\u8fd9\u4e2a\u89c6\u9891\u5427","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"03:15","source_url":"\/group\/6293274175373050369\/","source":"\u52a8\u7269\u96c6\u7ed3\u53f7","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":3796377,"image_url":"http:\/\/p1.pstatp.com\/list\/190x124\/72100070329606cbfee","group_id":"6293274175373050369","is_related":true,"media_url":"\/c\/user\/6093141211\/"},{"comments_count":9247,"is_related":true,"is_feed_ad":false,"is_diversion_page":false,"title":"\u6bdb\u4e3b\u5e2d\u9650\u65f6\u8ba9\u5916\u56fd\u519b\u8230\u64a4\u79bb\u4e2d\u56fd\u6c34\u57df\uff0c\u4e0d\u670d\u5c31\u6253","single_mode":true,"gallary_image_count":0,"middle_mode":true,"has_video":true,"video_duration_str":"05:24","source_url":"\/group\/6305636624118055426\/","source":"\u5f71\u89c6\u8d31\u6790","more_mode":null,"article_genre":"video","has_gallery":false,"video_play_count":2380623,"image_url":"http:\/\/p3.pstatp.com\/list\/190x124\/9e100096362981c1c95","group_id":"6305636624118055426","media_url":"\/c\/user\/6041671856\/"}];
+</script>
+
+<script src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/article_07b03ea.js.下载"></script>
+
+<script>
+  riot.mount('wtopbar', {
+    home: false,
+    userInfo: userInfo
+  });
+  riot.mount('login');
+  riot.mount('wsearch');
+</script>
+
+<script>
+  riot.mount('snsbox',{
+    share_url:"http://www.toutiao.com/item/6275057804382306817/",
+    abstract:"编者按：本文由「高可用架构后花园」群讨论整理而成，后花园是一个面向架构师的增值服务，如需了解，请关注「高可用架构」后回复 VIP有人的地方，就有江湖有江湖的地方，就有纷争问题的起源在电商等业务中，系统一般由多个独立的服务组成，如何解决分布式调用时候数据的一致性？".replace(/<br \/>/ig, ''),
+    group_id:"6275053905785176322",
+    comments_count: utils.numFormat('15', 1, 'en'),
+    fix: true
+  });
+  riot.mount('hotVideo');
+  riot.mount('hotPicture');
+  riot.mount('feedback');
+</script>
+
+<script>
+  riot.mount('comment', {
+    group_id: '6275053905785176322',
+    item_id: '6275057804382306817' || '',
+    comments_count: utils.numCutByComma('15'),
+    userInfo: userInfo,
+    ban_comment: 0 + 0
+  });
+</script>
+
+<script>
+  riot.mount('relatedChannel', {
+    tag: '__all__'
+  });
+</script>
+<script src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/tt-video.js.下载" charset="utf-8" crossorigin="anonymous"></script>
+<script src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/video_a99722f.js.下载" crossorigin="anonymous"></script>
+<!--[if lt IE 9]>
+  <script src="//s3.pstatp.com/toutiao/resource/ntoutiao_web/page/detail/article_detail/article_main/audio/audio_ie8_8f6ccc5.js" charset="utf-8"></script>
+<![endif]-->
+<script src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/audio_a4dce16.js.下载" crossorigin="anonymous"></script>
+<script type="text/javascript">
+window.jsblock=function(){
+  setTimeout(function () {
+    window._czc && _czc.push(['_trackEvent', 'jsblock', 'article', 'block', 1, ''])
+  }, 1500);
+}
+</script>
+<script>
+  ;(function(win) {
+    var picVersion = win.PAGE_SWITCH && win.PAGE_SWITCH.picVersion;
+    if (!picVersion) {
+      var d = new Date();
+      picVersion = d.getFullYear() + '' + (d.getMonth() + 1) + '' + d.getDate() + '_01';
+    }
+    var url = '//s3a.pstatp.com/toutiao/gallery_img/dist/img.min.js?ver=' + picVersion;
+    window.utils && window.utils.loadScript(url, function() {
+      setTimeout(function() {
+        window.trigger('ad_put');
+      });
+    }, function() {
+      return window.jsblock();
+    });
+  })(window);
+</script><script src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/img.min.js.下载" crossorigin="anonymous"></script>
+<script>
+  var TT_PERF_CONFIG = {
+      metrics: true,
+      percent: 20
+  };
+</script>
+<script src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/ta.js.下载"></script>
+
+    <script src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/z_stat.php" language="JavaScript"></script><script src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/core.php" charset="utf-8" type="text/javascript"></script><a href="http://www.cnzz.com/stat/website.php?web_id=1259612802" target="_blank" title="站长统计">站长统计</a>
+    <script src="./保证分布式系统数据一致性的6种方案 - 今日头条(www.toutiao.com)_files/promotion_c49e139.js.下载"></script>
+    <script>
+      var is360 = window.uaCheck && window.uaCheck.is360se();
+      var isShowed = window.localStorage && window.localStorage.getItem('is_ext_pop_showed');
+      var isInstalled = window.sessionStorage && window.sessionStorage.getItem('is_ext_installed');
+      if (is360 && isShowed !== '1' && isInstalled !== '1') {
+        window.riot && riot.mount('#promotion-ext', 'promotion');
+      }
+    </script>
+
+
+</body></html>
