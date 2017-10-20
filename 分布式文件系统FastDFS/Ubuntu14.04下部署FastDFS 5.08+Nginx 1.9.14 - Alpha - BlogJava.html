@@ -1,0 +1,1045 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0060)http://www.blogjava.net/Alpha/archive/2016/04/07/430008.html -->
+<html><head id="Head"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>
+	Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava
+</title><meta id="metaKeywords" name="keywords" content="Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14"><meta name="google-site-verification" content="hKt1bEVNTOaEOkYyHHv6Cbms3U3NbbEq-9d1gefpKVM"><link type="text/css" rel="stylesheet" href="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/common.css"><link id="MainCss" type="text/css" rel="stylesheet" href="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/style.css"><link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="http://www.blogjava.net/Alpha/rss.aspx"></head>
+<body>
+    <form name="Form1" method="post" action="http://www.blogjava.net/Alpha/archive/2016/04/07/430008.html" id="Form1">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__VIEWSTATE" id="
+__VIEWSTATE" value="">
+</div>
+
+<script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script><script async="" type="text/javascript" src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/gpt.js.下载"></script><script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['Form1'];
+if (!theForm) {
+    theForm = document.Form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/WebResource.axd" type="text/javascript"></script>
+
+<script language="JavaScript">
+									function ctlent(evt,id)
+											{
+												if(evt.ctrlKey && evt.keyCode == 13)
+												{	
+													try
+													{
+														TempSave(id);
+													}
+													catch(ex)
+													{
+													}
+													finally
+													{
+													    __doPostBack('AjaxHolder$PostComment$btnSubmit','')
+													}
+												}
+		
+												}</script>
+												<script language="JavaScript">function SetReplyAuhor(author){document.getElementById('AjaxHolder_PostComment_tbComment').value+="@"+author+"\n";document.getElementById('AjaxHolder_PostComment_tbComment').focus();return false}</script>
+<script src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/ScriptResource.axd" type="text/javascript"></script>
+<script src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/ScriptResource(1).axd" type="text/javascript"></script>
+        
+<!--done-->
+<div id="header">
+	
+<!--done-->
+<div class="header">
+	<div class="headerText">
+		<a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.blogjava.net/Alpha/">Alpha</a><br>
+		多少春秋风雨改 多少崎岖不变爱
+	</div>
+</div>
+
+</div>
+
+<div id="mytopmenu">
+	
+		<div id="mylinks">
+<!--done-->
+<a id="MyLinks1_HomeLink" class="menu" href="http://www.blogjava.net/">BlogJava</a>&nbsp;&nbsp;
+<a id="MyLinks1_MyHomeLink" class="menu" href="http://www.blogjava.net/Alpha/">首页</a>&nbsp;&nbsp;
+<a id="MyLinks1_NewPostLink" class="menu" href="http://www.blogjava.net/Alpha/admin/EditPosts.aspx?opt=1">新随笔</a>
+<a id="MyLinks1_ContactLink" class="menu" href="http://www.blogjava.net/Alpha/contact.aspx?id=1">联系</a>&nbsp;&nbsp;
+<a id="MyLinks1_Syndication" class="menu" href="http://www.blogjava.net/Alpha/rss">聚合</a><a id="MyLinks1_XMLLink" href="http://www.blogjava.net/Alpha/rss"><img src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/xml.gif" style="border-width:0px;"></a>&nbsp;&nbsp;
+<a id="MyLinks1_Admin" class="menu" href="http://www.blogjava.net/Alpha/admin/EditPosts.aspx">管理</a>
+</div>
+		<div id="mystats">
+<!--done-->
+随笔-174&nbsp;
+评论-666&nbsp;
+文章-29&nbsp;
+trackbacks-0
+</div>
+	
+</div>
+<div id="centercontent">
+	
+					
+<!--done-->
+<div class="post">
+	<div class="postTitle">
+		<a id="viewpost1_TitleUrl" class="postTitle2" href="http://www.blogjava.net/Alpha/archive/2016/04/07/430008.html">Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14</a>
+	</div>
+	<p style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px 0px 1.6842em; outline: 0px; padding: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;">最新的版本可以在<a href="http://sourceforge.net/projects/fastdfs/" title="fastdfs" target="_blank" style="box-sizing: inherit; border-width: 0px 0px 1px; border-bottom-style: solid; border-color: #2e2256; font-style: inherit; font-weight: inherit; margin: 0px; outline: 0px; padding: 0px; vertical-align: baseline; color: #2e2256; text-decoration: none;">这里</a>获取，目前下载的最新版本是5.08，更新于2016-02-03。在<a href="http://bbs.chinaunix.net/thread-1920470-1-1.html" title="bbs.chinaunix.net" target="_blank" style="box-sizing: inherit; border-width: 0px 0px 1px; border-bottom-style: solid; border-color: #2e2256; font-style: inherit; font-weight: inherit; margin: 0px; outline: 0px; padding: 0px; vertical-align: baseline; color: #2e2256; text-decoration: none;">这里</a>可以找到更多的说明。</p>
+<p style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px 0px 1.6842em; outline: 0px; padding: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;">　　下载好后，server端分为两个部分，一个是tracker，一个是storage。顾名思义，前者调度管理，负载均衡，后者则是实际的存储节点。两个都能做成集群，以防止单点故障。以前的4.x版本依赖libevent，现在不需要了，只需要libfastcommon。安装方法如下：</p>
+<p style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px 0px 1.6842em; outline: 0px; padding: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;"><span style="box-sizing: inherit; border: 0px; font-style: inherit; font-weight: 700; margin: 0px; outline: 0px; padding: 0px; vertical-align: baseline;">1. 下载安装libfastcommon</span></p>
+<div style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px; outline: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;">
+<div id="highlighter_517360" nogutter="" code-box="" plain"="" style="box-sizing: inherit; font-style: inherit; font-weight: inherit; outline: 0px; vertical-align: baseline; width: 660.25px; font-size: 1em !important; margin: 1em 0px !important; position: relative !important; overflow-x: auto !important; overflow-y: hidden !important; background-color: black !important;">
+<table border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0px; width: 660px; box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; table-layout: auto !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+     <tbody style="box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+         <tr style="box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <td style="width: 660px; box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <div style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: relative !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <div number1="" index0="" alt2"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">git clone https://github.com/happyfish100/libfastcommon.git</code></div>
+             <div number2="" index1="" alt1"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">cd libfastcommon/</code></div>
+             <div number3="" index2="" alt2"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">./make.sh</code></div>
+             <div number4="" index3="" alt1"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">./make.sh install</code></div>
+             </div>
+             </td>
+         </tr>
+     </tbody>
+</table>
+</div>
+</div>
+<p style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px 0px 1.6842em; outline: 0px; padding: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;">确认make没有错误后，执行安装，64位系统默认会复制到/usr/lib64下。</p>
+<p style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px 0px 1.6842em; outline: 0px; padding: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;">这时候需要设置环境变量或者创建软链接</p>
+<div style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px; outline: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;">
+<div id="highlighter_798735" nogutter="" code-box="" plain"="" style="box-sizing: inherit; font-style: inherit; font-weight: inherit; outline: 0px; vertical-align: baseline; width: 660.25px; font-size: 1em !important; margin: 1em 0px !important; position: relative !important; overflow-x: auto !important; overflow-y: hidden !important; background-color: black !important;">
+<table border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0px; width: 699px; box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; table-layout: auto !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+     <tbody style="box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+         <tr style="box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <td style="width: 699px; box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <div style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: relative !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <div number1="" index0="" alt2"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">export LD_LIBRARY_PATH=/usr/lib64/</code></div>
+             <div number2="" index1="" alt1"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">ln -s /usr/lib64/libfastcommon.so /usr/local/lib/libfastcommon.so</code></div>
+             </div>
+             </td>
+         </tr>
+     </tbody>
+</table>
+</div>
+</div>
+<p style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px 0px 1.6842em; outline: 0px; padding: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;"><span style="box-sizing: inherit; border: 0px; font-style: inherit; font-weight: 700; margin: 0px; outline: 0px; padding: 0px; vertical-align: baseline;">2. 下载安装fastdfs</span></p>
+<div style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px; outline: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;">
+<div id="highlighter_226575" nogutter="" code-box="" plain"="" style="box-sizing: inherit; font-style: inherit; font-weight: inherit; outline: 0px; vertical-align: baseline; width: 660.25px; font-size: 1em !important; margin: 1em 0px !important; position: relative !important; overflow-x: auto !important; overflow-y: hidden !important; background-color: black !important;">
+<table border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0px; width: 660px; box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; table-layout: auto !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+     <tbody style="box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+         <tr style="box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <td style="width: 660px; box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <div style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: relative !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <div number1="" index0="" alt2"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">tar xzf FastDFS.tar.gz</code></div>
+             <div number2="" index1="" alt1"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">cd FastDFS/</code></div>
+             <div number3="" index2="" alt2"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">./make.sh</code></div>
+             <div number4="" index3="" alt1"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">./make.sh install</code></div>
+             </div>
+             </td>
+         </tr>
+     </tbody>
+</table>
+</div>
+</div>
+<p style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px 0px 1.6842em; outline: 0px; padding: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;">确认make没有错误后，执行安装，默认会安装到/usr/bin中，并在/etc/fdfs中添加三个配置文件。</p>
+<p style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px 0px 1.6842em; outline: 0px; padding: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;"><span style="box-sizing: inherit; border: 0px; font-style: inherit; font-weight: 700; margin: 0px; outline: 0px; padding: 0px; vertical-align: baseline;">3. 修改配置文件</span><br style="box-sizing: inherit;">
+首先将三个文件的名字去掉sample，暂时只修改以下几点，先让fastdfs跑起来，其余参数调优的时候再考虑。<br style="box-sizing: inherit;">
+tracker.conf 中修改</p>
+<div style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px; outline: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;">
+<div id="highlighter_667780" nogutter="" code-box="" plain"="" style="box-sizing: inherit; font-style: inherit; font-weight: inherit; outline: 0px; vertical-align: baseline; width: 660.25px; font-size: 1em !important; margin: 1em 0px !important; position: relative !important; overflow-x: auto !important; overflow-y: hidden !important; background-color: black;">
+<table border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0px; width: 660px; box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; table-layout: auto !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; direction: ltr !important; box-shadow: none !important; background-image: none !important; background-attachment: initial !important; background-color: initial; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;">
+     <tbody style="box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+         <tr style="box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <td style="width: 660px; box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <div style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: relative !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <div number1="" index0="" alt2"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">base_path=/home/fastdfs #用于存放日志。<br><span style="color: #333333; font-family: Verdana, Arial, Tahoma; font-size: 14px; line-height: 25px; white-space: normal; background-color: #ffffff;">http.server_port=8090&nbsp;</span><br></code></div>
+             </div>
+             </td>
+         </tr>
+     </tbody>
+</table>
+</div>
+</div>
+<p style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px 0px 1.6842em; outline: 0px; padding: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;">storage.conf 中修改<br><br>外网访问 出现<span style="color: #ff0000; font-family: Arial; font-size: 14px; line-height: 26px;">net.ConnectException: Connection refused: connect</span><br><span style="color: #333333; font-family: Arial; font-size: 14px; line-height: 26px;">storage的tracker_server地址必须是外网地址，重启FastDFS就好了。</span></p>
+<div style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px; outline: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;">
+<div id="highlighter_599924" nogutter="" code-box="" plain"="" style="box-sizing: inherit; font-style: inherit; font-weight: inherit; outline: 0px; vertical-align: baseline; width: 660.25px; font-size: 1em !important; margin: 1em 0px !important; position: relative !important; overflow-x: auto !important; overflow-y: hidden !important; background-color: black;">
+<br><table border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0px; width: 660px; box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; table-layout: auto !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; direction: ltr !important; box-shadow: none !important; color: #ffffff; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><tbody style="box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+     </tbody>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0px; width: 660px; box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; table-layout: auto !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; direction: ltr !important; box-shadow: none !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;">
+     <tbody style="box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+         <tr style="box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background-image: none !important; background-attachment: initial !important; background-color: initial; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;">
+             <td style="width: 660px; box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; direction: ltr !important; box-shadow: none !important; background-image: none !important; background-attachment: initial !important; background-color: initial; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;">
+             <div style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: relative !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <div number3="" index2="" alt2"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">tracker_server=192.168.1.181:22122 #指定tracker服务器地址。</code></div>
+             </div>
+             </td>
+         </tr>
+     </tbody>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0px; width: 660px; box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; table-layout: auto !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; direction: ltr !important; box-shadow: none !important; background-image: none !important; background-attachment: initial !important; background-color: initial; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;">
+     <tbody style="box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+         <tr style="box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background-image: none !important; background-attachment: initial !important; background-color: initial; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;">
+             <td style="width: 660px; box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; direction: ltr !important; box-shadow: none !important; background-image: none !important; background-attachment: initial !important; background-color: initial; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;">
+             <div style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: relative !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <div number1="" index0="" alt2"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">base_path=/<span style="line-height: 20.9px;">home</span>/fastdfs #用于存放日志。</code></div>
+             <div number2="" index1="" alt1"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">store_path0=/<span style="line-height: 20.9px;">home</span>/fastdfs/storage #存放数据，若不设置默认为前面那个。<br><br><table border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0px; width: 660px; color: #ffffff; border: 0px !important; box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; table-layout: auto !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; direction: ltr !important; box-shadow: none !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><tbody style="box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;"><tr style="box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background-image: none !important; background-attachment: initial !important; background-color: initial; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><td style="width: 660px; border: 0px !important; box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; direction: ltr !important; box-shadow: none !important; background-image: none !important; background-attachment: initial !important; background-color: initial; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><div style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: relative !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;"><div number1="" index0="" alt2"="" style="padding-right: 1em !important; padding-left: 0em !important; box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;"><span style="color: #333333; font-family: tahoma, 宋体; font-size: 14px; line-height: 22.4px; text-align: justify; white-space: normal; background-color: #fafafc;">http.server_port=80&nbsp;</span><br style="color: #333333; font-family: tahoma, 宋体; font-size: 14px; line-height: 22.4px; text-align: justify; white-space: normal; background-color: #fafafc;"><span style="color: #333333; font-family: tahoma, 宋体; font-size: 14px; line-height: 22.4px; text-align: justify; white-space: normal; background-color: #fafafc;">group_name=group1&nbsp;</span></code></div></div></td></tr></tbody></table></code></div>
+             </div>
+             </td>
+         </tr>
+     </tbody>
+</table>
+</div>
+</div>
+<p style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px 0px 1.6842em; outline: 0px; padding: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;">client.conf 中同样要修改</p>
+<div style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px; outline: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;">
+<div id="highlighter_455923" nogutter="" code-box="" plain"="" style="box-sizing: inherit; font-style: inherit; font-weight: inherit; outline: 0px; vertical-align: baseline; width: 660.25px; font-size: 1em !important; margin: 1em 0px !important; position: relative !important; overflow-x: auto !important; overflow-y: hidden !important; background-color: black;">
+<table border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0px; width: 660px; box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; table-layout: auto !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; direction: ltr !important; box-shadow: none !important; background-image: none !important; background-attachment: initial !important; background-color: initial; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;">
+     <tbody style="box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+         <tr style="box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <td style="width: 660px; box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <div style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: relative !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <div number1="" index0="" alt2"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">base_path=/<span style="line-height: 20.9px;">home</span>/fastdfs #用于存放日志。</code></div>
+             <div number2="" index1="" alt1"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background-image: none !important; background-attachment: initial !important; background-color: initial; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;">tracker_server=192.168.1.181:22122 #指定tracker服务器地址。</code></div></div></td></tr></tbody></table><span style="color: #333333; font-family: tahoma, 宋体; font-size: 14px; line-height: 22.4px; text-align: justify; background-color: #fafafc;">http.tracker_server_port=80<br></span><p style="padding: 0px; margin: 0px 0px 0px 30px; color: #333333; font-family: Verdana, Arial, Tahoma; font-size: 14px; line-height: 25px; background-color: #ffffff;"><br>#include&nbsp;http.conf&nbsp;</p><p style="padding: 0px; margin: 0px 0px 0px 30px; color: #333333; font-family: Verdana, Arial, Tahoma; font-size: 14px; line-height: 25px; background-color: #ffffff;">其它保持默认，注意上面那个是1个#，默认是2个#，去掉1个就行</p>
+</div>
+</div>
+<p style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px 0px 1.6842em; outline: 0px; padding: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;"><span style="box-sizing: inherit; border: 0px; font-style: inherit; font-weight: 700; margin: 0px; outline: 0px; padding: 0px; vertical-align: baseline;">4. 启动tracker和storage</span></p>
+<div style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px; outline: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;">
+<div id="highlighter_218508" nogutter="" code-box="" plain"="" style="box-sizing: inherit; font-style: inherit; font-weight: inherit; outline: 0px; vertical-align: baseline; width: 660.25px; font-size: 1em !important; margin: 1em 0px !important; position: relative !important; overflow-x: auto !important; overflow-y: hidden !important; background-color: black !important;">
+<table border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0px; width: 660px; box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; table-layout: auto !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+     <tbody style="box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+         <tr style="box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <td style="width: 660px; box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <div style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: relative !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <div number1="" index0="" alt2"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">/usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf</code></div>
+             <div number2="" index1="" alt1"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">/usr/bin/fdfs_storaged /etc/fdfs/storage.conf</code></div>
+             </div>
+             </td>
+         </tr>
+     </tbody>
+</table><br><br><span style="color: #333333; font-family: Verdana, Arial, Tahoma; font-size: 14px; line-height: 25px; background-color: #ffffff;">netstat&nbsp;–lnp&nbsp;–tcp&nbsp;参看端口是否起来，默认如果显示22122和8090,23000,80说明服务正常起来<br></span></div>
+</div>
+<p style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px 0px 1.6842em; outline: 0px; padding: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;"><span style="box-sizing: inherit; border: 0px; font-style: inherit; font-weight: 700; margin: 0px; outline: 0px; padding: 0px; vertical-align: baseline;">5. 检查进程</span></p>
+<div style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px; outline: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;">
+<div id="highlighter_536756" nogutter="" code-box="" plain"="" style="box-sizing: inherit; font-style: inherit; font-weight: inherit; outline: 0px; vertical-align: baseline; width: 660.25px; font-size: 1em !important; margin: 1em 0px !important; position: relative !important; overflow-x: auto !important; overflow-y: hidden !important; background-color: black !important;">
+<table border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0px; width: 1012px; box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; table-layout: auto !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+     <tbody style="box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+         <tr style="box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <td style="width: 1012px; box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <div style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: relative !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <div number1="" index0="" alt2"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">root@ubuntu:~# ps -ef |grep fdfs</code></div>
+             <div number2="" index1="" alt1"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">root&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 7819&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1&nbsp; 0 15:24 ?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00:00:00 /usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf</code></div>
+             <div number3="" index2="" alt2"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">root&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8046&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1&nbsp; 0 15:36 ?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00:00:01 fdfs_storaged /etc/fdfs/storage.conf start</code></div>
+             </div>
+             </td>
+         </tr>
+     </tbody>
+</table>
+</div>
+</div>
+<p style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px 0px 1.6842em; outline: 0px; padding: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;">表示启动ok了，若有错误，可以在<span style="color: #d3d3d3; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace; line-height: 20.9px; white-space: pre; background-color: #000000;">/</span><span style="color: #d3d3d3; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace; line-height: 20.9px; white-space: pre; background-color: #000000;">home</span><span style="color: #d3d3d3; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace; line-height: 20.9px; white-space: pre; background-color: #000000;">/fastdfs</span>目录下检查日志。</p>
+<p style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px 0px 1.6842em; outline: 0px; padding: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;"><span style="box-sizing: inherit; border: 0px; font-style: inherit; font-weight: 700; margin: 0px; outline: 0px; padding: 0px; vertical-align: baseline;">6. 上传/删除测试</span><br style="box-sizing: inherit;">
+使用自带的fdfs_test来测试，使用格式如下：</p>
+<div style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px; outline: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;">
+<div id="highlighter_854586" nogutter="" code-box="" plain"="" style="box-sizing: inherit; font-style: inherit; font-weight: inherit; outline: 0px; vertical-align: baseline; width: 660.25px; font-size: 1em !important; margin: 1em 0px !important; position: relative !important; overflow-x: auto !important; overflow-y: hidden !important; background-color: black !important;">
+<table border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0px; width: 1012px; box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; table-layout: auto !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+     <tbody style="box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+         <tr style="box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <td style="width: 1012px; box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <div style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: relative !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <div number1="" index0="" alt2"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">root@ubuntu:~# fdfs_test /etc/fdfs/client.conf upload /home/steven/01.jpg </code></div>
+             <div number2="" index1="" alt1"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">...</code></div>
+             <div number3="" index2="" alt2"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">group_name=group1, ip_addr=192.168.1.181, port=23000</code></div>
+             <div number4="" index3="" alt1"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">storage_upload_by_filename</code></div>
+             <div number5="" index4="" alt2"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">group_name=group1, remote_filename=M00/00/00/wKgdhFTV0ZmAP3AZAPk-Io7D4w8580.jpg</code></div>
+             <div number6="" index5="" alt1"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">...</code></div>
+             <div number7="" index6="" alt2"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">example file url: http://192.168.1.181/group1/M00/00/00/wKgdhFTV0ZmAP3AZAPk-Io7D4w8580.jpg</code></div>
+             <div number8="" index7="" alt1"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">storage_upload_slave_by_filename</code></div>
+             <div number9="" index8="" alt2"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">group_name=group1, remote_filename=M00/00/00/wKgdhFTV0ZmAP3AZAPk-Io7D4w8580_big.jpg</code></div>
+             <div number10="" index9="" alt1"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">...</code></div>
+             <div number11="" index10="" alt2"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">example file url: http://192.168.1.181/group1/M00/00/00/wKgdhFTV0ZmAP3AZAPk-Io7D4w8580_big.jpg</code></div>
+             </div>
+             </td>
+         </tr>
+     </tbody>
+</table>
+</div>
+</div>
+<p style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px 0px 1.6842em; outline: 0px; padding: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;">使用fdfs_delete_file来删除文件，格式如下：</p>
+<div style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px; outline: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;">
+<div id="highlighter_229867" nogutter="" code-box="" plain"="" style="box-sizing: inherit; font-style: inherit; font-weight: inherit; outline: 0px; vertical-align: baseline; width: 660.25px; font-size: 1em !important; margin: 1em 0px !important; position: relative !important; overflow-x: auto !important; overflow-y: hidden !important; background-color: black !important;">
+<table border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0px; width: 960px; box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; table-layout: auto !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+     <tbody style="box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+         <tr style="box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <td style="width: 960px; box-sizing: content-box !important; border: 0px !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <div style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: relative !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; background: none !important;">
+             <div number1="" index0="" alt2"="" style="box-sizing: content-box !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding-right: 1em !important; padding-left: 0em !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; white-space: pre !important; background-image: none !important; background-attachment: initial !important; background-size: initial !important; background-origin: initial !important; background-clip: initial !important; background-position: initial !important; background-repeat: initial !important;"><code plain"="" style="box-sizing: content-box !important; border: 0px !important; font-family: Monaco, Consolas, &#39;Bitstream Vera Sans Mono&#39;, &#39;Courier New&#39;, Courier, monospace !important; font-size: 1em !important; margin: 0px !important; outline: 0px !important; padding: 0px !important; vertical-align: baseline !important; border-radius: 0px !important; bottom: auto !important; float: none !important; height: auto !important; left: auto !important; line-height: 1.1em !important; overflow: visible !important; position: static !important; right: auto !important; top: auto !important; width: auto !important; direction: ltr !important; box-shadow: none !important; display: inline !important; color: #d3d3d3 !important; background: none !important;">fdfs_delete_file /etc/fdfs/client.conf group1/M00/00/00/wKgdhFTV11uAXgKWAPk-Io7D4w8667.jpg</code></div>
+             </div>
+             </td>
+         </tr>
+     </tbody>
+</table>
+</div>
+</div>
+<p style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px 0px 1.6842em; outline: 0px; padding: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;">可以看到，上传ok了，这里会生成两个文件，这是fastdfs的主/从文件特性，以后再介绍。example file url是不能在浏览器中直接打开的，除非配合nginx使用。删除文件需要完整的group_name和remote_filename。<br><br></p><p style="padding: 0px; margin: 0px 0px 0px 30px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">因为FastDFS默认自带的http服务器性能不好，&nbsp;所以一般建议用外置的apache或者nginx&nbsp;来解决http下载，以应付大并发的情况&nbsp;注意nginx扩展模块只支持GET和HEAD模式获取文件，需要开发那边配合修改程序<br style="padding: 0px; margin: 0px;"><strong style="padding: 0px; margin: 0px;">获取nginx和FastDFS的nginx扩展插件</strong><br style="padding: 0px; margin: 0px;">wget&nbsp;<span style="font-family: verdana, &#39;courier new&#39;; line-height: 21px;">https://sourceforge.net/projects/fastdfs/files/FastDFS%20Nginx%20Module%20Source%20Code/</span></p><p style="padding: 0px; margin: 0px 0px 0px 30px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">wget&nbsp;<span style="font-family: verdana, &#39;courier new&#39;; line-height: 21px;">http://nginx.org/</span></p><p style="padding: 0px; margin: 0px 0px 0px 30px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;"><strong style="padding: 0px; margin: 0px;">解压并编译安装</strong></p><p style="padding: 0px; margin: 0px 0px 0px 30px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">　　备注：如果之前机器上安装了nginx，可以单独安装fastdfs-nginx-module模块，具体方法请参考：<span style="padding: 0px; margin: 0px; font-size: 15px;">如何单独添加NGINX自定义模块<br><br><span style="color: #555555; font-family: Verdana, &#39;BitStream vera Sans&#39;, Tahoma, Helvetica, sans-serif; font-size: 16px; line-height: 24px;">apt卸载nginx方法</span><br style="color: #555555; font-family: Verdana, &#39;BitStream vera Sans&#39;, Tahoma, Helvetica, sans-serif; font-size: 16px; line-height: 24px;"><span style="color: #555555; font-family: Verdana, &#39;BitStream vera Sans&#39;, Tahoma, Helvetica, sans-serif; font-size: 16px; line-height: 24px;">卸载方法</span><br style="color: #555555; font-family: Verdana, &#39;BitStream vera Sans&#39;, Tahoma, Helvetica, sans-serif; font-size: 16px; line-height: 24px;"><span style="color: #555555; font-family: Verdana, &#39;BitStream vera Sans&#39;, Tahoma, Helvetica, sans-serif; font-size: 16px; line-height: 24px;"># 删除nginx，保留配置文件</span><br style="color: #555555; font-family: Verdana, &#39;BitStream vera Sans&#39;, Tahoma, Helvetica, sans-serif; font-size: 16px; line-height: 24px;"><span style="color: #555555; font-family: Verdana, &#39;BitStream vera Sans&#39;, Tahoma, Helvetica, sans-serif; font-size: 16px; line-height: 24px;">sudo apt-get remove nginx<br><br><br></span></span></p><p style="padding: 0px; margin: 0px 0px 0px 60px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">apt-get&nbsp;install&nbsp;libssl-dev&nbsp;zlib1g-dev&nbsp;libpcre3-dev&nbsp;</p><p style="padding: 0px; margin: 0px 0px 0px 60px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">tar&nbsp;zvxf&nbsp;<span style="font-family: verdana, &#39;courier new&#39;; line-height: 21px;">nginx-1.9.14.tar.gz</span></p><p style="padding: 0px; margin: 0px 0px 0px 60px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">tar&nbsp;zvxf&nbsp;<span style="font-family: verdana, &#39;courier new&#39;; line-height: 21px;">fastdfs-nginx-module_v1.16.tar.gz</span></p><p style="padding: 0px; margin: 0px 0px 0px 60px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">cd&nbsp;<span style="font-family: verdana, &#39;courier new&#39;; line-height: 21px;">nginx-1.9.14</span></p><p style="padding: 0px; margin: 0px 0px 0px 60px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">./configure&nbsp;--prefix=/usr/local/nginx&nbsp;--with-http_gzip_static_module&nbsp;--add-module=<span style="font-family: verdana, &#39;courier new&#39;; line-height: 21px;">/home/alpha/tools/fastdfs-nginx-module</span>/src<br><br></p><div style="display: inline-block;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; make&nbsp;</div><p>&nbsp;</p><p style="padding: 0px; margin: 0px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;"></p><p style="padding: 0px; margin: 0px 0px 0px 60px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">sudo make&nbsp;install<br><br>如果出现 fastdfs-nginx-module/src/common.c:21:25: fatal error: fdfs_define.h: 没有那个文件或目录</p><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 添加链接</div><div></div><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ln -sv /usr/include/fastcommon /usr/local/include/fastcommon&nbsp;</div><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ln -sv /usr/include/fastdfs /usr/local/include/fastdfs&nbsp;</div><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ln -sv /usr/lib64/libfastcommon.so /usr/local/lib/libfastcommon.so<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 可解决！</div><p style="padding: 0px; margin: 0px 0px 0px 90px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;"><br></p><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;cd /home/alpha/tools/FastDFS/conf<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;cp http.conf /etc/fdfs/<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;cp&nbsp;mime.types /etc/fdfs/<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;cp storage_ids.conf /etc/fdfs</div><p style="padding: 0px; margin: 0px 0px 0px 90px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;"><br></p><p style="margin: 0px 0px 0px 60px; padding: 0px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">&nbsp; &nbsp; <strong>修改nginx扩展模块的配置文件</strong><br style="padding: 0px; margin: 0px;">　　cd&nbsp;../fastdfs-nginx-module/src</p><p style="padding: 0px; margin: 0px 0px 0px 90px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;"><br></p><p style="margin: 0px 0px 0px 90px; padding: 0px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">cp&nbsp;mod_fastdfs.conf&nbsp;/etc/fdfs/&nbsp;<br></p><p style="padding: 0px; margin: 0px 0px 0px 90px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">vi&nbsp;/etc/fdfs/mod_fastdfs.conf&nbsp;</p><p style="padding: 0px; margin: 0px 0px 0px 120px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">base_path=<span style="font-family: verdana, &#39;courier new&#39;; line-height: 21px;">/home/fastdfs/logs</span></p><p style="padding: 0px; margin: 0px 0px 0px 120px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">#存放log的路径&nbsp;</p><p style="padding: 0px; margin: 0px 0px 0px 120px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">tracker_server=127.0.0.1:22122&nbsp;</p><p style="padding: 0px; margin: 0px 0px 0px 120px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">#指定tracker服务器及端口&nbsp;</p><p style="padding: 0px; margin: 0px 0px 0px 120px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">url_have_group_name&nbsp;=&nbsp;true&nbsp;</p><p style="padding: 0px; margin: 0px 0px 0px 120px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">#这个很重要，在URL中包含group名称</p><p style="padding: 0px; margin: 0px 0px 0px 120px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">store_path0=<span style="font-family: verdana, &#39;courier new&#39;; line-height: 21px;">/home/fastdfs/storage</span></p><p style="padding: 0px; margin: 0px 0px 0px 120px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">#存储文件的路径&nbsp;</p><p style="padding: 0px; margin: 0px 0px 0px 120px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">storage_server_port=23000&nbsp;</p><p style="padding: 0px; margin: 0px 0px 0px 120px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">#与storage的配置端口保持一致&nbsp;</p><p style="padding: 0px; margin: 0px 0px 0px 120px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">保存后退出&nbsp;<br><br></p><p style="padding: 0px; margin: 0px 0px 0px 60px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;"><strong>做M00的链接</strong></p><p style="padding: 0px; margin: 0px 0px 0px 90px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">ln&nbsp;-s&nbsp;<span style="font-family: verdana, &#39;courier new&#39;; line-height: 21px;">/home/fastdfs/storage/</span>data &nbsp;<span style="font-family: verdana, &#39;courier new&#39;; line-height: 21px;">/home/fastdfs/storage</span>/data/M00&nbsp;<br><br></p><p style="padding: 0px; margin: 0px 0px 0px 60px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;"><strong>修改nginx的配置文件</strong></p><p style="padding: 0px; margin: 0px 0px 0px 90px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">备注：如果nginx有其他服务器在用，在nginx.conf原有的基础上追加一个下面server的配置即可</p><p style="padding: 0px; margin: 0px 0px 0px 90px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">&nbsp;vi&nbsp;/usr/local/nginx/conf/nginx.conf&nbsp;</p><p style="padding: 0px; margin: 0px 0px 0px 90px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">server&nbsp;{&nbsp;</p><p style="padding: 0px; margin: 0px 0px 0px 90px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">　　listen&nbsp;80；<br style="padding: 0px; margin: 0px;">　　location&nbsp;/&nbsp;{&nbsp;</p><p style="padding: 0px; margin: 0px 0px 0px 90px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">　　　　root&nbsp;<span style="font-family: verdana, &#39;courier new&#39;; line-height: 21px;">/home/fastdfs/storage</span>/data;&nbsp;</p><p style="padding: 0px; margin: 0px 0px 0px 90px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">　　　　index&nbsp;index.html&nbsp;index.htm;</p><p style="padding: 0px; margin: 0px 0px 0px 90px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">　　&nbsp;}&nbsp;</p><p style="padding: 0px; margin: 0px 0px 0px 90px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">　　location&nbsp;/group1/M00&nbsp;{</p><p style="padding: 0px; margin: 0px 0px 0px 90px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">　　　　&nbsp;root&nbsp;<span style="font-family: verdana, &#39;courier new&#39;; line-height: 21px;">/home/fastdfs/storage</span>/data;&nbsp;</p><p style="padding: 0px; margin: 0px 0px 0px 90px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">　　　　ngx_fastdfs_module;&nbsp;</p><p style="padding: 0px; margin: 0px 0px 0px 90px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">　　}</p><p style="padding: 0px; margin: 0px 0px 0px 90px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">&nbsp;}<br><br></p><p style="padding: 0px; margin: 0px 0px 0px 60px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;"><strong>重启相关服务，验证整合是否成功</strong></p><p style="padding: 0px; margin: 0px 0px 0px 90px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;"><em id="__mceDel" style="padding: 0px; margin: 0px;">先重启storage服务:</em></p><p style="padding: 0px; margin: 0px 0px 0px 90px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">&nbsp;/etc/init.d/fdfs_storaged&nbsp;start&nbsp;</p><p style="padding: 0px; margin: 0px 0px 0px 90px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">然后再启动nginx，</p><p style="padding: 0px; margin: 0px 0px 0px 90px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">注意顺序，否则会报端口占用的错误</p><p style="padding: 0px; margin: 0px 0px 0px 90px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">&nbsp;/usr/local/nginx/sbin/nginx&nbsp;<br><br></p><p style="padding: 0px; margin: 0px 0px 0px 90px; color: #333333; font-family: Verdana, Arial, Tahoma; line-height: 25px; background-color: #ffffff;">查看端口使用情况：<br style="padding: 0px; margin: 0px;">netstat&nbsp;-lnp&nbsp;--tcp<br><br><br><span style="color: #000000; font-family: song, Verdana; line-height: 22.4px; background-color: #f0f3fa;">如何让server进程退出运行？</span><br style="word-wrap: break-word; color: #000000; font-family: song, Verdana; line-height: 22.4px; background-color: #f0f3fa;"><span style="color: #000000; font-family: song, Verdana; line-height: 22.4px; background-color: #f0f3fa;">直接kill即可让server进程正常退出，可以使用killall命令，例如：</span><br style="word-wrap: break-word; color: #000000; font-family: song, Verdana; line-height: 22.4px; background-color: #f0f3fa;"><span style="color: #000000; font-family: song, Verdana; line-height: 22.4px; background-color: #f0f3fa;">killall fdfs_trackerd</span><br style="word-wrap: break-word; color: #000000; font-family: song, Verdana; line-height: 22.4px; background-color: #f0f3fa;"><span style="color: #000000; font-family: song, Verdana; line-height: 22.4px; background-color: #f0f3fa;">killall fdfs_storaged</span><br style="word-wrap: break-word; color: #000000; font-family: song, Verdana; line-height: 22.4px; background-color: #f0f3fa;"><span style="color: #000000; font-family: song, Verdana; line-height: 22.4px; background-color: #f0f3fa;">也可以使用如下命令：</span><br style="word-wrap: break-word; color: #000000; font-family: song, Verdana; line-height: 22.4px; background-color: #f0f3fa;"><span style="color: #000000; font-family: song, Verdana; line-height: 22.4px; background-color: #f0f3fa;">/usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf stop</span><br style="word-wrap: break-word; color: #000000; font-family: song, Verdana; line-height: 22.4px; background-color: #f0f3fa;"><span style="color: #000000; font-family: song, Verdana; line-height: 22.4px; background-color: #f0f3fa;">/usr/bin/fdfs_storaged /etc/fdfs/storage.conf stop</span><br style="word-wrap: break-word; color: #000000; font-family: song, Verdana; line-height: 22.4px; background-color: #f0f3fa;"><span style="color: #000000; font-family: song, Verdana; line-height: 22.4px; background-color: #f0f3fa;">千万不要使用-9参数强杀，否则可能会导致binlog数据丢失的问题。</span><br style="word-wrap: break-word; color: #000000; font-family: song, Verdana; line-height: 22.4px; background-color: #f0f3fa;"><br style="word-wrap: break-word; color: #000000; font-family: song, Verdana; line-height: 22.4px; background-color: #f0f3fa;"><span style="color: #000000; font-family: song, Verdana; line-height: 22.4px; background-color: #f0f3fa;">如何重启server进程？</span><br style="word-wrap: break-word; color: #000000; font-family: song, Verdana; line-height: 22.4px; background-color: #f0f3fa;"><span style="color: #000000; font-family: song, Verdana; line-height: 22.4px; background-color: #f0f3fa;">直接使用：</span><br style="word-wrap: break-word; color: #000000; font-family: song, Verdana; line-height: 22.4px; background-color: #f0f3fa;"><span style="color: #000000; font-family: song, Verdana; line-height: 22.4px; background-color: #f0f3fa;">/usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf restart</span><br style="word-wrap: break-word; color: #000000; font-family: song, Verdana; line-height: 22.4px; background-color: #f0f3fa;"><span style="color: #000000; font-family: song, Verdana; line-height: 22.4px; background-color: #f0f3fa;">/usr/bin/fdfs_storaged /etc/fdfs/storage.conf restart</span><br><br></p><p style="color: #333333; font-family: tahoma, 宋体; line-height: 22.4px; text-align: justify; background-color: #fafafc;"><strong>可以在任何storage</strong><strong>机器上执行如下命令，查看fastdfs</strong><strong>集群状态，如果各个storage</strong><strong>状态都为ACTIVE</strong><strong>，则搭建成功。</strong></p><p style="color: #333333; font-family: tahoma, 宋体; line-height: 22.4px; text-align: justify; background-color: #fafafc;"><strong>/usr/local/bin/fdfs_monitor /etc/fdfs/storage.conf</strong></p><p style="color: #333333; font-family: tahoma, 宋体; line-height: 22.4px; text-align: justify; background-color: #fafafc;">&nbsp;</p><p style="color: #333333; font-family: tahoma, 宋体; line-height: 22.4px; text-align: justify; background-color: #fafafc;"><strong>关闭tracker(storage)</strong></p><p style="color: #333333; font-family: tahoma, 宋体; line-height: 22.4px; text-align: justify; background-color: #fafafc;"><strong>&nbsp; /usr/local/bin/stop.sh /usr/local/bin/fdfs_trackered(fdfs_storaged) /etc/fdfs/tracker.conf（storage.conf）</strong></p><p style="color: #333333; font-family: tahoma, 宋体; line-height: 22.4px; text-align: justify; background-color: #fafafc;"><strong>&nbsp; 或者 killall fdfs_trackered(storaged) &nbsp;-------注意，<span style="color: #ff0000;">千万不要使用-9强行杀死进程</span>。否则可能会导致binlog数据丢失的问题。<br></strong></p><p style="color: #333333; font-family: tahoma, 宋体; line-height: 22.4px; text-align: justify; background-color: #fafafc;"><strong>&nbsp;<br>重启<strong>tracker(storage)</strong></strong></p><p style="color: #333333; font-family: tahoma, 宋体; line-height: 22.4px; text-align: justify; background-color: #fafafc;"><strong>/usr/local/bin/restart.sh /usr/local/bin/fdfs_trackered(fdfs_storaged) /etc/fdfs/tracker.conf（storage.conf）</strong></p><p style="color: #333333; font-family: tahoma, 宋体; line-height: 22.4px; text-align: justify; background-color: #fafafc;"><strong><br>删除storage</strong></p><p style="color: #333333; font-family: tahoma, 宋体; line-height: 22.4px; text-align: justify; background-color: #fafafc;"><strong>&nbsp;/usr/local/bin/fdfs_monitor /etc/fdfs/storage.conf delete group2 20.12.1.73(删除group2中ip为20.12.1.73的storage)</strong></p><p style="color: #333333; font-family: tahoma, 宋体; line-height: 22.4px; text-align: justify; background-color: #fafafc;"><strong>注意：在配置过程，要注意防火墙的设置。关闭防火墙，或者设置对相关端口例外。<br><br></strong></p><div>http://wenku.baidu.com/view/78ca45c608a1284ac850431b.html?re=view</div><p style="box-sizing: inherit; border: 0px; font-family: &#39;Microsoft YaHei&#39;; font-size: 19px; margin: 0px 0px 1.6842em; outline: 0px; padding: 0px; vertical-align: baseline; color: #2e2256; line-height: 31.9998px; background-color: #ffffff;"></p>
+	<div class="postDesc">posted on 2016-04-07 13:58 <a href="http://www.blogjava.net/Alpha/">Alpha</a> 阅读(1871) <a href="http://www.blogjava.net/Alpha/archive/2016/04/07/430008.html#Post">评论(2)</a> &nbsp;<a href="http://www.blogjava.net/Alpha/admin/EditPosts.aspx?postid=430008">编辑</a> &nbsp;<a href="http://www.blogjava.net/Alpha/AddToFavorite.aspx?id=430008">收藏</a>  </div>
+</div>
+<img src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/430008.html" width="1" height="1">
+
+<!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:dc="http://purl.org/dc/elements/1.1/"
+xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description
+rdf:about="http://www.blogjava.net/Alpha/archive/2016/04/07/430008.html"
+dc:identifier="http://www.blogjava.net/Alpha/archive/2016/04/07/430008.html"
+dc:title="Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14"
+trackback:ping="http://www.blogjava.net/Alpha/services/trackbacks/430008.aspx" />
+</rdf:RDF>
+-->
+
+<script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('AjaxHolder$scriptmanager1', document.getElementById('Form1'));
+Sys.WebForms.PageRequestManager.getInstance()._updateControls(['tAjaxHolder$UpdatePanel1'], [], [], 90);
+//]]>
+</script>
+
+<div id="AjaxHolder_UpdatePanel1">
+	    
+    <a name="pagedcomment"></a>
+<!--done-->
+<br>
+<b>评论:</b>
+<div class="feedbackNoItems"></div>
+	
+
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+			<a title="permalink: re: Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14" href="http://www.blogjava.net/Alpha/archive/2016/04/07/430008.html#430104">#</a>&nbsp;<a name="430104"></a>re: Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14
+				2016-04-15 12:30 | <a id="AjaxHolder_Comments_CommentList_ctl00_NameLink" href="http://www.simaqingshan.com/" target="_blank">司马青衫</a><br>
+				<div align="left">可以可以可以&nbsp;&nbsp;<a onclick="return SetReplyAuhor(&quot;司马青衫&quot;)" href="http://www.blogjava.net/Alpha/archive/2016/04/07/430008.html#post">回复</a>&nbsp;&nbsp;<a title="查看该作者发表过的评论" href="http://www.blogjava.net/comment?author=%e5%8f%b8%e9%a9%ac%e9%9d%92%e8%a1%ab" target="_blank">更多评论</a><br><a id="AjaxHolder_Comments_CommentList_ctl00_DeleteLink" href="javascript:__doPostBack(&#39;AjaxHolder$Comments$CommentList$ctl00$DeleteLink&#39;,&#39;&#39;)"></a>&nbsp;&nbsp;<a id="AjaxHolder_Comments_CommentList_ctl00_EditLink"></a></div>
+			</div>
+			
+			
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+			<a title="permalink: re: Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14" href="http://www.blogjava.net/Alpha/archive/2016/04/07/430008.html#431422">#</a>&nbsp;<a name="431422"></a>re: Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14<a name="Post"></a>
+				2016-08-02 14:56 | <a id="AjaxHolder_Comments_CommentList_ctl01_NameLink" target="_blank">reatang</a><br>
+				<div align="left">相当成功&nbsp;&nbsp;<a onclick="return SetReplyAuhor(&quot;reatang&quot;)" href="http://www.blogjava.net/Alpha/archive/2016/04/07/430008.html#post">回复</a>&nbsp;&nbsp;<a title="查看该作者发表过的评论" href="http://www.blogjava.net/comment?author=reatang" target="_blank">更多评论</a><br><a id="AjaxHolder_Comments_CommentList_ctl01_DeleteLink" href="javascript:__doPostBack(&#39;AjaxHolder$Comments$CommentList$ctl01$DeleteLink&#39;,&#39;&#39;)"></a>&nbsp;&nbsp;<a id="AjaxHolder_Comments_CommentList_ctl01_EditLink"></a></div>
+			</div>
+			
+			
+		</div>
+	
+
+
+
+
+<style>
+td { font-size: 12px }
+.commentTextBox 
+{ 
+    font-family : Verdana; 
+    font-size: 13px;
+ }
+</style>
+<!--Beging Temp Save-->
+<style>.userData { BEHAVIOR: url(#default#userdata) }
+	</style>
+<div class="userData" id="CommentsPersistDiv"></div>
+
+<script type="text/javascript">
+function pageLoad()
+{
+    Sys.WebForms.PageRequestManager.getInstance().add_initializeRequest(handleInitializeRequest);
+    //Sys.WebForms.PageRequestManager.getInstance().add_endRequest(handleEndRequest);
+}
+
+function handleInitializeRequest(sender, args)
+{
+    var prm = Sys.WebForms.PageRequestManager.getInstance();
+    var eid = args.get_postBackElement().id;
+    if (eid.indexOf("DeleteLink")>0) 
+    {
+       args.get_postBackElement().innerHTML = "<font color='red'>正在删除...</font>";         
+    }    
+    else if (eid.indexOf("btnSubmit")>0) 
+    {
+       document.getElementById("AjaxHolder_PostComment_ltSubmitMsg").innerHTML="正在提交...";
+       document.getElementById("AjaxHolder_PostComment_btnSubmit").disabled = true;       
+    }   
+    else if(eid.indexOf("refreshList")>0)
+    {
+        document.getElementById("AjaxHolder_PostComment_refreshList").innerHTML="<font color='red'>正在刷新...</font>";
+    }
+   
+}	
+
+function TempSave(ElementID)
+{
+	try
+	{
+	CommentsPersistDiv.setAttribute("CommentContent",document.getElementById(ElementID).value);
+	CommentsPersistDiv.save("CommentXMLStore");
+	}
+	catch(ex)
+	{
+	}
+	
+}
+function Restore(ElementID)
+{
+	CommentsPersistDiv.load("CommentXMLStore");
+	document.getElementById(ElementID).value=CommentsPersistDiv.getAttribute("CommentContent");
+}	
+			
+			
+</script>
+<!--Ene TempSave-->
+<div id="divRefreshComments" style="text-align:right;margin-right:10px;margin-bottom:5px;font-size:12px"><a href="http://www.blogjava.net/RequireRegister.aspx">新用户注册</a>&nbsp;&nbsp;<a id="AjaxHolder_PostComment_refreshList" href="javascript:__doPostBack(&#39;AjaxHolder$PostComment$refreshList&#39;,&#39;&#39;)">刷新评论列表</a>&nbsp;&nbsp;</div>
+<div class="commentform">
+<span id="AjaxHolder_PostComment_ltSubmitMsg" style="color:Red;"></span>
+<br>
+<a name="Feedback"></a>
+	<table cellspacing="1" cellpadding="1" border="0">
+		<tbody><tr>
+		<td id="AjaxHolder_PostComment_tdOnCommentForm" colspan="3" style="line-height:1.5">		
+		</td>
+	
+		</tr>
+		
+		<tr><td colspan="3">只有注册用户<a href="http://www.blogjava.net/login.aspx?ReturnUrl=/Alpha/archive/2016/04/07/430008.html">登录</a>后才能发表评论。</td></tr>
+		<tr>
+			<td colspan="3"><!--该文被作者在 2016-04-27 16:15 编辑过--></td>
+		</tr>
+		<!--
+		<TR>
+			<TD colSpan="3" height="5"></TD>
+		</TR>	
+		-->	
+		<tr>
+		<td colspan="3">
+		<br>
+		
+<script type="text/javascript">
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') + 
+'//www.googletagservices.com/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+</script>
+
+<script type="text/javascript">
+googletag.cmd.push(function() {
+googletag.defineSlot('/1090369/blogjava_blogpost_bottom', [300, 250], 'div-gpt-ad-1364133350381-0').addService(googletag.pubads());
+googletag.pubads().enableSingleRequest();
+googletag.enableServices();
+});
+</script>
+<!-- blogjava_blogpost_bottom -->
+<div id="div-gpt-ad-1364133350381-0" style="width:300px; height:250px;">
+<script type="text/javascript">
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1364133350381-0'); });
+</script>
+</div>
+<br>
+
+		</td>
+		</tr>
+		<tr>			
+		<td colspan="3">
+		
+		</td>
+		</tr>
+		<tr>
+		<td colspan="3"></td>
+		</tr>
+		<tr>
+			<td colspan="3" height="1">网站导航:<div id="blogsite">
+			<a href="http://www.cnblogs.com/" title="开发者的网上家园">博客园</a>&nbsp;&nbsp;
+			<a href="https://news.cnblogs.com/">IT新闻</a>&nbsp;&nbsp;
+			<a href="http://kb.cnblogs.com/">知识库</a>&nbsp;&nbsp;
+			<a href="http://www.cppblog.com/">C++博客</a>&nbsp;&nbsp;
+			<a href="https://q.cnblogs.com/">博问</a>&nbsp;&nbsp;
+			<a href="http://www.blogjava.net/Alpha/archive/2016/04/07/430008.html?opt=admin">管理</a>
+			</div>
+		</td>
+		</tr>
+		<tr>
+			<td colspan="3" height="5"></td>
+		</tr>	
+		<tr>
+			<td colspan="3">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="3" height="5"></td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				</td>
+		</tr>		
+	</tbody></table>	
+</div>
+<div id="AjaxHolder_PostComment_ValidationSummary1" style="color:Red;display:none;">
+
+	</div>
+
+</div>
+
+				
+</div>
+<div id="leftcontent" style="display: inline;">
+	
+		<div id="leftcontentcontainer">
+			
+<!--done-->
+<div class="newsItem">
+	<a href="http://www.blogjava.net/Alpha/"><img src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/o_alphalogo04.gif" border="0" alt=""></a>
+<center>今日记一事，明日悟一理，积久而成学。<br>
+<!--font color="#aaaaaa">
+<strong>&nbsp;>>&nbsp;共有<script src='http://fastonlineusers.com/online.php?d=http://www.blogjava.net/Alpha/'></script>人正在访问Alpha's Blog</strong></font--></center>
+  
+</div>
+
+			<table id="Calendar1_entryCal" class="Cal" cellspacing="0" cellpadding="0" title="日历" border="0" style="border-width:1px;border-style:solid;border-collapse:collapse;">
+	<tbody><tr><td colspan="7" style="background-color:Silver;"><table class="CalTitle" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;">
+		<tbody><tr><td class="CalNextPrev" style="width:15%;"><a href="javascript:__doPostBack(&#39;Calendar1$entryCal&#39;,&#39;V5904&#39;)" style="color:Black" title="转到上一个月">&lt;</a></td><td align="center" style="width:70%;">2016年4月</td><td class="CalNextPrev" align="right" style="width:15%;"><a href="javascript:__doPostBack(&#39;Calendar1$entryCal&#39;,&#39;V5965&#39;)" style="color:Black" title="转到下一个月">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center" style="width:14%;">27</td><td class="CalOtherMonthDay" align="center" style="width:14%;">28</td><td class="CalOtherMonthDay" align="center" style="width:14%;">29</td><td class="CalOtherMonthDay" align="center" style="width:14%;">30</td><td class="CalOtherMonthDay" align="center" style="width:14%;">31</td><td align="center" style="width:14%;">1</td><td class="CalWeekendDay" align="center" style="width:14%;">2</td></tr><tr><td class="CalWeekendDay" align="center" style="width:14%;">3</td><td align="center" style="width:14%;">4</td><td align="center" style="width:14%;">5</td><td align="center" style="width:14%;">6</td><td align="center" style="width:14%;"><a href="http://www.blogjava.net/Alpha/archive/2016/04/07.html"><u>7</u></a></td><td align="center" style="width:14%;">8</td><td class="CalWeekendDay" align="center" style="width:14%;">9</td></tr><tr><td class="CalWeekendDay" align="center" style="width:14%;">10</td><td align="center" style="width:14%;">11</td><td align="center" style="width:14%;">12</td><td align="center" style="width:14%;">13</td><td align="center" style="width:14%;">14</td><td align="center" style="width:14%;">15</td><td class="CalWeekendDay" align="center" style="width:14%;">16</td></tr><tr><td class="CalWeekendDay" align="center" style="width:14%;">17</td><td align="center" style="width:14%;">18</td><td align="center" style="width:14%;">19</td><td align="center" style="width:14%;">20</td><td align="center" style="width:14%;">21</td><td align="center" style="width:14%;">22</td><td class="CalWeekendDay" align="center" style="width:14%;">23</td></tr><tr><td class="CalWeekendDay" align="center" style="width:14%;">24</td><td align="center" style="width:14%;">25</td><td align="center" style="width:14%;">26</td><td align="center" style="width:14%;">27</td><td align="center" style="width:14%;">28</td><td align="center" style="width:14%;"><a href="http://www.blogjava.net/Alpha/archive/2016/04/29.html"><u>29</u></a></td><td class="CalWeekendDay" align="center" style="width:14%;">30</td></tr><tr><td class="CalOtherMonthDay" align="center" style="width:14%;">1</td><td class="CalOtherMonthDay" align="center" style="width:14%;">2</td><td class="CalOtherMonthDay" align="center" style="width:14%;">3</td><td class="CalOtherMonthDay" align="center" style="width:14%;">4</td><td class="CalOtherMonthDay" align="center" style="width:14%;">5</td><td class="CalOtherMonthDay" align="center" style="width:14%;">6</td><td class="CalOtherMonthDay" align="center" style="width:14%;">7</td></tr>
+</tbody></table>
+<br>
+			
+<h3>常用链接</h3>
+<ul>
+		<li><a id="SingleColumn1_ctl00_repeaterLinks_ctl01_lnkLinkItem" href="http://www.blogjava.net/Alpha/MyPosts.html">我的随笔</a></li>
+	
+		<li><a id="SingleColumn1_ctl00_repeaterLinks_ctl02_lnkLinkItem" href="http://www.blogjava.net/Alpha/MyComments.html">我的评论</a></li>
+	
+		<li><a id="SingleColumn1_ctl00_repeaterLinks_ctl03_lnkLinkItem" href="http://www.blogjava.net/Alpha/OtherPosts.html">我的参与</a></li>
+	
+		<li><a id="SingleColumn1_ctl00_repeaterLinks_ctl04_lnkLinkItem" href="http://www.blogjava.net/Alpha/RecentComments.html">最新评论</a></li>
+	</ul>
+<h3>留言簿<span style="font-size:11px;font-weight:normal;">(30)</span></h3>
+<ul>
+	<li>
+		<a id="SingleColumn1_ctl01_lnkMessages" href="http://www.blogjava.net/Alpha/Contact.aspx?id=1">给我留言</a>
+	</li><li>
+		<a id="SingleColumn1_ctl01_lnkPublicMsgView" href="http://www.blogjava.net/Alpha/default.aspx?opt=msg">查看公开留言</a>
+	</li><li>
+		<a id="SingleColumn1_ctl01_lnkPrivateMsgView" href="http://www.blogjava.net/Alpha/admin/MyMessages.aspx">查看私人留言</a>
+	</li>
+</ul>
+
+<!--done-->
+
+		<h1 class="catListTitle">随笔分类<span style="font-size:11px;font-weight:normal">(179)</span></h1>
+		
+				<ul class="catList">
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl01_Link" class="listitem" href="http://www.blogjava.net/Alpha/category/53949.html">Android 移动开发</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl01_RssLink" title="Subscribe to Android 移动开发" class="listitem" href="http://www.blogjava.net/Alpha/category/53949.html/rss"><img title="Subscribe to Android 移动开发" src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/xml(1).gif" style="border-width:0px;"></a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl02_Link" class="listitem" href="http://www.blogjava.net/Alpha/category/6824.html">Hibernate(2)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl02_RssLink" title="Subscribe to Hibernate(2)" class="listitem" href="http://www.blogjava.net/Alpha/category/6824.html/rss"><img title="Subscribe to Hibernate(2)" src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/xml(1).gif" style="border-width:0px;"></a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl03_Link" class="listitem" href="http://www.blogjava.net/Alpha/category/1968.html">Java J2EE JSP(31)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl03_RssLink" title="Subscribe to Java J2EE JSP(31)" class="listitem" href="http://www.blogjava.net/Alpha/category/1968.html/rss"><img title="Subscribe to Java J2EE JSP(31)" src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/xml(1).gif" style="border-width:0px;"></a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl04_Link" class="listitem" href="http://www.blogjava.net/Alpha/category/6826.html">jQuery JavaScript Flex(5)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl04_RssLink" title="Subscribe to jQuery JavaScript Flex(5)" class="listitem" href="http://www.blogjava.net/Alpha/category/6826.html/rss"><img title="Subscribe to jQuery JavaScript Flex(5)" src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/xml(1).gif" style="border-width:0px;"></a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl05_Link" class="listitem" href="http://www.blogjava.net/Alpha/category/10062.html">Linux Nginx(25)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl05_RssLink" title="Subscribe to Linux Nginx(25)" class="listitem" href="http://www.blogjava.net/Alpha/category/10062.html/rss"><img title="Subscribe to Linux Nginx(25)" src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/xml(1).gif" style="border-width:0px;"></a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl06_Link" class="listitem" href="http://www.blogjava.net/Alpha/category/9664.html">MySQL NoSQL(14)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl06_RssLink" title="Subscribe to MySQL NoSQL(14)" class="listitem" href="http://www.blogjava.net/Alpha/category/9664.html/rss"><img title="Subscribe to MySQL NoSQL(14)" src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/xml(1).gif" style="border-width:0px;"></a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl07_Link" class="listitem" href="http://www.blogjava.net/Alpha/category/40501.html">PHP ThinkPHP(2)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl07_RssLink" title="Subscribe to PHP ThinkPHP(2)" class="listitem" href="http://www.blogjava.net/Alpha/category/40501.html/rss"><img title="Subscribe to PHP ThinkPHP(2)" src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/xml(1).gif" style="border-width:0px;"></a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl08_Link" class="listitem" href="http://www.blogjava.net/Alpha/category/53948.html">SEO优化 网站推广(1)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl08_RssLink" title="Subscribe to SEO优化 网站推广(1)" class="listitem" href="http://www.blogjava.net/Alpha/category/53948.html/rss"><img title="Subscribe to SEO优化 网站推广(1)" src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/xml(1).gif" style="border-width:0px;"></a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl09_Link" class="listitem" href="http://www.blogjava.net/Alpha/category/6825.html">Spring(3)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl09_RssLink" title="Subscribe to Spring(3)" class="listitem" href="http://www.blogjava.net/Alpha/category/6825.html/rss"><img title="Subscribe to Spring(3)" src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/xml(1).gif" style="border-width:0px;"></a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl10_Link" class="listitem" href="http://www.blogjava.net/Alpha/category/1746.html">吴语轮笔(81)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl10_RssLink" title="Subscribe to 吴语轮笔(81)" class="listitem" href="http://www.blogjava.net/Alpha/category/1746.html/rss"><img title="Subscribe to 吴语轮笔(81)" src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/xml(1).gif" style="border-width:0px;"></a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl11_Link" class="listitem" href="http://www.blogjava.net/Alpha/category/14900.html">吾亦好摄(8)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl11_RssLink" title="Subscribe to 吾亦好摄(8)" class="listitem" href="http://www.blogjava.net/Alpha/category/14900.html/rss"><img title="Subscribe to 吾亦好摄(8)" src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/xml(1).gif" style="border-width:0px;"></a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl12_Link" class="listitem" href="http://www.blogjava.net/Alpha/category/40502.html">开源开发工具使用(2)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl12_RssLink" title="Subscribe to 开源开发工具使用(2)" class="listitem" href="http://www.blogjava.net/Alpha/category/40502.html/rss"><img title="Subscribe to 开源开发工具使用(2)" src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/xml(1).gif" style="border-width:0px;"></a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl13_Link" class="listitem" href="http://www.blogjava.net/Alpha/category/24652.html">网站设计 用户体验(5)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl13_RssLink" title="Subscribe to 网站设计 用户体验(5)" class="listitem" href="http://www.blogjava.net/Alpha/category/24652.html/rss"><img title="Subscribe to 网站设计 用户体验(5)" src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/xml(1).gif" style="border-width:0px;"></a></li>
+			
+				</ul>
+			
+	
+		<h1 class="catListTitle">文章分类<span style="font-size:11px;font-weight:normal">(39)</span></h1>
+		
+				<ul class="catList">
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl01_Link" class="listitem" href="http://www.blogjava.net/Alpha/category/1967.html">J2EE＋JSP(1)</a><a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl01_RssLink" title="Subscribe to J2EE＋JSP(1)" class="listitem" href="http://www.blogjava.net/Alpha/category/1967.html/rss"><img title="Subscribe to J2EE＋JSP(1)" src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/xml(1).gif" style="border-width:0px;"></a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl02_Link" class="listitem" href="http://www.blogjava.net/Alpha/category/1966.html">JavaScript(9)</a><a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl02_RssLink" title="Subscribe to JavaScript(9)" class="listitem" href="http://www.blogjava.net/Alpha/category/1966.html/rss"><img title="Subscribe to JavaScript(9)" src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/xml(1).gif" style="border-width:0px;"></a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl03_Link" class="listitem" href="http://www.blogjava.net/Alpha/category/2197.html">Linux、操作系统(9)</a><a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl03_RssLink" title="Subscribe to Linux、操作系统(9)" class="listitem" href="http://www.blogjava.net/Alpha/category/2197.html/rss"><img title="Subscribe to Linux、操作系统(9)" src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/xml(1).gif" style="border-width:0px;"></a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl04_Link" class="listitem" href="http://www.blogjava.net/Alpha/category/17795.html">人生哲理(4)</a><a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl04_RssLink" title="Subscribe to 人生哲理(4)" class="listitem" href="http://www.blogjava.net/Alpha/category/17795.html/rss"><img title="Subscribe to 人生哲理(4)" src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/xml(1).gif" style="border-width:0px;"></a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl05_Link" class="listitem" href="http://www.blogjava.net/Alpha/category/17270.html">多愁善感(11)</a><a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl05_RssLink" title="Subscribe to 多愁善感(11)" class="listitem" href="http://www.blogjava.net/Alpha/category/17270.html/rss"><img title="Subscribe to 多愁善感(11)" src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/xml(1).gif" style="border-width:0px;"></a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl06_Link" class="listitem" href="http://www.blogjava.net/Alpha/category/15859.html">愤青集中营(2)</a><a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl06_RssLink" title="Subscribe to 愤青集中营(2)" class="listitem" href="http://www.blogjava.net/Alpha/category/15859.html/rss"><img title="Subscribe to 愤青集中营(2)" src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/xml(1).gif" style="border-width:0px;"></a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl07_Link" class="listitem" href="http://www.blogjava.net/Alpha/category/1965.html">数据库SQL(3)</a><a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl07_RssLink" title="Subscribe to 数据库SQL(3)" class="listitem" href="http://www.blogjava.net/Alpha/category/1965.html/rss"><img title="Subscribe to 数据库SQL(3)" src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/xml(1).gif" style="border-width:0px;"></a></li>
+			
+				</ul>
+			
+	
+		<h1 class="catListTitle">相册</h1>
+		
+				<ul class="catList">
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl02_LinkList_ctl01_Link" class="listitem" href="http://www.blogjava.net/Alpha/gallery/18662.html">06圣诞节</a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl02_LinkList_ctl02_Link" class="listitem" href="http://www.blogjava.net/Alpha/gallery/19016.html">07.1.7水濂山</a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl02_LinkList_ctl03_Link" class="listitem" href="http://www.blogjava.net/Alpha/gallery/18908.html">07年元旦</a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl02_LinkList_ctl04_Link" class="listitem" href="http://www.blogjava.net/Alpha/gallery/14901.html">原创图片</a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl02_LinkList_ctl05_Link" class="listitem" href="http://www.blogjava.net/Alpha/gallery/21843.html">杂七杂八</a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl02_LinkList_ctl06_Link" class="listitem" href="http://www.blogjava.net/Alpha/gallery/16867.html">校庆</a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl02_LinkList_ctl07_Link" class="listitem" href="http://www.blogjava.net/Alpha/gallery/33168.html">梅花</a></li>
+			
+				</ul>
+			
+	
+		<h1 class="catListTitle">友情链接</h1>
+		
+				<ul class="catList">
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl03_LinkList_ctl01_Link" class="listitem" href="http://abook.blog.hexun.com/" target="_blank">QQ's Blog</a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl03_LinkList_ctl02_Link" class="listitem" href="http://www.dgmeizu.cn/" target="_blank">东莞魅族专卖</a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl03_LinkList_ctl03_Link" class="listitem" href="http://www.blogjava.net/badboyryan/" target="_blank">坏男孩</a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl03_LinkList_ctl04_Link" class="listitem" href="http://upto.cnblogs.com/" target="_blank">黎波</a></li>
+			
+				</ul>
+			
+	
+		<h1 class="catListTitle">我的地盘</h1>
+		
+				<ul class="catList">
+			
+				</ul>
+			
+	
+		<h1 class="catListTitle">技术文档</h1>
+		
+				<ul class="catList">
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl05_LinkList_ctl01_Link" class="listitem" href="http://www.htmlhelp.com/zh/reference/css/">CSS 样式表参考文档</a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl05_LinkList_ctl02_Link" class="listitem" href="http://www.poptool.net/docs/dhtml/" target="_blank">DHTML 参考手册</a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl05_LinkList_ctl03_Link" class="listitem" href="http://wiki.javascud.org/display/dwrcn/Home" target="_blank">DWR中文文档</a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl05_LinkList_ctl04_Link" class="listitem" href="http://docs.huihoo.com/mysql/refman-5.1-zh/" target="_blank">MySQL 5.1参考手册</a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl05_LinkList_ctl05_Link" class="listitem" href="http://www.jactiongroup.net/reference/html/index.html" target="_blank">Spring Framework 开发参考手册</a></li>
+			
+				<li class="catListItem"> <a id="SingleColumn1_Categories_CatList_ctl05_LinkList_ctl06_Link" class="listitem" href="http://docs.huihoo.com/" target="_blank">灰狐文档中心</a></li>
+			
+				</ul>
+			
+	
+
+
+<script language="JavaScript">
+function SearchGoogle(key,evt,site)
+		{
+			if(evt.keyCode==13 || evt.keyCode==0 || evt.type =='click')
+			{
+				key.focus();
+				var keystr = encodeURIComponent(key.value);
+				url = "http://www.google.com/search?q=";
+				url = url+keystr;
+				url += "&ie=UTF-8&oe=GB2312&hl=zh-CN&domains="+site+"&sitesearch="+site;
+				window.location=url;
+				return false;
+			}
+		}
+</script>
+<h3>搜索</h3>
+<ul>
+	<li>
+		</li><li><input style="WIDTH: 130px" type="text" name="q" id="q" onkeydown="return SearchGoogle(document.getElementById(&#39;q&#39;),event,&#39;www.blogjava.net/Alpha&#39;)">&nbsp;<input onclick="SearchGoogle(document.getElementById(&#39;q&#39;),event,&#39;www.blogjava.net/Alpha&#39;)" type="button" value="搜索" name="sa">
+	</li>
+</ul>
+
+<h3>积分与排名</h3>
+<ul>
+	<li>
+		积分 -
+		1181478
+	</li><li>
+		排名 -
+		18
+	</li>
+</ul>
+
+<h3>最新随笔</h3>
+<div class="RecentComment">
+<ul style="word-break:break-all">
+	
+	
+			<li><a id="SingleColumn1_ctl05_RecentPostsList_ctl00_RecentPostsList2_ctl00_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2016/08/10/431515.html">1.&nbsp; CentOS 7 安裝 Nginx、PHP7、PHP-FPM</a></li>
+		
+		
+	
+			<li><a id="SingleColumn1_ctl05_RecentPostsList_ctl01_RecentPostsList2_ctl00_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2016/04/29/430290.html">2.&nbsp;Tomcat8 安全配置与性能优化</a></li>
+		
+		
+	
+			<li><a id="SingleColumn1_ctl05_RecentPostsList_ctl02_RecentPostsList2_ctl00_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2016/04/07/430008.html">3.&nbsp;Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14</a></li>
+		
+		
+	
+			<li><a id="SingleColumn1_ctl05_RecentPostsList_ctl03_RecentPostsList2_ctl00_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2016/03/07/429559.html">4.&nbsp;Ubuntu14.04下搭建VPN服务</a></li>
+		
+		
+	
+			<li><a id="SingleColumn1_ctl05_RecentPostsList_ctl04_RecentPostsList2_ctl00_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2016/02/25/429437.html">5.&nbsp;CentOS 6.4 配置VPN服务教程</a></li>
+		
+		
+	
+			<li><a id="SingleColumn1_ctl05_RecentPostsList_ctl05_RecentPostsList2_ctl00_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2015/10/31/428001.html">6.&nbsp;在Ubuntu 12.04上利用IP Tables来设置防火墙</a></li>
+		
+		
+	
+			<li><a id="SingleColumn1_ctl05_RecentPostsList_ctl06_RecentPostsList2_ctl00_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2015/10/28/427941.html">7.&nbsp;阿里云推荐码,aliyun优惠码,阿里云服务器ECS、云数据库RDS、负载均衡SLB推荐码,买阿里云主机省钱</a></li>
+		
+		
+	
+			<li><a id="SingleColumn1_ctl05_RecentPostsList_ctl07_RecentPostsList2_ctl00_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2015/10/07/427653.html">8.&nbsp;Ubuntu 14.04 安装 php nginx mysql JDK 8 svn</a></li>
+		
+		
+	
+			<li><a id="SingleColumn1_ctl05_RecentPostsList_ctl08_RecentPostsList2_ctl00_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2015/06/10/425600.html">9.&nbsp;软件工程师的创业陷阱：接私活</a></li>
+		
+		
+	
+			<li><a id="SingleColumn1_ctl05_RecentPostsList_ctl09_RecentPostsList2_ctl00_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2014/08/05/416592.html">10.&nbsp;jsp页面中，JSTL El表达式字符串比较常用方法</a></li>
+		
+	
+</ul>
+</div>
+
+<h3>最新评论
+	<a id="SingleColumn1__30ad904_RSSHyperlink1" href="http://www.blogjava.net/Alpha/CommentsRSS.aspx"><img src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/xml.gif" style="border-width:0px;"></a></h3>
+<div class="RecentComment">
+	
+			<ul>
+		
+			<li style="word-break:break-all">
+				<a id="SingleColumn1__30ad904_CommentList_ctl01_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2016/08/02/430008.html#431422">1.&nbsp;re: Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14</a>
+			</li>
+			<li style="word-break:break-all">
+				相当成功
+			</li>
+			<li style="text-align:right;margin-right:4px">
+				--reatang</li>
+		
+			<li style="word-break:break-all">
+				<a id="SingleColumn1__30ad904_CommentList_ctl02_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2016/07/27/131912.html#431351">2.&nbsp;re: mysql alter 语句用法,添加、修改、删除字段等</a>
+			</li>
+			<li style="word-break:break-all">
+				密密麻麻吗
+			</li>
+			<li style="text-align:right;margin-right:4px">
+				--，，，</li>
+		
+			<li style="word-break:break-all">
+				<a id="SingleColumn1__30ad904_CommentList_ctl03_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2016/05/26/296050.html#430676">3.&nbsp;eettafellamp</a>
+			</li>
+			<li style="word-break:break-all">
+				评论内容较长,点击标题查看
+			</li>
+			<li style="text-align:right;margin-right:4px">
+				--eettafellamp</li>
+		
+			<li style="word-break:break-all">
+				<a id="SingleColumn1__30ad904_CommentList_ctl04_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2016/05/18/284241.html#430582">4.&nbsp;re: 使用Spring MVC表单标签</a>
+			</li>
+			<li style="word-break:break-all">
+				水电费
+			</li>
+			<li style="text-align:right;margin-right:4px">
+				--  低调</li>
+		
+			<li style="word-break:break-all">
+				<a id="SingleColumn1__30ad904_CommentList_ctl05_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2016/05/18/296050.html#430568">5.&nbsp;aanrechtblad</a>
+			</li>
+			<li style="word-break:break-all">
+				评论内容较长,点击标题查看
+			</li>
+			<li style="text-align:right;margin-right:4px">
+				--aanrechtblad</li>
+		
+			<li style="word-break:break-all">
+				<a id="SingleColumn1__30ad904_CommentList_ctl06_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2016/05/05/430290.html#430353">6.&nbsp;re: Tomcat8 安全配置与性能优化[未登录]</a>
+			</li>
+			<li style="word-break:break-all">
+				评论内容较长,点击标题查看
+			</li>
+			<li style="text-align:right;margin-right:4px">
+				--aa</li>
+		
+			<li style="word-break:break-all">
+				<a id="SingleColumn1__30ad904_CommentList_ctl07_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2016/05/05/430290.html#430352">7.&nbsp;re: Tomcat8 安全配置与性能优化[未登录]</a>
+			</li>
+			<li style="word-break:break-all">
+				评论内容较长,点击标题查看
+			</li>
+			<li style="text-align:right;margin-right:4px">
+				--aa</li>
+		
+			<li style="word-break:break-all">
+				<a id="SingleColumn1__30ad904_CommentList_ctl08_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2016/04/21/279814.html#430183">8.&nbsp;aa[未登录]</a>
+			</li>
+			<li style="word-break:break-all">
+				啊啊啊啊
+			</li>
+			<li style="text-align:right;margin-right:4px">
+				--aa</li>
+		
+			<li style="word-break:break-all">
+				<a id="SingleColumn1__30ad904_CommentList_ctl09_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2016/04/15/430008.html#430104">9.&nbsp;re: Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14</a>
+			</li>
+			<li style="word-break:break-all">
+				可以可以可以
+			</li>
+			<li style="text-align:right;margin-right:4px">
+				--司马青衫</li>
+		
+			<li style="word-break:break-all">
+				<a id="SingleColumn1__30ad904_CommentList_ctl10_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2015/12/28/131912.html#428844">10.&nbsp;re: mysql alter 语句用法,添加、修改、删除字段等[未登录]</a>
+			</li>
+			<li style="word-break:break-all">
+				1111
+			</li>
+			<li style="text-align:right;margin-right:4px">
+				--a</li>
+		
+			</ul>
+		
+</div>
+
+<h3>阅读排行榜</h3>
+<div class="RecentComment">
+	
+			<ul style="word-break:break-all">
+		
+			<li>
+				<a id="SingleColumn1__2fc6832_TopList_ctl01_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2007/08/10/135694.html">1.&nbsp;MySQL的mysqldump工具的基本用法(232080)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__2fc6832_TopList_ctl02_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2007/07/23/131912.html">2.&nbsp;mysql alter 语句用法,添加、修改、删除字段等(145182)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__2fc6832_TopList_ctl03_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2007/01/22/95216.html">3.&nbsp;HttpClient 学习整理(137744)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__2fc6832_TopList_ctl04_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2009/03/29/262789.html">4.&nbsp;c3p0详细配置(79812)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__2fc6832_TopList_ctl05_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2006/04/07/39844.html">5.&nbsp;Mysql日期和时间函数大全(58061)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__2fc6832_TopList_ctl06_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2008/04/15/193094.html">6.&nbsp;Hibernate 不同数据库的连接及SQL方言(43916)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__2fc6832_TopList_ctl07_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2012/09/17/387950.html">7.&nbsp;iptables 开启80端口  (27674)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__2fc6832_TopList_ctl08_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2009/06/27/284373.html">8.&nbsp;AS与JS相互通信(Flex中调用js函数)(26042)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__2fc6832_TopList_ctl09_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2009/06/26/284241.html">9.&nbsp;使用Spring MVC表单标签(22858)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__2fc6832_TopList_ctl10_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2007/01/13/93569.html">10.&nbsp;JFreeChart在JSP中的应用实例(21165)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__2fc6832_TopList_ctl11_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2011/06/21/352745.html">11.&nbsp;linux+nginx+tomcat负载均衡，实现session同步(19637)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__2fc6832_TopList_ctl12_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2007/10/17/153578.html">12.&nbsp;scrollbar属性、样式详解(19217)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__2fc6832_TopList_ctl13_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2011/06/30/353439.html">13.&nbsp;linux rsync同步设置详细指南(14867)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__2fc6832_TopList_ctl14_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2006/07/12/57764.html">14.&nbsp;多级反向代理[Squid]下获取客户端真实IP地址(14692)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__2fc6832_TopList_ctl15_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2011/05/03/349454.html">15.&nbsp;JPA实体标识的自动生成(11745)</a>
+			</li>
+		
+			</ul>
+		
+</div>
+
+<h3>评论排行榜</h3>
+<div class="RecentComment">
+	
+			<ul style="word-break:break-all">
+		
+			<li>
+				<a id="SingleColumn1__1faddc9_TopList_ctl01_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2006/11/03/78983.html">1.&nbsp;南雄中学百年校庆(91)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__1faddc9_TopList_ctl02_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2007/01/22/95216.html">2.&nbsp;HttpClient 学习整理(44)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__1faddc9_TopList_ctl03_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2007/01/13/93569.html">3.&nbsp;JFreeChart在JSP中的应用实例(29)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__1faddc9_TopList_ctl04_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2009/03/29/262789.html">4.&nbsp;c3p0详细配置(26)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__1faddc9_TopList_ctl05_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2009/09/22/296050.html">5.&nbsp;从MySQL得到最大的性能(20)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__1faddc9_TopList_ctl06_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2006/11/18/81900.html">6.&nbsp;学会如何去爱一个人(16)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__1faddc9_TopList_ctl07_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2006/11/28/84174.html">7.&nbsp;千年珠玑(15)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__1faddc9_TopList_ctl08_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2006/08/21/64901.html">8.&nbsp;笑翻天乐园－痛并快乐着(14)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__1faddc9_TopList_ctl09_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2005/06/14/6130.html">9.&nbsp;说说我们技术部(13)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__1faddc9_TopList_ctl10_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2007/08/10/135694.html">10.&nbsp;MySQL的mysqldump工具的基本用法(12)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__1faddc9_TopList_ctl11_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2005/07/19/8010.html">11.&nbsp;述 职 报 告(11)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__1faddc9_TopList_ctl12_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2006/07/12/57764.html">12.&nbsp;多级反向代理[Squid]下获取客户端真实IP地址(11)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__1faddc9_TopList_ctl13_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2006/09/15/69983.html">13.&nbsp;双喜临门(10)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__1faddc9_TopList_ctl14_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2007/01/02/91444.html">14.&nbsp;元旦遭遇人山人海(9)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__1faddc9_TopList_ctl15_Hyperlink1" href="http://www.blogjava.net/Alpha/archive/2006/09/05/67910.html">15.&nbsp;第一次带着她去外拍(7)</a>
+			</li>
+		
+			</ul>
+		
+</div>
+</div>
+	
+</div>
+
+<!--done-->
+<div class="footer">
+	Powered by: <a href="http://www.cnblogs.com/">博客园</a>	模板提供：<a href="http://blog.hjenglish.com/">沪江博客</a>
+	Copyright ©2017 Alpha
+</div>
+
+
+<script language="javascript" type="text/javascript" src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/701941.js.下载"></script><a href="https://www.51.la/?701941" target="_blank" title="51.La 网站流量统计系统"><img alt="51.La 网站流量统计系统" src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/icon_9.gif" style="border:none"></a>
+
+<noscript>&lt;a href="http://www.51.la/?701941" target="_blank"&gt;&lt;img alt="&amp;#x6211;&amp;#x8981;&amp;#x5566;&amp;#x514D;&amp;#x8D39;&amp;#x7EDF;&amp;#x8BA1;" src="http://img.users.51.la/701941.asp" style="border:none" /&gt;&lt;/a&gt;</noscript>
+    
+<script type="text/javascript">
+//<![CDATA[
+var Page_ValidationSummaries =  new Array(document.getElementById("AjaxHolder_PostComment_ValidationSummary1"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var AjaxHolder_PostComment_ValidationSummary1 = document.all ? document.all["AjaxHolder_PostComment_ValidationSummary1"] : document.getElementById("AjaxHolder_PostComment_ValidationSummary1");
+AjaxHolder_PostComment_ValidationSummary1.showmessagebox = "True";
+AjaxHolder_PostComment_ValidationSummary1.showsummary = "False";
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+document.getElementById('AjaxHolder_PostComment_ValidationSummary1').dispose = function() {
+    Array.remove(Page_ValidationSummaries, document.getElementById('AjaxHolder_PostComment_ValidationSummary1'));
+}
+Sys.Application.initialize();
+//]]>
+</script>
+</form>
+    <script type="text/javascript" src="./Ubuntu14.04下部署FastDFS 5.08+Nginx 1.9.14 - Alpha - BlogJava_files/ShowHidden.js.下载"></script>
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-476124-3']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+
+
+</body></html>

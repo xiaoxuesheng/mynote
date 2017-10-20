@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)http://www.cnblogs.com/winner-0715/p/5950806.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>java上传文件到FastDFS - winner_0715 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./java上传文件到FastDFS - winner_0715 - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./java上传文件到FastDFS - winner_0715 - 博客园_files/bundle-darkgreentrip.css">
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="./java上传文件到FastDFS - winner_0715 - 博客园_files/bundle-darkgreentrip-mobile.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/winner-0715/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/winner-0715/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/winner-0715/wlwmanifest.xml">
+<script async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" src="./java上传文件到FastDFS - winner_0715 - 博客园_files/encoder.js.下载"></script><script src="./java上传文件到FastDFS - winner_0715 - 博客园_files/jquery.js.下载" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'winner-0715', cb_enable_mathjax=true;var isLogined=false;</script>
+<script src="./java上传文件到FastDFS - winner_0715 - 博客园_files/blog-common.js.下载" type="text/javascript"></script>
+<script type="text/x-mathjax-config;executed=true">MathJax.Hub.Config({
+  tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] },
+  TeX: { equationNumbers: { autoNumber: ['AMS'], useLabelIds: true }, extensions: ['extpfeil.js'] },
+  'HTML-CSS': { linebreaks: { automatic: true } },
+  SVG: { linebreaks: { automatic: true } }});</script><script type="text/javascript" src="./java上传文件到FastDFS - winner_0715 - 博客园_files/MathJax.js.下载"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+<body><div id="MathJax_Message" style="display: none;"></div>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/winner-0715/"><img id="blogLogo" src="./java上传文件到FastDFS - winner_0715 - 博客园_files/logo.gif" alt="返回主页"></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/winner-0715/">winner_0715</a></h1>
+<h2>笔记，仅作个人搜索</h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/winner-0715/">首页</a></li>
+<li></li>
+<li><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/winner_0715">联系</a></li>
+<li><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/winner-0715/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/winner-0715/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<span id="stats_post_count">随笔 - 1122&nbsp; </span>
+<span id="stats_article_count">文章 - 0&nbsp; </span>
+<span id="stats-comment_count">评论 - 29</span>
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/winner-0715/p/5950806.html">java上传文件到FastDFS</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><p>依赖</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff">&lt;</span><span style="color: #800000">dependency</span><span style="color: #0000ff">&gt;</span>
+　　<span style="color: #0000ff">&lt;</span><span style="color: #800000">groupId</span><span style="color: #0000ff">&gt;</span>org.csource<span style="color: #0000ff">&lt;/</span><span style="color: #800000">groupId</span><span style="color: #0000ff">&gt;</span>
+　　<span style="color: #0000ff">&lt;</span><span style="color: #800000">artifactId</span><span style="color: #0000ff">&gt;</span>fastdfs-client-java<span style="color: #0000ff">&lt;/</span><span style="color: #800000">artifactId</span><span style="color: #0000ff">&gt;</span>
+　　<span style="color: #0000ff">&lt;</span><span style="color: #800000">version</span><span style="color: #0000ff">&gt;</span>1.25<span style="color: #0000ff">&lt;/</span><span style="color: #800000">version</span><span style="color: #0000ff">&gt;</span>
+<span style="color: #0000ff">&lt;/</span><span style="color: #800000">dependency</span><span style="color: #0000ff">&gt;</span></pre>
+</div>
+<p><span style="font-family: 宋体">使用方法：</span></p>
+<p>1、<span style="font-family: 宋体">把</span>FastDFS<span style="font-family: 宋体">提供的</span><span style="font-family: Courier New">jar</span><span style="font-family: 宋体">包添加到工程中</span></p>
+<p>2、<span style="font-family: 宋体">初始化全局配置。加载一个配置文件。</span></p>
+<p>3、<span style="font-family: 宋体">创建一个</span>TrackerClient<span style="font-family: 宋体">对象。</span></p>
+<p>4、<span style="font-family: 宋体">创建一个</span>TrackerServer<span style="font-family: 宋体">对象。</span></p>
+<p>5、<span style="font-family: 宋体">声明一个</span>StorageServer<span style="font-family: 宋体">对象，</span><span style="font-family: Courier New">null</span><span style="font-family: 宋体">。</span></p>
+<p>6、<span style="font-family: 宋体">获得</span>StorageClient<span style="font-family: 宋体">对象。</span></p>
+<p>7、<span style="font-family: 宋体">直接调用</span>StorageClient<span style="font-family: 宋体">对象方法上传文件即可。</span></p>
+<p>&nbsp;</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./java上传文件到FastDFS - winner_0715 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff">import</span> org.csource.fastdfs.*<span style="color: #000000">;
+</span><span style="color: #0000ff">import</span><span style="color: #000000"> org.junit.Test;
+
+</span><span style="color: #008000">/**</span><span style="color: #008000">
+ * Created by winner_0715 on 2016/10/11.
+ </span><span style="color: #008000">*/</span>
+<span style="color: #0000ff">public</span> <span style="color: #0000ff">class</span><span style="color: #000000"> TestFastDFS {
+    @Test
+    </span><span style="color: #0000ff">public</span> <span style="color: #0000ff">void</span> testUpload() <span style="color: #0000ff">throws</span><span style="color: #000000"> Exception {
+        </span><span style="color: #008000">//</span><span style="color: #008000"> 1、把FastDFS提供的jar包添加到工程中
+        </span><span style="color: #008000">//</span><span style="color: #008000"> 2、初始化全局配置。加载一个配置文件。</span>
+        ClientGlobal.init("D:\\IdeaProjects\\taobao\\taobao-manager\\taobao-manager-web\\src\\main\\resources\\config\\resource\\client.conf"<span style="color: #000000">);
+        </span><span style="color: #008000">//</span><span style="color: #008000"> 3、创建一个TrackerClient对象。</span>
+        TrackerClient trackerClient = <span style="color: #0000ff">new</span><span style="color: #000000"> TrackerClient();
+        </span><span style="color: #008000">//</span><span style="color: #008000"> 4、创建一个TrackerServer对象。</span>
+        TrackerServer trackerServer =<span style="color: #000000"> trackerClient.getConnection();
+        </span><span style="color: #008000">//</span><span style="color: #008000"> 5、声明一个StorageServer对象，null。</span>
+        StorageServer storageServer = <span style="color: #0000ff">null</span><span style="color: #000000">;
+        </span><span style="color: #008000">//</span><span style="color: #008000"> 6、获得StorageClient对象。</span>
+        StorageClient storageClient = <span style="color: #0000ff">new</span><span style="color: #000000"> StorageClient(trackerServer, storageServer);
+        </span><span style="color: #008000">//</span><span style="color: #008000"> 7、直接调用StorageClient对象方法上传文件即可。</span>
+        String[] strings = storageClient.upload_file("C:\\Users\\Public\\Pictures\\Sample Pictures\\Chrysanthemum.jpg", "jpg", <span style="color: #0000ff">null</span><span style="color: #000000">);
+        </span><span style="color: #0000ff">for</span><span style="color: #000000"> (String string : strings) {
+            System.out.println(string);
+        }
+    }
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./java上传文件到FastDFS - winner_0715 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>&nbsp;</p>
+<p>client.conf</p>
+<div class="cnblogs_code">
+<pre>tracker_server=192.168.25.133:22122</pre>
+</div>
+<p>工具类</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./java上传文件到FastDFS - winner_0715 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff">package</span><span style="color: #000000"> com.taobao.utils;
+
+</span><span style="color: #0000ff">import</span><span style="color: #000000"> org.csource.common.NameValuePair;
+</span><span style="color: #0000ff">import</span> org.csource.fastdfs.*<span style="color: #000000">;
+
+</span><span style="color: #008000">/**</span><span style="color: #008000">
+ * Created by winner_0715 on 2016/10/11.
+ </span><span style="color: #008000">*/</span>
+<span style="color: #0000ff">public</span> <span style="color: #0000ff">class</span><span style="color: #000000"> FastDFSClient {
+    </span><span style="color: #0000ff">private</span> TrackerClient trackerClient = <span style="color: #0000ff">null</span><span style="color: #000000">;
+    </span><span style="color: #0000ff">private</span> TrackerServer trackerServer = <span style="color: #0000ff">null</span><span style="color: #000000">;
+    </span><span style="color: #0000ff">private</span> StorageClient1 storageClient = <span style="color: #0000ff">null</span><span style="color: #000000">;
+    </span><span style="color: #0000ff">private</span> StorageServer storageServer = <span style="color: #0000ff">null</span><span style="color: #000000">;
+
+    </span><span style="color: #0000ff">public</span> FastDFSClient(String conf) <span style="color: #0000ff">throws</span><span style="color: #000000"> Exception {
+        </span><span style="color: #0000ff">if</span> (conf.contains("classpath:"<span style="color: #000000">)) {
+            conf </span>= conf.replace("classpath:", <span style="color: #0000ff">this</span>.getClass().getResource("/"<span style="color: #000000">).getPath());
+        }
+        ClientGlobal.init(conf);
+        trackerClient </span>= <span style="color: #0000ff">new</span><span style="color: #000000"> TrackerClient();
+        trackerServer </span>=<span style="color: #000000"> trackerClient.getConnection();
+        storageServer </span>= <span style="color: #0000ff">null</span><span style="color: #000000">;
+        storageClient </span>= <span style="color: #0000ff">new</span><span style="color: #000000"> StorageClient1(trackerServer, storageServer);
+
+    }
+
+    </span><span style="color: #0000ff">public</span> String uploadFile(String fileName, String extName, NameValuePair[] metas) <span style="color: #0000ff">throws</span><span style="color: #000000"> Exception {
+        String result </span>=<span style="color: #000000"> storageClient.upload_file1(fileName, extName, metas);
+        </span><span style="color: #0000ff">return</span><span style="color: #000000"> result;
+    }
+
+    </span><span style="color: #0000ff">public</span> String uploadFile(String fileName) <span style="color: #0000ff">throws</span><span style="color: #000000"> Exception {
+        String result </span>= storageClient.upload_file1(fileName, <span style="color: #0000ff">null</span>, <span style="color: #0000ff">null</span><span style="color: #000000">);
+        </span><span style="color: #0000ff">return</span><span style="color: #000000"> result;
+    }
+
+    </span><span style="color: #0000ff">public</span> String uploadFile(String fileName, String extName) <span style="color: #0000ff">throws</span><span style="color: #000000"> Exception {
+        String result </span>= storageClient.upload_file1(fileName, extName, <span style="color: #0000ff">null</span><span style="color: #000000">);
+        </span><span style="color: #0000ff">return</span><span style="color: #000000"> result;
+    }
+
+
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./java上传文件到FastDFS - winner_0715 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./java上传文件到FastDFS - winner_0715 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #000000">    @Test
+    </span><span style="color: #0000ff">public</span> <span style="color: #0000ff">void</span> testFastDfsClient() <span style="color: #0000ff">throws</span><span style="color: #000000"> Exception {
+        FastDFSClient client </span>= <span style="color: #0000ff">new</span> FastDFSClient("classpath:config/resource/client.conf"<span style="color: #000000">);
+        String uploadFile </span>= client.uploadFile("C:\\Users\\Public\\Pictures\\Sample Pictures\\Chrysanthemum.jpg", "jpg", <span style="color: #0000ff">null</span><span style="color: #000000">);
+        System.out.println(uploadFile);
+    }</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./java上传文件到FastDFS - winner_0715 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(5950806,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;22dfbcfd-0776-e511-9fc1-ac853d9f53cc&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./java上传文件到FastDFS - winner_0715 - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./java上传文件到FastDFS - winner_0715 - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/winner-0715/" target="_blank"><img src="./java上传文件到FastDFS - winner_0715 - 博客园_files/20160104210031.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/winner-0715/">winner_0715</a><br>
+            <a href="http://home.cnblogs.com/u/winner-0715/followees">关注 - 4</a><br>
+            <a href="http://home.cnblogs.com/u/winner-0715/followers">粉丝 - 38</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;22dfbcfd-0776-e511-9fc1-ac853d9f53cc&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(5950806,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">0</span>
+    </div>
+    <div class="buryit" onclick="votePost(5950806,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/winner-0715/p/5950643.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/winner-0715/p/5950643.html" title="发布于2016-10-11 20:20">java-FastDFS问题，上传连接超时</a><br><a href="http://www.cnblogs.com/winner-0715/p/5951352.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/winner-0715/p/5951352.html" title="发布于2016-10-12 01:29">http://www.cnblogs.com/qq78292959/p/3760651.html</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2016-10-11 21:13</span> <a href="http://www.cnblogs.com/winner-0715/">winner_0715</a> 阅读(<span id="post_view_count">2585</span>) 评论(<span id="post_comment_count">0</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=5950806" rel="nofollow">编辑</a> <a href="http://www.cnblogs.com/winner-0715/p/5950806.html#" onclick="AddToWz(5950806);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=249702,cb_entryId=5950806,cb_blogApp=currentBlogApp,cb_blogUserGuid='22dfbcfd-0776-e511-9fc1-ac853d9f53cc',cb_entryCreatedDate='2016/10/11 21:13:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="http://www.cnblogs.com/winner-0715/p/5950806.html#" onclick="return RefreshPage();">刷新页面</a><a href="http://www.cnblogs.com/winner-0715/p/5950806.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="https://cloud.tencent.com/solution/la?fromSource=gwzcw.436846.436846.436846" target="_blank">【推荐】搭建微信小程序 就选腾讯云</a><br><a href="http://www.gcpowertools.com.cn/products/activereports_overview.htm?utm_source=cnblogs&amp;utm_medium=blogpage&amp;utm_term=bottom&amp;utm_content=AR&amp;utm_campaign=community" target="_blank">【推荐】报表开发有捷径：快速设计轻松集成，数据可视化和交互</a><br></div>
+<div id="opt_under_post"></div>
+<div id="cnblogs_c1" class="c_ad_block"><a href="https://www.mtyun.com/promote/69f73a72-f46d-4103-88e5-94ed2f81259d/" target="_blank"><img width="300" height="250" src="./java上传文件到FastDFS - winner_0715 - 博客园_files/24442-20170921101521025-1845913848.jpg" alt="美团云0921"></a></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="http://news.cnblogs.com/n/579826/" target="_blank">微软：OneDrive界面即将大改，未来几周正式推出</a><br> ·  <a href="http://news.cnblogs.com/n/579825/" target="_blank">乔布斯的遗产，正在被Google和微软继承</a><br> ·  <a href="http://news.cnblogs.com/n/579824/" target="_blank">甲骨文高管开怼亚马逊云：它的成本比我们高5-8倍</a><br> ·  <a href="http://news.cnblogs.com/n/579823/" target="_blank">Waymo将联手公益组织宣传自动驾驶 想消除酒驾</a><br> ·  <a href="http://news.cnblogs.com/n/579822/" target="_blank">中国工信部：将提前实现90%贫困村通宽带目标</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="cnblogs_c2" class="c_ad_block"><a href="http://click.aliyun.com/m/22446/" target="_blank"><img width="468" height="60" src="./java上传文件到FastDFS - winner_0715 - 博客园_files/24442-20171001085719794-417760373.jpg" alt="阿里云1001"></a></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/579480/" target="_blank">实用VPC虚拟私有云设计原则</a><br> ·  <a href="http://kb.cnblogs.com/page/576251/" target="_blank">如何阅读计算机科学类的书</a><br> ·  <a href="http://kb.cnblogs.com/page/578103/" target="_blank">Google 及其云智慧</a><br> ·  <a href="http://kb.cnblogs.com/page/575829/" target="_blank">做到这一点，你也可以成为优秀的程序员</a><br> ·  <a href="http://kb.cnblogs.com/page/566880/" target="_blank">写给立志做码农的大学生</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"><div id="profile_block">昵称：<a href="http://home.cnblogs.com/u/winner-0715/">winner_0715</a><br>园龄：<a href="http://home.cnblogs.com/u/winner-0715/" title="入园时间：2015-10-19">1年11个月</a><br>粉丝：<a href="http://home.cnblogs.com/u/winner-0715/followers/">38</a><br>关注：<a href="http://home.cnblogs.com/u/winner-0715/followees/">4</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;22dfbcfd-0776-e511-9fc1-ac853d9f53cc&#39;)">+加关注</a></div></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2017/09/01&#39;);return false;">&lt;</a></td><td align="center">2017年10月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2017/11/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">24</td><td class="CalOtherMonthDay" align="center">25</td><td class="CalOtherMonthDay" align="center">26</td><td class="CalOtherMonthDay" align="center">27</td><td class="CalOtherMonthDay" align="center">28</td><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td></tr><tr><td class="CalWeekendDay" align="center">1</td><td align="center">2</td><td align="center">3</td><td align="center">4</td><td align="center">5</td><td align="center">6</td><td class="CalWeekendDay" align="center">7</td></tr><tr><td class="CalWeekendDay" align="center">8</td><td align="center">9</td><td class="CalTodayDay" align="center">10</td><td align="center">11</td><td align="center">12</td><td align="center">13</td><td class="CalWeekendDay" align="center">14</td></tr><tr><td class="CalWeekendDay" align="center">15</td><td align="center">16</td><td align="center">17</td><td align="center">18</td><td align="center">19</td><td align="center">20</td><td class="CalWeekendDay" align="center">21</td></tr><tr><td class="CalWeekendDay" align="center">22</td><td align="center">23</td><td align="center">24</td><td align="center">25</td><td align="center">26</td><td align="center">27</td><td class="CalWeekendDay" align="center">28</td></tr><tr><td class="CalWeekendDay" align="center">29</td><td align="center">30</td><td align="center">31</td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+<div id="widget_my_google" class="div_my_zzk"><input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk"></div>
+</div>
+</div>
+
+</div><div id="sidebar_shortcut" class="sidebar-block">
+<div class="catListLink">
+<h3 class="catListTitle">常用链接</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/winner-0715/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="http://www.cnblogs.com/winner-0715/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="http://www.cnblogs.com/winner-0715/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="http://www.cnblogs.com/winner-0715/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="http://www.cnblogs.com/winner-0715/tag/" title="我的博客的标签列表">我的标签</a></li>
+</ul>
+<div id="itemListLin_con" style="display:none;">
+<ul>
+
+</ul>
+</div>
+</div></div><div id="sidebar_categories">
+<div id="sidebar_postcategory" class="catListPostCategory sidebar-block">
+<h3 class="catListTitle">随笔分类<span style="font-size:11px;font-weight:normal">(776)</span></h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="http://www.cnblogs.com/winner-0715/category/745737.html">Algorithm(32)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="http://www.cnblogs.com/winner-0715/category/1056829.html">API(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="http://www.cnblogs.com/winner-0715/category/745734.html">Architecture(33)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_3" href="http://www.cnblogs.com/winner-0715/category/1035828.html">Bootstrap(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_4" href="http://www.cnblogs.com/winner-0715/category/905096.html">BUG(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_5" href="http://www.cnblogs.com/winner-0715/category/879859.html">Cache(7)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_6" href="http://www.cnblogs.com/winner-0715/category/985105.html">Clean Code (38)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_7" href="http://www.cnblogs.com/winner-0715/category/798609.html">Collections(8)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_8" href="http://www.cnblogs.com/winner-0715/category/745736.html">Databases(21)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_9" href="http://www.cnblogs.com/winner-0715/category/892654.html">Design Patterns(7)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_10" href="http://www.cnblogs.com/winner-0715/category/829228.html">Dubbo(4)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_11" href="http://www.cnblogs.com/winner-0715/category/1076103.html">ELK(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_12" href="http://www.cnblogs.com/winner-0715/category/899162.html">Exception(3)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_13" href="http://www.cnblogs.com/winner-0715/category/915952.html">Gradle(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_14" href="http://www.cnblogs.com/winner-0715/category/907969.html">HTTP(12)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_15" href="http://www.cnblogs.com/winner-0715/category/1060086.html">I/O(7)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_16" href="http://www.cnblogs.com/winner-0715/category/785076.html">IDEA(27)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_17" href="http://www.cnblogs.com/winner-0715/category/745732.html">J2SE(140)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_18" href="http://www.cnblogs.com/winner-0715/category/745764.html">JavaEE(37)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_19" href="http://www.cnblogs.com/winner-0715/category/750787.html">JavaScript(31)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_20" href="http://www.cnblogs.com/winner-0715/category/848385.html">Jenkins(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_21" href="http://www.cnblogs.com/winner-0715/category/888299.html">JSON(12)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_22" href="http://www.cnblogs.com/winner-0715/category/798608.html">JUC(30)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_23" href="http://www.cnblogs.com/winner-0715/category/751286.html">JVM(28)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_24" href="http://www.cnblogs.com/winner-0715/category/745733.html">Linux(22)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_25" href="http://www.cnblogs.com/winner-0715/category/843174.html">Log(8)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_26" href="http://www.cnblogs.com/winner-0715/category/802180.html">Maven(19)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_27" href="http://www.cnblogs.com/winner-0715/category/931502.html">MQ(11)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_28" href="http://www.cnblogs.com/winner-0715/category/803959.html">MyBatis(30)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_29" href="http://www.cnblogs.com/winner-0715/category/922738.html">MySQL(34)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_30" href="http://www.cnblogs.com/winner-0715/category/1075053.html">Netty(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_31" href="http://www.cnblogs.com/winner-0715/category/745817.html">Network(14)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_32" href="http://www.cnblogs.com/winner-0715/category/781255.html">Nginx(6)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_33" href="http://www.cnblogs.com/winner-0715/category/767434.html">Notes(8)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_34" href="http://www.cnblogs.com/winner-0715/category/752351.html">Performance(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_35" href="http://www.cnblogs.com/winner-0715/category/866021.html">Quartz(3)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_36" href="http://www.cnblogs.com/winner-0715/category/922737.html">Redis(16)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_37" href="http://www.cnblogs.com/winner-0715/category/878782.html">RPC(3)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_38" href="http://www.cnblogs.com/winner-0715/category/937399.html">Shiro</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_39" href="http://www.cnblogs.com/winner-0715/category/745735.html">Spring(32)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_40" href="http://www.cnblogs.com/winner-0715/category/978334.html">Spring Boot(17)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_41" href="http://www.cnblogs.com/winner-0715/category/755399.html">Spring MVC(33)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_42" href="http://www.cnblogs.com/winner-0715/category/828769.html">SSM(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_43" href="http://www.cnblogs.com/winner-0715/category/988649.html">SSO(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_44" href="http://www.cnblogs.com/winner-0715/category/857522.html">Thrift</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_45" href="http://www.cnblogs.com/winner-0715/category/751285.html">Tomcat(14)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_46" href="http://www.cnblogs.com/winner-0715/category/889134.html">Utils(5)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_47" href="http://www.cnblogs.com/winner-0715/category/770532.html">VCS(8)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_48" href="http://www.cnblogs.com/winner-0715/category/830949.html">Zookeeper(2)</a> </li>
+
+</ul>
+
+</div>
+
+<div id="sidebar_postarchive" class="catListPostArchive sidebar-block">
+<h3 class="catListTitle">随笔档案<span style="font-size:11px;font-weight:normal">(1122)</span></h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_1_Link_0" href="http://www.cnblogs.com/winner-0715/archive/2017/09.html">2017年9月 (33)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_1" href="http://www.cnblogs.com/winner-0715/archive/2017/08.html">2017年8月 (95)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_2" href="http://www.cnblogs.com/winner-0715/archive/2017/07.html">2017年7月 (99)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_3" href="http://www.cnblogs.com/winner-0715/archive/2017/06.html">2017年6月 (42)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_4" href="http://www.cnblogs.com/winner-0715/archive/2017/05.html">2017年5月 (35)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_5" href="http://www.cnblogs.com/winner-0715/archive/2017/04.html">2017年4月 (41)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_6" href="http://www.cnblogs.com/winner-0715/archive/2017/03.html">2017年3月 (25)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_7" href="http://www.cnblogs.com/winner-0715/archive/2017/02.html">2017年2月 (28)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_8" href="http://www.cnblogs.com/winner-0715/archive/2017/01.html">2017年1月 (33)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_9" href="http://www.cnblogs.com/winner-0715/archive/2016/12.html">2016年12月 (33)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_10" href="http://www.cnblogs.com/winner-0715/archive/2016/11.html">2016年11月 (59)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_11" href="http://www.cnblogs.com/winner-0715/archive/2016/10.html">2016年10月 (49)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_12" href="http://www.cnblogs.com/winner-0715/archive/2016/09.html">2016年9月 (87)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_13" href="http://www.cnblogs.com/winner-0715/archive/2016/08.html">2016年8月 (39)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_14" href="http://www.cnblogs.com/winner-0715/archive/2016/07.html">2016年7月 (42)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_15" href="http://www.cnblogs.com/winner-0715/archive/2016/06.html">2016年6月 (15)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_16" href="http://www.cnblogs.com/winner-0715/archive/2016/05.html">2016年5月 (33)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_17" href="http://www.cnblogs.com/winner-0715/archive/2016/04.html">2016年4月 (23)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_18" href="http://www.cnblogs.com/winner-0715/archive/2016/03.html">2016年3月 (40)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_19" href="http://www.cnblogs.com/winner-0715/archive/2016/02.html">2016年2月 (13)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_20" href="http://www.cnblogs.com/winner-0715/archive/2016/01.html">2016年1月 (38)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_21" href="http://www.cnblogs.com/winner-0715/archive/2015/12.html">2015年12月 (90)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_22" href="http://www.cnblogs.com/winner-0715/archive/2015/11.html">2015年11月 (94)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_23" href="http://www.cnblogs.com/winner-0715/archive/2015/10.html">2015年10月 (36)</a> </li>
+
+</ul>
+
+</div>
+
+<div id="sidebar_links747944" class="catList sidebar-block">
+<h3 class="catListTitle">大牛博客</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_2_Link_0" href="http://blog.csdn.net/ClementAD/article/category/6217187/2"> Clement-Xu的专栏</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_1" href="http://www.cnblogs.com/skywang12345/p/" rel="nofollow"> skywang12345 </a> </li>
+
+<li><a id="CatList_LinkList_2_Link_2" href="http://www.cnblogs.com/leechenxiang" rel="nofollow">BeJavaGod</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_3" href="http://www.hollischuang.com/" rel="nofollow">hollis</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_4" href="http://www.cnblogs.com/fangjian0423/" rel="nofollow">http://www.cnblogs.com/fangjian0423/</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_5" href="http://www.infoq.com/cn/concurrency" rel="nofollow">http://www.infoq.com/cn/concurrency</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_6" href="http://www.iteye.com/problems/forums/Java" rel="nofollow">http://www.iteye.com/problems/forums/Java</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_7" href="http://www.rowkey.me/" rel="nofollow">http://www.rowkey.me/</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_8" href="http://www.ibm.com/developerworks/cn/java/" rel="nofollow">IBMDveloperWorks</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_9" href="http://www.importnew.com/" rel="nofollow">ImportNew</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_10" href="http://www.infoq.com/cn/" rel="nofollow">Infoq中文站</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_11" href="http://pan.baidu.com/share/home?uk=387674681#category/type=0" rel="nofollow">InfoQ中文站</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_12" href="http://www.javaranger.com/" rel="nofollow">JavaRanger – 专注JAVA WEB高性能程序开发、JVM、Mysql优化、业务架构</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_13" href="http://www.blogjava.net/fanyingjie/" rel="nofollow">JAVA—咖啡馆</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_14" href="http://www.iteye.com/forums/board/Java" rel="nofollow">Java企业应用论坛</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_15" href="http://www.iteye.com/forums/tag_good/Java%E7%BB%BC%E5%90%88" rel="nofollow">Java综合讨论</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_16" href="http://www.programcreek.com/" rel="nofollow">ProgramCreek.com</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_17" href="http://rednaxelafx.iteye.com/" rel="nofollow">RednaxelaFX</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_18" href="http://segmentfault.com/" rel="nofollow">segmentfault</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_19" href="http://412887952-qq-com.iteye.com/category/356333?page=5">SpringBoot</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_20" href="http://korhner.github.io/" rel="nofollow">Thoughts About Various Backend Development Topics</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_21" href="http://tutorials.jenkov.com/" rel="nofollow">tutorials.jenkov.com</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_22" href="http://www.cnblogs.com/enjiex/" rel="nofollow">Utopia</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_23" href="http://www.cnblogs.com/LBSer" rel="nofollow">zhanlijun</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_24" href="http://jm.taobao.org/" rel="nofollow">阿里中间件团队博客</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_25" href="http://www.cnblogs.com/selene/category/876189.html">编写高质量代码 改善java程序的151个建议</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_26" href="http://ifeve.com/" rel="nofollow">并发编程网</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_27" href="http://blog.jobbole.com/" rel="nofollow">伯乐在线</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_28" href="http://www.blogjava.net/freeman1984/" rel="nofollow">博客园第一名！！！</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_29" href="http://dobit.top/" rel="nofollow">不错的前端网站</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_30" href="http://www.codeproject.com/" rel="nofollow">顶级开发社区CodeProject</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_31" href="http://stackoverflow.com/" rel="nofollow">顶级开发社区之Stack Overflow</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_32" href="http://blog.csdn.net/yangbutao" rel="nofollow">分布式架构、大数据、机器学习、搜索、推荐、广告</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_33" href="http://hllvm.group.iteye.com/" rel="nofollow">高级语言虚拟机</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_34" href="http://www.apelearn.com/study_v2/index.html" rel="nofollow">跟阿铭学Linux（第2版）</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_35" href="http://www.cnblogs.com/xdp-gacl/p/" rel="nofollow">孤傲苍狼</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_36" href="http://www.blogjava.net/xylz/" rel="nofollow">关注后端架构、中间件、分布式和并发编程</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_37" href="http://timyang.net/" rel="nofollow">后端技术 by Tim Yang</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_38" href="http://my.oschina.net/huangyong/blog" rel="nofollow">黄勇的博客</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_39" href="http://www.cnblogs.com/java-my-life/p/" rel="nofollow">极好的设计模式教程</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_40" href="http://www.cnblogs.com/dinglang/" rel="nofollow">架构师</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_41" href="http://www.cnblogs.com/itfly8/" rel="nofollow">架构师学习</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_42" href="http://calvin1978.blogcn.com/" rel="nofollow">江南白衣，春天的旁边</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_43" href="http://jinnianshilongnian.iteye.com/" rel="nofollow">开涛的博客</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_44" href="http://coolshell.cn/" rel="nofollow">酷壳-CoolShell</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_45" href="http://www.cnblogs.com/leechenxiang" rel="nofollow">李晨翔</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_46" href="http://www.liaoxuefeng.com/" rel="nofollow">廖雪峰的官方网站,经常看！！</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_47" href="http://mindhacks.cn/" rel="nofollow">刘未鹏</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_48" href="http://www.codeceo.com/" rel="nofollow">码农网</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_49" href="http://www.cnblogs.com/peida/tag/%E6%AF%8F%E6%97%A5%E4%B8%80linux%E5%91%BD%E4%BB%A4/" rel="nofollow">每日一linux命令</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_50" href="http://tech.meituan.com/" rel="nofollow">美团点评技术团队</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_51" href="http://www.cnblogs.com/yjmyzz/" rel="nofollow">菩提树下的杨过.Net</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_52" href="http://www.ruanyifeng.com/blog/" rel="nofollow">阮一峰的网络日志</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_53" href="http://www.cnblogs.com/jiaan-geng/" rel="nofollow">泰山不老生</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_54" href="http://blog.csdn.net/column/details/15737.html" rel="nofollow">淘淘商城</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_55" href="http://www.cnblogs.com/xrq730/" rel="nofollow">五月的仓颉</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_56" href="http://www.cnblogs.com/kerrycode/" rel="nofollow">潇湘隐者</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_57" href="https://yq.aliyun.com/articles?spm=5176.100239.blogcont63021.1.7HxxlG" rel="nofollow">云溪社区</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_58" href="http://blog.csdn.net/u013256816" rel="nofollow">朱小厮的博客</a> </li>
+
+</ul>
+
+</div>
+
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/winner-0715/p/5933822.html#3802264">1. Re:VMware虚拟机上配置nginx后，本机无法访问问题</a></li>
+        <li class="recent_comment_body">我也是这样配置的，但只能在虚拟机里访问nginx，主机还是访问不了</li>
+        <li class="recent_comment_author">--StanLong</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div id="TopDiggPostsBlock"><ul><li><a href="http://www.cnblogs.com/winner-0715/p/5247086.html">1. IntelliJ IDEA 设置代码提示或自动补全的快捷键(3)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright ©2017 winner_0715
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+</body></html>
