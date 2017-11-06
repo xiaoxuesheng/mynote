@@ -47,4 +47,35 @@ JAVA_OPTS="$JAVA_OPTS" -server -XX:PermSize=128m -XX:MaxSize=512m
 （3）在web项目中调用，saleOrderWarehouseService.clearRetryNum。执行时报错 exception is java.lang.NoSuchMethodError
 解决方法：dubbo会有提供者缓存问题，清了缓存就可以了。home目录中 有 .dubbo文件，把这个文件夹下的文件都删除。
 
-
+解决-
+Zookeeper部署中的坑之一:Error contacting service. It is probably not running
+在配置完zookeeper集群后,三个节点,分别启动三个节点如下:
+[root@master bin]# zkServer.sh start
+JMX enabled by default
+Using config: /usr/local/zk/bin/../conf/zoo.cfg
+Starting zookeeper … STARTED
+在查看zookeeper状态时遇到
+[root@master bin]# zkServer.sh status
+JMX enabled by default
+Using config: /usr/local/zk/bin/../conf/zoo.cfg
+Error contacting service. It is probably not running.
+而其他两个节点却是现实正常;
+分析原因并解决:
+分析方法：
+先stop 掉原zk
+zkServer.sh stop
+然后以start-foreground方式启动，会看到启动日志
+zkServer.sh start-foreground
+一些常见原因：
+原因之一
+其原因是在编辑zoo.cfg配置文件时，指定了log的输出目录，但是却未创建。
+因此需要按照里面指定的目录进行创建。
+mkdir /tmp/zookeeper/log
+原因之二
+最后检查配置zoo.cfg配置发现是该节点的主机名写错了;先停止三个节点zookeeper服务,逐一的修改节点上zoo.cfg配置文件,在逐一的启动 ,结果显示正常;
+PS: zk类的安装搭建过程中, 如果报错, 一定要把status中的错误贴出来, 其它的信息不容易找到答案.
+原因之三
+Java
+Caused by: java.lang.IllegalArgumentException: ./zookeeper/myid file is missing
+1Caused by: java.lang.IllegalArgumentException: ./zookeeper/myid file is missing
+myid文件放错位置或者没有
