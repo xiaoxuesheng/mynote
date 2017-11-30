@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="29" height="32" viewBox="0 0 29 32">
+  <g fill="none" fill-rule="evenodd">
+    <rect width="6" height="2" x="8" fill="#BFE5C2" fill-rule="nonzero"/>
+    <polygon fill="#E1C38F" points="25.974 15.579 24.18 16.523 24.523 14.524 23.071 13.109 25.077 12.818 25.974 11 26.871 12.818 28.878 13.109 27.426 14.524 27.769 16.523"/>
+    <circle cx="21.5" cy="3.5" r="2.5" fill="#8FE19A" fill-rule="nonzero"/>
+    <circle cx="5.5" cy="6.5" r="1.5" fill="#E1DF8F" fill-rule="nonzero"/>
+    <circle cx="25.5" cy="28.5" r="1.5" fill="#E18FD4" fill-rule="nonzero"/>
+    <rect width="4" height="4" x="7" y="28" fill="#8FC0E1" fill-rule="nonzero"/>
+    <polygon fill="#8FE196" fill-rule="nonzero" points="3.679 17 3.679 19.028 5.642 19.028 5.642 20.614 3.679 20.614 3.679 22.642 1.976 22.642 1.976 20.614 0 20.614 0 19.028 1.976 19.028 1.976 17"/>
+    <path fill="#8A8712" fill-rule="nonzero" d="M15.5,27 C16.6,27 17.5,26.1 17.5,25 L13.5,25 C13.5,26.1 14.4,27 15.5,27 L15.5,27 Z M22,21 L22,15.5 C22,12.43 19.87,9.86 17,9.18 L17,8.5 C17,7.67 16.33,7 15.5,7 C14.67,7 14,7.67 14,8.5 L14,9.18 C11.13,9.86 9,12.43 9,15.5 L9,21 L7,23 L7,24 L24,24 L24,23 L22,21 L22,21 Z"/>
+  </g>
+</svg>
