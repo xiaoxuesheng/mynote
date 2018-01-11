@@ -1,0 +1,179 @@
+define("appmsg/fereport.js",["biz_wap/utils/wapsdk.js","biz_common/utils/http.js","appmsg/log.js"],function(e){
+"use strict";
+function i(){
+var e=window.performance||window.msPerformance||window.webkitPerformance;
+if(e&&e.timing){
+var i=e.timing,t=0,m=0,d=window.location.protocol,a=Math.random(),p=1>2*a,r=1>10*a,l=1>25*a,u=1>100*a,w=1>250*a,c=1>500*a,_=1>1e3*a,g=!0;
+"https:"==d?(t=18,m=27,g=!1):"http:"==d&&(t=9,m=19);
+var v=window.__wxgspeeds||{};
+if(v&&v.moonloadtime&&v.moonloadedtime){
+var S,f=v.moonloadedtime-v.moonloadtime;
+S=localStorage&&JSON.parse(localStorage.getItem("__WXLS__moonarg"))&&"fromls"==JSON.parse(localStorage.getItem("__WXLS__moonarg")).method?21:22,
+o.saveSpeeds({
+sample:21==S||22==S&&u?1:0,
+uin:uin,
+pid:t,
+speeds:{
+sid:S,
+time:f
+}
+});
+}
+v&&v.mod_downloadtime&&o.saveSpeeds({
+uin:uin,
+pid:t,
+speeds:{
+sid:24,
+time:v.mod_downloadtime
+}
+});
+var h=i.domContentLoadedEventStart-i.navigationStart;
+if(h>3e3&&(o.setBasicTime({
+sample:r&&g||l&&!g?1:0,
+uin:uin,
+pid:m
+}),(new Image).src=location.protocol+"//mp.weixin.qq.com/mp/jsmonitor?idkey=28307_28_1&lc=1&log0="+encodeURIComponent(location.href)),
+o.setBasicTime({
+sample:w&&g||u&&!g?1:0,
+uin:uin,
+pid:t
+}),n.htmlSize){
+var j=n.htmlSize/(i.responseEnd-i.connectStart);
+o.saveSpeeds({
+sample:c,
+uin:uin,
+pid:t,
+speeds:{
+sid:25,
+time:Math.round(j)
+}
+});
+}
+if(v&&v.combo_times)for(var b=1;b<v.combo_times.length;b++)o.saveSpeeds({
+sample:w,
+uin:uin,
+pid:t,
+speeds:{
+sid:26,
+time:v.combo_times[b]-v.combo_times[b-1]
+}
+});
+if(v&&v.mod_num){
+var z=v.hit_num/v.mod_num;
+o.saveSpeeds({
+sample:w,
+uin:uin,
+pid:t,
+speeds:[{
+sid:27,
+time:Math.round(100*z)
+},{
+sid:28,
+time:Math.round(1e3*z)
+}]
+});
+}
+var T=window.logs.pagetime.jsapi_ready_time-i.navigationStart;
+o.saveSpeeds(156==t||155==t?{
+sample:p,
+uin:uin,
+pid:t,
+speeds:{
+sid:31,
+time:T
+}
+}:{
+sample:c,
+uin:uin,
+pid:t,
+speeds:{
+sid:31,
+time:T
+}
+}),o.send(),window.setTimeout(function(){
+window.__moonclientlog&&s("[moon] "+window.__moonclientlog.join(" ^^^ "));
+},250),window.setTimeout(function(){
+window.onBridgeReadyTime&&(o.saveSpeeds({
+sample:_,
+uin:uin,
+pid:t,
+speeds:{
+sid:32,
+time:window.onBridgeReadyTime-i.navigationStart
+}
+}),o.send());
+},5e3);
+}
+}
+var o=e("biz_wap/utils/wapsdk.js"),n=e("biz_common/utils/http.js"),s=e("appmsg/log.js");
+i();
+});define("biz_wap/jsapi/core.js",[],function(e,n,o,i){
+"use strict";
+document.domain="qq.com";
+var t=window.__moon_report||function(){},d=8,r={
+ready:function(e){
+var n=function(){
+try{
+e&&(window.onBridgeReadyTime=window.onBridgeReadyTime||+new Date,e());
+}catch(n){
+throw t([{
+offset:d,
+log:"ready",
+e:n
+}]),n;
+}
+};
+"undefined"!=typeof top.window.WeixinJSBridge&&top.window.WeixinJSBridge.invoke?n():top.window.document.addEventListener?top.window.document.addEventListener("WeixinJSBridgeReady",n,!1):top.window.document.attachEvent&&(top.window.document.attachEvent("WeixinJSBridgeReady",n),
+top.window.document.attachEvent("onWeixinJSBridgeReady",n));
+},
+invoke:function(e,n,o){
+this.ready(function(){
+return"object"!=typeof top.window.WeixinJSBridge?(i("请在微信中打开此链接！"),!1):void top.window.WeixinJSBridge.invoke(e,n,function(n){
+try{
+if(o){
+o.apply(window,arguments);
+var i=n&&n.err_msg?", err_msg-> "+n.err_msg:"";
+console.info("[jsapi] invoke->"+e+i);
+}
+}catch(r){
+throw t([{
+offset:d,
+log:"invoke;methodName:"+e,
+e:r
+}]),r;
+}
+});
+});
+},
+call:function(e){
+this.ready(function(){
+if("object"!=typeof top.window.WeixinJSBridge)return!1;
+try{
+top.window.WeixinJSBridge.call(e);
+}catch(n){
+throw t([{
+offset:d,
+log:"call;methodName:"+e,
+e:n
+}]),n;
+}
+});
+},
+on:function(e,n){
+this.ready(function(){
+return"object"==typeof top.window.WeixinJSBridge&&top.window.WeixinJSBridge.on?void top.window.WeixinJSBridge.on(e,function(){
+try{
+n&&n.apply(window,arguments);
+}catch(o){
+throw t([{
+offset:d,
+log:"on;eventName:"+e,
+e:o
+}]),o;
+}
+}):!1;
+});
+}
+};
+return r;
+});
