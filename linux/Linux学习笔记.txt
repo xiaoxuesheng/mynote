@@ -1,0 +1,206 @@
+软件安装apt-get  /etc/apt/source.list
+dpkg 
+
+ls pwd cd 
+locate
+alias
+cat $(find -name 1.txt)命令替换
+命令后台执行&
+jobs查看
+环境配置文件加载顺序
+
+set查看所有环境变量
+环境变量作用：决定Shell将在哪些目录中寻找命令或者程序。
+
+环境变量生效：export .. 只对以后的有效
+全局有效 需要放入.bash_profile中 不要放入.bash_rc中否则每次打开一个shell，目录就会添加。
+
+echo 打印环境变量
+env 查看主要环境变量
+环境变量设定规则
+
+进程作业
+后台执行： 命令 &
+将一个正在前台执行的命令放到后台 并暂停：Ctrl+z
+查看后台运行的作业：jobs
+fg 数字 将后台的命令调到前台运行
+bg 数字 将后台暂停的命令继续运行
+
+进程管理
+kill 杀死进程
+ps -aux显示所有进程
+top 动态显示进程状况
+free -m 查看内存使用
+
+作业调度
+at作业执行一次
+at 时间 作业执行
+atq 查看作业队列
+atrm 作业号  删除作业
+
+crontab 定时执行任务
+crontab执行后，会写入/var/spool/cron中
+
+crontab -e 编辑任务
+crontab -l 查看
+crontab -r 删除任务
+
+
+vi:
+一般模式：
+光标移动 0移到这一行首字母 $移到这一行尾字母 
+        gg移动到文件第一行 n<Enter>光标向下移动n行
+
+删除 dd删除当前行 ndd向下删除n行 x向后删除一个字符 X向前删除一个字符
+
+复制 yy复制光标所在的那一行 nyy复制光标所在的向下n行 p粘贴在光标的下一行 P粘贴在光标的
+
+重复 .重复前一个动作
+取消 u 取消前一个操作
+
+/word从光标位置开始，向下寻找名为word的字符串 
+?word从光标位置开始，向上寻找名为word的字符串
+
+块选择 v字符选择，会将光标经过的地方反白;V行选择，会将光标经过的行反白选择
+
+命令模式：
+:e!文件还原为最原始状态
+
+文件管理：
+FHS的目录放置标准
+链接文件 ：硬链接文件 ln 文件名 硬链接文件名 （改变一个文件内容 另一个也改变）删除一个文件 不影响另一个
+软链接符号链接 ln -s 文件名 软链接名 （软链接只是源文件一个标记，当失去源文件时，它就不存在了）
+
+
+head tail cat more
+权限设置
+
+文件查找
+find 路径 -name 文件名
+
+硬盘管理
+df -h 看硬盘使用情况
+du -m 看目录中各文件大小 以mb显示 du -s 看总大小
+
+挂载-建立硬盘和文件系统的连接
+mount 文件系统类型 设备名(/dev/hda?) 目录名 
+unmount 卸载
+
+
+用户管理
+用户信息在/etc/gshadow 密码在/etc/shadow里 新增用户的主目录创建的文件在/etc/skel里
+用户添加 useradd 
+用户删除 userdel 
+切换用户su
+以系统管理身份执行指令 sudo ..  在/etc/sudoers看到具体有权限的用户
+用户配置文件/etc/passwd 里面内容解读
+冒号分割的七项
+用户名:密码:UID:GID:用户描述:用户主目录:登录shell
+
+网络管理
+ifconfig查看网络信息
+route
+traceroute
+netstat查看端口信息
+host查看目标主机ip
+nslookup查看主机ip
+
+系统服务管理
+daxmon（service）后台自动运行的服务 通常会在服务名后加上d
+netstat -tulnp 查看目前系统开启的网络服务
+
+系统服务启动在/etc/init.d和/etc/xinetd.d目录下。
+
+设置开机启动的服务：放在/etc/rc[0..6].d目录下 或 放在/etc/rc.d/rc.local中
+
+用sysv-rc-conf设置系统服务启动
+
+nohup Java -jar xxx.jar &
+nohup 意思是不挂断运行命令,当账户退出或终端关闭时,程序仍然运行
+java -jar xxx.jar &
+&代表在后台运行。当前ssh窗口不被锁定，但是当窗口关闭时，程序中止运行
+update-rc.d
+
+
+shell
+
+文件通配符 用于匹配文件名；find locate
+正则表达式 用于搜寻字符串、匹配文件内容和过滤特殊信息 grep 字符串 文件
+
+管道符 command1 | command2 | command3 管道的信息为STOUT
+cut 命令 ： cut -c1-20
+            cut -d "分割字符" -f1
+将同一行里面的数据进行分解
+
+tee 同时将命令显示在屏幕和输出到文件 last | tee 1.txt |cu t-d " "
+
+tr -d SET1 删除SET1字符串
+tr 'a' 'A' 将a用A代替
+
+split -b 输入文件 输出文件    以文件大小来分，会产生 输出文件aa 输出文件ab。。。
+split -l 输入文件 输出文件    以文件行数来分，会产生 输出文件aa 输出文件ab。。。
+
+重定向到文件 > 
+追加到文件 >>
+
+shell脚本执行方式 :1.chmod 755 脚本文件 ,然后执行脚本
+2.直接以sh命令来执行 sh脚本文件（.sh结尾的文件）
+普通脚本
+#!/bin/bash
+hello=Hello\ \!\ How\ are\ you\ \?
+echo $hello
+
+交互式脚本：read 接受键盘输入
+#!/bin/bash
+echo "please press any key"
+read name
+echo "your key is $name"
+
+变量
+未声明的变量默认为字符串类型
+变量声明declare -a 数组 -f 函数 -i整数
+
+文件检测 -f 是否为文件 -d 是否为目录
+
+运算符号 = != < >
+
+条件判断
+if [条件判断一] &&(||) [条件判断二];then
+ 执行的内容
+elif [条件判断一] &&(||) [条件判断二];then
+ 执行的内容
+else 
+ 执行的内容
+fi
+
+case 种类方式 in
+  种类方式一)
+    程序执行段
+    ;;
+  种类方式二)
+    程序执行段
+    ;;
+  *)
+    echo "Usage:{种类方式一|种类方式二}"
+    exit 1
+esac
+
+循环
+for(条件一;条件二;条件三)
+do
+...
+done
+
+for 变量 in 变量1 变量2 ...
+do
+...
+done
+
+while [条件] &&（||）[条件二]
+do
+...
+done
+until [条件]&&(||)[条件二]
+do 
+...
+done
