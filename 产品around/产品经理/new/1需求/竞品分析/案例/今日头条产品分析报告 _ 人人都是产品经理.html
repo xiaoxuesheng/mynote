@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)http://www.woshipm.com/evaluating/383291.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>今日头条产品分析报告 | 人人都是产品经理</title>
+    <!--[if lt IE 9]>
+    <script src="http://www.woshipm.com/wp-content/themes/Kan/js/html5.js"></script>
+    <![endif]-->
+    <meta name="keywords" content="产品分析, 今日头条, 今日头条产品分析报告, "><meta name="description" content="今日头条个性化的资讯推荐功能精确地满足用户碎片化利用时间的需求，拥有先发优势的今日头条掌握了大量的用户与行为数据，在以后的发展过程中更要做到商业变现与用户体验两者的平衡，并且要寻求多样化的变现形式。同时要加大对内容的监控力度，创造出一套完整的自媒体用户管理体制"><link type="image/vnd.microsoft.icon" href="http://image.woshipm.com/wp-files/other/favicon.ico" rel="shortcut icon"><link rel="dns-prefetch" href="http://image.woshipm.com/">
+<link rel="stylesheet" id="misc-css" href="./今日头条产品分析报告 _ 人人都是产品经理_files/misc.css" type="text/css" media="screen">
+<style id="misc-inline-css" type="text/css">
+
+                .surface-content.header-fix{
+                    padding-top:60px;
+                }
+                .surface-content.header-fix .metabar{
+                    position:fixed;
+                    top:0;
+                    left:0;
+                    right:0;
+                }
+                
+</style>
+<link rel="stylesheet" id="fa-css" href="./今日头条产品分析报告 _ 人人都是产品经理_files/font-awesome.min.css" type="text/css" media="screen">
+<script type="text/javascript" src="./今日头条产品分析报告 _ 人人都是产品经理_files/jquery-1.12.4.min.js.下载"></script>
+<link rel="canonical" href="http://www.woshipm.com/evaluating/383291.html">
+<script type="text/javascript">var algolia = {"debug":false,"application_id":"4OCSFS3SIM","search_api_key":"7bd75daaf81d0299565fce2232394dfd","powered_by_enabled":true,"query":"","autocomplete":{"sources":[],"input_selector":"input[name='s']:not('.no-autocomplete')"},"indices":{"searchable_posts":{"name":"w_searchable_posts","id":"searchable_posts","enabled":true,"replicas":[]}}};</script></head>
+<body class="single u-backgroundColorLightBlue">
+<div class="surface-content header-fix">
+    <div class="metabar metabar--shadow u-clearfix">
+        <div class="container">
+            <div class="u-floatLeft">
+                <a href="http://www.woshipm.com/" class="logo-xmas">
+                    <img class="logo" src="./今日头条产品分析报告 _ 人人都是产品经理_files/logo.png">
+                </a>
+            </div>
+            <div class="content u-floatLeft">
+                <nav class="header-nav"><ul id="menu-%e9%a1%b6%e9%83%a8%e5%af%bc%e8%88%aa" class="subnav-ul layoutSingleColumn layoutSingleColumn--wide"><li id="menu-item-155938" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-155938"><a href="http://www.woshipm.com/">首页</a></li>
+<li id="menu-item-155939" class="third menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-155939"><a href="http://www.woshipm.com/evaluating/383291.html#">分类浏览</a><span class="fa fa-angle-down"></span><ul class="sub-menu">	<li id="menu-item-155928" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155928"><a href="http://www.woshipm.com/category/pmd">产品经理</a></li>
+	<li id="menu-item-155929" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155929"><a href="http://www.woshipm.com/category/pd">产品设计</a></li>
+	<li id="menu-item-155927" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155927"><a href="http://www.woshipm.com/category/ucd">交互体验</a></li>
+	<li id="menu-item-155930" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155930"><a href="http://www.woshipm.com/category/operate">产品运营</a></li>
+	<li id="menu-item-155932" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155932"><a href="http://www.woshipm.com/category/rp">原型设计</a></li>
+	<li id="menu-item-191466" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-191466"><a href="http://www.woshipm.com/category/evaluating">分析评测</a></li>
+	<li id="menu-item-155926" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155926"><a href="http://www.woshipm.com/category/it">业界动态</a></li>
+	<li id="menu-item-155936" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155936"><a href="http://www.woshipm.com/category/zhichang">职场攻略</a></li>
+	<li id="menu-item-184121" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-184121"><a href="http://www.woshipm.com/category/chuangye">创业学院</a></li>
+	<li id="menu-item-1016325" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1016325"><a href="http://www.woshipm.com/category/marketing">营销推广</a></li>
+	<li id="menu-item-906383" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-906383"><a href="http://www.woshipm.com/category/ai">AI人工智能</a></li>
+	<li id="menu-item-906382" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-906382"><a href="http://www.woshipm.com/category/blockchain">区块链</a></li>
+</ul>
+</li>
+<li id="menu-item-155940" class="vip menu-item menu-item-type-custom menu-item-object-custom menu-item-155940"><a href="http://www.woshipm.com/course">热门课程</a></li>
+<li id="menu-item-420537" class="niubi menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-420537"><a href="http://www.woshipm.com/categroy/active">活动讲座</a><span class="fa fa-angle-down"></span><ul class="sub-menu">	<li id="menu-item-158482" class="menu-item menu-item-type-gs_sim menu-item-object-gs_sim menu-item-158482"><ul class="metabar-activities"><li class="metabar-activity-item"><a class="e-title" href="http://www.woshipm.com/active/1430457.html">线下课程丨解构运营人能力模型：初、中、高级；基础、普通、职业段位</a><div class="meta">上海-10月13日<span class="status">进行中</span></div></li><li class="metabar-activity-item"><a class="e-title" href="http://www.woshipm.com/active/1433797.html">线下课程 | 如果领导突然要把你升为运营总监，你能接的住吗？</a><div class="meta">上海-10月27日<span class="status">进行中</span></div></li></ul><div class="metabar-activity-more u-textAlignCenter u-clearfix"><a href="http://www.woshipm.com/category/active">更多活动</a></div></li>
+</ul>
+</li>
+<li id="menu-item-279085" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-279085"><a target="_blank" href="http://wen.woshipm.com/">问答</a></li>
+<li id="menu-item-395532" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-395532"><a target="_blank" href="http://996.pm/7b1Zr">年费会员</a></li>
+<li id="menu-item-155941" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-155941"><a target="_blank" href="http://www.zhaopins.com/">招聘</a><span class="fa fa-angle-down"></span><ul class="sub-menu">	<li id="menu-item-1021335" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1021335"><a target="_blank" href="http://www.zhaopins.com/">免费招人</a></li>
+	<li id="menu-item-1021337" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1021337"><a target="_blank" href="http://www.zhaopins.com/activity/20170114/2ent.html">付费招人</a></li>
+	<li id="menu-item-1021339" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1021339"><a target="_blank" href="http://www.zhaopins.com/activity/20170114/2user.html">免费内推</a></li>
+</ul>
+</li>
+<li id="menu-item-500728" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-500728"><a href="http://www.woshipm.com/evaluating/383291.html#">百宝箱</a><span class="fa fa-angle-down"></span><ul class="sub-menu">	<li id="menu-item-395530" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-395530"><a target="_blank" href="http://dh.woshipm.com/">网址导航</a></li>
+	<li id="menu-item-500731" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-500731"><a target="_blank" href="http://www.woshipm.com/books">必读书单</a></li>
+	<li id="menu-item-590029" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-590029"><a target="_blank" href="http://www.woshipm.com/topics">知识体系</a></li>
+	<li id="menu-item-501017" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-501017"><a target="_blank" href="http://www.yunyingpai.com/">运营派</a></li>
+	<li id="menu-item-500729" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-500729"><a target="_blank" href="http://www.woshipm.com/tools">必备工具</a></li>
+	<li id="menu-item-852376" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-852376"><a target="_blank" href="http://www.woshipm.com/screen/index.html">设计规范</a></li>
+	<li id="menu-item-1019313" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1019313"><a target="_blank" href="https://www.apptu.cn/">灵感图库</a></li>
+	<li id="menu-item-1317021" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1317021"><a target="_blank" href="https://t.qidianla.com/">学员后花园</a></li>
+</ul>
+</li>
+</ul></nav>
+            </div>
+            <div class="u-floatRight content">
+                                    <span class="item" data-action="popLogin"><svg class="svgIcon-use" width="18" height="17" viewBox="0 0 18 17"><path d="M17.831,3.950 L9.184,12.519 C9.113,12.590 9.024,12.641 8.927,12.667 L4.754,13.785 C4.705,13.798 4.655,13.805 4.603,13.805 C4.450,13.805 4.301,13.743 4.193,13.635 C4.047,13.489 3.992,13.275 4.048,13.078 L5.219,8.984 C5.246,8.891 5.296,8.805 5.366,8.736 L14.013,0.165 C14.122,0.058 14.267,-0.002 14.421,-0.002 C14.575,-0.002 14.720,0.058 14.829,0.165 L17.831,3.141 C17.940,3.249 18.000,3.393 18.000,3.545 C18.000,3.698 17.940,3.842 17.831,3.950 ZM8.156,11.689 L6.199,9.750 L5.436,12.419 L8.156,11.689 ZM14.421,1.378 L6.902,8.830 L9.088,10.997 L16.607,3.546 L14.421,1.378 ZM1.153,2.286 L1.153,14.895 C1.153,15.425 1.588,15.855 2.122,15.855 L14.732,15.855 C15.267,15.855 15.701,15.425 15.701,14.895 L15.701,10.476 L16.855,10.476 L16.855,14.895 C16.855,16.055 15.902,16.998 14.732,16.998 L2.122,16.998 C0.952,16.998 -0.000,16.055 -0.000,14.895 L-0.000,2.286 C-0.000,1.126 0.952,0.183 2.122,0.183 L9.326,0.183 L9.326,1.326 L2.122,1.326 C1.588,1.326 1.153,1.756 1.153,2.286 Z"></path></svg>投稿</span>
+                    <span class="item show-search"><svg class="svgIcon-use" width="16" height="16" viewBox="0 0 16 16"><path d="M15.800,14.481 L12.519,11.200 C12.504,11.184 12.487,11.170 12.471,11.156 C13.361,9.988 13.890,8.529 13.890,6.947 C13.890,3.110 10.780,-0.000 6.945,-0.000 C3.109,-0.000 -0.000,3.110 -0.000,6.947 C-0.000,10.785 3.109,13.895 6.945,13.895 C8.529,13.895 9.990,13.364 11.159,12.471 C11.172,12.487 11.186,12.503 11.201,12.518 L14.483,15.800 C14.786,16.104 15.329,16.056 15.693,15.692 C16.056,15.328 16.104,14.786 15.800,14.481 L15.800,14.481 ZM0.772,6.947 C0.772,3.537 3.535,0.771 6.945,0.771 C10.354,0.771 13.118,3.537 13.118,6.947 C13.118,8.621 12.453,10.138 11.373,11.250 C11.351,11.269 11.330,11.288 11.310,11.308 C11.289,11.329 11.269,11.351 11.250,11.373 C10.138,12.456 8.619,13.123 6.945,13.123 C3.535,13.123 0.772,10.358 0.772,6.947 L0.772,6.947 Z" class="cls-1"></path></svg>搜索</span>
+                    <div class="item app-qrcode"><svg class="svgIcon-use" width="12" height="18" viewBox="0 0 12 18"><path d="M10.599,17.999 L1.401,17.999 C0.626,17.999 -0.000,17.381 -0.000,16.616 L-0.000,1.382 C-0.000,0.617 0.626,-0.001 1.401,-0.001 L10.599,-0.001 C11.374,-0.001 12.000,0.627 12.000,1.382 L12.000,16.616 C12.000,17.381 11.374,17.999 10.599,17.999 ZM11.066,1.382 C11.066,1.128 10.857,0.922 10.599,0.922 L1.401,0.922 C1.142,0.922 0.934,1.128 0.934,1.382 L0.934,12.800 L11.066,12.800 L11.066,1.382 ZM11.066,13.811 L0.934,13.811 L0.934,16.626 C0.934,16.881 1.142,17.087 1.401,17.087 L10.599,17.087 C10.857,17.087 11.066,16.881 11.066,16.626 L11.066,13.811 ZM6.000,16.283 C5.483,16.283 5.066,15.871 5.066,15.361 C5.066,14.851 5.483,14.439 6.000,14.439 C6.516,14.439 6.934,14.851 6.934,15.361 C6.934,15.871 6.516,16.283 6.000,16.283 Z"></path></svg>APP<div class="app-qrcode-dropdown"><img class="app-qrcode-img" src="./今日头条产品分析报告 _ 人人都是产品经理_files/footer-appdownload.png"></div></div>
+                    <span class="item" data-action="popLogin">注册 | 登录</span>
+                                            </div>
+        </div>
+    </div>
+    <div class="search-overlay">
+        <div class="container search-content">
+            <form class="search-form" action="http://www.woshipm.com/search-posts" target="_blank" method="get">
+                <input type="search" class="search-form-input" name="k" placeholder="请输入搜索关键词">
+                <button class="btn-search">
+                    <i class="fa fa-search"></i>
+                </button>            </form>
+            <div class="search-hot-words">
+                <h3 class="search-overlay-title"><svg class="svgIcon-use u-colorYellow" width="16" height="16" viewBox="0 0 20 22">
+                        <path d="M19.595,15.561 C18.224,19.972 14.151,21.765 10.797,21.972 C9.858,22.028 8.916,22.002 7.981,21.894 C3.718,21.402 -0.382,18.446 0.029,13.748 C0.223,11.528 1.519,8.904 2.466,6.987 L2.620,6.672 C2.756,6.400 3.029,6.236 3.319,6.254 C3.609,6.268 3.865,6.462 3.972,6.747 C4.106,7.109 4.318,7.534 4.543,7.984 C4.629,8.156 4.715,8.330 4.800,8.504 C6.731,6.456 7.296,3.554 7.602,0.687 C7.631,0.425 7.783,0.197 8.007,0.081 C8.233,-0.035 8.498,-0.026 8.716,0.107 C10.922,1.463 12.480,2.863 13.616,4.513 C13.922,4.959 14.199,5.426 14.445,5.913 C14.621,5.327 14.811,4.747 15.016,4.172 C15.110,3.928 15.312,3.749 15.555,3.695 C15.798,3.640 16.051,3.718 16.229,3.901 C20.136,7.930 20.484,12.700 19.595,15.561 ZM7.493,12.523 C7.493,12.149 7.202,11.847 6.844,11.847 C6.486,11.847 6.196,12.149 6.196,12.523 L6.196,13.784 L4.857,13.804 L4.857,12.559 C4.857,12.186 4.566,11.884 4.209,11.884 C3.851,11.884 3.560,12.186 3.560,12.559 L3.560,16.704 C3.560,17.077 3.851,17.379 4.209,17.379 C4.566,17.379 4.857,17.077 4.857,16.704 L4.857,15.156 L6.196,15.135 L6.196,16.667 C6.196,17.040 6.486,17.343 6.844,17.343 C7.202,17.343 7.493,17.040 7.493,16.667 L7.493,12.523 ZM10.632,11.813 C9.385,11.813 8.371,13.034 8.371,14.535 C8.371,16.036 9.386,17.258 10.632,17.258 C11.878,17.258 12.892,16.036 12.892,14.535 C12.892,13.034 11.878,11.813 10.632,11.813 ZM16.522,11.959 L13.574,11.959 C13.216,11.959 12.926,12.262 12.926,12.635 C12.927,12.816 12.996,12.988 13.118,13.115 C13.239,13.242 13.403,13.312 13.574,13.311 L14.399,13.311 L14.399,16.629 C14.399,17.002 14.690,17.304 15.048,17.304 C15.406,17.304 15.696,17.002 15.696,16.629 L15.696,13.311 L16.522,13.311 C16.692,13.312 16.856,13.242 16.978,13.115 C17.100,12.988 17.169,12.816 17.170,12.635 C17.170,12.262 16.880,11.959 16.522,11.959 ZM10.632,15.908 C10.109,15.908 9.669,15.279 9.669,14.535 C9.669,13.791 10.109,13.163 10.632,13.163 C11.153,13.163 11.595,13.791 11.595,14.535 C11.595,15.279 11.154,15.908 10.632,15.908 Z" class="cls-1"></path>
+                    </svg>热搜词</h3>
+                <div class="words-list">
+                    <a href="http://www.woshipm.com/tag/app" target="_blank" class="words-item">app</a><a href="http://www.woshipm.com/tag/o2o" target="_blank" class="words-item">O2O</a><a href="http://www.woshipm.com/tag/prd" target="_blank" class="words-item">PRD</a><a href="http://www.woshipm.com/tag/%e4%ba%92%e8%81%94%e7%bd%91%e9%87%91%e8%9e%8d" target="_blank" class="words-item">互联网金融</a><a href="http://www.woshipm.com/tag/%e4%ba%a4%e4%ba%92%e8%ae%be%e8%ae%a1" target="_blank" class="words-item">交互设计</a><a href="http://www.woshipm.com/tag/rp" target="_blank" class="words-item">原型设计</a><a href="http://www.woshipm.com/tag/%e5%95%86%e4%b8%9a%e6%a8%a1%e5%bc%8f" target="_blank" class="words-item">商业模式</a><a href="http://www.woshipm.com/tag/%e6%95%b0%e6%8d%ae%e5%88%86%e6%9e%90" target="_blank" class="words-item">数据分析</a><a href="http://www.woshipm.com/tag/ue" target="_blank" class="words-item">用户体验</a><a href="http://www.woshipm.com/tag/%e7%ab%9e%e5%93%81%e5%88%86%e6%9e%90" target="_blank" class="words-item">竞品分析</a><a href="http://www.woshipm.com/tag/%e8%bf%90%e8%90%a5" target="_blank" class="words-item">运营</a><a href="http://www.woshipm.com/tag/%e9%9c%80%e6%b1%82%e5%88%86%e6%9e%90" target="_blank" class="words-item">需求分析</a>                </div>
+            </div>
+            <div class="search-features">
+                <h3 class="search-overlay-title"><svg class="svgIcon-use  u-colorPink" width="16" height="16" viewBox="0 0 22 22">
+                        <path d="M21.988,7.680 C21.978,7.317 21.969,6.921 21.963,6.490 C21.954,6.060 21.951,5.617 21.951,5.169 C21.932,4.117 21.917,2.952 21.898,1.674 C21.865,1.468 21.825,1.259 21.782,1.053 C21.739,0.847 21.631,0.647 21.459,0.457 C21.287,0.284 21.093,0.168 20.875,0.106 C20.660,0.045 20.466,0.017 20.294,0.017 L12.428,0.017 C12.394,-0.001 12.271,-0.005 12.065,0.005 C11.860,0.014 11.730,0.035 11.678,0.069 C11.574,0.103 11.457,0.165 11.328,0.251 C11.199,0.337 11.091,0.423 11.005,0.509 L0.576,10.993 C-0.183,11.891 -0.192,12.754 0.551,13.581 L8.568,21.631 C8.740,21.770 8.925,21.868 9.125,21.929 C9.324,21.991 9.527,22.012 9.733,21.994 C9.939,21.976 10.136,21.932 10.314,21.865 C10.495,21.797 10.646,21.702 10.765,21.579 C12.698,19.646 14.422,17.912 15.940,16.375 L17.855,14.433 C18.494,13.812 19.059,13.249 19.551,12.751 C20.042,12.250 20.445,11.845 20.755,11.534 L21.247,11.042 C21.281,11.009 21.336,10.935 21.416,10.821 C21.493,10.710 21.576,10.563 21.662,10.381 C21.748,10.200 21.825,9.997 21.895,9.773 C21.963,9.549 22.000,9.306 22.000,9.047 L22.000,8.583 C22.000,8.344 21.994,8.042 21.988,7.680 L21.988,7.680 L21.988,7.680 ZM8.479,14.845 L7.013,14.845 L7.290,12.908 L8.756,12.908 L8.479,14.845 L8.479,14.845 L8.479,14.845 ZM9.232,12.327 C9.161,12.376 9.084,12.413 9.001,12.438 C8.918,12.462 8.836,12.475 8.756,12.475 L7.188,12.475 L7.188,11.331 L8.037,11.331 L8.037,10.271 L7.087,10.317 L7.004,9.192 L8.037,9.137 L8.037,7.999 L6.967,7.999 L6.967,6.847 L8.037,6.847 L8.037,6.026 L9.465,6.026 L9.465,6.847 L10.452,6.847 L10.452,7.999 L9.465,7.999 L9.465,9.051 L10.406,9.005 L10.498,10.148 L9.466,10.203 L9.466,11.900 C9.466,11.992 9.444,12.075 9.401,12.146 C9.358,12.220 9.303,12.278 9.232,12.327 L9.232,12.327 L9.232,12.327 ZM9.742,14.845 L9.456,12.908 L10.931,12.908 L11.208,14.845 L9.742,14.845 L9.742,14.845 ZM12.041,14.845 L11.764,12.908 L13.230,12.908 L13.506,14.845 L12.041,14.845 L12.041,14.845 ZM13.860,12.115 C13.814,12.035 13.789,11.943 13.789,11.838 L13.789,8.009 L12.840,8.009 L12.757,9.281 L13.494,9.346 L13.384,10.489 L12.692,10.425 L12.600,11.937 C12.588,12.115 12.505,12.250 12.351,12.343 C12.197,12.435 12.041,12.481 11.881,12.481 L10.710,12.481 L10.609,11.340 L11.208,11.340 L11.272,10.299 L10.692,10.243 L10.802,9.091 L11.337,9.155 L11.411,8.012 L10.701,8.012 L10.701,6.859 L11.475,6.859 L11.530,6.011 L12.959,6.066 L12.904,6.859 L15.218,6.859 L15.218,11.353 L15.716,11.353 L15.716,12.487 L14.554,12.487 C14.462,12.487 14.370,12.472 14.281,12.444 C14.191,12.416 14.109,12.373 14.035,12.318 C13.961,12.263 13.906,12.195 13.860,12.115 L13.860,12.115 L13.860,12.115 ZM14.336,14.845 L14.060,12.908 L15.525,12.908 L15.802,14.845 L14.336,14.845 L14.336,14.845 L14.336,14.845 ZM19.373,4.830 C19.053,5.141 18.669,5.298 18.220,5.298 C17.772,5.298 17.390,5.141 17.080,4.830 C16.770,4.520 16.613,4.139 16.613,3.690 C16.613,3.241 16.770,2.860 17.080,2.550 C17.390,2.239 17.772,2.083 18.220,2.083 C18.669,2.083 19.053,2.239 19.373,2.550 C19.692,2.860 19.852,3.241 19.852,3.690 C19.852,4.139 19.692,4.520 19.373,4.830 L19.373,4.830 Z" class="cls-1">
+                    </path></svg>热门专题</h3>
+                                    <div class="search-feature-item">
+                        <a class="tool-img" href="http://www.woshipm.com/topic/grow" target="_blank">
+                            <img rel="nofollow" src="./今日头条产品分析报告 _ 人人都是产品经理_files/180x120">
+                            <h3>运营人的自我修养</h3>
+                        </a>
+                    </div>
+                                    <div class="search-feature-item">
+                        <a class="tool-img" href="http://www.woshipm.com/topic/xm" target="_blank">
+                            <img rel="nofollow" src="./今日头条产品分析报告 _ 人人都是产品经理_files/180x120(1)">
+                            <h3>产品项目总结</h3>
+                        </a>
+                    </div>
+                                    <div class="search-feature-item">
+                        <a class="tool-img" href="http://www.woshipm.com/topic/content" target="_blank">
+                            <img rel="nofollow" src="./今日头条产品分析报告 _ 人人都是产品经理_files/180x120(2)">
+                            <h3>文案进阶的必备利器</h3>
+                        </a>
+                    </div>
+                            </div>
+        </div>
+    </div>    <div class="container u-clearfix single-wrapper u-marginBottom30">
+        <div class="u-width840 u-floatLeft">
+            <div class="u-marginTop30">
+                <article class="article-wrapper u-backgroundColorWhite u-rounded">
+                    <header class="article-header">
+                        <h2 class="article-title">今日头条产品分析报告</h2>
+                    </header>
+                    <div class="postMetaLockup--authorWithBio u-flex">
+                        <div class="u-flex0">
+                            <a href="http://www.woshipm.com/u/101953" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/42x42" alt="" height="42" width="42" class="avatar"></a>
+                        </div>
+                        <div class="u-flex1 u-paddingLeft15 u-overflowHidden">
+                            <div class="">
+                                <a href="http://www.woshipm.com/u/101953" target="_blank">小狼人</a><button class="button button--toggle button--primary button--follow" data-action="showLoginForm" data-id="101953"><span class="is-default">订阅专栏</span><span class="is-active">取消订阅</span></button>                            </div>
+                            <div class="des">希望有朝一日能足够强大，因为我想有所选择</div>
+                            <div class="postMetaInline postMetaInlineSupplemental post-meta-items">
+                                <span class="post-meta-item"><span class="fa fa-clock-o"></span>2016-08-01</span>
+                                <span class="post-meta-item"><span class="fa fa-eye"></span>17.1万</span>
+                                <span class="post-meta-item"><span class="fa fa-star"></span>520</span>
+                                <span class="post-meta-item"><span class="fa fa-thumbs-up"></span>113</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="article-topAd">
+                        从零开始学运营，10年经验运营总监亲授，2天线下集训+1年在线学习，做个有竞争力的运营人。<a href="http://996.pm/MkqOR" target="_blank">了解详情</a>                    </div>
+                                        <div id="postAudio" class="jp-jplayer" style="width: 0px; height: 0px;"><img id="jp_poster_0" style="width: 0px; height: 0px; display: none;"><audio id="jp_audio_0" preload="none" src="http://audio-pm.woshipm.com/cache/vava-383291.mp3"></audio></div>
+                        <div id="jp_container_1" class="jp-audio" role="application" aria-label="media player">
+                            <div class="jp-type-single">
+                                <div class="jp-gui jp-interface">
+                                    <div class="jp-controls">
+                                        <button class="jp-play" role="button" tabindex="0"><svg class="svgIcon-use" width="25" height="25" viewBox="0 0 25 25"><path d="M7 4v17.03a.5.5 0 0 0 .795.404l11.1-8.111a1 1 0 0 0 0-1.615l-11.1-8.112A.5.5 0 0 0 7 4z"></path></svg></button>
+                                        <button class="jp-pause" role="button" tabindex="0" style="display: none;"><svg class="svgIcon-use" width="25" height="25" viewBox="0 0 25 25"><g transform="translate(5 4)" fill-rule="evenodd"><rect width="6" height="17" rx="2"></rect><rect x="9" width="6" height="17" rx="2"></rect></g></svg></button>
+                                    </div>
+                                    <div class="u-flex1">
+                                        <div>释放双眼，带上耳机，听听看~！</div>
+                                        <div class="u-flexCenter">
+                                            <div class="u-flex0 u-marginRight10 jp-current-time js-currentTime" style="width:34px">00:00</div>
+                                            <div class="u-flex1">
+                                                <div class="js-progress" data-action="seek-audioPlayer">
+                                                    <div class="js-progressBar">
+                                                        <div class="js-play-bar" style="width: 0%;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="u-flex0 u-marginLeft10 jp-duration">00:00</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                        <div class="grap">
+                        <blockquote><p>今日头条个性化的资讯推荐功能精确地满足用户碎片化利用时间的需求，拥有先发优势的今日头条掌握了大量的用户与行为数据，在以后的发展过程中更要做到商业变现与用户体验两者的平衡，并且要寻求多样化的变现形式。同时要加大对内容的监控力度，创造出一套完整的自媒体用户管理体制，提高内容的质量，增强平台的权威性。</p></blockquote>
+<p><img data-action="zoom" class="size-full wp-image-383978 aligncenter" src="./今日头条产品分析报告 _ 人人都是产品经理_files/jinritoutiao.jpg" alt="jinritoutiao" width="680" height="320" srcset="http://www.woshipm.com/wp-content/uploads/2016/07/jinritoutiao.jpg 680w, http://www.woshipm.com/wp-content/uploads/2016/07/jinritoutiao-404x190.jpg 404w" sizes="(max-width: 680px) 100vw, 680px"></p>
+<h2>一、行业概述</h2>
+<p>中国互联网信息中心发布的报告显示，截至2015年12月，中国网民规模达6.88亿，互联网普及率为50.3%；手机网民规模达6.2亿，移动互联网渗透率升至90.1%。而易观智库研究数据显示，2015年9月，中国新闻客户端行业活跃人数达到3.38亿，渗透率为54.3%。</p>
+<h2>二、市场概况</h2>
+<p>继PC端的互联网门户之争后，随着宽带基础的设施的完备、智能手机的普及等利好因素，互联网在中国得到了迅速的发展，用户呈现出从PC向移动端大规模转移的趋势，带动了移动互联网用户人数的暴增，用户时间趋于碎片化，移动新闻资讯行业成为互联网的巨大的流量来源，移动新闻客户端领域竞争激烈。从渗透率看，2015年下半年新闻资讯行业格局稳定，腾讯新闻凭借着庞大的流量入口，以其强大的用户覆盖率，位列第一。今日头条虽是后起之秀，但凭借着数据挖掘与引擎推荐迅速跑马圈地，直逼腾讯新闻。排名前四位的腾讯新闻、今日头条、搜狐新闻以及网易新闻，覆盖了近八成的新闻客户端市场。</p>
+<p><img data-action="zoom" class="attachment-large  aligncenter" src="./今日头条产品分析报告 _ 人人都是产品经理_files/CZH1.png" alt="CZH1" width="700" height="375"></p>
+<h2>三、产品分析</h2>
+<h3>（一）产品简介</h3>
+<p>今日头条是一款基于机器学习的数据挖掘与引擎推荐产品，旨在为用户提供个性化的新闻资讯，实现内容与用户的精准连接。公开数据显示，于2012年8月上线的今日头条，截至2016年5月，累计激活用户数已达4.8亿，日活跃人数超过4700万，成为仅次于腾讯的第二大资讯平台。</p>
+<h3>（二）核心功能</h3>
+<p>以技术为壁垒，以海量数据为依托，通过机器学习感知、理解、判断用户的行为特征，例如用户在新闻客户端的滑动、搜索、查询、点击、收藏、评论、分享等动作，综合用户具体的环境特征与社交属性判断用户的兴趣爱好，为用户推荐个性化的新闻资讯，塑造千人千面的阅读场景。</p>
+<h3>（三）产品特色</h3>
+<p>今日头条主要两大特色。第一、个性化的内容推荐机制，根据用户的喜好为其推荐个性化的媒体信息，让用户在信息过剩的互联网时代迅速获取自己所关心的内容，而不是千人一面。第二、庞大的内容创业者群体。早期的今日头条将自身定位为内容平台，不做新闻生产者，只做新闻的搬运工，通过爬虫抓取第三方媒体网站信息，这样的做法让今日头条获取了海量的媒体信息，但也引来了版权之争。而后，今日头条为了减少版权纠纷与加强平台的内容把控能力，创办了头条号，吸引了大量传统媒体与自媒体内容创作者的加入。</p>
+<h3>（四）产品slogan</h3>
+<p>“你所关心的，才是头条”。传统意义上的头条意指与社会群体密切相关的信息，而今日头条的这句产品slogan则打破了传统，实现了以用户自身为中心，突显了今日头条旨在为用户提供个性资讯的产品定位。</p>
+<h3>（五）产品商业模式</h3>
+<p>互联网产品变现的方式总体上有三种，广告、电商以及游戏。今日头条选择了广告变现和电商变现。由于掌握了大量的用户数据，使得今日头条能够根据用户的具体画像来实现广告的精准投放。但是平台无法给用户提供相应的消费场景，电商只能作为今日头条次要的变现方式而存在，包括与京东合作的商品导购和互联网理财产品。与格瓦拉合作的今日电影，此外今日头条还为手机游戏导流。</p>
+<h2>四、用户需求分析</h2>
+<h3>（一）需求分析</h3>
+<ol>
+<li>关注社会热点与行业资讯，及时了解时事新闻，保持与外界的信息沟通。</li>
+<li>通过轻松有趣的内容满足自身休闲娱乐的需求。</li>
+<li>从海量的信息中得到解放，减少筛选信息的成本，能够快速获取自己的喜闻乐见的内容。</li>
+</ol>
+<h3>（二）用户分析</h3>
+<p><strong>1、用户画像</strong></p>
+<p>性别：今日头条的主要以男性用户为主，男女比例大致为3:2，这符合在整个移动新闻资讯行业中，男性是主要的用户群体。</p>
+<p>年龄：用户年龄主要集中在35岁以下，比例为77.3%。其中30岁以下的用户占比为59.7%，用户群体趋向于年轻化。</p>
+<p><img data-action="zoom" class="attachment-large  aligncenter" src="./今日头条产品分析报告 _ 人人都是产品经理_files/CZH2-1-1024x416.png" alt="CZH2" width="708" height="288"></p>
+<p>地理位置：用户主要集中在北上广深、其他省会城市以及地级市，占比68.2%。</p>
+<p>学历：41.3%的用户学历在大专及以上，其中本科生占比最高。58.7%的用户学历在高中及以下，其中高中/职校/技校/占比最高。</p>
+<p><img data-action="zoom" class="attachment-large  aligncenter" src="./今日头条产品分析报告 _ 人人都是产品经理_files/CZH3-1024x425.png" alt="CZH3" width="691" height="287"></p>
+<p>职业与收入：自由职业者/个体户/私营企业主成为最大的用户群体，达到37.8%的比重，用户收入主要集中在4000元以下，低收入群体占大部分。</p>
+<p><img data-action="zoom" class="attachment-large  aligncenter" src="./今日头条产品分析报告 _ 人人都是产品经理_files/CZH4-1024x432.jpg" alt="CZH4" width="709" height="299"></p>
+<p><strong>2、用户使用场景</strong></p>
+<p><img data-action="zoom" class="attachment-large  aligncenter" src="./今日头条产品分析报告 _ 人人都是产品经理_files/CZH5.png" alt="CZH5" width="617" height="311"></p>
+<p>生活节奏的加快使人们的时间越来越趋于碎片化，移动互联网的普及给用户提供了利用碎片化的渠道，人们对移动新闻客户端的依赖性也逐渐上升。碎片化时间的特点在于时间长度较短，场景具有不稳定性，用户所能够吸纳的信息量是有限的。今日头条通过数据挖掘与引擎推荐，实现内容与用户的精准连接，极大减少用户的信息筛选时间与隐性成本，使用户能够充分利用其有限的碎片化时间。与其他传统新闻客户端相比，今日头条增加了用户的可利用的闲暇时间。假设一个使用场景，某天早上，一个白领在等待交通工具的过程中，当他打开某个传统新闻客户端后，却不知道自己该看哪一条，在快速滑动的过程中，他在寻找着自己感兴趣的新闻。而他旁边使用着今日头条的用户，当他一打开客户端，系统就根据他的喜好向他推荐了相关新闻，他的筛选时间在理想情况下接近于零，用户体验将远远优于前者。</p>
+<h2>五、竞品分析</h2>
+<h3>（一）、产品对比</h3>
+<p>渗透率：从渗透率看，2015年下半年新闻资讯行业格局稳定，腾讯新闻（31.8%）、今日头条（23.2%）、搜狐新闻（22.5%）网易新闻（17.1%）分别占据移动新闻资讯行业用户规模的前四位。</p>
+<p>活跃度：(艾媒咨询)数据显示，对于2015年手机新闻客户端活跃用户占比，凭借腾讯在社交产品积累庞大用户的优势，腾讯新闻在活跃用户占比上排名第一，占比38.2%；网易新闻客户端以及今日头条以较小差距分列二三位，分别占比33.1%和32.1%。搜狐新闻占比28.9%，位列第四。</p>
+<p><img data-action="zoom" class="attachment-large size-large aligncenter" src="./今日头条产品分析报告 _ 人人都是产品经理_files/CZH6.jpg" alt="CZH6" width="553" height="316"></p>
+<h3>（二）、用户画像对比</h3>
+<p>腾讯新闻：用户群体性别最均衡，年轻已婚的女性相对较多。大部分用户集中于30岁以下的年龄段，用户群年轻化程度仅次于网易新闻。用户学历水平大部分在大专以下，低学历用户占比最高，收入大部分在4000元以下。</p>
+<p>今日头条：以30以下的低收入年轻群体为主。</p>
+<p>搜狐新闻：以35岁以上的成熟商业界男士为主，男性用户所占比重最高。</p>
+<p>网易新闻：以30岁以下的用户为主，用户群更加年轻化，主要集中在地级市以上城市，大专及以上的高学历用户所占比重较大。公务员以及白领用户比重高于行业平均水平，中高收入占比亦更高。</p>
+<h3>（三）、内容对比</h3>
+<p>腾讯新闻、搜狐新闻和网易新闻客户端凭借着早期的门户网站的原始积累，已然形成了系统化的内容布局与培育出了一批更为专业的内容生产者，有足够的能力为用户提供更高质量的原创内容，不存在所谓的版权之争。而不做内容，只做平台的今日头条没有自身的内容编辑者，通过爬虫抓取媒体网站的内容，为用户推荐个性化的内容。并且创立头条号，吸引了众多的自媒体创业者，在内容的量上远远超过其他新闻客户端，并且能够做到多样化，个性化，大众化，但是存在侵权的风险。</p>
+<h2>六、产品功能体验</h2>
+<h3>（一）产品结构图</h3>
+<p><img data-action="zoom" class="attachment-large  aligncenter" src="./今日头条产品分析报告 _ 人人都是产品经理_files/CZH7-1.jpg" alt="CZH7" width="613" height="605"></p>
+<h3>（二）产品体验</h3>
+<p><strong>1、交互体验</strong></p>
+<p>页面展示：首页界面只展示用户关注的六个频道，其余频道隐藏在栏目右侧，用户可通过横向滑动来浏览自己关注的频道。另外，将系统所有频道通过折叠的方式隐藏于另一界面，用户可通过点击”+”来编辑频道。这样的设计有两个好处，第一、展示的频道数量适中，能够集中用户的注意力，使用户能够快速选择。第二、保证页面的统一与美观。今日头条基于用户的订阅来展现相关频道，因此频道的数量具有不确定性，如果采用列表式，不仅会占据大量页面空间，而且在排列上将无法做到整齐划一。</p>
+<p>动作设计：与新浪微博客户端一样，今日头条采用下拉界面以刷新内容。由于存在不同的频道，用户可以通过左右滑动来切换频道，不用将手移动到上面的频道栏逐个点击，使用起来也颇为方便。在首页界面，每条内容的右下方均有×号，点击后用户既可直接选择不感兴趣，也可以选择相应的标签，以减少同类内容，实现精准推送。但是同样的功能在视频界面却消失了，用户需要点击右下角的“.….”，选择“不感兴趣”，贴上具体的兴趣标签或者直接选择“不感兴趣”，前后经过三次点击才能将自己不感兴趣的内容屏蔽，中间环节过多，增加了用户的使用成本，今日头条既然主张以用户的兴趣爱好为内容推送的出发点，却没有做到让用户方便快速地做出是否感兴趣的选择，我想这点需要改进。</p>
+<p><a href="./今日头条产品分析报告 _ 人人都是产品经理_files/20160801155211.png"><img data-action="zoom" class="size-full wp-image-383972 aligncenter" src="./今日头条产品分析报告 _ 人人都是产品经理_files/20160801155211.png" alt="20160801155211" width="632" height="499" srcset="http://www.woshipm.com/wp-content/uploads/2016/07/20160801155211.png 632w, http://www.woshipm.com/wp-content/uploads/2016/07/20160801155211-380x300.png 380w" sizes="(max-width: 632px) 100vw, 632px"></a></p>
+<p><strong>2、内容体验</strong></p>
+<p>个性化推荐特点明显</p>
+<p>张一鸣认为今日头条的机器学习能够基于用户的兴趣满足个性化的推荐需求，用户用得越久，就会觉得越好用。笔者在体验今日头条的两个星期以来发现平台首页上的内容大部分是我关注的领域，比如移动互联网、产品经理、支付宝与微信，内容多样化，每一次的下拉更新都会出现新内容，而系统自动更新的速度也比较快，有个不好的地方在于，自己喜欢而未来得及的内容容易被覆盖，难以找到。而在视频界面，这一个性化推荐的特点也尤其明显，以演员、电影题材类型为基准点，系统推荐的视频短片基本符合我的兴趣爱好，但是这些视频短片基本没有注明电影的名称，所以当我看到某部电影的有趣片段，想上视频网站看全集时，却不知道这部电影叫什么名字，而在评论中我发现，里面有许多误导人的评论，故意说一些奇奇怪怪的电影名字，给我的使用带来了一定的困扰。</p>
+<p>平台内容质量把控力度仍然有待提高</p>
+<p>广告是今日头条目标主要的变现方式，在使用过程中我发现今日头条上的广告偏多，主要以游戏为主，也曾经出现过教育、金融贷款的推广。头条号的创立吸引力了大量的内容创业者，但是内容质量也有高低之分，部分内容以夺人眼球的标题吸引人，但是内容质量低下，容易误导用户，可见平台对内容的审核仍然有待加强。</p>
+<h3>（三）用户负面反馈</h3>
+<p>苹果APP Store上通过观察用户的评论总结出以下几点用户对今日头条的负面反馈</p>
+<ol>
+<li>内容推荐质量差，甚至低俗，屏蔽后仍然出现类似的内容。</li>
+<li>标题党夺人眼球，内容没有看点，影响读者对头条的信任感。</li>
+<li>平台不加筛选的新闻搬运，没有官方判断，无法区分权威与非权威的文章，容易误导读者。</li>
+<li>不实报道不经审核。</li>
+<li>内容变化太快，难以继续阅读之前感兴趣的新闻。</li>
+<li>旧新闻滥竽充数。</li>
+<li>新闻评论都是水军。</li>
+<li>系统卡顿，闪退，操作不流畅。</li>
+<li>广告太多。</li>
+</ol>
+<p>从以上反馈可以看出，用户对今日头条的不满之处主要有两个三个方面：内容质量有待提高，真实性与权威性有待加强；广告投放过多，影响用户体验；系统不够完善，流畅性有待提高。</p>
+<h2>七、SWOT分析</h2>
+<h3>S：优势</h3>
+<p>1、数据挖掘、推荐引擎、智能算法的技术创新，抢占庞大的个性化资讯市场，实现内容与用户精准性连接。</p>
+<p>2、相对个性化的产品形式，让今日头条受到内容创作者、用户、广告主的一定青睐，顺势成为个性资讯市场的独角兽。</p>
+<p>3、头条号的创立吸引了大批量的内容创业者与传统媒体，强化了平台生产内容的能力，有利于实现内容的多样化，为个性推荐提供强大的内容保障。</p>
+<p>4、引入社交基因，多样的社交渠道。用户可选择微信、腾讯QQ、新浪微博和人人网登录，使得今日头条能够获取迅速获取用户的社交关系链以及以往的社交信息，描绘出更为精准的用户画像，判断用户的喜好。 同时多样化的社交渠道也增强了平台自身的内容分发能力，起到引流的作用。</p>
+<p>5、用户粘性居于行业前列。截止2015年10月28日，今日头条用户平均每日使用时长是腾讯新闻的两倍；新用户转化为忠实用户的比例是腾讯新闻的2.25倍。今日头条用户平均每日打开时长超过40分钟（据张一鸣的演讲，该数字今年3月已经上升到57分钟），该数据位于全网首位，远抛离其他新闻客户端。正是凭借这样的差距，即便今日头条在月度覆盖率上远不如腾讯新闻，但用户使用总时长占比却排名第一。</p>
+<h3>W:劣势</h3>
+<p>1、用户变现形式单一，尚未形成完整的产品生态。以广告为主要变现形式的今日头条，正面临着广告投放与用户体验之间应该如何平衡的难题。不少用户认为今日平台上的广告推送过多，影响了用户体验，给今日头条带来了用户流失的风险。而电商作为今日头条次要的变现形式，则与产品本身所提供的场景吻合度不高，并未给今日头条带来太多的变现空间。以BAT为首的巨头在移动资讯的战略路线上均为生态化发展，打造内容的多元化流量入口，进而让内容创作成为长期行为，今日头条的生态建设仍然有待突破。</p>
+<p>2、传统新闻客户端有着多年的内容沉淀以及专业化的内容编辑，针对客户端的主流用户各自形成了自身的用户与内容壁垒，在权威性上远高于头条号上的自媒体创业者，如何管理平台上的内容创业者，提升内容的真实性与权威性，是今日头条需要考虑的问题。</p>
+<p>3、在BTA与传统门户的强势介入之后，今日头条在个性化资讯市场的技术优势变得相对单薄，地位受到巨头的强势挑战。</p>
+<h3>O:机会</h3>
+<p>1、用户时间趋于碎片化，个性化资讯市场庞大。</p>
+<p>2、作为较早的个性化资讯产品，今日头条已然积累了大量的用户数据，在这一点上远远超越了后知后觉的新闻客户端，有着先发优势。</p>
+<p>3、自媒体创业成为互联网时代的趋势，头条号能够让自媒体创业者的内容精准地向用户推荐，减少了创业者寻找用户的成本，对自媒体人有强大的吸引力。</p>
+<h3>T:威胁</h3>
+<p>1、BAT与传统门户介入资讯市场。腾讯新闻借助微信与QQ两大流量入口，拥有大量的用户基础，在用户规模上居于首位。同时微信平台背后拥有超过2000万公众号，并聚集大量内容创作者，并且推出微信热文推荐，其原理与今日头条的数据挖掘与引擎推荐相一致。针对今日头条千人万元计划推出芒种计划，旨在扶持优质内容，并为内容创业者提供一键分发的权利。天天快报对标今日头条，与腾讯新闻客户端形成资讯产品双矩阵，显示了其争夺个性化资讯市场的决心。阿里巴巴以UC浏览器进行市场围攻，启动内容资讯的UC头条模式。百度形成百度号、百度新闻、百度贴吧产品矩阵。传统门户加大对个性化资讯的投入，有望绝地反击。个性资讯客户端号外将目标用户定位于90后，并将战线聚焦于三四线城市，大有一种以农村包围城市的味道。一点资讯与手机厂商OPPO合作，选择在手机端上游采用预装的方式获取用户。各种迹象表明，个性化资讯市场正面临着激烈的市场竞争。</p>
+<p>2、今日头条通过爬虫获取媒体网站的内容存在侵犯版权的风险，受到外界的质疑。</p>
+<h2>八、总结</h2>
+<p>张一鸣公开发言不愿意做腾讯的员工，今日头条与腾讯的联姻也宣布告吹，随之而来的必然是步步为营的市场围攻。有人说未来是互联网的世界，也是BAT的世界，但其中也不乏像今日头条这样的独角兽企业能够在BAT的围攻下坚强的生存下来并茁壮成长。张一鸣想要的不是BAT的光环，而是中国第一内容创作平台。总体而言，今日头条个性化的资讯推荐功能精确地满足用户碎片化利用时间的需求，拥有先发优势的今日头条掌握了大量的用户与行为数据，在以后的发展过程中更要做到商业变现与用户体验两者的平衡，并且要寻求多样化的变现形式。同时要加大对内容的监控力度，创造出一套完整的自媒体用户管理体制，提高内容的质量，增强平台的权威性。当然，今日头条是否能够真正独立于BAT体系之外呢？我们拭目以待。</p>
+<p>&nbsp;</p>
+<p>陈镇鸿（czh987404699） 产品热衷者 &nbsp;在校大四学生，正准备秋招，希望从事互联网产品/运营。</p>
+<p>本文由 @陈镇鸿 原创发布于人人都是产品经理。未经许可，禁止转载。</p>
+                    </div>
+                    <div class="article-bottomAd">
+                        <a href="https://ke.qq.com/huodong/pmqidian16z_pc/index.html" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/RQXwJQLc2ZtAB47x8GqU.png" alt=""></a>                    </div>
+                    <div class="taglist"><a href="http://www.woshipm.com/tag/%e4%ba%a7%e5%93%81%e5%88%86%e6%9e%90" rel="tag">产品分析</a><a href="http://www.woshipm.com/tag/%e4%bb%8a%e6%97%a5%e5%a4%b4%e6%9d%a1" rel="tag">今日头条</a><a href="http://www.woshipm.com/tag/%e4%bb%8a%e6%97%a5%e5%a4%b4%e6%9d%a1%e4%ba%a7%e5%93%81%e5%88%86%e6%9e%90%e6%8a%a5%e5%91%8a" rel="tag">今日头条产品分析报告</a></div>                    <div class="support-author"><div class="support-title">赞赏是对原创者的最大认可</div><button class="button--pay" data-post-id="383291" data-author="101953" data-avatar="http://image.woshipm.com/wp-files/2016/08/340512866591155530.jpg"><svg width="13" height="16" class="svgIcon--use" viewBox="0 0 13 16"><path d="M9.113,4.571 C9.951,3.771 10.895,2.742 10.685,2.057 C10.475,1.485 10.056,0.799 9.427,0.571 C8.903,0.342 8.379,0.456 7.750,0.799 C7.540,0.342 7.016,0.114 6.596,-0.001 C5.863,-0.001 5.234,0.228 4.814,0.914 C4.080,0.571 3.451,0.685 2.927,1.028 C2.613,1.256 2.298,1.713 2.298,2.628 C2.298,3.542 3.137,4.228 3.766,4.685 C2.508,5.599 -0.218,7.885 -0.008,12.228 C-0.218,15.656 2.613,15.999 2.613,15.999 L10.371,15.999 C11.314,15.885 12.991,14.971 12.991,12.571 L12.991,12.228 C13.201,7.771 10.371,5.371 9.113,4.571 L9.113,4.571 ZM8.932,11.835 L6.940,11.835 L6.940,13.207 C6.940,13.435 6.731,13.549 6.521,13.549 C6.311,13.549 6.102,13.435 6.102,13.207 L6.102,11.835 L4.110,11.835 C3.900,11.835 3.795,11.606 3.795,11.378 C3.795,11.149 3.900,10.921 4.110,10.921 L6.102,10.921 L6.102,10.121 L4.949,10.121 C4.739,10.121 4.634,9.892 4.634,9.664 C4.634,9.435 4.739,9.206 4.949,9.206 L5.892,9.206 L4.739,7.950 C4.634,7.835 4.739,7.606 4.949,7.492 C5.158,7.378 5.368,7.264 5.473,7.378 L6.521,8.635 L7.674,7.264 C7.779,7.149 7.989,7.264 8.198,7.378 C8.408,7.492 8.408,7.721 8.408,7.835 L7.150,9.321 L8.094,9.321 C8.303,9.321 8.408,9.549 8.408,9.778 C8.408,10.007 8.303,10.235 8.094,10.235 L6.940,10.235 L6.940,11.035 L8.932,11.035 C9.142,11.035 9.247,11.264 9.247,11.493 C9.247,11.606 9.037,11.835 8.932,11.835 L8.932,11.835 Z"></path></svg>
+赞赏</button></div>                                        <div class="post-actions u-clearfix">
+                        <div class="u-floatLeft share-actions">
+                            <button class="button button--gray button--circle button--wechat"><span class="fa fa-wechat"></span><span class="qrcode-wrapper"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/api.php"></span></button>
+                            <a class="button button--gray button--circle button--weibo" target="_blank" href="http://service.weibo.com/share/share.php?appkey=2775287854&amp;title=%E4%BB%8A%E6%97%A5%E5%A4%B4%E6%9D%A1%E4%BA%A7%E5%93%81%E5%88%86%E6%9E%90%E6%8A%A5%E5%91%8A&amp;url=http://www.woshipm.com/evaluating/383291.html&amp;pic=http://image.woshipm.com/wp-files/2016/07/jinritoutiao.jpg" "=""><span class="fa fa-weibo"></span></a>
+                        </div>
+                        <div class="u-floatRight">
+                            <button title="收藏" class="button button--gray button--toggle button--recommend button-post-383291 " data-id="383291" data-action="popLogin"><span class="iconfont icon-heart"></span><span class="button-label is-default">收藏</span><span class="button-label is-active">已收藏</span> | <span class="count">520</span></button><button class="button button--toggle button--gray button--postlike" data-action="uplike" data-id="383291"><span class="button-label is-default">赞</span><span class="button-label is-active">已赞</span> | <span class="count">113</span></button>                        </div>
+                    </div>
+                </article>
+                <div class="postFooterInfo u-marginTop30 u-backgroundColorWhite u-rounded">
+                    <div class="u-flex">
+                        <div class="u-flex0">
+                            <a href="http://www.woshipm.com/u/101953" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/60x60" alt="" height="60" width="60" class="avatar"></a>
+                        </div>
+                        <div class="u-flex1 u-paddingLeft15 u-overflowHidden">
+                            <div class=""><span class="title"><a href="http://www.woshipm.com/u/101953" target="_blank">小狼人</a></span><button class="button button--toggle button--primary button--follow" data-action="showLoginForm" data-id="101953"><span class="is-default">订阅专栏</span><span class="is-active">取消订阅</span></button></div>
+                            <div class="des">希望有朝一日能足够强大，因为我想有所选择</div>
+                        </div>
+                        <div class="u-flex0">
+                            <div class="authorInfo-item"><i>1篇</i>作品</div>
+                            <div class="authorInfo-item"><i>17.1万</i>总阅读量</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="u-backgroundColorWhite comments-area">
+    <div class="comment-list-header"><span class="title">评论</span></div>
+    <div id="respond" class="respond respond-383291" role="form">
+        <form action="http://www.woshipm.com/wp-comments-post.php" method="post" id="commentform" data-post="383291" class="comment-form u-clearfix">
+                        <div class="textarea--unlogin" data-action="popLogin">欢迎留言交流</div>
+                </form>
+    </div>
+            <div class="commentshow">
+            <ol class="comment-list">
+                        <li class="comment byuser comment-author-627158 even thread-even depth-1" id="li-comment-268424" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-268424" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/627158" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/APP_U_201801_20180111190217_5164.jpeg" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/627158" target="_blank">面条米线</a><span class="des">一个准备转行产品经理的人！</span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>读完后，对我颇有意义，我也刚毕业一年左右，现在正在准备转产，最近一直在关注怎么写产品体验分析报告，作者的这篇分析给了我很大的启发！手动点赞，谢谢！</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2018-05-16T16:27:25+08:00">2018/05/16</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-268424&#39;, &#39;268424&#39;, &#39;respond&#39;, &#39;383291&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-fatina1230 odd alt thread-odd thread-alt depth-1" id="li-comment-230191" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-230191" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/286004" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/woshipm_def_head.jpg" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/286004" target="_blank">fatina1230</a><span class="des">我是一个大四的学生，热爱产品</span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>想问一下，那些数据是怎么找到的？而且怎么找到有效的数据</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2017-09-13T20:29:14+08:00">2017/09/13</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-230191&#39;, &#39;230191&#39;, &#39;respond&#39;, &#39;383291&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-294887 even thread-even depth-1" id="li-comment-222507" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-222507" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/294887" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/woshipm_def_head.jpg" alt="" height="40" width="40" class="avatar"></a>
+                                                    <div class="avatar--border pm-absolute">
+
+                            </div>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/294887" target="_blank">蓝布路</a><span class="qidianVip normalVip"><a href="http://996.pm/MEvX7" target="_blank" title="会员">会员</a></span><span class="des"></span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>在公司里写这个会有人看么？本人产品小白一只，在一个小公司里实习，老大从不让写这文字一堆的东西，竞品分析都是用Excel简单罗列下来。他最注重的是培养产品思维和梳理功能逻辑。作为一只纯小白，有时真的好迷茫，求大神指教，该怎么样发展。</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2017-08-03T17:37:11+08:00">2017/08/03</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-222507&#39;, &#39;222507&#39;, &#39;respond&#39;, &#39;383291&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            <ol class="children">
+        <li class="comment byuser comment-author-987404699 bypostauthor odd alt depth-2" id="li-comment-222508" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-222508" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/101953" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/40x40" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/101953" target="_blank">小狼人</a><span class="post-c-a" title="文章作者">作者</span><span class="color-noraml">回复</span><a href="http://www.woshipm.com/evaluating/383291.html#comment-222507">蓝布路</a></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>竞品分析其实也可以不用写得很复杂，但是就像你老大说的你在分析的时候要注重功能的逻辑，明白这样设计的原因，有什么优缺点，在公司写也会有人看的，只要你表达了自己的想法，实习期可以多试一下去做一些简要的竞品分析，还是挺有用的，其次要多体验产品。</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2017-08-03T17:41:04+08:00">2017/08/03</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-222508&#39;, &#39;222508&#39;, &#39;respond&#39;, &#39;383291&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+        <li class="comment byuser comment-author-yanxi1993 even thread-odd thread-alt depth-1" id="li-comment-218102" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-218102" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/260389" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/woshipm_def_head.jpg" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/260389" target="_blank">yanxi1993</a><span class="des"></span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>我算是头条新闻的忠实粉丝了，用了两三年了，对于文中提到的痛点，感同身受，写的很好，当做模板来练习了</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2017-07-04T16:43:36+08:00">2017/07/04</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-218102&#39;, &#39;218102&#39;, &#39;respond&#39;, &#39;383291&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-shao951159770 odd alt thread-even depth-1" id="li-comment-199149" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-199149" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/84911" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/40x40(1)" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/84911" target="_blank">天马行空</a><span class="des">邵氏核桃shaoshihetao.com</span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>经常看今日头条，做的确实不错。</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2017-03-11T13:52:59+08:00">2017/03/11</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-199149&#39;, &#39;199149&#39;, &#39;respond&#39;, &#39;383291&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-Vincent even thread-odd thread-alt depth-1" id="li-comment-198572" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-198572" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/108526" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/QIDIANVIP_USER_201707_20170731102630_3936.png" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/108526" target="_blank">Vincent</a><span class="des">互联网从业者，科技爱好者。</span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>今日头条还有个pro版本，付费下载，没有广告。但这种付费下载能给头条带来多大的变现还不可知。确实在平衡广告变现和内容体验上是头条要考虑的</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2017-03-07T16:25:09+08:00">2017/03/07</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-198572&#39;, &#39;198572&#39;, &#39;respond&#39;, &#39;383291&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-50 odd alt thread-even depth-1" id="li-comment-196719" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-196719" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/50" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/40x40(2)" alt="" height="40" width="40" class="avatar"></a>
+                                                    <div class="avatar--border pm-absolute">
+
+                            </div>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/50" target="_blank">欧阳俊杰</a><span class="qidianVip normalVip"><a href="http://996.pm/MEvX7" target="_blank" title="会员">会员</a></span><span class="des">产品、运营、技术啥都懂点。</span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>加油，期待更新作品。</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2017-02-24T12:46:16+08:00">2017/02/24</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-196719&#39;, &#39;196719&#39;, &#39;respond&#39;, &#39;383291&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-PM even thread-odd thread-alt depth-1" id="li-comment-187151" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-187151" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/110536" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/def_head.jpg" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/110536" target="_blank">PM鱼</a><span class="des">简单</span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>好东西，模仿做做我们自己公司的产品分析</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2016-11-30T10:59:56+08:00">2016/11/30</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-187151&#39;, &#39;187151&#39;, &#39;respond&#39;, &#39;383291&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-RMB odd alt thread-even depth-1" id="li-comment-178192" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-178192" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/96338" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/WD_U_201606_20160621004225_9317.jpg" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/96338" target="_blank">坚持就是RMB✔</a><span class="des"></span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>今日头条广告不少。质量不高</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2016-08-11T18:52:20+08:00">2016/08/11</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-178192&#39;, &#39;178192&#39;, &#39;respond&#39;, &#39;383291&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-pmmp even thread-odd thread-alt depth-1" id="li-comment-177120" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-177120" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/59696" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/40x40(3)" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/59696" target="_blank">北斗雁</a><span class="des">哪有什么胜利，挺住就是一切</span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>在人群画像等都只是做信息表达，建议从产品战略与目标用户是否吻合来探讨现象出现的本质原因。<br>
+我个人对产品分析的方法论是从某类产品行业的市场趋势，思考需求的本质，再反推目标分析产品如何去满足这需求的。如果在产品分析上只是对其功能表达上做测评，很难理解产品需求本质。<br>
+个人愚见。</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2016-08-02T17:23:08+08:00">2016/08/02</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-177120&#39;, &#39;177120&#39;, &#39;respond&#39;, &#39;383291&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            <ol class="children">
+        <li class="comment byuser comment-author-987404699 bypostauthor odd alt depth-2" id="li-comment-177138" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-177138" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/101953" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/40x40" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/101953" target="_blank">小狼人</a><span class="post-c-a" title="文章作者">作者</span><span class="color-noraml">回复</span><a href="http://www.woshipm.com/evaluating/383291.html#comment-177120">北斗雁</a></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>您好，谢谢您的建议。对于如何探讨用户需求与产品需求的关系、如何采集、分析需求的问题，我一直都想深入去学习，感觉我自己分析需求的时候思路太窄。</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2016-08-02T19:11:35+08:00">2016/08/02</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-177138&#39;, &#39;177138&#39;, &#39;respond&#39;, &#39;383291&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-flx1475921078 even depth-2" id="li-comment-178179" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-178179" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/117866" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/40x40(4)" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/117866" target="_blank">小黄鹂儿</a><span class="color-noraml">回复</span><a href="http://www.woshipm.com/evaluating/383291.html#comment-177120">北斗雁</a></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>您好，看到您的评论，感觉很有道理，可否加你qq讨论，我的qq：1475921078，谢谢</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2016-08-11T17:05:48+08:00">2016/08/11</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-178179&#39;, &#39;178179&#39;, &#39;respond&#39;, &#39;383291&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+        <li class="comment byuser comment-author-mario odd alt thread-even depth-1" id="li-comment-177115" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-177115" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/12053" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/40x40(5)" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/12053" target="_blank">mario</a><span class="des">上知行业走向，下晓体验细节，左通技术架构，右晓刚需痛处，前能写文档，后能画原型，进能与数据共舞，退能与运营齐飞。
+与研发共进退，与UI齐存亡，陪测试耍bug，同市场看未来，还有领导背背靠。眼泪纵横，只因为我们是PM。</span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>有点像数据分析报告，数据分析的挺到位，但是也显得重点不明显，不过很好奇楼主这些数据是从哪里获取的 <img src="./今日头条产品分析报告 _ 人人都是产品经理_files/icon_mrgreen.gif" alt=":mrgreen:" class="wp-smiley" style="height: 1em; max-height: 1em;"></p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2016-08-02T16:58:02+08:00">2016/08/02</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-177115&#39;, &#39;177115&#39;, &#39;respond&#39;, &#39;383291&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            <ol class="children">
+        <li class="comment byuser comment-author-987404699 bypostauthor even depth-2" id="li-comment-177137" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-177137" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/101953" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/40x40" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/101953" target="_blank">小狼人</a><span class="post-c-a" title="文章作者">作者</span><span class="color-noraml">回复</span><a href="http://www.woshipm.com/evaluating/383291.html#comment-177115">mario</a></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>您好，这些数据是在易观智库、艾媒咨询等大数据网站找到的。</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2016-08-02T19:07:11+08:00">2016/08/02</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-177137&#39;, &#39;177137&#39;, &#39;respond&#39;, &#39;383291&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-217987 odd alt depth-2" id="li-comment-201998" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-201998" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/217987" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/woshipm_def_head.jpg" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/217987" target="_blank">小张张</a><span class="color-noraml">回复</span><a href="http://www.woshipm.com/evaluating/383291.html#comment-177137">小狼人</a></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>您好，易观智库，艾媒咨询这种大数据网站是不是需要收费开启账号权限呢？大概是个什么样的价格呢？</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2017-03-29T10:09:18+08:00">2017/03/29</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-201998&#39;, &#39;201998&#39;, &#39;respond&#39;, &#39;383291&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+        <li class="comment byuser comment-author-smile even thread-odd thread-alt depth-1" id="li-comment-177091" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-177091" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/109610" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/WD_U_201607_20160719115236_9519.jpg" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/109610" target="_blank">smile。</a><span class="des"></span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>不感兴趣三步操作，可能是考虑到防止手滑？、</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2016-08-02T11:57:30+08:00">2016/08/02</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-177091&#39;, &#39;177091&#39;, &#39;respond&#39;, &#39;383291&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-45782 odd alt thread-even depth-1" id="li-comment-177061" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-177061" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/45782" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/40x40(6)" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/45782" target="_blank">啫喱</a><span class="des">好久不见</span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>说得有点大空泛，没有重点。建议抓某一个点重点分析，对类比方式</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2016-08-01T19:29:53+08:00">2016/08/01</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-177061&#39;, &#39;177061&#39;, &#39;respond&#39;, &#39;383291&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            <ol class="children">
+        <li class="comment byuser comment-author-987404699 bypostauthor even depth-2" id="li-comment-177069" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-177069" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/101953" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/40x40" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/101953" target="_blank">小狼人</a><span class="post-c-a" title="文章作者">作者</span><span class="color-noraml">回复</span><a href="http://www.woshipm.com/evaluating/383291.html#comment-177061">啫喱</a></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>谢谢您的宝贵意见。</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2016-08-01T21:23:45+08:00">2016/08/01</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-177069&#39;, &#39;177069&#39;, &#39;respond&#39;, &#39;383291&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+        <li class="comment byuser comment-author-934625333 odd alt thread-odd thread-alt depth-1" id="li-comment-177055" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-177055" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/77220" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/40x40(7)" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/77220" target="_blank">产品副经理</a><span class="des">为什么没有产品副经理呢？</span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>看到产品特色里面的内容“让用户在信息过剩的互联网时代迅速获取自己所关心的内容，而不是千人一面”看到千人一面这四个字我就判断出这应该是个实习生或者经验不多从业者，这个用词很稚嫩啊</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2016-08-01T17:22:31+08:00">2016/08/01</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-177055&#39;, &#39;177055&#39;, &#39;respond&#39;, &#39;383291&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            <ol class="children">
+        <li class="comment byuser comment-author-987404699 bypostauthor even depth-2" id="li-comment-177068" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-177068" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/101953" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/40x40" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/101953" target="_blank">小狼人</a><span class="post-c-a" title="文章作者">作者</span><span class="color-noraml">回复</span><a href="http://www.woshipm.com/evaluating/383291.html#comment-177055">产品副经理</a></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>嗯嗯，谢谢您的指导，以后遣词造句会更多注意。</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2016-08-01T21:23:13+08:00">2016/08/01</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-177068&#39;, &#39;177068&#39;, &#39;respond&#39;, &#39;383291&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-dao555 odd alt depth-2" id="li-comment-181503" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-181503" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/76224" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/40x40(8)" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/76224" target="_blank">岛555</a><span class="color-noraml">回复</span><a href="http://www.woshipm.com/evaluating/383291.html#comment-177055">产品副经理</a></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>那哪个词表达比较好？</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2016-09-18T16:23:56+08:00">2016/09/18</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-181503&#39;, &#39;181503&#39;, &#39;respond&#39;, &#39;383291&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-168662 even depth-2" id="li-comment-203210" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-203210" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/168662" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/WD_U_201611_20161124142101_9381.jpg" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/168662" target="_blank">典韦</a><span class="color-noraml">回复</span><a href="http://www.woshipm.com/evaluating/383291.html#comment-181503">岛555</a></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>千人千面</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2017-04-06T15:38:05+08:00">2017/04/06</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-203210&#39;, &#39;203210&#39;, &#39;respond&#39;, &#39;383291&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+            </ol>
+            <nav class="commentnav" data-fuck="383291">
+                            </nav>
+        </div>
+    </div>                <div class="u-backgroundColorWhite promote-posts-wrapper u-rounded">
+                    <h2 class="comments-title">您可能感兴趣的文章</h2>
+                    <div class="promote-posts">
+                                                    <div class="promote-post-item">
+                                <a target="_blank" href="http://www.woshipm.com/marketing/1450267.html" style="background-image: url(http://image.woshipm.com/wp-files/2018/09/QESEyidOfMPZMt437cUM.png)" class="promote-post-image">
+                                </a>
+                                <div class="promote-post-title"><a target="_blank" href="http://www.woshipm.com/marketing/1450267.html">转换产品价值，让它更有营销势能</a></div>
+                            </div>
+                                                    <div class="promote-post-item">
+                                <a target="_blank" href="http://www.woshipm.com/evaluating/1442977.html" style="background-image: url(http://image.woshipm.com/wp-files/2018/09/Ym6QVA7ijKUlQ6BKrKVW.jpg)" class="promote-post-image">
+                                </a>
+                                <div class="promote-post-title"><a target="_blank" href="http://www.woshipm.com/evaluating/1442977.html">一罐产品体验报告：零距离感受无压力内容社交</a></div>
+                            </div>
+                                                    <div class="promote-post-item">
+                                <a target="_blank" href="http://www.woshipm.com/pd/1444877.html" style="background-image: url(http://image.woshipm.com/wp-files/2018/09/bNkDeUt0TI507icJP8Ai.png)" class="promote-post-image">
+                                </a>
+                                <div class="promote-post-title"><a target="_blank" href="http://www.woshipm.com/pd/1444877.html">两步掌握B端产品：数据驱动式迭代</a></div>
+                            </div>
+                                                    <div class="promote-post-item">
+                                <a target="_blank" href="http://y0.cn/2IbUV" style="background-image: url(http://image.woshipm.com/wp-files/2017/03/Il8v4dI18IcRXTVeoLit.jpg)" class="promote-post-image">
+                                </a>
+                                <div class="promote-post-title"><a target="_blank" href="http://y0.cn/2IbUV">每天3块钱，500门产品、运营课程随便学，做个有竞争力互联网人</a></div>
+                            </div>
+                                                    <div class="promote-post-item">
+                                <a target="_blank" href="http://www.woshipm.com/ai/1442790.html" style="background-image: url(http://image.woshipm.com/wp-files/2018/03/fhnpfB6qHDp3pO97P2Cp.png)" class="promote-post-image">
+                                </a>
+                                <div class="promote-post-title"><a target="_blank" href="http://www.woshipm.com/ai/1442790.html">从智能音响开发者生态角度，看阿里、百度、小米、京东各有何优劣？</a></div>
+                            </div>
+                                                    <div class="promote-post-item">
+                                <a target="_blank" href="http://www.woshipm.com/it/1445846.html" style="background-image: url(http://image.woshipm.com/wp-files/2018/06/xZI4qASWuehNRXq4bwGM.jpg)" class="promote-post-image">
+                                </a>
+                                <div class="promote-post-title"><a target="_blank" href="http://www.woshipm.com/it/1445846.html">知乎，渐渐长成了自己讨厌的样子</a></div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+        </div>
+        <div class="u-width335 u-floatRight js-sidebar">
+                       <div class="widget u-backgroundColorWhite">
+        <div class="inner">
+            <div class="widget-title"><span><svg class="svgIcon-use" width="20" height="20" viewBox="0 0 20 20"><path d="M6.551,8.213 L7.586,8.213 C7.586,9.594 8.667,10.713 10.000,10.713 C11.333,10.713 12.414,9.594 12.414,8.213 L13.448,8.213 C13.448,10.186 11.904,11.784 10.000,11.784 C8.096,11.784 6.551,10.186 6.551,8.213 ZM16.561,16.551 L17.597,19.999 L16.552,19.999 L16.207,18.928 L16.209,18.928 L15.277,15.706 C15.301,15.706 15.324,15.713 15.349,15.713 C17.347,15.713 18.966,14.034 18.966,11.963 C18.966,10.732 18.386,9.649 17.502,8.965 C17.110,11.828 15.232,14.189 12.701,15.189 L13.818,18.928 L13.815,18.928 L14.138,19.999 L13.103,19.999 L12.759,18.928 L11.275,14.511 C14.283,13.896 16.552,11.151 16.552,7.856 C16.552,4.108 13.618,1.070 10.000,1.070 C6.382,1.070 3.448,4.108 3.448,7.856 C3.448,11.151 5.717,13.896 8.724,14.511 L7.241,18.928 L6.896,19.999 L5.862,19.999 L6.182,18.928 L6.182,18.928 L7.298,15.190 C4.768,14.189 2.890,11.829 2.498,8.967 C1.615,9.650 1.035,10.733 1.035,11.963 C1.035,14.034 2.655,15.713 4.655,15.713 C4.679,15.713 4.702,15.706 4.726,15.706 L3.793,18.928 L3.448,19.999 L2.404,19.999 L3.441,16.551 C1.460,16.001 -0.000,14.144 -0.000,11.931 C-0.000,10.120 0.978,8.544 2.420,7.730 C2.486,3.449 5.851,-0.001 10.000,-0.001 C14.148,-0.001 17.513,3.449 17.580,7.729 C19.022,8.542 20.000,10.119 20.000,11.931 C20.000,14.144 18.541,16.001 16.561,16.551 Z"></path></svg>圈子</span></div>
+            <div class="widget-content">
+                <div class="contact-area">
+                    <ul class="code-ul">
+                        <li><span class="text">产品经理群</span><a target="_blank" href="https://jq.qq.com/?_wv=1027&amp;k=5sGMjCm"><i>+</i>加入</a></li>
+<li><span class="text">运营交流群</span><a target="_blank" href="https://jq.qq.com/?_wv=1027&amp;k=51yzUQW"><i>+</i>加入</a></li>
+<li><span class="text">品牌营销群</span><a target="_blank" href="https://jq.qq.com/?_wv=1027&amp;k=5e8zovy"><i>+</i>加入</a></li>
+<li><span class="text">文案交流群</span><a target="_blank" href="https://jq.qq.com/?_wv=1027&amp;k=5v4zta9"><i>+</i>加入</a></li>
+<li><span class="text">Axure交流群</span><a target="_blank" href="https://jq.qq.com/?_wv=1027&amp;k=5eLN4KE"><i>+</i>加入</a></li>                    </ul>
+                    <dl class="code-dl">
+                        <dd>
+                            <img src="./今日头条产品分析报告 _ 人人都是产品经理_files/pm-erweima.jpg">
+                        </dd>
+                        <dt>关注微信公众号</dt>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="widget widget-ad fixed-sidebar-id"><a href="http://996.pm/7mgJo" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/sUuVsMQ1oKc4tvpmI93L.jpg" alt="">       </a><a href="http://996.pm/YydQv" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/bIPyRVdBtZdpi7meYjP7.jpg" alt=""></a><a href="http://996.pm/Y9mwX" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/CcGnm19GICLjPCSITaAn.jpg" alt=""></a></div><div class="widget u-backgroundColorWhite">
+        <div class="inner">
+            <div class="widget-title"><span><svg class="svgIcon-use" width="20" height="20" viewBox="0 0 20 20">
+  <path d="M20.000,9.999 C20.000,4.476 15.524,-0.001 9.999,-0.001 C4.477,-0.001 -0.000,4.476 -0.000,9.999 C-0.000,15.522 4.477,19.999 9.999,19.999 C12.267,19.999 14.342,19.227 16.021,17.957 C16.089,17.878 16.134,17.779 16.134,17.666 C16.134,17.422 15.937,17.223 15.692,17.223 C15.565,17.223 15.452,17.273 15.369,17.358 L15.365,17.358 C13.864,18.463 12.016,19.125 10.009,19.125 C5.009,19.125 0.954,15.069 0.954,10.069 C0.954,5.067 5.009,1.012 10.009,1.012 C15.011,1.012 19.065,5.067 19.065,10.069 C19.065,11.597 18.707,13.034 18.039,14.296 L18.039,14.304 C18.026,14.346 18.012,14.387 18.012,14.431 C18.012,14.677 18.212,14.876 18.456,14.876 C18.647,14.876 18.807,14.753 18.869,14.584 L18.869,14.588 C19.580,13.211 20.000,11.654 20.000,9.999 L20.000,9.999 L20.000,9.999 L20.000,9.999 ZM3.981,13.384 C3.704,13.384 3.480,13.160 3.480,12.883 L3.480,7.138 C3.480,6.861 3.704,6.637 3.981,6.637 C4.258,6.637 4.482,6.861 4.482,7.138 L4.482,12.883 C4.482,13.160 4.258,13.384 3.981,13.384 L3.981,13.384 ZM7.589,13.384 C7.313,13.384 7.088,13.160 7.088,12.883 L7.088,7.138 C7.088,6.861 7.313,6.637 7.589,6.637 C7.866,6.637 8.090,6.861 8.090,7.138 L8.090,12.883 C8.090,13.160 7.866,13.384 7.589,13.384 L7.589,13.384 ZM7.589,10.511 L3.981,10.511 C3.704,10.511 3.480,10.287 3.480,10.011 C3.480,9.734 3.704,9.510 3.981,9.510 L7.589,9.510 C7.865,9.510 8.090,9.734 8.090,10.011 C8.090,10.287 7.865,10.511 7.589,10.511 L7.589,10.511 ZM14.791,13.384 C14.515,13.384 14.291,13.160 14.291,12.883 L14.291,7.138 C14.291,6.861 14.515,6.637 14.791,6.637 C15.068,6.637 15.292,6.861 15.292,7.138 L15.292,12.883 C15.292,13.160 15.068,13.384 14.791,13.384 L14.791,13.384 ZM16.596,7.639 L12.988,7.639 C12.711,7.639 12.487,7.415 12.487,7.138 C12.487,6.861 12.711,6.637 12.988,6.637 L16.596,6.637 C16.872,6.637 17.097,6.861 17.097,7.138 C17.097,7.415 16.872,7.639 16.596,7.639 L16.596,7.639 ZM10.534,13.384 C9.426,13.384 8.524,12.482 8.524,11.374 L8.524,8.648 C8.524,7.539 9.426,6.637 10.534,6.637 C11.643,6.637 12.545,7.539 12.545,8.648 L12.545,11.374 C12.545,12.482 11.643,13.384 10.534,13.384 L10.534,13.384 ZM10.534,7.639 C9.978,7.639 9.526,8.092 9.526,8.648 L9.526,11.374 C9.526,11.930 9.978,12.382 10.534,12.382 C11.091,12.382 11.543,11.930 11.543,11.374 L11.543,8.648 C11.543,8.092 11.091,7.639 10.534,7.639 L10.534,7.639 Z"></path>
+</svg>热门文章</span></div><ul class="widget-post-list--withImage"><li class="widget-post-item--withImage">
+                    <div class="img">
+<a href="http://www.woshipm.com/ucd/972135.html" target="_blank">
+<img src="./今日头条产品分析报告 _ 人人都是产品经理_files/100x60" width="100" height="60">
+</a>
+</div>
+<div class="title"><a href="http://www.woshipm.com/ucd/972135.html">微信“不友好”设计其背后的逻辑</a></div>
+<div class="meta">2018-09-18</div>
+                </li><li class="widget-post-item--withImage">
+                    <div class="img">
+<a href="http://www.woshipm.com/it/1408558.html" target="_blank">
+<img src="./今日头条产品分析报告 _ 人人都是产品经理_files/100x60(1)" width="100" height="60">
+</a>
+</div>
+<div class="title"><a href="http://www.woshipm.com/it/1408558.html">约不到P的社交网络，是没有灵魂的</a></div>
+<div class="meta">2018-09-17</div>
+                </li><li class="widget-post-item--withImage">
+                    <div class="img">
+<a href="http://www.woshipm.com/evaluating/1267178.html" target="_blank">
+<img src="./今日头条产品分析报告 _ 人人都是产品经理_files/100x60(2)" width="100" height="60">
+</a>
+</div>
+<div class="title"><a href="http://www.woshipm.com/evaluating/1267178.html">阿里健康APP产品体验分析报告（上）</a></div>
+<div class="meta">2018-09-18</div>
+                </li><li class="widget-post-item--withImage">
+                    <div class="img">
+<a href="http://www.woshipm.com/zhichang/1411320.html" target="_blank">
+<img src="./今日头条产品分析报告 _ 人人都是产品经理_files/100x60(3)" width="100" height="60">
+</a>
+</div>
+<div class="title"><a href="http://www.woshipm.com/zhichang/1411320.html">笔试攻略：阿里、腾讯、百度、京东等产品笔试六大题型</a></div>
+<div class="meta">2018-09-17</div>
+                </li><li class="widget-post-item--withImage">
+                    <div class="img">
+<a href="http://www.woshipm.com/pmd/1418511.html" target="_blank">
+<img src="./今日头条产品分析报告 _ 人人都是产品经理_files/100x60(4)" width="100" height="60">
+</a>
+</div>
+<div class="title"><a href="http://www.woshipm.com/pmd/1418511.html">实例解析：怎么撰写一份产品数据报告</a></div>
+<div class="meta">2018-09-18</div>
+                </li></ul></div></div><div class="widget u-backgroundColorWhite">
+        <div class="inner">
+            <div class="widget-title"><span><svg class="svgIcon-use" width="20" height="20" viewBox="0 0 20 20">
+  <path d="M20.000,9.999 C20.000,4.476 15.524,-0.001 9.999,-0.001 C4.477,-0.001 -0.000,4.476 -0.000,9.999 C-0.000,15.522 4.477,19.999 9.999,19.999 C12.267,19.999 14.342,19.227 16.021,17.957 C16.089,17.878 16.134,17.779 16.134,17.666 C16.134,17.422 15.937,17.223 15.692,17.223 C15.565,17.223 15.452,17.273 15.369,17.358 L15.365,17.358 C13.864,18.463 12.016,19.125 10.009,19.125 C5.009,19.125 0.954,15.069 0.954,10.069 C0.954,5.067 5.009,1.012 10.009,1.012 C15.011,1.012 19.065,5.067 19.065,10.069 C19.065,11.597 18.707,13.034 18.039,14.296 L18.039,14.304 C18.026,14.346 18.012,14.387 18.012,14.431 C18.012,14.677 18.212,14.876 18.456,14.876 C18.647,14.876 18.807,14.753 18.869,14.584 L18.869,14.588 C19.580,13.211 20.000,11.654 20.000,9.999 L20.000,9.999 L20.000,9.999 L20.000,9.999 ZM3.981,13.384 C3.704,13.384 3.480,13.160 3.480,12.883 L3.480,7.138 C3.480,6.861 3.704,6.637 3.981,6.637 C4.258,6.637 4.482,6.861 4.482,7.138 L4.482,12.883 C4.482,13.160 4.258,13.384 3.981,13.384 L3.981,13.384 ZM7.589,13.384 C7.313,13.384 7.088,13.160 7.088,12.883 L7.088,7.138 C7.088,6.861 7.313,6.637 7.589,6.637 C7.866,6.637 8.090,6.861 8.090,7.138 L8.090,12.883 C8.090,13.160 7.866,13.384 7.589,13.384 L7.589,13.384 ZM7.589,10.511 L3.981,10.511 C3.704,10.511 3.480,10.287 3.480,10.011 C3.480,9.734 3.704,9.510 3.981,9.510 L7.589,9.510 C7.865,9.510 8.090,9.734 8.090,10.011 C8.090,10.287 7.865,10.511 7.589,10.511 L7.589,10.511 ZM14.791,13.384 C14.515,13.384 14.291,13.160 14.291,12.883 L14.291,7.138 C14.291,6.861 14.515,6.637 14.791,6.637 C15.068,6.637 15.292,6.861 15.292,7.138 L15.292,12.883 C15.292,13.160 15.068,13.384 14.791,13.384 L14.791,13.384 ZM16.596,7.639 L12.988,7.639 C12.711,7.639 12.487,7.415 12.487,7.138 C12.487,6.861 12.711,6.637 12.988,6.637 L16.596,6.637 C16.872,6.637 17.097,6.861 17.097,7.138 C17.097,7.415 16.872,7.639 16.596,7.639 L16.596,7.639 ZM10.534,13.384 C9.426,13.384 8.524,12.482 8.524,11.374 L8.524,8.648 C8.524,7.539 9.426,6.637 10.534,6.637 C11.643,6.637 12.545,7.539 12.545,8.648 L12.545,11.374 C12.545,12.482 11.643,13.384 10.534,13.384 L10.534,13.384 ZM10.534,7.639 C9.978,7.639 9.526,8.092 9.526,8.648 L9.526,11.374 C9.526,11.930 9.978,12.382 10.534,12.382 C11.091,12.382 11.543,11.930 11.543,11.374 L11.543,8.648 C11.543,8.092 11.091,7.639 10.534,7.639 L10.534,7.639 Z"></path>
+</svg>大家都在问</span></div>
+            <div class="widget-content hot-question-list"><div class="hot-question-item">
+                    <div class="title"><a href="https://wen.woshipm.com//question/detail/7tklid.html"><span class="fa fa-caret-right"></span>为什么游戏等级会设置得很高，动辄100级，而其他的产品最高等级就比较低，比如网易云，最高10级。这是因为什么呢？</a></div>
+                    <div class="meta">4个回答<span class="dot"></span>4人关注</div>
+                </div><div class="hot-question-item">
+                    <div class="title"><a href="https://wen.woshipm.com//question/detail/qai5vf.html"><span class="fa fa-caret-right"></span>【中秋福利】又是一年中秋节，今年中秋，有没有奇特的新鲜玩法？</a></div>
+                    <div class="meta">20个回答<span class="dot"></span>30人关注</div>
+                </div><div class="hot-question-item">
+                    <div class="title"><a href="https://wen.woshipm.com//question/detail/87kres.html"><span class="fa fa-caret-right"></span>微信朋友圈为什么不能直接点赞，而是需要两步操作？</a></div>
+                    <div class="meta">15个回答<span class="dot"></span>21人关注</div>
+                </div><div class="hot-question-item">
+                    <div class="title"><a href="https://wen.woshipm.com//question/detail/italid.html"><span class="fa fa-caret-right"></span>继BAT之后，今日头条也上线了小程序功能，今日头条如何突围？</a></div>
+                    <div class="meta">10个回答<span class="dot"></span>7人关注</div>
+                </div><div class="hot-question-item">
+                    <div class="title"><a href="https://wen.woshipm.com//question/detail/5vgtnj.html"><span class="fa fa-caret-right"></span>Chrome浏览器的断网小游戏，为什么没有被国内很多企业借鉴？</a></div>
+                    <div class="meta">7个回答<span class="dot"></span>4人关注</div>
+                </div><div class="hot-question-item">
+                    <div class="title"><a href="https://wen.woshipm.com//question/detail/nk8d98.html"><span class="fa fa-caret-right"></span>如果理发店加一款让顾客电子试发型的功能有没有前景？</a></div>
+                    <div class="meta">11个回答<span class="dot"></span>8人关注</div>
+                </div></div></div></div>    </div>    </div>
+<footer class="site-footer">
+    <div class="container u-clearfix footer-sections">
+        <section class="info-section u-floatLeft">
+            <div class="footer-title">关于</div>
+            人人都是产品经理（woshipm.com）是以产品经理、运营为核心的学习、交流、分享平台，集媒体、培训、招聘、社群为一体，全方位服务产品人和运营人，成立8年举办在线讲座500+期，线下分享会300+场，产品经理大会、运营大会20+场，覆盖北上海广深杭成都等15个城市，在行业有较高的影响力和知名度。平台聚集了众多BAT美团京东滴滴360小米网易等知名互联网公司产品总监和运营总监，他们在这里分享知识、招聘人才，与你一起成长。        </section>
+        <section class="link-section u-floatLeft">
+        <div class="footer-title">链接</div>
+            <nav class="footer-nav">
+                <ul>
+                    <li><a href="https://www.lagou.com/gongsi/318344.html" target="_blank">加入我们</a></li>
+                    <li><a href="http://www.woshipm.com/it/1010671.html" target="_blank">投稿须知</a></li>
+                    <li><a href="https://wen.woshipm.com/question/detail/omkf.html" target="_blank">意见反馈</a></li>
+                    <li><a href="http://www.woshipm.com/disclaimer" target="_blank">免责声明</a></li>
+                </ul>
+            </nav>
+        </section>
+        <section class="partner-section u-floatLeft">
+            <div class="footer-title">合作伙伴</div>
+            <ul class="blue-pic-ul">
+                <li><a href="https://www.qidianla.com/?woshipm" title="起点学院" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/qidian.png" alt="起点学院" title="起点学院"></a></li>
+<li><a href="http://www.cyzone.cn/?woshipm" title="创业邦" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/5-2.png" alt="创业邦" title="创业邦"></a></li>
+<li><a href="http://ke.qq.com/?from=95" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/6-1.png" alt="腾讯课堂"></a></li>
+<li><a href="http://www.geetest.com/?woshipm" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/3-3.png" alt="极验验证"></a></li>
+<li><a href="http://www.zhisheji.com/?woshipm" title="致设计" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/4-2.png" alt="致设计" title="致设计"></a></li>
+<li><a href="https://www.yunyingpai.com/?woshipm" title="运营派" target="_blank"><img src="./今日头条产品分析报告 _ 人人都是产品经理_files/运营派.png" alt="运营派" title="运营派"></a></li>
+            </ul>
+        </section>
+        <section class="qr-section u-floatRight">
+        <div class="footer-title">APP下载</div>
+            <img src="./今日头条产品分析报告 _ 人人都是产品经理_files/rpPRjFM56semOSrrJuWf.png">
+            <p>iPhone &amp; Android</p>
+        </section>
+    </div>
+    <div class="copyright">
+        <div class="container">
+        旗下品牌: <a target="_blank" href="https://www.qidianla.com/">起点学院</a> | <a target="_blank" href="https://www.yunyingpai.com/">运营派</a> | <a target="_blank" href="http://www.zhaopins.com/">秒聘网</a> <br>
+©2010-2018 - 人人都是产品经理 - <a target="_blank" href="http://www.miibeian.gov.cn/">粤ICP备14037330号-1</a><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030502001309">粤公网安备 44030502001309号</a>
+版权所有 © 深圳聚力创想信息科技有限公司        <div class="u-floatRight" style="margin-top:-10px;">企业内训/合作/投诉: 18123776760</div>
+    </div>
+    </div>
+</footer>
+</div>
+<div class="back2top is-active"><span class="fa-angle-up fa"></span></div>
+<div class="u-hide"><script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb85cbcc76e92e3fd79be8f2fed0f504f' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./今日头条产品分析报告 _ 人人都是产品经理_files/h.js.下载" type="text/javascript"></script><a href="http://tongji.baidu.com/hm-web/welcome/ico?s=b85cbcc76e92e3fd79be8f2fed0f504f" target="_blank">网站统计</a></div>
+<script type="text/javascript" src="./今日头条产品分析报告 _ 人人都是产品经理_files/jquery.jplayer.min.js.下载"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var PURE = {"ajax_url":"http:\/\/www.woshipm.com\/wp-admin\/admin-ajax.php","restapi":"http:\/\/www.woshipm.com\/__api\/","nonce":"9074272ccb","home_url":"http:\/\/www.woshipm.com","is_user_logged_in":"","is_singular":"1","is_home":"","id":"383291","token":"","secret":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./今日头条产品分析报告 _ 人人都是产品经理_files/misc.js.下载"></script>
+<script type="text/javascript" src="./今日头条产品分析报告 _ 人人都是产品经理_files/comment-reply.min.js.下载"></script>
+
+</body></html>

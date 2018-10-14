@@ -1,1 +1,3 @@
 https://docs.minio.io/
+
+nohup ./minio server --address :9008 data &

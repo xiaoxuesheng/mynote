@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)http://www.woshipm.com/evaluating/1153391.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 | 人人都是产品经理</title>
+    <!--[if lt IE 9]>
+    <script src="http://www.woshipm.com/wp-content/themes/Kan/js/html5.js"></script>
+    <![endif]-->
+    <meta name="keywords" content="2年, Feed流, instagram, 初级, 深度, "><meta name="description" content="这篇文章，作者将从多个角度分析Instagram中的Feed流和快拍功能。整个分析思路、方法都很不错，推荐各位学习。 一、体验环境 产品：Instagram； 版本：iOS v51.0； 体验机型和系统版本：iPhone7, iOS11 二、产品概述 背景：2"><link type="image/vnd.microsoft.icon" href="http://image.woshipm.com/wp-files/other/favicon.ico" rel="shortcut icon"><link rel="dns-prefetch" href="http://image.woshipm.com/">
+<link rel="stylesheet" id="misc-css" href="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/misc.css" type="text/css" media="screen">
+<style id="misc-inline-css" type="text/css">
+
+                .surface-content.header-fix{
+                    padding-top:60px;
+                }
+                .surface-content.header-fix .metabar{
+                    position:fixed;
+                    top:0;
+                    left:0;
+                    right:0;
+                }
+                
+</style>
+<link rel="stylesheet" id="fa-css" href="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/font-awesome.min.css" type="text/css" media="screen">
+<script type="text/javascript" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/jquery-1.12.4.min.js.下载"></script>
+<link rel="canonical" href="http://www.woshipm.com/evaluating/1153391.html">
+<script type="text/javascript">var algolia = {"debug":false,"application_id":"4OCSFS3SIM","search_api_key":"7bd75daaf81d0299565fce2232394dfd","powered_by_enabled":true,"query":"","autocomplete":{"sources":[],"input_selector":"input[name='s']:not('.no-autocomplete')"},"indices":{"searchable_posts":{"name":"w_searchable_posts","id":"searchable_posts","enabled":true,"replicas":[]}}};</script></head>
+<body class="single u-backgroundColorLightBlue">
+<div class="surface-content header-fix">
+    <div class="metabar metabar--shadow u-clearfix">
+        <div class="container">
+            <div class="u-floatLeft">
+                <a href="http://www.woshipm.com/" class="logo-xmas">
+                    <img class="logo" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/logo.png">
+                </a>
+            </div>
+            <div class="content u-floatLeft">
+                <nav class="header-nav"><ul id="menu-%e9%a1%b6%e9%83%a8%e5%af%bc%e8%88%aa" class="subnav-ul layoutSingleColumn layoutSingleColumn--wide"><li id="menu-item-155938" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-155938"><a href="http://www.woshipm.com/">首页</a></li>
+<li id="menu-item-155939" class="third menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-155939"><a href="http://www.woshipm.com/evaluating/1153391.html#">分类浏览</a><span class="fa fa-angle-down"></span><ul class="sub-menu">	<li id="menu-item-155928" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155928"><a href="http://www.woshipm.com/category/pmd">产品经理</a></li>
+	<li id="menu-item-155929" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155929"><a href="http://www.woshipm.com/category/pd">产品设计</a></li>
+	<li id="menu-item-155927" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155927"><a href="http://www.woshipm.com/category/ucd">交互体验</a></li>
+	<li id="menu-item-155930" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155930"><a href="http://www.woshipm.com/category/operate">产品运营</a></li>
+	<li id="menu-item-155932" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155932"><a href="http://www.woshipm.com/category/rp">原型设计</a></li>
+	<li id="menu-item-191466" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-191466"><a href="http://www.woshipm.com/category/evaluating">分析评测</a></li>
+	<li id="menu-item-155926" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155926"><a href="http://www.woshipm.com/category/it">业界动态</a></li>
+	<li id="menu-item-155936" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155936"><a href="http://www.woshipm.com/category/zhichang">职场攻略</a></li>
+	<li id="menu-item-184121" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-184121"><a href="http://www.woshipm.com/category/chuangye">创业学院</a></li>
+	<li id="menu-item-1016325" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1016325"><a href="http://www.woshipm.com/category/marketing">营销推广</a></li>
+	<li id="menu-item-906383" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-906383"><a href="http://www.woshipm.com/category/ai">AI人工智能</a></li>
+	<li id="menu-item-906382" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-906382"><a href="http://www.woshipm.com/category/blockchain">区块链</a></li>
+</ul>
+</li>
+<li id="menu-item-155940" class="vip menu-item menu-item-type-custom menu-item-object-custom menu-item-155940"><a href="http://www.woshipm.com/course">热门课程</a></li>
+<li id="menu-item-420537" class="niubi menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-420537"><a href="http://www.woshipm.com/categroy/active">活动讲座</a><span class="fa fa-angle-down"></span><ul class="sub-menu">	<li id="menu-item-158482" class="menu-item menu-item-type-gs_sim menu-item-object-gs_sim menu-item-158482"><ul class="metabar-activities"><li class="metabar-activity-item"><a class="e-title" href="http://www.woshipm.com/active/1430457.html">线下课程丨解构运营人能力模型：初、中、高级；基础、普通、职业段位</a><div class="meta">上海-10月13日<span class="status">进行中</span></div></li><li class="metabar-activity-item"><a class="e-title" href="http://www.woshipm.com/active/1433797.html">线下课程 | 如果领导突然要把你升为运营总监，你能接的住吗？</a><div class="meta">上海-10月27日<span class="status">进行中</span></div></li></ul><div class="metabar-activity-more u-textAlignCenter u-clearfix"><a href="http://www.woshipm.com/category/active">更多活动</a></div></li>
+</ul>
+</li>
+<li id="menu-item-279085" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-279085"><a target="_blank" href="http://wen.woshipm.com/">问答</a></li>
+<li id="menu-item-395532" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-395532"><a target="_blank" href="http://996.pm/7b1Zr">年费会员</a></li>
+<li id="menu-item-155941" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-155941"><a target="_blank" href="http://www.zhaopins.com/">招聘</a><span class="fa fa-angle-down"></span><ul class="sub-menu">	<li id="menu-item-1021335" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1021335"><a target="_blank" href="http://www.zhaopins.com/">免费招人</a></li>
+	<li id="menu-item-1021337" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1021337"><a target="_blank" href="http://www.zhaopins.com/activity/20170114/2ent.html">付费招人</a></li>
+	<li id="menu-item-1021339" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1021339"><a target="_blank" href="http://www.zhaopins.com/activity/20170114/2user.html">免费内推</a></li>
+</ul>
+</li>
+<li id="menu-item-500728" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-500728"><a href="http://www.woshipm.com/evaluating/1153391.html#">百宝箱</a><span class="fa fa-angle-down"></span><ul class="sub-menu">	<li id="menu-item-395530" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-395530"><a target="_blank" href="http://dh.woshipm.com/">网址导航</a></li>
+	<li id="menu-item-500731" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-500731"><a target="_blank" href="http://www.woshipm.com/books">必读书单</a></li>
+	<li id="menu-item-590029" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-590029"><a target="_blank" href="http://www.woshipm.com/topics">知识体系</a></li>
+	<li id="menu-item-501017" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-501017"><a target="_blank" href="http://www.yunyingpai.com/">运营派</a></li>
+	<li id="menu-item-500729" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-500729"><a target="_blank" href="http://www.woshipm.com/tools">必备工具</a></li>
+	<li id="menu-item-852376" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-852376"><a target="_blank" href="http://www.woshipm.com/screen/index.html">设计规范</a></li>
+	<li id="menu-item-1019313" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1019313"><a target="_blank" href="https://www.apptu.cn/">灵感图库</a></li>
+	<li id="menu-item-1317021" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1317021"><a target="_blank" href="https://t.qidianla.com/">学员后花园</a></li>
+</ul>
+</li>
+</ul></nav>
+            </div>
+            <div class="u-floatRight content">
+                                    <span class="item" data-action="popLogin"><svg class="svgIcon-use" width="18" height="17" viewBox="0 0 18 17"><path d="M17.831,3.950 L9.184,12.519 C9.113,12.590 9.024,12.641 8.927,12.667 L4.754,13.785 C4.705,13.798 4.655,13.805 4.603,13.805 C4.450,13.805 4.301,13.743 4.193,13.635 C4.047,13.489 3.992,13.275 4.048,13.078 L5.219,8.984 C5.246,8.891 5.296,8.805 5.366,8.736 L14.013,0.165 C14.122,0.058 14.267,-0.002 14.421,-0.002 C14.575,-0.002 14.720,0.058 14.829,0.165 L17.831,3.141 C17.940,3.249 18.000,3.393 18.000,3.545 C18.000,3.698 17.940,3.842 17.831,3.950 ZM8.156,11.689 L6.199,9.750 L5.436,12.419 L8.156,11.689 ZM14.421,1.378 L6.902,8.830 L9.088,10.997 L16.607,3.546 L14.421,1.378 ZM1.153,2.286 L1.153,14.895 C1.153,15.425 1.588,15.855 2.122,15.855 L14.732,15.855 C15.267,15.855 15.701,15.425 15.701,14.895 L15.701,10.476 L16.855,10.476 L16.855,14.895 C16.855,16.055 15.902,16.998 14.732,16.998 L2.122,16.998 C0.952,16.998 -0.000,16.055 -0.000,14.895 L-0.000,2.286 C-0.000,1.126 0.952,0.183 2.122,0.183 L9.326,0.183 L9.326,1.326 L2.122,1.326 C1.588,1.326 1.153,1.756 1.153,2.286 Z"></path></svg>投稿</span>
+                    <span class="item show-search"><svg class="svgIcon-use" width="16" height="16" viewBox="0 0 16 16"><path d="M15.800,14.481 L12.519,11.200 C12.504,11.184 12.487,11.170 12.471,11.156 C13.361,9.988 13.890,8.529 13.890,6.947 C13.890,3.110 10.780,-0.000 6.945,-0.000 C3.109,-0.000 -0.000,3.110 -0.000,6.947 C-0.000,10.785 3.109,13.895 6.945,13.895 C8.529,13.895 9.990,13.364 11.159,12.471 C11.172,12.487 11.186,12.503 11.201,12.518 L14.483,15.800 C14.786,16.104 15.329,16.056 15.693,15.692 C16.056,15.328 16.104,14.786 15.800,14.481 L15.800,14.481 ZM0.772,6.947 C0.772,3.537 3.535,0.771 6.945,0.771 C10.354,0.771 13.118,3.537 13.118,6.947 C13.118,8.621 12.453,10.138 11.373,11.250 C11.351,11.269 11.330,11.288 11.310,11.308 C11.289,11.329 11.269,11.351 11.250,11.373 C10.138,12.456 8.619,13.123 6.945,13.123 C3.535,13.123 0.772,10.358 0.772,6.947 L0.772,6.947 Z" class="cls-1"></path></svg>搜索</span>
+                    <div class="item app-qrcode"><svg class="svgIcon-use" width="12" height="18" viewBox="0 0 12 18"><path d="M10.599,17.999 L1.401,17.999 C0.626,17.999 -0.000,17.381 -0.000,16.616 L-0.000,1.382 C-0.000,0.617 0.626,-0.001 1.401,-0.001 L10.599,-0.001 C11.374,-0.001 12.000,0.627 12.000,1.382 L12.000,16.616 C12.000,17.381 11.374,17.999 10.599,17.999 ZM11.066,1.382 C11.066,1.128 10.857,0.922 10.599,0.922 L1.401,0.922 C1.142,0.922 0.934,1.128 0.934,1.382 L0.934,12.800 L11.066,12.800 L11.066,1.382 ZM11.066,13.811 L0.934,13.811 L0.934,16.626 C0.934,16.881 1.142,17.087 1.401,17.087 L10.599,17.087 C10.857,17.087 11.066,16.881 11.066,16.626 L11.066,13.811 ZM6.000,16.283 C5.483,16.283 5.066,15.871 5.066,15.361 C5.066,14.851 5.483,14.439 6.000,14.439 C6.516,14.439 6.934,14.851 6.934,15.361 C6.934,15.871 6.516,16.283 6.000,16.283 Z"></path></svg>APP<div class="app-qrcode-dropdown"><img class="app-qrcode-img" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/footer-appdownload.png"></div></div>
+                    <span class="item" data-action="popLogin">注册 | 登录</span>
+                                            </div>
+        </div>
+    </div>
+    <div class="search-overlay">
+        <div class="container search-content">
+            <form class="search-form" action="http://www.woshipm.com/search-posts" target="_blank" method="get">
+                <input type="search" class="search-form-input" name="k" placeholder="请输入搜索关键词">
+                <button class="btn-search">
+                    <i class="fa fa-search"></i>
+                </button>            </form>
+            <div class="search-hot-words">
+                <h3 class="search-overlay-title"><svg class="svgIcon-use u-colorYellow" width="16" height="16" viewBox="0 0 20 22">
+                        <path d="M19.595,15.561 C18.224,19.972 14.151,21.765 10.797,21.972 C9.858,22.028 8.916,22.002 7.981,21.894 C3.718,21.402 -0.382,18.446 0.029,13.748 C0.223,11.528 1.519,8.904 2.466,6.987 L2.620,6.672 C2.756,6.400 3.029,6.236 3.319,6.254 C3.609,6.268 3.865,6.462 3.972,6.747 C4.106,7.109 4.318,7.534 4.543,7.984 C4.629,8.156 4.715,8.330 4.800,8.504 C6.731,6.456 7.296,3.554 7.602,0.687 C7.631,0.425 7.783,0.197 8.007,0.081 C8.233,-0.035 8.498,-0.026 8.716,0.107 C10.922,1.463 12.480,2.863 13.616,4.513 C13.922,4.959 14.199,5.426 14.445,5.913 C14.621,5.327 14.811,4.747 15.016,4.172 C15.110,3.928 15.312,3.749 15.555,3.695 C15.798,3.640 16.051,3.718 16.229,3.901 C20.136,7.930 20.484,12.700 19.595,15.561 ZM7.493,12.523 C7.493,12.149 7.202,11.847 6.844,11.847 C6.486,11.847 6.196,12.149 6.196,12.523 L6.196,13.784 L4.857,13.804 L4.857,12.559 C4.857,12.186 4.566,11.884 4.209,11.884 C3.851,11.884 3.560,12.186 3.560,12.559 L3.560,16.704 C3.560,17.077 3.851,17.379 4.209,17.379 C4.566,17.379 4.857,17.077 4.857,16.704 L4.857,15.156 L6.196,15.135 L6.196,16.667 C6.196,17.040 6.486,17.343 6.844,17.343 C7.202,17.343 7.493,17.040 7.493,16.667 L7.493,12.523 ZM10.632,11.813 C9.385,11.813 8.371,13.034 8.371,14.535 C8.371,16.036 9.386,17.258 10.632,17.258 C11.878,17.258 12.892,16.036 12.892,14.535 C12.892,13.034 11.878,11.813 10.632,11.813 ZM16.522,11.959 L13.574,11.959 C13.216,11.959 12.926,12.262 12.926,12.635 C12.927,12.816 12.996,12.988 13.118,13.115 C13.239,13.242 13.403,13.312 13.574,13.311 L14.399,13.311 L14.399,16.629 C14.399,17.002 14.690,17.304 15.048,17.304 C15.406,17.304 15.696,17.002 15.696,16.629 L15.696,13.311 L16.522,13.311 C16.692,13.312 16.856,13.242 16.978,13.115 C17.100,12.988 17.169,12.816 17.170,12.635 C17.170,12.262 16.880,11.959 16.522,11.959 ZM10.632,15.908 C10.109,15.908 9.669,15.279 9.669,14.535 C9.669,13.791 10.109,13.163 10.632,13.163 C11.153,13.163 11.595,13.791 11.595,14.535 C11.595,15.279 11.154,15.908 10.632,15.908 Z" class="cls-1"></path>
+                    </svg>热搜词</h3>
+                <div class="words-list">
+                    <a href="http://www.woshipm.com/tag/app" target="_blank" class="words-item">app</a><a href="http://www.woshipm.com/tag/o2o" target="_blank" class="words-item">O2O</a><a href="http://www.woshipm.com/tag/prd" target="_blank" class="words-item">PRD</a><a href="http://www.woshipm.com/tag/%e4%ba%92%e8%81%94%e7%bd%91%e9%87%91%e8%9e%8d" target="_blank" class="words-item">互联网金融</a><a href="http://www.woshipm.com/tag/%e4%ba%a4%e4%ba%92%e8%ae%be%e8%ae%a1" target="_blank" class="words-item">交互设计</a><a href="http://www.woshipm.com/tag/rp" target="_blank" class="words-item">原型设计</a><a href="http://www.woshipm.com/tag/%e5%95%86%e4%b8%9a%e6%a8%a1%e5%bc%8f" target="_blank" class="words-item">商业模式</a><a href="http://www.woshipm.com/tag/%e6%95%b0%e6%8d%ae%e5%88%86%e6%9e%90" target="_blank" class="words-item">数据分析</a><a href="http://www.woshipm.com/tag/ue" target="_blank" class="words-item">用户体验</a><a href="http://www.woshipm.com/tag/%e7%ab%9e%e5%93%81%e5%88%86%e6%9e%90" target="_blank" class="words-item">竞品分析</a><a href="http://www.woshipm.com/tag/%e8%bf%90%e8%90%a5" target="_blank" class="words-item">运营</a><a href="http://www.woshipm.com/tag/%e9%9c%80%e6%b1%82%e5%88%86%e6%9e%90" target="_blank" class="words-item">需求分析</a>                </div>
+            </div>
+            <div class="search-features">
+                <h3 class="search-overlay-title"><svg class="svgIcon-use  u-colorPink" width="16" height="16" viewBox="0 0 22 22">
+                        <path d="M21.988,7.680 C21.978,7.317 21.969,6.921 21.963,6.490 C21.954,6.060 21.951,5.617 21.951,5.169 C21.932,4.117 21.917,2.952 21.898,1.674 C21.865,1.468 21.825,1.259 21.782,1.053 C21.739,0.847 21.631,0.647 21.459,0.457 C21.287,0.284 21.093,0.168 20.875,0.106 C20.660,0.045 20.466,0.017 20.294,0.017 L12.428,0.017 C12.394,-0.001 12.271,-0.005 12.065,0.005 C11.860,0.014 11.730,0.035 11.678,0.069 C11.574,0.103 11.457,0.165 11.328,0.251 C11.199,0.337 11.091,0.423 11.005,0.509 L0.576,10.993 C-0.183,11.891 -0.192,12.754 0.551,13.581 L8.568,21.631 C8.740,21.770 8.925,21.868 9.125,21.929 C9.324,21.991 9.527,22.012 9.733,21.994 C9.939,21.976 10.136,21.932 10.314,21.865 C10.495,21.797 10.646,21.702 10.765,21.579 C12.698,19.646 14.422,17.912 15.940,16.375 L17.855,14.433 C18.494,13.812 19.059,13.249 19.551,12.751 C20.042,12.250 20.445,11.845 20.755,11.534 L21.247,11.042 C21.281,11.009 21.336,10.935 21.416,10.821 C21.493,10.710 21.576,10.563 21.662,10.381 C21.748,10.200 21.825,9.997 21.895,9.773 C21.963,9.549 22.000,9.306 22.000,9.047 L22.000,8.583 C22.000,8.344 21.994,8.042 21.988,7.680 L21.988,7.680 L21.988,7.680 ZM8.479,14.845 L7.013,14.845 L7.290,12.908 L8.756,12.908 L8.479,14.845 L8.479,14.845 L8.479,14.845 ZM9.232,12.327 C9.161,12.376 9.084,12.413 9.001,12.438 C8.918,12.462 8.836,12.475 8.756,12.475 L7.188,12.475 L7.188,11.331 L8.037,11.331 L8.037,10.271 L7.087,10.317 L7.004,9.192 L8.037,9.137 L8.037,7.999 L6.967,7.999 L6.967,6.847 L8.037,6.847 L8.037,6.026 L9.465,6.026 L9.465,6.847 L10.452,6.847 L10.452,7.999 L9.465,7.999 L9.465,9.051 L10.406,9.005 L10.498,10.148 L9.466,10.203 L9.466,11.900 C9.466,11.992 9.444,12.075 9.401,12.146 C9.358,12.220 9.303,12.278 9.232,12.327 L9.232,12.327 L9.232,12.327 ZM9.742,14.845 L9.456,12.908 L10.931,12.908 L11.208,14.845 L9.742,14.845 L9.742,14.845 ZM12.041,14.845 L11.764,12.908 L13.230,12.908 L13.506,14.845 L12.041,14.845 L12.041,14.845 ZM13.860,12.115 C13.814,12.035 13.789,11.943 13.789,11.838 L13.789,8.009 L12.840,8.009 L12.757,9.281 L13.494,9.346 L13.384,10.489 L12.692,10.425 L12.600,11.937 C12.588,12.115 12.505,12.250 12.351,12.343 C12.197,12.435 12.041,12.481 11.881,12.481 L10.710,12.481 L10.609,11.340 L11.208,11.340 L11.272,10.299 L10.692,10.243 L10.802,9.091 L11.337,9.155 L11.411,8.012 L10.701,8.012 L10.701,6.859 L11.475,6.859 L11.530,6.011 L12.959,6.066 L12.904,6.859 L15.218,6.859 L15.218,11.353 L15.716,11.353 L15.716,12.487 L14.554,12.487 C14.462,12.487 14.370,12.472 14.281,12.444 C14.191,12.416 14.109,12.373 14.035,12.318 C13.961,12.263 13.906,12.195 13.860,12.115 L13.860,12.115 L13.860,12.115 ZM14.336,14.845 L14.060,12.908 L15.525,12.908 L15.802,14.845 L14.336,14.845 L14.336,14.845 L14.336,14.845 ZM19.373,4.830 C19.053,5.141 18.669,5.298 18.220,5.298 C17.772,5.298 17.390,5.141 17.080,4.830 C16.770,4.520 16.613,4.139 16.613,3.690 C16.613,3.241 16.770,2.860 17.080,2.550 C17.390,2.239 17.772,2.083 18.220,2.083 C18.669,2.083 19.053,2.239 19.373,2.550 C19.692,2.860 19.852,3.241 19.852,3.690 C19.852,4.139 19.692,4.520 19.373,4.830 L19.373,4.830 Z" class="cls-1">
+                    </path></svg>热门专题</h3>
+                                    <div class="search-feature-item">
+                        <a class="tool-img" href="http://www.woshipm.com/topic/grow" target="_blank">
+                            <img rel="nofollow" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/180x120">
+                            <h3>运营人的自我修养</h3>
+                        </a>
+                    </div>
+                                    <div class="search-feature-item">
+                        <a class="tool-img" href="http://www.woshipm.com/topic/xm" target="_blank">
+                            <img rel="nofollow" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/180x120(1)">
+                            <h3>产品项目总结</h3>
+                        </a>
+                    </div>
+                                    <div class="search-feature-item">
+                        <a class="tool-img" href="http://www.woshipm.com/topic/content" target="_blank">
+                            <img rel="nofollow" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/180x120(2)">
+                            <h3>文案进阶的必备利器</h3>
+                        </a>
+                    </div>
+                            </div>
+        </div>
+    </div>    <div class="container u-clearfix single-wrapper u-marginBottom30">
+        <div class="u-width840 u-floatLeft">
+            <div class="u-marginTop30">
+                <article class="article-wrapper u-backgroundColorWhite u-rounded">
+                    <header class="article-header">
+                        <h2 class="article-title">1.8万字，全方位拆解Instagram的Feed流动态和快拍功能</h2>
+                    </header>
+                    <div class="postMetaLockup--authorWithBio u-flex">
+                        <div class="u-flex0">
+                            <a href="http://www.woshipm.com/u/725652" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/WX_U_201807_20180719203255_1120.jpg" alt="" height="42" width="42" class="avatar"></a>
+                        </div>
+                        <div class="u-flex1 u-paddingLeft15 u-overflowHidden">
+                            <div class="">
+                                <a href="http://www.woshipm.com/u/725652" target="_blank">Megan</a><button class="button button--toggle button--primary button--follow" data-action="showLoginForm" data-id="725652"><span class="is-default">订阅专栏</span><span class="is-active">取消订阅</span></button>                            </div>
+                            <div class="des"></div>
+                            <div class="postMetaInline postMetaInlineSupplemental post-meta-items">
+                                <span class="post-meta-item"><span class="fa fa-clock-o"></span>2018-07-26</span>
+                                <span class="post-meta-item"><span class="fa fa-eye"></span>2.1万</span>
+                                <span class="post-meta-item"><span class="fa fa-star"></span>134</span>
+                                <span class="post-meta-item"><span class="fa fa-thumbs-up"></span>135</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="article-topAd">
+                        从零开始学运营，10年经验运营总监亲授，2天线下集训+1年在线学习，做个有竞争力的运营人。<a href="http://996.pm/MkqOR" target="_blank">了解详情</a>                    </div>
+                                        <div id="postAudio" class="jp-jplayer" style="width: 0px; height: 0px;"><img id="jp_poster_0" style="width: 0px; height: 0px; display: none;"><audio id="jp_audio_0" preload="none" src="http://audio-pm.woshipm.com/cache/vava-1153391.mp3"></audio></div>
+                        <div id="jp_container_1" class="jp-audio" role="application" aria-label="media player">
+                            <div class="jp-type-single">
+                                <div class="jp-gui jp-interface">
+                                    <div class="jp-controls">
+                                        <button class="jp-play" role="button" tabindex="0"><svg class="svgIcon-use" width="25" height="25" viewBox="0 0 25 25"><path d="M7 4v17.03a.5.5 0 0 0 .795.404l11.1-8.111a1 1 0 0 0 0-1.615l-11.1-8.112A.5.5 0 0 0 7 4z"></path></svg></button>
+                                        <button class="jp-pause" role="button" tabindex="0" style="display: none;"><svg class="svgIcon-use" width="25" height="25" viewBox="0 0 25 25"><g transform="translate(5 4)" fill-rule="evenodd"><rect width="6" height="17" rx="2"></rect><rect x="9" width="6" height="17" rx="2"></rect></g></svg></button>
+                                    </div>
+                                    <div class="u-flex1">
+                                        <div>释放双眼，带上耳机，听听看~！</div>
+                                        <div class="u-flexCenter">
+                                            <div class="u-flex0 u-marginRight10 jp-current-time js-currentTime" style="width:34px">00:00</div>
+                                            <div class="u-flex1">
+                                                <div class="js-progress" data-action="seek-audioPlayer">
+                                                    <div class="js-progressBar">
+                                                        <div class="js-play-bar" style="width: 0%;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="u-flex0 u-marginLeft10 jp-duration">00:00</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                        <div class="grap">
+                        <blockquote><p>这篇文章，作者将从多个角度分析Instagram中的Feed流和快拍功能。整个分析思路、方法都很不错，推荐各位学习。</p></blockquote>
+<p><img data-action="zoom" class="size-full wp-image-1160903 aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/Mg3SxPdN8Wc3V5lrFDCD.jpg" alt="" width="800" height="450"></p>
+<h2>一、体验环境</h2>
+<p>产品：Instagram；</p>
+<p>版本：iOS v51.0；</p>
+<p>体验机型和系统版本：iPhone7, iOS11</p>
+<h2>二、产品概述</h2>
+<p>背景：2010年，智能手机兴起，用手机拍照质量差、不美观。而智能手机的兴起开启了移动互联网时代，移动端App以及图片社交领域存在巨大的蓝海市场。</p>
+<h3>2.1 产品简介</h3>
+<p>创立于2010年，Instagram是一款<strong>图片、视频分享社交App</strong>。让用户<strong>随时随地、简单快捷</strong>地完成<strong>拍摄、编辑</strong>，满足了用户利用智能手机而不需要昂贵的摄影器材就能拍出美观的照片视频，并与他人分享的基本需求。</p>
+<p>产品总体调性是精致美好的生活，强调内容的生产与获取，相对弱化社交，让用户能够利用强大的滤镜分享、展示自我。</p>
+<p>Instagram目前的所有功能都是基于两个核心：关系和兴趣。</p>
+<h3>2.2 产品定位</h3>
+<p>快捷地分享美观有趣的内容的图片社交平台。</p>
+<h3>2.3 产品使命</h3>
+<p>成为用户分享生活的一种方式：快捷、美观、有趣。</p>
+<p>把用户与有趣的、感兴趣的人与事物连结起来。</p>
+<h3>2.4 核心功能</h3>
+<ul>
+<li><strong>拍摄和美化</strong>：照片或视频，使用滤镜和其它创作工具美化、编辑所拍摄的内容</li>
+<li><strong>发布分享</strong>：在Feed流动态或快拍发布内容，也可以分享到其它外部社交平台</li>
+<li><strong>浏览Feed流“动态”</strong>：浏览“动态”中的照片、视频及广告，可以给帖子点赞、评论或分享</li>
+<li><strong>浏览“快拍”</strong>：浏览快拍中的照片、视频及广告，通过发送Direct消息进行私密互动</li>
+<li><strong>即时通讯（Direct）</strong>：即时通讯功能；一对一或一对多；包括阅后即焚、语音视频通话等</li>
+<li><strong>长视频（IGTV）</strong>：浏览或发布大于一分钟的竖版长视频</li>
+</ul>
+<h3>2.5 功能结构图</h3>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/SJhsCQi7BVgLftRRI7NL.png" alt="" width="696" height="580"></p>
+<h2>三、用户分析</h2>
+<p>在这里分析的用户主要指To C的用户，而B端用户为C端用户积累到一定程度之后才发展起来的，因此将B端用户放在后面的商业化分析板块中一起分析。</p>
+<p>在产品发展早期（2010~2013年），Instagram的核心用户一批是或业余或专业的摄影师、艺术家，他们注重画质和表达，产品相对更加小众，在欧美市场的普及率都较低。</p>
+<p>随着产品功能的逐渐完善，产品定位不断打磨，现在主要向大众市场进军，但总体仍然保持精致、美观的产品调性。</p>
+<p>现阶段目标用户：热爱分享图片/视频以及通过图片/视频获取信息的相对年轻的用户群体。</p>
+<p>进一步将用户分为两大类：</p>
+<ul>
+<li>创作者：如摄影师、艺术家、明星、其他兴趣类博主。特点是粉丝数量大、内容发布频次高、内容质量好。</li>
+<li>普通用户：使用Instagram的主要目的是分享、社交和获取信息。</li>
+</ul>
+<h3>3.1 用户画像</h3>
+<p>截至2018年1月，用户年龄分布如下表：35岁以下的用户占比68%，其中35岁以下的成年人占比高达61%，因此Instagram的受众偏<strong>年轻化</strong>。</p>
+<p>而千禧一代中Instagram的普及率非常高: 2016年，全球58%的千禧一代拥有Instagram账号。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/ft39HBH2FziTzSVZB8EU.png" alt="" width="446" height="295"></p>
+<p>如下表，性别比例上，各年龄层男女性别分布差别不大；女性（50.7%）比男性（49.3%）总体占比高出1.4%。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/gTEBNupJdMvWecU68oAE.png" alt="" width="456" height="296"></p>
+<p>用户的收入和教育水平都相对较高。以美国地区用户为例：家庭年收入最高（10w+）的用户中，60%的人使用Instagram（PS：美国家庭年收入中位数为$57,671）。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/qTgQSyppeZogt4RlKQIp.png" alt="" width="451" height="317"></p>
+<p>教育水平高用户的占比也较高，42%拥有大学及以上学历（Statista数据）。</p>
+<p>此外，美国是Instagram的全球最大市场，但80%的用户来自美国以外的国家/地区，而美国地区用户月活最高（1.2亿），巴西、印度用户月活分别居于第二、第三位（Instagram官方数据）。</p>
+<h3>3.2 人物角色/Persona</h3>
+<p><strong>Phil：</strong></p>
+<p>23岁，是在美国读研的中国留学生，非常热爱各地旅游，探索新环境，Instagram是他朋友圈之外的发布“高逼格”照片的地方。</p>
+<p>除了发布自己旅游的照片，他也关注了很多旅行类博主和标签，他喜欢在Instagram上搜索旅游相关的标签、帖子来查看、计划自己未来将前往旅行的地方。</p>
+<p>到达了某个地方之后，他有时候也会用Instagram来查找当地的吃喝玩乐的攻略。</p>
+<p><strong>Celine：</strong></p>
+<p>25岁，在香港读PhD的中国学生，平时做研究很忙。在Instagram上是沉默的观看者，在闲暇时间更多是刷别人发布的动态。</p>
+<p>她较少发布Instagram帖子，就像她极少发朋友圈一样。但是Instagram是她除了朋友圈和微博之外的“排气口”。</p>
+<p>她对于Instagram的使用预期跟微博差不多，主要用于社交，也关注了一些美妆博主以及明星。她会通过视频来观看美妆博主的美妆教程，偶尔会用Instagram来搜索感兴趣的美妆或护肤产品的新资讯。</p>
+<p><strong>Neal：</strong></p>
+<p>24岁，坐标洛杉矶，体育爱好者，热爱各类球类运动，其中最喜欢踢足球。他喜欢Instagram是因为他对体育的兴趣爱好在这个平台得到了极大的满足。</p>
+<p>每当有自己喜欢的体育赛事，他都能在Instagram上面快速看到精彩的赛事画面或视频更新，也会在评论中参与赛事的预测。</p>
+<p>他经常在Instagram上浏览一些体育新闻资讯。</p>
+<p>他在Instagram上关注了很多体育明星，来查看他们在个人生活中的一面。每次去现场观看体育赛事，他都会拍下很多照片、视频，然后精选一些发布在Instagram上面。</p>
+<p><strong>Ryan：</strong></p>
+<p>41岁，美国某中型互联网公司的工程师。</p>
+<p>关注了很多个汽车品牌的账号以及相关的标签来获取新信息。</p>
+<p>他最喜欢在平台上看汽车相关的视频，进行相关的搜索，也会根据视频来评估不同汽车的性能表现。</p>
+<p>他在Instagram上面有许多志同道合的网友，他买新车时会通过发帖来向这些朋友寻求帮助建议，也会帮他人在汽车相关的问题上给出自己的意见。</p>
+<h3>3.3 用户需求与使用场景</h3>
+<p>依据KANO模型的前三种需求，举例已有功能并将其所满足需求场景进行归类对应如下：</p>
+<p><strong>基本型需求：</strong></p>
+<ul>
+<li>拍摄美观、有趣的照片用于分享：拍摄功能，滤镜等创作工具，发布内容到Feed流动态</li>
+<li>浏览基于好友关系和订阅关系的内容：浏览Feed流动态，浏览快拍</li>
+<li>浏览未关注人发布的内容：浏览发现页面</li>
+</ul>
+<p><strong>期望型需求：</strong></p>
+<ul>
+<li>分享照片/视频给特定的人/群体：即时通讯功能（Direct），设置私密账号</li>
+<li>在平台上发现喜欢的商品后更便捷地购物：通过Feed流帖子或动态直接快捷购物</li>
+<li>与好友实时聊天：即时聊天功能（Direct），语音视频通话功能</li>
+</ul>
+<p><strong>兴奋型需求：</strong></p>
+<ul>
+<li>将自己的动态同步到不同社交平台：发布Feed流动态时一键分享到其它外部社交平台</li>
+<li>更加随心所欲发布定时消除的照片/视频快拍：只保留24小时的快拍，Direct阅后即焚</li>
+<li>查看关注人的实时动态：直播</li>
+<li>观看60秒以上的长视频：IGTV</li>
+</ul>
+<h2>四、产品功能分析</h2>
+<h3>4.1 社交关系链</h3>
+<p>在分析具体的功能前，先分析这个图片社交平台的社交链条和平台对其社交关系的定位。因为只有当用户先在平台发展了一定的社交链，才可以浏览到自己喜欢的内容，并且自己发布的内容也会得到好友的互动激励，因而才会继续留存、活跃。</p>
+<p>Instagram内的社交关系有三种：</p>
+<p><strong>1.好友关系</strong>：Instagram对“好友”的定义是双向的：只有两个用户互相关注，才会被定义为“好友”关系。比如，Direct消息中，“好友”关系的用户之间可以自由聊天。再如，只有当双方互关，当一方首次发布快拍，另一方才会收到系统提示。如果是单纯“订阅”关系，则没有这样的提示。</p>
+<p><strong>2.订阅关系</strong>：只有一方关注另一方，是单纯的“关注”与“被关注”的关系，本质是“订阅”。比如，当未关注的人给自己发消息时，用户会在Direct消息里收到请求，点击可查看陌生消息，此时可以选择拒绝或允许（如下图）。当选择允许，发送消息的一方可以查看到自己发送的消息显示“已读”状态；如果选择拒绝，发送消息的一方不会收到任何的通知，也不会看到自己发送的消息显示“已读”状态。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/oHjJXB8KVneryVgSefJR.png" alt="" width="604" height="309"></p>
+<p><strong>3.互不关注关系</strong>：双方互不关注，但是在对方是公开账号的情况下，仍可以查看对方的个人主页和快拍，并可以进行互动点赞。其他进一步的互动如Direct聊天则需要遵循以上原则。</p>
+<p>此外需要注意的是：Instagram账户可以分为公开账户和私密账户。私密账户的用户有权限审核自己的粉丝：当其他用户申请关注自己的时候，用户可以选择是否允许ta关注自己；</p>
+<p>另外，私密账户的用户也可以移除粉丝，任何人都可以将自己的账户转为私密账户。</p>
+<p>总体来看，Instagram更加突出具体内容的重要性地位，对于社交本身相对弱化，体现在以下几点（因为私密账号的特殊性，以公开账号为前提作分析）：</p>
+<p>1.基于图片/视频内容的评论与图片共同处于首页一级界面，与内容本身共同构建内容板块；以上描述的三种关系链均可以参与点赞和评论等互动。</p>
+<p>2.基于关系链的私信在二级界面，且需要有双方互关的“好友关系”或者在“订阅关系”下的发私信的权限。</p>
+<p>3.无法给关注的人添加备注——这个设计的原因是，如果可以给他人添加备注，给用户的感觉就会变得更像微信这类IM软件，整个产品的感觉也会变化。</p>
+<blockquote><p>比如，如果用户给自己关注的同学备注为“北大-王小明”，被关注的人发布的内容连同他们不同粉丝给予的备注一起呈现，就会让这个图片社交软件看起来不那么“酷”，而会更加倾向于“商务化”。</p></blockquote>
+<p>当然，不少用户也会直接使用自己的名字来作为账户名，方便他人辨别自己。</p>
+<blockquote><p>跟这个特性可能有关系的设计是：在Instagram里查看其他用户的个人资料页面的头像，无法查看大图，只能显示圆圈内的小图，可能是为了让用户尽量使用能够识别正脸的大头照作为头像，来弥补无法备注姓名可能导致的让好友难以辨别的麻烦；另外也可能是为了保护用户的图片版权，防止有人盗取头像伪装成真实的用户产生不良影响。</p></blockquote>
+<p>以下对Feed流“动态”和快拍分别进行分析：</p>
+<h3>4.2 Feed流“动态”</h3>
+<p>Feed流“动态”是Instagram诞生之初就一直处于首页的核心板块，以下按内容生产（拍摄与分享）和内容消费（浏览动态）的角度来分析。</p>
+<p><strong>4.2.1 拍摄与分享</strong></p>
+<p>拍摄功能与滤镜等编辑功能是Instagram的核心功能。在不断丰富产品的功能的时候，也在不断加强产品的核心功能。简单来说，用户可以使用Instagram的内置相机拍摄照片或视频，使用滤镜及其它创作工具来编辑所拍摄的内容。用户完成编辑后，即可把内容发布在Feed流“动态”，也可以分享到其它社交平台。</p>
+<ul>
+<li>用户痛点：想随时随地用照片记录生活，但是智能手机拍出来的照片质量不够好。</li>
+<li>用户需求：用智能手机而不必用昂贵的摄影设备也能拍出好看的照片。</li>
+<li>解决方案：接近五十个强大的滤镜，用户几乎可以使用滤镜完成一键修图，提升照片/视频美感。</li>
+</ul>
+<p><strong>功能分析</strong></p>
+<p>Feed流帖子的拍摄入口位于一级菜单中间，用户点击进入后可以选择从本地图库中选择照片或视频、直接拍摄图片或视频三种方式。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/jIUoVofgmrgfkXaUPX55.png" alt="" width="2236" height="748"></p>
+<p><strong>1）直接拍摄</strong></p>
+<p>直接拍摄流程相对简单，但直接拍摄照片/视频只支持正方形格式，用户拍摄完后可以再进行编辑操作。</p>
+<p>Instagram还有三个拍摄副线 App——Layout、Hyperlapse、Boomerang ，分别对应图片拼贴、延时摄影和循环播放小视频，来满足用户更加多元的需求。但是为了满足其他拍摄需求而需要用户下载并跳转到其他的App，在操作流程上太过于繁琐，不利于简化用户体验流程。</p>
+<p>建议：将三个副线App或其中某一个技术实现较简单的App（如拼图）功能嵌入到Instagram内，方便用户使用这些拍摄、编辑功能而无需下载独立的App。</p>
+<p><strong>2）本地上传</strong></p>
+<p>图库中的第一张图会自动显示在预览界面，并默认设置为正方形格式。如果用户需要选择多张照片发布到同一个帖子中，所有照片的布局格式都会被调整为跟随第一张图片的布局格式。比如，第一张图为正方形格式，那么往后的所有图片或视频都会被调整为正方形格式，用户可以拖动照片来让其显示适当的元素内容。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/0FUEHryfPI6ootAsnSmu.png" alt="" width="447" height="321"></p>
+<p>如果用户想让一张照片或视频的所有元素显示完整（如下图），则需要先点击左下角的“放大按钮”，图片则会缩放为原始的布局格式，此时正方式预览框中会有白边，但白边并不会显示在最后发布的帖子中；点击下一步，进入滤镜或编辑模式，可以对图片或视频进行美化调整；进入最后一步时，用户可以添加文案、标记其他用户、添加地点（下方会显示默认推荐）。</p>
+<p>这里最重要的功能是：用户可以选择将此条帖子同步到Facebook、Twitter、Tumblr以及新浪微博。对应的用户痛点是：社交媒体数量繁多，用户想要把照片分享给不同社交平台上的家人、朋友、粉丝比较麻烦。对应的用户需求是：需要更简单的图片分享解决方案，在多个不同的社交平台可以发布同样的帖子、以便让不同的好友知悉自己的动态。此功能很好地满足了这个需求。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/0OqION0jzBMJ6SoZkfJ4.png" alt="" width="1916" height="788"></p>
+<p>实际上，Instagram在2015年8月前的Feed流一直只能发布正方形格式，最初的这种正方形图片布局设计是为了实现与当时的其他图片社交平台实现差异化的区分。</p>
+<p>另外，与我们熟悉的朋友圈不同，Instagram的Feed流图片或视频的展示是以手机屏幕宽度为基准来安排图片的布局，即图片会布满占个屏幕的宽度、让屏幕两侧不留白边，而长度则取决于对应宽度的比例，但同时也受限于官方设置的最大长度。</p>
+<p>如此一来，“布满”整个手机屏幕的图片的正方形格式在Feed流显得更为美观。</p>
+<p>但是随着产品发展，用户的发布照片的需求越来越多元，而正方形格式图片能容纳的元素比较有限，比如多人的大合照如果被裁剪为正方形格式进行发布就必然会裁掉边缘的人像，另外风景照片也是同理。</p>
+<p>因此，为了满足照片/视频能容纳更多元素的需求，产品新增了横向长方形和纵向长方形的照片/视频的布局格式，不变的是内容仍然以屏幕宽度为基准来展开布局。</p>
+<p>但这个改进也带来了其它问题：在Feed流发布图片时，不同布局格式的多张照片无法同时在同一个帖子中展现各自的所有元素，因为多张图片必须跟随第一张图片的布局格式。</p>
+<p>比如，第一张格式为横向长方形，则后面跟随的图片也必须为横向长方形（即使后面的图片以纵向长方形格式进行布局展示会更加完全、美观），这样就造成了发布照片、视频的新的限制。</p>
+<p>这样的限制可能是因为如果Feed流的同一个帖子中有不同布局格式的照片/视频，那么用户在浏览这个帖子切换不同照片的时候，帖子的外框都会随着改变，进而导致整个Feed流都要跟着改变，会受限于技术原因而难以实现，并且不美观。</p>
+<p>建议：</p>
+<p>a. 增加给不同尺寸格式的照片/视频自动加白边的功能。但是这样改进会带来的一个弊端是让照片/视频缩小，无法让用户尽兴地最大化展示图片/视频的细节等；</p>
+<p>b. 将Boomerang视频的拍摄入口挪到“直接拍摄”页面进行收纳而不是放置在本地图库，而目前的入口位置逻辑不清晰且会让用户产生迷惑。</p>
+<p><strong>4.2.2 浏览Feed流“动态”</strong></p>
+<p>用户可以在Feed流浏览自己关注的用户发布的帖子、关注的话题所囊括的帖子以及系统推荐的其他内容，用户可以给帖子点赞、评论或分享等。</p>
+<p>用户痛点：综合类社交平台各类信息冗杂，缺乏有趣的、感兴趣的图片/视频内容，消遣空闲时间的方式单一。</p>
+<p>用户需求：想方便快捷地查看好友或感兴趣的人发布的帖子。</p>
+<p>解决方案：Feed流“动态”专注于呈现基于用户兴趣和关系的帖子内容。</p>
+<p><strong>1） 浏览内容</strong></p>
+<ul>
+<li>浏览所关注的人或话题发布在Feed流的视频、帖子。</li>
+<li>浏览系统推荐的热门话题标签、关注用户发布的快拍、品牌广告等。</li>
+</ul>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/bxQUvKNrvTuB8pP9YH8H.png" alt="" width="2080" height="750"></p>
+<p>此外，在不停止关注好友的情况下，用户可以选择“不看TA的帖子或快拍”（如下图），这样的设计让用户避免看到不想看的帖子，同时又能维护在平台上的社交关系，用户自由控制的选择权较大。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/XKID1GVCa1wASa3q6tHm.png" alt="" width="208" height="353"></p>
+<p>Feed流<strong>排列算法</strong>原则：据以往的官方新闻稿和相关更新推测Instagram的Feed流排序算法，原则是优先根据用户与他人或事物等元素的关系和兴趣（如与好友的关系、关注的话题标签、点赞互动等）产生的用户数据、行为数据来对过去2天内的所有新帖进行排序，时间顺序不是排序的优先级标准。如果过去两天内的新帖子都看完了，则会提示用户“没有更多新内容了”（如下右图）。这样可以让用户清楚地了解自己到自己已经刷过了哪些帖子，而可以选择不去重复再刷一遍。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/wLTmqu8Uzet2Jvv2trit.png" alt="" width="202" height="345"></p>
+<p style="text-align: center;">（18.07.03更新，用户可以知道哪些帖子是最新的，哪些是两天前的旧帖子。）</p>
+<p><strong>a. 视觉体验</strong></p>
+<p>内容类别太多元，全屏展示的设计易杂乱：Instagram在产品发展的前五年中，由于Feed流中的图片只能被裁剪为正方形进行展示，正方形图片一度成为Instagram区别于其他社交软件的鲜明特色之一。</p>
+<p>但是Instagram在2015年8月的新版本中，开始支持图片的Landscape（横向）和Portrait（画像）的全尺寸排列格式以适应不同的照片类型的布局需求。虽然这让展示的照片、视频可以包含更加丰富的元素而不会被裁剪，但也带来了另外的缺陷。</p>
+<p>与朋友圈不同，Feed流的所有照片和视频都是占满整个屏幕的宽度而让屏幕两侧不留白边，这会让不同形状格式的图片/视频在同一个Feed流中显得较为杂乱。</p>
+<p>此外，有些用户还会自己在照片上加白边进行展示（如下图一）。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/jOrfzW7Sz0NfUa9Zd5Zo.png" alt="" width="2066" height="738"></p>
+<p>最后，再加上商业广告在Feed流中的出现，以及Instagram的系统推荐给用户的多种类别内容如话题标签推荐、用户推荐、快拍推荐等，诸如此类内容的多样性进一步增加Feed流内容布局给用户视觉上带来的混乱感，且不同板块的内容排列显得很拥挤，缺乏产品最初UI设计的整洁感、以及畅快的刷Feed流的感觉。</p>
+<p>建议：Feed流中，稍微增加每个账户发布的帖子以及不同内容板块如系列推荐的间距。</p>
+<p>此外，Feed流中的视频最大时长限制为60秒，当刷出的视频占屏幕的主要帖子部分时，即使没有完全显示于屏幕中，视频将开始自动播放。视频无法通过进度条来调整播放进度，每次只能从头开始全部播放。</p>
+<p>建议：增加视频播放进度条，方便用户调整播放进度。</p>
+<p><strong>b. 限制功能</strong></p>
+<p>浏览Feed流时，可能出于版权保护等原因，Instagram不支持长按保存图片或视频的功能，但用户可以通过截图来保存非原图照片。</p>
+<p>另外，因为Instagram仍然有提供帖子中图片或视频的链接地址，所以在一些第三方网站也可以利用Instagram的图片或视频的链接转换成可供下载的图片或视频。因此并没有形成对用户盗图的根本阻碍。</p>
+<p>在Feed流中，官方也禁止用户在帖子文案以及评论中添加一切外链（即外链只以纯文本形式呈现，而无法通过显示超链接来点击跳转），但是只允许用户在个人简介中放一个链接。用户如果想要让粉丝跳转到外部的个人网站、或者呼吁粉丝购买等的商业链接，需要在帖子上提示用户返回到用户的个人主页寻找外链。</p>
+<p>这是因为——Feed流中的外链会破坏Instagram的生态，Instagram尝试做的是让用户尽可能一直能在这个App里面刷下去，而不是被外链分散注意力。</p>
+<p>这样可以让Instagram的图片社交的核心的纯粹不变，避免让这个App和Facebook和Twitter等一样掺杂政治、假新闻、八卦、非常规广告等冗杂的内容。</p>
+<p>但是为了商业化的需要，Feed流中正规投放的广告可以添加品牌的第三方链接，方便用户浏览商品和完成购物。</p>
+<p>而在后文分析的快拍功能中，官方给特定的认证用户推出在快拍添加外链的权限，作为对Feed流动态禁止外链的一种平衡措施。</p>
+<p><strong>2) 互动分享</strong></p>
+<p>Feed流“动态”中的互动包括点赞和评论。用户双击图片或点击帖子下方的爱心即可对帖子进行点赞，也可以对帖子下方的任意评论进行点赞。评论功能也类似，既可以对帖子进行评论，也可以对帖子下方的评论进行回复。</p>
+<p>用户分享Feed流的帖子时，可以选择发布到自己的快拍，也可以选择通过Direct发送给特定的朋友或群。</p>
+<p><strong>a. 交互设计</strong></p>
+<p>Feed流中双击图片会产生点赞，而对比微信以及iPhone相册中，双击图片会放大，用户可能想通过双击来放大图片（实际上在Feed流中要放大照片只能通过两只手指往外拖动照片的操作）。</p>
+<p>而Instagram这样设计点赞功能的原因可能是为了让用户更加容易点赞，让发布者得到更多的激励，促进整个社区的活跃；但是对于一些习惯了使用双击来放大图片的用户来说，这种设计会造成一定的困扰。</p>
+<p>此外，点赞与查看点赞次数的图标靠的很近。以上这两点设计尤其会让新用户容易点错，点赞也容易被取消。而如果一定要使用不同的交互逻辑，则需要较长的时期来对用户培养这种交互习惯。</p>
+<p><strong>b. 评论内容</strong></p>
+<p>在评论区中，目前存在的一个问题是，在很多粉丝数量不够多的账号的帖子评论中，个体用户发出来的广告内容太多。</p>
+<p>以拥有78.2万粉丝的知名旅行博主猫力为例，她的很多帖子下面都有许多<u>如右图</u>所示的“牛皮癣”广告，普通用户的帖子中也经常见到这种广告，而粉丝更多的明星的帖子的评论中情况则有较大的改善。</p>
+<p>建议：需优化评论识别算法，结合发布广告的用户的主页内容，定期清理广告帖子和频繁打广告的用户，以维护社区环境。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/7ZfnkAvLKdrmFru9eYBQ.png" alt="" width="183" height="339"></p>
+<p><strong>3）无转发功能</strong></p>
+<p>值得注意的是，Feed流中没有转发功能，这种异于其他平台的设计有以下三点原因：</p>
+<ol>
+<li>避免太多人转发某一个帖子，无限放大某一个帖子、某一个人，导致刷屏现象。Feed流没有转发功能可以极大限度地限制病毒性传播，是一种更加去中心化的设计。</li>
+<li>没有转发功能可以保证每一个用户可以看到自己愿意关注的人所发布的帖子，而转发则难免会更大几率让用户看到一些自己兴趣之外的不关心的内容，这种杂乱的内容会对用户造成打扰。</li>
+<li>这样的设计可以最大化鼓励用户自己创造内容。如果Instagram平台遍布转发的帖子，则会变成一个非常不用心、不纯粹的图片分享社区，而不是一个可以让用户发现热爱、寻找灵感的地方。</li>
+</ol>
+<p>但是没有转发功能也有对应的弊端：</p>
+<ul>
+<li>大多数用户都喜闻乐见的高质量的好内容可能无法得到很高的流量；</li>
+<li>用户的社交关系网络里的人分享的内容具备独特的优势，用户的一些强关系的朋友/认可的KOL所转发的内容可能非常符合用户的兴趣，但是Feed流中转发功能的缺失也会让用户错失很多这样的“社交推荐”分发的内容，取而代之的是“机器推荐”进行内容分发。</li>
+</ul>
+<p>为了解决转发功能缺失的弊端，Instagram有以下解决办法进行弥补：</p>
+<p>1.Instagram官方账号进行人工筛选和转发，为优质的内容导流。Instagram官方账号会以原图转发，并在帖子的文案内提及原贴作者。</p>
+<p>但是这个解决办法的弊端就是：用户往往可能只对Instagram官方账号进行点赞和评论，而通过点击帖子中提及的账号名跳转到原贴进行点赞和评论的人数呈数量级减少。</p>
+<p>如下图所示，Instagram转发的帖子获得1160万的点赞，而原贴作者只获得了6815次点赞（如下图）。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/2rMFcdLN9p6mvcmNOocQ.png" alt="" width="400" height="337"></p>
+<p>2.弥补办法位于App一级菜单的第四个入口，呈爱心图标，进入后可以看到“已关注”的用户的行为动态：包括点赞、评论、关注。但相比直接转发的效果（如下图）。</p>
+<p>这个功能入口较深且效果也非常间接，可见Instagram在尽量削弱类似于“转发”导致的离用户更远一层的社交关系所分发的内容，而是选择更加“信任”自己精良的算法推荐。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/hodhAJ7dBofcRBF123xC.png" alt="" width="194" height="350"></p>
+<h3>4.3 快拍</h3>
+<p><strong>4.3.1 拍摄与分享到快拍</strong></p>
+<p>用户痛点： Feed流“动态”最适合发布一些高质量、展现自己生活完美一面的照片，生活中有很多零碎的动态没有地方可以分享或者“发泄”。如果将这些随意的内容发布的到自己的个人主页，又不想长期保存它们，过了一段时间还要自己去手动删除。</p>
+<p>用户需求：想要轻松地与人分享比较随意的生活动态而没有太多的后顾之忧。</p>
+<p>解决方案：比Feed流“动态”更即兴、随意、24小时后即销毁的内容形式——快拍（Stories）</p>
+<p><strong>1） 功能分析</strong></p>
+<p>快拍的拍摄入口繁多，意味着Instagram对于快拍的入口和流量的扶持。入口数量分两种情况：用户在24小时内已经发布快拍的情况下，通过在首页向右滑动屏幕或通过点击首页左上角的相机按钮都可以进入拍摄；而在用户24小时内未发布快拍的情况下，则有另外的两个入口，一个是首页快拍栏左侧“你的快拍”头像所在位置，另一个是位于用户“个人主页”的头像所在位置。</p>
+<p>进入到快拍的拍摄模式后，可以选择的模式有：文字、音乐、直播、普通、Boomerang、聚焦、推镜、倒播、单击拍摄等模式。</p>
+<p>其中音乐模式是18年6月底才推出的新功能，目的是给快拍增加背景音乐，满足用户的利用不同音乐配合当下场景拍摄视频，以更好地表达自我情感（类似于抖音）。音乐名称和歌手将以贴图形式显示在快拍页面中。</p>
+<p>直播功能进入后，则包括直播、与朋友合拍、重播等。从普通拍摄开始，往右的功能都是跟照片或视频特效有关，满足用户在不同场景拍照、拍视频的需求。</p>
+<p>利用以上的功能完成拍摄后，用户就可以进入下一步进行添加贴图、文字、使用画笔工具等操作，最后可以选择保存到本地、发布到快拍以及通过Direct发送给特定的朋友或群组。</p>
+<p>其中，保存到本地的功能实际上也让这个优先为快拍设置的拍摄入口给Feed流帖子内容提供了一个内容生产渠道，只不过很少有用户会直接把适合于快拍发布的内容用来发布到Feed流，可见大部分用户已经顺应了官方对于Feed流和快拍的差异定位。</p>
+<p><strong>2) 交互设计</strong></p>
+<p>没有或很少使用快拍的用户，在初期使用快拍时，会发现交互设计复杂、反馈机制不清晰明确。</p>
+<p>在笔者自身对快拍交互设计产生迷惑后，邀请了一个长期使用Instagram的非重度用户体验快拍——因为交互设计没有提供一个简洁的设计和清晰的反馈，她在操作过程中甚至无法确定自己是否发布了新的快拍。</p>
+<p>比如，快拍拍摄界面中，右上角的“&gt;”让普通的新用户难以理解到底意味着“退出”还是“发送”，容易在使用的某一瞬间产生担心的心理。</p>
+<p>笔者再调查了身边几个快拍的轻度用户表示，在快拍界面里，按下某个按钮的一瞬间不知道自己有没有误发。而Instagram的设计师的用“&gt;”：这个按钮的涵义/逻辑应该是为了表示用户操作制作快拍时，想要中途放弃，则通过点击右上角的“&gt;”返回到原页面，但是个人认为普通用户特别是新用户可能无法理解这个设计的内涵，而无法将功能用得很舒服、自然。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/n3JCdpydrDtgtUt9VGu9.png" alt="" width="435" height="364"></p>
+<p>此外，“X”：这个按钮的涵义/逻辑是用户完成了快拍，但是又不想发布，则点击左上角的“X”退出。对于快拍发布，“X”和“&gt;”都未完成时的选择，但是退出按钮不同会让部分用户尤其是新用户感到迷惑。另外两个退出按钮的左右放置位置不一样，也会让用户产生迷惑。</p>
+<p>相反，有类似设计的是微信公众号的阅读界面，但对应场景是阅读的返回或退出，而这里是涉及到拍摄与发布，在新手用户尝试该功能的场景下还涉及到隐私问题等担忧（如用户随便试拍了一张自拍，则可能会因为不清晰的交互设计按钮而担忧自己是否误发）。</p>
+<p>建议：将退出按钮放置在同一侧，并且最好使用“X”。</p>
+<p>完成快拍发布后，用户可以查看到哪些用户浏览了自己发布的快拍（下图左一），该名单不会被其他用户看见。用户也可以在该页面选择将快拍发布到Feed流，从而将快拍的内容“永久”留存在个人主页。如果有用户通过快拍内的Direct发送了相关的“私密的评论”，快拍发布者则通过Direct来查看对应的消息。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/UCxKuBW3EDHp5fTyy2tG.png" alt="" width="623" height="331"></p>
+<p><strong>4.3.2 浏览快拍（Stories）</strong></p>
+<p>用户痛点：通过Feed流动态只能看到关注的人精修过后的图片/视频，只看到他们生活中片面的一面，但不知道他们近期的动态如何。</p>
+<p>用户需求：想与关注的人或朋友有更加紧密的连系、想知道他们更多的近期动态。</p>
+<p>解决方案：比Feed流“动态”更即兴、随意、24小时后即销毁的内容形式——快拍（Stories）。</p>
+<p><strong>1）功能分析</strong></p>
+<p>类似于13年推出的以“阅后即焚”为核心功能的“Snapchat”，快拍是于16年推出的区别于Feed流“动态”的新内容形式。</p>
+<p>快拍的内容只存在24小时，过后即消失，除非用户“精选”某个快拍在个人主页永久展示；快拍内容占满手机全屏，内容类别包括照片、视频及广告。入口位于首页的快拍栏（如下方左图），点击快拍栏某个用户的彩虹色圆环外框头像之后，该用户的快拍即开始自动播放，且页面上方有进度条（如下方右图），播放完毕后系统将按照快拍栏中发布者的排列顺序自动切换到下一个快拍内容。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/mKeJlj4XeLksjBIMyw8k.png" alt="" width="600" height="316"></p>
+<p>浏览他人发布的快拍后，对方可以查看到浏览过快拍的用户名单。快拍中发布者与观看者间的互动方式不是通过常见的点赞、评论，而是通过观看者发送私密的Direct消息与发帖人进行非公开的互动。</p>
+<p><strong>交互设计</strong></p>
+<p>为了提升快拍的在平台中的分量以及用户对快拍的使用度，当某个用户发布了快拍之后，凡是App中该用户头像出现的地方24小时内都会出现一个彩虹色的圆环外框，点击该用户头像就会直接进入该用户发布的快拍界面。</p>
+<p>在用户头像和名字共同存在的页面，同样是点击该用户头像就会直接出现快拍，只有点击名字才进入该用户的个人主页。这种交互方式对于用户点击操作的要求太过于精细、复杂，因为有时候有些用户并不想观看别人的快拍或出现在快拍浏览名单里。</p>
+<p>此外，在首页快拍栏浏览快拍时，切换不同发布者的快拍和切换同一发布者的不同快拍所要求的交互方式不同：向左滑动为切换发布者，而在屏幕右侧点击一下则是切换同一个发布者的不同内容（当该发布者的同一快拍包含多段内容，该操作的结果则为切换到同一个快拍内容的下一段）。当同一个用户发布的快拍都浏览完之后，系统将自动切换到下一个用户的快拍。</p>
+<p>建议：虽然这种交互方式复杂，但最终也可以让用户区分、浏览不同板块的内容。在不改变交互设计逻辑的情况下，需要官方对初次使用的用户提供实时的新手教学，培养用户使用习惯。</p>
+<p><strong>2）快拍表现</strong></p>
+<p>快拍得到了Instagram用户的认可，从发布之时一直保持稳定增长。16年10月，快拍日活只有1亿；17 年 10 月，该数据达3亿；18年6月底，快拍日活达4亿。快拍推出一周年之际，官方数据显示快拍让用户在Instagram里花了更多的时间：25岁以下的用户平均在App里每日多花了32分钟，而25岁及以上用户平均每日多花了24分钟（Instagram全球数据）。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/GoEUJTO2XCS5ICXzys2t.png" alt="" width="495" height="326"></p>
+<p>2017年6月，依据对Instagram商家创建的非付费快拍的分析结果，在全球范围内，大约一半的Instagram 商家账号平均每月至少会创建一条快拍。今年7-8月统计数据显示，品牌的每五个快拍中就有一个收到了一个Direct信息，用户通过快拍与品牌的进行参与互动的程度较高（Instagram官方数据）。可见虽然快拍的活跃度远远不及Feed流动态，但其表现也较为可观。</p>
+<h3>4.4 快拍与Feed的异同点</h3>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/8KA0kH4sEQoUtyxP5nUQ.png" alt="" width="563" height="224"></p>
+<p>由以上诸多差异可见，快拍和Feed流的“生产创作”过程体现了两者定位的不同，Feed流的内容将偏向于更加正式、“严肃”，而快拍的内容则偏向于好玩、即兴，更多的是反映关注人/好友在当下/实时/或当天最近一段时间内的动态。</p>
+<p>Facebook调研了几个国家的一万用户发现，在以下两种情况下，用户更倾向于浏览快拍而不是Feed流（Facebook调研数据，2017年10月）：</p>
+<ol>
+<li>他们想知道朋友当下正在哪里、在干什么等（快拍让用户产生更加实时的连系）</li>
+<li>他们想看到未加滤镜的、更加真实纯粹的内容（更加日常的时刻）</li>
+</ol>
+<p>对比快拍和Feed流的不同用例：</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/6T5ieenWw3ZhtKfjcY6h.png" alt="" width="535" height="239"></p>
+<p>可见，让用户在更加即兴、随意、临时的场景下使用快拍。对于发布者而言，快拍带来的好处是，只短暂保留24小时的形式减少了发布Feed流帖子会带来的追求完美的“展示焦虑”——这意味着用户使用快拍是为了更加轻松、实时、真实、随意的内容。</p>
+<blockquote><p>Facebook调研显示：用户认为快拍促进了他们与家人、朋友的连系和交流。这让个体和商家用户都可以创造更加生活化、接地气的内容，而不必总是追求完美。</p></blockquote>
+<p>对于商家账号而言，虽然它们更多时候用Feed来介绍品牌、产品、或更新具体消息，但利用快拍可以与用户进行更实时、纯粹、有感染力的交流。</p>
+<p>虽然用户更倾向于用Feed来发现、了解产品和品牌，他们也乐于看到品牌的快拍，在娱乐放松的的用户体验中感知品牌，从而提升品牌知名度和品牌形象。超过30%用户表示，看到品牌的快拍会让他们对品牌更感兴趣（Facebook数据）。</p>
+<p>总体来说：快拍的出现满足了随着产品发展成熟而逐渐出现的新的用户需求，给用户创造了更丰富的使用场景，为用户提供了与人分享、交流、甚至购物的新形式，实际上也是对竞品Snapchat作出的重大回应。</p>
+<p>对比之下，比快拍早出现5年的Feed流则更加聚焦于特定的信息，承担的责任是满足更多的使用场景需求，提供更多深入的信息、产品导向的内容。这样一来，这具备很大差异的两个功能分别承担了满足不同需求的责任，实现了Instagram产品社区的总体平衡。</p>
+<p>快拍作为一个近两年才推出的新功能，也有尝试融合到Feed流并“借流量”。一般当某个用户有一段时间没有浏览快拍的情况下，该用户的Feed流中会出现他/她所关注的用户发布的快拍以缩略图加用户头像的形式显示在Feed流中。</p>
+<p>给快拍设计这样的一个“特殊入口”的目的是为了借助Feed流更大的活跃度来为快拍内容导流，促进快拍的用户活跃度。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/24fPGJi1EoZrn4J3TK0s.png" alt="" width="184" height="309"></p>
+<h2>五、商业化</h2>
+<p>Instagram的商业化面向B端用户，即各行业商家，以平台的流量吸引品牌商入驻Instagram平台、使用Instagram的商业解决方案，并且吸引广告主进行不同种类的广告投放。</p>
+<h3>5.1 综合概况</h3>
+<p><strong>1）商家账号</strong></p>
+<p>商业账号可以在App内自主创建商家主页、发布业务信息如地址、联系方式，让消费者可以快速找到准确的联络信息。商业账号也可以获取自己的相关数据，比如关注者人口统计细分数据、发贴最佳时段、快拍和推广帖全天的实时表现数据。</p>
+<blockquote><p>截至2017年11月，全球共有超过2,500万个商家主页；各品牌使用商业账户每月平均发布接近30条帖子。80%的用户至少关注了一个商家账号（Ad week数据），超过2亿用户每天至少访问一个商家主页（Instagram，2017.11）。</p></blockquote>
+<p>对于品牌而言，Instagram社区的流量的体量和质量都比较有价值。2017年9月，全球有超过200万活跃广告主（Instagram内部数据）。60%的用户表示会在Instagram了解新商品的信息（Instagram内部数据，2015.11）。</p>
+<p><strong>2）广告推荐算法原则</strong></p>
+<p>Instagram通过利用Facebook、自身的用户数据以及第三方网站和应用的相关信息，向用户展示他们可能感兴趣且相关的企业广告。</p>
+<p>例如：系统可能会根据用户在 Instagram 关注的用户和点赞的内容、用户在Facebook 的信息和兴趣，以及用户访问过的网站和应用向用户展示特定广告。当用户看到不感兴趣、不喜欢的广告时，可以选择隐藏或举报广告，从而向官方提供反馈数据。</p>
+<h3>5.2 盈利模式</h3>
+<p><strong>1）Feed流盈利模式</strong></p>
+<p>a. 购物功能</p>
+<p>商品标记：商家 账号可以为自己的帖子中的商品添加可点击跳转的标签链接，用户看到喜欢的商品可以直接点击标签跳转到商品的购买页面，提升购买率的转化。</p>
+<p>商家主页“店铺”选项卡：直接以用户主页的原生形态为商家提供商品展示页面。消费者无须跳转其他第三方网站或应用，可以直接在Instagram内完成商品的查找、选择和购买。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/21Q3xRUdw0el15jrOx5c.png" alt="" width="1882" height="676"></p>
+<p>b. Feed流广告</p>
+<p>如下图，前三张从左至右依次为“照片广告”（正方形或横版的照片），“视频广告”（正方形或至多60秒的横版视频），“轮播广告”（单条广告中有更多照片/视频），“精品栏广告”（主题图+商品展示）。Feed流中的这些视频和图片广告会被标记为赞助内容，用户可以滑动查看广告主发布的多个图片/视频，也可以直接点击链接跳转到官网。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/irA2Kw1mHtq2m4SqQ0OJ.png" alt="" width="1468" height="656"></p>
+<p>2018年1月底，Instagram开放图谱API，让商家可以通过第三方平台更自主地管理账户、规划内容运营、追踪运营数据，由此也可见Instagram对于的开放生态建设的布局。</p>
+<p>除品牌自主发布的广告，还有“大号合作广告”：品牌还可以和名人、KOL等有影响力的用户合作，通过他们的个人账号发布品牌、商品的相关资讯，帖子中会显示“与XX品牌合作”。2018年，品牌赞助的影响者的发帖数量达到2,170万。</p>
+<p>虽然Feed流广告是原生广告，但是很多广告在图片流中布局比较杂乱。此外，由于广告太过频繁，而不够克制，会非常打扰用户。另外，Instagram广告太过于精确，有不少用户反映（包括逼笔者自己）有时候在半小时之前浏览过、购买过的品牌/商品都会“原封不动”地出现在Feed流，这样的广告虽然精确但并非“同类推荐”，“同个单品推荐”的推荐机制会导致广告与用户的购买行为过于重复，并且更可能会让用户产生忧虑、恐惧感。</p>
+<p>建议：既然无法避免高频率的广告，Instagram就需要针对第三方广告投放平台以及广告主进行严格审核，提供一套规范的广告投放的设计准则，并且筛选有创意的广告给予优惠投放的鼓励。</p>
+<p><strong>2）快拍盈利模式</strong></p>
+<p>品牌自己通过快拍来发布广告，快拍广告下方可以拉出品牌官网的链接。这种广告分为静态图片快拍广告（如下方左侧两张图）和轮播图片快拍广告（如下方右侧三张图）。2017年1月数据显示，1/3的热门快拍来自商家（Instagram内部数据）。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/2mQo4ycvIAkp1MKfcQKj.png" alt="" width="1584" height="554"></p>
+<p>品牌也可以通过与有认证账户的KOL合作，植入品牌广告。经过官方认证的账户在快拍中，可以设置上滑页面添加第三方外链，用户通过点击或向上滑动即可进入品牌设置的网站页面（如下图，点击展开或上滑即可查看博主的长视频，但视频是发布在Instagram的竞争者YouTube上面。未来Instagram很可能会鼓励发布者提供直接跳转到IGTV观看长视频的链接）。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/lUk5aZzogfiPqfOtkbML.png" alt="" width="410" height="334"></p>
+<p>不同于Feed流中的外链被禁止，快拍中的外链被官方所允许，但是添加外链的权限本身需要官方审核才能实用，可以预见Instagram对于快拍的商业化的决心，一方面希望通过快拍的盈利能力鼓励创作者进行快拍的创作，另一方面也是进一步满足自己的商业化需求。</p>
+<h3>5.3 广告收益</h3>
+<p>2017年10月eMarketer的调查显示，美国社交媒体用户通过各社交媒体凭条直接购买商品的分布比例如下方左表，其中Instagram位居Facebook之后的第二，虽然离母公司的Facebook差了很远，但比起竞品的“卖货能力”已经非常强（eMarketer数据）。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/P6H3LtbnsaiGYXqWKFYu.png" alt="" width="1610" height="590"></p>
+<p>2017年Instagram移动互联网广告收入为36.4 亿美元&nbsp;(3.64 billion)，预计18年达到68.4亿美元（eMarketer数据）。</p>
+<h2>六、产品运营</h2>
+<p>总体来看，Feed流和快拍的运营痕迹对于用户来说不重，虽然偶尔有些运营手段会显得较为刻意。相比起更加成熟的Feed流动态，快拍的运营力度更重。以下分析几个运营策略：</p>
+<h3>6.1 新功能推广</h3>
+<p>由于Instagram发布许多新功能都隐藏了比较多特性，许多用户可能无法依靠潜意识来快速理解、学习使用新功能。因此每次有新的功能推出时，Instagram会有相应的视频教学，并且将教学视频的位置放在开屏页面或者其他流量大的位置，从而促进用户点击视频进行观看学习。</p>
+<p>下图为快拍中音乐分享功能和投票功能的教学视频示例。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/QpVTsdg5zgGjFtIDlzfT.png" alt="" width="583" height="316"></p>
+<p>但是，因为新功能推广视频只是在新功能刚刚推出的一两天内进行全平台呈现，对于新用户或者错过了新功能推广视频投放期的用户，可能会对某些功能的使用产生迷惑。</p>
+<p>改进建议：在个人页面设置一个帮助按钮，整合收纳较为复杂的功能的教学视频，帮助未使用某些功能的新用户在平台上更好更快地找到教程。</p>
+<h3>6.2 快拍运营</h3>
+<p><strong>1）贴纸更新频繁</strong></p>
+<p>和普通拍摄模式不断新增各种滤镜一样，快拍中的新滤镜、新贴纸等新玩法也层出不穷。以下分析快拍最近出的两个用于促进用户间互动和活跃的新互动贴纸：</p>
+<p>18年5月，用Emoji滑动条以投票调查的方式来让观看者回答问题，进一步增强与朋友的互动。</p>
+<p>拖动滑动条回答问题，回答完毕后可以查看回答的平均值——但是这个投票不是匿名的，Instagram的初衷是为了让用户方便参考自己的好友、或其他信任的人的投票。</p>
+<p>但用户误解读了这个功能，认为投票是匿名。许多用户知道了产品真实功能后表示非常崩溃，这反映了Instagram设计的有些功能违背用户的潜意识，而且新功能教程没有做到位。</p>
+<p>而7月快拍中引起一阵轰动的最新更新是“问题贴纸”，是快拍中首个公开互动的功能，功能目标是促进快拍的用户活跃和互动。这个快拍贴纸的功能是：发布者进行提问，浏览者可以进行作答，回答字数限制为三行。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/NXOUYtu9bKhs670gPhG1.png" alt="" width="601" height="353"></p>
+<p>发布者可以查看并挑选其他人的回复公开到原快拍，但回复者的用户名会被隐藏，只有分享者可见。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/nYNsHXcpAXm44HyK3s7D.png" alt="" width="380" height="319"></p>
+<p>这个新贴纸刚推出的时候，用户同样没有立刻理解到这个新特性的不同玩法。</p>
+<p>一方面，Instagram将贴纸的默认问题设置为“问我一个问题”，发布者很容易理解为这个贴纸是让粉丝来向自己问问题，而自己进行作答。</p>
+<p>而另一方面，发布者可以自己编辑“问我一个问题”的具体内容，如向粉丝询问附近的餐厅、最新的电影等等。</p>
+<p>因此，这个功能是一个双向提问、作答的互动，而不是单纯让粉丝针对快拍发布者进行提问。而默认的问题示例 “问我一个问题”具有误导性，让很多用户直接使用了这个贴纸而未加修改，则会显得有过于以自我为中心的自恋感，这个特性在刚推出的两天内被许多用户吐槽，认为像ppt、太自恋等。</p>
+<p>这个贴纸只在刚推出的几天内引发了很多的使用和互动，但是过了这个小峰值之后该贴纸的使用率很低。因此，该功能的初衷是为了增强发布者与浏览者的互动，但是因为默认的引导问题设置有点迷惑性，导致了许多用户的负面评价。</p>
+<p>对以上两个小的新功能及运营策略的改进建议：除了需要对新功能设计前的用户调研进行提升改进，平台应该尽量为容易引起迷惑的新功能/新特性向全平台用户推出简单易懂的视频教程，以及在引导用户使用新功能的文案中考虑到用户的理解习惯和潜意识，清晰地解释新功能特性，预知并预防用户的错误理解。</p>
+<p><strong>2）为快拍的新用户和轻度用户导流</strong></p>
+<p>当用户首次发布快拍，无论快拍功能所处的生命周期在何时，系统均会以消息通知栏的形式提醒用户的好友：“快去看看XXX在Instagram发布的第一个快拍”（如右图）。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/MTDy1DQG74qIlc8ebLDp.png" alt="" width="191" height="369"></p>
+<p>虽然这样可以为首次发布快拍的用户导一定的流量，但是这样造成的负面后果是：太迟发布快拍的用户可能本身比较克制，不愿意发布太多的社交媒体内容，因而也不会刻意希望大家知道自己发布了第一个快拍。</p>
+<p>另外，新功能发布过了太久之后才使用这个功能的用户，被系统主动帮助发布这种提示，如果用户从其他途径知道了这个功能，反而会让用户觉得自己很“过时”。</p>
+<p>其实当用户首次发布了快拍之后，想看的用户会在正常的入口点击查看，而系统提示则会打扰该用户的所有好友。</p>
+<p>建议：在快拍已经推出两年的情况下，这种激励用户使用快拍的促活手段太刻意，没有太大的必要。另外也可以通过设置实验组进行对照来观察该提示对于新用户使用快拍的活跃度的影响。</p>
+<h2>七、市场分析</h2>
+<p>2018年，全球互联网用户达到40.21亿，同比增长7%；社交媒体用户达到31.96亿，同比增长13%，社交媒体的增长趋势明显；移动手机用户则达到51.35亿，同比增长4%；移动社交媒体用户为29.58亿。社交媒体的增长很大部分来源于中南亚地区以及年龄偏大的人口。</p>
+<p>针对全球社交媒体行业，社交媒体按功能进行分类主要分为社交网络类、即时通讯类、资讯类、图片视频分享类、商务社交类、垂直社交类、电商社交类等。</p>
+<p>从用户数量比例看，全球用户使用社交媒体的最主要的三个原因是“获知朋友动态”（42%）、“获知新闻实时”（41%）和“打发休闲时间”（39%）（GlobalWebIndex，2017），而“发现有趣、娱乐性的内容”和“分享图片或视频给他人”则分别是第4（37%）和第7位（32%）的原因。</p>
+<p>2018年4月，根据月活跃用户数量进行排序，全球社交媒体排名位于前三位的平台分别为Facebook，YouTube和WhatsApp，Instagram排名位于第六。</p>
+<p>虽然相比前两个产品Facebook和YouTube，Instagram作为一款更加小众、体量更小的社交媒体的月活还无法与这两款产品相比，但是比起它的最大的竞品Snapchat，其目前占据的优势非常明显。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/RYHykqsXQ3xc8Bmp2mlG.png" alt="" width="422" height="305"></p>
+<p>从2015到2017年间的月活增长值来看，Facebook是增长最快的，WhatsApp和Instagram位居第二（下方左表）。</p>
+<p>Instagram的直接竞品Snapchat日活增长也较快。得益于不断推出的大小新功能，如快拍、直播、地理位置贴图、新的脸部贴图等，Instagram的月活增长速度越来越快。18年6月，Instagram全球月活已达10亿 (下方右表，TechCrunch数据)。</p>
+<p><img data-action="zoom" class="aligncenter" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/TPdqREPjY55KzrsaVYi9.png" alt="" width="1600" height="584"></p>
+<h2>八、总结</h2>
+<p>通过以上分析，总结Instagram的以下优缺点：</p>
+<p><strong>优点：</strong></p>
+<ol>
+<li>早期通过聚焦Feed流动态的图片和视频分享，积累了大量的优质内容和大众用户。</li>
+<li>围绕滤镜、贴纸等拍摄和编辑功能，持续打磨核心定位和竞争力。</li>
+<li>复制竞争对手Snapchat的阅后即焚和快拍模式，满足了原有的Feed流动态无法满足的用户需求，比Snapchat更加具备多元性，内容也更加美观、优质。</li>
+</ol>
+<p><strong>缺点：</strong></p>
+<ol>
+<li>随着社区的不断壮大，内容愈发同质，如视频内容很多都脱离了美观、精英化的调性，可能会让原来的核心用户感到失望。</li>
+<li>UI设计方面，Instagram已经从原来的简洁风变得越来越臃肿。思睿高全球品牌简单指数，Instagram被排在了55名。在美国，Instagram则被排到了83。亚洲国家比起欧美国家更加注重简约简洁的品牌体验，这可能与亚洲国家更加注重发展效率的国情和文化更加有关系。相比起其他行业品牌，社交媒体总体的复杂指数非常高。我访谈了周围使用Instagram的几位朋友，他们认为Instagram的交互虽然说不上哪里乱，但是整体感觉很乱。</li>
+</ol>
+<p>除了前文提到的具体的功能和设计的建议，以下是针对App总体的建议：</p>
+<ol>
+<li>交互设计应该删繁就简、更加简洁，以顺应用户的潜意识，也更加利于产品向年轻人之外的群里渗透。</li>
+<li>全球扩张的过程中，要考虑到不同国家地区用户的使用习惯不同，如许多亚洲人更喜欢简洁的交互轻快的风格，对内容的要求也类似。因此Instagram需针对地区化进行App的本土化改良。</li>
+</ol>
+<p>&nbsp;</p>
+<p>本文由 @Megan 原创发布于人人都是产品经理。未经许可，禁止转载</p>
+<p>题图来自 influencive</p>
+                    </div>
+                    <div class="article-bottomAd">
+                        <a href="https://ke.qq.com/huodong/pmqidian16z_pc/index.html" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/kKPHOXS3BcUSUdBpPgOQ.jpg" alt=""></a>                    </div>
+                    <div class="taglist"><a href="http://www.woshipm.com/tag/2%e5%b9%b4" rel="tag">2年</a><a href="http://www.woshipm.com/tag/feed%e6%b5%81" rel="tag">Feed流</a><a href="http://www.woshipm.com/tag/instagram" rel="tag">instagram</a><a href="http://www.woshipm.com/tag/%e5%88%9d%e7%ba%a7" rel="tag">初级</a><a href="http://www.woshipm.com/tag/%e6%b7%b1%e5%ba%a6" rel="tag">深度</a></div>                    <div class="support-author"><div class="support-title">赞赏是对原创者的最大认可</div><button class="button--pay" data-post-id="1153391" data-author="725652" data-avatar="https://static.woshipm.com/WX_U_201807_20180719203255_1120.jpg"><svg width="13" height="16" class="svgIcon--use" viewBox="0 0 13 16"><path d="M9.113,4.571 C9.951,3.771 10.895,2.742 10.685,2.057 C10.475,1.485 10.056,0.799 9.427,0.571 C8.903,0.342 8.379,0.456 7.750,0.799 C7.540,0.342 7.016,0.114 6.596,-0.001 C5.863,-0.001 5.234,0.228 4.814,0.914 C4.080,0.571 3.451,0.685 2.927,1.028 C2.613,1.256 2.298,1.713 2.298,2.628 C2.298,3.542 3.137,4.228 3.766,4.685 C2.508,5.599 -0.218,7.885 -0.008,12.228 C-0.218,15.656 2.613,15.999 2.613,15.999 L10.371,15.999 C11.314,15.885 12.991,14.971 12.991,12.571 L12.991,12.228 C13.201,7.771 10.371,5.371 9.113,4.571 L9.113,4.571 ZM8.932,11.835 L6.940,11.835 L6.940,13.207 C6.940,13.435 6.731,13.549 6.521,13.549 C6.311,13.549 6.102,13.435 6.102,13.207 L6.102,11.835 L4.110,11.835 C3.900,11.835 3.795,11.606 3.795,11.378 C3.795,11.149 3.900,10.921 4.110,10.921 L6.102,10.921 L6.102,10.121 L4.949,10.121 C4.739,10.121 4.634,9.892 4.634,9.664 C4.634,9.435 4.739,9.206 4.949,9.206 L5.892,9.206 L4.739,7.950 C4.634,7.835 4.739,7.606 4.949,7.492 C5.158,7.378 5.368,7.264 5.473,7.378 L6.521,8.635 L7.674,7.264 C7.779,7.149 7.989,7.264 8.198,7.378 C8.408,7.492 8.408,7.721 8.408,7.835 L7.150,9.321 L8.094,9.321 C8.303,9.321 8.408,9.549 8.408,9.778 C8.408,10.007 8.303,10.235 8.094,10.235 L6.940,10.235 L6.940,11.035 L8.932,11.035 C9.142,11.035 9.247,11.264 9.247,11.493 C9.247,11.606 9.037,11.835 8.932,11.835 L8.932,11.835 Z"></path></svg>
+赞赏</button><div class="pay-num">6人打赏</div><div class="donation-list"><div class="donation-item"><img class="avatar" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/woshipm_def_head.jpg" height="32" width="32"></div><div class="donation-item"><img class="avatar" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/1315.png!avatar" height="32" width="32"></div><div class="donation-item"><img class="avatar" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/TTW_USER_R_201706_20170602182437_8461.jpg" height="32" width="32"></div><div class="donation-item"><img class="avatar" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/TTW_USER_R_201706_20170602175317_7975.jpg" height="32" width="32"></div><div class="donation-item"><img class="avatar" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/TTW_USER_R_201706_20170602183141_2248.jpg" height="32" width="32"></div><div class="donation-item"><img class="avatar" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/TTW_USER_R_201706_20170602183120_6081.jpg" height="32" width="32"></div></div></div>                                        <div class="post-actions u-clearfix">
+                        <div class="u-floatLeft share-actions">
+                            <button class="button button--gray button--circle button--wechat"><span class="fa fa-wechat"></span><span class="qrcode-wrapper"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/api.php"></span></button>
+                            <a class="button button--gray button--circle button--weibo" target="_blank" href="http://service.weibo.com/share/share.php?appkey=2775287854&amp;title=1.8%E4%B8%87%E5%AD%97%EF%BC%8C%E5%85%A8%E6%96%B9%E4%BD%8D%E6%8B%86%E8%A7%A3Instagram%E7%9A%84Feed%E6%B5%81%E5%8A%A8%E6%80%81%E5%92%8C%E5%BF%AB%E6%8B%8D%E5%8A%9F%E8%83%BD&amp;url=http://www.woshipm.com/evaluating/1153391.html&amp;pic=http://image.woshipm.com/wp-files/2018/07/Mg3SxPdN8Wc3V5lrFDCD.jpg" "=""><span class="fa fa-weibo"></span></a>
+                        </div>
+                        <div class="u-floatRight">
+                            <button title="收藏" class="button button--gray button--toggle button--recommend button-post-1153391 " data-id="1153391" data-action="popLogin"><span class="iconfont icon-heart"></span><span class="button-label is-default">收藏</span><span class="button-label is-active">已收藏</span> | <span class="count">134</span></button><button class="button button--toggle button--gray button--postlike" data-action="uplike" data-id="1153391"><span class="button-label is-default">赞</span><span class="button-label is-active">已赞</span> | <span class="count">135</span></button>                        </div>
+                    </div>
+                </article>
+                <div class="postFooterInfo u-marginTop30 u-backgroundColorWhite u-rounded">
+                    <div class="u-flex">
+                        <div class="u-flex0">
+                            <a href="http://www.woshipm.com/u/725652" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/WX_U_201807_20180719203255_1120(1).jpg" alt="" height="60" width="60" class="avatar"></a>
+                        </div>
+                        <div class="u-flex1 u-paddingLeft15 u-overflowHidden">
+                            <div class=""><span class="title"><a href="http://www.woshipm.com/u/725652" target="_blank">Megan</a></span><button class="button button--toggle button--primary button--follow" data-action="showLoginForm" data-id="725652"><span class="is-default">订阅专栏</span><span class="is-active">取消订阅</span></button></div>
+                            <div class="des"></div>
+                        </div>
+                        <div class="u-flex0">
+                            <div class="authorInfo-item"><i>2篇</i>作品</div>
+                            <div class="authorInfo-item"><i>2.4万</i>总阅读量</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="u-backgroundColorWhite comments-area">
+    <div class="comment-list-header"><span class="title">评论</span></div>
+    <div id="respond" class="respond respond-1153391" role="form">
+        <form action="http://www.woshipm.com/wp-comments-post.php" method="post" id="commentform" data-post="1153391" class="comment-form u-clearfix">
+                        <div class="textarea--unlogin" data-action="popLogin">欢迎留言交流</div>
+                </form>
+    </div>
+            <div class="commentshow">
+            <ol class="comment-list">
+                        <li class="comment byuser comment-author-694693 even thread-even depth-1" id="li-comment-284586" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-284586" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/694693" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/woshipm_def_head(1).jpg" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/694693" target="_blank">黑色的托马斯</a><span class="des"></span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>请问作者的用户数据是在国外的哪些网站得来的呢</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2018-08-13T20:39:14+08:00">2018/08/13</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-284586&#39;, &#39;284586&#39;, &#39;respond&#39;, &#39;1153391&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            <ol class="children">
+        <li class="comment byuser comment-author-Megan bypostauthor odd alt depth-2" id="li-comment-284599" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-284599" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/725652" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/WX_U_201807_20180719203255_1120(2).jpg" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/725652" target="_blank">Megan</a><span class="post-c-a" title="文章作者">作者</span><span class="color-noraml">回复</span><a href="http://www.woshipm.com/evaluating/1153391.html#comment-284586">黑色的托马斯</a></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>主要是Statista、eMarketer</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2018-08-13T22:00:08+08:00">2018/08/13</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-284599&#39;, &#39;284599&#39;, &#39;respond&#39;, &#39;1153391&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+        <li class="comment byuser comment-author-180705 even thread-odd thread-alt depth-1" id="li-comment-283495" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-283495" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/180705" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/def_head.jpg" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/180705" target="_blank">回归</a><span class="des"></span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>敢为作者在哪个大厂</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2018-08-08T11:56:15+08:00">2018/08/08</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-283495&#39;, &#39;283495&#39;, &#39;respond&#39;, &#39;1153391&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-680787 odd alt thread-even depth-1" id="li-comment-282311" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-282311" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/680787" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/woshipm_def_head(1).jpg" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/680787" target="_blank">脑电波已经爆炸</a><span class="des"></span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>很详细全面，也没有胡乱给建议，很厉害</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2018-08-03T02:32:05+08:00">2018/08/03</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-282311&#39;, &#39;282311&#39;, &#39;respond&#39;, &#39;1153391&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-imlisa even thread-odd thread-alt depth-1" id="li-comment-281859" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-281859" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/727920" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/woshipm_def_head(1).jpg" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/727920" target="_blank">imlisa</a><span class="des"></span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>码了</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2018-08-01T11:55:18+08:00">2018/08/01</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-281859&#39;, &#39;281859&#39;, &#39;respond&#39;, &#39;1153391&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-731097 odd alt thread-even depth-1" id="li-comment-281705" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-281705" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/731097" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/WX_U_201807_20180731172740_553.jpg" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/731097" target="_blank">你，是我的益达。</a><span class="des"></span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>在国内用不了这个APP么</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2018-07-31T17:28:27+08:00">2018/07/31</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-281705&#39;, &#39;281705&#39;, &#39;respond&#39;, &#39;1153391&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-rannn even thread-odd thread-alt depth-1" id="li-comment-281663" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-281663" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/305163" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/40x40" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/305163" target="_blank">rannn</a><span class="des"></span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>好厉害。思路清晰，很有说服力。</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2018-07-31T15:11:07+08:00">2018/07/31</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-281663&#39;, &#39;281663&#39;, &#39;respond&#39;, &#39;1153391&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-700195 odd alt thread-even depth-1" id="li-comment-281555" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-281555" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/700195" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/APP_U_201808_20180801171508_8689.jpeg" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/700195" target="_blank">托马斯回旋踢</a><span class="des"></span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>我也刚写了一篇Instagram的分析，差距好大 <img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/icon_cry.gif" alt=":cry:" class="wp-smiley" style="height: 1em; max-height: 1em;"></p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2018-07-31T02:47:22+08:00">2018/07/31</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-281555&#39;, &#39;281555&#39;, &#39;respond&#39;, &#39;1153391&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-675032 even thread-odd thread-alt depth-1" id="li-comment-281508" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-281508" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/675032" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/WX_U_201804_20180424110632_7215.jpg" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/675032" target="_blank">张菠萝</a><span class="des"></span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>忍不住想转载阿，可以转载吗？标明作者~</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2018-07-30T17:15:49+08:00">2018/07/30</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-281508&#39;, &#39;281508&#39;, &#39;respond&#39;, &#39;1153391&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            <ol class="children">
+        <li class="comment byuser comment-author-Megan bypostauthor odd alt depth-2" id="li-comment-281797" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-281797" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/725652" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/WX_U_201807_20180719203255_1120(2).jpg" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/725652" target="_blank">Megan</a><span class="post-c-a" title="文章作者">作者</span><span class="color-noraml">回复</span><a href="http://www.woshipm.com/evaluating/1153391.html#comment-281508">张菠萝</a></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>哈哈谢谢~ 可以转载，不过最好在文章开头注明来源哈</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2018-08-01T02:51:43+08:00">2018/08/01</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-281797&#39;, &#39;281797&#39;, &#39;respond&#39;, &#39;1153391&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-675032 even depth-2" id="li-comment-282095" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-282095" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/675032" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/WX_U_201804_20180424110632_7215.jpg" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/675032" target="_blank">张菠萝</a><span class="color-noraml">回复</span><a href="http://www.woshipm.com/evaluating/1153391.html#comment-281797">Megan</a></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>你有没有公众号呢？我想关注~</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2018-08-02T11:42:30+08:00">2018/08/02</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-282095&#39;, &#39;282095&#39;, &#39;respond&#39;, &#39;1153391&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-Megan bypostauthor odd alt depth-2" id="li-comment-282118" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-282118" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/725652" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/WX_U_201807_20180719203255_1120(2).jpg" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/725652" target="_blank">Megan</a><span class="post-c-a" title="文章作者">作者</span><span class="color-noraml">回复</span><a href="http://www.woshipm.com/evaluating/1153391.html#comment-282095">张菠萝</a></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>没有哦，这是第一次写产品分析哈哈</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2018-08-02T12:59:12+08:00">2018/08/02</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-282118&#39;, &#39;282118&#39;, &#39;respond&#39;, &#39;1153391&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+        <li class="comment byuser comment-author-davechen even thread-even depth-1" id="li-comment-281506" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-281506" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/127343" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/PM_U_201608_20160824215151_4635.jpg" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/127343" target="_blank">davechen</a><span class="des"></span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>MARK，好赞，一直在用ins，有时间仔细看看</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2018-07-30T17:13:01+08:00">2018/07/30</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-281506&#39;, &#39;281506&#39;, &#39;respond&#39;, &#39;1153391&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-Nairo odd alt thread-odd thread-alt depth-1" id="li-comment-280842" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-280842" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/301" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/40x40(1)" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/301" target="_blank">Nairo</a><span class="des">投稿、稿件问题联系Q：419297645</span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>相当深刻了，分析方法和思路都有很多可以学习的地方</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2018-07-26T10:01:27+08:00">2018/07/26</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-280842&#39;, &#39;280842&#39;, &#39;respond&#39;, &#39;1153391&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+            </ol>
+            <nav class="commentnav" data-fuck="1153391">
+                            </nav>
+        </div>
+    </div>                <div class="u-backgroundColorWhite promote-posts-wrapper u-rounded">
+                    <h2 class="comments-title">您可能感兴趣的文章</h2>
+                    <div class="promote-posts">
+                                                    <div class="promote-post-item">
+                                <a target="_blank" href="http://www.woshipm.com/ucd/1445071.html" style="background-image: url(http://image.woshipm.com/wp-files/2018/09/p7oT02IFb76fAXAoR9zB.png)" class="promote-post-image">
+                                </a>
+                                <div class="promote-post-title"><a target="_blank" href="http://www.woshipm.com/ucd/1445071.html">同样是输入数字，为何电话和计算器键盘布局截然相反？</a></div>
+                            </div>
+                                                    <div class="promote-post-item">
+                                <a target="_blank" href="http://y0.cn/2IbUV" style="background-image: url(http://image.woshipm.com/wp-files/2017/03/Il8v4dI18IcRXTVeoLit.jpg)" class="promote-post-image">
+                                </a>
+                                <div class="promote-post-title"><a target="_blank" href="http://y0.cn/2IbUV">每天3块钱，500门产品、运营课程随便学，做个有竞争力互联网人</a></div>
+                            </div>
+                                                    <div class="promote-post-item">
+                                <a target="_blank" href="http://www.woshipm.com/it/1438106.html" style="background-image: url(http://image.woshipm.com/wp-files/2018/03/hHVZ3nQ536jBv2gFzlZU.png)" class="promote-post-image">
+                                </a>
+                                <div class="promote-post-title"><a target="_blank" href="http://www.woshipm.com/it/1438106.html">从ofo谈谈产品品牌与用户体验</a></div>
+                            </div>
+                                                    <div class="promote-post-item">
+                                <a target="_blank" href="http://www.woshipm.com/evaluating/1441406.html" style="background-image: url(http://image.woshipm.com/wp-files/2018/09/NcqFt29iDR8TUsdFOUC2.jpg)" class="promote-post-image">
+                                </a>
+                                <div class="promote-post-title"><a target="_blank" href="http://www.woshipm.com/evaluating/1441406.html">互金（金融、P2P）产品竞品分析报告：人人货、团贷网、君财、地标</a></div>
+                            </div>
+                                                    <div class="promote-post-item">
+                                <a target="_blank" href="http://www.woshipm.com/chuangye/1441181.html" style="background-image: url(http://image.woshipm.com/wp-files/2018/09/rI4TnYEQKsRIOeT4sfEd.png)" class="promote-post-image">
+                                </a>
+                                <div class="promote-post-title"><a target="_blank" href="http://www.woshipm.com/chuangye/1441181.html">没有创业者不焦虑，那些熬过来的人都用了这两个技巧</a></div>
+                            </div>
+                                                    <div class="promote-post-item">
+                                <a target="_blank" href="http://www.woshipm.com/operate/1438685.html" style="background-image: url(http://image.woshipm.com/wp-files/2018/09/v80rqVOFLxREnr2zAwFa.png)" class="promote-post-image">
+                                </a>
+                                <div class="promote-post-title"><a target="_blank" href="http://www.woshipm.com/operate/1438685.html">循序渐进的增长黑客指南：如何提高用户留存（实践方法篇）</a></div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+        </div>
+        <div class="u-width335 u-floatRight js-sidebar">
+                       <div class="widget u-backgroundColorWhite">
+        <div class="inner">
+            <div class="widget-title"><span><svg class="svgIcon-use" width="20" height="20" viewBox="0 0 20 20"><path d="M6.551,8.213 L7.586,8.213 C7.586,9.594 8.667,10.713 10.000,10.713 C11.333,10.713 12.414,9.594 12.414,8.213 L13.448,8.213 C13.448,10.186 11.904,11.784 10.000,11.784 C8.096,11.784 6.551,10.186 6.551,8.213 ZM16.561,16.551 L17.597,19.999 L16.552,19.999 L16.207,18.928 L16.209,18.928 L15.277,15.706 C15.301,15.706 15.324,15.713 15.349,15.713 C17.347,15.713 18.966,14.034 18.966,11.963 C18.966,10.732 18.386,9.649 17.502,8.965 C17.110,11.828 15.232,14.189 12.701,15.189 L13.818,18.928 L13.815,18.928 L14.138,19.999 L13.103,19.999 L12.759,18.928 L11.275,14.511 C14.283,13.896 16.552,11.151 16.552,7.856 C16.552,4.108 13.618,1.070 10.000,1.070 C6.382,1.070 3.448,4.108 3.448,7.856 C3.448,11.151 5.717,13.896 8.724,14.511 L7.241,18.928 L6.896,19.999 L5.862,19.999 L6.182,18.928 L6.182,18.928 L7.298,15.190 C4.768,14.189 2.890,11.829 2.498,8.967 C1.615,9.650 1.035,10.733 1.035,11.963 C1.035,14.034 2.655,15.713 4.655,15.713 C4.679,15.713 4.702,15.706 4.726,15.706 L3.793,18.928 L3.448,19.999 L2.404,19.999 L3.441,16.551 C1.460,16.001 -0.000,14.144 -0.000,11.931 C-0.000,10.120 0.978,8.544 2.420,7.730 C2.486,3.449 5.851,-0.001 10.000,-0.001 C14.148,-0.001 17.513,3.449 17.580,7.729 C19.022,8.542 20.000,10.119 20.000,11.931 C20.000,14.144 18.541,16.001 16.561,16.551 Z"></path></svg>圈子</span></div>
+            <div class="widget-content">
+                <div class="contact-area">
+                    <ul class="code-ul">
+                        <li><span class="text">产品经理群</span><a target="_blank" href="https://jq.qq.com/?_wv=1027&amp;k=5sGMjCm"><i>+</i>加入</a></li>
+<li><span class="text">运营交流群</span><a target="_blank" href="https://jq.qq.com/?_wv=1027&amp;k=51yzUQW"><i>+</i>加入</a></li>
+<li><span class="text">品牌营销群</span><a target="_blank" href="https://jq.qq.com/?_wv=1027&amp;k=5e8zovy"><i>+</i>加入</a></li>
+<li><span class="text">文案交流群</span><a target="_blank" href="https://jq.qq.com/?_wv=1027&amp;k=5v4zta9"><i>+</i>加入</a></li>
+<li><span class="text">Axure交流群</span><a target="_blank" href="https://jq.qq.com/?_wv=1027&amp;k=5eLN4KE"><i>+</i>加入</a></li>                    </ul>
+                    <dl class="code-dl">
+                        <dd>
+                            <img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/pm-erweima.jpg">
+                        </dd>
+                        <dt>关注微信公众号</dt>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="widget widget-ad fixed-sidebar-id is-fixed"><a href="http://996.pm/MRjgp" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/cSTDeGJsgQcYIWRUEzY8.jpg" alt="">       </a><a href="http://996.pm/Yw3wg" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/11.jpg" alt=""></a><a href="http://996.pm/Y9mwX" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/CcGnm19GICLjPCSITaAn.jpg" alt=""></a></div><div class="widget u-backgroundColorWhite">
+        <div class="inner">
+            <div class="widget-title"><span><svg class="svgIcon-use" width="20" height="20" viewBox="0 0 20 20">
+  <path d="M20.000,9.999 C20.000,4.476 15.524,-0.001 9.999,-0.001 C4.477,-0.001 -0.000,4.476 -0.000,9.999 C-0.000,15.522 4.477,19.999 9.999,19.999 C12.267,19.999 14.342,19.227 16.021,17.957 C16.089,17.878 16.134,17.779 16.134,17.666 C16.134,17.422 15.937,17.223 15.692,17.223 C15.565,17.223 15.452,17.273 15.369,17.358 L15.365,17.358 C13.864,18.463 12.016,19.125 10.009,19.125 C5.009,19.125 0.954,15.069 0.954,10.069 C0.954,5.067 5.009,1.012 10.009,1.012 C15.011,1.012 19.065,5.067 19.065,10.069 C19.065,11.597 18.707,13.034 18.039,14.296 L18.039,14.304 C18.026,14.346 18.012,14.387 18.012,14.431 C18.012,14.677 18.212,14.876 18.456,14.876 C18.647,14.876 18.807,14.753 18.869,14.584 L18.869,14.588 C19.580,13.211 20.000,11.654 20.000,9.999 L20.000,9.999 L20.000,9.999 L20.000,9.999 ZM3.981,13.384 C3.704,13.384 3.480,13.160 3.480,12.883 L3.480,7.138 C3.480,6.861 3.704,6.637 3.981,6.637 C4.258,6.637 4.482,6.861 4.482,7.138 L4.482,12.883 C4.482,13.160 4.258,13.384 3.981,13.384 L3.981,13.384 ZM7.589,13.384 C7.313,13.384 7.088,13.160 7.088,12.883 L7.088,7.138 C7.088,6.861 7.313,6.637 7.589,6.637 C7.866,6.637 8.090,6.861 8.090,7.138 L8.090,12.883 C8.090,13.160 7.866,13.384 7.589,13.384 L7.589,13.384 ZM7.589,10.511 L3.981,10.511 C3.704,10.511 3.480,10.287 3.480,10.011 C3.480,9.734 3.704,9.510 3.981,9.510 L7.589,9.510 C7.865,9.510 8.090,9.734 8.090,10.011 C8.090,10.287 7.865,10.511 7.589,10.511 L7.589,10.511 ZM14.791,13.384 C14.515,13.384 14.291,13.160 14.291,12.883 L14.291,7.138 C14.291,6.861 14.515,6.637 14.791,6.637 C15.068,6.637 15.292,6.861 15.292,7.138 L15.292,12.883 C15.292,13.160 15.068,13.384 14.791,13.384 L14.791,13.384 ZM16.596,7.639 L12.988,7.639 C12.711,7.639 12.487,7.415 12.487,7.138 C12.487,6.861 12.711,6.637 12.988,6.637 L16.596,6.637 C16.872,6.637 17.097,6.861 17.097,7.138 C17.097,7.415 16.872,7.639 16.596,7.639 L16.596,7.639 ZM10.534,13.384 C9.426,13.384 8.524,12.482 8.524,11.374 L8.524,8.648 C8.524,7.539 9.426,6.637 10.534,6.637 C11.643,6.637 12.545,7.539 12.545,8.648 L12.545,11.374 C12.545,12.482 11.643,13.384 10.534,13.384 L10.534,13.384 ZM10.534,7.639 C9.978,7.639 9.526,8.092 9.526,8.648 L9.526,11.374 C9.526,11.930 9.978,12.382 10.534,12.382 C11.091,12.382 11.543,11.930 11.543,11.374 L11.543,8.648 C11.543,8.092 11.091,7.639 10.534,7.639 L10.534,7.639 Z"></path>
+</svg>热门文章</span></div><ul class="widget-post-list--withImage"><li class="widget-post-item--withImage">
+                    <div class="img">
+<a href="http://www.woshipm.com/ucd/972135.html" target="_blank">
+<img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/100x60" width="100" height="60">
+</a>
+</div>
+<div class="title"><a href="http://www.woshipm.com/ucd/972135.html">微信“不友好”设计其背后的逻辑</a></div>
+<div class="meta">2018-09-18</div>
+                </li><li class="widget-post-item--withImage">
+                    <div class="img">
+<a href="http://www.woshipm.com/it/1408558.html" target="_blank">
+<img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/100x60(1)" width="100" height="60">
+</a>
+</div>
+<div class="title"><a href="http://www.woshipm.com/it/1408558.html">约不到P的社交网络，是没有灵魂的</a></div>
+<div class="meta">2018-09-17</div>
+                </li><li class="widget-post-item--withImage">
+                    <div class="img">
+<a href="http://www.woshipm.com/evaluating/1267178.html" target="_blank">
+<img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/100x60(2)" width="100" height="60">
+</a>
+</div>
+<div class="title"><a href="http://www.woshipm.com/evaluating/1267178.html">阿里健康APP产品体验分析报告（上）</a></div>
+<div class="meta">2018-09-18</div>
+                </li><li class="widget-post-item--withImage">
+                    <div class="img">
+<a href="http://www.woshipm.com/zhichang/1411320.html" target="_blank">
+<img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/100x60(3)" width="100" height="60">
+</a>
+</div>
+<div class="title"><a href="http://www.woshipm.com/zhichang/1411320.html">笔试攻略：阿里、腾讯、百度、京东等产品笔试六大题型</a></div>
+<div class="meta">2018-09-17</div>
+                </li><li class="widget-post-item--withImage">
+                    <div class="img">
+<a href="http://www.woshipm.com/pmd/1418511.html" target="_blank">
+<img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/100x60(4)" width="100" height="60">
+</a>
+</div>
+<div class="title"><a href="http://www.woshipm.com/pmd/1418511.html">实例解析：怎么撰写一份产品数据报告</a></div>
+<div class="meta">2018-09-18</div>
+                </li></ul></div></div><div class="widget u-backgroundColorWhite">
+        <div class="inner">
+            <div class="widget-title"><span><svg class="svgIcon-use" width="20" height="20" viewBox="0 0 20 20">
+  <path d="M20.000,9.999 C20.000,4.476 15.524,-0.001 9.999,-0.001 C4.477,-0.001 -0.000,4.476 -0.000,9.999 C-0.000,15.522 4.477,19.999 9.999,19.999 C12.267,19.999 14.342,19.227 16.021,17.957 C16.089,17.878 16.134,17.779 16.134,17.666 C16.134,17.422 15.937,17.223 15.692,17.223 C15.565,17.223 15.452,17.273 15.369,17.358 L15.365,17.358 C13.864,18.463 12.016,19.125 10.009,19.125 C5.009,19.125 0.954,15.069 0.954,10.069 C0.954,5.067 5.009,1.012 10.009,1.012 C15.011,1.012 19.065,5.067 19.065,10.069 C19.065,11.597 18.707,13.034 18.039,14.296 L18.039,14.304 C18.026,14.346 18.012,14.387 18.012,14.431 C18.012,14.677 18.212,14.876 18.456,14.876 C18.647,14.876 18.807,14.753 18.869,14.584 L18.869,14.588 C19.580,13.211 20.000,11.654 20.000,9.999 L20.000,9.999 L20.000,9.999 L20.000,9.999 ZM3.981,13.384 C3.704,13.384 3.480,13.160 3.480,12.883 L3.480,7.138 C3.480,6.861 3.704,6.637 3.981,6.637 C4.258,6.637 4.482,6.861 4.482,7.138 L4.482,12.883 C4.482,13.160 4.258,13.384 3.981,13.384 L3.981,13.384 ZM7.589,13.384 C7.313,13.384 7.088,13.160 7.088,12.883 L7.088,7.138 C7.088,6.861 7.313,6.637 7.589,6.637 C7.866,6.637 8.090,6.861 8.090,7.138 L8.090,12.883 C8.090,13.160 7.866,13.384 7.589,13.384 L7.589,13.384 ZM7.589,10.511 L3.981,10.511 C3.704,10.511 3.480,10.287 3.480,10.011 C3.480,9.734 3.704,9.510 3.981,9.510 L7.589,9.510 C7.865,9.510 8.090,9.734 8.090,10.011 C8.090,10.287 7.865,10.511 7.589,10.511 L7.589,10.511 ZM14.791,13.384 C14.515,13.384 14.291,13.160 14.291,12.883 L14.291,7.138 C14.291,6.861 14.515,6.637 14.791,6.637 C15.068,6.637 15.292,6.861 15.292,7.138 L15.292,12.883 C15.292,13.160 15.068,13.384 14.791,13.384 L14.791,13.384 ZM16.596,7.639 L12.988,7.639 C12.711,7.639 12.487,7.415 12.487,7.138 C12.487,6.861 12.711,6.637 12.988,6.637 L16.596,6.637 C16.872,6.637 17.097,6.861 17.097,7.138 C17.097,7.415 16.872,7.639 16.596,7.639 L16.596,7.639 ZM10.534,13.384 C9.426,13.384 8.524,12.482 8.524,11.374 L8.524,8.648 C8.524,7.539 9.426,6.637 10.534,6.637 C11.643,6.637 12.545,7.539 12.545,8.648 L12.545,11.374 C12.545,12.482 11.643,13.384 10.534,13.384 L10.534,13.384 ZM10.534,7.639 C9.978,7.639 9.526,8.092 9.526,8.648 L9.526,11.374 C9.526,11.930 9.978,12.382 10.534,12.382 C11.091,12.382 11.543,11.930 11.543,11.374 L11.543,8.648 C11.543,8.092 11.091,7.639 10.534,7.639 L10.534,7.639 Z"></path>
+</svg>大家都在问</span></div>
+            <div class="widget-content hot-question-list"><div class="hot-question-item">
+                    <div class="title"><a href="https://wen.woshipm.com//question/detail/7tklid.html"><span class="fa fa-caret-right"></span>为什么游戏等级会设置得很高，动辄100级，而其他的产品最高等级就比较低，比如网易云，最高10级。这是因为什么呢？</a></div>
+                    <div class="meta">4个回答<span class="dot"></span>4人关注</div>
+                </div><div class="hot-question-item">
+                    <div class="title"><a href="https://wen.woshipm.com//question/detail/qai5vf.html"><span class="fa fa-caret-right"></span>【中秋福利】又是一年中秋节，今年中秋，有没有奇特的新鲜玩法？</a></div>
+                    <div class="meta">20个回答<span class="dot"></span>30人关注</div>
+                </div><div class="hot-question-item">
+                    <div class="title"><a href="https://wen.woshipm.com//question/detail/87kres.html"><span class="fa fa-caret-right"></span>微信朋友圈为什么不能直接点赞，而是需要两步操作？</a></div>
+                    <div class="meta">15个回答<span class="dot"></span>21人关注</div>
+                </div><div class="hot-question-item">
+                    <div class="title"><a href="https://wen.woshipm.com//question/detail/italid.html"><span class="fa fa-caret-right"></span>继BAT之后，今日头条也上线了小程序功能，今日头条如何突围？</a></div>
+                    <div class="meta">10个回答<span class="dot"></span>7人关注</div>
+                </div><div class="hot-question-item">
+                    <div class="title"><a href="https://wen.woshipm.com//question/detail/5vgtnj.html"><span class="fa fa-caret-right"></span>Chrome浏览器的断网小游戏，为什么没有被国内很多企业借鉴？</a></div>
+                    <div class="meta">7个回答<span class="dot"></span>4人关注</div>
+                </div><div class="hot-question-item">
+                    <div class="title"><a href="https://wen.woshipm.com//question/detail/nk8d98.html"><span class="fa fa-caret-right"></span>如果理发店加一款让顾客电子试发型的功能有没有前景？</a></div>
+                    <div class="meta">11个回答<span class="dot"></span>8人关注</div>
+                </div></div></div></div>    </div>    </div>
+<footer class="site-footer">
+    <div class="container u-clearfix footer-sections">
+        <section class="info-section u-floatLeft">
+            <div class="footer-title">关于</div>
+            人人都是产品经理（woshipm.com）是以产品经理、运营为核心的学习、交流、分享平台，集媒体、培训、招聘、社群为一体，全方位服务产品人和运营人，成立8年举办在线讲座500+期，线下分享会300+场，产品经理大会、运营大会20+场，覆盖北上海广深杭成都等15个城市，在行业有较高的影响力和知名度。平台聚集了众多BAT美团京东滴滴360小米网易等知名互联网公司产品总监和运营总监，他们在这里分享知识、招聘人才，与你一起成长。        </section>
+        <section class="link-section u-floatLeft">
+        <div class="footer-title">链接</div>
+            <nav class="footer-nav">
+                <ul>
+                    <li><a href="https://www.lagou.com/gongsi/318344.html" target="_blank">加入我们</a></li>
+                    <li><a href="http://www.woshipm.com/it/1010671.html" target="_blank">投稿须知</a></li>
+                    <li><a href="https://wen.woshipm.com/question/detail/omkf.html" target="_blank">意见反馈</a></li>
+                    <li><a href="http://www.woshipm.com/disclaimer" target="_blank">免责声明</a></li>
+                </ul>
+            </nav>
+        </section>
+        <section class="partner-section u-floatLeft">
+            <div class="footer-title">合作伙伴</div>
+            <ul class="blue-pic-ul">
+                <li><a href="https://www.qidianla.com/?woshipm" title="起点学院" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/qidian.png" alt="起点学院" title="起点学院"></a></li>
+<li><a href="http://www.cyzone.cn/?woshipm" title="创业邦" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/5-2.png" alt="创业邦" title="创业邦"></a></li>
+<li><a href="http://ke.qq.com/?from=95" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/6-1.png" alt="腾讯课堂"></a></li>
+<li><a href="http://www.geetest.com/?woshipm" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/3-3.png" alt="极验验证"></a></li>
+<li><a href="http://www.zhisheji.com/?woshipm" title="致设计" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/4-2.png" alt="致设计" title="致设计"></a></li>
+<li><a href="https://www.yunyingpai.com/?woshipm" title="运营派" target="_blank"><img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/运营派.png" alt="运营派" title="运营派"></a></li>
+            </ul>
+        </section>
+        <section class="qr-section u-floatRight">
+        <div class="footer-title">APP下载</div>
+            <img src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/rpPRjFM56semOSrrJuWf.png">
+            <p>iPhone &amp; Android</p>
+        </section>
+    </div>
+    <div class="copyright">
+        <div class="container">
+        旗下品牌: <a target="_blank" href="https://www.qidianla.com/">起点学院</a> | <a target="_blank" href="https://www.yunyingpai.com/">运营派</a> | <a target="_blank" href="http://www.zhaopins.com/">秒聘网</a> <br>
+©2010-2018 - 人人都是产品经理 - <a target="_blank" href="http://www.miibeian.gov.cn/">粤ICP备14037330号-1</a><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030502001309">粤公网安备 44030502001309号</a>
+版权所有 © 深圳聚力创想信息科技有限公司        <div class="u-floatRight" style="margin-top:-10px;">企业内训/合作/投诉: 18123776760</div>
+    </div>
+    </div>
+</footer>
+</div>
+<div class="back2top is-active"><span class="fa-angle-up fa"></span></div>
+<div class="u-hide"><script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb85cbcc76e92e3fd79be8f2fed0f504f' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/h.js.下载" type="text/javascript"></script><a href="http://tongji.baidu.com/hm-web/welcome/ico?s=b85cbcc76e92e3fd79be8f2fed0f504f" target="_blank">网站统计</a></div>
+<script type="text/javascript" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/jquery.jplayer.min.js.下载"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var PURE = {"ajax_url":"http:\/\/www.woshipm.com\/wp-admin\/admin-ajax.php","restapi":"http:\/\/www.woshipm.com\/__api\/","nonce":"9074272ccb","home_url":"http:\/\/www.woshipm.com","is_user_logged_in":"","is_singular":"1","is_home":"","id":"1153391","token":"","secret":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/misc.js.下载"></script>
+<script type="text/javascript" src="./1.8万字，全方位拆解Instagram的Feed流动态和快拍功能 _ 人人都是产品经理_files/comment-reply.min.js.下载"></script>
+
+</body></html>

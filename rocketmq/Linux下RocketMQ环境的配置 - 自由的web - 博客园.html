@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)https://www.cnblogs.com/freeweb/p/7817968.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="origin">
+<title>Linux下RocketMQ环境的配置 - 自由的web - 博客园</title>
+<meta property="og:description" content="RocketMQ是一款分布式消息系统，最初是由阿里巴巴消息中间件团队研发并大规模应用于生产系统，满足线上海量堆积的需求，在去年捐赠给Apache开源基金会，并列为孵化项目，今年成功的正式成为了apac">
+<link type="text/css" rel="stylesheet" href="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/bundle-ThinkInside.css">
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/bundle-ThinkInside-mobile.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/freeweb/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/freeweb/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/freeweb/wlwmanifest.xml">
+<script async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" src="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/encoder.js.下载"></script><script src="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/jquery-2.2.0.min.js.下载"></script>
+<script type="text/javascript">var currentBlogApp = 'freeweb', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/blog-common.js.下载" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="https://www.cnblogs.com/freeweb/"><img id="blogLogo" src="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/logo.gif" alt="返回主页"></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="https://www.cnblogs.com/freeweb/">freeweb</a></h1>
+<h2>热爱数据和算法，也热爱生活.</h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">博客园</a></li>
+<li><a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/freeweb/">首页</a></li>
+<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E8%87%AA%E7%94%B1%E7%9A%84web">联系</a></li>
+<li><a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/freeweb/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="https://www.cnblogs.com/freeweb/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<span id="stats_post_count">随笔 - 220&nbsp; </span>
+<span id="stats_article_count">文章 - 0&nbsp; </span>
+<span id="stats-comment_count">评论 - 71</span>
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/freeweb/p/7817968.html">Linux下RocketMQ环境的配置</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body"><p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　RocketMQ是一款分布式消息系统，最初是由阿里巴巴消息中间件团队研发并大规模应用于生产系统，满足线上海量堆积的需求，在去年捐赠给Apache开源基金会，并列为孵化项目，今年成功的正式成为了apache顶级项目；早期阿里曾经基于ActiveMQ研发的消息系统，随着业务消息的规模增大，瓶颈逐渐明显，后来也考虑过Kafka，但是因为在低延迟和高可靠性方面没有选择，最后才自主研发了RocketMQ，各方面的性能都比目前已有的消息队列要好，RocketMQ和kafka在原理和概念上都非常相似，所以也经常被拿来对比；RocketMQ默认采用长轮询的拉模式，单机支持千万级别的消息堆积，可以非常好的应用在海量消息系统中，下面主要叙述一下RocketMQ的安装配置过程和一些相关的概念，因为rocketmq能够很方便的扩展到分布式集群，所以单机情况下也可以很好的说明，所以下面操作都在一台服务器上执行</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　RocketMQ官网地址为：http://rocketmq.apache.org/ ，个人感觉RocketMQ的官方文档写的非常清晰，简单易懂，通过文档左侧下方可以找到下载链接，下载编译好的二进制版本，最新版本是4.1.0孵化版，下载安装包为：rocketmq-all-4.1.0-incubating-bin-release.zip，下载之后准备安装</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　首先解压安装包然后放到自己要安装的位置：</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff">unzip</span> rocketmq-all-<span style="color: #800080">4.1</span>.<span style="color: #800080">0</span>-incubating-bin-release.<span style="color: #0000ff">zip</span>
+<span style="color: #0000ff">mv</span> rocketmq-all-<span style="color: #800080">4.1</span>.<span style="color: #800080">0</span>-incubating /monchickey/<span style="color: #000000">
+cd </span>/monchickey/rocketmq-all-<span style="color: #800080">4.1</span>.<span style="color: #800080">0</span>-incubating/</pre>
+</div>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　我这里安装到了/monchickey目录下面，首先可以按照官网上面的Quick Start走一遍，看看大致流程，rocketmq集群包括nameserver和broker，nameserver负责管理集群的列表信息，broker是真正作为消息承载和提供数据吞吐服务的，首先执行下面命令启动nameserver：</span></p>
+<div class="cnblogs_code">
+<pre>nohup ./bin/mqnamesrv &amp;</pre>
+</div>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　执行之后再敲一次确认键回到命令行，然后查看日志，默认位置在：~/logs/rocketmqlogs/namesrv.log中，如果看到下面内容则表示启动成功：</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　<img src="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/734555-20171110231113044-1398641181.png" alt="" width="714" height="175"></span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　然后执行&nbsp;<span class="cnblogs_code">jps</span>&nbsp;可以看到NamesrvStartup，就是nameserver进程了</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　<img src="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/734555-20171110231315856-1227479302.png" alt=""></span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　然后需要启动broker，命令如下：</span></p>
+<div class="cnblogs_code">
+<pre>nohup ./bin/mqbroker -n monchickey:<span style="color: #800080">9876</span> &amp;</pre>
+</div>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　这里-n指定nameserver地址，nameserver服务端口为9876，，这里如果在配置比较低的计算机或者虚拟机上很容易瞬间启动失败，这时候如果前台启动可能会看到下面这样的内容：</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　<img src="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/734555-20171110231812950-416111421.png" alt="" width="710" height="143"></span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　那么这种情况很明显就是内存不足导致的申请失败，RocketMQ默认配置是比较好的，这样可以直接应用于生产环境，所以如果机器内存较小，可以手动调整JVM的配置，可以先编辑bin/mqbroker会看到最后还是调用了bin/runbroker.sh，这里打开bin/runbroker.sh，找到jvm启动配置如下：</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　<img src="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/734555-20171110232149106-479589284.png" alt="" width="506" height="219"></span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　这里broker堆内存最大值和初始值都为8G，年轻代大小为4G，因为是测试环境所以xms和xmx都配置为4g，xmn配置为512m即可，配置完成后再次执行上面的命令启动即可，启动成功后日志位置同样是在家目录下，同样使用jps查看会看到BrokerStartup就是broker的进程</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　<img src="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/734555-20171110232730809-810856293.png" alt=""></span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　对于nameserver和broker日志位置都可以手动配置，具体配置文件就是conf下的logback_broker.xml和logback_namesrv.xml</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　<img src="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/734555-20171110232957184-1118978721.png" alt=""></span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　现在可以跑一个简单的示例看一下了，现在可以打开两个窗口，一个查看生产者，一个查看消费者，首先两个shell窗口都需要执行命令：&nbsp;<span class="cnblogs_code">export NAMESRV_ADDR=monchickey:<span style="color: #800080">9876</span></span>&nbsp;导入一下nameserver变量，然后第一个窗口执行下面命令启动生产者实例发送消息：</span></p>
+<div class="cnblogs_code">
+<pre>bin/tools.<span style="color: #0000ff">sh</span> org.apache.rocketmq.example.quickstart.Producer</pre>
+</div>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　可以看到发送成功的消息返回：</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　<img src="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/734555-20171110233445653-495253374.png" alt="" width="759" height="252"></span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　然后另一个窗口可以启动消费者实例消费：</span></p>
+<div class="cnblogs_code">
+<pre>bin/tools.<span style="color: #0000ff">sh</span> org.apache.rocketmq.example.quickstart.Consumer</pre>
+</div>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　可以看到消费消息如下：</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　<img src="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/734555-20171110233619028-1347034457.png" alt="" width="759" height="309"></span></p>
+<p>　　<span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">到这里其实最简单的RocketMQ环境就配置好了，可以看到基本上没有什么配置需要修改的，停止nameserver和broker可以分别执行下面命令：</span></p>
+<div class="cnblogs_code">
+<pre>bin/<span style="color: #000000">mqshutdown namesrv
+bin</span>/mqshutdown namesrv</pre>
+</div>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　这样进程就可以结束了，下面来详细说一下生产环境应该怎么部署</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　对于kafka集群，其中有一个节点为master，并且我们不用干预，master是kafka自动选择出来的，但是rocketMQ的master和slave都需要手动指定，所以kafka是broker中出来master和slave，而rocketmq中是多个master和slave，一块构建成为broker，两个过程基本上是相反的；另外在生产环境中nameserver建议至少设置2个，这样一个挂了集群不受影响</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　对于rocketmq集群，一个broker-name一般设置一个master以及一个或多个slave，一个集群可以设置多个broker-name，在rocketmq的conf目录下可以看到如下几个常用的配置：</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　<img src="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/734555-20171110234518966-1080708679.png" alt=""></span></p>
+<p>　　<span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">其中2m表示2个master，2s表示2个slave，sync表示同步刷盘，asyna表示异步刷盘和replication，默认情况下rocketmq是async模式的，这样性能会非常好，但是如果需要保证消息的可靠性，建议使用sync的方式，</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　另外多说一下，kafka的topic里面有分区和副本的概念，使用之前都是根据数据量手动创建，对于rocketmq也一样，需要手动创建topic，rocketmq的topic中有队列(queue)的概念，也就是说一个节点上面可以有多个队列，这样能非常大的提高并发性，而kafka最多只能是一个分区一个进程消费，这样并发性限制非常大，并且单机分区数量不能过多，超过64个分区就出现明显的不稳定，但是rocketmq单机支持上万队列，所以并发性能非常好；类比一下，rocketmq中一个broker-name其实就相当于kafka broker中的一个partition，而rocketmq每一个slave就相当于kafka中的一个replication，这种情况，所以rocketmq的特点相当于单个partition支持多队列，大致的原理图如下：</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　<img src="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/734555-20171111001406903-142477586.png" alt="" width="564" height="346"></span></p>
+<p>&nbsp;</p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　默认情况下，一个topic的队列数是8，当然在实际应用中可以设置的更大，知道了前面这些概念，那么在集群中以2m-2s-sync的方式启动一个集群就简单了，假设2台nameserver主机分别为rocket1和rocket2，则步骤如下：</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　1). 分别启动两个nameserver</span></p>
+<div class="cnblogs_code">
+<pre>rocket1 &gt; nohup ./bin/mqnamesrv &amp;<span style="color: #000000">
+rocket2 </span>&gt; nohup ./bin/mqnamesrv &amp;</pre>
+</div>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　2). 然后分别在剩下主机中分别启动2个master和2个slave：</span></p>
+<div class="cnblogs_code">
+<pre>bin/mqbroker -c ./conf/2m-2s-<span style="color: #0000ff">sync</span>/broker-a.properties -n rocket1:<span style="color: #800080">9876</span>,rocket2:<span style="color: #800080">9876</span><span style="color: #000000">
+bin</span>/mqbroker -c ./conf/2m-2s-<span style="color: #0000ff">sync</span>/broker-a-s.properties -n rocket1:<span style="color: #800080">9876</span>,rocket2:<span style="color: #800080">9876</span><span style="color: #000000">
+bin</span>/mqbroker -c ./conf/2m-2s-<span style="color: #0000ff">sync</span>/broker-b.properties -n rocket1:<span style="color: #800080">9876</span>,rocket2:<span style="color: #800080">9876</span><span style="color: #000000">
+bin</span>/mqbroker -c ./conf/2m-2s-<span style="color: #0000ff">sync</span>/broker-b-s.properties -n rocket1:<span style="color: #800080">9876</span>,rocket2:<span style="color: #800080">9876</span></pre>
+</div>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　这样就集群就启动完毕了，实际生产中最好是一个服务器只运行一个broker实例</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　然后在单机上也可以启动多个broker master，为了加深对配置的理解下面是具体的步骤：</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　首先启动nameserver这个和之前一样，但是启动broker不能按照之前那样启动了，因为单机伪集群模式也必须对应集群名称，同样按照集群中的概念来启动，先进入conf目录，可以看到有一个broker.conf，这个是相当于配置的简单模板，另外其他的配置也可以到上面说的2m-2s那些目录中去参考一下，这个broker.conf是不能直接使用的，因为broker启动的时候用-c参数传入配置文件，这里只认识*.properties的配置文件，所以这里应该分别执行：</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff">cp</span><span style="color: #000000"> broker.conf broker1.properties
+</span><span style="color: #0000ff">cp</span> broker1.properties broker2.properties</pre>
+</div>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　将配置文件复制为2份，先执行&nbsp;<span class="cnblogs_code">vim broker1.properties</span>&nbsp;查看第一个配置文件，内容如下：</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　<img src="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/734555-20171111003130747-451087939.png" alt="" width="330" height="159"></span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　这里第一个是集群名称，一个集群必须配置一个，默认就是DefaultCluster，然后brokerName是broker的名称，master的话brokerId为0，其余的slave依次是1,2,3往后排，然后brokerRole配置表示异步的往slave拷贝，如果是slave节点直接写SLAVE即可，最后一个是刷盘的类型，这样这个配置文件不用动，然后启动第一个broker即可：</span></p>
+<div class="cnblogs_code">
+<pre>nohup bin/mqbroker -c ./conf/broker1.properties -n monchickey:<span style="color: #800080">9876</span> &amp;</pre>
+</div>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　然后打开broker2.properties，修改如下：</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　<img src="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/734555-20171111003840731-407219433.png" alt=""></span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　首先是集群名要一致，然后brokerName设置为一个新的broker-b，这个也是master，相当于第二个分区，然后只配置这些启动直接就报端口冲突的失败，因为这是单机环境，而broker默认端口是10911，所以为了避免冲突启动多个broker需要设置个新的端口，当然分布式环境都默认即可，这里添加了一个端口配置为11911，然后启动第二个broker：</span></p>
+<div class="cnblogs_code">
+<pre>nohup bin/mqbroker -c ./conf/broker2.properties -n monchickey:<span style="color: #800080">9876</span> &amp;</pre>
+</div>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　这样就启动了第二个进程，此时jps应该可以看到两个broker进程，这就是一个最简单的集群了，另外还有更多配置项这个可以参考官方文档讲的很详细，下面可以使用mqadmin工具执行一些CLI操作，比如直接执行：&nbsp;<span class="cnblogs_code">./bin/mqadmin</span>&nbsp;可以看到所有的操作选项，常用的比如：updateTopic - 创建或更新topic，deleteTopic 删除topic，clusterList 列出集群，topicList 列出topic，另外还可以按照时间戳以及id查看消息等，</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　比如执行：&nbsp;<span class="cnblogs_code">bin/mqadmin clusterList -n monchickey:<span style="color: #800080">9876</span></span>&nbsp;查看集群如下：</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　<img src="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/734555-20171111004946278-985358275.png" alt="" width="752" height="175"></span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　可以看到只有一个集群2个broker</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　查看集群状态可以执行：&nbsp;<span class="cnblogs_code">bin/mqadmin brokerStatus -c DefaultCluster -n monchickey:<span style="color: #800080">9876</span></span>&nbsp;</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　新建一个默认配置的topic可以执行：&nbsp;<span class="cnblogs_code">bin/mqadmin updateTopic -b monchickey:<span style="color: #800080">10911</span> -n monchickey:<span style="color: #800080">9876</span> -t test</span>&nbsp;</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　或者执行：&nbsp;<span class="cnblogs_code">bin/mqadmin updateTopic -c DefaultCluster -n monchickey:<span style="color: #800080">9876</span> -t test</span>&nbsp;这两个命令都可以，也就是说-b broker主机或者-c集群名必须指定一个，</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　<img src="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/734555-20171111005605372-575079710.png" alt=""></span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　这样一个topic就创建成功了，默认读和写的队列数都是8个，</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　然后可以执行命令：&nbsp;<span class="cnblogs_code">bin/mqadmin topicList -n monchickey:<span style="color: #800080">9876</span></span>&nbsp;查看topic列表：</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　<img src="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/734555-20171111005845591-900730519.png" alt="" width="564" height="269"></span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　以及查看test这个topic队列分布的详细信息：&nbsp;<span class="cnblogs_code">bin/mqadmin topicStatus -n monchickey:<span style="color: #800080">9876</span> -t test</span>&nbsp;</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　<img src="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/734555-20171111005948138-881433517.png" alt="" width="658" height="201"></span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　可以看到默认情况下队列都被分到broker-a上面了，比如我们要创建更多的队列，那么rocketmq会自动的均衡分布到集群所有的broker中</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　基本的命令就是上面这些，对于每个命令可以用的时候现查，比如topicStatus这个具体怎么用，可以执行：&nbsp;<span class="cnblogs_code">bin/mqadmin help topicStatus</span>&nbsp;或者&nbsp;<span class="cnblogs_code">bin/mqadmin topicStatus -h</span>&nbsp;查看详细的参数，然后根据需要使用就可以了</span></p>
+<p><span style="font-family: &quot;Microsoft YaHei&quot;; font-size: 16px">　　好了，关于rocketmq的基本配置使用就先叙述这些，这确实是一个非常好用的消息中间件，值得深入的学习.. 最后感谢花时间阅读，如果有其他内容或问题也欢迎补充，一起交流...</span></p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="https://www.cnblogs.com/freeweb/category/670085.html" target="_blank">02.Linux</a>,<a href="https://www.cnblogs.com/freeweb/category/1112921.html" target="_blank">03.bigdata - RocketMQ</a></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(7817968,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;9f9732bc-0cd1-e411-b908-9dcfd8948a71&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/freeweb/" target="_blank"><img src="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/20180723170304.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/freeweb/">自由的web</a><br>
+            <a href="http://home.cnblogs.com/u/freeweb/followees">关注 - 6</a><br>
+            <a href="http://home.cnblogs.com/u/freeweb/followers">粉丝 - 73</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;9f9732bc-0cd1-e411-b908-9dcfd8948a71&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(7817968,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">0</span>
+    </div>
+    <div class="buryit" onclick="votePost(7817968,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="https://www.cnblogs.com/freeweb/p/7699996.html" class="p_n_p_prefix">« </a> 上一篇：<a href="https://www.cnblogs.com/freeweb/p/7699996.html" title="发布于2017-10-20 18:06">linux下安装python dlib依赖</a><br><a href="https://www.cnblogs.com/freeweb/p/8006639.html" class="p_n_p_prefix">» </a> 下一篇：<a href="https://www.cnblogs.com/freeweb/p/8006639.html" title="发布于2017-12-08 18:12">Linux安装postgresql</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2017-11-11 01:09</span> <a href="https://www.cnblogs.com/freeweb/">自由的web</a> 阅读(<span id="post_view_count">5084</span>) 评论(<span id="post_comment_count">0</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=7817968" rel="nofollow">编辑</a> <a href="https://www.cnblogs.com/freeweb/p/7817968.html#" onclick="AddToWz(7817968);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=219504,cb_entryId=7817968,cb_blogApp=currentBlogApp,cb_blogUserGuid='9f9732bc-0cd1-e411-b908-9dcfd8948a71',cb_entryCreatedDate='2017/11/11 1:09:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="https://www.cnblogs.com/freeweb/p/7817968.html#" onclick="return RefreshPage();">刷新页面</a><a href="https://www.cnblogs.com/freeweb/p/7817968.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】超50万VC++源码: 大型组态工控、电力仿真CAD与GIS源码库！</a><br><a href="https://cloud.tencent.com/developer/edu/major-100008?fromSource=gwzcw.1297698.1297698.1297698" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-腾讯蓝鲸&#39;)">【推荐】企业SaaS应用开发实战，快速构建企业运营/运维系统</a><br><a href="https://www.grapecity.com.cn/developer/activereports?utm_source=cnblogs&amp;utm_medium=blogpage&amp;utm_term=bottom&amp;utm_content=AR&amp;utm_campaign=community" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-ActiveReports&#39;)">【推荐】ActiveReports 报表控件，全面满足 .NET开发需求</a><br></div>
+<div id="opt_under_post"></div>
+<div id="cnblogs_c1" class="c_ad_block"><a href="https://cloud.tencent.com/act/ecommerce?fromSource=gwzcw.1191780.1191780.1191780" target="_blank"><img width="300" height="250" src="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/24442-20180814102629155-1096944426.png" alt="qcloud0814" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;C1&#39;);"></a></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="https://news.cnblogs.com/n/605757/" target="_blank">亚运会中国斩获两金一银 电竞离体育还有多远？</a><br> ·  <a href="https://news.cnblogs.com/n/605782/" target="_blank">百度因“段子”索赔500万 我们和这名被告博主聊了聊</a><br> ·  <a href="https://news.cnblogs.com/n/605765/" target="_blank">滴滴有没有垄断市场？合并优步中国反垄断调查为何两年无果</a><br> ·  <a href="https://news.cnblogs.com/n/605760/" target="_blank">“独角兽”业绩半年考 工业富联与三六零市值大缩水</a><br> ·  <a href="https://news.cnblogs.com/n/605771/" target="_blank">快的创始人陈伟星回归网约车 用区块链解决安全问题</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="cnblogs_c2" class="c_ad_block"><a href="http://clickc.admaster.com.cn/c/a113319,b2799157,c1705,i0,m101,8a1,8b3,h" target="_blank"><img width="468" height="60" src="./Linux下RocketMQ环境的配置 - 自由的web - 博客园_files/24442-20180821211532241-413062430.jpg" alt="华为CH0822" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;C2&#39;);"></a></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="https://kb.cnblogs.com/page/603663/" target="_blank">如何招到一个靠谱的程序员</a><br> ·  <a href="https://kb.cnblogs.com/page/573614/" target="_blank">一个故事看懂“区块链”</a><br> ·  <a href="https://kb.cnblogs.com/page/603697/" target="_blank">被踢出去的用户</a><br> ·  <a href="https://kb.cnblogs.com/page/603279/" target="_blank">成为一个有目标的学习者</a><br> ·  <a href="https://kb.cnblogs.com/page/602903/" target="_blank">历史转折中的“杭派工程师”</a><br></div>» <a href="https://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"><div id="profile_block">昵称：<a href="https://home.cnblogs.com/u/freeweb/">自由的web</a><br>园龄：<a href="https://home.cnblogs.com/u/freeweb/" title="入园时间：2015-03-23">3年5个月</a><br>粉丝：<a href="https://home.cnblogs.com/u/freeweb/followers/">73</a><br>关注：<a href="https://home.cnblogs.com/u/freeweb/followees/">6</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;9f9732bc-0cd1-e411-b908-9dcfd8948a71&#39;)">+加关注</a></div><script>getFollowStatus('9f9732bc-0cd1-e411-b908-9dcfd8948a71')</script></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2018/07/01&#39;);return false;">&lt;</a></td><td align="center">2018年8月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2018/09/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td><td class="CalOtherMonthDay" align="center">31</td><td align="center">1</td><td align="center">2</td><td align="center">3</td><td class="CalWeekendDay" align="center">4</td></tr><tr><td class="CalWeekendDay" align="center">5</td><td align="center">6</td><td align="center"><a href="https://www.cnblogs.com/freeweb/archive/2018/08/07.html"><u>7</u></a></td><td align="center">8</td><td align="center">9</td><td align="center">10</td><td class="CalWeekendDay" align="center">11</td></tr><tr><td class="CalWeekendDay" align="center">12</td><td align="center">13</td><td align="center">14</td><td align="center">15</td><td align="center">16</td><td align="center">17</td><td class="CalWeekendDay" align="center">18</td></tr><tr><td class="CalWeekendDay" align="center">19</td><td align="center">20</td><td align="center">21</td><td align="center">22</td><td align="center">23</td><td align="center">24</td><td class="CalWeekendDay" align="center">25</td></tr><tr><td class="CalWeekendDay" align="center">26</td><td align="center">27</td><td align="center">28</td><td align="center">29</td><td class="CalTodayDay" align="center">30</td><td align="center">31</td><td class="CalOtherMonthDay" align="center">1</td></tr><tr><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td><td class="CalOtherMonthDay" align="center">7</td><td class="CalOtherMonthDay" align="center">8</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+<div id="widget_my_google" class="div_my_zzk"><input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk"></div>
+</div>
+</div>
+
+</div><div id="sidebar_shortcut" class="sidebar-block">
+<div class="catListLink">
+<h3 class="catListTitle">常用链接</h3>
+<ul>
+<li><a href="https://www.cnblogs.com/freeweb/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="https://www.cnblogs.com/freeweb/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="https://www.cnblogs.com/freeweb/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="https://www.cnblogs.com/freeweb/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="https://www.cnblogs.com/freeweb/tag/" title="我的博客的标签列表">我的标签</a></li>
+</ul>
+<div id="itemListLin_con" style="display:none;">
+<ul>
+
+</ul>
+</div>
+</div></div><div id="sidebar_categories">
+<div id="sidebar_postcategory" class="catListPostCategory sidebar-block">
+<h3 class="catListTitle">随笔分类</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="https://www.cnblogs.com/freeweb/category/819685.html">00.dev</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="https://www.cnblogs.com/freeweb/category/685879.html">00.dev - Java(30)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="https://www.cnblogs.com/freeweb/category/672462.html">00.dev - php(28)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_3" href="https://www.cnblogs.com/freeweb/category/672466.html">00.dev - Python(11)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_4" href="https://www.cnblogs.com/freeweb/category/669710.html">00.dev - web前端(14)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_5" href="https://www.cnblogs.com/freeweb/category/670085.html">02.Linux(94)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_6" href="https://www.cnblogs.com/freeweb/category/781008.html">03.bigdata(7)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_7" href="https://www.cnblogs.com/freeweb/category/811260.html">03.bigdata - Hadoop(7)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_8" href="https://www.cnblogs.com/freeweb/category/811257.html">03.bigdata - Kafka(4)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_9" href="https://www.cnblogs.com/freeweb/category/1112921.html">03.bigdata - RocketMQ(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_10" href="https://www.cnblogs.com/freeweb/category/811258.html">03.bigdata - Solr(6)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_11" href="https://www.cnblogs.com/freeweb/category/867876.html">03.bigdata - Spark(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_12" href="https://www.cnblogs.com/freeweb/category/811256.html">03.bigdata - Storm(5)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_13" href="https://www.cnblogs.com/freeweb/category/811272.html">03.bigdata - Zookeeper(3)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_14" href="https://www.cnblogs.com/freeweb/category/672468.html">04.Windows(42)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_15" href="https://www.cnblogs.com/freeweb/category/790447.html">05.Database(8)</a> </li>
+
+</ul>
+
+</div>
+
+<div id="sidebar_postarchive" class="catListPostArchive sidebar-block">
+<h3 class="catListTitle">随笔档案</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_1_Link_0" href="https://www.cnblogs.com/freeweb/archive/2018/08.html">2018年8月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_1" href="https://www.cnblogs.com/freeweb/archive/2018/07.html">2018年7月 (8)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_2" href="https://www.cnblogs.com/freeweb/archive/2018/06.html">2018年6月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_3" href="https://www.cnblogs.com/freeweb/archive/2018/04.html">2018年4月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_4" href="https://www.cnblogs.com/freeweb/archive/2017/12.html">2017年12月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_5" href="https://www.cnblogs.com/freeweb/archive/2017/11.html">2017年11月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_6" href="https://www.cnblogs.com/freeweb/archive/2017/10.html">2017年10月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_7" href="https://www.cnblogs.com/freeweb/archive/2017/09.html">2017年9月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_8" href="https://www.cnblogs.com/freeweb/archive/2017/08.html">2017年8月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_9" href="https://www.cnblogs.com/freeweb/archive/2017/07.html">2017年7月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_10" href="https://www.cnblogs.com/freeweb/archive/2017/05.html">2017年5月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_11" href="https://www.cnblogs.com/freeweb/archive/2017/04.html">2017年4月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_12" href="https://www.cnblogs.com/freeweb/archive/2017/03.html">2017年3月 (6)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_13" href="https://www.cnblogs.com/freeweb/archive/2017/02.html">2017年2月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_14" href="https://www.cnblogs.com/freeweb/archive/2017/01.html">2017年1月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_15" href="https://www.cnblogs.com/freeweb/archive/2016/12.html">2016年12月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_16" href="https://www.cnblogs.com/freeweb/archive/2016/11.html">2016年11月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_17" href="https://www.cnblogs.com/freeweb/archive/2016/10.html">2016年10月 (7)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_18" href="https://www.cnblogs.com/freeweb/archive/2016/09.html">2016年9月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_19" href="https://www.cnblogs.com/freeweb/archive/2016/08.html">2016年8月 (10)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_20" href="https://www.cnblogs.com/freeweb/archive/2016/07.html">2016年7月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_21" href="https://www.cnblogs.com/freeweb/archive/2016/06.html">2016年6月 (7)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_22" href="https://www.cnblogs.com/freeweb/archive/2016/05.html">2016年5月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_23" href="https://www.cnblogs.com/freeweb/archive/2016/04.html">2016年4月 (10)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_24" href="https://www.cnblogs.com/freeweb/archive/2016/03.html">2016年3月 (26)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_25" href="https://www.cnblogs.com/freeweb/archive/2016/02.html">2016年2月 (18)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_26" href="https://www.cnblogs.com/freeweb/archive/2016/01.html">2016年1月 (18)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_27" href="https://www.cnblogs.com/freeweb/archive/2015/12.html">2015年12月 (10)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_28" href="https://www.cnblogs.com/freeweb/archive/2015/11.html">2015年11月 (9)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_29" href="https://www.cnblogs.com/freeweb/archive/2015/10.html">2015年10月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_30" href="https://www.cnblogs.com/freeweb/archive/2015/09.html">2015年9月 (18)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_31" href="https://www.cnblogs.com/freeweb/archive/2015/08.html">2015年8月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_32" href="https://www.cnblogs.com/freeweb/archive/2015/07.html">2015年7月 (8)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_33" href="https://www.cnblogs.com/freeweb/archive/2015/06.html">2015年6月 (11)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_34" href="https://www.cnblogs.com/freeweb/archive/2015/05.html">2015年5月 (17)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_35" href="https://www.cnblogs.com/freeweb/archive/2015/04.html">2015年4月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_36" href="https://www.cnblogs.com/freeweb/archive/2015/03.html">2015年3月 (3)</a> </li>
+
+</ul>
+
+</div>
+
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/freeweb/p/5623372.html#4043464">1. Re:Windows下安装Scala</a></li>
+        <li class="recent_comment_body">不知道我的为什么安装了却不能使用</li>
+        <li class="recent_comment_author">--别逗&amp;&amp;我宝</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/freeweb/p/5748424.html#4043275">2. Re:Linux服务器jps报process information unavailable</a></li>
+        <li class="recent_comment_body">正好解决了我的问题，谢谢！</li>
+        <li class="recent_comment_author">--涵语独醉</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/freeweb/p/5181764.html#4041353">3. Re:Linux下编译安装python3</a></li>
+        <li class="recent_comment_body">在安装python之前都必要模块里面需要加一条：<br>yum isntall gcc<br>然后在按照博客流程来，就不会在configure那里报错了</li>
+        <li class="recent_comment_author">--dream-子皿</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/freeweb/p/5181764.html#4041349">4. Re:Linux下编译安装python3</a></li>
+        <li class="recent_comment_body">configure: error: no acceptable C compiler found in $PATH这是报错信息吧？在编译安装之前就执行这个命令：./configure --prefix......</li>
+        <li class="recent_comment_author">--dream-子皿</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/freeweb/p/5181764.html#4037718">5. Re:Linux下编译安装python3</a></li>
+        <li class="recent_comment_body">@kong326好的，有时间我会测一下，是什么时候报错，是编译的时候报错，还是导入模块的时候报错...</li>
+        <li class="recent_comment_author">--自由的web</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock"><ul><li><a href="https://www.cnblogs.com/freeweb/p/5261077.html">1. nginx服务器绑定域名和设置根目录的方法(93171)</a></li><li><a href="https://www.cnblogs.com/freeweb/p/4908832.html">2. jQuery ajax跨域请求的解决方法(66763)</a></li><li><a href="https://www.cnblogs.com/freeweb/p/5425554.html">3. Linux下安装php环境并且配置Nginx支持php-fpm模块(63584)</a></li><li><a href="https://www.cnblogs.com/freeweb/p/5181764.html">4. Linux下编译安装python3(58399)</a></li><li><a href="https://www.cnblogs.com/freeweb/p/5794447.html">5. Linux下安装OpenCV+Python支持(30173)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="https://www.cnblogs.com/freeweb/p/5181764.html">1. Linux下编译安装python3(10)</a></li><li><a href="https://www.cnblogs.com/freeweb/p/5100131.html">2. 在eclipse中配置一个简单的spring入门项目(8)</a></li><li><a href="https://www.cnblogs.com/freeweb/p/5794447.html">3. Linux下安装OpenCV+Python支持(6)</a></li><li><a href="https://www.cnblogs.com/freeweb/p/5262852.html">4. 在Linux服务器上配置phpMyAdmin(6)</a></li><li><a href="https://www.cnblogs.com/freeweb/p/5446632.html">5. nginx做本地目录映射(5)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div id="TopDiggPostsBlock"><ul><li><a href="https://www.cnblogs.com/freeweb/p/5425554.html">1. Linux下安装php环境并且配置Nginx支持php-fpm模块(5)</a></li><li><a href="https://www.cnblogs.com/freeweb/p/5181764.html">2. Linux下编译安装python3(4)</a></li><li><a href="https://www.cnblogs.com/freeweb/p/5023020.html">3. Windows下尝试PHP7提示丢失VCRUNTIME140.DLL的问题解决(4)</a></li><li><a href="https://www.cnblogs.com/freeweb/p/5748424.html">4. Linux服务器jps报process information unavailable(2)</a></li><li><a href="https://www.cnblogs.com/freeweb/p/5242631.html">5. 基于Maven构建开发第一个Storm项目(2)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright ©2018 自由的web
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+</body></html>

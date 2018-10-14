@@ -81,6 +81,7 @@ find 路径 -name 文件名
 硬盘管理
 df -h 看硬盘使用情况
 du -m 看目录中各文件大小 以mb显示 du -s 看总大小
+df -T 查看分区文件系统类型
 
 挂载-建立硬盘和文件系统的连接
 mount 文件系统类型 设备名(/dev/hda?) 目录名 
@@ -204,3 +205,15 @@ until [条件]&&(||)[条件二]
 do 
 ...
 done
+
+
+性能检测
+top 
+htop
+free -m
+df -h
+vmstat 1
+
+
+
+

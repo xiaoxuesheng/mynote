@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)https://www.cnblogs.com/badboyf/p/6075393.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="origin">
+<title>ubuntu14.04-rocketmq单机搭建 - bad_boy_f - 博客园</title>
+<meta property="og:description" content="需要环境： jdk(1.6+) git(如果clone源码，需要git，没有git直接下载gar包也行) maven3.x在安装之前确定自己已经安装了jdk：java -version 先获取reck">
+<link type="text/css" rel="stylesheet" href="./ubuntu14.04-rocketmq单机搭建 - bad_boy_f - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./ubuntu14.04-rocketmq单机搭建 - bad_boy_f - 博客园_files/bundle-facebook.css">
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="./ubuntu14.04-rocketmq单机搭建 - bad_boy_f - 博客园_files/bundle-facebook-mobile.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/badboyf/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/badboyf/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/badboyf/wlwmanifest.xml">
+<script async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" src="./ubuntu14.04-rocketmq单机搭建 - bad_boy_f - 博客园_files/encoder.js.下载"></script><script src="./ubuntu14.04-rocketmq单机搭建 - bad_boy_f - 博客园_files/jquery-2.2.0.min.js.下载"></script>
+<script type="text/javascript">var currentBlogApp = 'badboyf', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="./ubuntu14.04-rocketmq单机搭建 - bad_boy_f - 博客园_files/blog-common.js.下载" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<h1><a id="Header2_HeaderTitle" class="headermaintitle" href="https://www.cnblogs.com/badboyf/">bad_boy_f</a></h1>
+<h2></h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<!--done-->
+			<ul id="navList">
+				<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">博客园</a></li>
+				<li><a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/badboyf/">首页</a></li>
+				<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+				<li><a id="blog_nav_contact" accesskey="9" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/bad_boy_f">联系</a></li>
+				<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+				<li><a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/badboyf/rss">订阅</a>
+				<a id="blog_nav_rss_image" class="aHeaderXML" href="https://www.cnblogs.com/badboyf/rss"><img src="./ubuntu14.04-rocketmq单机搭建 - bad_boy_f - 博客园_files/xml.gif" alt="订阅"></a></li>
+			</ul>
+
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔- 122&nbsp;
+文章- 0&nbsp;
+评论- 1&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/badboyf/p/6075393.html">ubuntu14.04-rocketmq单机搭建</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body"><p>需要环境：<br>　　jdk(1.6+)<br>　　git(如果clone源码，需要git，没有git直接下载gar包也行)<br>　　maven3.x<br>在安装之前确定自己已经安装了jdk：java -version</p>
+<p>先获取recketmq源码，可以直接从官网下载tar包。下载完之后找个地方解压。</p>
+<p>进入目录“RocketMQ-3.5.8”<br>执行 bash install.sh 命令<br>这步执行完之后会新出来一个devenv文件夹，这个文件夹其实是target/alibaba-rocketmq-broker/alibaba-rocketmq的一个链接<br>配置ROCKETMQ_HOME环境变量，进入devenv文件夹，把当前的目录设置成ROCKETMQ_HOME变量。也就是：<br>cd devenv<br>echo "ROCKETMQ_HOME=`pwd`" &gt;&gt; ~/.bash_profile<br>source ~/.bash_profile<br>现在环境已经差不多了，接下来启动server和broker.<br>启动 name server：<br>bash mqnamesrv<br>看见”The Name Server boot success. serializeType=JSON“就是已经启动了。在这里注意：如果jdk是sun jdk，同时也配置了JAVA_HOME，那么现在问题应该不大。如果是openjdk，这个在平时用的时候，不配JAVA_HOME也是可以用的，但是因为rocketmq是纯java编的，所以必须配置JAVA_HOME。一般openjdk默认安装的位置在/usr/lib/jvm/java-8-openjdk-amd64，在这个目录下看到bin目录下有javac文件，就说明这就是JDK了。编辑/etc/profile或者/root/.bashrc<br>export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64<br>export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar&nbsp;<br>export PATH=$PATH:$JAVA_HOME/bin</p>
+<p><br>到这里，环境都准备完毕，就可以正常启动了。如果执行bash mqnamesrv还是报错："Please set the JAVA_HOME variable in your environment, We need java(x64)!"<br>查看runserver.sh文件：</p>
+<p>[ ! -e "$JAVA_HOME/bin/java" ] &amp;&amp; JAVA_HOME=$HOME/jdk/java<br>[ ! -e "$JAVA_HOME/bin/java" ] &amp;&amp; JAVA_HOME=/opt/taobao/java<br>[ ! -e "$JAVA_HOME/bin/java" ] &amp;&amp; error_exit "Please set the JAVA_HOME variable in your environment, We need java(x64)!"</p>
+<p>这个位置，没有用全部注释掉添加[ ! -e "$JAVA_HOME/bin/java" ] &amp;&amp; JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64。当然删了也没有问题。</p>
+<p><em id="__mceDel">效果如下：</em></p>
+<div class="cnblogs_code">
+<pre>#[ ! -e <span style="color: #800000">"</span><span style="color: #800000">$JAVA_HOME/bin/java</span><span style="color: #800000">"</span> ] &amp;&amp; JAVA_HOME=$HOME/jdk/<span style="color: #000000">java
+#[ </span>! -e <span style="color: #800000">"</span><span style="color: #800000">$JAVA_HOME/bin/java</span><span style="color: #800000">"</span> ] &amp;&amp; JAVA_HOME=/opt/taobao/<span style="color: #000000">java
+#[ </span>! -e <span style="color: #800000">"</span><span style="color: #800000">$JAVA_HOME/bin/java</span><span style="color: #800000">"</span> ] &amp;&amp; error_exit <span style="color: #800000">"</span><span style="color: #800000">Please set the JAVA_HOME variable in your environment, We need java(x64)!</span><span style="color: #800000">"</span><span style="color: #000000">  
+[ </span>! -e <span style="color: #800000">"</span><span style="color: #800000">$JAVA_HOME/bin/java</span><span style="color: #800000">"</span> ] &amp;&amp; JAVA_HOME=/usr/lib/jvm/java-<span style="color: #800080">8</span>-openjdk-amd64</pre>
+</div>
+<p>启动成功后在开一个终端启动broker：</p>
+<p>bash mqbroker -n localhost:9876</p>
+<p>如果发现还是有上面的问题，解决办法一样，这次是runbroker.sh。<br>The broker[lizhanhui-Lenovo, 172.30.30.233:10911] boot success. serializeType=JSON and name server is localhost:9876看到这行就已经启动成功了。为了确认成功也可以查看log，不设置log目录的话默认在~/logs/rocketmqlogs下。配置文件在解压RocketMQ3.5.8的config文件夹下。</p>
+<p>关闭nameserver、broker命令：</p>
+<pre>mqshutdown namesrv
+mqshutdown broker</pre>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="https://www.cnblogs.com/badboyf/category/910782.html" target="_blank">RocketMQ</a></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(6075393,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;6cb5d953-85a1-e611-845c-ac853d9f53ac&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./ubuntu14.04-rocketmq单机搭建 - bad_boy_f - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./ubuntu14.04-rocketmq单机搭建 - bad_boy_f - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/badboyf/" target="_blank"><img src="./ubuntu14.04-rocketmq单机搭建 - bad_boy_f - 博客园_files/sample_face.gif" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/badboyf/">bad_boy_f</a><br>
+            <a href="http://home.cnblogs.com/u/badboyf/followees">关注 - 0</a><br>
+            <a href="http://home.cnblogs.com/u/badboyf/followers">粉丝 - 5</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;6cb5d953-85a1-e611-845c-ac853d9f53ac&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(6075393,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">0</span>
+    </div>
+    <div class="buryit" onclick="votePost(6075393,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="https://www.cnblogs.com/badboyf/p/6067461.html" class="p_n_p_prefix">« </a> 上一篇：<a href="https://www.cnblogs.com/badboyf/p/6067461.html" title="发布于2016-11-15 21:44">Python核心编程-基础2</a><br><a href="https://www.cnblogs.com/badboyf/p/6111425.html" class="p_n_p_prefix">» </a> 下一篇：<a href="https://www.cnblogs.com/badboyf/p/6111425.html" title="发布于2016-11-28 21:16">Python核心编程-细节</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2016-11-17 20:35</span> <a href="https://www.cnblogs.com/badboyf/">bad_boy_f</a> 阅读(<span id="post_view_count">1462</span>) 评论(<span id="post_comment_count">0</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=6075393" rel="nofollow">编辑</a> <a href="https://www.cnblogs.com/badboyf/p/6075393.html#" onclick="AddToWz(6075393);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=315074,cb_entryId=6075393,cb_blogApp=currentBlogApp,cb_blogUserGuid='6cb5d953-85a1-e611-845c-ac853d9f53ac',cb_entryCreatedDate='2016/11/17 20:35:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+	
+</div>
+<!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="https://www.cnblogs.com/badboyf/p/6075393.html#" onclick="return RefreshPage();">刷新页面</a><a href="https://www.cnblogs.com/badboyf/p/6075393.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】超50万VC++源码: 大型组态工控、电力仿真CAD与GIS源码库！</a><br><a href="https://cloud.tencent.com/developer/edu/major-100008?fromSource=gwzcw.1297698.1297698.1297698" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-腾讯蓝鲸&#39;)">【推荐】企业SaaS应用开发实战，快速构建企业运营/运维系统</a><br><a href="https://www.grapecity.com.cn/developer/activereports?utm_source=cnblogs&amp;utm_medium=blogpage&amp;utm_term=bottom&amp;utm_content=AR&amp;utm_campaign=community" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-ActiveReports&#39;)">【推荐】ActiveReports 报表控件，全面满足 .NET开发需求</a><br></div>
+<div id="opt_under_post"></div>
+<div id="cnblogs_c1" class="c_ad_block"><a href="https://cloud.tencent.com/act/ecommerce?fromSource=gwzcw.1191780.1191780.1191780" target="_blank"><img width="300" height="250" src="./ubuntu14.04-rocketmq单机搭建 - bad_boy_f - 博客园_files/24442-20180814102629155-1096944426.png" alt="qcloud0814" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;C1&#39;);"></a></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="https://news.cnblogs.com/n/605757/" target="_blank">亚运会中国斩获两金一银 电竞离体育还有多远？</a><br> ·  <a href="https://news.cnblogs.com/n/605782/" target="_blank">百度因“段子”索赔500万 我们和这名被告博主聊了聊</a><br> ·  <a href="https://news.cnblogs.com/n/605765/" target="_blank">滴滴有没有垄断市场？合并优步中国反垄断调查为何两年无果</a><br> ·  <a href="https://news.cnblogs.com/n/605760/" target="_blank">“独角兽”业绩半年考 工业富联与三六零市值大缩水</a><br> ·  <a href="https://news.cnblogs.com/n/605771/" target="_blank">快的创始人陈伟星回归网约车 用区块链解决安全问题</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="cnblogs_c2" class="c_ad_block"><a href="http://clickc.admaster.com.cn/c/a113319,b2799157,c1705,i0,m101,8a1,8b3,h" target="_blank"><img width="468" height="60" src="./ubuntu14.04-rocketmq单机搭建 - bad_boy_f - 博客园_files/24442-20180821211532241-413062430.jpg" alt="华为CH0822" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;C2&#39;);"></a></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="https://kb.cnblogs.com/page/603663/" target="_blank">如何招到一个靠谱的程序员</a><br> ·  <a href="https://kb.cnblogs.com/page/573614/" target="_blank">一个故事看懂“区块链”</a><br> ·  <a href="https://kb.cnblogs.com/page/603697/" target="_blank">被踢出去的用户</a><br> ·  <a href="https://kb.cnblogs.com/page/603279/" target="_blank">成为一个有目标的学习者</a><br> ·  <a href="https://kb.cnblogs.com/page/602903/" target="_blank">历史转折中的“杭派工程师”</a><br></div>» <a href="https://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+		<div id="calendar"><div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2018/07/01&#39;);return false;">&lt;</a></td><td align="center">2018年8月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2018/09/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td><td class="CalOtherMonthDay" align="center">31</td><td align="center">1</td><td align="center">2</td><td align="center">3</td><td class="CalWeekendDay" align="center">4</td></tr><tr><td class="CalWeekendDay" align="center">5</td><td align="center">6</td><td align="center">7</td><td align="center">8</td><td align="center">9</td><td align="center">10</td><td class="CalWeekendDay" align="center">11</td></tr><tr><td class="CalWeekendDay" align="center">12</td><td align="center">13</td><td align="center">14</td><td align="center">15</td><td align="center">16</td><td align="center">17</td><td class="CalWeekendDay" align="center">18</td></tr><tr><td class="CalWeekendDay" align="center">19</td><td align="center">20</td><td align="center">21</td><td align="center">22</td><td align="center">23</td><td align="center">24</td><td class="CalWeekendDay" align="center">25</td></tr><tr><td class="CalWeekendDay" align="center">26</td><td align="center">27</td><td align="center">28</td><td align="center">29</td><td class="CalTodayDay" align="center">30</td><td align="center">31</td><td class="CalOtherMonthDay" align="center">1</td></tr><tr><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td><td class="CalOtherMonthDay" align="center">7</td><td class="CalOtherMonthDay" align="center">8</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"><div id="profile_block">昵称：<a href="https://home.cnblogs.com/u/badboyf/">bad_boy_f</a><br>园龄：<a href="https://home.cnblogs.com/u/badboyf/" title="入园时间：2016-11-03">1年9个月</a><br>粉丝：<a href="https://home.cnblogs.com/u/badboyf/followers/">5</a><br>关注：<a href="https://home.cnblogs.com/u/badboyf/followees/">0</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;6cb5d953-85a1-e611-845c-ac853d9f53ac&#39;)">+加关注</a></div><script>getFollowStatus('6cb5d953-85a1-e611-845c-ac853d9f53ac')</script></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+			
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+<div id="widget_my_google" class="div_my_zzk"><input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk"></div>
+</div>
+</div>
+
+</div><div id="sidebar_shortcut" class="sidebar-block">
+<div class="catListLink">
+<h3 class="catListTitle">常用链接</h3>
+<ul>
+<li><a href="https://www.cnblogs.com/badboyf/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="https://www.cnblogs.com/badboyf/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="https://www.cnblogs.com/badboyf/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="https://www.cnblogs.com/badboyf/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="https://www.cnblogs.com/badboyf/tag/" title="我的博客的标签列表">我的标签</a></li>
+<li><a id="itemListLink" onclick="this.blur();WarpClass(&#39;itemListLink&#39;, &#39;itemListLin_con&#39;);return false;" href="https://www.cnblogs.com/badboyf/p/6075393.html#">更多链接</a></li>
+</ul>
+<div id="itemListLin_con" style="display:none;">
+<ul>
+
+</ul>
+</div>
+</div></div><div id="sidebar_toptags" class="sidebar-block"></div><div id="sidebar_categories">
+<div class="catListPostCategory">
+<h3 class="catListTitle">随笔分类</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="https://www.cnblogs.com/badboyf/category/962438.html"> Java程序性能优化-让你的程序更快更稳定(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="https://www.cnblogs.com/badboyf/category/933251.html">docker(3)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="https://www.cnblogs.com/badboyf/category/966152.html">effective java(9)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_3" href="https://www.cnblogs.com/badboyf/category/962084.html">git</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_4" href="https://www.cnblogs.com/badboyf/category/929275.html">Hadoop(4)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_5" href="https://www.cnblogs.com/badboyf/category/924263.html">Head First 设计模式(12)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_6" href="https://www.cnblogs.com/badboyf/category/904287.html">Java(14)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_7" href="https://www.cnblogs.com/badboyf/category/1007643.html">JavaScript(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_8" href="https://www.cnblogs.com/badboyf/category/938748.html">java并发(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_9" href="https://www.cnblogs.com/badboyf/category/951936.html">jenkins(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_10" href="https://www.cnblogs.com/badboyf/category/956901.html">Jooq(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_11" href="https://www.cnblogs.com/badboyf/category/905566.html">Linux(10)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_12" href="https://www.cnblogs.com/badboyf/category/919728.html">LinuxShell脚本攻略(6)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_13" href="https://www.cnblogs.com/badboyf/category/981633.html">mongodb(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_14" href="https://www.cnblogs.com/badboyf/category/956899.html">mysql(3)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_15" href="https://www.cnblogs.com/badboyf/category/951522.html">nginx(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_16" href="https://www.cnblogs.com/badboyf/category/945233.html">pygame(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_17" href="https://www.cnblogs.com/badboyf/category/907867.html">Python(8)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_18" href="https://www.cnblogs.com/badboyf/category/969089.html">python cookbook(4)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_19" href="https://www.cnblogs.com/badboyf/category/946141.html">python_flask(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_20" href="https://www.cnblogs.com/badboyf/category/961562.html">rabiitMQ</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_21" href="https://www.cnblogs.com/badboyf/category/910782.html">RocketMQ(3)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_22" href="https://www.cnblogs.com/badboyf/category/965992.html">shell(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_23" href="https://www.cnblogs.com/badboyf/category/1025352.html">spring</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_24" href="https://www.cnblogs.com/badboyf/category/1017685.html">spring cache(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_25" href="https://www.cnblogs.com/badboyf/category/961544.html">spring-cloud-config(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_26" href="https://www.cnblogs.com/badboyf/category/906125.html">spring源码深度解析(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_27" href="https://www.cnblogs.com/badboyf/category/961382.html">swagger-codegen(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_28" href="https://www.cnblogs.com/badboyf/category/940653.html">ubuntu14.04(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_29" href="https://www.cnblogs.com/badboyf/category/987698.html">Windows(3)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_30" href="https://www.cnblogs.com/badboyf/category/907146.html">乱七八糟(12)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_31" href="https://www.cnblogs.com/badboyf/category/957448.html">乱写的小程序(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_32" href="https://www.cnblogs.com/badboyf/category/957836.html">每天码点python砖(4)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_33" href="https://www.cnblogs.com/badboyf/category/904301.html">深入理解JVM虚拟机(4)</a> </li>
+
+</ul>
+
+</div>
+
+<div class="catListPostArchive">
+<h3 class="catListTitle">随笔档案</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_1_Link_0" href="https://www.cnblogs.com/badboyf/archive/2018/02.html">2018年2月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_1" href="https://www.cnblogs.com/badboyf/archive/2018/01.html">2018年1月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_2" href="https://www.cnblogs.com/badboyf/archive/2017/10.html">2017年10月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_3" href="https://www.cnblogs.com/badboyf/archive/2017/09.html">2017年9月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_4" href="https://www.cnblogs.com/badboyf/archive/2017/06.html">2017年6月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_5" href="https://www.cnblogs.com/badboyf/archive/2017/05.html">2017年5月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_6" href="https://www.cnblogs.com/badboyf/archive/2017/04.html">2017年4月 (9)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_7" href="https://www.cnblogs.com/badboyf/archive/2017/03.html">2017年3月 (23)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_8" href="https://www.cnblogs.com/badboyf/archive/2017/02.html">2017年2月 (13)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_9" href="https://www.cnblogs.com/badboyf/archive/2017/01.html">2017年1月 (22)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_10" href="https://www.cnblogs.com/badboyf/archive/2016/12.html">2016年12月 (28)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_11" href="https://www.cnblogs.com/badboyf/archive/2016/11.html">2016年11月 (19)</a> </li>
+
+</ul>
+
+</div>
+
+<div class="catListArticleCategory">
+<h3 class="catListTitle">文章分类</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_2_Link_0" href="https://www.cnblogs.com/badboyf/category/905565.html">Linux</a> </li>
+
+</ul>
+
+</div>
+
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/badboyf/p/6387228.html#3947533">1. Re:flask初次搭建rest服务笔记</a></li>
+        <li class="recent_comment_body">推荐一个适合新手的超棒的flask开发教程：<a href="https://www.cnblogs.com/badboyf/p/6075393.html" target="_blank"></a></li>
+        <li class="recent_comment_author">--ezpod</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock"><ul><li><a href="https://www.cnblogs.com/badboyf/p/6145642.html">1. 基于SpringBoot项目的https(16647)</a></li><li><a href="https://www.cnblogs.com/badboyf/p/6422547.html">2. ubuntu16.04 nginx安装(12695)</a></li><li><a href="https://www.cnblogs.com/badboyf/p/6995202.html">3. spring boot集成redis缓存(9434)</a></li><li><a href="https://www.cnblogs.com/badboyf/p/6522543.html">4. spring-cloud 实现更新配置不用重启服务 @FreshScope(8301)</a></li><li><a href="https://www.cnblogs.com/badboyf/p/6126511.html">5. ObjectMapper处理从远程获取的Object对象(8137)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="https://www.cnblogs.com/badboyf/p/6387228.html">1. flask初次搭建rest服务笔记(1)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div id="TopDiggPostsBlock"><ul><li><a href="https://www.cnblogs.com/badboyf/p/6040622.html">1. spring源码深度解析-1核心实现(1)</a></li><li><a href="https://www.cnblogs.com/badboyf/p/8366172.html">2. java调用ffmpeg命令行推流遇到的问题(1)</a></li><li><a href="https://www.cnblogs.com/badboyf/p/6995202.html">3. spring boot集成redis缓存(1)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright ©2018 bad_boy_f
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+</body></html>

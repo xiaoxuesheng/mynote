@@ -1,4 +1,7 @@
 项目：为什么做这个系统？这个系统的价值是什么？这个系统有哪些功能？优缺点有哪些？如果让你重新设计这个系统你会如何设计？
 
 
+https://github.com/donnemartin/system-design-primer/blob/master/README-zh-Hans.md
+
+
 

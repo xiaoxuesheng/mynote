@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)http://www.woshipm.com/evaluating/193111.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>有道词典的非完全产品分析 | 人人都是产品经理</title>
+    <!--[if lt IE 9]>
+    <script src="http://www.woshipm.com/wp-content/themes/Kan/js/html5.js"></script>
+    <![endif]-->
+    <meta name="keywords" content="有道词典, 有道词典产品分析, 金山词典, "><meta name="description" content="有道词典相信很多同学都用过或者曾经用过，我也是很多年的用户了，不能这么白用。今天就给它做个产品分析，希望它可以发展的更好。 一、体验环境 体验 产品：网易有道词典 产品 版本： v5.6.0 体验机型 ：Coolpad 8705 体验系统 ：Andriod 4"><link type="image/vnd.microsoft.icon" href="http://image.woshipm.com/wp-files/other/favicon.ico" rel="shortcut icon"><link rel="dns-prefetch" href="http://image.woshipm.com/">
+<link rel="stylesheet" id="misc-css" href="./有道词典的非完全产品分析 _ 人人都是产品经理_files/misc.css" type="text/css" media="screen">
+<style id="misc-inline-css" type="text/css">
+
+                .surface-content.header-fix{
+                    padding-top:60px;
+                }
+                .surface-content.header-fix .metabar{
+                    position:fixed;
+                    top:0;
+                    left:0;
+                    right:0;
+                }
+                
+</style>
+<link rel="stylesheet" id="fa-css" href="./有道词典的非完全产品分析 _ 人人都是产品经理_files/font-awesome.min.css" type="text/css" media="screen">
+<script type="text/javascript" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/jquery-1.12.4.min.js.下载"></script>
+<link rel="canonical" href="http://www.woshipm.com/evaluating/193111.html">
+<script type="text/javascript">var algolia = {"debug":false,"application_id":"4OCSFS3SIM","search_api_key":"7bd75daaf81d0299565fce2232394dfd","powered_by_enabled":true,"query":"","autocomplete":{"sources":[],"input_selector":"input[name='s']:not('.no-autocomplete')"},"indices":{"searchable_posts":{"name":"w_searchable_posts","id":"searchable_posts","enabled":true,"replicas":[]}}};</script></head>
+<body class="single u-backgroundColorLightBlue">
+<div class="surface-content header-fix">
+    <div class="metabar metabar--shadow u-clearfix">
+        <div class="container">
+            <div class="u-floatLeft">
+                <a href="http://www.woshipm.com/" class="logo-xmas">
+                    <img class="logo" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/logo.png">
+                </a>
+            </div>
+            <div class="content u-floatLeft">
+                <nav class="header-nav"><ul id="menu-%e9%a1%b6%e9%83%a8%e5%af%bc%e8%88%aa" class="subnav-ul layoutSingleColumn layoutSingleColumn--wide"><li id="menu-item-155938" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-155938"><a href="http://www.woshipm.com/">首页</a></li>
+<li id="menu-item-155939" class="third menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-155939"><a href="http://www.woshipm.com/evaluating/193111.html#">分类浏览</a><span class="fa fa-angle-down"></span><ul class="sub-menu">	<li id="menu-item-155928" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155928"><a href="http://www.woshipm.com/category/pmd">产品经理</a></li>
+	<li id="menu-item-155929" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155929"><a href="http://www.woshipm.com/category/pd">产品设计</a></li>
+	<li id="menu-item-155927" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155927"><a href="http://www.woshipm.com/category/ucd">交互体验</a></li>
+	<li id="menu-item-155930" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155930"><a href="http://www.woshipm.com/category/operate">产品运营</a></li>
+	<li id="menu-item-155932" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155932"><a href="http://www.woshipm.com/category/rp">原型设计</a></li>
+	<li id="menu-item-191466" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-191466"><a href="http://www.woshipm.com/category/evaluating">分析评测</a></li>
+	<li id="menu-item-155926" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155926"><a href="http://www.woshipm.com/category/it">业界动态</a></li>
+	<li id="menu-item-155936" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155936"><a href="http://www.woshipm.com/category/zhichang">职场攻略</a></li>
+	<li id="menu-item-184121" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-184121"><a href="http://www.woshipm.com/category/chuangye">创业学院</a></li>
+	<li id="menu-item-1016325" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1016325"><a href="http://www.woshipm.com/category/marketing">营销推广</a></li>
+	<li id="menu-item-906383" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-906383"><a href="http://www.woshipm.com/category/ai">AI人工智能</a></li>
+	<li id="menu-item-906382" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-906382"><a href="http://www.woshipm.com/category/blockchain">区块链</a></li>
+</ul>
+</li>
+<li id="menu-item-155940" class="vip menu-item menu-item-type-custom menu-item-object-custom menu-item-155940"><a href="http://www.woshipm.com/course">热门课程</a></li>
+<li id="menu-item-420537" class="niubi menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-420537"><a href="http://www.woshipm.com/categroy/active">活动讲座</a><span class="fa fa-angle-down"></span><ul class="sub-menu">	<li id="menu-item-158482" class="menu-item menu-item-type-gs_sim menu-item-object-gs_sim menu-item-158482"><ul class="metabar-activities"><li class="metabar-activity-item"><a class="e-title" href="http://www.woshipm.com/active/1430457.html">线下课程丨解构运营人能力模型：初、中、高级；基础、普通、职业段位</a><div class="meta">上海-10月13日<span class="status">进行中</span></div></li><li class="metabar-activity-item"><a class="e-title" href="http://www.woshipm.com/active/1433797.html">线下课程 | 如果领导突然要把你升为运营总监，你能接的住吗？</a><div class="meta">上海-10月27日<span class="status">进行中</span></div></li></ul><div class="metabar-activity-more u-textAlignCenter u-clearfix"><a href="http://www.woshipm.com/category/active">更多活动</a></div></li>
+</ul>
+</li>
+<li id="menu-item-279085" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-279085"><a target="_blank" href="http://wen.woshipm.com/">问答</a></li>
+<li id="menu-item-395532" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-395532"><a target="_blank" href="http://996.pm/7b1Zr">年费会员</a></li>
+<li id="menu-item-155941" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-155941"><a target="_blank" href="http://www.zhaopins.com/">招聘</a><span class="fa fa-angle-down"></span><ul class="sub-menu">	<li id="menu-item-1021335" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1021335"><a target="_blank" href="http://www.zhaopins.com/">免费招人</a></li>
+	<li id="menu-item-1021337" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1021337"><a target="_blank" href="http://www.zhaopins.com/activity/20170114/2ent.html">付费招人</a></li>
+	<li id="menu-item-1021339" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1021339"><a target="_blank" href="http://www.zhaopins.com/activity/20170114/2user.html">免费内推</a></li>
+</ul>
+</li>
+<li id="menu-item-500728" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-500728"><a href="http://www.woshipm.com/evaluating/193111.html#">百宝箱</a><span class="fa fa-angle-down"></span><ul class="sub-menu">	<li id="menu-item-395530" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-395530"><a target="_blank" href="http://dh.woshipm.com/">网址导航</a></li>
+	<li id="menu-item-500731" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-500731"><a target="_blank" href="http://www.woshipm.com/books">必读书单</a></li>
+	<li id="menu-item-590029" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-590029"><a target="_blank" href="http://www.woshipm.com/topics">知识体系</a></li>
+	<li id="menu-item-501017" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-501017"><a target="_blank" href="http://www.yunyingpai.com/">运营派</a></li>
+	<li id="menu-item-500729" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-500729"><a target="_blank" href="http://www.woshipm.com/tools">必备工具</a></li>
+	<li id="menu-item-852376" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-852376"><a target="_blank" href="http://www.woshipm.com/screen/index.html">设计规范</a></li>
+	<li id="menu-item-1019313" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1019313"><a target="_blank" href="https://www.apptu.cn/">灵感图库</a></li>
+	<li id="menu-item-1317021" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1317021"><a target="_blank" href="https://t.qidianla.com/">学员后花园</a></li>
+</ul>
+</li>
+</ul></nav>
+            </div>
+            <div class="u-floatRight content">
+                                    <span class="item" data-action="popLogin"><svg class="svgIcon-use" width="18" height="17" viewBox="0 0 18 17"><path d="M17.831,3.950 L9.184,12.519 C9.113,12.590 9.024,12.641 8.927,12.667 L4.754,13.785 C4.705,13.798 4.655,13.805 4.603,13.805 C4.450,13.805 4.301,13.743 4.193,13.635 C4.047,13.489 3.992,13.275 4.048,13.078 L5.219,8.984 C5.246,8.891 5.296,8.805 5.366,8.736 L14.013,0.165 C14.122,0.058 14.267,-0.002 14.421,-0.002 C14.575,-0.002 14.720,0.058 14.829,0.165 L17.831,3.141 C17.940,3.249 18.000,3.393 18.000,3.545 C18.000,3.698 17.940,3.842 17.831,3.950 ZM8.156,11.689 L6.199,9.750 L5.436,12.419 L8.156,11.689 ZM14.421,1.378 L6.902,8.830 L9.088,10.997 L16.607,3.546 L14.421,1.378 ZM1.153,2.286 L1.153,14.895 C1.153,15.425 1.588,15.855 2.122,15.855 L14.732,15.855 C15.267,15.855 15.701,15.425 15.701,14.895 L15.701,10.476 L16.855,10.476 L16.855,14.895 C16.855,16.055 15.902,16.998 14.732,16.998 L2.122,16.998 C0.952,16.998 -0.000,16.055 -0.000,14.895 L-0.000,2.286 C-0.000,1.126 0.952,0.183 2.122,0.183 L9.326,0.183 L9.326,1.326 L2.122,1.326 C1.588,1.326 1.153,1.756 1.153,2.286 Z"></path></svg>投稿</span>
+                    <span class="item show-search"><svg class="svgIcon-use" width="16" height="16" viewBox="0 0 16 16"><path d="M15.800,14.481 L12.519,11.200 C12.504,11.184 12.487,11.170 12.471,11.156 C13.361,9.988 13.890,8.529 13.890,6.947 C13.890,3.110 10.780,-0.000 6.945,-0.000 C3.109,-0.000 -0.000,3.110 -0.000,6.947 C-0.000,10.785 3.109,13.895 6.945,13.895 C8.529,13.895 9.990,13.364 11.159,12.471 C11.172,12.487 11.186,12.503 11.201,12.518 L14.483,15.800 C14.786,16.104 15.329,16.056 15.693,15.692 C16.056,15.328 16.104,14.786 15.800,14.481 L15.800,14.481 ZM0.772,6.947 C0.772,3.537 3.535,0.771 6.945,0.771 C10.354,0.771 13.118,3.537 13.118,6.947 C13.118,8.621 12.453,10.138 11.373,11.250 C11.351,11.269 11.330,11.288 11.310,11.308 C11.289,11.329 11.269,11.351 11.250,11.373 C10.138,12.456 8.619,13.123 6.945,13.123 C3.535,13.123 0.772,10.358 0.772,6.947 L0.772,6.947 Z" class="cls-1"></path></svg>搜索</span>
+                    <div class="item app-qrcode"><svg class="svgIcon-use" width="12" height="18" viewBox="0 0 12 18"><path d="M10.599,17.999 L1.401,17.999 C0.626,17.999 -0.000,17.381 -0.000,16.616 L-0.000,1.382 C-0.000,0.617 0.626,-0.001 1.401,-0.001 L10.599,-0.001 C11.374,-0.001 12.000,0.627 12.000,1.382 L12.000,16.616 C12.000,17.381 11.374,17.999 10.599,17.999 ZM11.066,1.382 C11.066,1.128 10.857,0.922 10.599,0.922 L1.401,0.922 C1.142,0.922 0.934,1.128 0.934,1.382 L0.934,12.800 L11.066,12.800 L11.066,1.382 ZM11.066,13.811 L0.934,13.811 L0.934,16.626 C0.934,16.881 1.142,17.087 1.401,17.087 L10.599,17.087 C10.857,17.087 11.066,16.881 11.066,16.626 L11.066,13.811 ZM6.000,16.283 C5.483,16.283 5.066,15.871 5.066,15.361 C5.066,14.851 5.483,14.439 6.000,14.439 C6.516,14.439 6.934,14.851 6.934,15.361 C6.934,15.871 6.516,16.283 6.000,16.283 Z"></path></svg>APP<div class="app-qrcode-dropdown"><img class="app-qrcode-img" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/footer-appdownload.png"></div></div>
+                    <span class="item" data-action="popLogin">注册 | 登录</span>
+                                            </div>
+        </div>
+    </div>
+    <div class="search-overlay">
+        <div class="container search-content">
+            <form class="search-form" action="http://www.woshipm.com/search-posts" target="_blank" method="get">
+                <input type="search" class="search-form-input" name="k" placeholder="请输入搜索关键词">
+                <button class="btn-search">
+                    <i class="fa fa-search"></i>
+                </button>            </form>
+            <div class="search-hot-words">
+                <h3 class="search-overlay-title"><svg class="svgIcon-use u-colorYellow" width="16" height="16" viewBox="0 0 20 22">
+                        <path d="M19.595,15.561 C18.224,19.972 14.151,21.765 10.797,21.972 C9.858,22.028 8.916,22.002 7.981,21.894 C3.718,21.402 -0.382,18.446 0.029,13.748 C0.223,11.528 1.519,8.904 2.466,6.987 L2.620,6.672 C2.756,6.400 3.029,6.236 3.319,6.254 C3.609,6.268 3.865,6.462 3.972,6.747 C4.106,7.109 4.318,7.534 4.543,7.984 C4.629,8.156 4.715,8.330 4.800,8.504 C6.731,6.456 7.296,3.554 7.602,0.687 C7.631,0.425 7.783,0.197 8.007,0.081 C8.233,-0.035 8.498,-0.026 8.716,0.107 C10.922,1.463 12.480,2.863 13.616,4.513 C13.922,4.959 14.199,5.426 14.445,5.913 C14.621,5.327 14.811,4.747 15.016,4.172 C15.110,3.928 15.312,3.749 15.555,3.695 C15.798,3.640 16.051,3.718 16.229,3.901 C20.136,7.930 20.484,12.700 19.595,15.561 ZM7.493,12.523 C7.493,12.149 7.202,11.847 6.844,11.847 C6.486,11.847 6.196,12.149 6.196,12.523 L6.196,13.784 L4.857,13.804 L4.857,12.559 C4.857,12.186 4.566,11.884 4.209,11.884 C3.851,11.884 3.560,12.186 3.560,12.559 L3.560,16.704 C3.560,17.077 3.851,17.379 4.209,17.379 C4.566,17.379 4.857,17.077 4.857,16.704 L4.857,15.156 L6.196,15.135 L6.196,16.667 C6.196,17.040 6.486,17.343 6.844,17.343 C7.202,17.343 7.493,17.040 7.493,16.667 L7.493,12.523 ZM10.632,11.813 C9.385,11.813 8.371,13.034 8.371,14.535 C8.371,16.036 9.386,17.258 10.632,17.258 C11.878,17.258 12.892,16.036 12.892,14.535 C12.892,13.034 11.878,11.813 10.632,11.813 ZM16.522,11.959 L13.574,11.959 C13.216,11.959 12.926,12.262 12.926,12.635 C12.927,12.816 12.996,12.988 13.118,13.115 C13.239,13.242 13.403,13.312 13.574,13.311 L14.399,13.311 L14.399,16.629 C14.399,17.002 14.690,17.304 15.048,17.304 C15.406,17.304 15.696,17.002 15.696,16.629 L15.696,13.311 L16.522,13.311 C16.692,13.312 16.856,13.242 16.978,13.115 C17.100,12.988 17.169,12.816 17.170,12.635 C17.170,12.262 16.880,11.959 16.522,11.959 ZM10.632,15.908 C10.109,15.908 9.669,15.279 9.669,14.535 C9.669,13.791 10.109,13.163 10.632,13.163 C11.153,13.163 11.595,13.791 11.595,14.535 C11.595,15.279 11.154,15.908 10.632,15.908 Z" class="cls-1"></path>
+                    </svg>热搜词</h3>
+                <div class="words-list">
+                    <a href="http://www.woshipm.com/tag/app" target="_blank" class="words-item">app</a><a href="http://www.woshipm.com/tag/o2o" target="_blank" class="words-item">O2O</a><a href="http://www.woshipm.com/tag/prd" target="_blank" class="words-item">PRD</a><a href="http://www.woshipm.com/tag/%e4%ba%92%e8%81%94%e7%bd%91%e9%87%91%e8%9e%8d" target="_blank" class="words-item">互联网金融</a><a href="http://www.woshipm.com/tag/%e4%ba%a4%e4%ba%92%e8%ae%be%e8%ae%a1" target="_blank" class="words-item">交互设计</a><a href="http://www.woshipm.com/tag/rp" target="_blank" class="words-item">原型设计</a><a href="http://www.woshipm.com/tag/%e5%95%86%e4%b8%9a%e6%a8%a1%e5%bc%8f" target="_blank" class="words-item">商业模式</a><a href="http://www.woshipm.com/tag/%e6%95%b0%e6%8d%ae%e5%88%86%e6%9e%90" target="_blank" class="words-item">数据分析</a><a href="http://www.woshipm.com/tag/ue" target="_blank" class="words-item">用户体验</a><a href="http://www.woshipm.com/tag/%e7%ab%9e%e5%93%81%e5%88%86%e6%9e%90" target="_blank" class="words-item">竞品分析</a><a href="http://www.woshipm.com/tag/%e8%bf%90%e8%90%a5" target="_blank" class="words-item">运营</a><a href="http://www.woshipm.com/tag/%e9%9c%80%e6%b1%82%e5%88%86%e6%9e%90" target="_blank" class="words-item">需求分析</a>                </div>
+            </div>
+            <div class="search-features">
+                <h3 class="search-overlay-title"><svg class="svgIcon-use  u-colorPink" width="16" height="16" viewBox="0 0 22 22">
+                        <path d="M21.988,7.680 C21.978,7.317 21.969,6.921 21.963,6.490 C21.954,6.060 21.951,5.617 21.951,5.169 C21.932,4.117 21.917,2.952 21.898,1.674 C21.865,1.468 21.825,1.259 21.782,1.053 C21.739,0.847 21.631,0.647 21.459,0.457 C21.287,0.284 21.093,0.168 20.875,0.106 C20.660,0.045 20.466,0.017 20.294,0.017 L12.428,0.017 C12.394,-0.001 12.271,-0.005 12.065,0.005 C11.860,0.014 11.730,0.035 11.678,0.069 C11.574,0.103 11.457,0.165 11.328,0.251 C11.199,0.337 11.091,0.423 11.005,0.509 L0.576,10.993 C-0.183,11.891 -0.192,12.754 0.551,13.581 L8.568,21.631 C8.740,21.770 8.925,21.868 9.125,21.929 C9.324,21.991 9.527,22.012 9.733,21.994 C9.939,21.976 10.136,21.932 10.314,21.865 C10.495,21.797 10.646,21.702 10.765,21.579 C12.698,19.646 14.422,17.912 15.940,16.375 L17.855,14.433 C18.494,13.812 19.059,13.249 19.551,12.751 C20.042,12.250 20.445,11.845 20.755,11.534 L21.247,11.042 C21.281,11.009 21.336,10.935 21.416,10.821 C21.493,10.710 21.576,10.563 21.662,10.381 C21.748,10.200 21.825,9.997 21.895,9.773 C21.963,9.549 22.000,9.306 22.000,9.047 L22.000,8.583 C22.000,8.344 21.994,8.042 21.988,7.680 L21.988,7.680 L21.988,7.680 ZM8.479,14.845 L7.013,14.845 L7.290,12.908 L8.756,12.908 L8.479,14.845 L8.479,14.845 L8.479,14.845 ZM9.232,12.327 C9.161,12.376 9.084,12.413 9.001,12.438 C8.918,12.462 8.836,12.475 8.756,12.475 L7.188,12.475 L7.188,11.331 L8.037,11.331 L8.037,10.271 L7.087,10.317 L7.004,9.192 L8.037,9.137 L8.037,7.999 L6.967,7.999 L6.967,6.847 L8.037,6.847 L8.037,6.026 L9.465,6.026 L9.465,6.847 L10.452,6.847 L10.452,7.999 L9.465,7.999 L9.465,9.051 L10.406,9.005 L10.498,10.148 L9.466,10.203 L9.466,11.900 C9.466,11.992 9.444,12.075 9.401,12.146 C9.358,12.220 9.303,12.278 9.232,12.327 L9.232,12.327 L9.232,12.327 ZM9.742,14.845 L9.456,12.908 L10.931,12.908 L11.208,14.845 L9.742,14.845 L9.742,14.845 ZM12.041,14.845 L11.764,12.908 L13.230,12.908 L13.506,14.845 L12.041,14.845 L12.041,14.845 ZM13.860,12.115 C13.814,12.035 13.789,11.943 13.789,11.838 L13.789,8.009 L12.840,8.009 L12.757,9.281 L13.494,9.346 L13.384,10.489 L12.692,10.425 L12.600,11.937 C12.588,12.115 12.505,12.250 12.351,12.343 C12.197,12.435 12.041,12.481 11.881,12.481 L10.710,12.481 L10.609,11.340 L11.208,11.340 L11.272,10.299 L10.692,10.243 L10.802,9.091 L11.337,9.155 L11.411,8.012 L10.701,8.012 L10.701,6.859 L11.475,6.859 L11.530,6.011 L12.959,6.066 L12.904,6.859 L15.218,6.859 L15.218,11.353 L15.716,11.353 L15.716,12.487 L14.554,12.487 C14.462,12.487 14.370,12.472 14.281,12.444 C14.191,12.416 14.109,12.373 14.035,12.318 C13.961,12.263 13.906,12.195 13.860,12.115 L13.860,12.115 L13.860,12.115 ZM14.336,14.845 L14.060,12.908 L15.525,12.908 L15.802,14.845 L14.336,14.845 L14.336,14.845 L14.336,14.845 ZM19.373,4.830 C19.053,5.141 18.669,5.298 18.220,5.298 C17.772,5.298 17.390,5.141 17.080,4.830 C16.770,4.520 16.613,4.139 16.613,3.690 C16.613,3.241 16.770,2.860 17.080,2.550 C17.390,2.239 17.772,2.083 18.220,2.083 C18.669,2.083 19.053,2.239 19.373,2.550 C19.692,2.860 19.852,3.241 19.852,3.690 C19.852,4.139 19.692,4.520 19.373,4.830 L19.373,4.830 Z" class="cls-1">
+                    </path></svg>热门专题</h3>
+                                    <div class="search-feature-item">
+                        <a class="tool-img" href="http://www.woshipm.com/topic/grow" target="_blank">
+                            <img rel="nofollow" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/180x120">
+                            <h3>运营人的自我修养</h3>
+                        </a>
+                    </div>
+                                    <div class="search-feature-item">
+                        <a class="tool-img" href="http://www.woshipm.com/topic/xm" target="_blank">
+                            <img rel="nofollow" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/180x120(1)">
+                            <h3>产品项目总结</h3>
+                        </a>
+                    </div>
+                                    <div class="search-feature-item">
+                        <a class="tool-img" href="http://www.woshipm.com/topic/content" target="_blank">
+                            <img rel="nofollow" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/180x120(2)">
+                            <h3>文案进阶的必备利器</h3>
+                        </a>
+                    </div>
+                            </div>
+        </div>
+    </div>    <div class="container u-clearfix single-wrapper u-marginBottom30">
+        <div class="u-width840 u-floatLeft">
+            <div class="u-marginTop30">
+                <article class="article-wrapper u-backgroundColorWhite u-rounded">
+                    <header class="article-header">
+                        <h2 class="article-title">有道词典的非完全产品分析</h2>
+                    </header>
+                    <div class="postMetaLockup--authorWithBio u-flex">
+                        <div class="u-flex0">
+                            <a href="http://www.woshipm.com/u/47389" target="_blank"><img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/42x42" alt="" height="42" width="42" class="avatar"></a>
+                        </div>
+                        <div class="u-flex1 u-paddingLeft15 u-overflowHidden">
+                            <div class="">
+                                <a href="http://www.woshipm.com/u/47389" target="_blank">杭电师叔</a><button class="button button--toggle button--primary button--follow" data-action="showLoginForm" data-id="47389"><span class="is-default">订阅专栏</span><span class="is-active">取消订阅</span></button>                            </div>
+                            <div class="des">懵懂大叔，产品小白</div>
+                            <div class="postMetaInline postMetaInlineSupplemental post-meta-items">
+                                <span class="post-meta-item"><span class="fa fa-clock-o"></span>2015-08-24</span>
+                                <span class="post-meta-item"><span class="fa fa-eye"></span>2.3万</span>
+                                <span class="post-meta-item"><span class="fa fa-star"></span>90</span>
+                                <span class="post-meta-item"><span class="fa fa-thumbs-up"></span>38</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="article-topAd">
+                        零基础学产品，BAT产品总监带，2天线下集训+1年在线课程，全面掌握优秀产品经理必备技能。<a href="http://996.pm/7WqDA" target="_blank">了解详情</a>                    </div>
+                                        <div id="postAudio" class="jp-jplayer" style="width: 0px; height: 0px;"><img id="jp_poster_0" style="width: 0px; height: 0px; display: none;"><audio id="jp_audio_0" preload="none" src="http://audio-pm.woshipm.com/cache/vava-193111.mp3"></audio></div>
+                        <div id="jp_container_1" class="jp-audio" role="application" aria-label="media player">
+                            <div class="jp-type-single">
+                                <div class="jp-gui jp-interface">
+                                    <div class="jp-controls">
+                                        <button class="jp-play" role="button" tabindex="0"><svg class="svgIcon-use" width="25" height="25" viewBox="0 0 25 25"><path d="M7 4v17.03a.5.5 0 0 0 .795.404l11.1-8.111a1 1 0 0 0 0-1.615l-11.1-8.112A.5.5 0 0 0 7 4z"></path></svg></button>
+                                        <button class="jp-pause" role="button" tabindex="0" style="display: none;"><svg class="svgIcon-use" width="25" height="25" viewBox="0 0 25 25"><g transform="translate(5 4)" fill-rule="evenodd"><rect width="6" height="17" rx="2"></rect><rect x="9" width="6" height="17" rx="2"></rect></g></svg></button>
+                                    </div>
+                                    <div class="u-flex1">
+                                        <div>释放双眼，带上耳机，听听看~！</div>
+                                        <div class="u-flexCenter">
+                                            <div class="u-flex0 u-marginRight10 jp-current-time js-currentTime" style="width:34px">00:00</div>
+                                            <div class="u-flex1">
+                                                <div class="js-progress" data-action="seek-audioPlayer">
+                                                    <div class="js-progressBar">
+                                                        <div class="js-play-bar" style="width: 0%;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="u-flex0 u-marginLeft10 jp-duration">00:00</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                        <div class="grap">
+                        <p>有道词典相信很多同学都用过或者曾经用过，我也是很多年的用户了，不能这么白用。今天就给它做个产品分析，希望它可以发展的更好。</p>
+<p><img data-action="zoom" class="aligncenter size-full wp-image-193400" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/youdaocidian.jpg" alt="youdaocidian" width="650" height="360" srcset="http://www.woshipm.com/wp-content/uploads/2015/08/youdaocidian.jpg 650w, http://www.woshipm.com/wp-content/uploads/2015/08/youdaocidian-404x224.jpg 404w" sizes="(max-width: 650px) 100vw, 650px"></p>
+<h2>一、体验环境</h2>
+<p>体验 产品：网易有道词典</p>
+<p>产品 版本： v5.6.0</p>
+<p>体验机型 ：Coolpad 8705</p>
+<p>体验系统 ：Andriod 4.3</p>
+<h2>二、需求分析</h2>
+<ul>
+<li>查单词——核心需求——更快更精准地获取单词释义</li>
+<li>句子翻译——次要需求——机器翻译的精准度限制</li>
+<li>英语学习——一般需求——英语学习的产品非常多，因此在词典产品中这块可以作为粘性功能</li>
+<li>学习社交——弱需求——学习和社交的结合类似一个社区，难点在于如果持续拉新和提升活跃度</li>
+</ul>
+<h2>三、市场状况</h2>
+<p>我们可以来看一下各大应用市场词典类应用的下载量和AppStore的排名情况（数据截止到8.22）</p>
+<p><img data-action="zoom" class="attachment-large aligncenter" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/图片118-1024x682.png" alt="图片1" width="350" height="233"></p>
+<p><img data-action="zoom" class="attachment-large aligncenter" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/图片28-1024x682.png" alt="图片2" width="352" height="233"></p>
+<p><img data-action="zoom" class="attachment-large aligncenter" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/图片36-1024x682.png" alt="图片3" width="350" height="233"></p>
+<p><img data-action="zoom" class="attachment-large aligncenter" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/图片46-1024x682.png" alt="图片4" width="350" height="233"></p>
+<p><strong>结论：</strong></p>
+<ol>
+<li>可以看到，有道词典在Android市场上的表现强劲，基本上稳稳占据词典类应用第一名。这得益于有道开发团队对于用户体验的追求以及在各大平台的投入</li>
+<li>在iOS上的表现不如Android上的抢眼，评论数较少</li>
+<li>在360手机助手的下载量远远大于其他app和其他平台</li>
+</ol>
+<p><strong>分析和建议：</strong></p>
+<ol>
+<li>iOS上有道词典有两个版本，本地增强版和普通版本，这样可能会分化一个平台上的用户体验。建议集中一个版本，也减少研发精力和成本。</li>
+<li>因为Android分发平台的多样性，不同的用户可能会选择不同的渠道，因此建议在其他渠道也投入一定合理的资源提升用户数，保证有需求的用户能够体验有道优质的产品</li>
+<li>继续保持对用户体验的追求，只有用户“爽”了，才体现产品的价值，在核心功能上继续挖掘优化之处，慢慢强化学习社交的份量</li>
+</ol>
+<h2>四、产品结构</h2>
+<h3>产品结构图</h3>
+<p><img data-action="zoom" class="attachment-large aligncenter" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/257.png" alt="2" width="476" height="320"></p>
+<h2><strong>结论和建议</strong></h2>
+<p>【看天下】在我看来承载了提高用户使用频次和时间，同时承担一部分盈利的责任。因此用户在这里留存的时间越久，推广的效果就越好。不足之处在于这部分内容虽然有趣，但多跟英语无关，且内容多是 &nbsp;纯中文，与产品的主题相关性不强，看起来内容的筛选上不是非常的明确，目的是吸引用户点击浏览。个人猜测，有道这样的设置可能是让用户在使用之余休闲娱乐，学习+休闲以此来占据用户更多的时间</p>
+<p><strong>建议：</strong>增加文章内容与英语的相关性，因为不是UGC，所以在用户调查的基础上更好的进行文章推送，跟进热点，配上译文等等。</p>
+<p>【单词本】作为一个和用户紧密相连的功能，放在【发现】里不是特别的合适，从字面意思上，发现就像 &nbsp;要找到一个新的东西，不属于核心功能但是可以给用户惊喜的内容；同时对比【发现】下的其他功能， &nbsp;相互之间的关系不紧密</p>
+<p><strong>建议：</strong>将【单词本】和【我的单词本】合并，并移动到【我的】下面</p>
+<p>【基本设置】下的一些功能，比如：【消息中心】、【查看收藏笔记】、【个人账户】等不适合放在这 &nbsp;里，用户在使用中也很难想到这些功能会放在设置中，用户路径不够清晰，造成一些混乱；而且一些比较 &nbsp;重要的功能隐藏的太深，如【有道词典小组】，学习小组功能被放在了三级目录下，用户的使用率 &nbsp;应 &nbsp;该不会很高，这样也很难测试出用户对其真实的接受程度和使用倾向；【我的帖子】、【我的回帖】针对的都是【圈子】的帖子，我的帖子和我的回帖界限模糊，我的帖子应该包括我发的和我回复的，符合用户一贯的认知</p>
+<p><strong>建议：</strong></p>
+<ol>
+<li>将基本设置中【个人账户】、【消息中心】、【查看收藏笔记】、【我的单词本】移动到【我的】下面，与【个人资料】同级</li>
+<li>将【我的帖子】、【我的回帖】合并为【我的帖子】</li>
+<li>将【有道词典小组】移动到【我的】下面，与【圈子】一起，打造有道的社区活跃度</li>
+<li>将【扩充词库与语音库】移动到【发现】下，符合【发现】的定义，两者也有相关度</li>
+<li>将【更多】下的全部功能移动到【基本设置】中，并取消【更多】</li>
+</ol>
+<h2>五、竞品分析</h2>
+<h3>复制查词</h3>
+<p><img data-action="zoom" class="attachment-large aligncenter" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/245.png" alt="2" width="459" height="154"></p>
+<p>如图：</p>
+<p><img data-action="zoom" class="aligncenter  wp-image-193371" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/chaciduibi.jpg" alt="chaciduibi" width="481" height="419" srcset="http://www.woshipm.com/wp-content/uploads/2015/08/chaciduibi.jpg 695w, http://www.woshipm.com/wp-content/uploads/2015/08/chaciduibi-344x300.jpg 344w" sizes="(max-width: 481px) 100vw, 481px"></p>
+<p><strong>结论：</strong></p>
+<ul>
+<li>有道词典&nbsp;<img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"><img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"><img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"></li>
+<li>金山词霸 &nbsp;<img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"><img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"></li>
+</ul>
+<p>从功能的便利性和体验上来讲，有道明显更胜一筹，但似乎在查词范围方面有些不足。笔者复制”Futhark“（意思为北欧古字母）单词时，金山词霸可以给出解释，有道没有反应</p>
+<p><strong>建议：</strong>优化有道词典复制查词功能，用户体验需要坚持有反馈比没反馈要好，针对一些不在本地词典库中的内容，建议可以继续跳出释义框，但是显示本地无释义，用户可选择点击查看全部释义（云端加载）</p>
+<h3>普通查词</h3>
+<p><strong>对于连续查词</strong></p>
+<p>对于需要连续查词的用户来说，如果快速的进行下一个单词的查询是体验核心之处，让我们来看看两者的区别。</p>
+<p>如图：</p>
+<p><img data-action="zoom" class="aligncenter  wp-image-193372" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/chadian.jpg" alt="chadian" width="495" height="432" srcset="http://www.woshipm.com/wp-content/uploads/2015/08/chadian.jpg 695w, http://www.woshipm.com/wp-content/uploads/2015/08/chadian-344x300.jpg 344w" sizes="(max-width: 495px) 100vw, 495px"></p>
+<p><strong>结论：</strong></p>
+<ul>
+<li>有道词典&nbsp;&nbsp;<img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"><img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"></li>
+<li>金山词霸 &nbsp;<img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"><img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"><img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"></li>
+</ul>
+<p>在连续查词上，可以看到金山做的更好，用户不需要进行大范围的手势移动即可完成下一个单词地输入查询。而有道需要先移动到顶部删除上一个单词再回到输入法，增加了使用路径。</p>
+<h3>输入查词的精准和速度</h3>
+<p>为了检验两个APP在查词算法以及对用户输入单词的预测精准度上的差异，我选取了”important”来进行输入，下面是实验结果：</p>
+<p><strong>查词算法</strong></p>
+<p>从输入”i“开始</p>
+<p><img data-action="zoom" class="aligncenter  wp-image-193373" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/dician.jpg" alt="dician" width="497" height="433" srcset="http://www.woshipm.com/wp-content/uploads/2015/08/dician.jpg 695w, http://www.woshipm.com/wp-content/uploads/2015/08/dician-344x300.jpg 344w" sizes="(max-width: 497px) 100vw, 497px"></p>
+<p>输入“impo”</p>
+<p><img data-action="zoom" class="aligncenter  wp-image-193374" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/zishuchaxun.jpg" alt="zishuchaxun" width="492" height="430" srcset="http://www.woshipm.com/wp-content/uploads/2015/08/zishuchaxun.jpg 695w, http://www.woshipm.com/wp-content/uploads/2015/08/zishuchaxun-344x300.jpg 344w" sizes="(max-width: 492px) 100vw, 492px"></p>
+<p><strong>结论：</strong></p>
+<ul>
+<li>有道词典 &nbsp;<img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"><img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"></li>
+<li>金山词霸 &nbsp;<img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"><img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"><img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"></li>
+</ul>
+<p>通过对比和真实的单词查询我们可以看出有道词典的查词算法跟现实中的词典基本一致，从a列举到z，从结果我们就可以看出，输入“impo”时，有道出来的单词结果的下一位从“l”到“t”，遵循了字母顺序规律</p>
+<h3><strong>对用户输入单词的预测</strong></h3>
+<p><strong>有道：</strong></p>
+<p><img data-action="zoom" class="aligncenter  wp-image-193381" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/dancilianxiang.jpg" alt="dancilianxiang" width="493" height="430" srcset="http://www.woshipm.com/wp-content/uploads/2015/08/dancilianxiang.jpg 695w, http://www.woshipm.com/wp-content/uploads/2015/08/dancilianxiang-344x300.jpg 344w" sizes="(max-width: 493px) 100vw, 493px"></p>
+<p><strong>金山词典：</strong></p>
+<p><img data-action="zoom" class="aligncenter  wp-image-193383" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/jinshandanci.jpg" alt="jinshandanci" width="494" height="431" srcset="http://www.woshipm.com/wp-content/uploads/2015/08/jinshandanci.jpg 695w, http://www.woshipm.com/wp-content/uploads/2015/08/jinshandanci-344x300.jpg 344w" sizes="(max-width: 494px) 100vw, 494px"></p>
+<p><strong>结论：</strong></p>
+<ul>
+<li>有道词典&nbsp;&nbsp;<img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"><img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"></li>
+<li>金山词霸 &nbsp;<img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"><img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"><img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"></li>
+</ul>
+<p>从上图我们就可以看到，有道对于预测用户的输入单词这点基本没有做处理，用户需要输入大部分或者全部的单词才可以看到想要的结果出现在首行；而金山在这点处理的很好，在输入第四个字母的时候已经得出了结果，我猜想他用的算法应该是热度排序，优先将查询次数多的单词推荐上来</p>
+<p><strong>建议：</strong>查单词是有道词典的核心功能，对于这一核心需求永远不能放弃或者重视不够，建议有道的产品就这一功能再做优化，让用户的查词过程更加的愉快，在算法的推荐上尤其改进一下，因为对于频繁查词的用户来说，对有道的依赖会更强，如果查词的过程每次都不够“爽”，竞争对手就有了超越的机会</p>
+<h3>拍照取词</h3>
+<p>随着技术的发展，词典们也发展了业余爱好—拍照取词功能，下面我就简单做个对比（因为目前拍照取词这块都不是很完善，我实验的数据量也不大，仅仅是给大家做个简单的参考）</p>
+<p><strong>功能上：</strong></p>
+<p>有道：按住取词——只支持英文</p>
+<p>金山：自动取词、点击取词、长句拍译——支持中英文对译</p>
+<p>实际使用效果（我用打印单词“example”来检测，手写的单词识别度比较低）</p>
+<p><img data-action="zoom" class="attachment-large aligncenter" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/199.jpg" alt="1" width="194" height="259"></p>
+<p>有道：</p>
+<p>并非我要黑有道，不过在使用金山时拍照功能正常，在使用有道的时候是这样子的</p>
+<p><img data-action="zoom" class="attachment-large aligncenter" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/1102.png" alt="1" width="194" height="345"></p>
+<p>估计是我是我手机的问题，于是只好换了只肾六来完成我的体验（然而并不是我的，家里穷，每次体验app用的都是一只200块充话费送的酷派神机~），下面是肾六的有道体验图片</p>
+<p><img data-action="zoom" class="attachment-large aligncenter" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/1103.png" alt="1" width="194" height="345"></p>
+<p>有道的取词功能用户体验很棒，取词框是固定的，当你将取词框对准想查的词，然后按住下面蓝色圆圈即可锁定单词，一般是单手就可以完成操作，准确率比较高，锁定避免了人手的不稳定给查词结果带来的变化</p>
+<p>金山：</p>
+<p>自动取词</p>
+<p><img data-action="zoom" class="attachment-large aligncenter" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/1104.png" alt="1" width="194" height="345"></p>
+<p>自动取词的体验比较差，因为手不可能一直保持稳定，但是这个功能是只要轻微的移动就会刷新查词结果，于是单词结果一直在跳动，虽然可以完成查词，但花费时间较长</p>
+<p>点击取词</p>
+<p><img data-action="zoom" class="attachment-large aligncenter" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/254.png" alt="2" width="194" height="345"></p>
+<p>点击取词其实跟自动取词的原理一样，只不过刷新频率改成了手动，只有点击后才会进行结果查询，准确率和有道词典差不多，体验上会比有道词典的按住取词略微复杂一点，可能需要双手操作</p>
+<p>长句拍译</p>
+<p><img data-action="zoom" class="attachment-large aligncenter" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/1106.png" alt="1" width="194" height="109"></p>
+<p><img data-action="zoom" class="attachment-large aligncenter" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/255.png" alt="2" width="194" height="109"></p>
+<p>非常有特色的一个功能，先拍照后选取句子进行翻译，这样子提高了识别的精准度，看上图是识别地完全正确，但是因为国内普遍坑爹的句子翻译，这个功能实际给用户的价值不大，对于一些用户的应急长句子翻译可能有参考意义</p>
+<p><strong>结论：</strong></p>
+<ul>
+<li>有道词典&nbsp;&nbsp;<img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"><img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"><img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"></li>
+<li>金山词霸 &nbsp;<img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"><img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"><img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"></li>
+</ul>
+<p>从以上分析可知，对于拍照取词功能来讲，体验上做的更好的是有道词典，词霸略微逊色，但是因为提供了多种方式以及长句拍译，如果后续能够继续优化则大有可为</p>
+<p>建议：有道的取词框后期可以优化至自动调整大小，迅速适应单词宽度，自动框住单词帮助用户快速锁定，提升用户体验</p>
+<h3>翻译</h3>
+<p>虽然大家都知道翻译功能现在没有谁是真正做的很好的，不过还是用我体验的结果给大家一个直观的感觉。</p>
+<p>为了体现我对杭州美女的热爱，我让有道和金山都做了这样一句话的翻译：杭州是全国美女最多的城市</p>
+<p>以下是结果：</p>
+<p><img data-action="zoom" class="aligncenter  wp-image-193393" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/meinvchengshi.jpg" alt="meinvchengshi" width="534" height="466" srcset="http://www.woshipm.com/wp-content/uploads/2015/08/meinvchengshi.jpg 695w, http://www.woshipm.com/wp-content/uploads/2015/08/meinvchengshi-344x300.jpg 344w" sizes="(max-width: 534px) 100vw, 534px"></p>
+<p>结论：</p>
+<ul>
+<li>有道词典&nbsp;&nbsp;<img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"></li>
+<li>金山词霸 &nbsp;<img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"></li>
+</ul>
+<p>翻译的结果大同小异，都跑偏了，难道美女是很邪恶的东西吗？都不肯翻译出来。。。我猜他们是不是看到美女这两个字就凌乱了，腿就软了，恩！一定是这样的！</p>
+<p>建议：我在翻译原理这方面没有做过深入的研究，不过从一个产品小白的角度来讲，如果你的竞争对手在某一功能做的和你差不多糟糕，那么谁能在接下来的战斗中首先完成升级，那么战局就可能会完全改变，希望接下来能投入更多的经历在翻译方面，不要让外国人（这里暗指Google）在翻译中文这方面做的比我们还好</p>
+<h3>扩展功能</h3>
+<p><strong>有道词典：</strong></p>
+<ul>
+<li>百科</li>
+<li>看天下</li>
+<li>云图书</li>
+<li>学堂</li>
+<li>活动中心</li>
+<li>圈子</li>
+<li>有道兴趣小组</li>
+</ul>
+<p><strong>金山词霸：</strong></p>
+<ul>
+<li>悦读</li>
+<li>每日一句</li>
+<li>听力</li>
+</ul>
+<p><strong>结论：</strong></p>
+<ul>
+<li>有道词典&nbsp;&nbsp;<img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"><img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"><img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"></li>
+<li>金山词霸 &nbsp;<img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"><img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21"></li>
+</ul>
+<p>有道提供了丰富的内容和功能来留住用户，虽然确实延长了使用时间，但是部分功能跟整个App的核心需求不是很相关，甚至还提供了游戏来愉悦用户，这些功能都对用户有所价值，但太多的话可能会让用户不专注；圈子和有道兴趣小组在使用上有重合的部分，分散了用户的兴趣点</p>
+<p>金山词霸的扩展功能相对来讲更加的专注，整个内容提供的都是围绕英语学习的，悦读中的文章都是中英对译，用户可以边浏览有趣的内容边学习英语，对用户来说在使用金山时有价值的时间比较多</p>
+<h3>竞品分析结果</h3>
+<p>有道词典：&nbsp; <img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21">16</p>
+<p>金山词霸： &nbsp;<img data-action="zoom" class="attachment-large" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/520.png" alt="5" width="20" height="21">17</p>
+<p>从中我们发现，金山词典略占优势。虽然金山词典起步早，老牌玩家，不过在产品上依然紧靠工具型产品的定位，围绕查词和英语学习来优化升级，广告也非常的少（几乎没有）。但这也是弱势，盈利方向不明。</p>
+<p>有道作为一款明星产品，发力迅猛，快速抢占了金山的大部分市场，用户体验上也做的很不错。目前看来，有道有往平台发展的趋势，已经盈利并且拓展了很多其他功能。不过个人建议可以适当收拢一些功能，还是要先紧紧抓住使用词典用户的核心需求—查单词，再做一些周边拓展也会更加有利于整体的发展。</p>
+<h2>如果我是有道词典的PM</h2>
+<p>优化产品结构。优化方向如下图，重新强调工具性的情况下增加明确社交和在线教育学习的入口，把握好用户使用的方向</p>
+<p><img data-action="zoom" class="attachment-large aligncenter" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/1109.png" alt="1" width="476" height="260"></p>
+<p>重新改进查词算法。对用户核心需求的满足是第一要务，如何又快又精准的让用户查词是制胜法宝</p>
+<p>提升学习和社交的结合力度。首先将有道学习小组抬升至一级目录【发现】下，将圈子改造成分享类功能，类似于朋友圈，可以理解成有道学习小组主打学习讨论，圈子主打个人分享，一起打造交流社群。同时用户可将自己的学习和单词成果分享至圈子，强化用户的参与感。</p>
+<p>增加单词复习功能到单词本。用户往往是查了新单词之后过一段时间又会忘了什么意思，增加该功能可帮助用户避免查了忘，忘了查的循环</p>
+<p>&nbsp;</p>
+<p>本文由 @杭电师叔 原创发布于人人都是产品经理&nbsp;，未经许可，禁止转载。</p>
+                    </div>
+                    <div class="article-bottomAd">
+                        <a href="https://ke.qq.com/huodong/pmqidian16z_pc/index.html" target="_blank"><img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/5C9tzFNoYlOE5jhCNdOG.png" alt=""></a>                    </div>
+                    <div class="taglist"><a href="http://www.woshipm.com/tag/%e6%9c%89%e9%81%93%e8%af%8d%e5%85%b8" rel="tag">有道词典</a><a href="http://www.woshipm.com/tag/%e6%9c%89%e9%81%93%e8%af%8d%e5%85%b8%e4%ba%a7%e5%93%81%e5%88%86%e6%9e%90" rel="tag">有道词典产品分析</a><a href="http://www.woshipm.com/tag/%e9%87%91%e5%b1%b1%e8%af%8d%e5%85%b8" rel="tag">金山词典</a></div>                    <div class="support-author"><div class="support-title">赞赏是对原创者的最大认可</div><button class="button--pay" data-post-id="193111" data-author="47389" data-avatar="http://image.woshipm.com/wp-files/2015/10/128.jpg"><svg width="13" height="16" class="svgIcon--use" viewBox="0 0 13 16"><path d="M9.113,4.571 C9.951,3.771 10.895,2.742 10.685,2.057 C10.475,1.485 10.056,0.799 9.427,0.571 C8.903,0.342 8.379,0.456 7.750,0.799 C7.540,0.342 7.016,0.114 6.596,-0.001 C5.863,-0.001 5.234,0.228 4.814,0.914 C4.080,0.571 3.451,0.685 2.927,1.028 C2.613,1.256 2.298,1.713 2.298,2.628 C2.298,3.542 3.137,4.228 3.766,4.685 C2.508,5.599 -0.218,7.885 -0.008,12.228 C-0.218,15.656 2.613,15.999 2.613,15.999 L10.371,15.999 C11.314,15.885 12.991,14.971 12.991,12.571 L12.991,12.228 C13.201,7.771 10.371,5.371 9.113,4.571 L9.113,4.571 ZM8.932,11.835 L6.940,11.835 L6.940,13.207 C6.940,13.435 6.731,13.549 6.521,13.549 C6.311,13.549 6.102,13.435 6.102,13.207 L6.102,11.835 L4.110,11.835 C3.900,11.835 3.795,11.606 3.795,11.378 C3.795,11.149 3.900,10.921 4.110,10.921 L6.102,10.921 L6.102,10.121 L4.949,10.121 C4.739,10.121 4.634,9.892 4.634,9.664 C4.634,9.435 4.739,9.206 4.949,9.206 L5.892,9.206 L4.739,7.950 C4.634,7.835 4.739,7.606 4.949,7.492 C5.158,7.378 5.368,7.264 5.473,7.378 L6.521,8.635 L7.674,7.264 C7.779,7.149 7.989,7.264 8.198,7.378 C8.408,7.492 8.408,7.721 8.408,7.835 L7.150,9.321 L8.094,9.321 C8.303,9.321 8.408,9.549 8.408,9.778 C8.408,10.007 8.303,10.235 8.094,10.235 L6.940,10.235 L6.940,11.035 L8.932,11.035 C9.142,11.035 9.247,11.264 9.247,11.493 C9.247,11.606 9.037,11.835 8.932,11.835 L8.932,11.835 Z"></path></svg>
+赞赏</button></div>                                        <div class="post-actions u-clearfix">
+                        <div class="u-floatLeft share-actions">
+                            <button class="button button--gray button--circle button--wechat"><span class="fa fa-wechat"></span><span class="qrcode-wrapper"><img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/api.php"></span></button>
+                            <a class="button button--gray button--circle button--weibo" target="_blank" href="http://service.weibo.com/share/share.php?appkey=2775287854&amp;title=%E6%9C%89%E9%81%93%E8%AF%8D%E5%85%B8%E7%9A%84%E9%9D%9E%E5%AE%8C%E5%85%A8%E4%BA%A7%E5%93%81%E5%88%86%E6%9E%90&amp;url=http://www.woshipm.com/evaluating/193111.html&amp;pic=http://image.woshipm.com/wp-files/2015/08/youdaocidian.jpg" "=""><span class="fa fa-weibo"></span></a>
+                        </div>
+                        <div class="u-floatRight">
+                            <button title="收藏" class="button button--gray button--toggle button--recommend button-post-193111 " data-id="193111" data-action="popLogin"><span class="iconfont icon-heart"></span><span class="button-label is-default">收藏</span><span class="button-label is-active">已收藏</span> | <span class="count">90</span></button><button class="button button--toggle button--gray button--postlike" data-action="uplike" data-id="193111"><span class="button-label is-default">赞</span><span class="button-label is-active">已赞</span> | <span class="count">38</span></button>                        </div>
+                    </div>
+                </article>
+                <div class="postFooterInfo u-marginTop30 u-backgroundColorWhite u-rounded">
+                    <div class="u-flex">
+                        <div class="u-flex0">
+                            <a href="http://www.woshipm.com/u/47389" target="_blank"><img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/60x60" alt="" height="60" width="60" class="avatar"></a>
+                        </div>
+                        <div class="u-flex1 u-paddingLeft15 u-overflowHidden">
+                            <div class=""><span class="title"><a href="http://www.woshipm.com/u/47389" target="_blank">杭电师叔</a></span><button class="button button--toggle button--primary button--follow" data-action="showLoginForm" data-id="47389"><span class="is-default">订阅专栏</span><span class="is-active">取消订阅</span></button></div>
+                            <div class="des">懵懂大叔，产品小白</div>
+                        </div>
+                        <div class="u-flex0">
+                            <div class="authorInfo-item"><i>1篇</i>作品</div>
+                            <div class="authorInfo-item"><i>2.3万</i>总阅读量</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="u-backgroundColorWhite comments-area">
+    <div class="comment-list-header"><span class="title">评论</span></div>
+    <div id="respond" class="respond respond-193111" role="form">
+        <form action="http://www.woshipm.com/wp-comments-post.php" method="post" id="commentform" data-post="193111" class="comment-form u-clearfix">
+                        <div class="textarea--unlogin" data-action="popLogin">欢迎留言交流</div>
+                </form>
+    </div>
+            <div class="commentshow">
+            <ol class="comment-list">
+                        <li class="comment byuser comment-author-45547 even thread-even depth-1" id="li-comment-159206" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-159206" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/45547" target="_blank"><img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/40x40" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/45547" target="_blank">随忆</a><span class="des"></span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>为什么［人工翻译］不是［翻译］下？</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2015-12-05T10:43:58+08:00">2015/12/05</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-159206&#39;, &#39;159206&#39;, &#39;respond&#39;, &#39;193111&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-kacahola odd alt thread-odd thread-alt depth-1" id="li-comment-159199" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-159199" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/2159" target="_blank"><img alt="" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/a32d2cb557d626ed9d9c1153ec970ed0.png" srcset="http://secure.gravatar.com/avatar/a32d2cb557d626ed9d9c1153ec970ed0?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/2159" target="_blank">kacahola</a><span class="des"></span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>写得很好啊，分析点抓得很有有力。学习了。另外想问下，你觉得现在市场上有哪些好的英语学习类app啊？</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2015-12-04T19:54:06+08:00">2015/12/04</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-159199&#39;, &#39;159199&#39;, &#39;respond&#39;, &#39;193111&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-neo_sev even thread-even depth-1" id="li-comment-156168" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-156168" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/54422" target="_blank"><img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/40x40(1)" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/54422" target="_blank">neo_sev</a><span class="des">new here</span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>个人认为，产品分析的内容可以再深入细致一点，比如针对整个产品的交互功能，或者单词查询的算法，或者界面设计，或者其他某一个角度进行深入分析。不过和金山词霸做的对比分析感觉还是挺不错的，不过可以在对比过后再分析一下原因或者不同的产品定位什么的，就是再深入一些会更好~</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2015-10-15T19:36:18+08:00">2015/10/15</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-156168&#39;, &#39;156168&#39;, &#39;respond&#39;, &#39;193111&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-153853" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-153853" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/0" target="_blank"><img alt="" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/3f2d34bfe3b6456da76046a38d7af9ce.png" srcset="http://secure.gravatar.com/avatar/3f2d34bfe3b6456da76046a38d7af9ce?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                        <div class="comment-author" itemprop="author"></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>个人感觉要多注重用户体验的分析，少注重后台算法处理 <img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/icon_biggrin.gif" alt=":grin:" class="wp-smiley" style="height: 1em; max-height: 1em;"></p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2015-09-28T16:12:20+08:00">2015/09/28</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-153853&#39;, &#39;153853&#39;, &#39;respond&#39;, &#39;193111&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            <ol class="children">
+        <li class="comment byuser comment-author-hdushishu bypostauthor even depth-2" id="li-comment-154321" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-154321" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/47389" target="_blank"><img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/40x40(2)" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/47389" target="_blank">杭电师叔</a><span class="post-c-a" title="文章作者">作者</span><span class="color-noraml">回复</span><a href="http://www.woshipm.com/evaluating/193111.html#comment-153853"></a></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>哈哈，对于使用的算法也是猜测，只不过最核心的查词涉及到用户的一个重要体验，故拿来讨论讨论~~  <img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/icon_smile.gif" alt=":smile:" class="wp-smiley" style="height: 1em; max-height: 1em;"></p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2015-10-02T16:06:15+08:00">2015/10/02</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-154321&#39;, &#39;154321&#39;, &#39;respond&#39;, &#39;193111&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-will- odd alt depth-2" id="li-comment-281062" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-281062" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/337909" target="_blank"><img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/woshipm_def_head.jpg" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/337909" target="_blank">will-王</a><span class="color-noraml">回复</span><a href="http://www.woshipm.com/evaluating/193111.html#comment-153853"></a></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>带有巨大词库的app，算法是核心。</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2018-07-27T09:30:45+08:00">2018/07/27</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-281062&#39;, &#39;281062&#39;, &#39;respond&#39;, &#39;193111&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+        <li class="comment byuser comment-author-yangtongxie even thread-even depth-1" id="li-comment-150718" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-150718" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/48183" target="_blank"><img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/40x40(3)" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/48183" target="_blank">杨童鞋</a><span class="des">网易有道HR</span></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>写得很有分量呀，我想和您私下多沟通一下，不知道方便不方便呀`~</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2015-08-26T10:28:38+08:00">2015/08/26</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-150718&#39;, &#39;150718&#39;, &#39;respond&#39;, &#39;193111&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            <ol class="children">
+        <li class="comment byuser comment-author-hdushishu bypostauthor odd alt depth-2" id="li-comment-150978" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-150978" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/47389" target="_blank"><img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/40x40(2)" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/47389" target="_blank">杭电师叔</a><span class="post-c-a" title="文章作者">作者</span><span class="color-noraml">回复</span><a href="http://www.woshipm.com/evaluating/193111.html#comment-150718">杨童鞋</a></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>可以啊，我的微信号  hdushishu ，您可以加我哈</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2015-08-27T19:42:50+08:00">2015/08/27</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-150978&#39;, &#39;150978&#39;, &#39;respond&#39;, &#39;193111&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment even depth-2" id="li-comment-151583" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-151583" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/0" target="_blank"><img alt="" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/7500b3413e0f862ae4fb139b888b7f8e.png" srcset="http://secure.gravatar.com/avatar/7500b3413e0f862ae4fb139b888b7f8e?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                        <div class="comment-author" itemprop="author"></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>我想问一下数据一般通过什么方式获得？</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2015-09-04T16:31:44+08:00">2015/09/04</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-151583&#39;, &#39;151583&#39;, &#39;respond&#39;, &#39;193111&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+        <li class="comment byuser comment-author-hdushishu bypostauthor odd alt depth-2" id="li-comment-151588" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-151588" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/47389" target="_blank"><img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/40x40(2)" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/47389" target="_blank">杭电师叔</a><span class="post-c-a" title="文章作者">作者</span><span class="color-noraml">回复</span><a href="http://www.woshipm.com/evaluating/193111.html#comment-151583"></a></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>有很多方式，app端的话可以从各大应用市场和应用雷达这些地方获取，第三方工具也挺多的，网上可以去搜搜哈</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2015-09-04T21:39:23+08:00">2015/09/04</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-151588&#39;, &#39;151588&#39;, &#39;respond&#39;, &#39;193111&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+        <li class="comment even thread-odd thread-alt depth-1" id="li-comment-150460" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-150460" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/0" target="_blank"><img alt="" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/2d4dca2a905009853b667f116a8ab85f.png" srcset="http://secure.gravatar.com/avatar/2d4dca2a905009853b667f116a8ab85f?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                        <div class="comment-author" itemprop="author"></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p><img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/icon_cool.gif" alt=":cool:" class="wp-smiley" style="height: 1em; max-height: 1em;">  <img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/icon_cool.gif" alt=":cool:" class="wp-smiley" style="height: 1em; max-height: 1em;">  <img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/icon_cool.gif" alt=":cool:" class="wp-smiley" style="height: 1em; max-height: 1em;"> 内容有点乱，不够突出主旨</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2015-08-24T14:04:29+08:00">2015/08/24</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-150460&#39;, &#39;150460&#39;, &#39;respond&#39;, &#39;193111&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            <ol class="children">
+        <li class="comment byuser comment-author-hdushishu bypostauthor odd alt depth-2" id="li-comment-150505" itemtype="http://schema.org/Comment" itemscope="" itemprop="comment">
+            <div id="comment-150505" class="comment-block">
+                    <div class="comment-avatar pm-relative">
+                        <a href="http://www.woshipm.com/u/47389" target="_blank"><img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/40x40(2)" alt="" height="40" width="40" class="avatar"></a>
+                                            </div>
+                <div class="comment-info">
+                    <div class="comment-meta">
+                                                                            <div class="comment-author" itemprop="author"><a href="http://www.woshipm.com/u/47389" target="_blank">杭电师叔</a><span class="post-c-a" title="文章作者">作者</span><span class="color-noraml">回复</span><a href="http://www.woshipm.com/evaluating/193111.html#comment-150460"></a></div>
+                                  
+                       
+                    </div>
+                </div>
+                <div class="comment-content" itemprop="description">
+                    <p>有什么好的建议吗？产品分析的主旨应该怎么突出？强化某一块的篇幅吗</p>
+                </div>
+
+                    <div class="u-clearfix comment-bottom"><span class="comment-time" itemprop="datePublished" datetime="2015-08-24T19:32:52+08:00">2015/08/24</span><span class="comment-reply-link u-floatRight u-cursorPointer" onclick="return addComment.moveForm(&#39;comment-150505&#39;, &#39;150505&#39;, &#39;respond&#39;, &#39;193111&#39;)"><span class="fa fa-comment"></span>回复</span></div>
+            </div>
+            </li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+            </ol>
+            <nav class="commentnav" data-fuck="193111">
+                            </nav>
+        </div>
+    </div>                <div class="u-backgroundColorWhite promote-posts-wrapper u-rounded">
+                    <h2 class="comments-title">您可能感兴趣的文章</h2>
+                    <div class="promote-posts">
+                                                    <div class="promote-post-item">
+                                <a target="_blank" href="http://www.woshipm.com/pd/1424429.html" style="background-image: url(http://image.woshipm.com/wp-files/2018/09/GWcZuooCDPoqEfqx2VNK.jpg)" class="promote-post-image">
+                                </a>
+                                <div class="promote-post-title"><a target="_blank" href="http://www.woshipm.com/pd/1424429.html">电商供应链：金融-企业采购金融产品解析</a></div>
+                            </div>
+                                                    <div class="promote-post-item">
+                                <a target="_blank" href="http://www.woshipm.com/pmd/1450609.html" style="background-image: url(http://image.woshipm.com/wp-files/2018/09/t1GA34nwIi6aa3VsSWd7.jpg)" class="promote-post-image">
+                                </a>
+                                <div class="promote-post-title"><a target="_blank" href="http://www.woshipm.com/pmd/1450609.html">产品经理必备的武器和方法论是什么？</a></div>
+                            </div>
+                                                    <div class="promote-post-item">
+                                <a target="_blank" href="http://www.woshipm.com/operate/1450397.html" style="background-image: url(http://image.woshipm.com/wp-files/2018/09/6EVSmmP8Ar5n6eVsn7jd.jpg)" class="promote-post-image">
+                                </a>
+                                <div class="promote-post-title"><a target="_blank" href="http://www.woshipm.com/operate/1450397.html">运营实战案例分析：如何制定运营策略？</a></div>
+                            </div>
+                                                    <div class="promote-post-item">
+                                <a target="_blank" href="http://www.woshipm.com/it/1449605.html" style="background-image: url(http://image.woshipm.com/wp-files/2018/09/yDwRWqJ1dFyWqFTLpJtZ.jpg)" class="promote-post-image">
+                                </a>
+                                <div class="promote-post-title"><a target="_blank" href="http://www.woshipm.com/it/1449605.html">热度褪去后，子弹短信该何去何从？</a></div>
+                            </div>
+                                                    <div class="promote-post-item">
+                                <a target="_blank" href="http://y0.cn/2IbUV" style="background-image: url(http://image.woshipm.com/wp-files/2017/03/Il8v4dI18IcRXTVeoLit.jpg)" class="promote-post-image">
+                                </a>
+                                <div class="promote-post-title"><a target="_blank" href="http://y0.cn/2IbUV">每天3块钱，500门产品、运营课程随便学，做个有竞争力互联网人</a></div>
+                            </div>
+                                                    <div class="promote-post-item">
+                                <a target="_blank" href="http://www.woshipm.com/zhichang/1435898.html" style="background-image: url(http://image.woshipm.com/wp-files/2018/09/d8chzZJYNvFeYAFWMV54.jpg)" class="promote-post-image">
+                                </a>
+                                <div class="promote-post-title"><a target="_blank" href="http://www.woshipm.com/zhichang/1435898.html">58集团产品经理线上笔试复盘</a></div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+        </div>
+        <div class="u-width335 u-floatRight js-sidebar">
+                       <div class="widget u-backgroundColorWhite">
+        <div class="inner">
+            <div class="widget-title"><span><svg class="svgIcon-use" width="20" height="20" viewBox="0 0 20 20"><path d="M6.551,8.213 L7.586,8.213 C7.586,9.594 8.667,10.713 10.000,10.713 C11.333,10.713 12.414,9.594 12.414,8.213 L13.448,8.213 C13.448,10.186 11.904,11.784 10.000,11.784 C8.096,11.784 6.551,10.186 6.551,8.213 ZM16.561,16.551 L17.597,19.999 L16.552,19.999 L16.207,18.928 L16.209,18.928 L15.277,15.706 C15.301,15.706 15.324,15.713 15.349,15.713 C17.347,15.713 18.966,14.034 18.966,11.963 C18.966,10.732 18.386,9.649 17.502,8.965 C17.110,11.828 15.232,14.189 12.701,15.189 L13.818,18.928 L13.815,18.928 L14.138,19.999 L13.103,19.999 L12.759,18.928 L11.275,14.511 C14.283,13.896 16.552,11.151 16.552,7.856 C16.552,4.108 13.618,1.070 10.000,1.070 C6.382,1.070 3.448,4.108 3.448,7.856 C3.448,11.151 5.717,13.896 8.724,14.511 L7.241,18.928 L6.896,19.999 L5.862,19.999 L6.182,18.928 L6.182,18.928 L7.298,15.190 C4.768,14.189 2.890,11.829 2.498,8.967 C1.615,9.650 1.035,10.733 1.035,11.963 C1.035,14.034 2.655,15.713 4.655,15.713 C4.679,15.713 4.702,15.706 4.726,15.706 L3.793,18.928 L3.448,19.999 L2.404,19.999 L3.441,16.551 C1.460,16.001 -0.000,14.144 -0.000,11.931 C-0.000,10.120 0.978,8.544 2.420,7.730 C2.486,3.449 5.851,-0.001 10.000,-0.001 C14.148,-0.001 17.513,3.449 17.580,7.729 C19.022,8.542 20.000,10.119 20.000,11.931 C20.000,14.144 18.541,16.001 16.561,16.551 Z"></path></svg>圈子</span></div>
+            <div class="widget-content">
+                <div class="contact-area">
+                    <ul class="code-ul">
+                        <li><span class="text">产品经理群</span><a target="_blank" href="https://jq.qq.com/?_wv=1027&amp;k=5sGMjCm"><i>+</i>加入</a></li>
+<li><span class="text">运营交流群</span><a target="_blank" href="https://jq.qq.com/?_wv=1027&amp;k=51yzUQW"><i>+</i>加入</a></li>
+<li><span class="text">品牌营销群</span><a target="_blank" href="https://jq.qq.com/?_wv=1027&amp;k=5e8zovy"><i>+</i>加入</a></li>
+<li><span class="text">文案交流群</span><a target="_blank" href="https://jq.qq.com/?_wv=1027&amp;k=5v4zta9"><i>+</i>加入</a></li>
+<li><span class="text">Axure交流群</span><a target="_blank" href="https://jq.qq.com/?_wv=1027&amp;k=5eLN4KE"><i>+</i>加入</a></li>                    </ul>
+                    <dl class="code-dl">
+                        <dd>
+                            <img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/pm-erweima.jpg">
+                        </dd>
+                        <dt>关注微信公众号</dt>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="widget widget-ad fixed-sidebar-id is-fixed"><a href="http://996.pm/zrPqQ" target="_blank"><img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/nLN5vaBhXIL7GFMmfRgP.jpg" alt="">       </a><a href="http://996.pm/Yw3wg" target="_blank"><img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/23-1.png" alt=""></a><a href="http://996.pm/Y9mwX" target="_blank"><img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/CcGnm19GICLjPCSITaAn.jpg" alt=""></a></div><div class="widget u-backgroundColorWhite">
+        <div class="inner">
+            <div class="widget-title"><span><svg class="svgIcon-use" width="20" height="20" viewBox="0 0 20 20">
+  <path d="M20.000,9.999 C20.000,4.476 15.524,-0.001 9.999,-0.001 C4.477,-0.001 -0.000,4.476 -0.000,9.999 C-0.000,15.522 4.477,19.999 9.999,19.999 C12.267,19.999 14.342,19.227 16.021,17.957 C16.089,17.878 16.134,17.779 16.134,17.666 C16.134,17.422 15.937,17.223 15.692,17.223 C15.565,17.223 15.452,17.273 15.369,17.358 L15.365,17.358 C13.864,18.463 12.016,19.125 10.009,19.125 C5.009,19.125 0.954,15.069 0.954,10.069 C0.954,5.067 5.009,1.012 10.009,1.012 C15.011,1.012 19.065,5.067 19.065,10.069 C19.065,11.597 18.707,13.034 18.039,14.296 L18.039,14.304 C18.026,14.346 18.012,14.387 18.012,14.431 C18.012,14.677 18.212,14.876 18.456,14.876 C18.647,14.876 18.807,14.753 18.869,14.584 L18.869,14.588 C19.580,13.211 20.000,11.654 20.000,9.999 L20.000,9.999 L20.000,9.999 L20.000,9.999 ZM3.981,13.384 C3.704,13.384 3.480,13.160 3.480,12.883 L3.480,7.138 C3.480,6.861 3.704,6.637 3.981,6.637 C4.258,6.637 4.482,6.861 4.482,7.138 L4.482,12.883 C4.482,13.160 4.258,13.384 3.981,13.384 L3.981,13.384 ZM7.589,13.384 C7.313,13.384 7.088,13.160 7.088,12.883 L7.088,7.138 C7.088,6.861 7.313,6.637 7.589,6.637 C7.866,6.637 8.090,6.861 8.090,7.138 L8.090,12.883 C8.090,13.160 7.866,13.384 7.589,13.384 L7.589,13.384 ZM7.589,10.511 L3.981,10.511 C3.704,10.511 3.480,10.287 3.480,10.011 C3.480,9.734 3.704,9.510 3.981,9.510 L7.589,9.510 C7.865,9.510 8.090,9.734 8.090,10.011 C8.090,10.287 7.865,10.511 7.589,10.511 L7.589,10.511 ZM14.791,13.384 C14.515,13.384 14.291,13.160 14.291,12.883 L14.291,7.138 C14.291,6.861 14.515,6.637 14.791,6.637 C15.068,6.637 15.292,6.861 15.292,7.138 L15.292,12.883 C15.292,13.160 15.068,13.384 14.791,13.384 L14.791,13.384 ZM16.596,7.639 L12.988,7.639 C12.711,7.639 12.487,7.415 12.487,7.138 C12.487,6.861 12.711,6.637 12.988,6.637 L16.596,6.637 C16.872,6.637 17.097,6.861 17.097,7.138 C17.097,7.415 16.872,7.639 16.596,7.639 L16.596,7.639 ZM10.534,13.384 C9.426,13.384 8.524,12.482 8.524,11.374 L8.524,8.648 C8.524,7.539 9.426,6.637 10.534,6.637 C11.643,6.637 12.545,7.539 12.545,8.648 L12.545,11.374 C12.545,12.482 11.643,13.384 10.534,13.384 L10.534,13.384 ZM10.534,7.639 C9.978,7.639 9.526,8.092 9.526,8.648 L9.526,11.374 C9.526,11.930 9.978,12.382 10.534,12.382 C11.091,12.382 11.543,11.930 11.543,11.374 L11.543,8.648 C11.543,8.092 11.091,7.639 10.534,7.639 L10.534,7.639 Z"></path>
+</svg>热门文章</span></div><ul class="widget-post-list--withImage"><li class="widget-post-item--withImage">
+                    <div class="img">
+<a href="http://www.woshipm.com/ucd/972135.html" target="_blank">
+<img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/100x60" width="100" height="60">
+</a>
+</div>
+<div class="title"><a href="http://www.woshipm.com/ucd/972135.html">微信“不友好”设计其背后的逻辑</a></div>
+<div class="meta">2018-09-18</div>
+                </li><li class="widget-post-item--withImage">
+                    <div class="img">
+<a href="http://www.woshipm.com/it/1408558.html" target="_blank">
+<img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/100x60(1)" width="100" height="60">
+</a>
+</div>
+<div class="title"><a href="http://www.woshipm.com/it/1408558.html">约不到P的社交网络，是没有灵魂的</a></div>
+<div class="meta">2018-09-17</div>
+                </li><li class="widget-post-item--withImage">
+                    <div class="img">
+<a href="http://www.woshipm.com/evaluating/1267178.html" target="_blank">
+<img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/100x60(2)" width="100" height="60">
+</a>
+</div>
+<div class="title"><a href="http://www.woshipm.com/evaluating/1267178.html">阿里健康APP产品体验分析报告（上）</a></div>
+<div class="meta">2018-09-18</div>
+                </li><li class="widget-post-item--withImage">
+                    <div class="img">
+<a href="http://www.woshipm.com/zhichang/1411320.html" target="_blank">
+<img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/100x60(3)" width="100" height="60">
+</a>
+</div>
+<div class="title"><a href="http://www.woshipm.com/zhichang/1411320.html">笔试攻略：阿里、腾讯、百度、京东等产品笔试六大题型</a></div>
+<div class="meta">2018-09-17</div>
+                </li><li class="widget-post-item--withImage">
+                    <div class="img">
+<a href="http://www.woshipm.com/pmd/1418511.html" target="_blank">
+<img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/100x60(4)" width="100" height="60">
+</a>
+</div>
+<div class="title"><a href="http://www.woshipm.com/pmd/1418511.html">实例解析：怎么撰写一份产品数据报告</a></div>
+<div class="meta">2018-09-18</div>
+                </li></ul></div></div><div class="widget u-backgroundColorWhite">
+        <div class="inner">
+            <div class="widget-title"><span><svg class="svgIcon-use" width="20" height="20" viewBox="0 0 20 20">
+  <path d="M20.000,9.999 C20.000,4.476 15.524,-0.001 9.999,-0.001 C4.477,-0.001 -0.000,4.476 -0.000,9.999 C-0.000,15.522 4.477,19.999 9.999,19.999 C12.267,19.999 14.342,19.227 16.021,17.957 C16.089,17.878 16.134,17.779 16.134,17.666 C16.134,17.422 15.937,17.223 15.692,17.223 C15.565,17.223 15.452,17.273 15.369,17.358 L15.365,17.358 C13.864,18.463 12.016,19.125 10.009,19.125 C5.009,19.125 0.954,15.069 0.954,10.069 C0.954,5.067 5.009,1.012 10.009,1.012 C15.011,1.012 19.065,5.067 19.065,10.069 C19.065,11.597 18.707,13.034 18.039,14.296 L18.039,14.304 C18.026,14.346 18.012,14.387 18.012,14.431 C18.012,14.677 18.212,14.876 18.456,14.876 C18.647,14.876 18.807,14.753 18.869,14.584 L18.869,14.588 C19.580,13.211 20.000,11.654 20.000,9.999 L20.000,9.999 L20.000,9.999 L20.000,9.999 ZM3.981,13.384 C3.704,13.384 3.480,13.160 3.480,12.883 L3.480,7.138 C3.480,6.861 3.704,6.637 3.981,6.637 C4.258,6.637 4.482,6.861 4.482,7.138 L4.482,12.883 C4.482,13.160 4.258,13.384 3.981,13.384 L3.981,13.384 ZM7.589,13.384 C7.313,13.384 7.088,13.160 7.088,12.883 L7.088,7.138 C7.088,6.861 7.313,6.637 7.589,6.637 C7.866,6.637 8.090,6.861 8.090,7.138 L8.090,12.883 C8.090,13.160 7.866,13.384 7.589,13.384 L7.589,13.384 ZM7.589,10.511 L3.981,10.511 C3.704,10.511 3.480,10.287 3.480,10.011 C3.480,9.734 3.704,9.510 3.981,9.510 L7.589,9.510 C7.865,9.510 8.090,9.734 8.090,10.011 C8.090,10.287 7.865,10.511 7.589,10.511 L7.589,10.511 ZM14.791,13.384 C14.515,13.384 14.291,13.160 14.291,12.883 L14.291,7.138 C14.291,6.861 14.515,6.637 14.791,6.637 C15.068,6.637 15.292,6.861 15.292,7.138 L15.292,12.883 C15.292,13.160 15.068,13.384 14.791,13.384 L14.791,13.384 ZM16.596,7.639 L12.988,7.639 C12.711,7.639 12.487,7.415 12.487,7.138 C12.487,6.861 12.711,6.637 12.988,6.637 L16.596,6.637 C16.872,6.637 17.097,6.861 17.097,7.138 C17.097,7.415 16.872,7.639 16.596,7.639 L16.596,7.639 ZM10.534,13.384 C9.426,13.384 8.524,12.482 8.524,11.374 L8.524,8.648 C8.524,7.539 9.426,6.637 10.534,6.637 C11.643,6.637 12.545,7.539 12.545,8.648 L12.545,11.374 C12.545,12.482 11.643,13.384 10.534,13.384 L10.534,13.384 ZM10.534,7.639 C9.978,7.639 9.526,8.092 9.526,8.648 L9.526,11.374 C9.526,11.930 9.978,12.382 10.534,12.382 C11.091,12.382 11.543,11.930 11.543,11.374 L11.543,8.648 C11.543,8.092 11.091,7.639 10.534,7.639 L10.534,7.639 Z"></path>
+</svg>大家都在问</span></div>
+            <div class="widget-content hot-question-list"><div class="hot-question-item">
+                    <div class="title"><a href="https://wen.woshipm.com//question/detail/7tklid.html"><span class="fa fa-caret-right"></span>为什么游戏等级会设置得很高，动辄100级，而其他的产品最高等级就比较低，比如网易云，最高10级。这是因为什么呢？</a></div>
+                    <div class="meta">7个回答<span class="dot"></span>7人关注</div>
+                </div><div class="hot-question-item">
+                    <div class="title"><a href="https://wen.woshipm.com//question/detail/qai5vf.html"><span class="fa fa-caret-right"></span>【中秋福利】又是一年中秋节，今年中秋，有没有奇特的新鲜玩法？</a></div>
+                    <div class="meta">21个回答<span class="dot"></span>31人关注</div>
+                </div><div class="hot-question-item">
+                    <div class="title"><a href="https://wen.woshipm.com//question/detail/87kres.html"><span class="fa fa-caret-right"></span>微信朋友圈为什么不能直接点赞，而是需要两步操作？</a></div>
+                    <div class="meta">15个回答<span class="dot"></span>22人关注</div>
+                </div><div class="hot-question-item">
+                    <div class="title"><a href="https://wen.woshipm.com//question/detail/italid.html"><span class="fa fa-caret-right"></span>继BAT之后，今日头条也上线了小程序功能，今日头条如何突围？</a></div>
+                    <div class="meta">10个回答<span class="dot"></span>7人关注</div>
+                </div><div class="hot-question-item">
+                    <div class="title"><a href="https://wen.woshipm.com//question/detail/5vgtnj.html"><span class="fa fa-caret-right"></span>Chrome浏览器的断网小游戏，为什么没有被国内很多企业借鉴？</a></div>
+                    <div class="meta">7个回答<span class="dot"></span>4人关注</div>
+                </div><div class="hot-question-item">
+                    <div class="title"><a href="https://wen.woshipm.com//question/detail/nk8d98.html"><span class="fa fa-caret-right"></span>如果理发店加一款让顾客电子试发型的功能有没有前景？</a></div>
+                    <div class="meta">13个回答<span class="dot"></span>10人关注</div>
+                </div></div></div></div>    </div>    </div>
+<footer class="site-footer">
+    <div class="container u-clearfix footer-sections">
+        <section class="info-section u-floatLeft">
+            <div class="footer-title">关于</div>
+            人人都是产品经理（woshipm.com）是以产品经理、运营为核心的学习、交流、分享平台，集媒体、培训、招聘、社群为一体，全方位服务产品人和运营人，成立8年举办在线讲座500+期，线下分享会300+场，产品经理大会、运营大会20+场，覆盖北上海广深杭成都等15个城市，在行业有较高的影响力和知名度。平台聚集了众多BAT美团京东滴滴360小米网易等知名互联网公司产品总监和运营总监，他们在这里分享知识、招聘人才，与你一起成长。        </section>
+        <section class="link-section u-floatLeft">
+        <div class="footer-title">链接</div>
+            <nav class="footer-nav">
+                <ul>
+                    <li><a href="https://www.lagou.com/gongsi/318344.html" target="_blank">加入我们</a></li>
+                    <li><a href="http://www.woshipm.com/it/1010671.html" target="_blank">投稿须知</a></li>
+                    <li><a href="https://wen.woshipm.com/question/detail/omkf.html" target="_blank">意见反馈</a></li>
+                    <li><a href="http://www.woshipm.com/disclaimer" target="_blank">免责声明</a></li>
+                </ul>
+            </nav>
+        </section>
+        <section class="partner-section u-floatLeft">
+            <div class="footer-title">合作伙伴</div>
+            <ul class="blue-pic-ul">
+                <li><a href="https://www.qidianla.com/?woshipm" title="起点学院" target="_blank"><img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/qidian.png" alt="起点学院" title="起点学院"></a></li>
+<li><a href="http://www.cyzone.cn/?woshipm" title="创业邦" target="_blank"><img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/5-2.png" alt="创业邦" title="创业邦"></a></li>
+<li><a href="http://ke.qq.com/?from=95" target="_blank"><img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/6-1.png" alt="腾讯课堂"></a></li>
+<li><a href="http://www.geetest.com/?woshipm" target="_blank"><img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/3-3.png" alt="极验验证"></a></li>
+<li><a href="http://www.zhisheji.com/?woshipm" title="致设计" target="_blank"><img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/4-2.png" alt="致设计" title="致设计"></a></li>
+<li><a href="https://www.yunyingpai.com/?woshipm" title="运营派" target="_blank"><img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/运营派.png" alt="运营派" title="运营派"></a></li>
+            </ul>
+        </section>
+        <section class="qr-section u-floatRight">
+        <div class="footer-title">APP下载</div>
+            <img src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/rpPRjFM56semOSrrJuWf.png">
+            <p>iPhone &amp; Android</p>
+        </section>
+    </div>
+    <div class="copyright">
+        <div class="container">
+        旗下品牌: <a target="_blank" href="https://www.qidianla.com/">起点学院</a> | <a target="_blank" href="https://www.yunyingpai.com/">运营派</a> | <a target="_blank" href="http://www.zhaopins.com/">秒聘网</a> <br>
+©2010-2018 - 人人都是产品经理 - <a target="_blank" href="http://www.miibeian.gov.cn/">粤ICP备14037330号-1</a><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030502001309">粤公网安备 44030502001309号</a>
+版权所有 © 深圳聚力创想信息科技有限公司        <div class="u-floatRight" style="margin-top:-10px;">企业内训/合作/投诉: 18123776760</div>
+    </div>
+    </div>
+</footer>
+</div>
+<div class="back2top is-active"><span class="fa-angle-up fa"></span></div>
+<div class="u-hide"><script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb85cbcc76e92e3fd79be8f2fed0f504f' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/h.js.下载" type="text/javascript"></script><a href="http://tongji.baidu.com/hm-web/welcome/ico?s=b85cbcc76e92e3fd79be8f2fed0f504f" target="_blank">网站统计</a></div>
+<script type="text/javascript" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/jquery.jplayer.min.js.下载"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var PURE = {"ajax_url":"http:\/\/www.woshipm.com\/wp-admin\/admin-ajax.php","restapi":"http:\/\/www.woshipm.com\/__api\/","nonce":"9074272ccb","home_url":"http:\/\/www.woshipm.com","is_user_logged_in":"","is_singular":"1","is_home":"","id":"193111","token":"","secret":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/misc.js.下载"></script>
+<script type="text/javascript" src="./有道词典的非完全产品分析 _ 人人都是产品经理_files/comment-reply.min.js.下载"></script>
+
+</body></html>
