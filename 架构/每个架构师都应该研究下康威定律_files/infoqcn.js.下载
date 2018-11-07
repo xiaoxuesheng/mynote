@@ -1,8 +1,0 @@
-if(Math.random() < 0.25){$(".text_info .related").before('<div style=margin-bottom:5px"><a href="http://ai.baidu.com/meeting/page/form/7C52C27538B2441191A0E3E852926095?channel=infoQ" target="_blank"><img  style="width: 100%;" src="http://static.geekbang.org/infoq/5a14d84a84585.png" /></a></div>')
-console.log("请关注InfoQ微信帐号:infoqchina");}
-else if(Math.random() >= 0.25&&Math.random() < 0.5){$(".text_info .related").before('<div style=margin-bottom:5px"><a href="http://bj2017.archsummit.com/?utm_source=infoq&utm_medium=wzbottom" target="_blank"><img  style="width: 100%;" src="http://static.geekbang.org/infoq/59f68fbc11458.png" /></a></div>')
-console.log("请关注InfoQ微信帐号:infoqchina");}
-else if(Math.random() >= 0.5&&Math.random() < 0.75){$(".text_info .related").before('<div style=margin-bottom:5px"><a href="https://aicon.geekbang.org/?utm_source=InfoQ&utm_medium=wzbottom" target="_blank"><img  style="width: 100%;" src="http://static.geekbang.org/infoq/5a127ca42de9d.png" /></a></div>')
-console.log("请关注InfoQ微信帐号:infoqchina");}
-else{$(".text_info .related").before('<div style=margin-bottom:5px"><a href="https://time.geekbang.org/column/intro/50?utm_source=website&utm_medium=articlebanner&utm_campaign=promotion&utm_content=qiuyue" target="_blank"><img  style="width: 100%;" src="http://static.geekbang.org/infoq/5a12ea135478d.png" /></a></div>')
-console.log("请关注InfoQ微信帐号:infoqchina");}
