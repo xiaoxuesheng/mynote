@@ -1,1 +1,0 @@
-try{$CKE.rdc({"shares":"55"})}catch(e){}
